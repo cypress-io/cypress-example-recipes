@@ -1,0 +1,19 @@
+{
+  "name": "cypress-example-recipes",
+  "version": "0.0.0",
+  "description": "This repo contains various recipes for testing common scenarios in your application using Cypress.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cypress-io/cypress-example-recipes.git"
+  },
+  "author": "Brian Mann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cypress-io/cypress-example-recipes/issues"
+  },
+  "homepage": "https://github.com/cypress-io/cypress-example-recipes#readme"
+}

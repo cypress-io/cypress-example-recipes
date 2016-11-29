@@ -36,13 +36,19 @@ npm start
 
 This does XYZ.
 
+***
+
 ### Unit Testing
 
 This does XYZ.
 
+***
+
 ### Bootstrapping App Data
 
 This does XYZ.
+
+***
 
 ### Dealing with Hover
 
