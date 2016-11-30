@@ -35,17 +35,26 @@ npm start
 
 ### [ES2015 / CommonJS Modules](./cypress/integration/es2015_commonjs_modules_spec.js)
 
-This recipe shows you how to import ES2015 modules or require CommonJS modules.
+This recipe shows you how to:
 
-We also explain how to organize reusable utility functions or import 3rd party node_modules you've installed.
+- Import ES2015 modules
+- Require CommonJS modules
+- Organize reusable utility functions
+- Import 3rd party `node_modules`
 
 ***
 
-### Unit Testing Application Code
+### Unit Test Application Code
 
 ***
 
-### Unit Testing React w/Enzyme
+### [Unit Test React w/Enzyme](./cypress/integration/unit_test_react_enzyme_spec.js)
+
+This recipe shows you how to:
+
+- Unit test a React Component
+- Import `enzyme` from `node_modules`
+- Extend chai assertions with `chai-enzyme`
 
 ***
 

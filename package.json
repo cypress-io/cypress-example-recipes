@@ -17,7 +17,12 @@
   },
   "homepage": "https://github.com/cypress-io/cypress-example-recipes#readme",
   "dependencies": {
+    "chai-enzyme": "^0.6.1",
+    "enzyme": "^2.6.0",
     "lodash": "^4.17.2",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "react": "^15.4.1",
+    "react-addons-test-utils": "^15.4.1",
+    "react-dom": "^15.4.1"
   }
 }
