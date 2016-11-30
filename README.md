@@ -32,24 +32,24 @@ npm start
 
 # Recipes
 
-### ES2015 / CommonJS Modules
+### [ES2015 / CommonJS Modules](./cypress/integration/es2015_commonjs_modules_spec.js)
 
-This does XYZ.
+This recipe shows you how to import ES2015 modules or require CommonJS modules.
+
+We also explain how to organize reusable utility functions or import 3rd party node_modules you've installed.
 
 ***
 
-### Unit Testing
+### Unit Testing Application Code
 
-This does XYZ.
+***
+
+### Unit Testing React w/Enzyme
 
 ***
 
 ### Bootstrapping App Data
 
-This does XYZ.
-
 ***
 
 ### Dealing with Hover
-
-This does XYZ.
