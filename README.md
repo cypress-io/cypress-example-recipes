@@ -14,10 +14,11 @@ This repo contains various recipes for testing common scenarios in your applicat
 
 # Overview
 
+- this is still a WIP, and we'll be adding recipes daily
 - all of the tests are found in `cypress/integration`
-- running a single static file server to server static file content
-- if a recipe needs a server it is booted separately on a differnet port
-- running node server (port: NNNN) for recipe: 'XYZ recipe'
+<!-- - running a single static file server to server static file content -->
+<!-- - if a recipe needs a server it is booted separately on a differnet port -->
+<!-- - running node server (port: NNNN) for recipe: 'XYZ recipe' -->
 
 # Installation
 
