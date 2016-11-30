@@ -6,6 +6,11 @@ import Greeting from '../../examples/unit_test_react_enzyme/greeting'
 // Cypress automatically exposes the 'chai'
 // global to all spec files. this enables us
 // to extend chai with enzyme specific assertions
+// for this one spec file.
+//
+// Alternatively we could move this configuration
+// into cypress/support/assertions to enable all
+// spec files to use these chai-enzyme assertions
 chai.use(chaiEnzyme)
 
 describe('Unit Test React with Enzyme', function(){

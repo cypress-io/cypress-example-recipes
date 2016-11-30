@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/cypress-io/cypress-example-recipes#readme",
   "dependencies": {
+    "chai-colors": "^1.0.1",
+    "chai-date-string": "^0.1.0",
     "chai-enzyme": "^0.6.1",
     "enzyme": "^2.6.0",
     "lodash": "^4.17.2",

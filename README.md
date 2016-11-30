@@ -10,6 +10,7 @@ This repo contains various recipes for testing common scenarios in your applicat
   - [ES2015 / CommonJS Modules](#es2015--commonjs-modules)
   - [Unit Test - Application Code](#unit-test---application-code)
   - [Unit Test - React w/Enzyme](#unit-test---react-wenzyme)
+  - [Extending Chai with Assertion Plugins](#extending-chai-with-assertion-plugins)
 
 # Overview
 
@@ -61,5 +62,15 @@ This recipe shows you how to:
 - Unit test a React JSX Component
 - Import `enzyme` from `node_modules`
 - Extend chai assertions with `chai-enzyme`
+
+***
+
+### [Extending Chai with Assertion Plugins](./cypress/integration/extending_chai_assertion_plugins_spec.js)
+
+This recipe shows you how to:
+
+- Extend `chai` with the `chai-date-string` assertion plugin
+- Extend `chai` with the `chai-colors` assertion plugin
+- Globally extend `chai` for all specs
 
 ***

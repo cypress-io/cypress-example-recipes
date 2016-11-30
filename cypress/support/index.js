@@ -18,6 +18,7 @@
 import "./commands"
 import "./defaults"
 
-// Alternatively you can use CommonJS syntax:
-// require("./commands")
-// require("./defaults")
+// also import 3rd party assertions
+// which will globally modify chai
+// and make these accessible to all specs
+import "./assertions"
