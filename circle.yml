@@ -1,0 +1,11 @@
+machine:
+  node:
+    version: 6.5.0
+
+dependencies:
+  post:
+    - npm install -g cypress-cli
+
+test:
+  override:
+    - cypress ci

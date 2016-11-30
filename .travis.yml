@@ -1,0 +1,10 @@
+language: node_js
+
+node_js:
+  - 6.5.0
+
+before_install:
+  - npm install -g cypress-cli
+
+script:
+  - cypress ci
