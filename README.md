@@ -7,10 +7,9 @@ This repo contains various recipes for testing common scenarios in your applicat
 - [Overview](#overview)
 - [Installation](#installation)
 - [Recipes](#recipes)
-  - [ES2015 / CommonJS Modules](#recipes)
-  - [Unit Testing](#recipes)
-  - [Bootstrapping App Data](#recipes)
-  - [Dealing with Hover](#recipes)
+  - [ES2015 / CommonJS Modules](#es2015--commonjs-modules)
+  - [Unit Test - Application Code](#unit-test---application-code)
+  - [Unit Test - React w/Enzyme](#unit-test---react-wenzyme)
 
 # Overview
 
@@ -44,22 +43,23 @@ This recipe shows you how to:
 
 ***
 
-### Unit Test Application Code
-
-***
-
-### [Unit Test React w/Enzyme](./cypress/integration/unit_test_react_enzyme_spec.js)
+### [Unit Test - Application Code](./cypress/integration/unit_test_application_code_spec.js)
 
 This recipe shows you how to:
 
-- Unit test a React Component
+- Unit test your own application code libs
+- Import modules using ES2015
+- Write simple math functions
+- Implement the canonical *fizzbuzz* test
+
+***
+
+### [Unit Test - React w/Enzyme](./cypress/integration/unit_test_react_enzyme_spec.js)
+
+This recipe shows you how to:
+
+- Unit test a React JSX Component
 - Import `enzyme` from `node_modules`
 - Extend chai assertions with `chai-enzyme`
 
 ***
-
-### Bootstrapping App Data
-
-***
-
-### Dealing with Hover
