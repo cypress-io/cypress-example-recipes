@@ -155,7 +155,9 @@ describe('Tab Handling Anchor Links', function(){
     // You can also test different subdomains in the same test, just not different
     // superdomains.
     //
-    // We have this documented in detail here: https://on.cypress.io/guides/web-security
+    // We have this documented in detail here:
+    // - https://on.cypress.io/guides/web-security
+    // - https://on.cypress.io/cross-origin-violation
     //
     // Regardless of this restriction you have many options to overcome this
     // and still test your application with 100% confidence.
