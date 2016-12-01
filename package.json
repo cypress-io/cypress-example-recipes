@@ -4,7 +4,7 @@
   "description": "This repo contains various recipes for testing common scenarios in your application using Cypress.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "./scripts/start.sh"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "chai-date-string": "^0.1.0",
     "chai-enzyme": "^0.6.1",
     "enzyme": "^2.6.0",
+    "http-server": "^0.9.0",
     "lodash": "^4.17.2",
     "minimist": "^1.2.0",
     "react": "^15.4.1",

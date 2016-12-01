@@ -7,5 +7,9 @@ dependencies:
     - npm install -g cypress-cli
 
 test:
+  pre:
+    - npm start:
+        background: true
+
   override:
     - cypress ci

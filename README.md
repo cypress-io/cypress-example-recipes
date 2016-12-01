@@ -11,6 +11,7 @@ This repo contains various recipes for testing common scenarios in your applicat
   - [Unit Test - Application Code](#unit-test---application-code)
   - [Unit Test - React w/Enzyme](#unit-test---react-wenzyme)
   - [Extending Chai with Assertion Plugins](#extending-chai-with-assertion-plugins)
+  - [Tab Handling and Anchor Links](#tab-handling-and-anchor-links)
 
 # Overview
 
@@ -72,5 +73,17 @@ This recipe shows you how to:
 - Extend `chai` with the `chai-date-string` assertion plugin
 - Extend `chai` with the `chai-colors` assertion plugin
 - Globally extend `chai` for all specs
+
+***
+
+### [Tab Handling and Anchor Links](./cypress/integration/tab_handling_anchor_links_spec.js)
+
+This recipe shows you how to:
+
+- Test `<a target="_blank">` elements
+- Test `<a href="..."> elements which link to external domains
+- Prevent content from opening in a new tab
+- Request external content that would open in a new tab
+- Improve testing performance by reducing loading times
 
 ***
