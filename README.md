@@ -81,7 +81,7 @@ This recipe shows you how to:
 This recipe shows you how to:
 
 - Test `<a target="_blank">` elements
-- Test `<a href="..."> elements which link to external domains
+- Test `<a href="...">` elements which link to external domains
 - Prevent content from opening in a new tab
 - Request external content that would open in a new tab
 - Improve testing performance by reducing loading times
