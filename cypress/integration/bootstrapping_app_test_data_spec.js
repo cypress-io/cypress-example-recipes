@@ -16,7 +16,7 @@ describe("Bootstrapping App Test Data", function(){
       // dont modify anything, let's just test that the normal
       // way of development data seeding works.
       cy
-        .visit("http://localhost:8081/bootstrap")
+        .visit("http://localhost:8081/bootstrap.html")
         .get("pre")
         .invoke("text")
         .should("eq", JSON.stringify({
@@ -36,7 +36,7 @@ describe("Bootstrapping App Test Data", function(){
       }
 
       cy
-        .visit("http://localhost:8081/bootstrap", {
+        .visit("http://localhost:8081/bootstrap.html", {
           onBeforeLoad: (win) => {
             win._bootstrappedData = data
           }
@@ -55,7 +55,7 @@ describe("Bootstrapping App Test Data", function(){
       // dont modify anything, let's just test that the normal
       // way of development data seeding works.
       cy
-        .visit("http://localhost:8081/xhr")
+        .visit("http://localhost:8081/xhr.html")
         .get("pre")
         .invoke("text")
         .should("eq", JSON.stringify({
@@ -75,7 +75,7 @@ describe("Bootstrapping App Test Data", function(){
           cy
             .server()
             .route("GET", "/data.json", data)
-            .visit("http://localhost:8081/xhr")
+            .visit("http://localhost:8081/xhr.html")
             .get("pre")
             .invoke("text")
             .should("eq", JSON.stringify(data))
@@ -103,7 +103,7 @@ describe("Bootstrapping App Test Data", function(){
               response: data
             })
             .as("getData")
-            .visit("http://localhost:8081/xhr")
+            .visit("http://localhost:8081/xhr.html")
             .wait("@getData")
             .get("pre")
             .invoke("text")

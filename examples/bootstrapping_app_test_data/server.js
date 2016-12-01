@@ -13,13 +13,13 @@ const data = {
 app.set("views", __dirname)
 app.set("view engine", "hbs")
 
-app.get("/bootstrap", (req, res) => {
+app.get("/bootstrap.html", (req, res) => {
   res.render("./bootstrap.hbs", {
     data: JSON.stringify(data)
   })
 })
 
-app.get("/xhr", (req, res) => {
+app.get("/xhr.html", (req, res) => {
   res.render("./xhr.hbs")
 })
 
