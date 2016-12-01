@@ -1,0 +1,4 @@
+{
+  "env": "test",
+  "api": "https://test-api.company.com"
+}

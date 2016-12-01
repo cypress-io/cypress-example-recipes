@@ -87,3 +87,14 @@ This recipe shows you how to:
 - Improve testing performance by reducing loading times
 
 ***
+
+### [Bootstrapping your App with Test Data](./cypress/integration/bootstrapping_app_test_data_spec.js)
+
+This recipe shows you how to:
+
+- Use `cy.visit` `onBeforeLoad` callback
+- Start your application with test data
+- Stub an XHR to seed with test data
+- Wait on an XHR to finish
+
+***
