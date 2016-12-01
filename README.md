@@ -12,6 +12,7 @@ This repo contains various recipes for testing common scenarios in your applicat
   - [Unit Test - React w/Enzyme](#unit-test---react-wenzyme)
   - [Extending Chai with Assertion Plugins](#extending-chai-with-assertion-plugins)
   - [Tab Handling and Anchor Links](#tab-handling-and-anchor-links)
+  - [Bootstrapping your App with Test Data](./cypress/integration/bootstrapping_app_test_data_spec.js)
 
 # Overview
 
