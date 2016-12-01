@@ -2,7 +2,7 @@ const minimist = require("minimist")
 const express = require("express")
 const app = express()
 
-// get port from passed in args from scripts/start.sh
+// get port from passed in args from scripts/start.js
 const port = minimist(process.argv.slice(2)).port
 
 const data = {
