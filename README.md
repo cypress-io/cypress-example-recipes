@@ -12,6 +12,7 @@ This repo contains various recipes for testing common scenarios in your applicat
   - [Unit Test - React w/Enzyme](#unit-test---react-wenzyme)
   - [Extending Chai with Assertion Plugins](#extending-chai-with-assertion-plugins)
   - [Tab Handling and Anchor Links](#tab-handling-and-anchor-links)
+  - [Dealing with Hover and Hidden Elements](./cypress/integration/hover_hidden_elements.js)
   - [Bootstrapping your App with Test Data](./cypress/integration/bootstrapping_app_test_data_spec.js)
 
 # Overview
@@ -86,6 +87,16 @@ This recipe shows you how to:
 - Prevent content from opening in a new tab
 - Request external content that would open in a new tab
 - Improve testing performance by reducing loading times
+
+***
+
+### [Dealing with Hover and Hidden Elements](./cypress/integration/hover_hidden_elements.js)
+
+This recipe shows you how to:
+
+- Interact with elements which are hidden by CSS
+- Trigger `mouseover`, `mouseout`, `mouseenter`, `mouseleave` events
+- Get around the lack of a `cy.hover` command
 
 ***
 
