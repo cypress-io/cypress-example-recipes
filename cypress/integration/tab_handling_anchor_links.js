@@ -15,7 +15,7 @@ describe('Tab Handling Anchor Links', function(){
   })
 
   context("testing the target='_blank' link", function(){
-    // Tthe problem with this link is that by default when you click
+    // The problem with this link is that by default when you click
     // on it, the browser will attempt to open the content in another
     // tab. You can open up your browser to the URL we visited above
     // and test this out. Notice a new tab will open.
