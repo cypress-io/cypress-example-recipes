@@ -3,8 +3,12 @@
   "version": "0.0.0",
   "description": "This repo contains various recipes for testing common scenarios in your application using Cypress.",
   "main": "index.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "scripts": {
-    "start": "node ./scripts/start.js"
+    "start": "node ./scripts/start.js",
+    "dev": "nodemon ./scripts/start.js --watch examples"
   },
   "repository": {
     "type": "git",
@@ -31,5 +35,8 @@
     "react": "^15.4.1",
     "react-addons-test-utils": "^15.4.1",
     "react-dom": "^15.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

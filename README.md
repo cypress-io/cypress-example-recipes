@@ -19,9 +19,8 @@ This repo contains various recipes for testing common scenarios in your applicat
 
 - this is still a WIP, and we'll be adding recipes daily
 - all of the tests are found in [`cypress/integration`](./cypress/integration)
-<!-- - running a single static file server to server static file content -->
-<!-- - if a recipe needs a server it is booted separately on a differnet port -->
-<!-- - running node server (port: NNNN) for recipe: 'XYZ recipe' -->
+- we boot a separate node server per recipe
+- each [`example`](./examples) has all of its own backend and frontend assets
 
 # Installation
 
@@ -32,6 +31,11 @@ npm install
 ## boot the various node servers
 ## to use in the tests
 npm start
+
+## or if you want to make modifications
+## to the node server code and have
+## the servers automatically restart
+npm run dev
 ```
 
 # Recipes
