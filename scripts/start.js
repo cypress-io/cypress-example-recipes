@@ -11,14 +11,16 @@ console.log(dividers, "\n")
 
 const processes = [
   {
-    name: "static file server (port 8080)",
     cmd:  "http-server . -p 8080 -c-c1",
     msg:  `Running Static File Server for all recipes: ${chalk.cyan('(port 8080)')}`
   },
   {
-    name: "bootstrapping app test data (port 8081)",
     cmd:  "node ./examples/bootstrapping_app_test_data/server.js --port 8081",
     msg:  `Running Node Server for recipe: ${chalk.cyan('examples/bootstrapping_app_test_data')} on ${chalk.cyan('(port 8081)')}`
+  },
+  {
+    cmd:  "node ./examples/logging_in_html_web_form/server.js --port 8082",
+    msg:  `Running Node Server for recipe: ${chalk.cyan('examples/logging_in_html_web_form')} on ${chalk.cyan('(port 8082)')}`
   }
 ]
 
