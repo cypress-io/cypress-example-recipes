@@ -3,7 +3,7 @@
 // to send it form urlencoded values
 
 // We are going to do a few things
-// 1. tests unauthorized routes
+// 1. tests unauthorized routes using cy.visit + cy.request
 // 2. test using a regular form submission (old school POSTs)
 // 3. test error states
 // 4. test authenticated session states
@@ -22,7 +22,7 @@ describe('Logging In - HTML Web Form', function(){
   })
 
   context('Unauthorized', function(){
-    it('cannot visit /dashboard without a session', function(){
+    it('example #1: cannot visit /dashboard without a session', function(){
       // we must have a valid session cookie to be logged
       // in else we are redirected to /unauthorized
       cy
@@ -30,9 +30,32 @@ describe('Logging In - HTML Web Form', function(){
         .get('h3').should('contain', 'You are not logged in and cannot access this page')
         .url().should('include', 'unauthorized')
     })
+
+    it('example #2: can test the redirection behavior with cy.request', function(){
+      // instead of visiting the page above we can test more programatically
+      // by issuing a cy.request and checking the status code and redirecedTo
+      // property.
+      //
+      // the 'redirectedTo' property is a special Cypress property under the hood
+      // which normalizes the url the browser would normally follow during a redirect
+      cy.request({
+        url: '/dashboard',
+        followRedirect: false,
+        failOnStatus: false // TODO: rename this property for 0.18.1
+      })
+      .then((resp) => {
+        // should have status code 302
+        expect(resp.status).to.eq(302)
+
+        // when we turn off following redirects Cypress will also send us
+        // a 'redirectedTo' property with the fully qualified URL that we
+        // were redirected to.
+        expect(resp.redirectedTo).to.eq("http://localhost:8082/unauthorized")
+      })
+    })
   })
 
-  context.only('HTML form submission', function(){
+  context('HTML form submission', function(){
     beforeEach(function(){
       cy.visit('/login')
     })
@@ -75,6 +98,8 @@ describe('Logging In - HTML Web Form', function(){
       // with cy.request we can bypass all of this because it automatically gets
       // and sets cookies under the hood which acts exactly as if these requests
       // came from the browser
+      //
+      // TOOD: lets generate our own 'login' log
       cy
         .request({
           method: 'POST',
@@ -86,7 +111,7 @@ describe('Logging In - HTML Web Form', function(){
           }
         })
 
-        // add Cypress.Cookies.debug(true) here
+        // TODO: add Cypress.Cookies.debug(true) here
 
         // just to prove we have a session
         cy.getCookie("cypress-session-cookie").should('exist')
@@ -97,13 +122,19 @@ describe('Logging In - HTML Web Form', function(){
     // typically we'd put this in cypress/support/commands.js
     // but because this custom command is specific to this example
     // we'll keep it here
-    Cypress.addParentCommad("login", (username, password) => {
+    Cypress.addParentCommand("login", (username, password) => {
       // set default args
       username = username || 'cypress'
       password = password || 'password123'
 
       return cy.request({
-
+        method: 'POST',
+        url: '/login_with_form',
+        form: true,
+        body: {
+          username: 'cypress',
+          password: 'password123'
+        }
       })
     })
 

@@ -1,4 +1,5 @@
 const minimist   = require('minimist')
+const morgan     = require('morgan')
 const bodyParser = require('body-parser')
 const session    = require('express-session')
 const express    = require('express')
@@ -40,6 +41,8 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 // parse JSON bodies
 const jsonParser = bodyParser.json()
 
+app.use(morgan("dev"))
+
 // store a session cookie called
 // 'cypress-session-cookie'
 app.use(session({
@@ -78,6 +81,14 @@ app.post('/login_with_json', jsonParser, postLogin)
 
 app.get('/dashboard', ensureLoggedIn, (req, res) => {
   res.render('./dashboard.hbs')
+})
+
+app.get('/users', ensureLoggedIn, (req, res) => {
+  res.render('./users.hbs')
+})
+
+app.get('/admin', ensureLoggedIn, (req, res) => {
+  res.render('./admin.hbs')
 })
 
 app.get('/unauthorized', (req, res) => {
