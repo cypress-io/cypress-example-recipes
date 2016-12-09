@@ -22,7 +22,7 @@ describe('Logging In - HTML Web Form', function(){
   })
 
   context('Unauthorized', function(){
-    it('example #1: cannot visit /dashboard without a session', function(){
+    it('example: #1 cannot visit /dashboard without a session', function(){
       // we must have a valid session cookie to be logged
       // in else we are redirected to /unauthorized
       cy
@@ -31,26 +31,25 @@ describe('Logging In - HTML Web Form', function(){
         .url().should('include', 'unauthorized')
     })
 
-    it('example #2: can test the redirection behavior with cy.request', function(){
+    it('example: #2 can test the redirection behavior with cy.request', function(){
       // instead of visiting the page above we can test more programatically
-      // by issuing a cy.request and checking the status code and redirecedTo
+      // by issuing a cy.request and checking the status code and redirecedToUrl
       // property.
       //
-      // the 'redirectedTo' property is a special Cypress property under the hood
+      // the 'redirectedToUrl' property is a special Cypress property under the hood
       // which normalizes the url the browser would normally follow during a redirect
       cy.request({
         url: '/dashboard',
-        followRedirect: false,
-        failOnStatus: false // TODO: rename this property for 0.18.1
+        followRedirect: false // turn off following redirects automatically
       })
       .then((resp) => {
         // should have status code 302
         expect(resp.status).to.eq(302)
 
         // when we turn off following redirects Cypress will also send us
-        // a 'redirectedTo' property with the fully qualified URL that we
+        // a 'redirectedToUrl' property with the fully qualified URL that we
         // were redirected to.
-        expect(resp.redirectedTo).to.eq("http://localhost:8082/unauthorized")
+        expect(resp.redirectedToUrl).to.eq("http://localhost:8082/unauthorized")
       })
     })
   })
