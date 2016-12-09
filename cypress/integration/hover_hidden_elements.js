@@ -84,7 +84,6 @@ describe('Hover and Hidden Elements', function(){
           cy
             .get('#with-jquery').invoke('trigger', event)
             .get('#messages').should('contain', `the event ${event} was fired`)
-            .debug()
         })
       })
     })
