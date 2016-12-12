@@ -10,11 +10,11 @@ This repo contains various recipes for testing common scenarios in your applicat
   - [ES2015 / CommonJS Modules](#es2015--commonjs-modules)
   - [Unit Test - Application Code](#unit-test---application-code)
   - [Unit Test - React w/Enzyme](#unit-test---react-wenzyme)
-  - [Logging In - HTML Web Form](./cypress/integration/logging_in_html_web_form_spec.js)
+  - [Logging In - HTML Web Form](#logging-in---html-web-form)
   - [Extending Chai with Assertion Plugins](#extending-chai-with-assertion-plugins)
   - [Tab Handling and Anchor Links](#tab-handling-and-anchor-links)
-  - [Dealing with Hover and Hidden Elements](./cypress/integration/hover_hidden_elements.js)
-  - [Bootstrapping your App with Test Data](./cypress/integration/bootstrapping_app_test_data_spec.js)
+  - [Dealing with Hover and Hidden Elements](#dealing-with-hover-and-hidden-elements)
+  - [Bootstrapping your App with Test Data](#bootstrapping-your-app-with-test-data)
 
 # Overview
 
