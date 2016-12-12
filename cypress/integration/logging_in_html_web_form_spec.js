@@ -1,16 +1,10 @@
-// TODO: these tests are written using an unreleased 0.18.1
-// which adds improvements to cy.request to enable us
-// to send it form urlencoded values
-
 // We are going to do a few things
-// 1. tests unauthorized routes using cy.visit + cy.request
+// 1. test unauthorized routes using cy.visit + cy.request
 // 2. test using a regular form submission (old school POSTs)
 // 3. test error states
 // 4. test authenticated session states
 // 5. use cy.request for much faster performance
 // 6. create a custom command
-// 7. test using XHR login (new school)
-// 8. stub responses from the server (loading spinner)
 
 // change the baseUrl since we do lots of separate
 // visits and requests in these tests
@@ -98,7 +92,7 @@ describe('Logging In - HTML Web Form', function(){
       // and sets cookies under the hood which acts exactly as if these requests
       // came from the browser
       //
-      // TOOD: lets generate our own 'login' log
+      // TOOD: lets generate our own 'login' Command Log
       cy
         .request({
           method: 'POST',
@@ -111,6 +105,8 @@ describe('Logging In - HTML Web Form', function(){
         })
 
         // TODO: add Cypress.Cookies.debug(true) here
+        // to show users cy.request sets/gets cookies
+        // under the hood
 
         // just to prove we have a session
         cy.getCookie("cypress-session-cookie").should('exist')
