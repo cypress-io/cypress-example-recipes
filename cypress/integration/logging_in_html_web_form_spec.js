@@ -27,11 +27,11 @@ describe('Logging In - HTML Web Form', function(){
 
     it('example: #2 can test the redirection behavior with cy.request', function(){
       // instead of visiting the page above we can test more programatically
-      // by issuing a cy.request and checking the status code and redirecedToUrl
+      // by issuing a cy.request and checking the status code and redirectedToUrl
       // property.
       //
       // the 'redirectedToUrl' property is a special Cypress property under the hood
-      // which normalizes the url the browser would normally follow during a redirect
+      // that normalizes the url the browser would normally follow during a redirect
       cy.request({
         url: '/dashboard',
         followRedirect: false // turn off following redirects automatically
@@ -92,7 +92,7 @@ describe('Logging In - HTML Web Form', function(){
       // and sets cookies under the hood which acts exactly as if these requests
       // came from the browser
       //
-      // TOOD: lets generate our own 'login' Command Log
+      // TODO: lets generate our own 'login' Command Log
       cy
         .request({
           method: 'POST',
