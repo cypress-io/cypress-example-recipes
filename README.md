@@ -12,6 +12,7 @@ This repo contains various recipes for testing common scenarios in your applicat
   - [Unit Test - React w/Enzyme](#unit-test---react-wenzyme)
   - [Logging In - HTML Web Form](#logging-in---html-web-form)
   - [Logging In - XHR Web Form](#logging-in---xhr-web-form)
+  - [Logging In - CSRF Tokens](#logging-in---csrf-tokens)
   - [Extending Chai with Assertion Plugins](#extending-chai-with-assertion-plugins)
   - [Tab Handling and Anchor Links](#tab-handling-and-anchor-links)
   - [Dealing with Hover and Hidden Elements](#dealing-with-hover-and-hidden-elements)
@@ -99,6 +100,18 @@ This recipe shows you how to:
 - Create a custom `login` command
 - Bypass needing to use your actual UI
 - Increase testing performance with `cy.request`
+
+***
+
+### [Logging In - CSRF Tokens](./cypress/integration/logging_in_csrf_tokens_spec.js)
+
+This recipe shows you how to:
+
+- Use cy.request to get around CSRF protections
+- Parse CSRF tokens out of HTML
+- Parse CSRF tokens out of response headers
+- Expose CSRF via a route
+- Disable CSRF when not in production
 
 ***
 
