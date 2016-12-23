@@ -21,6 +21,10 @@ const processes = [
   {
     cmd:  "node ./examples/logging_in_html_web_form/server.js --port 8082",
     msg:  `Running Node Server for recipe: ${chalk.cyan('examples/logging_in_html_web_form')} on ${chalk.cyan('(port 8082)')}`
+  },
+  {
+    cmd:  "node ./examples/logging_in_xhr_web_form/server.js --port 8083",
+    msg:  `Running Node Server for recipe: ${chalk.cyan('examples/logging_in_xhr_web_form')} on ${chalk.cyan('(port 8083)')}`
   }
 ]
 

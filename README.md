@@ -77,14 +77,27 @@ This recipe shows you how to:
 
 This recipe shows you how to:
 
-- Test a standard `username/password` form
+- Test a standard `username/password` HTML form
 - Test errors submitting invalid data
 - Test unauthenticated redirects
 - Authenticate users with cookies
 - Create a custom `login` command
 - Bypass needing to use your actual UI
 - Increase testing performance with `cy.request`
-- Stub JSON based /login requests
+
+***
+
+### [Logging In - XHR Web Form](./cypress/integration/logging_in_xhr_web_form_spec.js)
+
+This recipe shows you how to:
+
+- Test an AJAX backed `username/password` form
+- Test errors submitting invalid data
+- Stub JSON based XHR requests
+- Authenticate users with cookies
+- Create a custom `login` command
+- Bypass needing to use your actual UI
+- Increase testing performance with `cy.request`
 
 ***
 
