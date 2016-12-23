@@ -1,6 +1,6 @@
-// This recipe is very similar to the 'Logging In - XHR web form'
-// except that is uses AJAX (XHR's) under the hood instead
-// of using a regular HTML form submission.
+// This recipe is very similar to the 'Logging In - HTML web form'
+// except that is uses regular HTML form submission
+// instead of using XHR's.
 
 // We are going to test a few things:
 // 1. test unauthorized routes using cy.visit + cy.request
@@ -125,7 +125,7 @@ describe('Logging In - HTML Web Form', function(){
     // typically we'd put this in cypress/support/commands.js
     // but because this custom command is specific to this example
     // we'll keep it here
-    Cypress.addParentCommand('loginWithForm', (username, password) => {
+    Cypress.addParentCommand('loginByForm', (username, password) => {
       // TODO: lets generate our own 'login' Command Log
 
       // set default args
@@ -145,7 +145,7 @@ describe('Logging In - HTML Web Form', function(){
 
     beforeEach(function(){
       // login before each test
-      cy.loginWithForm()
+      cy.loginByForm()
     })
 
     it('can visit /dashboard', function(){

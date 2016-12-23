@@ -95,7 +95,7 @@ This recipe shows you how to:
 - Test an AJAX backed `username/password` form
 - Test errors submitting invalid data
 - Stub JSON based XHR requests
-- Authenticate users with cookies
+- Stub application functions
 - Create a custom `login` command
 - Bypass needing to use your actual UI
 - Increase testing performance with `cy.request`

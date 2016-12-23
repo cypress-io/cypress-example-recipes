@@ -1,6 +1,6 @@
-// This recipe is very similar to the 'Logging In - HTML web form'
-// except that is uses regular HTML form submission
-// instead of using XHR's.
+// This recipe is very similar to the 'Logging In - XHR web form'
+// except that is uses AJAX (XHR's) under the hood instead
+// of using a regular HTML form submission.
 //
 // We are going to test a few things:
 // 2. test login form using XHR's
@@ -187,7 +187,7 @@ describe('Logging In - XHR Web Form', function(){
     // typically we'd put this in cypress/support/commands.js
     // but because this custom command is specific to this example
     // we'll keep it here
-    Cypress.addParentCommand('loginWithJSON', (username, password) => {
+    Cypress.addParentCommand('loginByJSON', (username, password) => {
       // TODO: lets generate our own 'login' Command Log
 
       // set default args
@@ -206,7 +206,7 @@ describe('Logging In - XHR Web Form', function(){
 
     beforeEach(function(){
       // login before each test
-      cy.loginWithJSON()
+      cy.loginByJSON()
     })
 
     it('can visit /dashboard', function(){
