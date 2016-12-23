@@ -11,6 +11,7 @@ This repo contains various recipes for testing common scenarios in your applicat
   - [Unit Test - Application Code](#unit-test---application-code)
   - [Unit Test - React w/Enzyme](#unit-test---react-wenzyme)
   - [Logging In - HTML Web Form](#logging-in---html-web-form)
+  - [Logging In - XHR Web Form](#logging-in---xhr-web-form)
   - [Extending Chai with Assertion Plugins](#extending-chai-with-assertion-plugins)
   - [Tab Handling and Anchor Links](#tab-handling-and-anchor-links)
   - [Dealing with Hover and Hidden Elements](#dealing-with-hover-and-hidden-elements)
