@@ -24,9 +24,6 @@ const ensureLoggedIn = (req, res, next) => {
 // parse regular form submission bodies
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-// parse JSON bodies
-const jsonParser = bodyParser.json()
-
 app.use(morgan("dev"))
 
 // store a session cookie called

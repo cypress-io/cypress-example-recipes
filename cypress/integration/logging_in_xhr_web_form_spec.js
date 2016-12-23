@@ -3,12 +3,12 @@
 // of using a regular HTML form submission.
 //
 // We are going to test a few things:
-// 2. test login form using XHR's
-// 3. test error states
-// 4. stub login XHR with errors and success
-// 5. stub Login.redirect method
-// 6. use cy.request for much faster performance
-// 7. create a custom command
+// 1. test login form using XHR's
+// 2. test error states
+// 3. stub login XHR with errors and success
+// 4. stub Login.redirect method
+// 5. use cy.request for much faster performance
+// 6. create a custom command
 
 describe('Logging In - XHR Web Form', function(){
   before(function(){
