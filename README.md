@@ -107,7 +107,7 @@ This recipe shows you how to:
 
 This recipe shows you how to:
 
-- Use cy.request to get around CSRF protections
+- Use `cy.request` to get around CSRF protections
 - Parse CSRF tokens out of HTML
 - Parse CSRF tokens out of response headers
 - Expose CSRF via a route
