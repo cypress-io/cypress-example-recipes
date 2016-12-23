@@ -1,4 +1,8 @@
-// We are going to do a few things
+// This recipe is very similar to the 'Logging In - XHR web form'
+// except that is uses AJAX (XHR's) under the hood instead
+// of using a regular HTML form submission.
+
+// We are going to test a few things:
 // 1. test unauthorized routes using cy.visit + cy.request
 // 2. test using a regular form submission (old school POSTs)
 // 3. test error states
@@ -8,9 +12,15 @@
 
 // change the baseUrl since we do lots of separate
 // visits and requests in these tests
-Cypress.config('baseUrl', "http://localhost:8082")
+Cypress.config('baseUrl', 'http://localhost:8082')
 
 describe('Logging In - HTML Web Form', function(){
+  before(function(){
+    // change the baseUrl since we do lots of separate
+    // visits and requests in these tests
+    Cypress.config('baseUrl', 'http://localhost:8082')
+  })
+
   beforeEach(function(){
     cy.viewport(500, 380)
   })
@@ -43,7 +53,7 @@ describe('Logging In - HTML Web Form', function(){
         // when we turn off following redirects Cypress will also send us
         // a 'redirectedToUrl' property with the fully qualified URL that we
         // were redirected to.
-        expect(resp.redirectedToUrl).to.eq("http://localhost:8082/unauthorized")
+        expect(resp.redirectedToUrl).to.eq('http://localhost:8082/unauthorized')
       })
     })
   })
@@ -91,12 +101,10 @@ describe('Logging In - HTML Web Form', function(){
       // with cy.request we can bypass all of this because it automatically gets
       // and sets cookies under the hood which acts exactly as if these requests
       // came from the browser
-      //
-      // TODO: lets generate our own 'login' Command Log
       cy
         .request({
           method: 'POST',
-          url: '/login_with_form', //baseUrl will be prepended to this url
+          url: '/login', //baseUrl will be prepended to this url
           form: true, //indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
           body: {
             username: 'cypress',
@@ -109,55 +117,58 @@ describe('Logging In - HTML Web Form', function(){
         // under the hood
 
         // just to prove we have a session
-        cy.getCookie("cypress-session-cookie").should('exist')
+        cy.getCookie('cypress-session-cookie').should('exist')
     })
   })
 
-  context('Reusable custom command to automatically facilitate logging in', function(){
+  context('Reusable "login" custom command', function(){
     // typically we'd put this in cypress/support/commands.js
     // but because this custom command is specific to this example
     // we'll keep it here
-    Cypress.addParentCommand("login", (username, password) => {
+    Cypress.addParentCommand('loginWithForm', (username, password) => {
+      // TODO: lets generate our own 'login' Command Log
+
       // set default args
       username = username || 'cypress'
       password = password || 'password123'
 
       return cy.request({
         method: 'POST',
-        url: '/login_with_form',
+        url: '/login',
         form: true,
         body: {
-          username: 'cypress',
-          password: 'password123'
+          username: username,
+          password: password
         }
       })
     })
 
     beforeEach(function(){
       // login before each test
-      cy.login()
+      cy.loginWithForm()
     })
 
     it('can visit /dashboard', function(){
       cy
-        .visit("/dashboard")
-        .get("h2").should("contain", "dashboard.html")
+        .visit('/dashboard')
+        .get('h2').should('contain', 'dashboard.html')
     })
 
     it('can visit /users', function(){
       cy
-        .visit("/users")
-        .get("h2").should("contain", "users.html")
+        .visit('/users')
+        .get('h2').should('contain', 'users.html')
     })
 
     it('can simply request other authenticated pages', function(){
       cy
-        // dont visit this page and load the resources
-        // instead let's just issue a simple HTTP request
-        // so we can make an assertion about its body
-        .request("/admin")
-        .its("body")
-        .should("include", "<h2>admin.html</h2>")
+        // instead of visiting each page and waiting for all
+        // the associated resources to load, we can instead
+        // just issue a simple HTTP request and make an
+        // assertion about the response body
+        .request('/admin')
+        .its('body')
+        .should('include', '<h2>admin.html</h2>')
     })
   })
 })

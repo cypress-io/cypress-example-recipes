@@ -21,20 +21,6 @@ const ensureLoggedIn = (req, res, next) => {
   }
 }
 
-const postLogin = (req, res) => {
-  // if this matches the secret username and password
-  if(matchesUsernameAndPassword(req.body)){
-    req.session.user = 'cypress'
-
-    res.redirect('/dashboard')
-  } else {
-    // render login with errors
-    res.render('./login.hbs', {
-      error: 'Username and password incorrect'
-    })
-  }
-}
-
 // parse regular form submission bodies
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -65,19 +51,22 @@ app.get('/login', (req, res) => {
   res.render('./login.hbs')
 })
 
-// Because this recipe includes an example that
-// uses a regular HTML form submission and an
-// example that uses XHR based
-
 // specify that the urlencodedParser should only
 // be used on this one route when its coming from
 // the login form
-app.post('/login_with_form', urlencodedParser, postLogin)
+app.post('/login', urlencodedParser, (req, res) => {
+  // if this matches the secret username and password
+  if(matchesUsernameAndPassword(req.body)){
+    req.session.user = 'cypress'
 
-// specifiy thae the jsonParser shoudld only be
-// used on the one route when its coming from
-// a JSON request
-app.post('/login_with_json', jsonParser, postLogin)
+    res.redirect('/dashboard')
+  } else {
+    // render login with errors
+    res.render('./login.hbs', {
+      error: 'Username and password incorrect'
+    })
+  }
+})
 
 app.get('/dashboard', ensureLoggedIn, (req, res) => {
   res.render('./dashboard.hbs')
