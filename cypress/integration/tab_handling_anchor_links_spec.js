@@ -1,7 +1,7 @@
 // In this recipe we have a <nav> with a couple of links
 // that we want to test.
 //
-// One of the links has a target="_blank" attribute that
+// One of the links has a target='_blank' attribute that
 // would otherwise open in a new tab.
 //
 // Another link is pointed to an external domain that
@@ -9,12 +9,13 @@
 
 describe('Tab Handling Anchor Links', function(){
   beforeEach(function(){
+    debugger
     cy
       .viewport(500, 300) // a small viewport is all we need for this recipe
-      .visit("http://localhost:8080/examples/tab_handling_anchor_links/index.html")
+      .visit('http://localhost:8080/examples/tab_handling_anchor_links/index.html')
   })
 
-  context("testing the target='_blank' link", function(){
+  context('testing the target="_blank" link', function(){
     // The problem with this link is that by default when you click
     // on it, the browser will attempt to open the content in another
     // tab. You can open up your browser to the URL we visited above
@@ -32,7 +33,7 @@ describe('Tab Handling Anchor Links', function(){
     // Remember the key to Cypress is thinking differently and not necessarily
     // doing things exactly like a real user. Robots aren't real users.
 
-    it("solution #1: verify the href, dont click through", function(){
+    it('solution #1: verify the href, dont click through', function(){
       // The first question we should ask ourselves is... why do we want
       // to even click this link?
       //
@@ -43,20 +44,20 @@ describe('Tab Handling Anchor Links', function(){
       // If the answer is yes, then this is a super simple test.
       //
       // We simply verify that this <a> has the right href and that's it!
-      cy.get("#users").should(function($a){
+      cy.get('#users').should(function($a){
         // the href 'attribute' will only ever be what the
         // literal value is on the element itself and will
         // match what was served by the <html> payload
-        expect($a).to.have.attr("href", "users.html")
+        expect($a).to.have.attr('href', 'users.html')
 
         // an <a> also has an 'href' property which always resolves
         // to the fully qualified URL. by asserting on this property
         // we are testing this element more thoroughly
-        expect($a).to.have.prop("href", "http://localhost:8080/examples/tab_handling_anchor_links/users.html")
+        expect($a).to.have.prop('href', 'http://localhost:8080/examples/tab_handling_anchor_links/users.html')
       })
     })
 
-    it("solution #2: click through to the new page", function(){
+    it('solution #2: click through to the new page', function(){
       // Okay so let's assume solution #1 isn't comprehensive enough for you.
       //
       // Perhaps you have some event handling on the click event and testing
@@ -69,16 +70,16 @@ describe('Tab Handling Anchor Links', function(){
         // we can simply modify 'the state of the world' to best suit our testing
         // needs.
         //
-        // We can simply remove the offending attribute - target="_blank" which
+        // We can simply remove the offending attribute - target='_blank' which
         // would normally open content in a new tab.
-        .get("#users").invoke("removeAttr", "target").click()
+        .get('#users').invoke('removeAttr', 'target').click()
 
         // after clicking the <a> we are now navigated to the
         // new page and we can assert that the url is correct
-        .url().should("include", "users.html")
+        .url().should('include', 'users.html')
     })
 
-    it("solution #3: visit without modifying the <a>", function(){
+    it('solution #3: visit without modifying the <a>', function(){
       // Still not happy? Perhaps you don't like the idea of modifying your
       // application's HTML. I'm not sure why, but let's assume you want
       // some more ideas here without modifying the state of the world.
@@ -86,18 +87,18 @@ describe('Tab Handling Anchor Links', function(){
       // We can still test this by simply visiting the href property that
       // would normally cause our browser to be navigated to.
       //
-      cy.get("#users").then(function($a){
+      cy.get('#users').then(function($a){
         // extract the fully qualified href property
-        const href = $a.prop("href")
+        const href = $a.prop('href')
 
         // and now simply visit this directly
         cy
           .visit(href)
-          .url().should("include", "users.html")
+          .url().should('include', 'users.html')
       })
     })
 
-    it("solution #4: request without visiting", function(){
+    it('solution #4: request without visiting', function(){
       // One thing you should always challenge yourself with is
       // trying to always reduce the time it takes for a test to
       // run.
@@ -121,9 +122,9 @@ describe('Tab Handling Anchor Links', function(){
       // 'act like the browser' but avoid all of the side effects
       // when it comes to loading resources you don't care about.
       //
-      cy.get("#users").then(function($a){
+      cy.get('#users').then(function($a){
         // extract the fully qualified href propert
-        const href = $a.prop("href")
+        const href = $a.prop('href')
 
         cy
           // make an http request for this resource
@@ -131,18 +132,18 @@ describe('Tab Handling Anchor Links', function(){
           .request(href)
 
           // drill into the response body
-          .its("body")
+          .its('body')
 
           // and now assert about its contents
           // which is a string of the <html> response
-          .should("include", "<title>")
-          .and("include", "users.html")
-          .and("include", "</html>")
+          .should('include', '<title>')
+          .and('include', 'users.html')
+          .and('include', '</html>')
       })
     })
   })
 
-  context("testing the external domain link", function(){
+  context('testing the external domain link', function(){
     // The new problem we are facing has to do with an inherent restriction in
     // Cypress.
     //
@@ -162,7 +163,7 @@ describe('Tab Handling Anchor Links', function(){
     // Regardless of this restriction you have many options to overcome this
     // and still test your application with 100% confidence.
 
-    it("solution #1: verify the href property only", function(){
+    it('solution #1: verify the href property only', function(){
       // Just like in our solution #1 above, the simpliest way to approach
       // testing an external link is simply not click through it.
       //
@@ -175,10 +176,10 @@ describe('Tab Handling Anchor Links', function(){
       //
       // If that's the case, then this test is identical to solution #1 above!
       //
-      cy.get("#google").should("have.prop", "href", "https://www.google.com/")
+      cy.get('#google').should('have.prop', 'href', 'https://www.google.com/')
     })
 
-    it("solution #2: request its contents", function(){
+    it('solution #2: request its contents', function(){
       // Okay but what if you REALLY REALLY want to see 'whats on the other side?'
       //
       // Let's assume that somehow this other completely different domain has or
@@ -189,15 +190,15 @@ describe('Tab Handling Anchor Links', function(){
       // errors which causes the current test to fail. Since that remote page
       // isn't under your control, it's way better not to actually cy.visit(...) it!
       //
-      cy.get("#google").then(function($a){
-        const href = $a.prop("href")
+      cy.get('#google').then(function($a){
+        const href = $a.prop('href')
 
         cy
           // request the contents of https://www.google.com/
           .request(href)
 
           // drill into the response body
-          .its("body")
+          .its('body')
 
           // Because we don't control this site - in fact google updates its home
           // page all the time, we don't feel comfortable making any kind of assertions
@@ -208,11 +209,11 @@ describe('Tab Handling Anchor Links', function(){
           //
           // You will notice that this test even goes much slower than the others and
           // it requires internet access.
-          .should("include", "</html>")
+          .should('include', '</html>')
       })
     })
 
-    it("solution #3: click through to the external domain", function(){
+    it('solution #3: click through to the external domain', function(){
       // Wait what? I thought you said this wasn't just a bad idea, you said its not
       // even possible to do with Cypress!
       //
@@ -228,8 +229,8 @@ describe('Tab Handling Anchor Links', function(){
       // cypress.json which is why the test is actually commented out.
       //
       // cy
-      //   .get("#google").click()
-      //   .url().should("include", "google.com")
+      //   .get('#google').click()
+      //   .url().should('include', 'google.com')
     })
   })
 
