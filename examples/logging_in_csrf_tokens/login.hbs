@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Logging In - HTML Web Form - Login</title>
+  <title>Logging In - CSRF Tokens - Login</title>
   <style type="text/css">
     body {
       padding: 0 10px;
@@ -29,10 +29,10 @@
 <body>
   <h2>login.html</h2>
   <p>
-    This example has a regular HTML form that POSTs username and password to the node server.
+    This example has a regular HTML form that POSTs username, password and csrf token to the node server.
   </p>
   <p>
-    In this recipe we are going to test that sessions (cookies) are properly sent, we'll test form errors, and then show how you can bypass the UI entirely to speed up your tests.
+    In this recipe we are going to show how to bypass and manage CSRF tokens.
   </p>
   <div id="form-wrapper">
     <form method="POST" action="/login">

@@ -53,7 +53,7 @@ app.get('/login', csrfProtection, (req, res) => {
   res
   .set('x-csrf-token', token) // set a response header
   .render('./login.hbs', {
-    csrfToken: token // and also send this part of the HTMLK
+    csrfToken: token // and also send this part of the HTML
   })
 })
 
@@ -89,11 +89,11 @@ if(process.env.NODE_ENV !== 'production'){
 }
 
 app.use((err, req, res, next) => {
-  if (err.code !== 'EBADCSRFTOKEN') {
-    return next(err)
+  if (err.code === 'EBADCSRFTOKEN') {
+    return res.status(403).render('./csrf.hbs')
   }
 
-  res.status(403).render('./csrf.hbs')
+  next(err)
 })
 
 app.listen(port, () => {
