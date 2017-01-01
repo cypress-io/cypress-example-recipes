@@ -13,6 +13,7 @@ This repo contains various recipes for testing common scenarios in your applicat
   - [Logging In - HTML Web Form](#logging-in---html-web-form)
   - [Logging In - XHR Web Form](#logging-in---xhr-web-form)
   - [Logging In - CSRF Tokens](#logging-in---csrf-tokens)
+  - [Logging In - Single Sign On](#logging-in---single-sign-on)
   - [Extending Chai with Assertion Plugins](#extending-chai-with-assertion-plugins)
   - [Tab Handling and Anchor Links](#tab-handling-and-anchor-links)
   - [Dealing with Hover and Hidden Elements](#dealing-with-hover-and-hidden-elements)
@@ -112,6 +113,17 @@ This recipe shows you how to:
 - Parse CSRF tokens out of response headers
 - Expose CSRF via a route
 - Disable CSRF when not in production
+
+***
+
+### [Logging In - Single Sign On](./cypress/integration/logging_in_single_sign_on_spec.js)
+
+This recipe shows you how to:
+
+- Login when authentication is done on a 3rd party server
+- Parse tokens using `cy.request`
+- Manually set tokens on local storage
+- Map external hosts and point to local servers
 
 ***
 

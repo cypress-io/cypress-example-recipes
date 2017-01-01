@@ -16,19 +16,27 @@ const processes = [
   },
   {
     cmd:  "node ./examples/bootstrapping_app_test_data/server.js --port 8081",
-    msg:  `Running Node Server for recipe: ${chalk.cyan('examples/bootstrapping_app_test_data')} on ${chalk.cyan('(port 8081)')}`
+    msg:  `Running App Server for recipe: ${chalk.cyan('examples/bootstrapping_app_test_data')} on ${chalk.cyan('(port 8081)')}`
   },
   {
     cmd:  "node ./examples/logging_in_html_web_form/server.js --port 8082",
-    msg:  `Running Node Server for recipe: ${chalk.cyan('examples/logging_in_html_web_form')} on ${chalk.cyan('(port 8082)')}`
+    msg:  `Running App Server for recipe: ${chalk.cyan('examples/logging_in_html_web_form')} on ${chalk.cyan('(port 8082)')}`
   },
   {
     cmd:  "node ./examples/logging_in_xhr_web_form/server.js --port 8083",
-    msg:  `Running Node Server for recipe: ${chalk.cyan('examples/logging_in_xhr_web_form')} on ${chalk.cyan('(port 8083)')}`
+    msg:  `Running App Server for recipe: ${chalk.cyan('examples/logging_in_xhr_web_form')} on ${chalk.cyan('(port 8083)')}`
   },
   {
     cmd:  "node ./examples/logging_in_csrf_tokens/server.js --port 8084",
-    msg:  `Running Node Server for recipe: ${chalk.cyan('examples/logging_in_csrf_tokens')} on ${chalk.cyan('(port 8084)')}`
+    msg:  `Running App Server for recipe: ${chalk.cyan('examples/logging_in_csrf_tokens')} on ${chalk.cyan('(port 8084)')}`
+  },
+  {
+    cmd:  "node ./examples/logging_in_single_sign_on/app_server.js --port 8085",
+    msg:  `Running App Server for recipe: ${chalk.cyan('examples/logging_in_single_sign_on')} on ${chalk.cyan('(port 8085)')}`
+  },
+  {
+    cmd:  "node ./examples/logging_in_single_sign_on/auth_server.js --port 8086",
+    msg:  `Running Auth Server for recipe: ${chalk.cyan('examples/logging_in_single_sign_on')} on ${chalk.cyan('(port 8086)')}`
   }
 ]
 
