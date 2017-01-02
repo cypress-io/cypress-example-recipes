@@ -9,7 +9,6 @@
 
 describe('Tab Handling Anchor Links', function(){
   beforeEach(function(){
-    debugger
     cy
       .viewport(500, 300) // a small viewport is all we need for this recipe
       .visit('http://localhost:8080/examples/tab_handling_anchor_links/index.html')
