@@ -169,3 +169,10 @@ This recipe shows you how to:
 - Wait on an XHR to finish
 
 ***
+
+### [TypeScript type definitions for Cypress](https://github.com/StackVista/typed-cypress). Provided by [StackState](http://www.stackstate.com/).
+
+This repo includes:
+
+- TypeScript definitions for most Cypress API commands.
+- Type safe mocking of XHR and websockets.
