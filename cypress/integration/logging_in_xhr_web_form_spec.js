@@ -112,12 +112,9 @@ describe('Logging In - XHR Web Form', function(){
         .visit('/login')
         .window()
         .then(function(win){
-          // unroll the agents for stub/spy
-          const agents = cy.agents()
-
           // stub out the Login.redirect method
           // so it doesnt cause the browser to redirect
-          this.redirect = agents.stub(win.Login, 'redirect')
+          cy.stub(win.Login, 'redirect').as("redirect")
         })
         .server()
 
