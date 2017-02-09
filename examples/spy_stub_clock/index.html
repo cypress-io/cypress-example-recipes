@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spy / Stub / Clock</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Favorite Fruits</h1>
+  <ul class="favorite-fruits"></ul>
+
+  <h1>Search Fruits</h1>
+  <input placeholder="Fruit name..." />
+  <ul class='search-results'></ul>
+
+  <script>
+    // util functions
+
+    function debounce (fn, delay) {
+      let timerId
+      return (...args) => {
+        clearTimeout(timerId)
+        timerId = setTimeout(() => {
+          fn(...args)
+        }, delay)
+      }
+    }
+
+    function handleFetchResponse (response) {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error(response.statusText)
+      }
+    }
+
+    // app code
+
+    function updateFavoriteFruits (contents) {
+      if (typeof contents !== 'string') {
+        contents = contents.map((item) => `<li>${item}</li>`).join('')
+      }
+
+      document.querySelector('.favorite-fruits').innerHTML = contents
+    }
+
+    function getFavoriteFruits () {
+      document.querySelector('.favorite-fruits').innerHTML = '<div class="loader"></div>'
+
+      fetch('/favorite-fruits')
+      .then(handleFetchResponse)
+      .then((response) => {
+         updateFavoriteFruits(response.length ? response : 'No favorites')
+      })
+      .catch((error) => {
+        updateFavoriteFruits(`Failed loading favorite fruits: ${error.message}`)
+      })
+    }
+
+    getFavoriteFruits()
+    setInterval(getFavoriteFruits, 30000)
+
+    function updateSearchResults (contents) {
+      document.querySelector('.search-results').innerHTML = contents
+    }
+
+    document.querySelector('input').addEventListener('keyup', debounce((e) => {
+      const query = e.target.value
+      if (!query) {
+        updateSearchResults([])
+        return
+      }
+
+      fetch(`/fruits?query=${e.target.value}`)
+      .then(handleFetchResponse)
+      .then((response) => {
+        updateSearchResults(response.length ? response : 'No fruit found')
+      })
+      .catch((error) => {
+        updateSearchResults(`Search failed: ${error.message}`)
+      })
+    }, 500))
+  </script>
+</body>
+</html>

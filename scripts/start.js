@@ -37,6 +37,10 @@ const processes = [
   {
     cmd:  "node ./examples/logging_in_single_sign_on/auth_server.js --port 8086",
     msg:  `Running Auth Server for recipe: ${chalk.cyan('examples/logging_in_single_sign_on')} on ${chalk.cyan('(port 8086)')}`
+  },
+  {
+    cmd:  "node ./examples/spy_stub_clock/server.js --port 8087",
+    msg:  `Running App Server for recipe: ${chalk.cyan('examples/spy_stub_clock')} on ${chalk.cyan('(port 8087)')}`
   }
 ]
 
