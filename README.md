@@ -18,7 +18,7 @@ This repo contains various recipes for testing common scenarios in your applicat
   - [Tab Handling and Anchor Links](#tab-handling-and-anchor-links)
   - [Dealing with Hover and Hidden Elements](#dealing-with-hover-and-hidden-elements)
   - [Bootstrapping your App with Test Data](#bootstrapping-your-app-with-test-data)
-  - [Controlling Behavior with Spies, Stubs, and Clocks](#controlling-behavior-with-spies--stubs--and-clocks)
+  - [Controlling Behavior with Spies, Stubs, and Clocks](#controlling-behavior-with-spies-stubs-and-clocks)
 
 # Overview
 
