@@ -18,11 +18,6 @@ app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/index.html`)
 })
 
-app.get('/fruits', (req, res) => {
-  const query = req.query.query
-  res.json(fruits.filter((fruit) => fruit.toLowerCase().indexOf(query) > -1))
-})
-
 app.get('/favorite-fruits', (req, res) => {
   res.json(_.sampleSize(fruits, 5))
 })

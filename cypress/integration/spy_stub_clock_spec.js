@@ -2,14 +2,7 @@
 // control behavior and time
 
 // This app shows a list of "favorite fruits" that gets
-// refreshed every 30 seconds (let's say it's being
-// drawn from how many people mention the fruit on Twitter)
-
-// It also has a way to search for fruits, if say, you
-// thought that 'elderberry' was a fruit but weren't quite sure :)
-// The app will search as you type, but in the interest of
-// preventing the server from getting inundated with requests,
-// it debounces the API calls
+// refreshed every 30 seconds
 
 describe('Spy / Stub / Clock', function(){
   // With this strategy, we let calls go through to the server
