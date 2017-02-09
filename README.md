@@ -177,7 +177,7 @@ This recipe shows you how to:
 
 - Use `cy.spy` to verify the behavior of a function
 - Use `cy.stub` to verify and control the behavior of a function
-- Stub `window.fetch` to control server responses
 - Use `cy.clock` to control time
+- Stub `window.fetch` to control server responses
 
 ***
