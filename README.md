@@ -10,6 +10,7 @@ This repo contains various recipes for testing common scenarios in your applicat
   - [ES2015 / CommonJS Modules](#es2015--commonjs-modules)
   - [Unit Test - Application Code](#unit-test---application-code)
   - [Unit Test - React w/Enzyme](#unit-test---react-wenzyme)
+  - [Unit Test - Stubbing Dependencies](#unit-test---stubbing-dependencies)
   - [Logging In - HTML Web Form](#logging-in---html-web-form)
   - [Logging In - XHR Web Form](#logging-in---xhr-web-form)
   - [Logging In - CSRF Tokens](#logging-in---csrf-tokens)
@@ -74,6 +75,16 @@ This recipe shows you how to:
 - Unit test a React JSX Component
 - Import `enzyme` from `node_modules`
 - Extend chai assertions with `chai-enzyme`
+
+***
+
+### [Unit Test - Stubbing Dependencies](./cypress/integration/unit_test_stubbing_dependencies_spec.js)
+
+This recipe shows you how to:
+
+- Use `cy.stub` to stub dependencies in a unit test
+- Handle promises returned by stubbed functions
+- Handle callbacks in stubbed functions
 
 ***
 
