@@ -12,4 +12,4 @@ test:
         background: true
 
   override:
-    - cypress ci
+    - cypress run

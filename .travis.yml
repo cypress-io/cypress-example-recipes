@@ -10,4 +10,4 @@ before_script:
   - npm start -- --silent &
 
 script:
-  - cypress ci
+  - cypress run
