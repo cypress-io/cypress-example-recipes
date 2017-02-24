@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Drag n Drop</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <ul class="places">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <ul class="pieces">
+    <li class="piece-1"></li>
+    <li class="piece-2"></li>
+    <li class="piece-3"></li>
+    <li class="piece-4"></li>
+    <li class="piece-5"></li>
+    <li class="piece-6"></li>
+    <li class="piece-7"></li>
+    <li class="piece-8"></li>
+    <li class="piece-9"></li>
+    <li class="piece-10" draggable="true"></li>
+    <li class="piece-11" draggable="true"></li>
+    <li class="piece-12" draggable="true"></li>
+  </ul>
+
+  <script src="http://localhost:8080/node_modules/dragula/dist/dragula.min.js"></script>
+  <script src="http://localhost:8080/node_modules/jquery/dist/jquery.js"></script>
+  <script>
+    let $piece
+    let initialX = 0
+    let initialY = 0
+
+    $('.pieces li').on('mousedown', (e) => {
+      $piece = $(e.target).css('z-index', 1000)
+      initialX = e.pageX - $piece.position().left
+      initialY = e.pageY - $piece.position().top
+      return false // prevents text selection
+    })
+
+    $(document).on('mousemove', (e) => {
+      if (!$piece) return
+
+      $piece.css({
+        left: `${e.pageX - initialX}px`,
+        top: `${e.pageY - initialY}px`,
+      })
+    })
+
+    $(document).on('mouseup', (e) => {
+      if (!$piece) return
+
+      $piece.css('z-index', 'auto')
+      $piece = null
+    })
+  </script>
+</body>
+</html>
