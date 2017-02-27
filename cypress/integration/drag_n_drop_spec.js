@@ -1,50 +1,49 @@
 describe('Drag n Drop', function(){
-  beforeEach(function(){
-    cy
-      .viewport(700, 300)
-      .visit('http://localhost:8080/examples/drag_n_drop/index.html')
-  })
 
-  it('moves pieces in place', function() {
-    return (
+  describe('puzzle using mouse events', function(){
+
+    function movePiece (number, x, y) {
+      return cy
+        .get(`.piece-${number}`)
+        .ttrigger('mousedown', { which: 1 })
+        .ttrigger('mousemove', { clientX: x, clientY: y })
+        .ttrigger('mouseup')
+    }
+
+    function completePuzzle (correctly) {
+      return Cypress.Promise.all([
+        movePiece(1, 410, correctly ? 130 : 200),
+        movePiece(2, 480, 130),
+        movePiece(3, 550, 130),
+        movePiece(4, 410, correctly ? 200 : 130),
+        movePiece(5, 480, 200),
+        movePiece(6, 550, 200),
+        movePiece(7, 410, 270),
+        movePiece(8, 480, 270),
+        movePiece(9, 550, 270),
+      ])
+    }
+
+    beforeEach(function(){
       cy
-        .pause()
-        .get('.piece-1')
-          .ttrigger('mousedown', { pageX: 0, pageY: 0 })
-          .ttrigger('mousemove', { pageX: 358, pageY: 9 })
-          .ttrigger('mouseup')
-        .get('.piece-2')
-          .ttrigger('mousedown', { pageX: 0, pageY: 80 })
-          .ttrigger('mousemove', { pageX: 425, pageY: 9 })
-          .ttrigger('mouseup')
-        .get('.piece-3')
-          .ttrigger('mousedown', { pageX: 0, pageY: 160 })
-          .ttrigger('mousemove', { pageX: 492, pageY: 9 })
-          .ttrigger('mouseup')
-        .get('.piece-4')
-          .ttrigger('mousedown', { pageX: 80, pageY: 0 })
-          .ttrigger('mousemove', { pageX: 358, pageY: 76 })
-          .ttrigger('mouseup')
-        .get('.piece-5')
-          .ttrigger('mousedown', { pageX: 80, pageY: 80 })
-          .ttrigger('mousemove', { pageX: 425, pageY: 76 })
-          .ttrigger('mouseup')
-        .get('.piece-6')
-          .ttrigger('mousedown', { pageX: 80, pageY: 160 })
-          .ttrigger('mousemove', { pageX: 492, pageY: 76 })
-          .ttrigger('mouseup')
-        .get('.piece-7')
-          .ttrigger('mousedown', { pageX: 160, pageY: 0 })
-          .ttrigger('mousemove', { pageX: 358, pageY: 143 })
-          .ttrigger('mouseup')
-        .get('.piece-8')
-          .ttrigger('mousedown', { pageX: 160, pageY: 80 })
-          .ttrigger('mousemove', { pageX: 425, pageY: 143 })
-          .ttrigger('mouseup')
-        .get('.piece-9')
-          .ttrigger('mousedown', { pageX: 160, pageY: 160 })
-          .ttrigger('mousemove', { pageX: 492, pageY: 143 })
-          .ttrigger('mouseup')
-    )
+        .viewport(650, 350)
+        .visit('http://localhost:8080/examples/drag_n_drop/puzzle.html')
+    })
+
+    it('shows error when puzzle is completed incorrectly', function(){
+      completePuzzle(false)
+      cy
+        .get('.notice')
+        .should('have.class', 'error')
+        .should('have.text', 'Not quite right. Please try again')
+    })
+
+    it('shows error when puzzle is completed correctly', function(){
+      completePuzzle(true)
+      cy
+        .get('.notice')
+        .should('have.class', 'success')
+        .should('have.text', 'Success!')
+    })
   })
 })

@@ -14,12 +14,37 @@ ul,li {
   padding: 0;
 }
 
+header {
+  margin-bottom: 20px;
+}
+
+main {
+  display: flex;
+}
+
+.notice {
+  min-height: 1.2em;
+  margin: 0 0 10px 40px;
+}
+
+.notice.error {
+  color: red;
+}
+
+.notice.success {
+  color: green;
+}
+
+.places,
+.pieces {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .places {
   border-left: solid 1px #d7d7d7;
   border-top: solid 1px #d7d7d7;
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: 350px;
+  margin-left: 40px;
   width: 201px;
   height: 201px;
 }
@@ -31,22 +56,74 @@ ul,li {
   height: 66px;
 }
 
+.pieces {
+  justify-content: space-between;
+  width: 300px;
+}
+
 .pieces li {
-  background: url('cypress-logo.png') no-repeat;
-  position: absolute;
+  margin: 4px;
   width: 67px;
   height: 67px;
 }
 
-.pieces .piece-1  { background-position:      0      0; left:  20px; top:  20px; }
-.pieces .piece-2  { background-position:  -67px      0; left:  20px; top: 100px; }
-.pieces .piece-3  { background-position: -134px      0; left:  20px; top: 180px; }
-.pieces .piece-4  { background-position:      0  -67px; left: 100px; top:  20px; }
-.pieces .piece-5  { background-position:  -67px  -67px; left: 100px; top: 100px; }
-.pieces .piece-6  { background-position: -134px  -67px; left: 100px; top: 180px; }
-.pieces .piece-7  { background-position:      0 -134px; left: 180px; top:  20px; }
-.pieces .piece-8  { background-position:  -67px -134px; left: 180px; top: 100px; }
-.pieces .piece-9  { background-position: -134px -134px; left: 180px; top: 180px; }
-.pieces .piece-10 { background-position: -100px -120px; left: 260px; top:  20px; }
-.pieces .piece-11 { background-position:  -10px  -20px; left: 260px; top: 100px; }
-.pieces .piece-12 { background-position: -110px      0; left: 260px; top: 180px; }
+.piece {
+  background: url('cypress-logo.png') no-repeat;
+  display: block;
+  width: 67px;
+  height: 67px;
+}
+
+.piece-1  { background-position:      0      0; }
+.piece-2  { background-position:  -67px      0; }
+.piece-3  { background-position: -134px      0; }
+.piece-4  { background-position:      0  -67px; }
+.piece-5  { background-position:  -67px  -67px; }
+.piece-6  { background-position: -134px  -67px; }
+.piece-7  { background-position:      0 -134px; }
+.piece-8  { background-position:  -67px -134px; }
+.piece-9  { background-position: -134px -134px; }
+.piece-10 { background-position:  -90px -170px; }
+.piece-11 { background-position:  -10px  -40px; }
+.piece-12 { background-position:  -120px -60px; }
+
+.balls {
+  width: 130px;
+}
+
+.balls img {
+  margin: 5px;
+}
+
+.hoop {
+  border: solid 3px #999;
+  border-radius: 50%;
+  margin-left: 50px;
+  width: 60px;
+  height: 60px;
+}
+
+.hoop.over {
+  background: #bfe8ac;
+}
+
+/* for dragula */
+
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+}
+
+.gu-hide {
+  display: none !important;
+}
+
+.gu-unselectable {
+  user-select: none !important;
+}
+
+.gu-transit {
+  opacity: 0.2;
+}
