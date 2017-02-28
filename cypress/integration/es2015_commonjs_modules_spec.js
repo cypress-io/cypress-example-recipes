@@ -8,11 +8,11 @@
 // Doing so makes it much more obvious where reusable
 // functions come from.
 
-// ES2015 import utility foo
-import foo from '../support/utils/foo'
+// ES2015 import utility get_selector
+import getSelector from '../support/utils/get_selector'
 
-// CommonJS require utility bar
-const bar = require('../support/utils/bar')
+// CommonJS require utility append_key
+const appendKey = require('../support/utils/append_key')
 
 // we can also import node_modules from our package.json
 import { upperFirst, lowerFirst } from 'lodash'
@@ -25,22 +25,22 @@ describe("Modules", function(){
   // you can use ES2015 module import syntax
   context('ES2015', function(){
     it('can import default function', function(){
-      expect(foo('bar')).to.eq('foo bar')
+      expect(getSelector('checkbox')).to.eq('.my-app-checkbox')
     })
 
     it('can import upperFirst from lodash', function(){
-      expect(upperFirst('brian')).to.eq('Brian')
+      expect(upperFirst('jane')).to.eq('Jane')
     })
 
     it('can import lowerFirst from lodash', function(){
-      expect(lowerFirst('BRIAN')).to.eq('bRIAN')
+      expect(lowerFirst('JANE')).to.eq('jANE')
     })
   })
 
   // you can also use node's CommonJS require syntax
   context('CommonJS', function(){
     it('can require module.exports', function(){
-      expect(bar('baz')).to.eq('bar baz')
+      expect(appendKey('jane.lane@devs.com')).to.eq('jane.lane@devs.com+APIkey123')
     })
 
     it('can require minimist', function(){
