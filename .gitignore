@@ -6,3 +6,6 @@ npm-debug.log
 tmp
 .projects
 *.orig
+
+cypress/screenshots
+cypress/videos
