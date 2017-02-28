@@ -58,7 +58,7 @@ main {
 
 .pieces {
   justify-content: space-between;
-  width: 300px;
+  width: 230px;
 }
 
 .pieces li {
@@ -83,9 +83,6 @@ main {
 .piece-7  { background-position:      0 -134px; }
 .piece-8  { background-position:  -67px -134px; }
 .piece-9  { background-position: -134px -134px; }
-.piece-10 { background-position:  -90px -170px; }
-.piece-11 { background-position:  -10px  -40px; }
-.piece-12 { background-position:  -120px -60px; }
 
 .balls {
   width: 130px;
@@ -105,6 +102,18 @@ main {
 
 .hoop.over {
   background: #bfe8ac;
+}
+
+.basketball main p {
+  font-size: 1.5em;
+}
+
+.basketball .error p {
+  color: red;
+}
+
+.basketball .success p {
+  color: green;
 }
 
 /* for dragula */
