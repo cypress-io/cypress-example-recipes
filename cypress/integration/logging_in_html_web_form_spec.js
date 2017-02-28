@@ -13,10 +13,6 @@
 // Be sure to run `npm start` to start the server
 // before running the tests below.
 
-// change the baseUrl since we do lots of separate
-// visits and requests in these tests
-Cypress.config('baseUrl', 'http://localhost:8082')
-
 describe('Logging In - HTML Web Form', function(){
   before(function(){
     // change the baseUrl since we do lots of separate

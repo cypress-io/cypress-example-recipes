@@ -1,57 +1,66 @@
 // This recipe expands on the previous 'Logging in' examples
 // and shows you how to login when authentication is done
 // through a 3rd party server.
-//
-// There is a web security restriction in Cypress which prevents
+
+// There is a web security restriction in Cypress that prevents
 // you from visiting two different super domains in the same test
 // without setting {chromeWebSecurity: false} in cypress.json.
 // However this restriction is easy to bypass (and is much more
 // performant and less brittle) with cy.request
-//
+
 // There are two servers in use in this example.
 // 1. http://localhost:8085 (the app server)
 // 2. http://auth.corp.com:8086 (the authentication server)
-//
+
+// Be sure to run `npm start` to start the server
+// before running the tests below.
+
 // NOTE: We are able to use auth.corp.com without modifying our
 // local /etc/hosts file because cypress supports hosts mapping
 // in cypress.json
-//
-// Pretty much all 3rd party authentication flow works like this:
-//
+
+// Most 3rd party authentication works like this:
+
 // 1. Visit the 3rd party site (http://auth.corp.com:8086) and tell
-//    the 3rd party site where to redirect back to upon success like this:
+//    the 3rd party site where to redirect back to upon success:
 //    http://auth.corp.com:8086?redirectTo=http://localhost:8085/set_token
-//
-// 2. Submit the username / password on the auth.corp.com site
-//
-// 4. Upon success, the 3rd party site redirects back to your application
-//    and includes the id_token in the URL like this:
+
+// 2. Submit the username / password to the auth.corp.com site
+
+// 3. Upon success, the 3rd party site redirects back to your application
+//    and includes the id_token in the URL:
 //    http://localhost:8085/set_token?id_token=abc123def456
-//
-// 5. Your application then parses out the id_token and generally sets it
-//    as a cookie or sets it on local storage and includes it on all
+
+// 4. Your application then parses out the id_token and sets it
+//    as a cookie or on local storage then includes it on all
 //    subsequent requests to your server.
-//
-// There are other various implementation differences but they are share
+
+// There are other various implementation differences but they aall share
 // the same fundamental concepts which we can test in Cypress.
 
-// require node's url module
 const _   = Cypress._
+
+// require node's url module
 const url = require('url')
 
 describe('Logging In - Single Sign on', function(){
   Cypress.addParentCommand('loginBySingleSignOn', (overrides = {}) => {
+
+    Cypress.Log.command({
+      name: 'loginBySingleSignOn'
+    })
+
     const options = {
       method: 'POST',
       url: 'http://auth.corp.com:8086/login',
       qs: {
-        // use qs to set query string to the url which creates
+        // use qs to set query string to the url that creates
         // http://auth.corp.com:8080?redirectTo=http://localhost:8085/set_token
         redirectTo: 'http://localhost:8085/set_token'
       },
       form: true, // we are submitting a regular form body
       body: {
-        username: 'cypress',
+        username: 'jane.lane',
         password: 'password123',
       }
     }
@@ -70,18 +79,14 @@ describe('Logging In - Single Sign on', function(){
     Cypress.config('baseUrl', 'http://localhost:8085')
   })
 
-  beforeEach(function(){
-    cy.viewport(500, 380)
-  })
-
-  context('example #1: use redirectTo and a session cookie', function(){
+  context('Use redirectTo and a session cookie to login', function(){
     // This first example assumes we have an app server that
-    // is capable of handling the redirect and sets a session cookie
-    //
+    // is capable of handling the redirect and set a session cookie
+
     // The flow will be:
     // 1. sign into auth.corp.com
     // 2. redirect back to our app server
-    // 3. have our app server set a HttpOnly session cookie
+    // 3. have our app server set an HttpOnly session cookie
     // 4. check that we are now properly logged in
 
     it('is 403 unauthorized without a session cookie', function(){
@@ -96,7 +101,7 @@ describe('Logging In - Single Sign on', function(){
     it('can authenticate with cy.request', function(){
       cy
         // this automatically gets + sets cookies on the browser
-        // and follows all of the redirects which ultimately gets
+        // and follows all of the redirects that ultimately get
         // us to /dashboard.html
         .loginBySingleSignOn()
         .then((resp) => {
@@ -104,23 +109,23 @@ describe('Logging In - Single Sign on', function(){
           expect(resp.status).to.eq(200)
 
           // we're at http://localhost:8085/dashboard contents
-          expect(resp.body).to.include('<h2>dashboard.html</h2>')
+          expect(resp.body).to.include('<h1>Welcome to the Dashboard!</h1>')
         })
 
         // you don't need to do this next part but
         // just to prove we can also visit the page in our app
         .visit('/dashboard')
-        .get('h2').should('contain', 'dashboard.html')
+        .get('h1').should('contain', 'Welcome to the Dashboard')
 
         // and our cookie should be set to 'cypress-session-cookie'
         .getCookie('cypress-session-cookie').should('exist')
     })
   })
 
-  context('example #2: manually parse id_token and set on local storage', function(){
-    // This second example assumes we are building a SPA without a server to handle
-    // setting the session cookie.
-    //
+  context('Manually parse id_token and set on local storage to login', function(){
+    // This second example assumes we are building a SPA
+    // without a server to handle setting the session cookie.
+
     // The flow will be:
     // 1. disable following automatic redirects
     // 1. sign into auth.corp.com

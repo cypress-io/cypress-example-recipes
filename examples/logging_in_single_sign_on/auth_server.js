@@ -11,7 +11,7 @@ const app        = express()
 const port = minimist(process.argv.slice(2)).port
 
 const matchesUsernameAndPassword = (body = {}) => {
-  return body.username === 'cypress' && body.password === 'password123'
+  return body.username === 'jane.lane' && body.password === 'password123'
 }
 
 // parse regular form submission bodies

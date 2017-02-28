@@ -1,24 +1,23 @@
-// This recipe is very similar to the 'Logging In - XHR web form'
+// This recipe is very similar to the 'Logging In - HTML web form'
 // except that is uses AJAX (XHR's) under the hood instead
 // of using a regular HTML form submission.
 //
 // We are going to test a few things:
-// 1. test login form using XHR's
-// 2. test error states
-// 3. stub login XHR with errors and success
-// 4. stub Login.redirect method
-// 5. use cy.request for much faster performance
-// 6. create a custom command
+// 1. Test login form using XHR's
+// 2. Test error states
+// 3. Stub login XHR with errors and success
+// 4. Stub Login.redirect method
+// 5. Use cy.request for much faster performance
+// 6. Create a custom command
+
+// Be sure to run `npm start` to start the server
+// before running the tests below.
 
 describe('Logging In - XHR Web Form', function(){
   before(function(){
     // change the baseUrl since we do lots of separate
     // visits and requests in these tests
     Cypress.config('baseUrl', 'http://localhost:8083')
-  })
-
-  beforeEach(function(){
-    cy.viewport(500, 380)
   })
 
   context('XHR form submission', function(){
@@ -33,10 +32,10 @@ describe('Logging In - XHR Web Form', function(){
         // alias this route so we can wait on it later
         .route('POST', '/login').as('postLogin')
 
-        .get('input[name=username]').type('foo')
-        .get('input[name=password]').type('bar{enter}')
+        .get('input[name=username]').type('jane.lae')
+        .get('input[name=password]').type('password123{enter}')
 
-        // we should always wait explictly wait for
+        // we should always explictly wait for
         // the response for this POST to come back
         // so our tests are not potentially flaky or brittle
         .wait('@postLogin')
@@ -44,7 +43,7 @@ describe('Logging In - XHR Web Form', function(){
         // we should have visible errors now
         .get('p.error')
           .should('be.visible')
-          .and('contain', 'Username and password incorrect')
+          .and('contain', 'Username and/or password is incorrect')
 
         // and still be on the same URL
         .url().should('include', '/login')
@@ -67,16 +66,16 @@ describe('Logging In - XHR Web Form', function(){
         // alias this route so we can wait on it later
         .as('postLogin')
 
-        .get('input[name=username]').type('foo')
-        .get('input[name=password]').type('bar{enter}')
+        .get('input[name=username]').type('jane.lae')
+        .get('input[name=password]').type('password123{enter}')
 
         // we can even test that the correct request
-        // body was sent along with this XHR
+        // body was sent in this XHR
         .wait('@postLogin')
           .its('requestBody')
           .should('deep.eq', {
-            username: 'foo',
-            password: 'bar'
+            username: 'jane.lae',
+            password: 'password123'
           })
 
         // we should have visible errors now
@@ -88,13 +87,14 @@ describe('Logging In - XHR Web Form', function(){
         .url().should('include', '/login')
     })
 
-    it('redirects with JS to /dashboard on success', function(){
+    it('redirects to /dashboard on success', function(){
       cy
-        .get('input[name=username]').type('cypress')
+        .get('input[name=username]').type('jane.lane')
         .get('input[name=password]').type('password123{enter}')
 
         // we should be redirected to /dashboard
         .url().should('include', '/dashboard')
+        .get('h1').should('contain', 'jane.lane')
 
         // and our cookie should be set to 'cypress-session-cookie'
         .getCookie('cypress-session-cookie').should('exist')
@@ -103,10 +103,10 @@ describe('Logging In - XHR Web Form', function(){
     it('redirects on a stubbed XHR', function(){
       // When we stub the XHR we will no longer have a valid
       // cookie which means that on our Login.onSuccess callback
-      // when we try to navigate to /dashboard we be unauthorized
+      // when we try to navigate to /dashboard we are unauthorized
       //
       // In this case we can simply stub out the Login.redirect method
-      // and test that its simply called with the right data.
+      // and test that its called with the right data.
       //
       cy
         .visit('/login')
@@ -125,17 +125,15 @@ describe('Logging In - XHR Web Form', function(){
           url: '/login',
           response: {
             // simulate a redirect to another page
-            redirect: '/foobarbaz'
+            redirect: '/error'
           }
         })
         // alias this route so we can wait on it later
         .as('postLogin')
 
-        .get('input[name=username]').type('foo')
-        .get('input[name=password]').type('bar{enter}')
+        .get('input[name=username]').type('jane.lane')
+        .get('input[name=password]').type('password123{enter}')
 
-        // we can even test that the correct request
-        // body was sent along with this XHR
         .wait('@postLogin')
 
         // we should not have any visible errors
@@ -145,7 +143,7 @@ describe('Logging In - XHR Web Form', function(){
         .then(function(){
           // our redirect function should have been called with
           // the right arguments from the stubbed routed
-          expect(this.redirect).to.be.calledWith('/foobarbaz')
+          expect(this.redirect).to.be.calledWith('/error')
         })
     })
   })
@@ -164,16 +162,12 @@ describe('Logging In - XHR Web Form', function(){
       cy
         .request({
           method: 'POST',
-          url: '/login', //baseUrl will be prepended to this url
+          url: '/login', // baseUrl will be prepended to this url
           body: {
-            username: 'cypress',
+            username: 'jane.lane',
             password: 'password123'
           }
         })
-
-        // TODO: add Cypress.Cookies.debug(true) here
-        // to show users cy.request sets/gets cookies
-        // under the hood
 
         // just to prove we have a session
         cy.getCookie('cypress-session-cookie').should('exist')
@@ -185,11 +179,11 @@ describe('Logging In - XHR Web Form', function(){
     // but because this custom command is specific to this example
     // we'll keep it here
     Cypress.addParentCommand('loginByJSON', (username, password) => {
-      // TODO: lets generate our own 'login' Command Log
 
-      // set default args
-      username = username || 'cypress'
-      password = password || 'password123'
+      Cypress.Log.command({
+        name: 'loginByJSON',
+        message: username + ' | ' + password
+      })
 
       return cy.request({
         method: 'POST',
@@ -203,19 +197,19 @@ describe('Logging In - XHR Web Form', function(){
 
     beforeEach(function(){
       // login before each test
-      cy.loginByJSON()
+      cy.loginByJSON('jane.lane', 'password123')
     })
 
     it('can visit /dashboard', function(){
       cy
         .visit('/dashboard')
-        .get('h2').should('contain', 'dashboard.html')
+        .get('h1').should('contain', 'jane.lane')
     })
 
     it('can visit /users', function(){
       cy
         .visit('/users')
-        .get('h2').should('contain', 'users.html')
+        .get('h1').should('contain', 'Users')
     })
 
     it('can simply request other authenticated pages', function(){
@@ -226,7 +220,7 @@ describe('Logging In - XHR Web Form', function(){
         // assertion about the response body
         .request('/admin')
         .its('body')
-        .should('include', '<h2>admin.html</h2>')
+        .should('include', '<h1>Admin</h1>')
     })
   })
 })
