@@ -3,10 +3,10 @@
 import chaiColors from 'chai-colors'
 
 // and we are extending chai to use this assertion
-// plugin but this plugin will only be available once
+// plugin, but this plugin will only be available once
 // this spec file runs.
 //
-// if we were running only a single other spec file
+// if we were running any other spec file
 // it would not have access to this plugin
 chai.use(chaiColors)
 
@@ -19,9 +19,9 @@ describe('Chai Assertion Plugins', function(){
     // importing it in this file is that it's been globally
     // imported from our supportFile
     //
-    // if look inside of cypress/support/index.js
-    // and you'll see that we import cypress/support/assertions.js
-    // and because the supportFile is bundled before our spec file
+    // if look inside cypress/support/index.js
+    // you'll see that we import cypress/support/assertions.js
+    // and because the supportFile is bundled before our spec file,
     // it means we already have access to it
     it('can be used in any spec file', function(){
       expect('2015-11-12').to.be.a.dateString()
@@ -35,7 +35,7 @@ describe('Chai Assertion Plugins', function(){
       expect('2015-14-41').not.to.be.a.dateString()
     })
 
-    it('can be negated by Cypress', function(){
+    it('can be negated using Cypress', function(){
       cy.wrap('2015-14-41').should('not.be.a.dateString')
     })
   })
@@ -53,7 +53,7 @@ describe('Chai Assertion Plugins', function(){
       expect('#650042').not.to.be.colored('rgba(1, 2, 3, 4)')
     })
 
-    it('can be negated by Cypress', function(){
+    it('can be negated using Cypress', function(){
       cy.wrap('#ff0000').should('not.be.colored', 'green')
     })
   })

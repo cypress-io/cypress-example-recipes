@@ -127,19 +127,19 @@ describe('Logging In - Single Sign on', function(){
     // without a server to handle setting the session cookie.
 
     // The flow will be:
-    // 1. disable following automatic redirects
-    // 1. sign into auth.corp.com
-    // 2. parse out the id_token manually
-    // 3. visit our application
-    // 4. before it loads, set token on local storage
-    // 5. make sure the XHR goes out and the response
+    // 1. Disable following automatic redirects
+    // 1. Sign into auth.corp.com
+    // 2. Parse out the id_token manually
+    // 3. Visit our application
+    // 4. Before it loads, set token on local storage
+    // 5. Make sure the XHR goes out and the response
     //    is correct + #main has the correct response text
 
     it('knows when there is no session token', function(){
       // by default our SPA app checks for id_token set in local storage
       // and will display a message if its not set
       //
-      // else it will make a XHR to the backend and display the results
+      // else it will make an XHR request to the backend and display the results
       cy
         .visit('/')
         .get('#main')
@@ -148,11 +148,11 @@ describe('Logging In - Single Sign on', function(){
 
     it('can parse out id_token and set on local storage', function(){
       cy
-        // dont follow redirects so we can manually parse our
+        // dont follow redirects so we can manually parse out
         // the id_token
         .loginBySingleSignOn({followRedirect: false})
         .then((resp) => {
-          // we can use the redirectedToUrl property which Cypress adds
+          // we can use the redirectedToUrl property that Cypress adds
           // whenever we turn off following redirects
           //
           // and use node's url.parse module (and parse the query params)
@@ -202,5 +202,4 @@ describe('Logging In - Single Sign on', function(){
         })
     })
   })
-
 })
