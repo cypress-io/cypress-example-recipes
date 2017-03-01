@@ -88,44 +88,21 @@ describe('Hover and Hidden Elements', function(){
       })
     })
 
-    describe('if your app does not use jquery', function(){
+    describe.only('if your app does not use jquery', function(){
       ['mouseover', 'mouseout', 'mouseenter', 'mouseleave'].forEach((event) => {
+        const options = {}
+        switch (event) {
+          case 'mouseenter':
+          case 'mouseleave':
+            options.bubbles = false
+            options.cancelable = false
+            break;
+        }
+
         it(`dispatches event: '${event}`, function(){
-          // if your app doesnt use jquery then we need to manually
-          // build up and dispatch this event
           cy
-            .get('#no-jquery').then(function($btn){
-              const obj = {}
-
-              // TODO: we are obviously not happy about this
-              // and don't want you to have to build up events
-              // manually like this.
-              //
-              // We are soon releasing a `cy.trigger` command which
-              // under the hood will build up and dispatch events
-              // but also do some niceties like automatically knowing
-              // whether events bubble, whether they're cancellable,
-              // and filling in properties like clientX and clientY
-              // so events are dispatched akin to other cypress commands
-              switch(event){
-                case 'mouseover':
-                case 'mouseout':
-                  obj.bubbles = true
-                  obj.cancelable = true
-                  break;
-                case 'mouseenter':
-                case 'mouseleave':
-                  obj.bubbles = false
-                  obj.cancelable = false
-                  break;
-              }
-
-              // generate the manual event instance
-              const e = new Event(event, obj)
-
-              // dispatch this on our btn
-              $btn.get(0).dispatchEvent(e)
-            })
+            .get('#no-jquery')
+            .ttrigger(event, options)
             .get('#messages').should('contain', `the event ${event} was fired`)
         })
       })

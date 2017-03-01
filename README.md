@@ -20,6 +20,8 @@ This repo contains various recipes for testing common scenarios in your applicat
   - [Dealing with Hover and Hidden Elements](#dealing-with-hover-and-hidden-elements)
   - [Bootstrapping your App with Test Data](#bootstrapping-your-app-with-test-data)
   - [Controlling Behavior with Spies, Stubs, and Clocks](#controlling-behavior-with-spies-stubs-and-clocks)
+  - [Form Interactions](#form-interactions)
+  - [Drag 'n Drop](#drag-n-drop)
 
 # Overview
 
@@ -190,5 +192,22 @@ This recipe shows you how to:
 - Use `cy.stub` to verify and control the behavior of a function
 - Use `cy.clock` to control time
 - Stub `window.fetch` to control server responses
+
+***
+
+### [Form Interactions](./cypress/integration/form_interactions_spec.js)
+
+This recipe shows you how to:
+
+- Use `cy.invoke` and `cy.trigger` to test a range input (slider)
+
+***
+
+### [Drag 'n Drop](./cypress/integration/drag_n_drop_spec.js)
+
+This recipe shows you how to:
+
+- Use `cy.trigger` to test drag-n-drop that uses mouse events
+- Use `cy.trigger` to test drag-n-drop that uses drag events
 
 ***
