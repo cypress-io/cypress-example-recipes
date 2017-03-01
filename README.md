@@ -143,9 +143,9 @@ npm run dev
 
 **This recipe shows you how to:**
 
-- Extend `chai` with the `chai-date-string` assertion plugin
-- Extend `chai` with the `chai-colors` assertion plugin
-- Globally extend `chai` for all specs
+- Extend [`chai`](http://chaijs.com/) with the [`chai-date-string`](http://chaijs.com/plugins/chai-date-string/) assertion plugin
+- Extend [`chai`](http://chaijs.com/) with the [`chai-colors`](http://chaijs.com/plugins/chai-colors/) assertion plugin
+- Globally extend [`chai`](http://chaijs.com/) for all specs
 
 ***
 
@@ -153,15 +153,15 @@ npm run dev
 
 **This recipe shows you how to:**
 
-- Test `<a target="_blank">` elements
-- Test `<a href="...">` elements which link to external domains
+- Test anchor links opening in new tabs: `<a target="_blank">`
+- Test anchor links that link to external domains: `<a href="...">`
 - Prevent content from opening in a new tab
 - Request external content that would open in a new tab
-- Improve testing performance by reducing loading times
+- Speed up tests by reducing loading times
 
 ***
 
-### [Dealing with Hover and Hidden Elements](./cypress/integration/hover_hidden_elements.js)
+### [Dealing with Hover and Hidden Elements](./cypress/integration/hover_hidden_elements_spec.js)
 
 **This recipe shows you how to:**
 
