@@ -20,7 +20,7 @@ describe('Drag n Drop', function(){
     // On mousemove, we need to specify where we're moving
     // with clientX and clientY
     function movePiece (number, x, y) {
-      return cy
+      cy
         .get(`.piece-${number}`)
         .ttrigger('mousedown', { which: 1 })
         .ttrigger('mousemove', { clientX: x, clientY: y })
@@ -28,17 +28,15 @@ describe('Drag n Drop', function(){
     }
 
     function completePuzzle (correctly) {
-      return Cypress.Promise.all([
-        movePiece(1, 340, correctly ? 130 : 200),
-        movePiece(2, 410, 130),
-        movePiece(3, 480, 130),
-        movePiece(4, 340, correctly ? 200 : 130),
-        movePiece(5, 410, 200),
-        movePiece(6, 480, 200),
-        movePiece(7, 340, 270),
-        movePiece(8, 410, 270),
-        movePiece(9, 480, 270),
-      ])
+      movePiece(1, 340, correctly ? 130 : 200)
+      movePiece(2, 410, 130)
+      movePiece(3, 480, 130)
+      movePiece(4, 340, correctly ? 200 : 130)
+      movePiece(5, 410, 200)
+      movePiece(6, 480, 200)
+      movePiece(7, 340, 270)
+      movePiece(8, 410, 270)
+      movePiece(9, 480, 270)
     }
 
     beforeEach(function(){
@@ -92,7 +90,7 @@ describe('Drag n Drop', function(){
   // like dragstart, dragenter, dragleave, and drop
   describe('game using drag events', function(){
     function dropBallInHoop (index) {
-      return cy
+      cy
         .get('.balls img').first()
           .ttrigger('dragstart')
         .get('.hoop')

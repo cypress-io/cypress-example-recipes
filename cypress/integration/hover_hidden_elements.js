@@ -90,7 +90,6 @@ describe('Hover and Hidden Elements', function(){
 
     describe.only('if your app does not use jquery', function(){
       ['mouseover', 'mouseout', 'mouseenter', 'mouseleave'].forEach((event) => {
-      // ['mouseover'].forEach((event) => {
         const options = {}
         switch (event) {
           case 'mouseenter':
@@ -101,8 +100,6 @@ describe('Hover and Hidden Elements', function(){
         }
 
         it(`dispatches event: '${event}`, function(){
-          // if your app doesnt use jquery then we need to manually
-          // build up and dispatch this event
           cy
             .get('#no-jquery')
             .ttrigger(event, options)
