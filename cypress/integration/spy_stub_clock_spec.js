@@ -71,11 +71,17 @@ describe('Spy / Stub / Clock', function(){
         })
       })
 
-      it('displays them', function () {
-        cy.get('.favorite-fruits li').as('favoriteFruits').should('have.length', 3)
-        cy.get('@favoriteFruits').first().should('have.text', 'Apple')
-        cy.get('@favoriteFruits').eq(1).should('have.text', 'Banana')
-        cy.get('@favoriteFruits').eq(2).should('have.text', 'Cantaloupe')
+      it('displays the list of fruits', function () {
+        cy
+          .get('.favorite-fruits li').as('favoriteFruits')
+            .should('have.length', 3)
+
+          .get('@favoriteFruits').first()
+            .should('have.text', 'Apple')
+          .get('@favoriteFruits').eq(1)
+            .should('have.text', 'Banana')
+          .get('@favoriteFruits').eq(2)
+            .should('have.text', 'Cantaloupe')
       })
     })
 
