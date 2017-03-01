@@ -1,4 +1,4 @@
-// This recipe shows how to interact with a range input
+// This recipe shows how to interact with a range input (slider)
 
 // Eventually, this will be expanded to includes examples of interacting
 // with various form elements
@@ -11,7 +11,7 @@ describe('Form Interactions', function(){
   })
 
   it('updates range value when moving slider', function(){
-    // To interact with a range input, we need to set its value and
+    // To interact with a range input (slider), we need to set its value and
     // then trigger the appropriate event to signal it has changed
 
     // Here, we invoke jQuery's val() method to set the value
