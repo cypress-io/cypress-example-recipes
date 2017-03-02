@@ -1,13 +1,16 @@
 // cy.stub makes it easy to stub methods on dependencies
 // and test a unit of code in isolation
 
-// auth.js is the code under test, part of our app code
-//   that deals with authentication
-// api.js is an adapter for the API the app uses
-// util.js is a module with utility functions
+// See docs for cy.stub here: https://on.cypress.io/api/stub
 
+// auth.js is the code under test
+// (our app code that deals with authentication)
 import Auth from '../../examples/unit_test_stubbing_dependencies/auth'
+
+// api.js is an adapter for the API the app uses
 import api from '../../examples/unit_test_stubbing_dependencies/api'
+
+// util.js is a module with utility functions
 import util from '../../examples/unit_test_stubbing_dependencies/util'
 
 describe('Stubbing Dependencies', function () {

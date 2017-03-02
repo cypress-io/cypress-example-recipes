@@ -10,7 +10,7 @@ const app        = express()
 const port = minimist(process.argv.slice(2)).port
 
 const matchesUsernameAndPassword = (body = {}) => {
-  return body.username === 'cypress' && body.password === 'password123'
+  return body.username === 'jane.lane' && body.password === 'password123'
 }
 
 const ensureLoggedIn = (req, res, next) => {
@@ -54,19 +54,21 @@ app.get('/login', (req, res) => {
 app.post('/login', urlencodedParser, (req, res) => {
   // if this matches the secret username and password
   if(matchesUsernameAndPassword(req.body)){
-    req.session.user = 'cypress'
+    req.session.user = 'jane.lane'
 
     res.redirect('/dashboard')
   } else {
     // render login with errors
     res.render('./login.hbs', {
-      error: 'Username and password incorrect'
+      error: 'Username and/or password is incorrect'
     })
   }
 })
 
 app.get('/dashboard', ensureLoggedIn, (req, res) => {
-  res.render('./dashboard.hbs')
+  res.render('./dashboard.hbs', {
+    user: req.session.user
+  })
 })
 
 app.get('/users', ensureLoggedIn, (req, res) => {
