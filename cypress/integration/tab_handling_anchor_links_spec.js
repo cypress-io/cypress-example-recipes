@@ -9,8 +9,7 @@
 
 describe('Tab Handling Anchor Links', function(){
   beforeEach(function(){
-    cy
-      .visit('http://localhost:8080/examples/tab_handling_anchor_links/index.html')
+    cy.visit('http://localhost:8080/examples/tab_handling_anchor_links/index.html')
   })
 
   context('testing the target="_blank" link', function(){
@@ -38,21 +37,19 @@ describe('Tab Handling Anchor Links', function(){
       // If the answer is yes, then this is a super simple test.
       //
       // We verify that the <a> has the right href and that's it!
-      cy
-        .get('#users')
-          // the href 'attribute' will only ever be what the
-          // literal value is on the element itself and will
-          // match what was served by the <html> payload
-          .should('have.attr', 'href')
-          .and('include', 'users.html')
+      cy.get('#users')
+        // the href 'attribute' will only ever be what the
+        // literal value is on the element itself and will
+        // match what was served by the <html> payload
+        .should('have.attr', 'href')
+        .and('include', 'users.html')
 
-        .get('#users')
-          // an <a> also has an 'href' property which always resolves
-          // to the fully qualified URL. by asserting on this property
-          // we are testing this element more thoroughly
-          .should('have.prop', 'href')
-          .and('equal', 'http://localhost:8080/examples/tab_handling_anchor_links/users.html')
-
+      cy.get('#users')
+        // an <a> also has an 'href' property which always resolves
+        // to the fully qualified URL. by asserting on this property
+        // we are testing this element more thoroughly
+        .should('have.prop', 'href')
+        .and('equal', 'http://localhost:8080/examples/tab_handling_anchor_links/users.html')
     })
 
     it('solution #2: click through to the new page', function(){
@@ -63,18 +60,18 @@ describe('Tab Handling Anchor Links', function(){
       //
       // Here's another simple way we can test the <a> behavior
       // without opening a new tab.
-      cy
-        // Because we have total and unrestricted access
-        // to everything in Cypress we can simply modify
-        // 'the state of the world' to best suit our testing needs.
-        //
-        // We can remove the offending attribute - target='_blank'
-        // that would normally open content in a new tab.
-        .get('#users').invoke('removeAttr', 'target').click()
 
-        // after clicking the <a> we are now navigated to the
-        // new page and we can assert that the url is correct
-        .url().should('include', 'users.html')
+      // Because we have total and unrestricted access
+      // to everything in Cypress we can simply modify
+      // 'the state of the world' to best suit our testing needs.
+      //
+      // We can remove the offending attribute - target='_blank'
+      // that would normally open content in a new tab.
+      cy.get('#users').invoke('removeAttr', 'target').click()
+
+      // after clicking the <a> we are now navigated to the
+      // new page and we can assert that the url is correct
+      cy.url().should('include', 'users.html')
     })
 
     it('solution #3: visit without modifying the <a>', function(){
@@ -89,9 +86,8 @@ describe('Tab Handling Anchor Links', function(){
         const href = $a.prop('href')
 
         // and now visit the href directly
-        cy
-          .visit(href)
-          .url().should('include', 'users.html')
+        cy.visit(href)
+        cy.url().should('include', 'users.html')
       })
     })
 
@@ -120,11 +116,9 @@ describe('Tab Handling Anchor Links', function(){
         // extract the fully qualified href property
         const href = $a.prop('href')
 
-        cy
-          // make an http request for this resource
-          // outside of the browser
-          .request(href)
-
+        // make an http request for this resource
+        // outside of the browser
+        cy.request(href)
           // drill into the response body
           .its('body')
 
@@ -170,9 +164,8 @@ describe('Tab Handling Anchor Links', function(){
       cy.get('#google').then(function($a){
         const href = $a.prop('href')
 
-        cy
-          // request the contents of https://www.google.com/
-          .request(href)
+        // request the contents of https://www.google.com/
+        cy.request(href)
 
           // drill into the response body
           .its('body')

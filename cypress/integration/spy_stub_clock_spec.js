@@ -72,16 +72,15 @@ describe('Spy / Stub / Clock', function(){
       })
 
       it('displays the list of fruits', function () {
-        cy
-          .get('.favorite-fruits li').as('favoriteFruits')
-            .should('have.length', 3)
+        cy.get('.favorite-fruits li').as('favoriteFruits')
+          .should('have.length', 3)
 
-          .get('@favoriteFruits').first()
-            .should('have.text', 'Apple')
-          .get('@favoriteFruits').eq(1)
-            .should('have.text', 'Banana')
-          .get('@favoriteFruits').eq(2)
-            .should('have.text', 'Cantaloupe')
+        cy.get('@favoriteFruits').first()
+          .should('have.text', 'Apple')
+        cy.get('@favoriteFruits').eq(1)
+          .should('have.text', 'Banana')
+        cy.get('@favoriteFruits').eq(2)
+          .should('have.text', 'Cantaloupe')
       })
     })
 
@@ -107,9 +106,8 @@ describe('Spy / Stub / Clock', function(){
       })
 
       it('displays error', function () {
-        cy
-          .get('.favorite-fruits')
-            .should('have.text', 'Failed loading favorite fruits: Orchard under maintenance')
+        cy.get('.favorite-fruits')
+          .should('have.text', 'Failed loading favorite fruits: Orchard under maintenance')
       })
     })
   })
@@ -127,12 +125,10 @@ describe('Spy / Stub / Clock', function(){
     beforeEach(function () {
       this.fetchFavoritesDeferred = deferred()
 
-      cy
-        .clock()
-        .visit('http://localhost:8087', {
+      cy.clock()
+      cy.visit('http://localhost:8087', {
           onBeforeLoad (win) {
-            cy
-              .stub(win, 'fetch')
+            cy.stub(win, 'fetch')
               .withArgs('/favorite-fruits')
               .as('fetchFavorites')
               .returns(this.fetchFavoritesDeferred.promise)
@@ -149,16 +145,15 @@ describe('Spy / Stub / Clock', function(){
       })
 
       it('displays list of fruits', function () {
-        cy
-          .get('.favorite-fruits li').as('favoriteFruits')
-            .should('have.length', 3)
+        cy.get('.favorite-fruits li').as('favoriteFruits')
+          .should('have.length', 3)
 
-          .get('@favoriteFruits').first()
-            .should('have.text', 'Apple')
-          .get('@favoriteFruits').eq(1)
-            .should('have.text', 'Banana')
-          .get('@favoriteFruits').eq(2)
-            .should('have.text', 'Cantaloupe')
+        cy.get('@favoriteFruits').first()
+          .should('have.text', 'Apple')
+        cy.get('@favoriteFruits').eq(1)
+          .should('have.text', 'Banana')
+        cy.get('@favoriteFruits').eq(2)
+          .should('have.text', 'Cantaloupe')
       })
 
       describe('polling every 30 secs', function () {
@@ -179,18 +174,17 @@ describe('Spy / Stub / Clock', function(){
         })
 
         it('displays the new list of fruits', function () {
-          cy
-            .get('.favorite-fruits li').as('favoriteFruits')
-              .should('have.length', 4)
+          cy.get('.favorite-fruits li').as('favoriteFruits')
+            .should('have.length', 4)
 
-            .get('@favoriteFruits').first()
-              .should('have.text', 'Orange')
-            .get('@favoriteFruits').eq(1)
-              .should('have.text', 'Cherry')
-            .get('@favoriteFruits').eq(2)
-              .should('have.text', 'Raspberry')
-            .get('@favoriteFruits').eq(3)
-              .should('have.text', 'Pineapple')
+          cy.get('@favoriteFruits').first()
+            .should('have.text', 'Orange')
+          cy.get('@favoriteFruits').eq(1)
+            .should('have.text', 'Cherry')
+          cy.get('@favoriteFruits').eq(2)
+            .should('have.text', 'Raspberry')
+          cy.get('@favoriteFruits').eq(3)
+            .should('have.text', 'Pineapple')
         })
       })
     })

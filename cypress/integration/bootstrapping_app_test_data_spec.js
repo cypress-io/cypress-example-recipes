@@ -15,9 +15,8 @@ describe('Bootstrapping App Test Data', function(){
     it('works by default using development bootstrap data', function(){
       // Let's test that the normal
       // way of development data seeding works.
-      cy
-        .visit('http://localhost:8081/bootstrap.html')
-        .get('pre')
+      cy.visit('http://localhost:8081/bootstrap.html')
+      cy.get('pre')
         .invoke('text')
         .should('eq', JSON.stringify({
           env: 'development',
@@ -35,13 +34,12 @@ describe('Bootstrapping App Test Data', function(){
         api: 'https://test-api.company.com'
       }
 
-      cy
-        .visit('http://localhost:8081/bootstrap.html', {
+      cy.visit('http://localhost:8081/bootstrap.html', {
           onBeforeLoad: (win) => {
             win._bootstrappedData = data
           }
         })
-        .get('pre')
+      cy.get('pre')
         .invoke('text')
         .should('eq', JSON.stringify(data))
     })
@@ -54,9 +52,8 @@ describe('Bootstrapping App Test Data', function(){
     it('works by default using development bootstrap data', function(){
       // Let's test that the normal
       // way of development data seeding works.
-      cy
-        .visit('http://localhost:8081/xhr.html')
-        .get('pre')
+      cy.visit('http://localhost:8081/xhr.html')
+      cy.get('pre')
         .invoke('text')
         .should('eq', JSON.stringify({
           env: 'development',
@@ -65,16 +62,14 @@ describe('Bootstrapping App Test Data', function(){
     })
 
     it('can modify the seed data by stubbing the XHR', function(){
-      cy
-        // store our test bootstrap data as a fixture
-        // data in /fixtures/bootstrap.json
-        .fixture('bootstrap.json')
+      // store our test bootstrap data as a fixture
+      // data in /fixtures/bootstrap.json
+      cy.fixture('bootstrap.json')
         .then((data) => {
-          cy
-            .server()
-            .route('GET', '/data.json', data)
-            .visit('http://localhost:8081/xhr.html')
-            .get('pre')
+          cy.server()
+          cy.route('GET', '/data.json', data)
+          cy.visit('http://localhost:8081/xhr.html')
+          cy.get('pre')
             .invoke('text')
             .should('eq', JSON.stringify(data))
         })
@@ -90,20 +85,18 @@ describe('Bootstrapping App Test Data', function(){
       // This insulates you from making assertions prior to the data
       // coming in
 
-      cy
-        .fixture('bootstrap.json')
+      cy.fixture('bootstrap.json')
         .then((data) => {
-          cy
-            .server()
-            .route({
+          cy.server()
+          cy.route({
               delay: 2000, // simulate a slow XHR request
               url: '/data.json',
               response: data
             })
             .as('getData')
-            .visit('http://localhost:8081/xhr.html')
-            .wait('@getData')
-            .get('pre')
+          cy.visit('http://localhost:8081/xhr.html')
+          cy.wait('@getData')
+          cy.get('pre')
             .invoke('text')
             .should('eq', JSON.stringify(data))
         })

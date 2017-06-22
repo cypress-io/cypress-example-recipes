@@ -25,9 +25,8 @@ describe('Hover and Hidden Elements', function(){
       //
       // Some commands, like cy.click, allow you to pass 'force: true'
       // as an option to bypass these checks and allow the event to happen anyway
-      cy
-        .get('button').click({force: true})
-        .get('#message').should('contain', 'the button was clicked')
+      cy.get('button').click({force: true})
+      cy.get('#message').should('contain', 'the button was clicked')
     })
 
     it('solution #2: force the element to be visible before click', function(){
@@ -38,12 +37,12 @@ describe('Hover and Hidden Elements', function(){
       // best suit our testing needs.
       //
       // In this example we will force the element to be shown before clicking it.
-      cy
-        // Cypress automatically wraps all elements with our own jQuery
-        // so we can call the jQuery method: 'show' on the element.
-        // This forces it to have a 'display: block' CSS style inlined on it
-        .get('button').invoke('show').click()
-        .get('#message').should('contain', 'the button was clicked')
+      //
+      // Cypress automatically wraps all elements with our own jQuery
+      // so we can call the jQuery method: 'show' on the element.
+      // This forces it to have a 'display: block' CSS style inlined on it
+      cy.get('button').invoke('show').click()
+      cy.get('#message').should('contain', 'the button was clicked')
     })
 
     it('solution #3: verify visibility prior to showing element', function(){
@@ -52,9 +51,8 @@ describe('Hover and Hidden Elements', function(){
       //
       // We check that the element is in the correct
       // visible state before manually modifying it.
-      cy
-        .get('button').should('be.hidden').invoke('show').click()
-        .get('#message').should('contain', 'the button was clicked')
+      cy.get('button').should('be.hidden').invoke('show').click()
+      cy.get('#message').should('contain', 'the button was clicked')
     })
   })
 
@@ -72,9 +70,8 @@ describe('Hover and Hidden Elements', function(){
         it(`triggers event: '${event}`, function(){
           // if your app uses jQuery, then we can trigger a jQuery
           // event that causes the event callback to fire
-          cy
-            .get('#with-jquery').invoke('trigger', event)
-            .get('#messages').should('contain', `the event ${event} was fired`)
+          cy.get('#with-jquery').invoke('trigger', event)
+          cy.get('#messages').should('contain', `the event ${event} was fired`)
         })
       })
     })
@@ -84,8 +81,7 @@ describe('Hover and Hidden Elements', function(){
         it(`dispatches event: '${event}`, function(){
           // if your app doesnt use jQuery then we need to manually
           // build up and dispatch this event
-          cy
-            .get('#no-jquery').then(function($btn){
+          cy.get('#no-jquery').then(function($btn){
               const obj = {}
 
               // We are soon releasing a `cy.trigger` command that
@@ -115,7 +111,8 @@ describe('Hover and Hidden Elements', function(){
               // dispatch this on our btn
               $btn.get(0).dispatchEvent(e)
             })
-            .get('#messages').should('contain', `the event ${event} was fired`)
+
+          cy.get('#messages').should('contain', `the event ${event} was fired`)
         })
       })
     })

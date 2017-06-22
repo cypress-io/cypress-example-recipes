@@ -26,38 +26,36 @@ describe('Logging In - XHR Web Form', function(){
     })
 
     it('displays errors on login', function(){
-      cy
-        .server()
+      cy.server()
 
-        // alias this route so we can wait on it later
-        .route('POST', '/login').as('postLogin')
+      // alias this route so we can wait on it later
+      cy.route('POST', '/login').as('postLogin')
 
-        .get('input[name=username]').type('jane.lae')
-        .get('input[name=password]').type('password123{enter}')
+      cy.get('input[name=username]').type('jane.lae')
+      cy.get('input[name=password]').type('password123{enter}')
 
-        // we should always explictly wait for
-        // the response for this POST to come back
-        // so our tests are not potentially flaky or brittle
-        .wait('@postLogin')
+      // we should always explictly wait for
+      // the response for this POST to come back
+      // so our tests are not potentially flaky or brittle
+      cy.wait('@postLogin')
 
-        // we should have visible errors now
-        .get('p.error')
+      // we should have visible errors now
+      cy.get('p.error')
           .should('be.visible')
           .and('contain', 'Username and/or password is incorrect')
 
-        // and still be on the same URL
-        .url().should('include', '/login')
+      // and still be on the same URL
+      cy.url().should('include', '/login')
     })
 
     it('can stub the XHR to force it to fail', function(){
       // instead of letting this XHR hit our backend we can instead
       // control its behavior programatically by stubbing it
-      cy
-        .server()
+      cy.server()
 
-        // simulate the server returning 503 with
-        // empty JSON response body
-        .route({
+      // simulate the server returning 503 with
+      // empty JSON response body
+      cy.route({
           method: 'POST',
           url: '/login',
           status: 503,
@@ -66,38 +64,37 @@ describe('Logging In - XHR Web Form', function(){
         // alias this route so we can wait on it later
         .as('postLogin')
 
-        .get('input[name=username]').type('jane.lae')
-        .get('input[name=password]').type('password123{enter}')
+      cy.get('input[name=username]').type('jane.lae')
+      cy.get('input[name=password]').type('password123{enter}')
 
-        // we can even test that the correct request
-        // body was sent in this XHR
-        .wait('@postLogin')
-          .its('requestBody')
-          .should('deep.eq', {
-            username: 'jane.lae',
-            password: 'password123'
-          })
+      // we can even test that the correct request
+      // body was sent in this XHR
+      cy.wait('@postLogin')
+        .its('requestBody')
+        .should('deep.eq', {
+          username: 'jane.lae',
+          password: 'password123'
+        })
 
-        // we should have visible errors now
-        .get('p.error')
-          .should('be.visible')
-          .and('contain', 'An error occurred: 503 Service Unavailable')
+      // we should have visible errors now
+      cy.get('p.error')
+        .should('be.visible')
+        .and('contain', 'An error occurred: 503 Service Unavailable')
 
-        // and still be on the same URL
-        .url().should('include', '/login')
+      // and still be on the same URL
+      cy.url().should('include', '/login')
     })
 
     it('redirects to /dashboard on success', function(){
-      cy
-        .get('input[name=username]').type('jane.lane')
-        .get('input[name=password]').type('password123{enter}')
+      cy.get('input[name=username]').type('jane.lane')
+      cy.get('input[name=password]').type('password123{enter}')
 
-        // we should be redirected to /dashboard
-        .url().should('include', '/dashboard')
-        .get('h1').should('contain', 'jane.lane')
+      // we should be redirected to /dashboard
+      cy.url().should('include', '/dashboard')
+      cy.get('h1').should('contain', 'jane.lane')
 
-        // and our cookie should be set to 'cypress-session-cookie'
-        .getCookie('cypress-session-cookie').should('exist')
+      // and our cookie should be set to 'cypress-session-cookie'
+      cy.getCookie('cypress-session-cookie').should('exist')
     })
 
     it('redirects on a stubbed XHR', function(){
@@ -108,19 +105,19 @@ describe('Logging In - XHR Web Form', function(){
       // In this case we can simply stub out the Login.redirect method
       // and test that its called with the right data.
       //
-      cy
-        .visit('/login')
-        .window()
+      cy.visit('/login')
+      cy.window()
         .then(function(win){
           // stub out the Login.redirect method
           // so it doesnt cause the browser to redirect
           cy.stub(win.Login, 'redirect').as("redirect")
         })
-        .server()
 
-        // simulate the server returning 503 with
-        // empty JSON response body
-        .route({
+      cy.server()
+
+      // simulate the server returning 503 with
+      // empty JSON response body
+      cy.route({
           method: 'POST',
           url: '/login',
           response: {
@@ -131,15 +128,14 @@ describe('Logging In - XHR Web Form', function(){
         // alias this route so we can wait on it later
         .as('postLogin')
 
-        .get('input[name=username]').type('jane.lane')
-        .get('input[name=password]').type('password123{enter}')
+      cy.get('input[name=username]').type('jane.lane')
+      cy.get('input[name=password]').type('password123{enter}')
 
-        .wait('@postLogin')
+      cy.wait('@postLogin')
 
-        // we should not have any visible errors
-        .get('p.error')
-          .should('not.be.visible')
-
+      // we should not have any visible errors
+      cy.get('p.error')
+        .should('not.be.visible')
         .then(function(){
           // our redirect function should have been called with
           // the right arguments from the stubbed routed
@@ -159,8 +155,7 @@ describe('Logging In - XHR Web Form', function(){
       // with cy.request we can bypass all of this because it automatically gets
       // and sets cookies under the hood which acts exactly as if these requests
       // came from the browser
-      cy
-        .request({
+      cy.request({
           method: 'POST',
           url: '/login', // baseUrl will be prepended to this url
           body: {
@@ -169,8 +164,8 @@ describe('Logging In - XHR Web Form', function(){
           }
         })
 
-        // just to prove we have a session
-        cy.getCookie('cypress-session-cookie').should('exist')
+      // just to prove we have a session
+      cy.getCookie('cypress-session-cookie').should('exist')
     })
   })
 
@@ -201,24 +196,21 @@ describe('Logging In - XHR Web Form', function(){
     })
 
     it('can visit /dashboard', function(){
-      cy
-        .visit('/dashboard')
-        .get('h1').should('contain', 'jane.lane')
+      cy.visit('/dashboard')
+      cy.get('h1').should('contain', 'jane.lane')
     })
 
     it('can visit /users', function(){
-      cy
-        .visit('/users')
-        .get('h1').should('contain', 'Users')
+      cy.visit('/users')
+      cy.get('h1').should('contain', 'Users')
     })
 
     it('can simply request other authenticated pages', function(){
-      cy
-        // instead of visiting each page and waiting for all
-        // the associated resources to load, we can instead
-        // just issue a simple HTTP request and make an
-        // assertion about the response body
-        .request('/admin')
+      // instead of visiting each page and waiting for all
+      // the associated resources to load, we can instead
+      // just issue a simple HTTP request and make an
+      // assertion about the response body
+      cy.request('/admin')
         .its('body')
         .should('include', '<h1>Admin</h1>')
     })

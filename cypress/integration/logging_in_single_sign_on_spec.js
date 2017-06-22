@@ -92,18 +92,16 @@ describe('Logging In - Single Sign on', function(){
     it('is 403 unauthorized without a session cookie', function(){
       // smoke test just to show that without logging in we cannot
       // visit the dashboard
-      cy
-        .visit('/dashboard')
-        .get('h3').should('contain', 'You are not logged in and cannot access this page')
-        .url().should('include', 'unauthorized')
+      cy.visit('/dashboard')
+      cy.get('h3').should('contain', 'You are not logged in and cannot access this page')
+      cy.url().should('include', 'unauthorized')
     })
 
     it('can authenticate with cy.request', function(){
-      cy
-        // this automatically gets + sets cookies on the browser
-        // and follows all of the redirects that ultimately get
-        // us to /dashboard.html
-        .loginBySingleSignOn()
+      // this automatically gets + sets cookies on the browser
+      // and follows all of the redirects that ultimately get
+      // us to /dashboard.html
+      cy.loginBySingleSignOn()
         .then((resp) => {
           // yup this should all be good
           expect(resp.status).to.eq(200)
@@ -112,13 +110,13 @@ describe('Logging In - Single Sign on', function(){
           expect(resp.body).to.include('<h1>Welcome to the Dashboard!</h1>')
         })
 
-        // you don't need to do this next part but
-        // just to prove we can also visit the page in our app
-        .visit('/dashboard')
-        .get('h1').should('contain', 'Welcome to the Dashboard')
+      // you don't need to do this next part but
+      // just to prove we can also visit the page in our app
+      cy.visit('/dashboard')
+      cy.get('h1').should('contain', 'Welcome to the Dashboard')
 
-        // and our cookie should be set to 'cypress-session-cookie'
-        .getCookie('cypress-session-cookie').should('exist')
+      // and our cookie should be set to 'cypress-session-cookie'
+      cy.getCookie('cypress-session-cookie').should('exist')
     })
   })
 
@@ -140,17 +138,15 @@ describe('Logging In - Single Sign on', function(){
       // and will display a message if its not set
       //
       // else it will make an XHR request to the backend and display the results
-      cy
-        .visit('/')
-        .get('#main')
+      cy.visit('/')
+      cy.get('#main')
         .should('contain', 'No session token set!')
     })
 
     it('can parse out id_token and set on local storage', function(){
-      cy
-        // dont follow redirects so we can manually parse out
-        // the id_token
-        .loginBySingleSignOn({followRedirect: false})
+      // dont follow redirects so we can manually parse out
+      // the id_token
+      cy.loginBySingleSignOn({followRedirect: false})
         .then((resp) => {
           // we can use the redirectedToUrl property that Cypress adds
           // whenever we turn off following redirects
@@ -163,12 +159,11 @@ describe('Logging In - Single Sign on', function(){
           return uri.query.id_token
         })
         .then((id_token) => {
-          cy
-            .server()
-            .route('/config').as('getConfig')
+          cy.server()
+          cy.route('/config').as('getConfig')
 
-            // now go visit our app
-            .visit('/', {
+          // now go visit our app
+          cy.visit('/', {
               onBeforeLoad: function(win){
                 // and before the page finishes loading
                 // set the id_token in local storage
@@ -176,29 +171,29 @@ describe('Logging In - Single Sign on', function(){
               }
             })
 
-            // wait for the /config XHR
-            .wait('@getConfig')
-              .its('response.body')
-              .should('deep.eq', {
+          // wait for the /config XHR
+          cy.wait('@getConfig')
+            .its('response.body')
+            .should('deep.eq', {
+              foo: 'bar',
+              some: 'config',
+              loggedIn: true
+            })
+
+          // and now our #main should be filled
+          // with the response body
+          cy.get('#main')
+            .invoke('text')
+            .should((text) => {
+              // parse the text into JSON
+              const json = JSON.parse(text)
+
+              expect(json).to.deep.eq({
                 foo: 'bar',
                 some: 'config',
                 loggedIn: true
               })
-
-            // and now our #main should be filled
-            // with the response body
-            .get('#main')
-              .invoke('text')
-              .should((text) => {
-                // parse the text into JSON
-                const json = JSON.parse(text)
-
-                expect(json).to.deep.eq({
-                  foo: 'bar',
-                  some: 'config',
-                  loggedIn: true
-                })
-              })
+            })
         })
     })
   })
