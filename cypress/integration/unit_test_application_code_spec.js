@@ -21,25 +21,24 @@ describe('Unit Test Application Code', function(){
   })
 
   context('fizzbuzz.js', function(){
-    beforeEach(function(){
-      this.numsExpectedToEq = (arr, expected) =>
-        // loop through the array of nums and make
-        // sure they equal what is expected
-        arr.forEach((num) => {
-          expect(fizzbuzz(num)).to.eq(expected)
-        })
-    })
+    function numsExpectedToEq (arr, expected) {
+      // loop through the array of nums and make
+      // sure they equal what is expected
+      arr.forEach((num) => {
+        expect(fizzbuzz(num)).to.eq(expected)
+      })
+    }
 
     it('returns "fizz" when number is multiple of 3', function(){
-      this.numsExpectedToEq([9, 12, 18], "fizz")
+      numsExpectedToEq([9, 12, 18], "fizz")
     })
 
     it('returns "buzz" when number is multiple of 5', function(){
-      this.numsExpectedToEq([10, 20, 25], "buzz")
+      numsExpectedToEq([10, 20, 25], "buzz")
     })
 
     it('returns "fizzbuzz" when number is multiple of both 3 and 5', function(){
-      this.numsExpectedToEq([15, 30, 60], "fizzbuzz")
+      numsExpectedToEq([15, 30, 60], "fizzbuzz")
     })
   })
 })
