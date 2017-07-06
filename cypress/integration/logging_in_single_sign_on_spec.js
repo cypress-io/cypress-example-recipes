@@ -110,13 +110,14 @@ describe('Logging In - Single Sign on', function(){
           expect(resp.body).to.include('<h1>Welcome to the Dashboard!</h1>')
         })
 
-      // you don't need to do this next part but
-      // just to prove we can also visit the page in our app
-      cy.visit('/dashboard')
-      cy.get('h1').should('contain', 'Welcome to the Dashboard')
+        // you don't need to do this next part but
+        // just to prove we can also visit the page in our app
+        .visit('/dashboard')
 
-      // and our cookie should be set to 'cypress-session-cookie'
-      cy.getCookie('cypress-session-cookie').should('exist')
+        .get('h1').should('contain', 'Welcome to the Dashboard')
+
+        // and our cookie should be set to 'cypress-session-cookie'
+        .getCookie('cypress-session-cookie').should('exist')
     })
   })
 
