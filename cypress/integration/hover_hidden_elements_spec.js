@@ -11,7 +11,7 @@ describe('Hover and Hidden Elements', function(){
     beforeEach(function(){
       // In `examples/hover_hidden_elements/hidden.html`,
       // the html page includes an element that is hidden until
-      // the :hover CSS psuedo selector is triggered by a mouse hover
+      // the :hover CSS pseudo selector is triggered by a mouse hover
       //
       // Additionally when the <button> is clicked
       // our application populates text in a <p>
@@ -68,7 +68,7 @@ describe('Hover and Hidden Elements', function(){
     describe('if your app uses jQuery', function(){
       ['mouseover', 'mouseout', 'mouseenter', 'mouseleave'].forEach((event) => {
         it(`triggers event: '${event}`, function(){
-          // if your app uses jQuery, then we can trigger a jQuery
+          // If your app uses jQuery, then we can trigger a jQuery
           // event that causes the event callback to fire
           cy.get('#with-jquery').invoke('trigger', event)
           cy.get('#messages').should('contain', `the event ${event} was fired`)
@@ -79,7 +79,7 @@ describe('Hover and Hidden Elements', function(){
     describe('if your app does not use jQuery', function(){
       ['mouseover', 'mouseout', 'mouseenter', 'mouseleave'].forEach((event) => {
         it(`dispatches event: '${event}`, function(){
-          // if your app doesnt use jQuery then we need to manually
+          // If your app doesn't use jQuery then we need to manually
           // build up and dispatch this event
           cy.get('#no-jquery').then(function($btn){
               const obj = {}
@@ -90,7 +90,7 @@ describe('Hover and Hidden Elements', function(){
               // It will also automatically know whether events bubble,
               // whether they're cancellable and fill in
               // properties like clientX and clientY so events
-              // are dispatched like in other cypress commands
+              // are dispatched like in other Cypress commands
 
               switch(event){
                 case 'mouseover':
@@ -105,10 +105,10 @@ describe('Hover and Hidden Elements', function(){
                   break;
               }
 
-              // generate the manual event instance
+              // Generate the manual event instance
               const e = new Event(event, obj)
 
-              // dispatch this on our btn
+              // Dispatch this on our button
               $btn.get(0).dispatchEvent(e)
             })
 
