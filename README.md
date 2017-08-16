@@ -19,7 +19,13 @@ This repo contains various recipes for testing common scenarios using Cypress.
   - [Tab Handling and Anchor Links](#tab-handling-and-anchor-links)
   - [Dealing with Hover and Hidden Elements](#dealing-with-hover-and-hidden-elements)
   - [Bootstrapping your App with Test Data](#bootstrapping-your-app-with-test-data)
+<<<<<<< HEAD
   - [Controlling Behavior with Spies, Stubs and Clocks](#controlling-behavior-with-spies-stubs-and-clocks)
+=======
+  - [Controlling Behavior with Spies, Stubs, and Clocks](#controlling-behavior-with-spies-stubs-and-clocks)
+  - [Form Interactions](#form-interactions)
+  - [Drag 'n Drop](#drag-n-drop)
+>>>>>>> origin/CYP-627-cy-trigger
 
 # Overview
 
@@ -190,5 +196,22 @@ npm run dev
 - Use [`cy.stub`](https://on.cypress.io/api/stub) to verify and control the behavior of a function
 - Use [`cy.clock`](https://on.cypress.io/api/clock) and [`cy.tick`](https://on.cypress.io/api/tick) to control time
 - Stub `window.fetch` to control server responses
+
+***
+
+### [Form Interactions](./cypress/integration/form_interactions_spec.js)
+
+This recipe shows you how to:
+
+- Use `cy.invoke` and `cy.trigger` to test a range input (slider)
+
+***
+
+### [Drag 'n Drop](./cypress/integration/drag_n_drop_spec.js)
+
+This recipe shows you how to:
+
+- Use `cy.trigger` to test drag-n-drop that uses mouse events
+- Use `cy.trigger` to test drag-n-drop that uses drag events
 
 ***
