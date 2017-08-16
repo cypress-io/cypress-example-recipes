@@ -20,11 +20,10 @@ describe('Drag n Drop', function(){
     // On mousemove, we need to specify where we're moving
     // with clientX and clientY
     function movePiece (number, x, y) {
-      cy
-        .get(`.piece-${number}`)
-        .ttrigger('mousedown', { which: 1 })
-        .ttrigger('mousemove', { clientX: x, clientY: y })
-        .ttrigger('mouseup')
+      cy.get(`.piece-${number}`)
+        .trigger('mousedown', { which: 1 })
+        .trigger('mousemove', { clientX: x, clientY: y })
+        .trigger('mouseup', {force: true})
     }
 
     function completePuzzle (correctly) {
@@ -40,9 +39,8 @@ describe('Drag n Drop', function(){
     }
 
     beforeEach(function(){
-      cy
-        .viewport(550, 350)
-        .visit('http://localhost:8080/examples/drag_n_drop/puzzle.html')
+      cy.viewport(550, 350)
+      cy.visit('http://localhost:8080/examples/drag_n_drop/puzzle.html')
     })
 
     it('moves the piece when dragged to valid place', function(){
@@ -71,18 +69,16 @@ describe('Drag n Drop', function(){
 
     it('shows error message when puzzle is completed incorrectly', function(){
       completePuzzle(false)
-      cy
-        .get('.notice')
+      cy.get('.notice')
         .should('have.class', 'error')
-        .should('have.text', 'Not quite right. Please try again')
+        .and('have.text', 'Not quite right. Please try again')
     })
 
     it('shows success message when puzzle is completed correctly', function(){
       completePuzzle(true)
-      cy
-        .get('.notice')
+      cy.get('.notice')
         .should('have.class', 'success')
-        .should('have.text', 'Success!')
+        .and('have.text', 'Success!')
     })
   })
 
@@ -90,55 +86,48 @@ describe('Drag n Drop', function(){
   // like dragstart, dragenter, dragleave, and drop
   describe('game using drag events', function(){
     function dropBallInHoop (index) {
-      cy
-        .get('.balls img').first()
-          .ttrigger('dragstart')
-        .get('.hoop')
-          .ttrigger('drop')
+      cy.get('.balls img').first()
+        .trigger('dragstart')
+      cy.get('.hoop')
+        .trigger('drop')
     }
 
     beforeEach(function(){
-      cy
-        .clock()
-        .viewport(400, 350)
-        .visit('http://localhost:8080/examples/drag_n_drop/basketball.html')
+      cy.clock()
+      cy.viewport(400, 350)
+      cy.visit('http://localhost:8080/examples/drag_n_drop/basketball.html')
     })
 
     it('shows error message when time runs out', function(){
-      cy
-        .tick(10000)
-        .get('main')
+      cy.tick(10000)
+      cy.get('main')
         .should('have.class', 'error')
         .find('p')
         .should('have.text', "Time's up!")
     })
 
     it('highlights hoop when ball is dragged over it', function(){
-      cy
-        .get('.hoop')
-        .ttrigger('dragenter')
+      cy.get('.hoop')
+        .trigger('dragenter')
         .should('have.class', 'over')
     })
 
     it('unhighlights hoop when ball is dragged out of it', function(){
-      cy
-        .get('.hoop')
-        .ttrigger('dragenter')
+      cy.get('.hoop')
+        .trigger('dragenter')
         .should('have.class', 'over')
-        .ttrigger('dragleave')
+        .trigger('dragleave')
         .should('not.have.class', 'over')
     })
 
     it('unhighlights hoop when ball is dropped in it', function(){
-      cy
-        .get('.hoop')
-        .ttrigger('dragenter')
+      cy.get('.hoop')
+        .trigger('dragenter')
         .should('have.class', 'over')
 
       dropBallInHoop()
 
-      cy
-        .get('.hoop')
+      cy.get('.hoop')
         .should('not.have.class', 'over')
     })
 
@@ -152,8 +141,7 @@ describe('Drag n Drop', function(){
       dropBallInHoop()
       dropBallInHoop()
       dropBallInHoop()
-      cy
-        .get('main')
+      cy.get('main')
         .should('have.class', 'success')
         .find('p')
         .should('have.text', 'Success!')
