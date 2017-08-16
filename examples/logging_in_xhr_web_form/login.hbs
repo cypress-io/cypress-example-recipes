@@ -61,57 +61,55 @@
     <p class="error"></p>
   </div>
   <script type="text/javascript">
-    $(function(){
-      var $username = $("input[name=username]")
-      var $password = $("input[name=password]")
-      var $error    = $(".error")
+    var $username = $("input[name=username]")
+    var $password = $("input[name=password]")
+    var $error    = $(".error")
 
-      window.Login = {
-        redirect: function(str){
-          window.location.pathname = str
-        },
+    window.Login = {
+      redirect: function(str){
+        window.location.pathname = str
+      },
 
-        onSuccess: function(data){
-          var redirect = data.redirect || "/dashboard"
+      onSuccess: function(data){
+        var redirect = data.redirect || "/dashboard"
 
-          Login.redirect(redirect)
-        },
+        Login.redirect(redirect)
+      },
 
-        onError: function(jqXhr, textStatus, errorThrown){
-          var status = jqXhr.status
+      onError: function(jqXhr, textStatus, errorThrown){
+        var status = jqXhr.status
 
-          // if we have a validation problem
-          if(status === 422){
-            // pluck out the error from the JSON
-            var json = jqXhr.responseJSON
-            var text = json && json.error
-          } else {
-            // we dont know what went wrong with the server
-            var text = ["An error occurred:", status, errorThrown].join(" ")
-          }
-
-          // fill it in
-          $error.text(text)
+        // if we have a validation problem
+        if(status === 422){
+          // pluck out the error from the JSON
+          var json = jqXhr.responseJSON
+          var text = json && json.error
+        } else {
+          // we dont know what went wrong with the server
+          var text = ["An error occurred:", status, errorThrown].join(" ")
         }
+
+        // fill it in
+        $error.text(text)
       }
+    }
 
-      $("form").submit(function(e){
-        // dont actually submit the form
-        e.preventDefault()
+    $("form").submit(function(e){
+      // dont actually submit the form
+      e.preventDefault()
 
-        // post some JSON
-        $.post({
-          url: "/login",
-          dataType: "json",
-          contentType: "application/json",
-          data: JSON.stringify({
-            username: $username.val(),
-            password: $password.val()
-          })
+      // post some JSON
+      $.post({
+        url: "/login",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify({
+          username: $username.val(),
+          password: $password.val()
         })
-        .done(Login.onSuccess)
-        .fail(Login.onError)
       })
+      .done(Login.onSuccess)
+      .fail(Login.onError)
     })
   </script>
 </body>
