@@ -5,9 +5,8 @@
 
 describe('Form Interactions', function(){
   beforeEach(function(){
-    cy
-      .viewport(400, 300)
-      .visit('http://localhost:8080/examples/form_interactions/index.html')
+    cy.viewport(400, 300)
+    cy.visit('http://localhost:8080/examples/form_interactions/index.html')
   })
 
   it('updates range value when moving slider', function(){
@@ -20,11 +19,10 @@ describe('Form Interactions', function(){
     // Note that some implementations may rely on the 'input' event,
     // which is fired as a user moves the slider, but is not supported
     // by some browsers
-    cy
-      .get('input[type=range]').as('range')
+    cy.get('input[type=range]').as('range')
       .invoke('val', 25)
-      .ttrigger('change')
-      .get('@range').siblings('p')
-        .should('have.text', '25')
+      .trigger('change')
+    cy.get('@range').siblings('p')
+      .should('have.text', '25')
   })
 })
