@@ -42,8 +42,7 @@ describe('Spy / Stub / Clock', function(){
       // window.fetch before any app code runs
       cy.visit('http://localhost:8087', {
         onBeforeLoad (win) {
-          cy
-            .stub(win, 'fetch')
+          cy.stub(win, 'fetch')
             .withArgs('/favorite-fruits')
             .as('fetchFavorites')
             .returns(this.fetchFavoritesDeferred.promise)

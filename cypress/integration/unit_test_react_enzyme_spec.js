@@ -12,7 +12,6 @@ import Greeting from '../../examples/unit_test_react_enzyme/greeting'
 // Alternatively we could move this configuration
 // into cypress/support/assertions to enable all
 // spec files to use these chai-enzyme assertions
-
 chai.use(chaiEnzyme)
 
 describe('Unit Test React with Enzyme', function(){

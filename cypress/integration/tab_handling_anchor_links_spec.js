@@ -141,7 +141,7 @@ describe('Tab Handling Anchor Links', function(){
     // just not different superdomains.
     //
     // We have this documented in detail here:
-    // - https://on.cypress.io/guides/web-security
+    // - https://on.cypress.io/web-security
     // - https://on.cypress.io/cross-origin-violation
     //
     // Regardless, there are still many ways to test this behavior.
@@ -189,14 +189,13 @@ describe('Tab Handling Anchor Links', function(){
       // This enables us to test any and all superdomains in a single test.
       //
       // You can read more about this here:
-      // https://on.cypress.io/guides/web-security
+      // https://on.cypress.io/web-security
       //
       // This test will not work until you add {chromeWebSecurity: false} in your
       // cypress.json which is why the test below is commented out.
       //
-      // cy
-      //   .get('#google').click()
-      //   .url().should('include', 'google.com')
+      // cy.get('#google').click()
+      // cy.url().should('include', 'google.com')
     })
   })
 })
