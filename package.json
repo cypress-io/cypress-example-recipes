@@ -43,7 +43,6 @@
     "react-test-renderer": "^15.5.4"
   },
   "devDependencies": {
-    "chai": "^4.1.1",
     "nodemon": "^1.11.0"
   }
 }
