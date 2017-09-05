@@ -7,6 +7,7 @@
     "node": ">=4.0.0"
   },
   "scripts": {
+    "cypress:run": "cypress run --record",
     "start": "node ./scripts/start.js",
     "dev": "nodemon ./scripts/start.js --watch examples"
   },
@@ -43,6 +44,7 @@
     "react-test-renderer": "^15.5.4"
   },
   "devDependencies": {
+    "cypress": "dev",
     "nodemon": "^1.11.0"
   }
 }

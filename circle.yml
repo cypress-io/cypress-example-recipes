@@ -2,14 +2,10 @@ machine:
   node:
     version: 6.5.0
 
-dependencies:
-  post:
-    - npm install -g cypress-cli
-
 test:
   pre:
     - npm start:
         background: true
 
   override:
-    - cypress run --record
+    - npm run cypress:run

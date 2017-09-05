@@ -3,11 +3,8 @@ language: node_js
 node_js:
   - 6.5.0
 
-before_install:
-  - npm install -g cypress-cli
-
 before_script:
   - npm start -- --silent &
 
 script:
-  - cypress run --record
+  - npm run cypress:run
