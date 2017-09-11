@@ -8,4 +8,6 @@ test:
         background: true
 
   override:
-    - npm run cypress:run
+    ## pass the --record flag for the dashboard
+    ## this executes: 'cypress run --record'
+    - npm run cypress:run -- --record

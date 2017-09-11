@@ -44,6 +44,21 @@ npm start
 ## to the node server code and have
 ## the servers automatically restart
 npm run dev
+
+## opens the cypress desktop app
+## to run tests in the interactive GUI
+npm run cypress:open
+```
+
+# Running from the CLI
+
+```bash
+## runs all cypress tests from the CLI
+npm run cypress:run
+
+## switch the browser to chrome instead
+## of the default headless Electron browser
+npm run cypress:run -- --browser chrome
 ```
 
 # Recipes
