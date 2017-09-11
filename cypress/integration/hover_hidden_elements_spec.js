@@ -79,39 +79,10 @@ describe('Hover and Hidden Elements', function(){
     describe('if your app does not use jQuery', function(){
       ['mouseover', 'mouseout', 'mouseenter', 'mouseleave'].forEach((event) => {
         it(`dispatches event: '${event}`, function(){
-          // if your app doesnt use jQuery then we need to manually
-          // build up and dispatch this event
-          cy.get('#no-jquery').then(function($btn){
-              const obj = {}
+          // if your app doesnt use jQuery then we use .trigger()
+          // https://on.cypress.io/trigger
 
-              // We are soon releasing a `cy.trigger` command that
-              // under the hood will build up and dispatch events
-              // so you don't have to write this.
-              // It will also automatically know whether events bubble,
-              // whether they're cancellable and fill in
-              // properties like clientX and clientY so events
-              // are dispatched like in other cypress commands
-
-              switch(event){
-                case 'mouseover':
-                case 'mouseout':
-                  obj.bubbles = true
-                  obj.cancelable = true
-                  break;
-                case 'mouseenter':
-                case 'mouseleave':
-                  obj.bubbles = false
-                  obj.cancelable = false
-                  break;
-              }
-
-              // generate the manual event instance
-              const e = new Event(event, obj)
-
-              // dispatch this on our btn
-              $btn.get(0).dispatchEvent(e)
-            })
-
+          cy.get('#no-jquery').trigger(event)
           cy.get('#messages').should('contain', `the event ${event} was fired`)
         })
       })

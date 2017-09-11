@@ -1,7 +1,7 @@
 // cy.stub makes it easy to stub methods on dependencies
 // and test a unit of code in isolation
 
-// See docs for cy.stub here: https://on.cypress.io/api/stub
+// See docs for cy.stub here: https://on.cypress.io/stub
 
 // auth.js is the code under test
 // (our app code that deals with authentication)

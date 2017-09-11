@@ -41,8 +41,8 @@ describe('Logging In - XHR Web Form', function(){
 
       // we should have visible errors now
       cy.get('p.error')
-          .should('be.visible')
-          .and('contain', 'Username and/or password is incorrect')
+        .should('be.visible')
+        .and('contain', 'Username and/or password is incorrect')
 
       // and still be on the same URL
       cy.url().should('include', '/login')
@@ -105,12 +105,11 @@ describe('Logging In - XHR Web Form', function(){
       // In this case we can simply stub out the Login.redirect method
       // and test that its called with the right data.
       //
-      cy.visit('/login')
       cy.window()
         .then(function(win){
           // stub out the Login.redirect method
           // so it doesnt cause the browser to redirect
-          cy.stub(win.Login, 'redirect').as("redirect")
+          cy.stub(win.Login, 'redirect').as('redirect')
         })
 
       cy.server()
@@ -173,9 +172,9 @@ describe('Logging In - XHR Web Form', function(){
     // typically we'd put this in cypress/support/commands.js
     // but because this custom command is specific to this example
     // we'll keep it here
-    Cypress.addParentCommand('loginByJSON', (username, password) => {
+    Cypress.Commands.add('loginByJSON', (username, password) => {
 
-      Cypress.Log.command({
+      Cypress.log({
         name: 'loginByJSON',
         message: username + ' | ' + password
       })

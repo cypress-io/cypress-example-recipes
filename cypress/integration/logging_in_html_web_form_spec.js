@@ -114,9 +114,9 @@ describe('Logging In - HTML Web Form', function(){
     // typically we'd put this in cypress/support/commands.js
     // but because this custom command is specific to this example
     // we'll keep it here
-    Cypress.addParentCommand('loginByForm', (username, password) => {
+    Cypress.Commands.add('loginByForm', (username, password) => {
 
-      Cypress.Log.command({
+      Cypress.log({
         name: 'loginByForm',
         message: username + ' | ' + password
       })

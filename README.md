@@ -19,7 +19,9 @@ This repo contains various recipes for testing common scenarios using Cypress.
   - [Tab Handling and Anchor Links](#tab-handling-and-anchor-links)
   - [Dealing with Hover and Hidden Elements](#dealing-with-hover-and-hidden-elements)
   - [Bootstrapping your App with Test Data](#bootstrapping-your-app-with-test-data)
-  - [Controlling Behavior with Spies, Stubs and Clocks](#controlling-behavior-with-spies-stubs-and-clocks)
+  - [Controlling Behavior with Spies, Stubs, and Clocks](#controlling-behavior-with-spies-stubs-and-clocks)
+  - [Form Interactions](#form-interactions)
+  - [Drag 'n Drop](#drag-n-drop)
 
 # Overview
 
@@ -42,6 +44,21 @@ npm start
 ## to the node server code and have
 ## the servers automatically restart
 npm run dev
+
+## opens the cypress desktop app
+## to run tests in the interactive GUI
+npm run cypress:open
+```
+
+# Running from the CLI
+
+```bash
+## runs all cypress tests from the CLI
+npm run cypress:run
+
+## switch the browser to chrome instead
+## of the default headless Electron browser
+npm run cypress:run -- --browser chrome
 ```
 
 # Recipes
@@ -166,6 +183,7 @@ npm run dev
 **This recipe shows you how to:**
 
 - Interact with elements which are hidden by CSS
+- Use [`.invoke`](https://on.cypress.io/invoke) and [`.trigger`](https://on.cypress.io/trigger) to simulate hovering
 - Trigger `mouseover`, `mouseout`, `mouseenter`, `mouseleave` events
 - Get around the lack of a `cy.hover` command
 
@@ -186,9 +204,26 @@ npm run dev
 
 **This recipe shows you how to:**
 
-- Use [`cy.spy`](https://on.cypress.io/api/spy) to verify the behavior of a function
-- Use [`cy.stub`](https://on.cypress.io/api/stub) to verify and control the behavior of a function
-- Use [`cy.clock`](https://on.cypress.io/api/clock) and [`cy.tick`](https://on.cypress.io/api/tick) to control time
+- Use [`cy.spy`](https://on.cypress.io/spy) to verify the behavior of a function
+- Use [`cy.stub`](https://on.cypress.io/stub) to verify and control the behavior of a function
+- Use [`cy.clock`](https://on.cypress.io/clock) and [`cy.tick`](https://on.cypress.io/tick) to control time
 - Stub `window.fetch` to control server responses
+
+***
+
+### [Form Interactions](./cypress/integration/form_interactions_spec.js)
+
+This recipe shows you how to:
+
+- Use [`.invoke`](https://on.cypress.io/invoke) and [`.trigger`](https://on.cypress.io/trigger) to test a range input (slider)
+
+***
+
+### [Drag 'n Drop](./cypress/integration/drag_n_drop_spec.js)
+
+This recipe shows you how to:
+
+- Use [`.trigger`](https://on.cypress.io/trigger) to test drag-n-drop that uses mouse events
+- Use [`.trigger`](https://on.cypress.io/trigger) to test drag-n-drop that uses drag events
 
 ***

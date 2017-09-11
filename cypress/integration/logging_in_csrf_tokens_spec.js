@@ -3,9 +3,8 @@
 // validates POSTs against a CSRF token
 //
 describe('Logging In - CSRF Tokens', function(){
-  Cypress.addParentCommand('loginByCSRF', (csrfToken) => {
-    cy.chain()
-      .request({
+  Cypress.Commands.add('loginByCSRF', (csrfToken) => {
+    cy.request({
         method: 'POST',
         url: '/login',
         failOnStatusCode: false, // dont fail so we can make assertions
@@ -88,5 +87,4 @@ describe('Logging In - CSRF Tokens', function(){
           })
       })
   })
-
 })

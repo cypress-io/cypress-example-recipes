@@ -44,9 +44,9 @@ const _   = Cypress._
 const url = require('url')
 
 describe('Logging In - Single Sign on', function(){
-  Cypress.addParentCommand('loginBySingleSignOn', (overrides = {}) => {
+  Cypress.Commands.add('loginBySingleSignOn', (overrides = {}) => {
 
-    Cypress.Log.command({
+    Cypress.log({
       name: 'loginBySingleSignOn'
     })
 
@@ -68,9 +68,7 @@ describe('Logging In - Single Sign on', function(){
     // allow us to override defaults with passed in overrides
     _.extend(options, overrides)
 
-    cy
-      .chain()
-      .request(options)
+    cy.request(options)
   })
 
   before(function(){
@@ -110,14 +108,14 @@ describe('Logging In - Single Sign on', function(){
           expect(resp.body).to.include('<h1>Welcome to the Dashboard!</h1>')
         })
 
-        // you don't need to do this next part but
-        // just to prove we can also visit the page in our app
-        .visit('/dashboard')
+      // you don't need to do this next part but
+      // just to prove we can also visit the page in our app
+      cy.visit('/dashboard')
 
-        .get('h1').should('contain', 'Welcome to the Dashboard')
+      cy.get('h1').should('contain', 'Welcome to the Dashboard')
 
-        // and our cookie should be set to 'cypress-session-cookie'
-        .getCookie('cypress-session-cookie').should('exist')
+      // and our cookie should be set to 'cypress-session-cookie'
+      cy.getCookie('cypress-session-cookie').should('exist')
     })
   })
 

@@ -1,0 +1,138 @@
+body {
+  color: #333;
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 1.2em;
+}
+
+ul,li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+main {
+  display: flex;
+}
+
+.notice {
+  min-height: 1.2em;
+  margin: 0 0 10px 40px;
+}
+
+.notice.error {
+  color: red;
+}
+
+.notice.success {
+  color: green;
+}
+
+.places,
+.pieces {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.places {
+  border-left: solid 1px #d7d7d7;
+  border-top: solid 1px #d7d7d7;
+  margin-left: 40px;
+  width: 201px;
+  height: 201px;
+}
+
+.places li {
+  border-right: solid 1px #d7d7d7;
+  border-bottom: solid 1px #d7d7d7;
+  width: 66px;
+  height: 66px;
+}
+
+.pieces {
+  justify-content: space-between;
+  width: 230px;
+}
+
+.pieces li {
+  margin: 4px;
+  width: 67px;
+  height: 67px;
+}
+
+.piece {
+  background: url('cypress-logo.png') no-repeat;
+  display: block;
+  width: 67px;
+  height: 67px;
+}
+
+.piece-1  { background-position:      0      0; }
+.piece-2  { background-position:  -67px      0; }
+.piece-3  { background-position: -134px      0; }
+.piece-4  { background-position:      0  -67px; }
+.piece-5  { background-position:  -67px  -67px; }
+.piece-6  { background-position: -134px  -67px; }
+.piece-7  { background-position:      0 -134px; }
+.piece-8  { background-position:  -67px -134px; }
+.piece-9  { background-position: -134px -134px; }
+
+.balls {
+  width: 130px;
+}
+
+.balls img {
+  margin: 5px;
+}
+
+.hoop {
+  border: solid 3px #999;
+  border-radius: 50%;
+  margin-left: 50px;
+  width: 60px;
+  height: 60px;
+}
+
+.hoop.over {
+  background: #bfe8ac;
+}
+
+.basketball main p {
+  font-size: 1.5em;
+}
+
+.basketball .error p {
+  color: red;
+}
+
+.basketball .success p {
+  color: green;
+}
+
+/* for dragula */
+
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+}
+
+.gu-hide {
+  display: none !important;
+}
+
+.gu-unselectable {
+  user-select: none !important;
+}
+
+.gu-transit {
+  opacity: 0.2;
+}
