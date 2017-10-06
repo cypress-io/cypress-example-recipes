@@ -1,4 +1,6 @@
 const cp    = require('child_process')
+const path  = require('path')
+const execa = require('execa')
 const chalk = require('chalk')
 
 // get the args passed into this process
@@ -45,21 +47,18 @@ const processes = [
 ]
 
 processes.map((proc) =>{
-  const log = (data) => {
-    console.log(data.toString())
-  }
-
   // convert to an array
   const cmd  = proc.cmd.split(" ")
 
   // slice out the args from the bin
   const args = cmd.slice(1).concat(argv)
 
-  // spawn the process
-  const sp   = cp.spawn(cmd[0], args)
+  console.log(cmd[0], args)
 
-  sp.stdout.on("data", log)
-  sp.stderr.on("data", log)
+  // spawn the process
+  execa(cmd[0], args, {
+    stdio: 'inherit',
+  })
 
   if (proc.msg) {
     console.log(chalk.yellow(proc.msg) + "\n")
