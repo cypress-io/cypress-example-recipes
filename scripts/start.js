@@ -53,8 +53,6 @@ processes.map((proc) =>{
   // slice out the args from the bin
   const args = cmd.slice(1).concat(argv)
 
-  console.log(cmd[0], args)
-
   // spawn the process
   execa(cmd[0], args, {
     stdio: 'inherit',
