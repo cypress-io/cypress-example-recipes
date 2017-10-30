@@ -9,6 +9,7 @@
   "scripts": {
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
+    "test:ci": "run-p --race start cypress:run",
     "start": "node ./scripts/start.js",
     "dev": "nodemon ./scripts/start.js --watch examples"
   },
@@ -47,6 +48,7 @@
   },
   "devDependencies": {
     "cypress": "1.0.2",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "npm-run-all": "^4.1.1"
   }
 }
