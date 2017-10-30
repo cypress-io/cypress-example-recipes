@@ -47,7 +47,7 @@
     "react-test-renderer": "^15.5.4"
   },
   "devDependencies": {
-    "cypress": "1.0.2",
+    "cypress": "1.0.3",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.1.1"
   }
