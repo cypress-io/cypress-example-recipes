@@ -7,6 +7,8 @@
     "node": ">=4.0.0"
   },
   "scripts": {
+    "cypress:version": "cypress version",
+    "cypress:verify": "cypress verify",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "cypress:run:chrome": "cypress run --browser chrome",
