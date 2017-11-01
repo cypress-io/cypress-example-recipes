@@ -9,7 +9,9 @@
   "scripts": {
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
+    "cypress:run:chrome": "cypress run --browser chrome",
     "test:ci": "run-p --race start cypress:run",
+    "test:ci:chrome": "run-p --race start cypress:run:chrome",
     "start": "node ./scripts/start.js",
     "dev": "nodemon ./scripts/start.js --watch examples"
   },
