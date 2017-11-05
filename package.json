@@ -35,7 +35,7 @@
     "chalk": "^2.2.0",
     "csurf": "^1.9.0",
     "dragula": "^3.7.2",
-    "enzyme": "^2.6.0",
+    "enzyme": "^3.1.1",
     "execa": "^0.8.0",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
