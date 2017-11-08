@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Drag n Drop</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    Complete the puzzle to make the Cypress logo
+  </header>
+  <main>
+    <ul class="pieces">
+      <li><span class="piece piece-3" data-id="3"></span></li>
+      <li><span class="piece piece-9" data-id="9"></span></li>
+      <li><span class="piece piece-6" data-id="6"></span></li>
+      <li><span class="piece piece-1" data-id="1"></span></li>
+      <li><span class="piece piece-5" data-id="5"></span></li>
+      <li><span class="piece piece-4" data-id="4"></span></li>
+      <li><span class="piece piece-8" data-id="8"></span></li>
+      <li><span class="piece piece-2" data-id="2"></span></li>
+      <li><span class="piece piece-7" data-id="7"></span></li>
+    </ul>
+    <div>
+      <p class="notice"></p>
+      <ul class="places">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </main>
+
+  <script src="/node_modules/dragula/dist/dragula.js"></script>
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script>
+    dragula($('.pieces li, .places li').get(), {
+      accepts (el, target, source, sibling) {
+        return $(target).is(':empty')
+      },
+    }).on('drop', () => {
+      const $places = $('.places')
+      const $notice = $('.notice')
+      const $piecesInPlace = $places.find('.piece')
+      if ($piecesInPlace.length !== 9) return
+
+      const $piecesInRightPlace = $piecesInPlace.filter((i, el) => {
+        return (i + 1) === Number($(el).data('id'))
+      })
+
+      if ($piecesInRightPlace.length !== 9) {
+        $notice
+          .text('Not quite right. Please try again')
+          .addClass('error')
+      } else {
+        $notice
+          .text('Success!')
+          .addClass('success')
+      }
+    })
+  </script>
+</body>
+</html>

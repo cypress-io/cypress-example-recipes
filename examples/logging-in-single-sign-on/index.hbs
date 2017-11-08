@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logging In - Single Sign On - Index</title>
+  <script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
+  <style type="text/css">
+    body {
+      padding: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>index.html</h2>
+  <p>
+    This example uses an XHR to set an x-session-token header.
+  </p>
+  <pre id="main"></pre>
+  <script type="text/javascript">
+    $(function(){
+      var token = localStorage.getItem('id_token')
+      var $main = $('#main')
+
+      function noSessionToken() {
+        $main.text('No session token set!')
+      }
+
+      function gotSessionToken(data) {
+        $main.text(JSON.stringify(data))
+      }
+
+      if(!token) {
+        noSessionToken()
+      } else {
+        $.ajax({
+          dataType: 'json',
+          url: '/config',
+          beforeSend: function(xhr){
+            // set the x-session-token request header
+            xhr.setRequestHeader('x-session-token', token)
+          }
+        })
+        .done(gotSessionToken)
+        .fail(noSessionToken)
+      }
+    })
+  </script>
+</body>
+</html>

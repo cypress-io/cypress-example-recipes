@@ -13,7 +13,7 @@ console.log(dividers, "\n")
 
 const processes = [
   {
-    cmd:  "http-server . -p 8080 -c-1",
+    cmd:  "http-server . -p 8080 -c-c1",
     msg:  `Running Static File Server for all recipes: ${chalk.cyan('(port 8080)')}`
   },
   {

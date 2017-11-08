@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Drag n Drop</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="basketball">
+  <header>
+    <p>Get all the basketballs in the hoop before time runs out</p>
+    <div class="timer">
+      0:<span>10</span>
+    </div>
+  </header>
+  <main>
+    <div class="balls">
+      <img src="basketball.png" draggable />
+      <img src="basketball.png" draggable />
+      <img src="basketball.png" draggable />
+      <img src="basketball.png" draggable />
+    </div>
+    <div class="hoop"></div>
+  </main>
+
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script>
+      let secondsLeft = 10
+      const timer = setInterval(() => {
+        secondsLeft--
+        $('.timer span').text(`0${secondsLeft}`)
+        if (secondsLeft <= 0) {
+          clearInterval(timer)
+          $('main').addClass('error').html('<p>Time\'s up!</p>')
+        }
+      }, 1000)
+
+      let dragging
+      $('.balls img').on('dragstart', (e) => {
+        dragging = e.target
+      })
+
+      $('.hoop')
+        .on('dragover', (e) => {
+          e.preventDefault()
+        })
+        .on('dragenter', (e) => {
+          $(e.target).addClass('over')
+        })
+        .on('dragleave', (e) => {
+          $(e.target).removeClass('over')
+        })
+        .on('drop', (e) => {
+          e.stopPropagation()
+          e.preventDefault()
+
+          $(e.target).removeClass('over')
+
+          if (dragging) {
+            $(dragging).remove()
+          }
+
+          if (!$('.balls img').length) {
+            clearInterval(timer)
+            $('main').addClass('success').html('<p>Success!</p>')
+          }
+        })
+  </script>
+</body>
+</html>
