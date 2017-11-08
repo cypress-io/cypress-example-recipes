@@ -1,6 +1,7 @@
+import Adapter from 'enzyme-adapter-react-16'
 import React from 'react'
 import chaiEnzyme from 'chai-enzyme'
-import { shallow } from 'enzyme'
+import { configure, shallow } from 'enzyme'
 
 import Greeting from '../../examples/unit_test_react_enzyme/greeting'
 
@@ -19,6 +20,10 @@ import Greeting from '../../examples/unit_test_react_enzyme/greeting'
 // into cypress/support/assertions to enable all
 // spec files to use these chai-enzyme assertions
 chai.use(chaiEnzyme())
+
+// This could also be moved under cypress/support if
+// using enzyme in multiple tests
+configure({ adapter: new Adapter() })
 
 describe('Unit Test React with Enzyme', function(){
   context('<Greeting />', function(){
