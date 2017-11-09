@@ -50,8 +50,12 @@
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
+    "bluebird": "^3.5.1",
     "cypress": "1.0.3",
+    "fs-extra": "^4.0.2",
+    "glob": "^7.1.2",
     "nodemon": "^1.11.0",
-    "npm-run-all": "^4.1.1"
+    "npm-run-all": "^4.1.1",
+    "pretty-ms": "^3.0.1"
   }
 }
