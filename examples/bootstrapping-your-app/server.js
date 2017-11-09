@@ -15,7 +15,7 @@ app.set('views', __dirname)
 app.set('view engine', 'hbs')
 
 app.use(express.static('.'))
-app.use('/node_modules', express.static(path.join(__dirname, '..', 'node_modules')))
+app.use('/node_modules', express.static(path.join(__dirname, '..', '..', 'node_modules')))
 
 app.get('/bootstrap.html', (req, res) => {
   res.render('./bootstrap.hbs', {

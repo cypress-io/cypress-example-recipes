@@ -7,6 +7,6 @@ const app = express()
 const port = minimist(process.argv.slice(2)).port
 
 app.use(express.static('.'))
-app.use('/node_modules', express.static(path.join(__dirname, '..', 'node_modules')))
+app.use('/node_modules', express.static(path.join(__dirname, '..', '..', 'node_modules')))
 
 app.listen(port)
