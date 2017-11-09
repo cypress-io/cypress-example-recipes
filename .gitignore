@@ -7,5 +7,5 @@ tmp
 .projects
 *.orig
 
-cypress/screenshots
-cypress/videos
+screenshots
+videos
