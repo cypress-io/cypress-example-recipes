@@ -9,14 +9,14 @@ This repo contains various recipes for testing common scenarios using Cypress.
 - [Overview](#overview)
 - [Installation](#installation)
 - [Recipes](#recipes)
-  - [ES2015 / CommonJS Modules](#es2015--commonjs-modules)
-  - [Unit Test - Application Code](#unit-test---application-code)
-  - [Unit Test - React w/Enzyme](#unit-test---react-wenzyme)
-  - [Unit Test - Stubbing Dependencies](#unit-test---stubbing-dependencies)
+  - [Logging In - Single Sign On](#logging-in---single-sign-on)
   - [Logging In - HTML Web Form](#logging-in---html-web-form)
   - [Logging In - XHR Web Form](#logging-in---xhr-web-form)
   - [Logging In - CSRF Tokens](#logging-in---csrf-tokens)
-  - [Logging In - Single Sign On](#logging-in---single-sign-on)
+  - [Unit Test - Application Code](#unit-test---application-code)
+  - [Unit Test - React w/Enzyme](#unit-test---react-wenzyme)
+  - [Unit Test - Stubbing Dependencies](#unit-test---stubbing-dependencies)
+  - [ES2015 / CommonJS Modules](#es2015--commonjs-modules)
   - [Extending Chai with Assertion Plugins](#extending-chai-with-assertion-plugins)
   - [Tab Handling and Anchor Links](#tab-handling-and-anchor-links)
   - [Dealing with Hover and Hidden Elements](#dealing-with-hover-and-hidden-elements)
@@ -27,10 +27,10 @@ This repo contains various recipes for testing common scenarios using Cypress.
 
 # Overview
 
-- This is still a WIP, and we'll be adding recipes often.
-- All of the tests are found in the [`cypress/integration`](./cypress/integration) folder.
-- We boot a separate node server per recipe.
-- Each [`example`](./examples) has all of its own backend and frontend assets.
+- This repo is structured similar to how other "Monorepos" work.
+- Each [`example project`](./examples) has it's own Cypress configuration, tests, backend and frontend assets.
+- Each of these [`example projects`](./examples) share a single "root" Cypress that is installed in the root [`node_modules`](./node_modules) folder.
+- This structure looks different from normal projects, but its the easiest way to manage multiple projects without installing Cypress independently for each one.
 
 # Installation
 
@@ -38,76 +38,56 @@ This repo contains various recipes for testing common scenarios using Cypress.
 ## install all dependencies
 npm install
 
-## boot the various node servers
-## to use in the tests
+## this will call 'npm start' on
+## each example project's package.json
+## which boots all of the webservers
 npm start
 
-## or if you want to make modifications
+## if you want to make modifications
 ## to the node server code and have
 ## the servers automatically restart
 npm run dev
+```
 
-## opens the cypress desktop app
-## to run tests in the interactive GUI
+# Opening Cypress GUI
+
+```bash
+## this opens the cypress test runner
+## in the GUI mode. because this project
+## is a monorepo - we've opened the test
+## runner in 'global' mode.
+##
+## so to run a specific project you'll
+## need to manually add the folder to Cypress.
+npm run cypress:open
+
+## alternatively, to open a specific
+## example without running in global mode
+cd ./examples/drag-n-drop
 npm run cypress:open
 ```
 
 # Running from the CLI
 
 ```bash
-## runs all cypress tests from the CLI
+## runs all example projects and
+## exits with the total number of
+## failures across all projects
 npm run cypress:run
 
 ## switch the browser to chrome instead
 ## of the default headless Electron browser
-npm run cypress:run -- --browser chrome
+npm run cypress:run:chrome
+
+## alternatively, to run a specific
+## example without running all projects
+cd ./examples/drag-n-drop
+npm run cypress:run
 ```
 
 # Recipes
 
-### [ES2015 / CommonJS Modules](./cypress/integration/es2015_commonjs_modules_spec.js)
-
-**This recipe shows you how to:**
-
-- Import ES2015 modules
-- Require CommonJS modules
-- Organize reusable utility functions
-- Import 3rd party `node_modules`
-
-***
-
-### [Unit Test - Application Code](./cypress/integration/unit_test_application_code_spec.js)
-
-**This recipe shows you how to:**
-
-- Unit test your own application code libraries
-- Import modules using ES2015
-- Test simple math functions
-- Test the canonical *fizzbuzz* test
-
-***
-
-### [Unit Test - React w/Enzyme](./cypress/integration/unit_test_react_enzyme_spec.js)
-
-**This recipe shows you how to:**
-
-- Unit test a React JSX Component using [Enzyme](http://airbnb.io/enzyme/)
-- Import `enzyme` from `node_modules`
-- Extend chai assertions with [`chai-enzyme`](https://github.com/producthunt/chai-enzyme)
-
-***
-
-### [Unit Test - Stubbing Dependencies](./cypress/integration/unit_test_stubbing_dependencies_spec.js)
-
-**This recipe shows you how to:**
-
-- Use [`cy.stub`](https://on.cypress.io/api/stub) to stub dependencies in a unit test
-- Handle promises returned by stubbed functions
-- Handle callbacks in stubbed functions
-
-***
-
-### [Logging In - HTML Web Form](./cypress/integration/logging_in_html_web_form_spec.js)
+### [Logging In - HTML Web Form](./examples/logging-in-html-web-form)
 
 **This recipe shows you how to:**
 
@@ -121,7 +101,7 @@ npm run cypress:run -- --browser chrome
 
 ***
 
-### [Logging In - XHR Web Form](./cypress/integration/logging_in_xhr_web_form_spec.js)
+### [Logging In - XHR Web Form](./examples/logging-in-xhr-web-form)
 
 **This recipe shows you how to:**
 
@@ -135,7 +115,7 @@ npm run cypress:run -- --browser chrome
 
 ***
 
-### [Logging In - CSRF Tokens](./cypress/integration/logging_in_csrf_tokens_spec.js)
+### [Logging In - CSRF Tokens](./examples/logging-in-csrf-tokens)
 
 **This recipe shows you how to:**
 
@@ -147,7 +127,7 @@ npm run cypress:run -- --browser chrome
 
 ***
 
-### [Logging In - Single Sign On](./cypress/integration/logging_in_single_sign_on_spec.js)
+### [Logging In - Single Sign On](./examples/logging-in-single-sign-on)
 
 **This recipe shows you how to:**
 
@@ -158,7 +138,49 @@ npm run cypress:run -- --browser chrome
 
 ***
 
-### [Extending Chai with Assertion Plugins](./cypress/integration/extending_chai_assertion_plugins_spec.js)
+### [Unit Test - Application Code](./examples/unit-test-application-code)
+
+**This recipe shows you how to:**
+
+- Unit test your own application code libraries
+- Import modules using ES2015
+- Test simple math functions
+- Test the canonical *fizzbuzz* test
+
+***
+
+### [Unit Test - React w/Enzyme](./examples/unit-test-react-enzyme)
+
+**This recipe shows you how to:**
+
+- Unit test a React JSX Component using [Enzyme](http://airbnb.io/enzyme/)
+- Import `enzyme` from `node_modules`
+- Extend chai assertions with [`chai-enzyme`](https://github.com/producthunt/chai-enzyme)
+
+***
+
+### [Unit Test - Stubbing Dependencies](./examples/unit-test-stubbing-dependencies)
+
+**This recipe shows you how to:**
+
+- Use [`cy.stub`](https://on.cypress.io/api/stub) to stub dependencies in a unit test
+- Handle promises returned by stubbed functions
+- Handle callbacks in stubbed functions
+
+***
+
+### [ES2015 / CommonJS Modules](./examples/es2015-commonjs-modules)
+
+**This recipe shows you how to:**
+
+- Import ES2015 modules
+- Require CommonJS modules
+- Organize reusable utility functions
+- Import 3rd party `node_modules`
+
+***
+
+### [Extending Chai with Assertion Plugins](./examples/extending-chai-assertion-plugins)
 
 **This recipe shows you how to:**
 
@@ -168,11 +190,11 @@ npm run cypress:run -- --browser chrome
 
 ***
 
-### [Tab Handling and Anchor Links](./cypress/integration/tab_handling_anchor_links_spec.js)
+### [Tab Handling and Anchor Links](./examples/tab-handling-anchor-links)
 
 **This recipe shows you how to:**
 
-- Test anchor links opening in new tabs: `<a target="_blank">`
+- Test anchor links opening in new tabs: `<a target="-blank">`
 - Test anchor links that link to external domains: `<a href="...">`
 - Prevent content from opening in a new tab
 - Request external content that would open in a new tab
@@ -180,7 +202,7 @@ npm run cypress:run -- --browser chrome
 
 ***
 
-### [Dealing with Hover and Hidden Elements](./cypress/integration/hover_hidden_elements_spec.js)
+### [Dealing with Hover and Hidden Elements](./examples/hover-hidden-elements)
 
 **This recipe shows you how to:**
 
@@ -191,7 +213,7 @@ npm run cypress:run -- --browser chrome
 
 ***
 
-### [Bootstrapping your App with Test Data](./cypress/integration/bootstrapping_app_test_data_spec.js)
+### [Bootstrapping your App with Test Data](./examples/bootstrapping-your-app)
 
 **This recipe shows you how to:**
 
@@ -202,7 +224,7 @@ npm run cypress:run -- --browser chrome
 
 ***
 
-### [Controlling Behavior with Spies, Stubs and Clocks](./cypress/integration/spy_stub_clock_spec.js)
+### [Controlling Behavior with Spies, Stubs and Clocks](./examples/spy-stub-clock)
 
 **This recipe shows you how to:**
 
@@ -213,7 +235,7 @@ npm run cypress:run -- --browser chrome
 
 ***
 
-### [Form Interactions](./cypress/integration/form_interactions_spec.js)
+### [Form Interactions](./examples/form-interactions)
 
 This recipe shows you how to:
 
@@ -221,7 +243,7 @@ This recipe shows you how to:
 
 ***
 
-### [Drag 'n Drop](./cypress/integration/drag_n_drop_spec.js)
+### [Drag 'n Drop](./examples/drag-n-drop)
 
 This recipe shows you how to:
 
