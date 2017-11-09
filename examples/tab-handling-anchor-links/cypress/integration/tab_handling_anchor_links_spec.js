@@ -9,7 +9,7 @@
 
 describe('Tab Handling Anchor Links', function(){
   beforeEach(function(){
-    cy.visit('/examples/tab_handling_anchor_links/index.html')
+    cy.visit('/index.html')
   })
 
   context('testing the target="_blank" link', function(){
@@ -49,7 +49,7 @@ describe('Tab Handling Anchor Links', function(){
         // to the fully qualified URL. by asserting on this property
         // we are testing this element more thoroughly
         .should('have.prop', 'href')
-        .and('equal', 'http://localhost:8080/examples/tab_handling_anchor_links/users.html')
+        .and('equal', 'http://localhost:7078/users.html')
     })
 
     it('solution #2: click through to the new page', function(){

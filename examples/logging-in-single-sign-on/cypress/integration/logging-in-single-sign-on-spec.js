@@ -9,8 +9,8 @@
 // performant and less brittle) with cy.request
 
 // There are two servers in use in this example.
-// 1. http://localhost:8085 (the app server)
-// 2. http://auth.corp.com:8086 (the authentication server)
+// 1. http://localhost:7074 (the app server)
+// 2. http://auth.corp.com:7075 (the authentication server)
 
 // Be sure to run `npm start` to start the server
 // before running the tests below.
@@ -21,15 +21,15 @@
 
 // Most 3rd party authentication works like this:
 
-// 1. Visit the 3rd party site (http://auth.corp.com:8086) and tell
+// 1. Visit the 3rd party site (http://auth.corp.com:7075) and tell
 //    the 3rd party site where to redirect back to upon success:
-//    http://auth.corp.com:8086?redirectTo=http://localhost:8085/set_token
+//    http://auth.corp.com:7075?redirectTo=http://localhost:7074/set_token
 
 // 2. Submit the username / password to the auth.corp.com site
 
 // 3. Upon success, the 3rd party site redirects back to your application
 //    and includes the id_token in the URL:
-//    http://localhost:8085/set_token?id_token=abc123def456
+//    http://localhost:7074/set_token?id_token=abc123def456
 
 // 4. Your application then parses out the id_token and sets it
 //    as a cookie or on local storage then includes it on all
@@ -52,11 +52,11 @@ describe('Logging In - Single Sign on', function(){
 
     const options = {
       method: 'POST',
-      url: 'http://auth.corp.com:8086/login',
+      url: 'http://auth.corp.com:7075/login',
       qs: {
         // use qs to set query string to the url that creates
-        // http://auth.corp.com:8080?redirectTo=http://localhost:8085/set_token
-        redirectTo: 'http://localhost:8085/set_token'
+        // http://auth.corp.com:8080?redirectTo=http://localhost:7074/set_token
+        redirectTo: 'http://localhost:7074/set_token'
       },
       form: true, // we are submitting a regular form body
       body: {
@@ -98,7 +98,7 @@ describe('Logging In - Single Sign on', function(){
           // yup this should all be good
           expect(resp.status).to.eq(200)
 
-          // we're at http://localhost:8085/dashboard contents
+          // we're at http://localhost:7074/dashboard contents
           expect(resp.body).to.include('<h1>Welcome to the Dashboard!</h1>')
         })
 

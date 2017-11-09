@@ -1,3 +1,4 @@
+const path       = require('path')
 const minimist   = require('minimist')
 const morgan     = require('morgan')
 const bodyParser = require('body-parser')
@@ -24,6 +25,7 @@ const ensureLoggedIn = (req, res, next) => {
 // parse JSON bodies
 const jsonParser = bodyParser.json()
 
+app.use('/node_modules', express.static(path.join(__dirname, '..', '..', 'node_modules')))
 app.use(morgan("dev"))
 
 // store a session cookie called

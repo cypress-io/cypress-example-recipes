@@ -1,3 +1,4 @@
+const path       = require('path')
 const minimist   = require('minimist')
 const morgan     = require('morgan')
 const session    = require('express-session')
@@ -21,6 +22,7 @@ const ensureLoggedIn = (req, res, next) => {
   }
 }
 
+app.use('/node_modules', express.static(path.join(__dirname, '..', '..', 'node_modules')))
 app.use(morgan("dev"))
 
 // store a session cookie called

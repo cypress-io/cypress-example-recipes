@@ -17,8 +17,3 @@
 // using ES2015 syntax:
 import "./commands"
 import "./defaults"
-
-// also import 3rd party assertions
-// which will globally modify chai
-// and make these accessible to all specs
-import "./assertions"

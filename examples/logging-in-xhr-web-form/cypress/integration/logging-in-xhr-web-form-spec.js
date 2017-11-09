@@ -14,12 +14,6 @@
 // before running the tests below.
 
 describe('Logging In - XHR Web Form', function(){
-  before(function(){
-    // change the baseUrl since we do lots of separate
-    // visits and requests in these tests
-    Cypress.config('baseUrl', 'http://localhost:8083')
-  })
-
   context('XHR form submission', function(){
     beforeEach(function(){
       cy.visit('/login')

@@ -12,4 +12,12 @@ const port = minimist(process.argv.slice(2)).port
 app.use(express.static('.'))
 app.use('/node_modules', express.static(path.join(__dirname, '..', '..', 'node_modules')))
 
+app.get('/', (req, res) => {
+  res.sendFile(`${__dirname}/index.html`)
+})
+
+app.get('/favorite-fruits', (req, res) => {
+  res.json(_.sampleSize(fruits, 5))
+})
+
 app.listen(port)

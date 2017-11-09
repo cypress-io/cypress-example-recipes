@@ -14,12 +14,6 @@
 // before running the tests below.
 
 describe('Logging In - HTML Web Form', function(){
-  before(function(){
-    // change the baseUrl since we do lots of separate
-    // visits and requests in these tests
-    Cypress.config('baseUrl', 'http://localhost:8082')
-  })
-
   context('Unauthorized', function(){
     it('is redirected on visit to /dashboard when no session', function(){
       // we must have a valid session cookie to be logged
@@ -48,7 +42,7 @@ describe('Logging In - HTML Web Form', function(){
           // when we turn off following redirects Cypress will also send us
           // a 'redirectedToUrl' property with the fully qualified URL that we
           // were redirected to.
-          expect(resp.redirectedToUrl).to.eq('http://localhost:8082/unauthorized')
+          expect(resp.redirectedToUrl).to.eq('http://localhost:7077/unauthorized')
         })
     })
   })
