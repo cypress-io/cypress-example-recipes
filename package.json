@@ -9,9 +9,9 @@
   "scripts": {
     "cypress:version": "cypress version",
     "cypress:verify": "cypress verify",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
-    "cypress:run:chrome": "cypress run --browser chrome",
+    "cypress:open": "cypress open --global",
+    "cypress:run": "node ./scripts/run.js",
+    "cypress:run:chrome": "node ./scripts/run.js --browser chrome",
     "test:ci": "run-p --race start cypress:run",
     "test:ci:chrome": "run-p --race start cypress:run:chrome",
     "start": "node ./scripts/start.js",
