@@ -5,6 +5,6 @@
   "scripts": {
     "cypress:run": "../node_modules/.bin/cypress run",
     "cypress:open": "../node_modules/.bin/cypress open",
-    "start": "node server.js --port 7078"
+    "start": "node app_server.js --port 7074 & node auth_server.js --port 7075"
   }
 }
