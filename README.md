@@ -29,7 +29,7 @@ This repo contains various recipes for testing common scenarios using Cypress.
 
 - This repo is structured similar to how other "Monorepos" work.
 - Each [`example project`](./examples) has it's own Cypress configuration, tests, backend and frontend assets.
-- Each of these [`example projects`](./examples) share a single "root" Cypress that is installed in the root [`node_modules`](./node_modules) folder.
+- Each of these [`example projects`](./examples) share a single "root" Cypress that is installed in the root `node_modules` folder.
 - This structure looks different from normal projects, but its the easiest way to manage multiple projects without installing Cypress independently for each one.
 
 # Installation
@@ -87,6 +87,17 @@ npm run cypress:run
 
 # Recipes
 
+### [Logging In - Single Sign On](./examples/logging-in-single-sign-on)
+
+**This recipe shows you how to:**
+
+- Login when authentication is done on a 3rd party server
+- Parse tokens using [`cy.request`](https://on.cypress.io/api/request)
+- Manually set tokens on local storage
+- Map external hosts and point to local servers
+
+***
+
 ### [Logging In - HTML Web Form](./examples/logging-in-html-web-form)
 
 **This recipe shows you how to:**
@@ -124,17 +135,6 @@ npm run cypress:run
 - Parse CSRF tokens out of response headers
 - Expose CSRF via a route
 - Disable CSRF when not in production
-
-***
-
-### [Logging In - Single Sign On](./examples/logging-in-single-sign-on)
-
-**This recipe shows you how to:**
-
-- Login when authentication is done on a 3rd party server
-- Parse tokens using [`cy.request`](https://on.cypress.io/api/request)
-- Manually set tokens on local storage
-- Map external hosts and point to local servers
 
 ***
 
