@@ -19,7 +19,7 @@ glob(path.join('examples', '*'), {
   realpath: true
 })
 .each((pathToExampleProject) => {
-  console.log('Running example project ', pathToExampleProject)
+  console.log('Running example project:', pathToExampleProject)
 
   return cypress.run({
     project: pathToExampleProject,
