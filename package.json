@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "bluebird": "^3.5.1",
-    "cypress": "1.0.3",
+    "cypress": "1.1.1",
     "fs-extra": "^4.0.2",
     "glob": "^7.1.2",
     "nodemon": "^1.11.0",

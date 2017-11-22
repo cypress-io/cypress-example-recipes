@@ -35,7 +35,7 @@
 //    as a cookie or on local storage then includes it on all
 //    subsequent requests to your server.
 
-// There are other various implementation differences but they aall share
+// There are other various implementation differences but they all share
 // the same fundamental concepts which we can test in Cypress.
 
 const _   = Cypress._
