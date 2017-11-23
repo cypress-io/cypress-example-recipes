@@ -4,7 +4,7 @@
 
 This repo contains various recipes for testing common scenarios using Cypress.
 
-# Contents
+## Contents
 
 - [Overview](#overview)
 - [Installation](#installation)
@@ -25,14 +25,14 @@ This repo contains various recipes for testing common scenarios using Cypress.
   - [Form Interactions](#form-interactions)
   - [Drag 'n Drop](#drag-n-drop)
 
-# Overview
+## Overview
 
 - This repo is structured similar to how other "Monorepos" work.
 - Each [`example project`](./examples) has it's own Cypress configuration, tests, backend and frontend assets.
 - Each of these [`example projects`](./examples) share a single "root" Cypress that is installed in the root `node_modules` folder.
 - This structure looks different from normal projects, but its the easiest way to manage multiple projects without installing Cypress independently for each one.
 
-# Installation
+## Installation
 
 ```bash
 ## install all dependencies
@@ -49,7 +49,7 @@ npm start
 npm run dev
 ```
 
-# Opening Cypress GUI
+## Opening Cypress GUI
 
 ```bash
 ## this opens the cypress test runner
@@ -67,7 +67,7 @@ cd ./examples/drag-n-drop
 npm run cypress:open
 ```
 
-# Running from the CLI
+## Running from the CLI
 
 ```bash
 ## runs all example projects and
@@ -85,7 +85,7 @@ cd ./examples/drag-n-drop
 npm run cypress:run
 ```
 
-# Recipes
+## Recipes
 
 ### [Logging In - Single Sign On](./examples/logging-in-single-sign-on)
 
