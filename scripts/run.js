@@ -1,4 +1,5 @@
-const _ = require('lodash')
+/* eslint-disable no-console */
+
 const path = require('path')
 const cypress = require('cypress')
 const Promise = require('bluebird')
@@ -16,14 +17,14 @@ let numFailed = 0
 // grab all the npm start scripts from
 // each package.json
 glob(path.join('examples', '*'), {
-  realpath: true
+  realpath: true,
 })
 .each((pathToExampleProject) => {
   console.log('Running example project:', pathToExampleProject)
 
   return cypress.run({
     project: pathToExampleProject,
-    browser: args.browser
+    browser: args.browser,
   })
   .then((results = {}) => {
     numFailed += results.failures
