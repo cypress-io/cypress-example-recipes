@@ -15,6 +15,7 @@ Recipe | Category | Description
 [Hover and Hidden Elements](#hover-and-hidden-elements) | Testing the DOM | Test hidden elements requiring hover
 [Form Interactions](#form-interactions) | Testing the DOM | Test form elements like input type `range`
 [Drag and Drop](#drag-and-drop) | Testing the DOM | Use `.trigger()` to test drag and drop
+[Typescript with Webpack](#typescript-webpack) | Preprocessors | Add typescript support with webpack
 [Stubbing Functions](#stubbing-functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
 [Stubbing `window.fetch`](#stubbing-windowfetch) | Stubbing, Spying | Use `cy.stub()` to control fetch requests
 [Application Code](#application-code) | Unit Testing | Import and test your own application code
