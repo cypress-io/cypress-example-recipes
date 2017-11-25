@@ -1,0 +1,10 @@
+{
+  "name": "cypress-example-typescript-webpack",
+  "version": "1.0.0",
+  "description": "Example showing TypeScript tests with Cypress",
+  "scripts": {
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "build": "../../node_modules/.bin/webpack --output-filename out.js --entry ./cypress/integration/spec.ts"
+  }
+}

@@ -50,6 +50,11 @@
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
+    "@cypress/browserify-preprocessor": "^1.0.0",
+    "@cypress/webpack-preprocessor": "^1.1.0",
+    "@types/chai": "4.0.5",
+    "@types/cypress": "^0.1.2",
+    "@types/mocha": "^2.2.43",
     "bluebird": "^3.5.1",
     "cypress": "1.1.1",
     "eslint": "^4.11.0",
@@ -58,6 +63,10 @@
     "glob": "^7.1.2",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.1.1",
-    "pretty-ms": "^3.0.1"
+    "pretty-ms": "^3.0.1",
+    "ts-loader": "^3.0.2",
+    "tsify": "^3.0.3",
+    "typescript": "^2.5.3",
+    "webpack": "^3.8.1"
   }
 }
