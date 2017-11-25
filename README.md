@@ -4,228 +4,187 @@
 
 This repo contains various recipes for testing common scenarios using Cypress.
 
-# Contents
+Recipe | Category | Description
+--- | --- | ---
+[Node Modules](#node-modules) | Fundamentals | Import your own node modules
+[Single Sign On](#single-sign-on) | Logging In | Log in across multiple servers or providers
+[HTML Web Forms](#html-web-forms) | Logging In | Log in with a basic HTML form
+[XHR Web Forms](#xhr-web-forms) | Logging In | Log in using an XHR
+[CSRF Tokens](#csrf-tokens) | Logging In | Log in with a required CSRF token
+[Tab Handling and Links](#tab-handling-and-links) | Testing the DOM | Links that open in a new tab
+[Hover and Hidden Elements](#hover-and-hidden-elements) | Testing the DOM | Test hidden elements requiring hover
+[Form Interactions](#form-interactions) | Testing the DOM | Test form elements like input type `range`
+[Drag and Drop](#drag-and-drop) | Testing the DOM | Use `.trigger()` to test drag and drop
+[Stubbing Functions](#stubbing-functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
+[Stubbing `window.fetch`](#stubbing-windowfetch) | Stubbing, Spying | Use `cy.stub()` to control fetch requests
+[Application Code](#application-code) | Unit Testing | Import and test your own application code
+[React with Enzyme](#react-with-enzyme) | Unit Testing | Test your react components in isolation
+[Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
+[Bootstrapping your App](#bootstrapping-your-app) | Server Communication | Seed your application with test data
 
-- [Overview](#overview)
-- [Installation](#installation)
-- [Recipes](#recipes)
-  - [ES2015 / CommonJS Modules](#es2015--commonjs-modules)
-  - [Unit Test - Application Code](#unit-test---application-code)
-  - [Unit Test - React w/Enzyme](#unit-test---react-wenzyme)
-  - [Unit Test - Stubbing Dependencies](#unit-test---stubbing-dependencies)
-  - [Logging In - HTML Web Form](#logging-in---html-web-form)
-  - [Logging In - XHR Web Form](#logging-in---xhr-web-form)
-  - [Logging In - CSRF Tokens](#logging-in---csrf-tokens)
-  - [Logging In - Single Sign On](#logging-in---single-sign-on)
-  - [Extending Chai with Assertion Plugins](#extending-chai-with-assertion-plugins)
-  - [Tab Handling and Anchor Links](#tab-handling-and-anchor-links)
-  - [Dealing with Hover and Hidden Elements](#dealing-with-hover-and-hidden-elements)
-  - [Bootstrapping your App with Test Data](#bootstrapping-your-app-with-test-data)
-  - [Controlling Behavior with Spies, Stubs, and Clocks](#controlling-behavior-with-spies-stubs-and-clocks)
-  - [Form Interactions](#form-interactions)
-  - [Drag 'n Drop](#drag-n-drop)
+## Overview
 
-# Overview
+- This repo is structured similar to how other "Monorepos" work.
+- Each [`example project`](./examples) has it's own Cypress configuration, tests, backend and frontend assets.
+- Each of these [`example projects`](./examples) share a single "root" Cypress that is installed in the root `node_modules` folder.
+- This structure looks different from normal projects, but its the easiest way to manage multiple projects without installing Cypress independently for each one.
 
-- This is still a WIP, and we'll be adding recipes often.
-- All of the tests are found in the [`cypress/integration`](./cypress/integration) folder.
-- We boot a separate node server per recipe.
-- Each [`example`](./examples) has all of its own backend and frontend assets.
-
-# Installation
+## Installation
 
 ```bash
 ## install all dependencies
 npm install
 
-## boot the various node servers
-## to use in the tests
+## this will call 'npm start' on
+## each example project's package.json
+## which boots all of the webservers
 npm start
 
-## or if you want to make modifications
+## if you want to make modifications
 ## to the node server code and have
 ## the servers automatically restart
 npm run dev
+```
 
-## opens the cypress desktop app
-## to run tests in the interactive GUI
+## Opening Cypress GUI
+
+```bash
+## this opens the cypress test runner
+## in the GUI mode. because this project
+## is a monorepo - we've opened the test
+## runner in 'global' mode.
+##
+## so to run a specific project you'll
+## need to manually add the folder to Cypress.
+npm run cypress:open
+
+## alternatively, to open a specific
+## example without running in global mode
+cd ./examples/drag-n-drop
 npm run cypress:open
 ```
 
-# Running from the CLI
+## Running from the CLI
 
 ```bash
-## runs all cypress tests from the CLI
+## runs all example projects and
+## exits with the total number of
+## failures across all projects
 npm run cypress:run
 
 ## switch the browser to chrome instead
 ## of the default headless Electron browser
-npm run cypress:run -- --browser chrome
+npm run cypress:run:chrome
+
+## alternatively, to run a specific
+## example without running all projects
+cd ./examples/drag-n-drop
+npm run cypress:run
 ```
 
-# Recipes
+## Recipes
 
-### [ES2015 / CommonJS Modules](./cypress/integration/es2015_commonjs_modules_spec.js)
+### [Node Modules](./examples/fundamentals__node-modules)
 
-**This recipe shows you how to:**
+- Import ES2015 modules.
+- Require CommonJS modules.
+- Organize reusable utility functions.
+- Import 3rd party `node_modules`.
 
-- Import ES2015 modules
-- Require CommonJS modules
-- Organize reusable utility functions
-- Import 3rd party `node_modules`
+### [Single Sign On](./examples/logging-in__single-sign-on)
 
-***
+- Login when authentication is done on a 3rd party server.
+- Parse tokens using [`cy.request()`](https://on.cypress.io/request).
+- Manually set tokens on local storage.
+- Map external hosts and point to local servers.
 
-### [Unit Test - Application Code](./cypress/integration/unit_test_application_code_spec.js)
+### [HTML Web Forms](./examples/logging-in__html-web-forms)
 
-**This recipe shows you how to:**
+- Test a standard `username/password` HTML form.
+- Test errors submitting invalid data.
+- Test unauthenticated redirects.
+- Authenticate users with cookies.
+- Create a custom `cy.login()` test command.
+- Bypass needing to use your actual UI.
+- Increase speed of testing with [`cy.request()`](https://on.cypress.io/request).
 
-- Unit test your own application code libraries
-- Import modules using ES2015
-- Test simple math functions
-- Test the canonical *fizzbuzz* test
+### [XHR Web Forms](./examples/logging-in__xhr-web-forms)
 
-***
+- Test an AJAX backed `username/password` form.
+- Test errors submitting invalid data.
+- Stub JSON based XHR requests.
+- Stub application functions.
+- Create a custom `cy.login()` test command.
+- Bypass needing to use your actual UI.
+- Increase speed of testing with [`cy.request()`](https://on.cypress.io/request).
 
-### [Unit Test - React w/Enzyme](./cypress/integration/unit_test_react_enzyme_spec.js)
+### [CSRF Tokens](./examples/logging-in__csrf-tokens)
 
-**This recipe shows you how to:**
+- Use [`cy.request()`](https://on.cypress.io/request) to get around CSRF protections.
+- Parse CSRF tokens out of HTML.
+- Parse CSRF tokens out of response headers.
+- Expose CSRF via a route.
+- Disable CSRF when not in production.
 
-- Unit test a React JSX Component using [Enzyme](http://airbnb.io/enzyme/)
-- Import `enzyme` from `node_modules`
-- Extend chai assertions with [`chai-enzyme`](https://github.com/producthunt/chai-enzyme)
+### [Tab Handling and Links](./examples/testing-dom__tab-handling-links)
 
-***
+- Test anchor links opening in new tabs: `<a target="_blank">`.
+- Test anchor links that link to external domains: `<a href="...">`.
+- Prevent content from opening in a new tab.
+- Request external content that would open in a new tab using [`cy.request()`](https://on.cypress.io/request).
+- Speed up tests by reducing loading times.
 
-### [Unit Test - Stubbing Dependencies](./cypress/integration/unit_test_stubbing_dependencies_spec.js)
+### [Hover and Hidden Elements](./examples/testing-dom__hover-hidden-elements)
 
-**This recipe shows you how to:**
+- Interact with elements that are hidden by CSS.
+- Use [`.invoke()`](https://on.cypress.io/invoke) and [`.trigger()`](https://on.cypress.io/trigger) to simulate hovering.
+- Trigger `mouseover`, `mouseout`, `mouseenter`, `mouseleave` events.
+Get around the lack of a `.hover()` command.
 
-- Use [`cy.stub`](https://on.cypress.io/api/stub) to stub dependencies in a unit test
-- Handle promises returned by stubbed functions
-- Handle callbacks in stubbed functions
+### [Form Interactions](./examples/testing-dom__form-interactions)
 
-***
+- Use [`.invoke()`](https://on.cypress.io/invoke) and [`.trigger()`](https://on.cypress.io/trigger) to test a range input (slider).
 
-### [Logging In - HTML Web Form](./cypress/integration/logging_in_html_web_form_spec.js)
+### [Drag and Drop](./examples/testing-dom__drag-drop)
 
-**This recipe shows you how to:**
+- Use [`.trigger()`](https://on.cypress.io/trigger) to test drag-n-drop that uses mouse events.
+- Use [`.trigger()`](https://on.cypress.io/trigger) to test drag-n-drop that uses drag events.
 
-- Test a standard `username/password` HTML form
-- Test errors submitting invalid data
-- Test unauthenticated redirects
-- Authenticate users with cookies
-- Create a custom `login` test command
-- Bypass needing to use your actual UI
-- Increase speed of testing with [`cy.request`](https://on.cypress.io/api/request)
+### [Stubbing Functions](./examples/stubbing-spying__functions)
 
-***
+- Use [`cy.stub()`](https://on.cypress.io/stub) to stub dependencies in a unit test.
+- Handle promises returned by stubbed functions.
+- Handle callbacks in stubbed functions.
 
-### [Logging In - XHR Web Form](./cypress/integration/logging_in_xhr_web_form_spec.js)
+### [Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch)
 
-**This recipe shows you how to:**
+- Use [`cy.spy()`](https://on.cypress.io/spy) to verify the behavior of a function.
+- Use [`cy.stub()`](https://on.cypress.io/stub) to verify and control the behavior of a function.
+- Use [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick) to control time.
+- Stub `window.fetch` to control server responses.
 
-- Test an AJAX backed `username/password` form
-- Test errors submitting invalid data
-- Stub JSON based XHR requests
-- Stub application functions
-- Create a custom `login` test command
-- Bypass needing to use your actual UI
-- Increase speed of testing with [`cy.request`](https://on.cypress.io/api/request)
+### [Application Code](./examples/unit-testing__application-code)
 
-***
+- Unit test your own application code libraries.
+- Import modules using ES2015.
+- Test simple math functions.
+- Test the canonical *fizzbuzz* test.
 
-### [Logging In - CSRF Tokens](./cypress/integration/logging_in_csrf_tokens_spec.js)
+### [React with Enzyme](./examples/unit-testing__react-enzyme)
 
-**This recipe shows you how to:**
+- Unit test a React JSX Component using [Enzyme](http://airbnb.io/enzyme/).
+- Import `enzyme` from `node_modules`.
+- Extend chai assertions with [`chai-enzyme`](https://github.com/producthunt/chai-enzyme).
 
-- Use [`cy.request`](https://on.cypress.io/api/request) to get around CSRF protections
-- Parse CSRF tokens out of HTML
-- Parse CSRF tokens out of response headers
-- Expose CSRF via a route
-- Disable CSRF when not in production
+### [Adding Chai Assertions](./examples/extending-cypres__chai-assertions)
 
-***
+- Extend [`chai`](http://chaijs.com/) with the [`chai-date-string`](http://chaijs.com/plugins/chai-date-string/) assertion plugin.
+- Extend [`chai`](http://chaijs.com/) with the [`chai-colors`](http://chaijs.com/plugins/chai-colors/) assertion plugin.
+- Globally extend [`chai`](http://chaijs.com/) for all specs.
 
-### [Logging In - Single Sign On](./cypress/integration/logging_in_single_sign_on_spec.js)
+### [Bootstrapping your App](./examples/server-communication__bootstrapping-your-app)
 
-**This recipe shows you how to:**
-
-- Login when authentication is done on a 3rd party server
-- Parse tokens using [`cy.request`](https://on.cypress.io/api/request)
-- Manually set tokens on local storage
-- Map external hosts and point to local servers
-
-***
-
-### [Extending Chai with Assertion Plugins](./cypress/integration/extending_chai_assertion_plugins_spec.js)
-
-**This recipe shows you how to:**
-
-- Extend [`chai`](http://chaijs.com/) with the [`chai-date-string`](http://chaijs.com/plugins/chai-date-string/) assertion plugin
-- Extend [`chai`](http://chaijs.com/) with the [`chai-colors`](http://chaijs.com/plugins/chai-colors/) assertion plugin
-- Globally extend [`chai`](http://chaijs.com/) for all specs
-
-***
-
-### [Tab Handling and Anchor Links](./cypress/integration/tab_handling_anchor_links_spec.js)
-
-**This recipe shows you how to:**
-
-- Test anchor links opening in new tabs: `<a target="_blank">`
-- Test anchor links that link to external domains: `<a href="...">`
-- Prevent content from opening in a new tab
-- Request external content that would open in a new tab
-- Speed up tests by reducing loading times
-
-***
-
-### [Dealing with Hover and Hidden Elements](./cypress/integration/hover_hidden_elements_spec.js)
-
-**This recipe shows you how to:**
-
-- Interact with elements which are hidden by CSS
-- Use [`.invoke`](https://on.cypress.io/invoke) and [`.trigger`](https://on.cypress.io/trigger) to simulate hovering
-- Trigger `mouseover`, `mouseout`, `mouseenter`, `mouseleave` events
-- Get around the lack of a `cy.hover` command
-
-***
-
-### [Bootstrapping your App with Test Data](./cypress/integration/bootstrapping_app_test_data_spec.js)
-
-**This recipe shows you how to:**
-
-- Use [`cy.visit`](https://on.cypress.io/api/visit) `onBeforeLoad` callback
-- Start your application with test data
-- Stub an XHR to seed with test data
-- Wait on an XHR to finish
-
-***
-
-### [Controlling Behavior with Spies, Stubs and Clocks](./cypress/integration/spy_stub_clock_spec.js)
-
-**This recipe shows you how to:**
-
-- Use [`cy.spy`](https://on.cypress.io/spy) to verify the behavior of a function
-- Use [`cy.stub`](https://on.cypress.io/stub) to verify and control the behavior of a function
-- Use [`cy.clock`](https://on.cypress.io/clock) and [`cy.tick`](https://on.cypress.io/tick) to control time
-- Stub `window.fetch` to control server responses
-
-***
-
-### [Form Interactions](./cypress/integration/form_interactions_spec.js)
-
-This recipe shows you how to:
-
-- Use [`.invoke`](https://on.cypress.io/invoke) and [`.trigger`](https://on.cypress.io/trigger) to test a range input (slider)
-
-***
-
-### [Drag 'n Drop](./cypress/integration/drag_n_drop_spec.js)
-
-This recipe shows you how to:
-
-- Use [`.trigger`](https://on.cypress.io/trigger) to test drag-n-drop that uses mouse events
-- Use [`.trigger`](https://on.cypress.io/trigger) to test drag-n-drop that uses drag events
-
-***
+- Use [`cy.visit()`](https://on.cypress.io/visit) `onBeforeLoad` callback.
+- Start your application with test data.
+- Stub an XHR to seed with test data.
+- Wait on an XHR to finish.

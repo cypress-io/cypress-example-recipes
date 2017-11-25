@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrapping your App with Test Data</title>
+</head>
+<body>
+  <h2>bootstrap.html</h2>
+  <p>
+    This example has the node server send down the initial html payload with data for your our application to run.
+  </p>
+  <p>
+    In this recipe we are going to modify this bootstrapped data with Cypress so we can control the initial data payload.
+  </p>
+  <pre></pre>
+
+  <script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="/app.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      // give ourselves a chance to set window._bootstrappedData
+      // in Cypress, but otherwise use the default data that
+      // is generated from our server
+      var data = window._bootstrappedData || {{{data}}}
+
+      App.start(data)
+    })
+  </script>
+</body>
+</html>

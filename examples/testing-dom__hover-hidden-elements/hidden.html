@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hover and Hidden Elements - Hidden</title>
+  <script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
+  <style>
+    #background {
+      padding: 5px 10px;
+      width: 300px;
+      height: 150px;
+      background-color: #eee;
+      color: #777;
+    }
+
+    #background button {
+      display: none;
+      margin: 20px;
+    }
+
+    #background:hover button {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h2>
+    hidden.html
+  </h2>
+  <div id="background">
+    <p>
+      This is a &lt;div&gt; holding a hidden button which becomes visible on hover.
+    </p>
+
+    <button>Click me</button>
+  </div>
+
+  <p id="message"></p>
+
+  <script type="text/javascript">
+    // when our hidden button is clicked
+    // we want to populate <p id="message">
+    // so we can test how this event is triggered
+    // by Cypress
+    $("button").click(function(){
+      $("#message").text("the button was clicked")
+    })
+  </script>
+</body>
+</html>
