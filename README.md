@@ -6,21 +6,21 @@ This repo contains various recipes for testing common scenarios using Cypress.
 
 Recipe | Category | Description
 --- | --- | ---
-[Node Modules](#Node-Modules) | Fundamentals | Import your own node modules
-[Single Sign On](#Single-Sign-On) | Logging In | Log in across multiple servers or providers
-[HTML Web Forms](#HTML-Web-Forms) | Logging In | Log in with a basic HTML form
-[XHR Web Forms](#XHR-Web-Forms) | Logging In | Log in using an XHR
-[CSRF Tokens](#CSRF-Tokens) | Logging In | Log in with a required CSRF token
-[Tab Handling and Links](#Tab-Handling-and-Links) | Testing the DOM | Links that open in a new tab
-[Hover and Hidden Elements](#Hover-and-Hidden-Elements) | Testing the DOM | Test hidden elements requiring hover
-[Form Interactions](#Form-Interactions) | Testing the DOM | Test form elements like input type `range`
-[Drag 'n Drop](#Drag-n-Drop) | Testing the DOM | Use `.trigger()` to test drag and drop
-[Stubbing Functions](#Stubbing-Functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
-[Stubbing `window.fetch`](#Stubbing-window-fetch) | Stubbing, Spying | Use `cy.stub()` to control fetch requests
-[Application Code](#Application-Code) | Unit Testing | Import and test your own application code
-[React with Enzyme](#React-with-Enzyme) | Unit Testing | Test your react components in isolation
-[Adding Chai Assertions](#Adding-Chai-Assertions) | Extending Cypress | Add new or custom chai assertions
-[Bootstrapping your App](#Bootstrapping-your-App) | Server Communication | Seed your application with test data
+[Node Modules](#node-modules) | Fundamentals | Import your own node modules
+[Single Sign On](#single-sign-on) | Logging In | Log in across multiple servers or providers
+[HTML Web Forms](#html-web-forms) | Logging In | Log in with a basic HTML form
+[XHR Web Forms](#xhr-web-forms) | Logging In | Log in using an XHR
+[CSRF Tokens](#csrf-tokens) | Logging In | Log in with a required CSRF token
+[Tab Handling and Links](#tab-handling-and-links) | Testing the DOM | Links that open in a new tab
+[Hover and Hidden Elements](#hover-and-hidden-elements) | Testing the DOM | Test hidden elements requiring hover
+[Form Interactions](#form-interactions) | Testing the DOM | Test form elements like input type `range`
+[Drag 'n Drop](#drag-n-drop) | Testing the DOM | Use `.trigger()` to test drag and drop
+[Stubbing Functions](#stubbing-functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
+[Stubbing `window.fetch`](#stubbing-windowfetch) | Stubbing, Spying | Use `cy.stub()` to control fetch requests
+[Application Code](application-code) | Unit Testing | Import and test your own application code
+[React with Enzyme](#react-with-enzyme) | Unit Testing | Test your react components in isolation
+[Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
+[Bootstrapping your App](#bootstrapping-your-app) | Server Communication | Seed your application with test data
 
 ## Overview
 
@@ -94,8 +94,7 @@ npm run cypress:run
 ### [Single Sign On](https://github.com/cypress-io/cypress-example-recipes/blob/master/cypress/integration/logging_in_single_sign_on_spec.js)
 
 - Login when authentication is done on a 3rd party server.
-- Parse tokens using [`cy.request()`](https://on.cypress.io/
-https://on.cypress.io/request).
+- Parse tokens using [`cy.request()`](https://on.cypress.io/request).
 - Manually set tokens on local storage.
 - Map external hosts and point to local servers.
 
@@ -107,8 +106,7 @@ https://on.cypress.io/request).
 - Authenticate users with cookies.
 - Create a custom `cy.login()` test command.
 - Bypass needing to use your actual UI.
-- Increase speed of testing with [`cy.request()`](https://on.cypress.io/
-https://on.cypress.io/request).
+- Increase speed of testing with [`cy.request()`](https://on.cypress.io/request).
 
 ### [XHR Web Forms](https://github.com/cypress-io/cypress-example-recipes/blob/master/cypress/integration/logging_in_xhr_web_form_spec.js)
 
@@ -118,13 +116,11 @@ https://on.cypress.io/request).
 - Stub application functions.
 - Create a custom `cy.login()` test command.
 - Bypass needing to use your actual UI.
-- Increase speed of testing with [`cy.request()`](https://on.cypress.io/
-https://on.cypress.io/request).
+- Increase speed of testing with [`cy.request()`](https://on.cypress.io/request).
 
 ### [CSRF Tokens](https://github.com/cypress-io/cypress-example-recipes/blob/master/cypress/integration/logging_in_csrf_tokens_spec.js)
 
-- Use [`cy.request()`](https://on.cypress.io/
-https://on.cypress.io/request) to get around CSRF protections.
+- Use [`cy.request()`](https://on.cypress.io/request) to get around CSRF protections.
 - Parse CSRF tokens out of HTML.
 - Parse CSRF tokens out of response headers.
 - Expose CSRF via a route.
@@ -135,29 +131,24 @@ https://on.cypress.io/request) to get around CSRF protections.
 - Test anchor links opening in new tabs: `<a target="_blank">`.
 - Test anchor links that link to external domains: `<a href="...">`.
 - Prevent content from opening in a new tab.
-- Request external content that would open in a new tab using [`cy.request()`](https://on.cypress.io/
-https://on.cypress.io/request).
+- Request external content that would open in a new tab using [`cy.request()`](https://on.cypress.io/request).
 - Speed up tests by reducing loading times.
 
 ### [Hover and Hidden Elements](https://github.com/cypress-io/cypress-example-recipes/blob/master/cypress/integration/hover_hidden_elements_spec.js)
 
 - Interact with elements that are hidden by CSS.
-- Use [`.invoke()`](https://on.cypress.io/invoke) and [`.trigger()`](https://on.cypress.io/
-https://on.cypress.io/trigger) to simulate hovering.
+- Use [`.invoke()`](https://on.cypress.io/invoke) and [`.trigger()`](https://on.cypress.io/trigger) to simulate hovering.
 - Trigger `mouseover`, `mouseout`, `mouseenter`, `mouseleave` events.
 Get around the lack of a `.hover()` command.
 
 ### [Form Interactions](https://github.com/cypress-io/cypress-example-recipes/blob/master/cypress/integration/form_interactions_spec.js)
 
-- Use [`.invoke()`](https://on.cypress.io/invoke) and [`.trigger()`](https://on.cypress.io/
-https://on.cypress.io/trigger) to test a range input (slider).
+- Use [`.invoke()`](https://on.cypress.io/invoke) and [`.trigger()`](https://on.cypress.io/trigger) to test a range input (slider).
 
 ### [Drag and Drop](https://github.com/cypress-io/cypress-example-recipes/blob/master/cypress/integration/drag_n_drop_spec.js)
 
-- Use [`.trigger()`](https://on.cypress.io/
-https://on.cypress.io/trigger) to test drag-n-drop that uses mouse events.
-- Use [`.trigger()`](https://on.cypress.io/
-https://on.cypress.io/trigger) to test drag-n-drop that uses drag events.
+- Use [`.trigger()`](https://on.cypress.io/trigger) to test drag-n-drop that uses mouse events.
+- Use [`.trigger()`](https://on.cypress.io/trigger) to test drag-n-drop that uses drag events.
 
 ### [Stubbing Functions](https://github.com/cypress-io/cypress-example-recipes/blob/master/cypress/integration/unit_test_stubbing_dependencies_spec.js)
 
@@ -167,14 +158,10 @@ https://on.cypress.io/trigger) to test drag-n-drop that uses drag events.
 
 ### [Stubbing `window.fetch`](https://github.com/cypress-io/cypress-example-recipes/blob/master/cypress/integration/spy_stub_clock_spec.js)
 
-- Use [`cy.spy()`](https://on.cypress.io/
-https://on.cypress.io/spy) to verify the behavior of a function.
+- Use [`cy.spy()`](https://on.cypress.io/spy) to verify the behavior of a function.
 - Use [`cy.stub()`](https://on.cypress.io/stub) to verify and control the behavior of a function.
-- Use [`cy.clock()`](https://on.cypress.io/
-https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/
-https://on.cypress.io/tick) to control time.
+- Use [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick) to control time.
 - Stub `window.fetch` to control server responses.
-
 
 ### [Application Code](https://github.com/cypress-io/cypress-example-recipes/blob/master/cypress/integration/unit_test_application_code_spec.js)
 
@@ -197,8 +184,7 @@ https://on.cypress.io/tick) to control time.
 
 ### [Bootstrapping your App](https://github.com/cypress-io/cypress-example-recipes/blob/master/cypress/integration/bootstrapping_app_test_data_spec.js)
 
-- Use [`cy.visit()`](https://on.cypress.io/
-https://on.cypress.io/visit) `onBeforeLoad` callback.
+- Use [`cy.visit()`](https://on.cypress.io/visit) `onBeforeLoad` callback.
 - Start your application with test data.
 - Stub an XHR to seed with test data.
 - Wait on an XHR to finish.
