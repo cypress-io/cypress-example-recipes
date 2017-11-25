@@ -14,10 +14,10 @@ Recipe | Category | Description
 [Tab Handling and Links](#tab-handling-and-links) | Testing the DOM | Links that open in a new tab
 [Hover and Hidden Elements](#hover-and-hidden-elements) | Testing the DOM | Test hidden elements requiring hover
 [Form Interactions](#form-interactions) | Testing the DOM | Test form elements like input type `range`
-[Drag 'n Drop](#drag-n-drop) | Testing the DOM | Use `.trigger()` to test drag and drop
+[Drag and Drop](#drag-and-drop) | Testing the DOM | Use `.trigger()` to test drag and drop
 [Stubbing Functions](#stubbing-functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
 [Stubbing `window.fetch`](#stubbing-windowfetch) | Stubbing, Spying | Use `cy.stub()` to control fetch requests
-[Application Code](application-code) | Unit Testing | Import and test your own application code
+[Application Code](#application-code) | Unit Testing | Import and test your own application code
 [React with Enzyme](#react-with-enzyme) | Unit Testing | Test your react components in isolation
 [Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
 [Bootstrapping your App](#bootstrapping-your-app) | Server Communication | Seed your application with test data
