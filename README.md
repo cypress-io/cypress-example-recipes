@@ -152,6 +152,14 @@ Get around the lack of a `.hover()` command.
 - Use [`.trigger()`](https://on.cypress.io/trigger) to test drag-n-drop that uses mouse events.
 - Use [`.trigger()`](https://on.cypress.io/trigger) to test drag-n-drop that uses drag events.
 
+### [Typescript with Browserify](./examples/preprocessors__typescript-browserify)
+
+- Use [`@cypress/browserify-preprocessor`](https://github.com/cypress-io/cypress-browserify-preprocessor) to write Cypress tests in Typescript
+
+### [Typescript with Webpack](./examples/preprocessors__typescript-webpack)
+
+- Use [`@cypress/webpack-preprocessor`](https://github.com/cypress-io/cypress-webpack-preprocessor) to write Cypress tests in Typescript
+
 ### [Stubbing Functions](./examples/stubbing-spying__functions)
 
 - Use [`cy.stub()`](https://on.cypress.io/stub) to stub dependencies in a unit test.
