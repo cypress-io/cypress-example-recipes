@@ -4,73 +4,84 @@ describe('Angular TodoMVC', () => {
   })
 
   it('loads page', () => {
-    cy.title()
-      .should('include', 'AngularJS')
-      .and('include', 'TodoMVC')
+    cy
+    .title()
+    .should('include', 'AngularJS')
+    .and('include', 'TodoMVC')
   })
 
   it('adds a todo', () => {
-    cy.focused()
-      .type('new todo')
-      .type('{enter}')
-    cy.get('#todo-list')
-      .find('li')
-      .should('have.length', 1)
-      .first()
-      .contains('new todo')
+    cy
+    .get('#new-todo')
+    .type('new todo')
+    .type('{enter}')
+
+    cy
+    .get('#todo-list')
+    .find('li')
+    .should('have.length', 1)
+    .first()
+    .contains('new todo')
   })
 
   it('can get angular library', () => {
-    cy.window()
-      .then(win => {
-        console.log('got app window object', win)
-        return win
-      })
-      .its('angular')
-      .then(ng => {
-        console.log('got angular object', ng.version)
-      })
+    cy
+    .window()
+    .then((win) => {
+      console.log('got app window object', win)
+      return win
+    })
+    .its('angular')
+    .then((ng) => {
+      console.log('got angular object', ng.version)
+    })
   })
 
   const getAngular = () =>
-    cy.window()
-      .its('angular')
+    cy
+    .window()
+    .its('angular')
 
   const getFirstTodoElement = () =>
-    cy.get('#todo-list')
-      .find('li')
-      .first()
+    cy
+    .get('#todo-list')
+    .find('li')
+    .first()
 
   const getElementScope = (selector) =>
-    cy.get(selector)
-      .then($el =>
-        getAngular()
-          .then(ng => ng.element($el).scope())
-      )
+    cy
+    .get(selector)
+    .then(($el) =>
+      getAngular()
+      .then((ng) => ng.element($el).scope())
+    )
 
   const getElementInjector = (selector) =>
-    cy.get(selector)
-      .then($el =>
-        getAngular()
-          .then(ng => ng.element($el).injector())
-      )
+    cy
+    .get(selector)
+    .then(($el) =>
+      getAngular()
+      .then((ng) => ng.element($el).injector())
+    )
 
   const addTodo = (text) =>
-    cy.focused()
-      .type(text)
-      .type('{enter}')
+    cy
+    .get('#new-todo')
+    .type(text)
+    .type('{enter}')
 
   it('has todo object in scope', () => {
-    cy.focused()
-      .type('new todo')
-      .type('{enter}')
+    cy
+    .get('#new-todo')
+    .type('new todo')
+    .type('{enter}')
 
     getElementScope('#todo-list li:first')
-      .its('todo')
-      .should('deep.equal', {
-        title: 'new todo',
-        completed: false
-      })
+    .its('todo')
+    .should('deep.equal', {
+      title: 'new todo',
+      completed: false,
+    })
   })
 
   it('can get todo', () => {
@@ -78,11 +89,11 @@ describe('Angular TodoMVC', () => {
     addTodo(title)
 
     getElementScope('#todo-list li:first')
-      .its('todo')
-      .should('deep.equal', {
-        title,
-        completed: false
-      })
+    .its('todo')
+    .should('deep.equal', {
+      title,
+      completed: false,
+    })
   })
 
   it('can change todo via Angular scope', () => {
@@ -90,85 +101,90 @@ describe('Angular TodoMVC', () => {
     addTodo(title)
 
     getElementScope('#todo-list li:first')
-      .its('todo')
-      .then(todo => {
-        todo.completed = true
-      })
+    .its('todo')
+    .then((todo) => {
+      todo.completed = true
+    })
 
     getElementScope('#todo-list li:first')
-      .then(scope => {
-        // must run digest cycle so Angular
-        // updates DOM
-        scope.$apply()
-      })
+    .then((scope) => {
+      // must run digest cycle so Angular
+      // updates DOM
+      scope.$apply()
+    })
 
     // check UI - it should have been updated
-    cy.get('#todo-list li:first')
-      .find('input.toggle')
-      .should('be.checked')
+    cy
+    .get('#todo-list li:first')
+    .find('input.toggle')
+    .should('be.checked')
   })
 
   it('set several todos at once', () => {
     // home app handles missing "completed" property
     const todos = [{
-      title: 'first todo'
+      title: 'first todo',
     }, {
-      title: 'second todo'
+      title: 'second todo',
     }, {
-      title: 'third todo'
+      title: 'third todo',
     }]
 
     getElementScope('#todo-list')
-      .then(scope => {
-        scope.todos = todos
-        scope.$apply()
-      })
+    .then((scope) => {
+      scope.todos = todos
+      scope.$apply()
+    })
 
     // we should have 3 elements in the list
-    cy.get('#todo-list li')
-      .should('have.length', 3)
+    cy
+    .get('#todo-list li')
+    .should('have.length', 3)
   })
 
   it('shows completed items', () => {
     // home app handles missing "completed" property
     const todos = [{
-      title: 'first todo'
+      title: 'first todo',
     }, {
       title: 'second todo',
-      completed: true
+      completed: true,
     }, {
-      title: 'third todo'
+      title: 'third todo',
     }]
 
     getElementScope('#todo-list')
-      .then(scope => {
-        scope.todos = todos
-        scope.$apply()
-      })
+    .then((scope) => {
+      scope.todos = todos
+      scope.$apply()
+    })
 
     getElementInjector('#todo-list')
-      .then(injector => {
-        const store = injector.get('localStorage')
-        todos.forEach(t => store.insert(t))
-      })
+    .then((injector) => {
+      const store = injector.get('localStorage')
+      todos.forEach((t) => store.insert(t))
+    })
 
-    cy.get('#filters')
-      .contains('Completed')
-      .click()
+    cy
+    .get('#filters')
+    .contains('Completed')
+    .click()
 
-    cy.get('#todo-list li')
-      .should('have.length', 1)
+    cy
+    .get('#todo-list li')
+    .should('have.length', 1)
   })
 
   it('sets todo using addTodo scope method', () => {
     getElementScope('#todo-list')
-      .then(scope => {
-        scope.newTodo = 'this is a todo'
-        scope.addTodo()
-        scope.$apply()
-      })
+    .then((scope) => {
+      scope.newTodo = 'this is a todo'
+      scope.addTodo()
+      scope.$apply()
+    })
 
-    cy.get('#todo-list li')
-      .should('have.length', 1)
+    cy
+    .get('#todo-list li')
+    .should('have.length', 1)
   })
 })
