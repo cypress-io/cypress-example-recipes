@@ -1,8 +1,0 @@
-{
-  "baseUrl": "http://localhost:8080",
-  "hosts": {
-    "auth.corp.com": "127.0.0.1"
-  },
-  "pluginsFile": false,
-  "projectId": "6p53jw"
-}
