@@ -7,4 +7,4 @@ before_script:
   - npm start -- --silent &
 
 script:
-  - npm run cypress:run
+  - npm run cypress:run -- --record

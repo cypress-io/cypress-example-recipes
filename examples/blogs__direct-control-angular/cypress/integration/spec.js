@@ -1,3 +1,36 @@
+const getAngular = () =>
+  cy
+  .window()
+  .its('angular')
+
+const getFirstTodoElement = () =>
+  cy
+  .get('#todo-list')
+  .find('li')
+  .first()
+
+const getElementScope = (selector) =>
+  cy
+  .get(selector)
+  .then(($el) =>
+    getAngular()
+    .then((ng) => ng.element($el).scope())
+  )
+
+const getElementInjector = (selector) =>
+  cy
+  .get(selector)
+  .then(($el) =>
+    getAngular()
+    .then((ng) => ng.element($el).injector())
+  )
+
+const addTodo = (text) =>
+  cy
+  .get('#new-todo')
+  .type(text)
+  .type('{enter}')
+
 describe('Angular TodoMVC', () => {
   beforeEach(() => {
     cy.visit('/')
@@ -36,39 +69,6 @@ describe('Angular TodoMVC', () => {
       console.log('got angular object', ng.version)
     })
   })
-
-  const getAngular = () =>
-    cy
-    .window()
-    .its('angular')
-
-  const getFirstTodoElement = () =>
-    cy
-    .get('#todo-list')
-    .find('li')
-    .first()
-
-  const getElementScope = (selector) =>
-    cy
-    .get(selector)
-    .then(($el) =>
-      getAngular()
-      .then((ng) => ng.element($el).scope())
-    )
-
-  const getElementInjector = (selector) =>
-    cy
-    .get(selector)
-    .then(($el) =>
-      getAngular()
-      .then((ng) => ng.element($el).injector())
-    )
-
-  const addTodo = (text) =>
-    cy
-    .get('#new-todo')
-    .type(text)
-    .type('{enter}')
 
   it('has todo object in scope', () => {
     cy
