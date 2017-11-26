@@ -5,6 +5,6 @@
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "start": "../../node_modules/json-server db.json --port 7081",
+    "start": "../../node_modules/.bin/json-server db.json --port 7081 --quiet"
   }
 }
