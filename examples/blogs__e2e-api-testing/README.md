@@ -6,6 +6,6 @@ This is an example of using Cypress to test REST APIs.
 
 We wrote a [companion blog post](https://www.cypress.io/blog/2017/11/07/Add-GUI-to-Your-E2E-API-Tests) that provides more details and explanation of this recipe.
 
-Please read that if you'd like to understand more about programmatically controlling your Angular applications.
+Please read that if you'd like to understand more about writing E2E API tests in Cypress.
 
 ![API testing using Cypress](img/demo.png)
