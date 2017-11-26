@@ -43,6 +43,7 @@
     "hbs": "^4.0.1",
     "http-server": "^0.10.0",
     "jquery": "^3.1.1",
+    "json-server": "^0.12.1",
     "lodash": "^4.17.2",
     "minimist": "^1.2.0",
     "morgan": "^1.7.0",

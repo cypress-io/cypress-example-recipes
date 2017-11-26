@@ -17,6 +17,8 @@ Recipe | Category | Description
 [Drag and Drop](#drag-and-drop) | Testing the DOM | Use `.trigger()` to test drag and drop
 [Typescript with Browserify](#typescript-with-browserify) | Preprocessors | Add typescript support with browserify
 [Typescript with Webpack](#typescript-with-webpack) | Preprocessors | Add typescript support with webpack
+[Direct Control of AngularJS](#direct-control-of-angularjs) | Blogs | Bypass the DOM and control AngularJS
+[E2E API Testing](#e2e-api-testing) | Blogs | Run your API Tests with a GUI
 [Stubbing Functions](#stubbing-functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
 [Stubbing `window.fetch`](#stubbing-windowfetch) | Stubbing, Spying | Use `cy.stub()` to control fetch requests
 [Application Code](#application-code) | Unit Testing | Import and test your own application code
@@ -159,6 +161,19 @@ Get around the lack of a `.hover()` command.
 ### [Typescript with Webpack](./examples/preprocessors__typescript-webpack)
 
 - Use [`@cypress/webpack-preprocessor`](https://github.com/cypress-io/cypress-webpack-preprocessor) to write Cypress tests in Typescript
+
+### [Direct Control of AngularJS](./examples/blogs__direct-control-angular)
+
+- [Blog article written here](https://www.cypress.io/blog/2017/11/15/Control-Angular-Application-From-E2E-Tests)
+- Programmatically control AngularJS
+- Bypass the DOM, update scopes directly
+- Create custom command for controlling services
+
+### [E2E API Testing](./examples/blogs__e2e-api-testing)
+
+- [Blog article written here](https://www.cypress.io/blog/2017/11/07/Add-GUI-to-Your-E2E-API-Tests)
+- Use `cy.request()` to perform API Testing
+- Use the Cypress GUI to help debug requests
 
 ### [Stubbing Functions](./examples/stubbing-spying__functions)
 
