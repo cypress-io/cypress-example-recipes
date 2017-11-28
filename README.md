@@ -26,6 +26,7 @@ Recipe | Category | Description
 [Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
 [Bootstrapping your App](#bootstrapping-your-app) | Server Communication | Seed your application with test data
 [Codepen.io Testing](#codepen-testing) | Blogs | Test a HyperApp Codepen demo
+[Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Blogs | Test an application that uses central data store
 
 ## Overview
 
@@ -220,3 +221,9 @@ Get around the lack of a `.hover()` command.
 - Load Codepen and get around iframe security restrictions.
 - Use [`cy.request()`](https://on.cypress.io/api/request) to load a document into test iframe.
 - Test [HyperApp.js](https://hyperapp.js.org/) application through the DOM and through actions.
+
+### [Vue + Vuex + REST Testing](./examples/blogs__vue-vuex-rest)
+
+- Test a [Vue.js](https://vuejs.org/) web application that uses central data store
+- Mock REST calls to the server
+- Dispatch actions to the [Vuex](https://vuex.vuejs.org/en/) store
