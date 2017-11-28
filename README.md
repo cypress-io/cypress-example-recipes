@@ -25,6 +25,7 @@ Recipe | Category | Description
 [React with Enzyme](#react-with-enzyme) | Unit Testing | Test your react components in isolation
 [Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
 [Bootstrapping your App](#bootstrapping-your-app) | Server Communication | Seed your application with test data
+[Codepen.io Testing](#codepen-testing) | Blogs | Test a HyperApp Codepen demo
 
 ## Overview
 
@@ -213,3 +214,9 @@ Get around the lack of a `.hover()` command.
 - Start your application with test data.
 - Stub an XHR to seed with test data.
 - Wait on an XHR to finish.
+
+### [Codepen Testing](./examples/blogs__codepen-demo)
+
+- Loading Codepen and getting around iframe security restrictions.
+- Using [`cy.request()`](https://on.cypress.io/api/request) to load a document.
+- Testing [HyperApp.js](https://hyperapp.js.org/) application through the DOM and through actions.
