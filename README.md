@@ -217,6 +217,6 @@ Get around the lack of a `.hover()` command.
 
 ### [Codepen Testing](./examples/blogs__codepen-demo)
 
-- Loading Codepen and getting around iframe security restrictions.
-- Using [`cy.request()`](https://on.cypress.io/api/request) to load a document.
-- Testing [HyperApp.js](https://hyperapp.js.org/) application through the DOM and through actions.
+- Load Codepen and get around iframe security restrictions.
+- Use [`cy.request()`](https://on.cypress.io/api/request) to load a document into test iframe.
+- Test [HyperApp.js](https://hyperapp.js.org/) application through the DOM and through actions.
