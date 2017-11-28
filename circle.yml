@@ -8,6 +8,9 @@ test:
         background: true
 
   override:
+    ## make sure we did not leave ".only" in one of the tests
+    - npm run stop-only
+
     ## pass the --record flag for the dashboard
     ## this executes: 'cypress run --record'
     - npm run cypress:run -- --record

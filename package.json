@@ -15,7 +15,8 @@
     "test:ci": "run-p --race start cypress:run",
     "test:ci:chrome": "run-p --race start cypress:run:chrome",
     "start": "node ./scripts/start.js",
-    "dev": "nodemon ./scripts/start.js --watch examples"
+    "dev": "nodemon ./scripts/start.js --watch examples",
+    "stop-only": "stop-only examples"
   },
   "repository": {
     "type": "git",
@@ -65,6 +66,7 @@
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.1.1",
     "pretty-ms": "^3.0.1",
+    "stop-only": "^1.1.0",
     "ts-loader": "^3.0.2",
     "tsify": "^3.0.3",
     "typescript": "^2.5.3",
