@@ -17,14 +17,14 @@ Recipe | Category | Description
 [Typescript with Webpack](#typescript-with-webpack) | Preprocessors | Add typescript support with webpack
 [Direct Control of AngularJS](#direct-control-of-angularjs) | Blogs | Bypass the DOM and control AngularJS
 [E2E API Testing](#e2e-api-testing) | Blogs | Run your API Tests with a GUI
+[Codepen.io Testing](#codepen-testing) | Blogs | Test a HyperApp Codepen demo
+[Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Blogs | Test an application that uses central data store
 [Stubbing Functions](#stubbing-functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
 [Stubbing `window.fetch`](#stubbing-windowfetch) | Stubbing, Spying | Use `cy.stub()` to control fetch requests
 [Application Code](#application-code) | Unit Testing | Import and test your own application code
 [React with Enzyme](#react-with-enzyme) | Unit Testing | Test your react components in isolation
 [Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
 [Bootstrapping your App](#bootstrapping-your-app) | Server Communication | Seed your application with test data
-[Codepen.io Testing](#codepen-testing) | Blogs | Test a HyperApp Codepen demo
-[Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Blogs | Test an application that uses central data store
 
 ## Overview
 
@@ -175,6 +175,19 @@ Get around the lack of a `.hover()` command.
 - Use `cy.request()` to perform API Testing
 - Use the Cypress GUI to help debug requests
 
+### [Codepen Testing](./examples/blogs__codepen-demo)
+
+- Load Codepen and get around iframe security restrictions.
+- Use [`cy.request()`](https://on.cypress.io/api/request) to load a document into test iframe.
+- Test [HyperApp.js](https://hyperapp.js.org/) application through the DOM and through actions.
+
+### [Vue + Vuex + REST Testing](./examples/blogs__vue-vuex-rest)
+
+- Test a [Vue.js](https://vuejs.org/) web application that uses central data store
+- Mock REST calls to the server
+- Dispatch actions to the [Vuex](https://vuex.vuejs.org/en/) store
+- Test text file upload
+
 ### [Stubbing Functions](./examples/stubbing-spying__functions)
 
 - Use [`cy.stub()`](https://on.cypress.io/stub) to stub dependencies in a unit test.
@@ -213,16 +226,3 @@ Get around the lack of a `.hover()` command.
 - Start your application with test data.
 - Stub an XHR to seed with test data.
 - Wait on an XHR to finish.
-
-### [Codepen Testing](./examples/blogs__codepen-demo)
-
-- Load Codepen and get around iframe security restrictions.
-- Use [`cy.request()`](https://on.cypress.io/api/request) to load a document into test iframe.
-- Test [HyperApp.js](https://hyperapp.js.org/) application through the DOM and through actions.
-
-### [Vue + Vuex + REST Testing](./examples/blogs__vue-vuex-rest)
-
-- Test a [Vue.js](https://vuejs.org/) web application that uses central data store
-- Mock REST calls to the server
-- Dispatch actions to the [Vuex](https://vuex.vuejs.org/en/) store
-- Test text file upload
