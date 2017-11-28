@@ -1,0 +1,10 @@
+{
+  "name": "cypress-example-vue-vuex-rest",
+  "version": "1.0.0",
+  "description": "Testing Vue + Vuex + REST TodoMVC using Cypress",
+  "scripts": {
+    "start": "json-server --static . --watch data.json",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:open": "../../node_modules/.bin/cypress open"
+  }
+}
