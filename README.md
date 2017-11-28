@@ -1,6 +1,4 @@
-# Recipes [![Circle CI](https://circleci.com/gh/cypress-io/cypress-example-recipes.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes) [![Travis CI](https://travis-ci.org/cypress-io/cypress-example-recipes.svg?branch=master)](https://travis-ci.org/cypress-io/cypress-example-recipes)
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/cypress-io/cypress-example-recipes.svg)](https://greenkeeper.io/)
+# Recipes [![Circle CI](https://circleci.com/gh/cypress-io/cypress-example-recipes.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes) [![Travis CI](https://travis-ci.org/cypress-io/cypress-example-recipes.svg?branch=master)](https://travis-ci.org/cypress-io/cypress-example-recipes) [![Greenkeeper badge](https://badges.greenkeeper.io/cypress-io/cypress-example-recipes.svg)](https://greenkeeper.io/)
 
 This repo contains various recipes for testing common scenarios using Cypress.
 
@@ -227,3 +225,4 @@ Get around the lack of a `.hover()` command.
 - Test a [Vue.js](https://vuejs.org/) web application that uses central data store
 - Mock REST calls to the server
 - Dispatch actions to the [Vuex](https://vuex.vuejs.org/en/) store
+- Test text file upload
