@@ -12,7 +12,7 @@ describe('Bootstrapping App Test Data', function(){
   // with the seed data inlined
   context('solution #1: bootstrap.html', function(){
 
-    it.only('works by default using development bootstrap data', function(){
+    it('works by default using development bootstrap data', function(){
       // Let's test that the normal
       // way of development data seeding works.
       cy.visit('/bootstrap.html')
