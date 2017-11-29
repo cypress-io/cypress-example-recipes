@@ -15,7 +15,7 @@ describe('HyperApp Counter Codepen', () => {
       })
       .its('body')
       .then(html => {
-        cy.window().its('document').then(document => {
+        cy.document().then(document => {
           document.write(html)
           document.close()
         })
