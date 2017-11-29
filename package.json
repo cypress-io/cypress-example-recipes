@@ -69,6 +69,7 @@
     "stop-only": "^1.1.0",
     "ts-loader": "^3.0.2",
     "tsify": "^3.0.3",
+    "tslint": "^5.8.0",
     "typescript": "^2.5.3",
     "webpack": "^3.8.1"
   }

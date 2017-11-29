@@ -10,6 +10,13 @@ See:
 - [cypress/plugins/index.js](cypress/plugins/index.js)
 - [example test](cypress/integration/spec.ts)
 
+## Commands
+
+The E2E tests should run in Cypress right away. There are few other commands configured in this example recipe as a demonstration.
+
+- `npm run build` runs Webpack to convert spec TS file into `out.js`
+- `npm run lint` lints TypeScript specs using [tslint](https://palantir.github.io/tslint) and then TypeScript compiler to type check.
+
 ## Notes
 
 To get Mocha TypeScript definitions for `describe`, `it` and other BDD functions plus `cy` itself, install the typings.

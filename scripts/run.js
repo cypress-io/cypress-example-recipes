@@ -25,7 +25,7 @@ glob(path.join('examples', '*'), {
   return cypress.run({
     project: pathToExampleProject,
     browser: args.browser,
-    record: !!args.record,
+    record: Boolean(args.record),
   })
   .then((results = {}) => {
     numFailed += results.failures
