@@ -7,7 +7,8 @@ import {
   enterTodo,
   stubMathRandom,
   makeTodo,
-  getTodoItems
+  getTodoItems,
+  getNewTodoInput
 } from './utils'
 
 // testing the central Vuex data store
@@ -144,13 +145,9 @@ describe('Vuex store', () => {
     enterTodo(title)
 
     const newTitleText = 'this is a second todo title, slowly typed'
-    cy
-      .get('.todoapp')
-      .find('.new-todo')
-      .type(newTitleText, { delay: 100 })
-      .trigger('change')
+    getNewTodoInput().type(newTitleText, { delay: 100 }).trigger('change')
 
-    cy.screenshot('typing after delay')
+    getNewTodoInput().should('have.value', newTitleText)
   })
 
   it('can add a todo, type and compare entire store', () => {
