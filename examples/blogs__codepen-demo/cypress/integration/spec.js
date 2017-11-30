@@ -1,9 +1,12 @@
+/* eslint-env mocha */
+/* global cy */
 // our Codepen has top level URL
 const url = 'https://codepen.io/bahmutov/full/ZaMxgz/'
 // that loads app from this URL
 const iframeUrl = 'https://s.codepen.io/bahmutov/fullpage/ZaMxgz'
 describe('HyperApp Counter Codepen', () => {
   beforeEach(function loadAppIFrameAndSetAsOurTestDocument () {
+    // we could even cache the received HTML code
     cy
       .request({
         method: 'GET',
@@ -16,6 +19,7 @@ describe('HyperApp Counter Codepen', () => {
       .its('body')
       .then(html => {
         cy.document().then(document => {
+          cy.log('Writing HTML into test document')
           document.write(html)
           document.close()
         })
