@@ -9,7 +9,7 @@ export const resetDatabase = () => {
   }
   const str = JSON.stringify(data, null, 2)
   cy.writeFile('./data.json', str)
-  cy.wait(1000) // gives json-server a chance to reload
+  cy.wait(2000) // gives json-server a chance to reload
 }
 
 export const visit = () => cy.visit('/')
