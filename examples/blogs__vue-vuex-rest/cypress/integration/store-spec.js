@@ -149,6 +149,8 @@ describe('Vuex store', () => {
       .find('.new-todo')
       .type(newTitleText, { delay: 100 })
       .trigger('change')
+
+    cy.screenshot('typing after delay')
   })
 
   it('can add a todo, type and compare entire store', () => {
