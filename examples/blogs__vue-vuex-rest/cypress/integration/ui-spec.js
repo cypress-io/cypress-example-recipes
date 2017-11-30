@@ -38,6 +38,14 @@ describe('UI', () => {
       getNewTodoInput().type(text)
       getNewTodoInput().should('have.value', text)
     })
+
+    it('can add many items', () => {
+      const N = 100
+      for (let k = 0; k < N; k += 1) {
+        enterTodo(`item ${k + 1}`)
+      }
+      getTodoItems().should('have.length', N)
+    })
   })
 
   context('advanced', () => {
