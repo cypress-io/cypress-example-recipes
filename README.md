@@ -76,6 +76,17 @@ npm run cypress:open
 ## failures across all projects
 npm run cypress:run
 
+### runs all example projects in specific browser
+### similar to cypress run --browser <name>
+npm run cypress:run -- --browser chrome
+
+### sends test results, videos, screenshots
+### to Cypress dashboard
+npm run cypress:run -- --record
+
+### run single example by name
+npm run cypress:run -- --example blogs__codepen-demo
+
 ## switch the browser to chrome instead
 ## of the default headless Electron browser
 npm run cypress:run:chrome
