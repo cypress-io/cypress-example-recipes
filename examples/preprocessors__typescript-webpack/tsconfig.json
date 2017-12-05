@@ -52,6 +52,7 @@
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
   },
   "include": [
-    "cypress/integration/spec.ts"
+    "../../node_modules/cypress/index.d.ts",
+    "cypress/*/*.ts"
   ]
 }
