@@ -8,6 +8,9 @@ test:
         background: true
 
   override:
+    ## remove obsolete dependencies
+    - npm prune
+
     ## make sure we did not leave ".only" in one of the tests
     - npm run stop-only
 
