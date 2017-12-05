@@ -9,7 +9,7 @@ import {
   makeTodo,
   getTodoItems,
   getNewTodoInput
-} from './utils'
+} from '../support/utils'
 
 // testing the central Vuex data store
 describe('UI to Vuex store', () => {
