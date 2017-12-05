@@ -7,7 +7,7 @@ import {
   enterTodo,
   getTodoItems,
   getNewTodoInput
-} from './utils'
+} from '../support/utils'
 
 it('loads the app', () => {
   visit()
@@ -16,7 +16,7 @@ it('loads the app', () => {
 
 describe('UI', () => {
   beforeEach(resetDatabase)
-  beforeEach(visit)
+  beforeEach(() => visit())
 
   context('basic features', () => {
     it('loads application', () => {

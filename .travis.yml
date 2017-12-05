@@ -4,6 +4,7 @@ node_js:
   - 6.5.0
 
 before_script:
+  - npm prune
   - npm start -- --silent &
 
 script:
