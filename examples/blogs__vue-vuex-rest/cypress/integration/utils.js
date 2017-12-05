@@ -10,9 +10,16 @@ export const resetDatabase = () => {
   const str = JSON.stringify(data, null, 2)
   cy.writeFile('./data.json', str)
   cy.wait(2000) // gives json-server a chance to reload
+  console.log('resetDatabase')
 }
 
-export const visit = () => cy.visit('/')
+export const visit = () => {
+  cy.server()
+  cy.route('/todos').as('todos')
+  cy.visit('/')
+  console.log('cy.visit /')
+  cy.wait('@todos')
+}
 
 export const getTodoApp = () => cy.get('.todoapp')
 
@@ -49,7 +56,11 @@ export const makeTodo = (text = 'todo') => {
 export const getNewTodoInput = () => getTodoApp().find('.new-todo')
 
 export const enterTodo = (text = 'example todo') => {
+  console.log('entering todo', text)
+
   getNewTodoInput().type(`${text}{enter}`)
+  console.log('typed', text)
+
   // we need to make sure the store and the vue component
   // get updated and the DOM is updated.
   // quick check - the new text appears at the last position
