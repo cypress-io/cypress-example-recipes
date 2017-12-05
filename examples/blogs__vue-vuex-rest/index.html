@@ -16,7 +16,7 @@
           autofocus autocomplete="off"
           placeholder="What needs to be done?"
           :value="newTodo"
-          @change="setNewTodo"
+          @input="setNewTodo"
           @keyup.enter="addTodo"
           >
       </header>

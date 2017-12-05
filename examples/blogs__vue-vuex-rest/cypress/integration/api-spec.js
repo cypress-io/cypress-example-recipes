@@ -7,7 +7,7 @@ import {
   enterTodo,
   getTodoItems,
   stubMathRandom
-} from './utils'
+} from '../support/utils'
 
 // testing TodoMVC server API
 describe('via API', () => {
