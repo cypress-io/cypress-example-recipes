@@ -13,12 +13,25 @@ export const resetDatabase = () => {
   console.log('resetDatabase')
 }
 
-export const visit = () => {
-  cy.server()
-  cy.route('/todos').as('todos')
+export const visit = skipWaiting => {
+  console.log('visit this =', this)
+
+  if (typeof skipWaiting !== 'boolean') {
+    skipWaiting = false
+  }
+
+  const waitForInitialLoad = !skipWaiting
+  console.log('visit will wait for initial todos', waitForInitialLoad)
+  if (waitForInitialLoad) {
+    cy.server()
+    cy.route('/todos').as('initialTodos')
+  }
   cy.visit('/')
   console.log('cy.visit /')
-  cy.wait('@todos')
+  if (waitForInitialLoad) {
+    console.log('waiting for initial todos')
+    cy.wait('@initialTodos')
+  }
 }
 
 export const getTodoApp = () => cy.get('.todoapp')

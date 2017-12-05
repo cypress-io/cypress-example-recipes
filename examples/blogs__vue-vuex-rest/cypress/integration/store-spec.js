@@ -14,7 +14,7 @@ import {
 // testing the central Vuex data store
 describe('UI to Vuex store', () => {
   beforeEach(resetDatabase)
-  beforeEach(visit)
+  beforeEach(() => visit())
 
   const getStore = () => cy.window().its('app.$store')
 
@@ -23,8 +23,9 @@ describe('UI to Vuex store', () => {
   })
 
   it('starts empty', () => {
-    getStore().its('state').should('deep.equal', {
-      loading: true, // initially the store is loading data
+    const omitLoading = state => Cypress._.omit(state, 'loading')
+
+    getStore().its('state').then(omitLoading).should('deep.equal', {
       todos: [],
       newTodo: ''
     })
@@ -89,7 +90,7 @@ describe('UI to Vuex store', () => {
 
 describe('Vuex store', () => {
   beforeEach(resetDatabase)
-  beforeEach(visit)
+  beforeEach(() => visit())
   beforeEach(stubMathRandom)
 
   let store
@@ -125,7 +126,7 @@ describe('Vuex store', () => {
 
   it('can compare the entire store', () => {
     getStore().should('deep.equal', {
-      loading: true, // initially the store is loading data
+      loading: false,
       todos: [],
       newTodo: ''
     })
@@ -244,7 +245,7 @@ describe('Store actions', () => {
   const getStore = () => cy.window().its('app.$store')
 
   beforeEach(resetDatabase)
-  beforeEach(visit)
+  beforeEach(() => visit())
   beforeEach(stubMathRandom)
 
   it('changes the state', () => {

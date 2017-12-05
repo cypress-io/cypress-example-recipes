@@ -44,7 +44,9 @@
     actions: {
       loadTodos ({ commit }) {
         commit('SET_LOADING', true)
+        console.log('asking for todos')
         axios.get('/todos').then((r) => r.data).then((todos) => {
+          console.log('got %d todos', todos.length)
           commit('SET_TODOS', todos)
           commit('SET_LOADING', false)
         })
