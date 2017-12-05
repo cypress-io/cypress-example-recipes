@@ -16,7 +16,7 @@ it('loads the app', () => {
 
 describe('UI', () => {
   beforeEach(resetDatabase)
-  beforeEach(visit)
+  beforeEach(() => visit())
 
   context('basic features', () => {
     it('loads application', () => {

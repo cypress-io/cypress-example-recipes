@@ -172,6 +172,7 @@ Get around the lack of a `.hover()` command.
 ### [Typescript with Webpack](./examples/preprocessors__typescript-webpack)
 
 - Use [`@cypress/webpack-preprocessor`](https://github.com/cypress-io/cypress-webpack-preprocessor) to write Cypress tests in Typescript
+- Lint TypeScript spec code against Cypress type definitions
 
 ### [Direct Control of AngularJS](./examples/blogs__direct-control-angular)
 
