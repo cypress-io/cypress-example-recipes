@@ -5,6 +5,10 @@
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "build": "../../node_modules/.bin/webpack --output-filename out.js --entry ./cypress/integration/spec.ts"
+    "build": "../../node_modules/.bin/webpack --output-filename out.js --entry ./cypress/integration/spec.ts",
+    "lint": "../../node_modules/.bin/tslint --project ./tsconfig.json",
+    "postlint": "npm run tsc",
+    "tsc": "../../node_modules/.bin/tsc --pretty --noEmit",
+    "precypress:run": "npm run lint"
   }
 }
