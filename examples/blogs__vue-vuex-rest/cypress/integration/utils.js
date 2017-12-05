@@ -7,24 +7,18 @@ export const resetDatabase = () => {
   const data = {
     todos: []
   }
-  const str = JSON.stringify(data)
+  const str = JSON.stringify(data, null, 2)
   cy.writeFile('./data.json', str)
-  cy.wait(1000) // gives json-server a chance to reload
+  cy.wait(2000) // gives json-server a chance to reload
 }
 
 export const visit = () => cy.visit('/')
 
 export const getTodoApp = () => cy.get('.todoapp')
 
-export const getTodoItems = () =>
-  getTodoApp()
-    .find('.todo-list')
-    .find('li')
+export const getTodoItems = () => getTodoApp().find('.todo-list').find('li')
 
-export const newId = () =>
-  Math.random()
-    .toString()
-    .substr(2, 10)
+export const newId = () => Math.random().toString().substr(2, 10)
 
 // if we expose "newId" factory method from the application
 // we can easily stub it. But this is a realistic example of
@@ -52,7 +46,15 @@ export const makeTodo = (text = 'todo') => {
   }
 }
 
-export const enterTodo = (text = 'example todo') =>
-  getTodoApp()
-    .find('.new-todo')
-    .type(`${text}{enter}`)
+export const getNewTodoInput = () => getTodoApp().find('.new-todo')
+
+export const enterTodo = (text = 'example todo') => {
+  getNewTodoInput().type(`${text}{enter}`)
+  // we need to make sure the store and the vue component
+  // get updated and the DOM is updated.
+  // quick check - the new text appears at the last position
+  // I am going to use combined selector to always grab
+  // the element and not use stale reference from previous chain call
+  const lastItem = '.todoapp .todo-list li:last'
+  cy.get(lastItem).should('contain', text)
+}

@@ -5,7 +5,8 @@ import {
   visit,
   getTodoApp,
   enterTodo,
-  getTodoItems
+  getTodoItems,
+  getNewTodoInput
 } from './utils'
 
 it('loads the app', () => {
@@ -23,16 +24,27 @@ describe('UI', () => {
     })
 
     it('starts with zero items', () => {
-      cy
-        .get('.todo-list')
-        .find('li')
-        .should('have.length', 0)
+      cy.get('.todo-list').find('li').should('have.length', 0)
     })
 
     it('adds two items', () => {
       enterTodo('first item')
       enterTodo('second item')
       getTodoItems().should('have.length', 2)
+    })
+
+    it('enters text in the input', () => {
+      const text = 'do something'
+      getNewTodoInput().type(text)
+      getNewTodoInput().should('have.value', text)
+    })
+
+    it('can add many items', () => {
+      const N = 100
+      for (let k = 0; k < N; k += 1) {
+        enterTodo(`item ${k + 1}`)
+      }
+      getTodoItems().should('have.length', N)
     })
   })
 
@@ -62,21 +74,15 @@ describe('UI', () => {
       testFile = new File([text], 'example.json')
     })
     // sets test File object on the Vue component
-    cy
-      .window()
-      .its('app')
-      .then(app => {
-        app.file = testFile
-      })
+    cy.window().its('app').then(app => {
+      app.file = testFile
+    })
     // triggers reading File object
     cy.get('#todo-file-upload').trigger('change')
 
     // asserts that items from test JSON file have been
     // rendered correctly by the component
     getTodoItems().should('have.length', 4)
-    getTodoItems()
-      .eq(1)
-      .find('.toggle')
-      .should('be.checked')
+    getTodoItems().eq(1).find('.toggle').should('be.checked')
   })
 })
