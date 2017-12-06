@@ -1,16 +1,13 @@
 /* global cy */
 export const resetDatabase = () => {
-  // for complex resets can use NPM script command
-  // cy.exec('npm run reset:database')
-
-  // for simple cases, can just overwrite the data file
-  const data = {
-    todos: []
-  }
-  const str = JSON.stringify(data, null, 2)
-  cy.writeFile('./data.json', str)
-  cy.wait(2000) // gives json-server a chance to reload
   console.log('resetDatabase')
+  cy.request({
+    method: 'POST',
+    url: '/reset',
+    body: {
+      todos: []
+    }
+  })
 }
 
 export const visit = skipWaiting => {
