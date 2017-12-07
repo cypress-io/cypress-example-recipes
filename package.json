@@ -73,6 +73,6 @@
     "tsify": "^3.0.3",
     "tslint": "^5.8.0",
     "typescript": "^2.5.3",
-    "webpack": "^3.8.1"
+    "webpack": "^3.10.0"
   }
 }
