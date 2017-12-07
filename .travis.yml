@@ -1,10 +1,14 @@
 language: node_js
-
 node_js:
-  - 6.5.0
+- 6.5.0
 
 before_script:
-  - npm start -- --silent &
+- npm prune
+- npm start -- --silent &
 
 script:
-  - npm run cypress:run -- --record
+- npm run cypress:run -- --record
+
+notifications:
+  slack:
+    secure: ne0CixoRITDhePGEGgxDYnwB7DxoMhuFO6NWJKqgzs6Cz/uwwWJ9DAVgjbbh6HWaWLhHaew0s4Bx3Ckyk2AfqzmrPhVJCWZsx7VihrniGZCn/sZk/VQ71O/XDXlEw2d7Gm65Uu9MtesB98sCQsbr69cAJzZWd4A/6R/7nWsLmzM7KG1ZnEHDhNFI5KY/dAA7ImZ7q9pc5Zw1JeAMW7X4nGpDRhXcxk2FxVNge5m4GOhlFfb/CPNwo/FC9MbE+GrfpyQNK5J0DRkdu7igs8dbTJFEEjGLCVbxLZD5X5GZwRJmN3G5Zt89bs/ZHwj4tBKWKZeSxEbrrOr/OilFF3N46QhJSTjF7DgG2BlITYi3ZgHSUC/OanfxjoGYMrd702Nq9Wod3ZbhiwTbAwBOkkfv9+g12fwTk+u5BgNhcweHbdP3Ju5dmD53Z7rY4kIP0XlhfvU5WvC6YuKzVxquZQFEAWYzkcBPiZh2UP9hxuBRdX5UcLoU2eBGAUa8LlPhMO15i5sXyfH1vjnKkzgf1n8I7RQcWvpTBnAZyLwjT4bnqwP7gBYt/heO+iSGVaIya3ShtocwBxv9l88Qe6ogsHAHLnjaK352hVc5+6s7WyECXQ2EZug8GXlahHkLn3dXEY+zVNclyG0rNSDMRDQO5LsrXVr7zjyxHHrEWWBvHfePfb0=

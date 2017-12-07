@@ -1,18 +1,35 @@
 /* global cy */
 export const resetDatabase = () => {
-  // for complex resets can use NPM script command
-  // cy.exec('npm run reset:database')
-
-  // for simple cases, can just overwrite the data file
-  const data = {
-    todos: []
-  }
-  const str = JSON.stringify(data, null, 2)
-  cy.writeFile('./data.json', str)
-  cy.wait(2000) // gives json-server a chance to reload
+  console.log('resetDatabase')
+  cy.request({
+    method: 'POST',
+    url: '/reset',
+    body: {
+      todos: []
+    }
+  })
 }
 
-export const visit = () => cy.visit('/')
+export const visit = skipWaiting => {
+  console.log('visit this =', this)
+
+  if (typeof skipWaiting !== 'boolean') {
+    skipWaiting = false
+  }
+
+  const waitForInitialLoad = !skipWaiting
+  console.log('visit will wait for initial todos', waitForInitialLoad)
+  if (waitForInitialLoad) {
+    cy.server()
+    cy.route('/todos').as('initialTodos')
+  }
+  cy.visit('/')
+  console.log('cy.visit /')
+  if (waitForInitialLoad) {
+    console.log('waiting for initial todos')
+    cy.wait('@initialTodos')
+  }
+}
 
 export const getTodoApp = () => cy.get('.todoapp')
 
@@ -49,7 +66,11 @@ export const makeTodo = (text = 'todo') => {
 export const getNewTodoInput = () => getTodoApp().find('.new-todo')
 
 export const enterTodo = (text = 'example todo') => {
+  console.log('entering todo', text)
+
   getNewTodoInput().type(`${text}{enter}`)
+  console.log('typed', text)
+
   // we need to make sure the store and the vue component
   // get updated and the DOM is updated.
   // quick check - the new text appears at the last position
