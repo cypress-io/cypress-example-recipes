@@ -62,7 +62,7 @@
     "eslint": "^4.11.0",
     "eslint-plugin-cypress-dev": "^1.1.2",
     "eslint-plugin-mocha": "^4.11.0",
-    "fs-extra": "^4.0.2",
+    "fs-extra": "^5.0.0",
     "glob": "^7.1.2",
     "json-server-reset": "^1.0.0",
     "nodemon": "^1.11.0",
