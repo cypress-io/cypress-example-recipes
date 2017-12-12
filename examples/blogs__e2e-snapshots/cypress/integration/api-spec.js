@@ -39,31 +39,14 @@ describe('via API', () => {
   it('adds todo deep', () => {
     addTodo('first todo')
     addTodo('second todo')
-    fetchTodos().should('deep.equal', [
-      {
-        title: 'first todo',
-        completed: false,
-        id: '1'
-      },
-      {
-        title: 'second todo',
-        completed: false,
-        id: '2'
-      }
-    ])
+    fetchTodos().snapshot()
   })
 
   it('adds and deletes a todo', () => {
     addTodo('first todo') // id "1"
     addTodo('second todo') // id "2"
     deleteTodo('2')
-    fetchTodos().should('deep.equal', [
-      {
-        title: 'first todo',
-        completed: false,
-        id: '1'
-      }
-    ])
+    fetchTodos().snapshot()
   })
 })
 
@@ -150,11 +133,7 @@ describe('API', () => {
 
     // thanks to stubbed random id generator
     // we can "predict" what the TODO object is going to look like
-    cy.wait('@postTodo').its('request.body').should('deep.equal', {
-      title: 'first item',
-      completed: false,
-      id: '1'
-    })
+    cy.wait('@postTodo').its('request.body').snapshot()
   })
 
   it('is deleting a todo item', () => {

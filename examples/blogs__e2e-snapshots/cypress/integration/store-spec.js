@@ -19,23 +19,21 @@ describe('UI to Vuex store', () => {
   const getStore = () => cy.window().its('app.$store')
 
   it('has loading, newTodo and todos properties', () => {
-    getStore().its('state').should('have.keys', ['loading', 'newTodo', 'todos'])
+    // getStore().its('state').should('have.keys', ['loading', 'newTodo', 'todos'])
+    getStore().its('state').then(Object.keys).snapshot()
   })
 
   it('starts empty', () => {
     const omitLoading = state => Cypress._.omit(state, 'loading')
 
-    getStore().its('state').then(omitLoading).should('deep.equal', {
-      todos: [],
-      newTodo: ''
-    })
+    getStore().its('state').then(omitLoading).snapshot()
   })
 
   it('can enter new todo text', () => {
     const text = 'learn how to test with Cypress.io'
     cy.get('.todoapp').find('.new-todo').type(text).trigger('change')
 
-    getStore().its('state.newTodo').should('equal', text)
+    getStore().its('state.newTodo').snapshot()
   })
 
   it('stores todos in the store', () => {
@@ -45,16 +43,7 @@ describe('UI to Vuex store', () => {
     getStore().its('state.todos').should('have.length', 2)
 
     const removeIds = list => list.map(todo => Cypress._.omit(todo, 'id'))
-    getStore().its('state.todos').then(removeIds).should('deep.equal', [
-      {
-        title: 'first todo',
-        completed: false
-      },
-      {
-        title: 'second todo',
-        completed: false
-      }
-    ])
+    getStore().its('state.todos').then(removeIds).snapshot()
   })
 
   const stubMathRandom = () => {
@@ -73,18 +62,7 @@ describe('UI to Vuex store', () => {
 
     getStore().its('state.todos').should('have.length', 2)
 
-    getStore().its('state.todos').should('deep.equal', [
-      {
-        title: 'first todo',
-        completed: false,
-        id: '1'
-      },
-      {
-        title: 'second todo',
-        completed: false,
-        id: '2'
-      }
-    ])
+    getStore().its('state.todos').snapshot()
   })
 })
 
@@ -114,22 +92,18 @@ describe('Vuex store', () => {
   const getStoreTodos = getFromStore.bind(null, 'todos')
 
   it('starts empty', () => {
-    getStoreTodos().should('deep.equal', [])
+    getStoreTodos().snapshot()
   })
 
   it('can enter new todo text', () => {
     const text = 'learn how to test with Cypress.io'
     cy.get('.todoapp').find('.new-todo').type(text).trigger('change')
 
-    getFromStore('newTodo').should('equal', text)
+    getFromStore('newTodo').snapshot()
   })
 
   it('can compare the entire store', () => {
-    getStore().should('deep.equal', {
-      loading: false,
-      todos: [],
-      newTodo: ''
-    })
+    getStore().snapshot()
   })
 
   it('starts typing after delayed server response', () => {
@@ -148,7 +122,7 @@ describe('Vuex store', () => {
     const newTitleText = 'this is a second todo title, slowly typed'
     getNewTodoInput().type(newTitleText, { delay: 100 }).trigger('change')
 
-    getNewTodoInput().should('have.value', newTitleText)
+    getNewTodoInput().snapshot()
   })
 
   it('can add a todo, type and compare entire store', () => {
@@ -158,17 +132,7 @@ describe('Vuex store', () => {
     const text = 'learn how to test with Cypress.io'
     cy.get('.todoapp').find('.new-todo').type(text).trigger('change')
 
-    getStore().should('deep.equal', {
-      loading: false,
-      todos: [
-        {
-          title,
-          completed: false,
-          id: '1'
-        }
-      ],
-      newTodo: text
-    })
+    getStore().snapshot()
   })
 
   it('can add a todo', () => {
@@ -185,13 +149,7 @@ describe('Vuex store', () => {
   it('can add a particular todo', () => {
     const title = `a single todo ${newId()}`
     enterTodo(title)
-    getStoreTodos().should('deep.equal', [
-      {
-        title,
-        completed: false,
-        id: '2'
-      }
-    ])
+    getStoreTodos().snapshot()
   })
 
   it('can add two todos and delete one', () => {
@@ -209,13 +167,7 @@ describe('Vuex store', () => {
 
     getTodoItems().should('have.length', 1)
 
-    getStoreTodos().should('deep.equal', [
-      {
-        title: second.title,
-        completed: false,
-        id: '4'
-      }
-    ])
+    getStoreTodos().snapshot()
   })
 
   it('can be driven by dispatching actions', () => {
@@ -227,17 +179,7 @@ describe('Vuex store', () => {
     getTodoItems().should('have.length', 1).first().contains('a new todo')
 
     // assert store
-    getStore().should('deep.equal', {
-      loading: false,
-      todos: [
-        {
-          title: 'a new todo',
-          completed: false,
-          id: '1'
-        }
-      ],
-      newTodo: ''
-    })
+    getStore().snapshot()
   })
 })
 
@@ -255,17 +197,7 @@ describe('Store actions', () => {
       store.dispatch('clearNewTodo')
     })
 
-    getStore().its('state').should('deep.equal', {
-      loading: false,
-      todos: [
-        {
-          title: 'a new todo',
-          completed: false,
-          id: '1'
-        }
-      ],
-      newTodo: ''
-    })
+    getStore().its('state').snapshot()
   })
 
   it('changes the state after delay', () => {
@@ -285,17 +217,7 @@ describe('Store actions', () => {
       store.dispatch('clearNewTodo')
     })
 
-    getStore().its('state').should('deep.equal', {
-      loading: false,
-      todos: [
-        {
-          title: 'a new todo',
-          completed: false,
-          id: '1'
-        }
-      ],
-      newTodo: ''
-    })
+    getStore().its('state').snapshot()
   })
 
   it('changes the ui', () => {
@@ -325,11 +247,7 @@ describe('Store actions', () => {
     })
 
     // assert server call
-    cy.wait('@postTodo').its('request.body').should('deep.equal', {
-      title: 'a new todo',
-      completed: false,
-      id: '1'
-    })
+    cy.wait('@postTodo').its('request.body').snapshot()
   })
 
   it('calls server with delay', () => {
@@ -350,10 +268,6 @@ describe('Store actions', () => {
     })
 
     // assert server call - will wait 3 seconds until stubbed server responds
-    cy.wait('@postTodo').its('request.body').should('deep.equal', {
-      title: 'a new todo',
-      completed: false,
-      id: '1'
-    })
+    cy.wait('@postTodo').its('request.body').snapshot()
   })
 })
