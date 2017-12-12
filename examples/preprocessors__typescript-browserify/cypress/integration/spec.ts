@@ -1,5 +1,3 @@
-declare function expect(any):any
-
 describe('TypeScript', () => {
   it('works', () => {
     // note TypeScript definition
