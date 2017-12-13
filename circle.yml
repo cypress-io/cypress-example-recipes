@@ -14,6 +14,9 @@ defaults: &defaults
         npm_config_unsafe_perm: true
   steps:
     - checkout
+    - run:
+        command: echo current folder $PWD
+        working_directory: examples/$CIRCLE_PROJECT_REPONAME
     - restore_cache:
         key: root-deps
     - run: npm install
@@ -23,13 +26,10 @@ defaults: &defaults
         paths:
           - node_modules
     - run:
-        command: echo current folder $PWD
-        workind_directory: examples/$CIRCLE_PROJECT_REPONAME
-    - run:
         command: npm run start
         name: start the server
         background: true
-        workind_directory: examples/$CIRCLE_PROJECT_REPONAME
+        working_directory: examples/$CIRCLE_PROJECT_REPONAME
     - run:
         command: npm run cypress:run
         name: Cypress tests
