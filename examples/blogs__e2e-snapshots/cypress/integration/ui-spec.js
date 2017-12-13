@@ -78,6 +78,8 @@ describe('UI', () => {
       // assertions
       getTodoItems().should('have.length', 4)
       getCompleted().should('have.length', 2)
+      getTodo('first item').find('[type="checkbox"]').should('not.be.checked')
+      getTodo('second item').find('[type="checkbox"]').should('not.be.checked')
       getTodo('item 3').find('[type="checkbox"]').should('be.checked')
       getTodo('item 4').find('[type="checkbox"]').should('be.checked')
     })
