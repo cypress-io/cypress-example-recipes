@@ -1,1 +1,1 @@
-require('@cypress/snapshot')()
+require('@cypress/snapshot').register()
