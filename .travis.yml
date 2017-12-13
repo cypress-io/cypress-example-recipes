@@ -17,11 +17,14 @@ jobs:
     # this will run it in a separate job on TravisCI
 
     # blog recipes
-    - script:
-      - cd examples/blogs__codepen-demo
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
+    - stage: test
+      env:
+        - NAME=blogs__codepen-demo
+      script:
+        - cd examples/$NAME
+        - echo current dir $PWD
+        - npm start -- --silent &
+        - npm run cypress:run -- --record
     - script:
       - cd examples/blogs__direct-control-angular
       - echo current dir $PWD
