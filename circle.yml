@@ -23,6 +23,9 @@ defaults: &defaults
         paths:
           - node_modules
     - run:
+        command: echo current folder $PWD
+        workind_directory: examples/$CIRCLE_PROJECT_REPONAME
+    - run:
         command: npm run start
         name: start the server
         background: true
