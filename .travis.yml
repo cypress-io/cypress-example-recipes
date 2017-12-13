@@ -6,6 +6,7 @@ cache:
   directories:
     - node_modules
 
+# hmm, do we need these commands if we are running using build stages?
 script: echo "Running tests against $(node -v) ..."
 script: npm install
 script: npm prune
@@ -14,21 +15,34 @@ jobs:
   include:
     # define a separate script for each "examples/*" folder
     # this will run it in a separate job on TravisCI
+    - &run-tests
+      - echo current dir $PWD
+      - npm start -- --silent &
+      - npm run cypress:run -- --record
     - script:
       - cd examples/blogs__codepen-demo
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
+      <<: *run-tests
     - script:
       - cd examples/blogs__direct-control-angular
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
+      <<: *run-tests
     - script:
       - cd examples/blogs__e2e-api-testing
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
+      <<: *run-tests
+    # - script:
+    #   - cd examples/blogs__codepen-demo
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/blogs__direct-control-angular
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/blogs__e2e-api-testing
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
 
 notifications:
   slack:
