@@ -33,7 +33,7 @@ export const visit = skipWaiting => {
 
 export const getTodoApp = () => cy.get('.todoapp')
 
-export const getTodoItems = () => getTodoApp().find('.todo-list').find('li')
+export const getTodoItems = () => getTodoApp().find('.todo-list li')
 
 export const newId = () => Math.random().toString().substr(2, 10)
 
@@ -79,3 +79,13 @@ export const enterTodo = (text = 'example todo') => {
   const lastItem = '.todoapp .todo-list li:last'
   cy.get(lastItem).should('contain', text)
 }
+
+const TODO_ITEM_SELECTOR = '.todoapp .todo-list li'
+
+export const getTodo = text => cy.contains(TODO_ITEM_SELECTOR, text)
+
+const getTodoItemCheckbox = text => getTodo(text).find('[type="checkbox"]')
+
+export const toggle = text => getTodoItemCheckbox(text).click()
+
+export const getCompleted = () => cy.get('.todoapp .todo-list li.completed')

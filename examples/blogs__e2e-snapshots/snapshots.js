@@ -1,5 +1,5 @@
 module.exports = {
-  "__version": "1.1.3",
+  "__version": "1.1.4",
   "adds numbers": {
     "1": 5,
     "2": 11,
@@ -172,6 +172,13 @@ module.exports = {
         "title": "first item",
         "completed": false,
         "id": "1"
+      }
+    }
+  },
+  "UI": {
+    "advanced": {
+      "marks completed items": {
+        "todo-list with 2 completed items": "<ul class=\"todo-list\">\n  <li class=\"todo\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>first item</label> <button class=\"destroy\"></button></div>\n  </li>\n  <li class=\"todo\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>second item</label> <button class=\"destroy\"></button></div>\n  </li>\n  <li class=\"todo completed\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>item 3</label> <button class=\"destroy\"></button></div>\n  </li>\n  <li class=\"todo completed\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>item 4</label> <button class=\"destroy\"></button></div>\n  </li>\n</ul>"
       }
     }
   }

@@ -6,7 +6,10 @@ import {
   getTodoApp,
   enterTodo,
   getTodoItems,
-  getNewTodoInput
+  getNewTodoInput,
+  toggle,
+  getTodo,
+  getCompleted
 } from '../support/utils'
 
 it('loads the app', () => {
@@ -62,6 +65,37 @@ describe('UI', () => {
       cy.contains('first item').should('not.exist')
       cy.contains('second item').should('exist')
       getTodoItems().should('have.length', 1)
+    })
+
+    it('marks completed items assertions', () => {
+      // actions
+      enterTodo('first item')
+      enterTodo('second item')
+      enterTodo('item 3')
+      enterTodo('item 4')
+      toggle('item 3')
+      toggle('item 4')
+      // assertions
+      getTodoItems().should('have.length', 4)
+      getCompleted().should('have.length', 2)
+      getTodo('item 3').find('[type="checkbox"]').should('be.checked')
+      getTodo('item 4').find('[type="checkbox"]').should('be.checked')
+    })
+
+    it('marks completed items', () => {
+      // actions
+      enterTodo('first item')
+      enterTodo('second item')
+      enterTodo('item 3')
+      enterTodo('item 4')
+      toggle('item 3')
+      toggle('item 4')
+      // make sure app has rendered the toggled buttons
+      getCompleted().should('have.length', 2)
+      // single snapshot of entire <ul class="todo-list"> element
+      cy
+        .get('ul.todo-list')
+        .snapshot({ name: 'todo-list with 2 completed items' })
     })
   })
 
