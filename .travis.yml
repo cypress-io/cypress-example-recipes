@@ -2,12 +2,23 @@ language: node_js
 node_js:
 - 6.5.0
 
-before_script:
-- npm prune
-- npm start -- --silent &
+script: echo "Running tests against $(node -v) ..."
+# hmm, can we do npm install here?
 
-script:
-- npm run cypress:run -- --record
+jobs:
+  include:
+    - script:
+      - npm install
+      - cd examples/blogs__codepen-demo
+      - echo current dir $PWD
+
+
+# before_script:
+# - npm prune
+# - npm start -- --silent &
+
+# script:
+# - npm run cypress:run -- --record
 
 notifications:
   slack:
