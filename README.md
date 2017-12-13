@@ -17,6 +17,7 @@ Recipe | Category | Description
 [Typescript with Webpack](#typescript-with-webpack) | Preprocessors | Add typescript support with webpack
 [Direct Control of AngularJS](#direct-control-of-angularjs) | Blogs | Bypass the DOM and control AngularJS
 [E2E API Testing](#e2e-api-testing) | Blogs | Run your API Tests with a GUI
+[E2E Snapshots](#e2e-snapshots) | Blogs | End-to-End Snapshot Testing
 [Codepen.io Testing](#codepen-testing) | Blogs | Test a HyperApp Codepen demo
 [Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Blogs | Test an application that uses central data store
 [Stubbing Functions](#stubbing-functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
@@ -186,6 +187,13 @@ Get around the lack of a `.hover()` command.
 - [Blog article written here](https://www.cypress.io/blog/2017/11/07/Add-GUI-to-Your-E2E-API-Tests)
 - Use `cy.request()` to perform API Testing
 - Use the Cypress GUI to help debug requests
+
+### [E2E Snapshots](./examples/blogs__e2e-snapshots)
+
+- Adding `.snapshot()` command by requiring 3rd party module
+- Capturing and saving snapshots of primitive values
+- Testing central data Vuex store using snapshots
+- Making assertions against a DOM element with `cy.get('...').snapshot()`
 
 ### [Codepen Testing](./examples/blogs__codepen-demo)
 
