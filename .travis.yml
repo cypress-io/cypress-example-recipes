@@ -23,11 +23,19 @@ jobs:
     # define a separate script for each "examples/*" folder
     # this will run it in a separate job on TravisCI
 
-    # blog recipes
     - stage: test
       env:
         - DIR=blogs__codepen-demo
       <<: *defaults
+    - stage: test
+      env:
+        - DIR=blogs__direct-control-angular
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=blogs__e2e-api-testing
+      <<: *defaults
+
     # - script:
     #   - cd examples/blogs__direct-control-angular
     #   - echo current dir $PWD
