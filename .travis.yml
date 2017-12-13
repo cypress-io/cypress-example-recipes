@@ -11,6 +11,13 @@ script: echo "Running tests against $(node -v) ..."
 script: npm install
 script: npm prune
 
+defaults: &defaults
+  script:
+    - cd examples/$DIR
+    - echo current dir $PWD
+    - npm start -- --silent &
+    - npm run cypress:run -- --record
+
 jobs:
   include:
     # define a separate script for each "examples/*" folder
@@ -19,131 +26,127 @@ jobs:
     # blog recipes
     - stage: test
       env:
-        - NAME=blogs__codepen-demo
-      script:
-        - cd examples/$NAME
-        - echo current dir $PWD
-        - npm start -- --silent &
-        - npm run cypress:run -- --record
-    - script:
-      - cd examples/blogs__direct-control-angular
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/blogs__e2e-api-testing
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/blogs__e2e-snapshots
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/blogs__vue-vuex-rest
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
+        - DIR=blogs__codepen-demo
+      <<: *defaults
+    # - script:
+    #   - cd examples/blogs__direct-control-angular
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/blogs__e2e-api-testing
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/blogs__e2e-snapshots
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/blogs__vue-vuex-rest
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
 
-    # assertions and modules
-    - script:
-      - cd examples/extending-cypress__chai-assertions
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/fundamentals__node-modules
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
+    # # assertions and modules
+    # - script:
+    #   - cd examples/extending-cypress__chai-assertions
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/fundamentals__node-modules
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
 
-    # different ways of logging in
-    - script:
-      - cd examples/logging-in__csrf-tokens
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/logging-in__html-web-forms
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/logging-in__single-sign-on
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/logging-in__xhr-web-forms
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
+    # # different ways of logging in
+    # - script:
+    #   - cd examples/logging-in__csrf-tokens
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/logging-in__html-web-forms
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/logging-in__single-sign-on
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/logging-in__xhr-web-forms
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
 
-    # preprocessor examples
-    - script:
-      - cd examples/preprocessors__typescript-browserify
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/preprocessors__typescript-webpack
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
+    # # preprocessor examples
+    # - script:
+    #   - cd examples/preprocessors__typescript-browserify
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/preprocessors__typescript-webpack
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
 
-    # misc
-    - script:
-      - cd examples/server-communication__bootstrapping-your-app
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
+    # # misc
+    # - script:
+    #   - cd examples/server-communication__bootstrapping-your-app
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
 
-    # stubbing and spying
-    - script:
-      - cd examples/stubbing-spying__functions
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/stubbing-spying__window-fetch
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
+    # # stubbing and spying
+    # - script:
+    #   - cd examples/stubbing-spying__functions
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/stubbing-spying__window-fetch
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
 
-    # testing DOM
-    - script:
-      - cd examples/testing-dom__drag-drop
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/testing-dom__form-interactions
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/testing-dom__hover-hidden-elements
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/testing-dom__tab-handling-links
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
+    # # testing DOM
+    # - script:
+    #   - cd examples/testing-dom__drag-drop
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/testing-dom__form-interactions
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/testing-dom__hover-hidden-elements
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/testing-dom__tab-handling-links
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
 
-    # unit testing examples
-    - script:
-      - cd examples/unit-testing__application-code
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
-    - script:
-      - cd examples/unit-testing__react-enzyme
-      - echo current dir $PWD
-      - npm start -- --silent &
-      - npm run cypress:run -- --record
+    # # unit testing examples
+    # - script:
+    #   - cd examples/unit-testing__application-code
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
+    # - script:
+    #   - cd examples/unit-testing__react-enzyme
+    #   - echo current dir $PWD
+    #   - npm start -- --silent &
+    #   - npm run cypress:run -- --record
 
 notifications:
   slack:
