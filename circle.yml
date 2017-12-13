@@ -16,7 +16,7 @@ defaults: &defaults
     - checkout
     - run:
         command: echo current folder $PWD
-        working_directory: examples/$CIRCLE_PROJECT_REPONAME
+        working_directory: "examples/$CIRCLE_JOB"
     - restore_cache:
         key: root-deps
     - run: npm install
@@ -29,15 +29,15 @@ defaults: &defaults
         command: npm run start
         name: start the server
         background: true
-        working_directory: examples/$CIRCLE_PROJECT_REPONAME
+        working_directory: examples/$CIRCLE_JOB
     - run:
         command: npm run cypress:run
         name: Cypress tests
-        working_directory: examples/$CIRCLE_PROJECT_REPONAME
+        working_directory: examples/$CIRCLE_JOB
     - store_artifacts:
-        path: $CIRCLE_PROJECT_REPONAME/cypress/screenshots
+        path: $CIRCLE_JOB/cypress/screenshots
     - store_artifacts:
-        path: $CIRCLE_PROJECT_REPONAME/cypress/videos
+        path: $CIRCLE_JOB/cypress/videos
 
 jobs:
   # define a new job with defailts for each "examples/*" subfolder
