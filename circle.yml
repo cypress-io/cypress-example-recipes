@@ -40,6 +40,46 @@ jobs:
     <<: *defaults
   blogs__direct-control-angular:
     <<: *defaults
+  blogs__e2e-api-testing:
+    <<: *defaults
+  blogs__e2e-snapshots:
+    <<: *defaults
+  blogs__vue-vuex-rest:
+    <<: *defaults
+  extending-cypress__chai-assertions:
+    <<: *defaults
+  fundamentals__node-modules:
+    <<: *defaults
+  logging-in__csrf-tokens:
+    <<: *defaults
+  logging-in__html-web-forms:
+    <<: *defaults
+  logging-in__single-sign-on:
+    <<: *defaults
+  logging-in__xhr-web-forms:
+    <<: *defaults
+  preprocessors__typescript-browserify:
+    <<: *defaults
+  preprocessors__typescript-webpack:
+    <<: *defaults
+  server-communication__bootstrapping-your-app:
+    <<: *defaults
+  stubbing-spying__functions:
+    <<: *defaults
+  stubbing-spying__window-fetch:
+    <<: *defaults
+  testing-dom__drag-drop:
+    <<: *defaults
+  testing-dom__form-interactions:
+    <<: *defaults
+  testing-dom__hover-hidden-elements:
+    <<: *defaults
+  testing-dom__tab-handling-links:
+    <<: *defaults
+  unit-testing__application-code:
+    <<: *defaults
+  unit-testing__react-enzyme:
+    <<: *defaults
 
 workflows:
   version: 2
@@ -49,3 +89,23 @@ workflows:
     jobs:
       - blogs__codepen-demo
       - blogs__direct-control-angular
+      - blogs__e2e-api-testing
+      - blogs__e2e-snapshots
+      - blogs__vue-vuex-rest
+      - extending-cypress__chai-assertions
+      - fundamentals__node-modules
+      - logging-in__csrf-tokens
+      - logging-in__html-web-forms
+      - logging-in__single-sign-on
+      - logging-in__xhr-web-forms
+      - preprocessors__typescript-browserify
+      - preprocessors__typescript-webpack
+      - server-communication__bootstrapping-your-app
+      - stubbing-spying__functions
+      - stubbing-spying__window-fetch
+      - testing-dom__drag-drop
+      - testing-dom__form-interactions
+      - testing-dom__hover-hidden-elements
+      - testing-dom__tab-handling-links
+      - unit-testing__application-code
+      - unit-testing__react-enzyme
