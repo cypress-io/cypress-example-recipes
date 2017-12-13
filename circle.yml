@@ -14,9 +14,6 @@ defaults: &defaults
         npm_config_unsafe_perm: true
   steps:
     - checkout
-    - run:
-        command: echo current folder $PWD
-        working_directory: "examples/$CIRCLE_JOB"
     - restore_cache:
         key: root-deps
     - run: npm install
@@ -26,18 +23,16 @@ defaults: &defaults
         paths:
           - node_modules
     - run:
-        command: npm run start
+        command: |
+          cd examples/$CIRCLE_JOB
+          npm run start
         name: start the server
         background: true
-        working_directory: examples/$CIRCLE_JOB
     - run:
-        command: npm run cypress:run
+        command: |
+          cd examples/$CIRCLE_JOB
+          npm run cypress:run -- --record
         name: Cypress tests
-        working_directory: examples/$CIRCLE_JOB
-    - store_artifacts:
-        path: $CIRCLE_JOB/cypress/screenshots
-    - store_artifacts:
-        path: $CIRCLE_JOB/cypress/videos
 
 jobs:
   # define a new job with defailts for each "examples/*" subfolder
