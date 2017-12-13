@@ -26,15 +26,15 @@ defaults: &defaults
         command: npm run start
         name: start the server
         background: true
-        workind_directory: examples/$CIRCLE_JOB_NAME
+        workind_directory: examples/$CIRCLE_PROJECT_REPONAME
     - run:
         command: npm run cypress:run
         name: Cypress tests
-        working_directory: examples/$CIRCLE_JOB_NAME
+        working_directory: examples/$CIRCLE_PROJECT_REPONAME
     - store_artifacts:
-        path: $CIRCLE_JOB_NAME/cypress/screenshots
+        path: $CIRCLE_PROJECT_REPONAME/cypress/screenshots
     - store_artifacts:
-        path: $CIRCLE_JOB_NAME/cypress/videos
+        path: $CIRCLE_PROJECT_REPONAME/cypress/videos
 
 jobs:
   # define a new job with defailts for each "examples/*" subfolder
