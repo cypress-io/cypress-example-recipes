@@ -68,6 +68,8 @@ jobs:
     <<: *defaults
   stubbing-spying__window-fetch:
     <<: *defaults
+  stubbing-spying__google-analytics:
+    <<: *defaults
   testing-dom__drag-drop:
     <<: *defaults
   testing-dom__form-interactions:
@@ -103,6 +105,7 @@ workflows:
       - server-communication__bootstrapping-your-app
       - stubbing-spying__functions
       - stubbing-spying__window-fetch
+      - stubbing-spying__google-analytics
       - testing-dom__drag-drop
       - testing-dom__form-interactions
       - testing-dom__hover-hidden-elements
