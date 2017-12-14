@@ -1,5 +1,7 @@
 import { add } from '../support/add'
 
+declare function expect(any):any
+
 describe('TypeScript', () => {
   it('works', () => {
     // note TypeScript definition
