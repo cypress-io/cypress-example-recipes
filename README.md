@@ -1,4 +1,4 @@
-# Recipes [![Circle CI](https://circleci.com/gh/cypress-io/cypress-example-recipes.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes) [![Travis CI](https://travis-ci.org/cypress-io/cypress-example-recipes.svg?branch=master)](https://travis-ci.org/cypress-io/cypress-example-recipes) [![Greenkeeper badge](https://badges.greenkeeper.io/cypress-io/cypress-example-recipes.svg)](https://greenkeeper.io/)
+# Recipes [![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) [![Travis CI](https://travis-ci.org/cypress-io/cypress-example-recipes.svg?branch=master)](https://travis-ci.org/cypress-io/cypress-example-recipes) [![Greenkeeper badge](https://badges.greenkeeper.io/cypress-io/cypress-example-recipes.svg)](https://greenkeeper.io/)
 
 This repo contains various recipes for testing common scenarios using Cypress.
 
