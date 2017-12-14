@@ -1,6 +1,8 @@
-# Direct Control AngularJS
+# Stubbing Google Analytics
 
-This is an example showing how to blacklist requests for `www.google-analytics.com` and additionally how to stub on the `window.ga` object so you can ensure its being called correctly.
+This is an example showing how to blacklist requests for `www.google-analytics.com`.
+
+Even though we are preventing the actual `GA` script from loading, we can still stub the `window.ga` object and ensure its being called correctly.
 
 ## Network Requests
 
