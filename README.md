@@ -22,6 +22,7 @@ Recipe | Category | Description
 [Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Blogs | Test an application that uses central data store
 [Stubbing Functions](#stubbing-functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
 [Stubbing `window.fetch`](#stubbing-windowfetch) | Stubbing, Spying | Use `cy.stub()` to control fetch requests
+[Stubbing Google Analytics](#stubbing-google-analytics) | Stubbing, Spying | Use `cy.stub()` to test Google Analytics calls
 [Application Code](#application-code) | Unit Testing | Import and test your own application code
 [React with Enzyme](#react-with-enzyme) | Unit Testing | Test your react components in isolation
 [Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
@@ -220,6 +221,11 @@ Get around the lack of a `.hover()` command.
 - Use [`cy.stub()`](https://on.cypress.io/stub) to verify and control the behavior of a function.
 - Use [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick) to control time.
 - Stub `window.fetch` to control server responses.
+
+### [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics)
+
+- Use [`blacklistHosts`](https://on.cypress.io/configuration#Browser) to block Google Analytics from receiving requests.
+- Use [`cy.stub()`](https://on.cypress.io/stub) to verify that `window.ga(...)` was called with the correct arguments
 
 ### [Application Code](./examples/unit-testing__application-code)
 
