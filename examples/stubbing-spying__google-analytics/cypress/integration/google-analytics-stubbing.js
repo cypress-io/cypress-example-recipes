@@ -1,3 +1,5 @@
+/* global Cypress, cy */
+
 // in our cypress.json file we have blacklisted www.google-analytics.com
 // which prevents the GA script from ever loading. however because there
 // is still a global 'window.ga' function, that means we can stub it
@@ -26,23 +28,22 @@ describe('Google Analytics', function () {
   it('can ensure window.ga is called correctly', function () {
     cy
     .get('@ga')
-
     // ensure GA was created with our google analytics ID
     .should('be.calledWith', 'create', 'UA-XXXXX-Y')
-
     // and ensure that the initial pageview was sent
     .and('be.calledWith', 'send', 'pageview')
 
     // now click the anchor tag which causes a hashchange event
     cy.contains('#page2').click()
 
+    cy.hash().should('equal', '#page2')
+
     // make sure GA was sent this pageview
     cy.get('@ga').should('be.calledWith', 'send', 'pageview', '#page2')
 
-
     // and now do it again for page3
     cy.contains('#page3').click()
+    cy.hash().should('equal', '#page3')
     cy.get('@ga').should('be.calledWith', 'send', 'pageview', '#page3')
-
   })
 })
