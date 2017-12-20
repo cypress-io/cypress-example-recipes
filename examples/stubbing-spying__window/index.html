@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Stubbing Window</title>
+  </head>
+  <body>
+    <h1>My Application</h1>
+    <ul>
+      <li>
+        <button id="open-window">Open New Window</button>
+      </li>
+    </ul>
+
+    <script>
+      var btn = document.getElementById('open-window')
+
+      btn.addEventListener('click', function(event) {
+        window.open('page1.html')
+      })
+    </script>
+  </body>
+</html>
