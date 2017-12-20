@@ -240,7 +240,7 @@ Get around the lack of a `.hover()` command.
 - Import `enzyme` from `node_modules`.
 - Extend chai assertions with [`chai-enzyme`](https://github.com/producthunt/chai-enzyme).
 
-### [Adding Chai Assertions](./examples/extending-cypres__chai-assertions)
+### [Adding Chai Assertions](./examples/extending-cypress__chai-assertions)
 
 - Extend [`chai`](http://chaijs.com/) with the [`chai-date-string`](http://chaijs.com/plugins/chai-date-string/) assertion plugin.
 - Extend [`chai`](http://chaijs.com/) with the [`chai-colors`](http://chaijs.com/plugins/chai-colors/) assertion plugin.
