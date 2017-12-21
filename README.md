@@ -1,4 +1,4 @@
-# Recipes [![Circle CI](https://circleci.com/gh/cypress-io/cypress-example-recipes.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes) [![Travis CI](https://travis-ci.org/cypress-io/cypress-example-recipes.svg?branch=master)](https://travis-ci.org/cypress-io/cypress-example-recipes) [![Greenkeeper badge](https://badges.greenkeeper.io/cypress-io/cypress-example-recipes.svg)](https://greenkeeper.io/)
+# Recipes [![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) [![Travis CI](https://travis-ci.org/cypress-io/cypress-example-recipes.svg?branch=master)](https://travis-ci.org/cypress-io/cypress-example-recipes) [![Greenkeeper badge](https://badges.greenkeeper.io/cypress-io/cypress-example-recipes.svg)](https://greenkeeper.io/)
 
 This repo contains various recipes for testing common scenarios using Cypress.
 
@@ -17,10 +17,12 @@ Recipe | Category | Description
 [Typescript with Webpack](#typescript-with-webpack) | Preprocessors | Add typescript support with webpack
 [Direct Control of AngularJS](#direct-control-of-angularjs) | Blogs | Bypass the DOM and control AngularJS
 [E2E API Testing](#e2e-api-testing) | Blogs | Run your API Tests with a GUI
+[E2E Snapshots](#e2e-snapshots) | Blogs | End-to-End Snapshot Testing
 [Codepen.io Testing](#codepen-testing) | Blogs | Test a HyperApp Codepen demo
 [Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Blogs | Test an application that uses central data store
 [Stubbing Functions](#stubbing-functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
 [Stubbing `window.fetch`](#stubbing-windowfetch) | Stubbing, Spying | Use `cy.stub()` to control fetch requests
+[Stubbing Google Analytics](#stubbing-google-analytics) | Stubbing, Spying | Use `cy.stub()` to test Google Analytics calls
 [Application Code](#application-code) | Unit Testing | Import and test your own application code
 [React with Enzyme](#react-with-enzyme) | Unit Testing | Test your react components in isolation
 [Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
@@ -187,6 +189,13 @@ Get around the lack of a `.hover()` command.
 - Use `cy.request()` to perform API Testing
 - Use the Cypress GUI to help debug requests
 
+### [E2E Snapshots](./examples/blogs__e2e-snapshots)
+
+- Adding `.snapshot()` command by requiring 3rd party module
+- Capturing and saving snapshots of primitive values
+- Testing central data Vuex store using snapshots
+- Making assertions against a DOM element with `cy.get('...').snapshot()`
+
 ### [Codepen Testing](./examples/blogs__codepen-demo)
 
 - Load Codepen and get around iframe security restrictions.
@@ -213,6 +222,11 @@ Get around the lack of a `.hover()` command.
 - Use [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick) to control time.
 - Stub `window.fetch` to control server responses.
 
+### [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics)
+
+- Use [`blacklistHosts`](https://on.cypress.io/configuration#Browser) to block Google Analytics from receiving requests.
+- Use [`cy.stub()`](https://on.cypress.io/stub) to verify that `window.ga(...)` was called with the correct arguments
+
 ### [Application Code](./examples/unit-testing__application-code)
 
 - Unit test your own application code libraries.
@@ -226,7 +240,7 @@ Get around the lack of a `.hover()` command.
 - Import `enzyme` from `node_modules`.
 - Extend chai assertions with [`chai-enzyme`](https://github.com/producthunt/chai-enzyme).
 
-### [Adding Chai Assertions](./examples/extending-cypres__chai-assertions)
+### [Adding Chai Assertions](./examples/extending-cypress__chai-assertions)
 
 - Extend [`chai`](http://chaijs.com/) with the [`chai-date-string`](http://chaijs.com/plugins/chai-date-string/) assertion plugin.
 - Extend [`chai`](http://chaijs.com/) with the [`chai-colors`](http://chaijs.com/plugins/chai-colors/) assertion plugin.

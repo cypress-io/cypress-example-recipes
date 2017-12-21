@@ -1,9 +1,11 @@
+import { add } from '../support/add'
+
 declare function expect(any):any
 
 describe('TypeScript', () => {
   it('works', () => {
     // note TypeScript definition
-    const x:number = 42
+    const x: number = 42
   })
 
   it('checks shape of an object', () => {
@@ -16,5 +18,9 @@ describe('TypeScript', () => {
 
   it('uses cy commands', () => {
     cy.wrap({}).should('deep.eq', {})
+  })
+
+  it('adds numbers', () => {
+    expect(add(2, 3)).to.equal(5)
   })
 })

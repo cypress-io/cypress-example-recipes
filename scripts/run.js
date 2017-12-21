@@ -6,8 +6,17 @@ const Promise = require('bluebird')
 const minimist = require('minimist')
 const prettyMs = require('pretty-ms')
 
-// get the args passed into this process
-const args = minimist(process.argv.slice(2))
+// parse the args passed into this process
+const args = minimist(process.argv.slice(2), {
+  string: ['example'],
+  boolean: ['record'],
+  default: {
+    example: '*',
+  },
+  alias: {
+    groupId: 'group-id',
+  },
+})
 
 const glob = Promise.promisify(require('glob'))
 
@@ -16,7 +25,7 @@ let numFailed = 0
 
 // grab all the npm start scripts from
 // each package.json
-const mask = args.example || '*'
+const mask = args.example
 glob(path.join('examples', mask), {
   realpath: true,
 })
@@ -27,9 +36,9 @@ glob(path.join('examples', mask), {
   .run({
     project: pathToExampleProject,
     browser: args.browser,
-    record: Boolean(args.record),
+    record: args.record,
     group: true,
-    groupId: args.groupId || args['group-id'],
+    groupId: args.groupId,
   })
   .then((results = {}) => {
     numFailed += results.failures

@@ -1,19 +1,114 @@
-machine:
-  node:
-    version: 6.5.0
+version: 2
 
-test:
-  pre:
-    - npm start:
+defaults: &defaults
+  parallelism: 1
+  working_directory: ~/app
+  docker:
+    - image: cypress/browsers:chrome63
+      environment:
+        ## this enables colors + fixes failing unit tests
+        TERM: xterm
+        # avoid million NPM install messages
+        npm_config_loglevel: warn
+        # allow installing when the main user is root
+        npm_config_unsafe_perm: true
+  steps:
+    - checkout
+    - restore_cache:
+        key: root-deps
+    - run: npm install
+    - run: npm prune
+    - save_cache:
+        key: root-deps-{{ checksum "package.json" }}
+        paths:
+          - node_modules
+    - run:
+        command: |
+          cd examples/$CIRCLE_JOB
+          npm run start
+        name: start the server
         background: true
+    - run:
+        command: |
+          cd examples/$CIRCLE_JOB
+          npm run cypress:run -- --record
+        name: Cypress tests
 
-  override:
-    ## remove obsolete dependencies
-    - npm prune
+jobs:
+  # define a new job with defailts for each "examples/*" subfolder
+  blogs__codepen-demo:
+    <<: *defaults
+  blogs__direct-control-angular:
+    <<: *defaults
+  blogs__e2e-api-testing:
+    <<: *defaults
+  blogs__e2e-snapshots:
+    <<: *defaults
+  blogs__vue-vuex-rest:
+    <<: *defaults
+  extending-cypress__chai-assertions:
+    <<: *defaults
+  fundamentals__node-modules:
+    <<: *defaults
+  logging-in__csrf-tokens:
+    <<: *defaults
+  logging-in__html-web-forms:
+    <<: *defaults
+  logging-in__single-sign-on:
+    <<: *defaults
+  logging-in__xhr-web-forms:
+    <<: *defaults
+  preprocessors__typescript-browserify:
+    <<: *defaults
+  preprocessors__typescript-webpack:
+    <<: *defaults
+  server-communication__bootstrapping-your-app:
+    <<: *defaults
+  stubbing-spying__functions:
+    <<: *defaults
+  stubbing-spying__window-fetch:
+    <<: *defaults
+  stubbing-spying__google-analytics:
+    <<: *defaults
+  testing-dom__drag-drop:
+    <<: *defaults
+  testing-dom__form-interactions:
+    <<: *defaults
+  testing-dom__hover-hidden-elements:
+    <<: *defaults
+  testing-dom__tab-handling-links:
+    <<: *defaults
+  unit-testing__application-code:
+    <<: *defaults
+  unit-testing__react-enzyme:
+    <<: *defaults
 
-    ## make sure we did not leave ".only" in one of the tests
-    - npm run stop-only
-
-    ## pass the --record flag for the dashboard
-    ## this executes: 'cypress run --record'
-    - npm run cypress:run -- --record
+workflows:
+  version: 2
+  # when adding new example subfolder with a recipe
+  # add its name here to "create" CircleCI job
+  all-recipes:
+    jobs:
+      - blogs__codepen-demo
+      - blogs__direct-control-angular
+      - blogs__e2e-api-testing
+      - blogs__e2e-snapshots
+      - blogs__vue-vuex-rest
+      - extending-cypress__chai-assertions
+      - fundamentals__node-modules
+      - logging-in__csrf-tokens
+      - logging-in__html-web-forms
+      - logging-in__single-sign-on
+      - logging-in__xhr-web-forms
+      - preprocessors__typescript-browserify
+      - preprocessors__typescript-webpack
+      - server-communication__bootstrapping-your-app
+      - stubbing-spying__functions
+      - stubbing-spying__window-fetch
+      - stubbing-spying__google-analytics
+      - testing-dom__drag-drop
+      - testing-dom__form-interactions
+      - testing-dom__hover-hidden-elements
+      - testing-dom__tab-handling-links
+      - unit-testing__application-code
+      - unit-testing__react-enzyme

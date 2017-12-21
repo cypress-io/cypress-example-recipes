@@ -1,0 +1,11 @@
+{
+  "name": "cypress-example-e2e-snapshots",
+  "version": "1.0.0",
+  "description": "End-to-end snapshots for Cypress",
+  "scripts": {
+    "start": "../../node_modules/.bin/json-server -p 3700 --static . data.json --middlewares ../../node_modules/json-server-reset",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "reset:db": "node reset-db.js"
+  }
+}
