@@ -32,8 +32,14 @@
           // or from the DOM file input list
           const file = e.nativeEvent.testFile || e.nativeEvent.target.files[0]
           const data = new FormData()
-          console.log('uploading file', file)
-          data.append("file", file, "file")
+
+          // log just for the demo
+          console.log('uploading file', file.name)
+          console.log('file object', file)
+
+          // https://developer.mozilla.org/en-US/docs/Web/API/FormData/append
+          // FormData.append(name, value, filename)
+          data.append("file", file, file.name)
           axios.post('https://some-server.com/upload', data)
         }
       });
