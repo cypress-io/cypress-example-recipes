@@ -244,8 +244,8 @@ Get around the lack of a `.hover()` command.
 ### [File Upload in React](./examples/file-upload-react)
 
 - Passing synthetic test file to upload via an [`.trigger('change')`](https://on.cypress.io/trigger) event
-- Stub remote server using [`.route()`](https://on.cypress.io/route)
-- Alternatively stub `axios.post` method using [`.stub()`](https://on.cypress.io/stub)
+- Stub remote server using [`cy.route()`](https://on.cypress.io/route)
+- Alternatively stub `axios.post` method using [`cy.stub()`](https://on.cypress.io/stub)
 
 ### [Adding Chai Assertions](./examples/extending-cypress__chai-assertions)
 
