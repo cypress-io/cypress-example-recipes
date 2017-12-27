@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>File Upload</title>
+  </head>
+  <body>
+    <p>
+      File upload testing using
+      <a href="https://www.cypress.io/">Cypress Test Runner</a>.
+      See the source of this page (React component) and the Cypress integration
+      spec file.
+    </p>
+    <div id="app"></div>
+
+    <script src="https://fb.me/react-15.0.0.js"></script>
+    <script src="https://fb.me/react-dom-15.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/babel">
+      var FileUploadApp = React.createClass({
+        render: function() {
+          return (
+            <div>
+              <h3>File upload</h3>
+              <input id="file1" type="file" onChange={this.fileUpload}/>
+            </div>
+          )
+        },
+
+        fileUpload (e) {
+          // either upload file directly from the event (from a test)
+          // or from the DOM file input list
+          const file = e.nativeEvent.testFile || e.nativeEvent.target.files[0]
+          const data = new FormData()
+
+          // log just for the demo
+          console.log('uploading file', file.name)
+          console.log('file object', file)
+
+          // https://developer.mozilla.org/en-US/docs/Web/API/FormData/append
+          // FormData.append(name, value, filename)
+          data.append("file", file, file.name)
+          axios.post('https://some-server.com/upload', data)
+        }
+      });
+
+      ReactDOM.render(
+        <FileUploadApp/>,
+        document.getElementById('app')
+      );
+    </script>
+  </body>
+</html>
