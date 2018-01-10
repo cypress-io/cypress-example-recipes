@@ -45,6 +45,10 @@ jobs:
       <<: *defaults
     - stage: test
       env:
+        - DIR=file-upload-react
+      <<: *defaults
+    - stage: test
+      env:
         - DIR=fundamentals__node-modules
       <<: *defaults
     - stage: test

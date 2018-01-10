@@ -22,9 +22,11 @@ Recipe | Category | Description
 [Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Blogs | Test an application that uses central data store
 [Stubbing Functions](#stubbing-functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
 [Stubbing `window.fetch`](#stubbing-windowfetch) | Stubbing, Spying | Use `cy.stub()` to control fetch requests
+[Stubbing methods called on `window`](#stubbing-methods-called-on-window) | Stubbing, Spying | Use `cy.stub()` for methods called on `window`
 [Stubbing Google Analytics](#stubbing-google-analytics) | Stubbing, Spying | Use `cy.stub()` to test Google Analytics calls
 [Application Code](#application-code) | Unit Testing | Import and test your own application code
-[React with Enzyme](#react-with-enzyme) | Unit Testing | Test your react components in isolation
+[React with Enzyme](#react-with-enzyme) | Unit Testing | Test your React components in isolation
+[File Upload in React](#file-upload-in-react) | Unit Testing | Test file upload in React app
 [Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
 [Bootstrapping your App](#bootstrapping-your-app) | Server Communication | Seed your application with test data
 
@@ -222,6 +224,10 @@ Get around the lack of a `.hover()` command.
 - Use [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick) to control time.
 - Stub `window.fetch` to control server responses.
 
+### [Stubbing methods called on `window`](./examples/stubbing-spying__window)
+
+- Use [`cy.spy()`](https://on.cypress.io/stub) to test `window.open` behavior.
+
 ### [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics)
 
 - Use [`blacklistHosts`](https://on.cypress.io/configuration#Browser) to block Google Analytics from receiving requests.
@@ -239,6 +245,12 @@ Get around the lack of a `.hover()` command.
 - Unit test a React JSX Component using [Enzyme](http://airbnb.io/enzyme/).
 - Import `enzyme` from `node_modules`.
 - Extend chai assertions with [`chai-enzyme`](https://github.com/producthunt/chai-enzyme).
+
+### [File Upload in React](./examples/file-upload-react)
+
+- Passing synthetic test file to upload via an [`.trigger('change')`](https://on.cypress.io/trigger) event
+- Stub remote server using [`cy.route()`](https://on.cypress.io/route)
+- Alternatively stub `axios.post` method using [`cy.stub()`](https://on.cypress.io/stub)
 
 ### [Adding Chai Assertions](./examples/extending-cypress__chai-assertions)
 

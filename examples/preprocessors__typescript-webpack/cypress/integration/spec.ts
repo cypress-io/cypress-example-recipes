@@ -1,7 +1,7 @@
 import { add } from '../support/add'
 
 // brings type definition from @types/chai
-declare const expect: Chai.ExpectStatic
+// declare const expect: Chai.ExpectStatic
 
 describe('TypeScript', () => {
   it('works', () => {
@@ -23,7 +23,10 @@ describe('TypeScript', () => {
 
   it('tests our example site', () => {
     cy.visit('https://example.cypress.io/')
-    cy.get('.home-list').contains('Querying').click()
+    cy
+      .get('.home-list')
+      .contains('Querying')
+      .click()
     cy.get('#query-btn').should('contain', 'Button')
   })
 
@@ -39,5 +42,9 @@ describe('TypeScript', () => {
 
   it('adds numbers', () => {
     expect(add(2, 3)).to.equal(5)
+  })
+
+  it('uses custom command cy.foo()', () => {
+    cy.foo().should('be.equal', 'foo')
   })
 })
