@@ -3,8 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "cypress:run": "../../node_modules/.bin/cypress run",
-    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "cypress run",
+    "cypress:open": "cypress open",
     "start": "node server.js --port 7079"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "hbs": "^4.0.1",
+    "jquery": "^3.2.1",
+    "minimist": "^1.2.0",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "cypress": "^1.4.1"
   }
 }
