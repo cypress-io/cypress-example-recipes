@@ -60,7 +60,7 @@
     "@cypress/browserify-preprocessor": "^1.0.0",
     "@cypress/snapshot": "^2.0.1",
     "@cypress/webpack-preprocessor": "^1.1.0",
-    "@types/chai": "4.0.8",
+    "@types/chai": "4.1.2",
     "@types/mocha": "^2.2.43",
     "bluebird": "^3.5.1",
     "cypress": "1.4.2",
