@@ -2,7 +2,6 @@
 /* eslint-disable no-console */
 (function () {
   Vue.use(Vuex)
-  Vue.use(window['bootstrap-vue'])
 
   function randomId () {
     return Math.random().toString().substr(2, 10)

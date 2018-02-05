@@ -1,5 +1,5 @@
 module.exports = {
-  "__version": "1.1.4",
+  "__version": "1.4.2",
   "adds numbers": {
     "1": 5,
     "2": 11,
