@@ -3,8 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>Vue.js • TodoMVC</title>
-    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap@next/dist/css/bootstrap.min.css"/>
-    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
     <link rel="stylesheet" href="https://unpkg.com/todomvc-app-css@2.0.4/index.css">
     <style>[v-cloak] { display: none; }</style>
   </head>
@@ -34,13 +32,6 @@
           </li>
         </ul>
       </section>
-      <section class="file-upload">
-        <p>
-          <center>Upload JSON file with Todo items</center>
-        </p>
-        <b-form-file id="todo-file-upload" accept=".json"
-          v-model="file" @change="uploadTodos"></b-form-file>
-      </section>
     </section>
     <footer class="info">
       <p>Written by <a href="http://evanyou.me">Evan You</a></p>
@@ -51,7 +42,6 @@
     <script src="https://unpkg.com/vue@2.5.5/dist/vue.js"></script>
     <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
     <script src="https://unpkg.com/axios@0.17.1/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
