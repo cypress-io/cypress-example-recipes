@@ -63,7 +63,7 @@
     "@types/chai": "4.1.2",
     "@types/mocha": "^2.2.43",
     "bluebird": "^3.5.1",
-    "cypress": "2.0.1",
+    "cypress": "2.0.4",
     "eslint": "^4.15.0",
     "eslint-plugin-cypress-dev": "^1.1.2",
     "eslint-plugin-mocha": "^4.11.0",
