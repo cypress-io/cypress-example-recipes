@@ -1,0 +1,10 @@
+{
+  "name": "seeding-your-database",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "start": "node server/index.js --port 7082"
+  }
+}
