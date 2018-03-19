@@ -74,7 +74,7 @@
     "npm-run-all": "^4.1.1",
     "pretty-ms": "^3.0.1",
     "stop-only": "^1.1.0",
-    "ts-loader": "^3.0.2",
+    "ts-loader": "^4.0.0",
     "tsify": "^3.0.3",
     "tslint": "^5.8.0",
     "typescript": "2.6.2",
