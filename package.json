@@ -59,7 +59,7 @@
   "devDependencies": {
     "@cypress/browserify-preprocessor": "^1.0.0",
     "@cypress/snapshot": "^2.0.1",
-    "@cypress/webpack-preprocessor": "^1.1.0",
+    "@cypress/webpack-preprocessor": "^2.0.0",
     "@types/chai": "4.1.2",
     "@types/mocha": "^2.2.43",
     "bluebird": "^3.5.1",
