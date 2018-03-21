@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
 	"strict": true,
-    "baseUrl": "../../../node_modules",
+    "baseUrl": "../../../node_modules", // Point this to the root `node_modules` of your project. Most likely `../node_modules`
     "target": "es5",
     "lib": ["es5", "dom"],
     "types": ["cypress"],
