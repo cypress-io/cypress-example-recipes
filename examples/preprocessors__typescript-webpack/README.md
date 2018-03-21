@@ -19,26 +19,23 @@ The E2E tests should run in Cypress right away. There are few other commands con
 
 ## Notes
 
-Cypress includes its own TypeScript definitions starting with version 1.1.3. For older versions of Cypress you will need to install them separately using `npm i -D @types/cypress`.
+Cypress includes its own TypeScript definitions starting with version 1.1.3.
 
-To get Mocha TypeScript definitions for `describe`, `it` and other BDD functions install the mocha typings. To get definitions for `expect` install chai typings.
-
+For older versions of Cypress you will need to install them separately.
 ```
-npm install --save-dev @types/mocha @types/chai
+npm i -D @types/cypress @types/mocha @types/chai
 ```
 
 Because `cypress` is installed in the root folder of this repo, [tsconfig.json](tsconfig.json) specifies where to find its types:
 
 ```
 {
-  "include": [
-    "../../node_modules/cypress/index.d.ts",
-    "cypress/*/*.ts"
-  ]
+  "types": ["cypress"],
+  "baseUrl": "../../../node_modules"
 }
 ```
 
-In "normal" installation, TypeScript compiler should be able to find `node_modules/cypress/index.d.ts` automatically.
+In a "normal" installation, the Cypress folder is a child of your root, so the "baseUrl" would just be `"../node_modules"`
 
 Without type definitions
 
