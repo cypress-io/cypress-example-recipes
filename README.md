@@ -193,6 +193,7 @@ Get around the lack of a `.hover()` command.
 
 ### [E2E Snapshots](./examples/blogs__e2e-snapshots)
 
+- Blog post [End-to-End Snapshot Testing](https://www.cypress.io/blog/2018/01/16/end-to-end-snapshot-testing/)
 - Adding `.snapshot()` command by requiring 3rd party module
 - Capturing and saving snapshots of primitive values
 - Testing central data Vuex store using snapshots
@@ -200,12 +201,14 @@ Get around the lack of a `.hover()` command.
 
 ### [Codepen Testing](./examples/blogs__codepen-demo)
 
+- [Blog post](https://www.cypress.io/blog/2017/12/05/testing-apps-hosted-on-codepen/)
 - Load Codepen and get around iframe security restrictions.
 - Use [`cy.request()`](https://on.cypress.io/api/request) to load a document into test iframe.
 - Test [HyperApp.js](https://hyperapp.js.org/) application through the DOM and through actions.
 
 ### [Vue + Vuex + REST Testing](./examples/blogs__vue-vuex-rest)
 
+- [Blog post](https://www.cypress.io/blog/2017/11/28/testing-vue-web-application-with-vuex-data-store-and-rest-backend/)
 - Test a [Vue.js](https://vuejs.org/) web application that uses central data store
 - Mock REST calls to the server
 - Dispatch actions to the [Vuex](https://vuex.vuejs.org/en/) store
