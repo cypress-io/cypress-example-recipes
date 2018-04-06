@@ -1,4 +1,4 @@
-/* global Vue, Vuex, axios, FileReader, window */
+/* global Vue, Vuex, axios, FileReader, window, Promise */
 /* eslint-disable no-console */
 (function () {
   Vue.use(Vuex)
@@ -53,6 +53,13 @@
           commit('SET_LOADING', false)
         })
       },
+
+      /**
+       * Sets text for the future todo
+       *
+       * @param {any} { commit }
+       * @param {string} todo Message
+       */
       setNewTodo ({ commit }, todo) {
         commit('SET_NEW_TODO', todo)
       },
@@ -78,6 +85,20 @@
       },
       clearNewTodo ({ commit }) {
         commit('CLEAR_NEW_TODO')
+      },
+      // example promise-returning action
+      addTodoAfterDelay ({ commit }, { milliseconds, title }) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            const todo = {
+              title,
+              completed: false,
+              id: randomId(),
+            }
+            commit('ADD_TODO', todo)
+            resolve()
+          }, milliseconds)
+        })
       },
     },
   })

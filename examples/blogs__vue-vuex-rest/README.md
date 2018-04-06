@@ -8,6 +8,12 @@ Testing Vue + Vuex + REST TodoMVC using Cypress.
 
 ![Application organization](img/vue-vuex-rest.png)
 
+## Shows how to
+
+- test application through the GUI
+- test application through the Vuex store
+- test application through REST calls
+
 ## Script commands
 
 - `npm run reset:db` resets [data.json](data.json) to have empty list of todos
