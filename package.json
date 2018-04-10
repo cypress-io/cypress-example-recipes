@@ -72,6 +72,7 @@
     "json-server-reset": "^1.0.0",
     "nodemon": "^1.17.0",
     "npm-run-all": "^4.1.1",
+    "parcel-bundler": "1.7.0",
     "pretty-ms": "^3.0.1",
     "stop-only": "^1.1.0",
     "ts-loader": "^4.0.0",
