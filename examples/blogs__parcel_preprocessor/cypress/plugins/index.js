@@ -48,8 +48,12 @@ const onFile = (file) => {
   bundlers[filePath] = new Promise((resolve, reject) => {
     bundler.bundle()
       .then(r => {
-        console.log('finished bundle', r.name)
-        resolve(r.name)
+        if (r) {
+          console.log('finished bundle', r.name)
+          resolve(r.name)
+        } else {
+          reject(new Error(`Could not bundle ${filePath}`))
+        }
       })
       .catch(reject)
   })
@@ -58,6 +62,7 @@ const onFile = (file) => {
     console.log('bundled %s', filePath)
     console.log('into %s', b.name)
 
+    // overwrite the cached promise
     bundlers[filePath] = new Promise((resolve, reject) => {
       file.emit('rerun')
       resolve(b.name)
