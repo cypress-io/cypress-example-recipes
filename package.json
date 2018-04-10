@@ -75,7 +75,7 @@
     "pretty-ms": "^3.0.1",
     "stop-only": "^1.1.0",
     "ts-loader": "^4.0.0",
-    "tsify": "^3.0.3",
+    "tsify": "^4.0.0",
     "tslint": "^5.8.0",
     "typescript": "2.6.2",
     "webpack": "^4.5.0"
