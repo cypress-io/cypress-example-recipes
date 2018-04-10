@@ -1,4 +1,4 @@
-const utils = require('./utils')
+const utils = require('../utils')
 it('works', () => {
   // use "utils" reference
   expect(utils).to.equal('utils')
