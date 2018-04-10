@@ -46,13 +46,22 @@ const onFile = (file) => {
   const bundler = new ParcelBundler(filePath, options)
 
   bundlers[filePath] = new Promise((resolve, reject) => {
-    bundler.on('bundled', b => {
-      console.log('bundled %s', filePath)
-      console.log('into %s', b.name)
+    bundler.bundle()
+      .then(r => {
+        console.log('finished bundle', r.name)
+        resolve(r.name)
+      })
+      .catch(reject)
+  })
+
+  bundler.on('bundled', b => {
+    console.log('bundled %s', filePath)
+    console.log('into %s', b.name)
+
+    bundlers[filePath] = new Promise((resolve, reject) => {
       file.emit('rerun')
       resolve(b.name)
     })
-    bundler.bundle().catch(reject)
   })
 
   file.on('close', () => {
