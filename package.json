@@ -61,7 +61,7 @@
     "@cypress/snapshot": "^2.0.1",
     "@cypress/webpack-preprocessor": "^2.0.0",
     "@types/chai": "4.1.2",
-    "@types/mocha": "^2.2.43",
+    "@types/mocha": "^5.0.0",
     "bluebird": "^3.5.1",
     "cypress": "2.1.0",
     "eslint": "^4.19.0",
