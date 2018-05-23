@@ -70,7 +70,7 @@
     "fs-extra": "^6.0.0",
     "glob": "^7.1.2",
     "json-server-reset": "^1.0.0",
-    "nodemon": "^1.17.0",
+    "nodemon": "^1.17.5",
     "npm-run-all": "^4.1.1",
     "pretty-ms": "^3.0.1",
     "stop-only": "^1.1.0",
