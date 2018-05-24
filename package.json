@@ -53,7 +53,7 @@
     "lodash": "^4.17.2",
     "minimist": "^1.2.0",
     "morgan": "^1.7.0",
-    "react": "^16.3.1",
+    "react": "^16.4.0",
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
