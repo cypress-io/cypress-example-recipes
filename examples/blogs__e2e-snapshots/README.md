@@ -4,6 +4,8 @@ Adding snapshot support to Cypress via 3rd party module [@cypress/snapshot](http
 
 ## Blog Post
 
+[End-to-End Snapshot Testing](https://www.cypress.io/blog/2018/01/16/end-to-end-snapshot-testing/)
+
 ## Lessons
 
 - Adding `.snapshot()` command by requiring 3rd party module [cypress/support/commands.js](cypress/support/commands.js)

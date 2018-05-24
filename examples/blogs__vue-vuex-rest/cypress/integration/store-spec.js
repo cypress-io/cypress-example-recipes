@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 /* eslint-env mocha */
 /* global cy, Cypress */
 import {
@@ -95,15 +96,17 @@ describe('Vuex store', () => {
 
   let store
 
+  const getVuex = () => cy.window({log: false}).its('app.$store')
+
   beforeEach(() => {
-    cy.window().its('app').its('$store').then(s => {
+    getVuex().then(s => {
       store = s
     })
   })
 
   const toJSON = x => JSON.parse(JSON.stringify(x))
 
-  // returns the entire Vuex store
+  // returns the entire Vuex store state
   const getStore = () => cy.then(_ => cy.wrap(toJSON(store.state)))
 
   // returns given getter value from the store
@@ -216,6 +219,19 @@ describe('Vuex store', () => {
         id: '4'
       }
     ])
+  })
+
+  it('can wait on promise-returning store actions', () => {
+    // automatically waits for promise returned by the action to resolve
+    getVuex().invoke('dispatch', 'addTodoAfterDelay', {
+      milliseconds: 2000,
+      title: 'async task'
+    })
+    // log message appears after 2 seconds
+    cy.log('after invoke')
+
+    // assert UI
+    getTodoItems().should('have.length', 1).first().contains('async task')
   })
 
   it('can be driven by dispatching actions', () => {
