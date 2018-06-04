@@ -1,4 +1,4 @@
 {
   "baseUrl": "http://localhost:3700",
-  "videoRecording": false
+  "video": false
 }
