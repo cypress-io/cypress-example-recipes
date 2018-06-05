@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 const utils = require('../utils')
 it('works', () => {
   // use "utils" reference

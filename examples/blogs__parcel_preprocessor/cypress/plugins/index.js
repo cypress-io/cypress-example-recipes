@@ -10,7 +10,7 @@ const bundleOnce = (filePath, outputPath) => {
 
   // seems parcel-bundler 1.7.0 does not want extension
   // in the output filename
-  const basename = path.basename(outFile, '.js')
+  const basename = path.basename(outFile, path.extname(outFile))
   const options = {
     watch: false,
     hmr: false,
@@ -44,6 +44,7 @@ const onFile = (file) => {
     // make output simpler and avoid possible conflicts with Cypress
     // by NOT having hot module reloading
     hmr: false,
+    logLevel: 3,
   }
 
   const bundler = new ParcelBundler(filePath, options)
