@@ -90,6 +90,7 @@ workflows:
       - blogs__direct-control-angular
       - blogs__e2e-api-testing
       - blogs__e2e-snapshots
+      - blogs__parcel_preprocessor
       - blogs__vue-vuex-rest
       - extending-cypress__chai-assertions
       - file-upload-react
