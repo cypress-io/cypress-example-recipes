@@ -8,10 +8,10 @@ defaults: &defaults
   steps:
     - checkout
     - restore_cache:
-        key: cache-dirs
+        key: cache-dirs-{{ .Branch }}
     - run: npm ci
     - save_cache:
-        key: cache-dirs
+        key: cache-dirs-{{ .Branch }}
         paths:
           - ~/.npm
           - ~/.cache
