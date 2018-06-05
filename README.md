@@ -15,6 +15,7 @@ Recipe | Category | Description
 [Drag and Drop](#drag-and-drop) | Testing the DOM | Use `.trigger()` to test drag and drop
 [Typescript with Browserify](#typescript-with-browserify) | Preprocessors | Add typescript support with browserify
 [Typescript with Webpack](#typescript-with-webpack) | Preprocessors | Add typescript support with webpack
+[Parcel bundler](#parcel-bundler) | Preprocessors | Example of bundling specs using Parcel bundler
 [Direct Control of AngularJS](#direct-control-of-angularjs) | Blogs | Bypass the DOM and control AngularJS
 [E2E API Testing](#e2e-api-testing) | Blogs | Run your API Tests with a GUI
 [E2E Snapshots](#e2e-snapshots) | Blogs | End-to-End Snapshot Testing
@@ -177,6 +178,10 @@ Get around the lack of a `.hover()` command.
 
 - Use [`@cypress/webpack-preprocessor`](https://github.com/cypress-io/cypress-webpack-preprocessor) to write Cypress tests in Typescript
 - Lint TypeScript spec code against Cypress type definitions
+
+### [Parcel bundler](./examples/blogs__parcel_preprocessor)
+
+- Uses [preprocessors API](https://on.cypress.io/preprocessors-api) to control [Parcel bundler 🎁](https://parceljs.org/) and bundle spec files
 
 ### [Direct Control of AngularJS](./examples/blogs__direct-control-angular)
 
