@@ -1,6 +1,9 @@
 const ParcelBundler = require('parcel-bundler')
 const path = require('path')
 
+/* global Promise */
+/* eslint-disable no-console */
+
 const bundleOnce = (filePath, outputPath) => {
   const outDir = path.dirname(outputPath)
   const outFile = path.basename(outputPath)
@@ -12,7 +15,7 @@ const bundleOnce = (filePath, outputPath) => {
     watch: false,
     hmr: false,
     outFile: basename,
-    outDir
+    outDir,
   }
   const bundler = new ParcelBundler(filePath, options)
   return bundler.bundle()
@@ -24,7 +27,7 @@ const onFile = (file) => {
   const { filePath, shouldWatch, outputPath } = file
   if (!shouldWatch) {
     console.log('bundle file once without watching to %s', outputPath)
-    return bundleOnce(filePath, outputPath).then(_ => outputPath)
+    return bundleOnce(filePath, outputPath).then(() => outputPath)
   }
 
   if (bundlers[filePath]) {
@@ -40,30 +43,30 @@ const onFile = (file) => {
     watch: shouldWatch,
     // make output simpler and avoid possible conflicts with Cypress
     // by NOT having hot module reloading
-    hmr: false
+    hmr: false,
   }
 
   const bundler = new ParcelBundler(filePath, options)
 
   bundlers[filePath] = new Promise((resolve, reject) => {
     bundler.bundle()
-      .then(r => {
-        if (r) {
-          console.log('finished bundle', r.name)
-          resolve(r.name)
-        } else {
-          reject(new Error(`Could not bundle ${filePath}`))
-        }
-      })
-      .catch(reject)
+    .then((r) => {
+      if (r) {
+        console.log('finished bundle', r.name)
+        resolve(r.name)
+      } else {
+        reject(new Error(`Could not bundle ${filePath}`))
+      }
+    })
+    .catch(reject)
   })
 
-  bundler.on('bundled', b => {
+  bundler.on('bundled', (b) => {
     console.log('bundled %s', filePath)
     console.log('into %s', b.name)
 
     // overwrite the cached promise
-    bundlers[filePath] = new Promise((resolve, reject) => {
+    bundlers[filePath] = new Promise((resolve) => {
       file.emit('rerun')
       resolve(b.name)
     })
@@ -78,6 +81,7 @@ const onFile = (file) => {
   return bundlers[filePath]
 }
 
+// eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
   on('file:preprocessor', onFile)
 }

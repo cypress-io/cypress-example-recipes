@@ -4,7 +4,7 @@ defaults: &defaults
   parallelism: 1
   working_directory: ~/app
   docker:
-    - image: cypress/browsers:chrome65-ff57
+    - image: cypress/base:10
   steps:
     - checkout
     - restore_cache:
