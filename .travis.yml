@@ -14,7 +14,7 @@ cache:
 defaults: &defaults
   script:
     - cd examples/$DIR
-    - echo current dir $PWD
+    - echo current dir $PWD || true
     - npm start -- --silent &
     - npm run cypress:run -- --record
     # kill all background jobs (like "npm start &")
