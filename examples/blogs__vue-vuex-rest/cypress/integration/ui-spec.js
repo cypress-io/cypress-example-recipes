@@ -1,13 +1,7 @@
+/// <reference types="Cypress" />
 /* eslint-env mocha */
 /* global cy, File */
-import {
-  resetDatabase,
-  visit,
-  getTodoApp,
-  enterTodo,
-  getTodoItems,
-  getNewTodoInput
-} from '../support/utils'
+import { enterTodo, getNewTodoInput, getTodoApp, getTodoItems, resetDatabase, visit } from '../support/utils';
 
 it('loads the app', () => {
   visit()
@@ -84,5 +78,27 @@ describe('UI', () => {
     // rendered correctly by the component
     getTodoItems().should('have.length', 4)
     getTodoItems().eq(1).find('.toggle').should('be.checked')
+  })
+
+  context('cy.tasks', () => {
+    it('can observe records saved in the database', () => {
+      const title = 'create a task'
+      enterTodo(title)
+      // https://on.cypress.io/task
+      cy.task('hasSavedRecord', title, {timeout: 10000})
+    })
+
+    it('returns resolved value', () => {
+      const title = 'create a task'
+      enterTodo(title)
+      // https://on.cypress.io/task
+      cy.task('hasSavedRecord', title, {timeout: 10000})
+      .should('contain', {
+        title,
+        completed: false
+      })
+      // there is also an ID
+      .and('have.property', 'id')
+    })
   })
 })
