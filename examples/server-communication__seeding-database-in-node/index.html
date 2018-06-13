@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Seeding Your Database with Test Data</title>
+</head>
+<body>
+  <h1>Seeding Your Database with Test Data</h1>
+  <p>
+    This example has the client app.js make an XHR for the data from the server.
+  </p>
+  <p>
+    In this recipe we are going to seed the database with Cypress so we can control the initial data payload.
+  </p>
+  <div id="posts"></div>
+
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script>
+    const App = {
+      start: function(){
+        $.getJSON('/posts.json')
+        .done((posts) => {
+          this.displayPosts(posts)
+        })
+      },
+
+      displayPosts: function(posts = []){
+        if (posts.length) {
+          const postsDom = posts.map((post) => (
+            `<li>
+              <h2>${post.title}</h2>
+              <p>${post.date}</p>
+              <p>${post.body}</p>
+            </li>`
+          )).join('')
+          $('#posts').append(`<ul>${postsDom}</ul>`)
+        } else {
+          $('#posts').text('No posts')
+        }
+      }
+    }
+
+    App.start()
+  </script>
+</body>
+</html>

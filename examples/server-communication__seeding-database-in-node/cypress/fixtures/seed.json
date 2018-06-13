@@ -1,0 +1,19 @@
+{
+  "posts": [
+    {
+      "title": "Cypress is going open source!",
+      "date": "05-04-2017",
+      "body": "That’s right! After years of development and focused iteration with our early adopters, the most advanced front-end testing tool in the universe is almost ready for its ultimate adventure: going open source!"
+    },
+    {
+      "title": "Atom test utils",
+      "date": "05-05-2017",
+      "body": "At Cypress, we love creating tools that make testing easier and more productive. We also write a lot of tests ourselves to both guide our development and help prevent regressions. While having a lot of tests is a great way to prevent regressions, it can get in the way of getting quick feedback during development. The more tests there are, the longer it takes to run them all, which can slow things down."
+    },
+    {
+      "title": "Why I joined the Cypress.io team",
+      "date": "05-15-2017",
+      "body": "You know what is hard? Changing jobs is hard. Testing web applications is hard. Luckily for me, I have an opportunity to tackle both problems at once!"
+    }
+  ]
+}
