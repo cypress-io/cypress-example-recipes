@@ -30,6 +30,7 @@ Recipe | Category | Description
 [Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
 [Bootstrapping your App](#bootstrapping-your-app) | Server Communication | Seed your application with test data
 [Seeding your Database in Node](#seeding-your-database-in-node) | Server Communication | Seed your database with test data
+[WebSockets](#websockets) | Server Communication | Simple WebSockets Test
 
 ## Overview
 
@@ -274,6 +275,10 @@ Get around the lack of a `.hover()` command.
 - Use [`cy.task()`](https://on.cypress.io/task) to communicate with node via the `pluginsFile`.
 - Seed your database with test data.
 - Wrap your `pluginsFile` so you can require files that use ES modules (`import`/`export`).
+
+### [WebSockets](./examples/websockets)
+
+- Test a simple WebSockets (via socket.io) chat app.
 
 [renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
 [renovate-app]: https://renovateapp.com/
