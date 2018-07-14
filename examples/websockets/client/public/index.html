@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Simple Chat with WebSockets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-one-third">
+            <h1 class="title is-2">Simple Chat</h1>
+            <br>
+            <form id="form">
+              <div class="field">
+                <input class="input" type="text" name="msg" place="Enter your message here" id="msg"/>
+              </div>
+              <div class="field">
+                <button class="button is-primary">Send</button>
+              </div>
+            </form>
+            <br>
+            <ul id="message"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+  </body>
+</html>
