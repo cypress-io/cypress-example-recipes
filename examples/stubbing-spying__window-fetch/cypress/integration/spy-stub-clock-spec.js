@@ -1,10 +1,12 @@
+/// <reference types="Cypress" />
+
 // This recipe utilizes Cypress methods that help you
 // control function behavior and time
 
 // This app we are testing shows a random list of
 // "favorite fruits" that refreshes every 30 seconds
 
-describe('Spy / Stub / Clock', function(){
+describe('Spy / Stub / Clock', function () {
   // Here, we let calls go through to the server
   // but verify that the right call is made by spying on
   // window.fetch
@@ -15,7 +17,7 @@ describe('Spy / Stub / Clock', function(){
       cy.visit('/', {
         onBeforeLoad (win) {
           cy.spy(win, 'fetch')
-        }
+        },
       })
     })
 
@@ -38,9 +40,9 @@ describe('Spy / Stub / Clock', function(){
     before(() => {
       const polyfillUrl = 'https://unpkg.com/unfetch/dist/unfetch.umd.js'
       cy.request(polyfillUrl)
-        .then(response => {
-          polyfill = response.body
-        })
+      .then((response) => {
+        polyfill = response.body
+      })
     })
 
     beforeEach(function () {
@@ -55,7 +57,7 @@ describe('Spy / Stub / Clock', function(){
           delete win.fetch
           win.eval(polyfill)
           win.fetch = win.unfetch
-        }
+        },
       })
     })
 
@@ -81,10 +83,10 @@ describe('Spy / Stub / Clock', function(){
       cy.visit('/', {
         onBeforeLoad (win) {
           cy.stub(win, 'fetch')
-            .withArgs('/favorite-fruits')
-            .as('fetchFavorites')
-            .returns(this.fetchFavoritesDeferred.promise)
-        }
+          .withArgs('/favorite-fruits')
+          .as('fetchFavorites')
+          .returns(this.fetchFavoritesDeferred.promise)
+        },
       })
     })
 
@@ -110,14 +112,14 @@ describe('Spy / Stub / Clock', function(){
 
       it('displays the list of fruits', function () {
         cy.get('.favorite-fruits li').as('favoriteFruits')
-          .should('have.length', 3)
+        .should('have.length', 3)
 
         cy.get('@favoriteFruits').first()
-          .should('have.text', 'Apple')
+        .should('have.text', 'Apple')
         cy.get('@favoriteFruits').eq(1)
-          .should('have.text', 'Banana')
+        .should('have.text', 'Banana')
         cy.get('@favoriteFruits').eq(2)
-          .should('have.text', 'Cantaloupe')
+        .should('have.text', 'Cantaloupe')
       })
     })
 
@@ -144,7 +146,7 @@ describe('Spy / Stub / Clock', function(){
 
       it('displays error', function () {
         cy.get('.favorite-fruits')
-          .should('have.text', 'Failed loading favorite fruits: Orchard under maintenance')
+        .should('have.text', 'Failed loading favorite fruits: Orchard under maintenance')
       })
     })
   })
@@ -164,13 +166,13 @@ describe('Spy / Stub / Clock', function(){
 
       cy.clock()
       cy.visit('/', {
-          onBeforeLoad (win) {
-            cy.stub(win, 'fetch')
-              .withArgs('/favorite-fruits')
-              .as('fetchFavorites')
-              .returns(this.fetchFavoritesDeferred.promise)
-          }
-        })
+        onBeforeLoad (win) {
+          cy.stub(win, 'fetch')
+          .withArgs('/favorite-fruits')
+          .as('fetchFavorites')
+          .returns(this.fetchFavoritesDeferred.promise)
+        },
+      })
     })
 
     describe('when favorite fruits are returned', function () {
@@ -183,14 +185,14 @@ describe('Spy / Stub / Clock', function(){
 
       it('displays list of fruits', function () {
         cy.get('.favorite-fruits li').as('favoriteFruits')
-          .should('have.length', 3)
+        .should('have.length', 3)
 
         cy.get('@favoriteFruits').first()
-          .should('have.text', 'Apple')
+        .should('have.text', 'Apple')
         cy.get('@favoriteFruits').eq(1)
-          .should('have.text', 'Banana')
+        .should('have.text', 'Banana')
         cy.get('@favoriteFruits').eq(2)
-          .should('have.text', 'Cantaloupe')
+        .should('have.text', 'Cantaloupe')
       })
 
       describe('polling every 30 secs', function () {
@@ -212,16 +214,16 @@ describe('Spy / Stub / Clock', function(){
 
         it('displays the new list of fruits', function () {
           cy.get('.favorite-fruits li').as('favoriteFruits')
-            .should('have.length', 4)
+          .should('have.length', 4)
 
           cy.get('@favoriteFruits').first()
-            .should('have.text', 'Orange')
+          .should('have.text', 'Orange')
           cy.get('@favoriteFruits').eq(1)
-            .should('have.text', 'Cherry')
+          .should('have.text', 'Cherry')
           cy.get('@favoriteFruits').eq(2)
-            .should('have.text', 'Raspberry')
+          .should('have.text', 'Raspberry')
           cy.get('@favoriteFruits').eq(3)
-            .should('have.text', 'Pineapple')
+          .should('have.text', 'Pineapple')
         })
       })
     })
