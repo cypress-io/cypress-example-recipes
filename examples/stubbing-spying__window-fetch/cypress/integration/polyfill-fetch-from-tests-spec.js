@@ -1,8 +1,11 @@
 /// <reference types="Cypress" />
 
-// Here, we remove window.fetch and polyfill on top of XHRs
-// useful if your app only supports modern browsers and the
-// production bundle does not include polyfills
+// Here, we remove window.fetch and polyfill it on top of XHRs.
+
+// For most cases it is enough to just `delete window.fetch` because
+// web code usually includes a polyfill for older browsers.
+// But if the application code does not include a polyfill, our test
+// code can load polyfill!
 describe('polyfill window.fetch from tests', function () {
   let polyfill
 
@@ -25,6 +28,8 @@ describe('polyfill window.fetch from tests', function () {
     cy.visit('/', {
       onBeforeLoad (win) {
         delete win.fetch
+        // since the application code does not ship with a polyfill
+        // load a polyfilled "fetch" from the test
         win.eval(polyfill)
         win.fetch = win.unfetch
       },
