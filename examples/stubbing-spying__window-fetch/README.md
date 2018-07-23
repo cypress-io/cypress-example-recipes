@@ -5,3 +5,5 @@
 - Use [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick) to control time.
 - Stub `window.fetch` to control server responses.
 - Replace `window.fetch` with a polyfill that uses XHR and is loaded only for tests
+
+See individual spec files in [cypress/integration](cypress/integration) folder.
