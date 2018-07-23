@@ -5,5 +5,8 @@
   ],
   "env": {
     "node": true
+  },
+  "globals": {
+    "cy": true
   }
 }
