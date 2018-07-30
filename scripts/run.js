@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 
+const _ = require('lodash')
 const path = require('path')
+const assert = require('assert')
 const cypress = require('cypress')
 const Promise = require('bluebird')
 const minimist = require('minimist')
@@ -20,7 +22,7 @@ const args = minimist(process.argv.slice(2), {
 
 const glob = Promise.promisify(require('glob'))
 
-const started = new Date()
+const started = Date.now()
 let numFailed = 0
 
 // grab all the npm start scripts from
@@ -45,11 +47,14 @@ glob(path.join('examples', mask), {
   })
 })
 .then(() => {
-  const duration = new Date() - started
+  const duration = Date.now() - started
 
   console.log('\n--All Done--\n')
   console.log('Total duration:', prettyMs(duration)) // format this however you like
   console.log('Exiting with final code:', numFailed)
+
+  // make sure this is a finite number and not NaN
+  assert(_.isFinite(numFailed), `expected 'numFailed' to be a finite number. got '${numFailed}' instead.`)
 
   process.exit(numFailed)
 })
