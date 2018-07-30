@@ -41,7 +41,7 @@ glob(path.join('examples', mask), {
     groupId: args.groupId,
   })
   .then((results = {}) => {
-    numFailed += results.failures
+    numFailed += results.totalFailed
   })
 })
 .then(() => {
