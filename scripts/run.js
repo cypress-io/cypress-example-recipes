@@ -2,11 +2,16 @@
 
 const _ = require('lodash')
 const path = require('path')
+const debug = require('debug')('cypress-example-recipes')
 const assert = require('assert')
 const cypress = require('cypress')
 const Promise = require('bluebird')
 const minimist = require('minimist')
 const prettyMs = require('pretty-ms')
+
+const assertIsFinite = (value, name) => {
+  return assert(_.isFinite(value), `expected '${name}' to be a finite number. got '${value}' instead.`)
+}
 
 // parse the args passed into this process
 const args = minimist(process.argv.slice(2), {
@@ -39,11 +44,15 @@ glob(path.join('examples', mask), {
     project: pathToExampleProject,
     browser: args.browser,
     record: args.record,
-    group: true,
-    groupId: args.groupId,
   })
   .then((results = {}) => {
+    debug('results were: %o', results)
+
+    assertIsFinite(results.totalFailed, 'results.totalFailed')
+
     numFailed += results.totalFailed
+
+    debug('total numFailed is: %o', numFailed)
   })
 })
 .then(() => {
@@ -54,7 +63,7 @@ glob(path.join('examples', mask), {
   console.log('Exiting with final code:', numFailed)
 
   // make sure this is a finite number and not NaN
-  assert(_.isFinite(numFailed), `expected 'numFailed' to be a finite number. got '${numFailed}' instead.`)
+  assertIsFinite(numFailed, 'numFailed')
 
   process.exit(numFailed)
 })
