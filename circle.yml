@@ -8,13 +8,15 @@ defaults: &defaults
   steps:
     - checkout
     - restore_cache:
-        key: cache-dirs-{{ .Branch }}
+        key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
     - run: npm ci
     - save_cache:
-        key: cache-dirs-{{ .Branch }}
+        key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
         paths:
           - ~/.npm
           - ~/.cache
+    # TODO switch to cache + workspace
+    # see example in https://github.com/cypress-io/cypress-example-kitchensink/blob/master/circle.yml
     - run:
         command: |
           cd examples/$CIRCLE_JOB
@@ -86,25 +88,26 @@ workflows:
     jobs:
       - blogs__codepen-demo
       - blogs__direct-control-angular
-      - blogs__e2e-api-testing
-      - blogs__e2e-snapshots
-      - blogs__vue-vuex-rest
-      - extending-cypress__chai-assertions
-      - file-upload-react
-      - fundamentals__node-modules
-      - logging-in__csrf-tokens
-      - logging-in__html-web-forms
-      - logging-in__single-sign-on
-      - logging-in__xhr-web-forms
-      - preprocessors__typescript-browserify
-      - preprocessors__typescript-webpack
-      - server-communication__bootstrapping-your-app
-      - stubbing-spying__functions
-      - stubbing-spying__window-fetch
-      - stubbing-spying__google-analytics
-      - testing-dom__drag-drop
-      - testing-dom__form-interactions
-      - testing-dom__hover-hidden-elements
-      - testing-dom__tab-handling-links
-      - unit-testing__application-code
-      - unit-testing__react-enzyme
+      # TODO disable for now, enable once grouping works
+      # - blogs__e2e-api-testing
+      # - blogs__e2e-snapshots
+      # - blogs__vue-vuex-rest
+      # - extending-cypress__chai-assertions
+      # - file-upload-react
+      # - fundamentals__node-modules
+      # - logging-in__csrf-tokens
+      # - logging-in__html-web-forms
+      # - logging-in__single-sign-on
+      # - logging-in__xhr-web-forms
+      # - preprocessors__typescript-browserify
+      # - preprocessors__typescript-webpack
+      # - server-communication__bootstrapping-your-app
+      # - stubbing-spying__functions
+      # - stubbing-spying__window-fetch
+      # - stubbing-spying__google-analytics
+      # - testing-dom__drag-drop
+      # - testing-dom__form-interactions
+      # - testing-dom__hover-hidden-elements
+      # - testing-dom__tab-handling-links
+      # - unit-testing__application-code
+      # - unit-testing__react-enzyme
