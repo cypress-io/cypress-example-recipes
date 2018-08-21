@@ -122,23 +122,60 @@ workflows:
       - blogs__vue-vuex-rest:
           requires:
             - build
-      # TODO disable for now, enable once grouping works
-      # - extending-cypress__chai-assertions
-      # - file-upload-react
-      # - fundamentals__node-modules
-      # - logging-in__csrf-tokens
-      # - logging-in__html-web-forms
-      # - logging-in__single-sign-on
-      # - logging-in__xhr-web-forms
-      # - preprocessors__typescript-browserify
-      # - preprocessors__typescript-webpack
-      # - server-communication__bootstrapping-your-app
-      # - stubbing-spying__functions
-      # - stubbing-spying__window-fetch
-      # - stubbing-spying__google-analytics
-      # - testing-dom__drag-drop
-      # - testing-dom__form-interactions
-      # - testing-dom__hover-hidden-elements
-      # - testing-dom__tab-handling-links
-      # - unit-testing__application-code
-      # - unit-testing__react-enzyme
+      - extending-cypress__chai-assertions:
+          requires:
+            - build
+      - file-upload-react:
+          requires:
+            - build
+      - fundamentals__node-modules:
+          requires:
+            - build
+      - logging-in__csrf-tokens:
+          requires:
+            - build
+      - logging-in__html-web-forms:
+          requires:
+            - build
+      - logging-in__single-sign-on:
+          requires:
+            - build
+      - logging-in__xhr-web-forms:
+          requires:
+            - build
+      - preprocessors__typescript-browserify:
+          requires:
+            - build
+      - preprocessors__typescript-webpack:
+          requires:
+            - build
+      - server-communication__bootstrapping-your-app:
+          requires:
+            - build
+      - stubbing-spying__functions:
+          requires:
+            - build
+      - stubbing-spying__window-fetch:
+          requires:
+            - build
+      - stubbing-spying__google-analytics:
+          requires:
+            - build
+      - testing-dom__drag-drop:
+          requires:
+            - build
+      - testing-dom__form-interactions:
+          requires:
+            - build
+      - testing-dom__hover-hidden-elements:
+          requires:
+            - build
+      - testing-dom__tab-handling-links:
+          requires:
+            - build
+      - unit-testing__application-code:
+          requires:
+            - build
+      - unit-testing__react-enzyme:
+          requires:
+            - build
