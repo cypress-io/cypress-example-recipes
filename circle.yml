@@ -113,10 +113,16 @@ workflows:
       - blogs__direct-control-angular:
           requires:
             - build
+      - blogs__e2e-api-testing:
+          requires:
+            - build
+      - blogs__e2e-snapshots:
+          requires:
+            - build
+      - blogs__vue-vuex-rest:
+          requires:
+            - build
       # TODO disable for now, enable once grouping works
-      # - blogs__e2e-api-testing
-      # - blogs__e2e-snapshots
-      # - blogs__vue-vuex-rest
       # - extending-cypress__chai-assertions
       # - file-upload-react
       # - fundamentals__node-modules
