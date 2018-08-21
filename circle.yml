@@ -1,22 +1,14 @@
 version: 2
 
+# testing jobs are all the same, so just use a template
 defaults: &defaults
   parallelism: 1
   working_directory: ~/app
   docker:
     - image: cypress/browsers:chrome65-ff57
   steps:
-    - checkout
-    - restore_cache:
-        key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
-    - run: npm ci
-    - save_cache:
-        key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
-        paths:
-          - ~/.npm
-          - ~/.cache
-    # TODO switch to cache + workspace
-    # see example in https://github.com/cypress-io/cypress-example-kitchensink/blob/master/circle.yml
+    - attach_workspace:
+        at: ~/
     - run:
         command: |
           cd examples/$CIRCLE_JOB
@@ -30,6 +22,34 @@ defaults: &defaults
         name: Cypress tests
 
 jobs:
+  # a single job that installs dependencies (NPM and Cypress)
+  build:
+    working_directory: ~/app
+    docker:
+      - image: cypress/browsers:chrome65-ff57
+    steps:
+      - checkout
+      - restore_cache:
+          key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
+      - run: npm ci
+      # run verify and then save cache.
+      # this ensures that the Cypress verified status is cached too
+      - run: npm run cy:verify
+      - save_cache:
+          key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      # all other test jobs will run AFTER this build job finishes
+      # to avoid reinstalling dependencies, we persist the source folder "app"
+      # and the Cypress binary to workspace, which is the fastest way
+      # for Circle jobs to pass files
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - app
+            - .cache/Cypress
+
   # define a new job with defailts for each "examples/*" subfolder
   blogs__codepen-demo:
     <<: *defaults
@@ -86,8 +106,13 @@ workflows:
   # add its name here to "create" CircleCI job
   all-recipes:
     jobs:
-      - blogs__codepen-demo
-      - blogs__direct-control-angular
+      - build
+      - blogs__codepen-demo:
+          requires:
+            - build
+      - blogs__direct-control-angular:
+          requires:
+            - build
       # TODO disable for now, enable once grouping works
       # - blogs__e2e-api-testing
       # - blogs__e2e-snapshots
