@@ -18,7 +18,7 @@ defaults: &defaults
     - run:
         command: |
           cd examples/$CIRCLE_JOB
-          npm run cypress:run -- --record
+          npm run cypress:run -- --record --parallel --group $CIRCLE_JOB
         name: Cypress tests
 
 jobs:
