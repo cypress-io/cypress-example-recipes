@@ -34,7 +34,7 @@ jobs:
       - run: npm ci
       # run verify and then save cache.
       # this ensures that the Cypress verified status is cached too
-      - run: npm run cy:verify
+      - run: npm run cypress:verify
       - save_cache:
           key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
           paths:
