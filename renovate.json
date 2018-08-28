@@ -12,8 +12,14 @@
     "automerge": false
   },
   "prHourlyLimit": 2,
+  "prConcurrentLimit": 2,
+  "updateNotScheduled": false,
+  "timezone": "America/New_York",
   "schedule": [
-    "after 10pm and before 5am on every weekday",
+    "after 2am and before 5am on every weekday",
     "every weekend"
-  ]
+  ],
+  "lockFileMaintenance": {
+    "enabled": true
+  }
 }
