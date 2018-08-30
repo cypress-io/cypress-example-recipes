@@ -244,6 +244,9 @@ Get around the lack of a `.hover()` command.
 - Import modules using ES2015.
 - Test simple math functions.
 - Test the canonical *fizzbuzz* test.
+- Automatically retry assertion until a given property inside an object:
+  * is added or delted
+  * has expected value
 
 ### [React with Enzyme](./examples/unit-testing__react-enzyme)
 
