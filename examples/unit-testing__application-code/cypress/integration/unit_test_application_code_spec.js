@@ -45,7 +45,7 @@ describe('Unit Test Application Code', function(){
       // the assertion until the "o.foo = 42" runs and the assertion passes
       cy.wrap(o).should('have.property', 'foo', 42)
 
-      // if we are not interested the value we could use assertion
+      // if we are not interested in the value we could use assertion
       //  .should('have.property', 'foo')
     })
 

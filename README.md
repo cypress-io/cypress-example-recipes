@@ -245,7 +245,7 @@ Get around the lack of a `.hover()` command.
 - Test simple math functions.
 - Test the canonical *fizzbuzz* test.
 - Automatically retry assertion until a given property inside an object:
-  * is added or delted
+  * is added or deleted
   * has expected value
 
 ### [React with Enzyme](./examples/unit-testing__react-enzyme)
