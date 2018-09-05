@@ -3,5 +3,6 @@
   "eslint.enable": true,
   "eslint.alwaysShowStatus": true,
   "eslint.autoFixOnSave": true,
-  "standard.enable": false
+  "standard.enable": false,
+  "editor.formatOnSave": true
 }

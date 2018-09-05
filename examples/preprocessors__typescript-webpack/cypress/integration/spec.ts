@@ -1,8 +1,5 @@
 import { add } from '../support/add'
 
-// brings type definition from @types/chai
-// declare const expect: Chai.ExpectStatic
-
 describe('TypeScript', () => {
   it('works', () => {
     // note TypeScript definition
@@ -23,8 +20,7 @@ describe('TypeScript', () => {
 
   it('tests our example site', () => {
     cy.visit('https://example.cypress.io/')
-    cy
-      .get('.home-list')
+    cy.get('.home-list')
       .contains('Querying')
       .click()
     cy.get('#query-btn').should('contain', 'Button')
