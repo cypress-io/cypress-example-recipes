@@ -16,6 +16,7 @@ defaults: &defaults
     - cd examples/$DIR
     - echo current dir $PWD || true
     - npm start -- --silent &
+    - date -R
     - npm run cypress:run -- --record --group $DIR
     # kill all background jobs (like "npm start &")
     - kill $(jobs -p) || true
