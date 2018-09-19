@@ -8,5 +8,5 @@ and [tsify](https://github.com/TypeStrong/tsify)
 
 See:
 - [tsconfig.json](tsconfig.json)
-- [cypress/plugins/index.js](cypress/plugins/index.js)
+- [cypress/background/index.js](cypress/background/index.js)
 - [example test](cypress/integration/spec.ts)

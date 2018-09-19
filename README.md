@@ -275,9 +275,9 @@ Get around the lack of a `.hover()` command.
 
 ### [Seeding your Database in Node](./examples/server-communication__seeding-database-in-node)
 
-- Use [`cy.task()`](https://on.cypress.io/task) to communicate with node via the `pluginsFile`.
+- Use [`cy.task()`](https://on.cypress.io/task) to communicate with node via the `backgroundFile`.
 - Seed your database with test data.
-- Wrap your `pluginsFile` so you can require files that use ES modules (`import`/`export`).
+- Wrap your `backgroundFile` so you can require files that use ES modules (`import`/`export`).
 
 [renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
 [renovate-app]: https://renovateapp.com/

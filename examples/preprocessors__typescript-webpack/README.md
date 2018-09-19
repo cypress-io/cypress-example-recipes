@@ -7,7 +7,7 @@ via [@cypress/webpack-preprocessor](https://github.com/cypress-io/cypress-webpac
 
 See:
 - [webpack.config.js](webpack.config.js)
-- [cypress/plugins/index.js](cypress/plugins/index.js)
+- [cypress/background/index.js](cypress/background/index.js)
 - [example test](cypress/integration/spec.ts)
 
 ## Commands
