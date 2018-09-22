@@ -39,6 +39,7 @@
     "chai-date-string": "^0.1.0",
     "chai-enzyme": "1.0.0-beta.1",
     "chalk": "^2.2.0",
+    "cross-env": "5.2.0",
     "csurf": "^1.9.0",
     "debug": "^3.1.0",
     "dragula": "^3.7.2",
