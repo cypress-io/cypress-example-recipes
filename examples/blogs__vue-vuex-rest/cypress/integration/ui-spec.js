@@ -4,8 +4,8 @@
 import { enterTodo, getNewTodoInput, getTodoApp, getTodoItems, resetDatabase, visit } from '../support/utils';
 
 it('loads the app', () => {
-  visit()
-  getTodoApp().should('be.visible')
+  cy.visit('/')
+  cy.get('.todoapp').should('be.visible')
 })
 
 describe('UI', () => {
