@@ -3,11 +3,28 @@
 /* global cy, File */
 import { enterTodo, getNewTodoInput, getTodoApp, getTodoItems, resetDatabase, visit } from '../support/utils';
 
+//
+// very first two tests
+//
 it('loads the app', () => {
   cy.visit('/')
   cy.get('.todoapp').should('be.visible')
 })
 
+// enable this test only when the database is empty initially
+// or to demonstrate failure
+it.skip('adds 2 todos', () => {
+  cy.visit('http://localhost:3000')
+  cy.get('.new-todo')
+    .type('learn testing{enter}')
+    .type('be cool{enter}')
+  cy.get('.todo-list li')
+    .should('have.length', 2)
+})
+
+//
+// more realistic tests with resetting data before each test
+//
 describe('UI', () => {
   beforeEach(resetDatabase)
   beforeEach(() => visit())
