@@ -99,6 +99,8 @@ jobs:
     <<: *defaults
   unit-testing__react-enzyme:
     <<: *defaults
+  server-communication__env-variables:
+    <<: *defaults
 
 workflows:
   version: 2
@@ -177,5 +179,8 @@ workflows:
           requires:
             - build
       - unit-testing__react-enzyme:
+          requires:
+            - build
+      - server-communication__env-variables:
           requires:
             - build

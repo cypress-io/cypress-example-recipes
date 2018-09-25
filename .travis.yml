@@ -119,6 +119,10 @@ jobs:
       env:
         - DIR=unit-testing__react-enzyme
       <<: *defaults
+    - stage: test
+      env:
+        - DIR=server-communication__env-variables
+      <<: *defaults
 
 notifications:
   slack:
