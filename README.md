@@ -280,7 +280,7 @@ Get around the lack of a `.hover()` command.
 - Seed your database with test data.
 - Wrap your `pluginsFile` so you can require files that use ES modules (`import`/`export`).
 
-### [Environment Variables]('./examples/server-communication__env-variables)
+### [Environment Variables](./examples/server-communication__env-variables)
 
 - Pass values via `env` object in `cypress.json`.
 - Pass any variable that starts with `CYPRESS_`.
