@@ -39,6 +39,7 @@
     "chai-date-string": "^0.1.0",
     "chai-enzyme": "1.0.0-beta.1",
     "chalk": "^2.2.0",
+    "classnames": "2.2.6",
     "cross-env": "5.2.0",
     "csurf": "^1.9.0",
     "debug": "^3.1.0",
@@ -55,8 +56,13 @@
     "lodash": "^4.17.2",
     "minimist": "^1.2.0",
     "morgan": "^1.7.0",
+    "prop-types": "15.6.2",
     "react": "^16.4.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "react-redux": "5.1.0",
+    "redux": "4.0.1",
+    "reselect": "4.0.0",
+    "todomvc-app-css": "2.1.2"
   },
   "devDependencies": {
     "@cypress/browserify-preprocessor": "1.0.2",
@@ -76,6 +82,7 @@
     "nodemon": "1.17.5",
     "npm-run-all": "4.1.2",
     "pretty-ms": "3.2.0",
+    "react-scripts": "2.1.1",
     "stop-only": "1.1.0",
     "ts-loader": "4.4.2",
     "tsify": "4.0.0",
