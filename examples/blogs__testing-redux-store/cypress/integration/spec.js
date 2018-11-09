@@ -104,10 +104,18 @@ const initialVisit = (url, fixture) => {
   })
 }
 
-it.only('can set initial todos from a fixture', () => {
+it('can set initial todos from a fixture', () => {
   initialVisit('/', '3-todos.json')
   // there should be 3 items in the UI
   cy.get('.todo-list li').should('have.length', 3)
   // and 2 of them should be completed
   cy.get('.todo-list li.completed').should('have.length', 2)
+})
+
+it('snapshots', () => {
+  cy.visit('/')
+  cy.focused().type('first{enter}').type('second{enter}').type('third{enter}')
+  cy.contains('.todo-list li', 'second').find('input[type=checkbox]').click()
+  cy.contains('.filters a', 'Completed').click()
+  cy.window().its('store').invoke('getState').toMatchSnapshot()
 })
