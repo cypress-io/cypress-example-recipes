@@ -1,0 +1,17 @@
+[
+  {
+    "id": 0,
+    "text": "first",
+    "completed": true
+  },
+  {
+    "id": 1,
+    "text": "second",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "text": "third",
+    "completed": true
+  }
+]

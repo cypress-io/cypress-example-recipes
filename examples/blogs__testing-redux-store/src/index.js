@@ -1,11 +1,10 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import 'todomvc-app-css/index.css';
-import * as actions from './actions';
-import App from './components/App';
-import reducer from './reducers';
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import 'todomvc-app-css/index.css'
+import App from './components/App'
+import reducer from './reducers'
 
 const store = createStore(reducer)
 
@@ -16,5 +15,7 @@ render(
   document.getElementById('root')
 )
 
-window.store = store
-window.actions = actions
+// expose store during tests
+if (window.Cypress) {
+  window.store = store
+}

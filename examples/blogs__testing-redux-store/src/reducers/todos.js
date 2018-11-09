@@ -1,13 +1,13 @@
 import {
   ADD_TODO,
-  DELETE_TODO,
-  EDIT_TODO,
-  COMPLETE_TODO,
+  CLEAR_COMPLETED,
   COMPLETE_ALL_TODOS,
-  CLEAR_COMPLETED
+  COMPLETE_TODO,
+  DELETE_TODO,
+  EDIT_TODO
 } from '../constants/ActionTypes'
 
-const initialState = [
+const initialState = (window.Cypress && window.initialState) || [
   {
     text: 'Use Redux',
     completed: false,
@@ -15,7 +15,7 @@ const initialState = [
   }
 ]
 
-export default function todos(state = initialState, action) {
+export default function todos (state = initialState, action) {
   switch (action.type) {
     case ADD_TODO:
       return [
@@ -28,22 +28,19 @@ export default function todos(state = initialState, action) {
       ]
 
     case DELETE_TODO:
-      return state.filter(todo =>
-        todo.id !== action.id
-      )
+      return state.filter(todo => todo.id !== action.id)
 
     case EDIT_TODO:
-      return state.map(todo =>
-        todo.id === action.id ?
-          { ...todo, text: action.text } :
-          todo
+      return state.map(
+        todo => (todo.id === action.id ? { ...todo, text: action.text } : todo)
       )
 
     case COMPLETE_TODO:
-      return state.map(todo =>
-        todo.id === action.id ?
-          { ...todo, completed: !todo.completed } :
-          todo
+      return state.map(
+        todo =>
+          (todo.id === action.id
+            ? { ...todo, completed: !todo.completed }
+            : todo)
       )
 
     case COMPLETE_ALL_TODOS:
