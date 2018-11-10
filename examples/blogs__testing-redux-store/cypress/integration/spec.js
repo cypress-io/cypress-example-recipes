@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { addTodo, deleteTodo } from '../../src/actions'
+import { addTodo, deleteTodo } from '../../src/actions';
 
 it('loads', () => {
   cy.visit('/')
@@ -44,6 +44,15 @@ it('is updated by the DOM actions', () => {
     ],
     visibilityFilter: 'show_completed'
   })
+})
+
+it('can wait for delayed updates', () => {
+  cy.visit('/')
+  cy.focused().type('first{enter}').type('second{enter}')
+  // check the dom
+  cy.get('.todo-list li').should('have.length', 3)
+  // now redux store should have been updated
+  cy.window().its('store').invoke('getState').its('todos').should('have.length', 3)
 })
 
 it('can drive app by dispatching actions', () => {

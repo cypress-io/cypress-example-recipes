@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import TodoTextInput from './TodoTextInput'
+import PropTypes from 'prop-types';
+import React from 'react';
+import TodoTextInput from './TodoTextInput';
 
 const Header = ({ addTodo }) => (
   <header className="header">
@@ -9,6 +9,8 @@ const Header = ({ addTodo }) => (
       newTodo
       onSave={(text) => {
         if (text.length !== 0) {
+          // simulate delayed application logic
+          // setTimeout(addTodo, 1000, text)
           addTodo(text)
         }
       }}
