@@ -8,6 +8,7 @@ Testing Redux store using Cypress.
 - drive application by dispatching Redux actions
 - use Redux actions directly from tests
 - load initial Redux state from a fixture file
+- use automatic user function retries with [cypress-pipe](https://github.com/NicholasBoll/cypress-pipe#readme)
 - use snapshot testing via [meinaart/cypress-plugin-snapshots](https://github.com/meinaart/cypress-plugin-snapshots) plugin
 
 ## Application
