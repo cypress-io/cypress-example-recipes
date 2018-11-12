@@ -123,6 +123,9 @@ workflows:
       - blogs__e2e-snapshots:
           requires:
             - build
+      - blogs__testing-redux-store:
+          requires:
+            - build
       - blogs__vue-vuex-rest:
           requires:
             - build
