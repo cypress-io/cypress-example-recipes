@@ -45,6 +45,10 @@ jobs:
       <<: *defaults
     - stage: test
       env:
+        - DIR=blogs__testing-redux-store
+      <<: *defaults
+    - stage: test
+      env:
         - DIR=blogs__vue-vuex-rest
       <<: *defaults
     - stage: test

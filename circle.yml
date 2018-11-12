@@ -59,6 +59,8 @@ jobs:
     <<: *defaults
   blogs__e2e-snapshots:
     <<: *defaults
+  blogs__testing-redux-store:
+    <<: *defaults
   blogs__vue-vuex-rest:
     <<: *defaults
   extending-cypress__chai-assertions:
