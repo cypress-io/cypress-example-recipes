@@ -55,6 +55,18 @@ it('can wait for delayed updates', () => {
   cy.window().its('store').invoke('getState').its('todos').should('have.length', 3)
 })
 
+it('can wait for delayed updates using pipe', () => {
+  cy.visit('/')
+  cy.focused().type('first{enter}').type('second{enter}')
+  const getTodos = (win) =>
+    win.store.getState().todos
+  // using cypress-pipe the "getTodos" will be retried until
+  //   should('have.length', 3) passes
+  //    or
+  //   default command timeout ends
+  cy.window().pipe(getTodos).should('have.length', 3)
+})
+
 it('can drive app by dispatching actions', () => {
   cy.visit('/')
   // dispatch Redux action
