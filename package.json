@@ -85,7 +85,7 @@
     "nodemon": "1.17.5",
     "npm-run-all": "4.1.2",
     "pretty-ms": "3.2.0",
-    "react-scripts": "2.1.1",
+    "react-scripts": "2.1.0",
     "stop-only": "1.1.0",
     "ts-loader": "4.4.2",
     "tsify": "4.0.0",
