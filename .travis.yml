@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-  # 10.3 includes npm@6 which has good "npm ci" command
-  - 10.3
+  # 10.13 includes npm@6 which has good "npm ci" command, and is LTS
+  - 10.13
 
 cache:
   directories:
@@ -42,6 +42,10 @@ jobs:
     - stage: test
       env:
         - DIR=blogs__e2e-snapshots
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=blogs__testing-redux-store
       <<: *defaults
     - stage: test
       env:

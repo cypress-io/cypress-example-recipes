@@ -5,7 +5,7 @@ defaults: &defaults
   parallelism: 1
   working_directory: ~/app
   docker:
-    - image: cypress/browsers:chrome65-ff57
+    - image: cypress/base:10
   steps:
     - attach_workspace:
         at: ~/
@@ -26,7 +26,7 @@ jobs:
   build:
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:chrome65-ff57
+      - image: cypress/base:10
     steps:
       - checkout
       - restore_cache:
@@ -58,6 +58,8 @@ jobs:
   blogs__e2e-api-testing:
     <<: *defaults
   blogs__e2e-snapshots:
+    <<: *defaults
+  blogs__testing-redux-store:
     <<: *defaults
   blogs__vue-vuex-rest:
     <<: *defaults
@@ -119,6 +121,9 @@ workflows:
           requires:
             - build
       - blogs__e2e-snapshots:
+          requires:
+            - build
+      - blogs__testing-redux-store:
           requires:
             - build
       - blogs__vue-vuex-rest:

@@ -19,6 +19,7 @@ Recipe | Category | Description
 [E2E API Testing](#e2e-api-testing) | Blogs | Run your API Tests with a GUI
 [E2E Snapshots](#e2e-snapshots) | Blogs | End-to-End Snapshot Testing
 [Codepen.io Testing](#codepen-testing) | Blogs | Test a HyperApp Codepen demo
+[Testing Redux Store](#testing-redux-store) | Blogs | Test an application that uses Redux data store
 [Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Blogs | Test an application that uses central data store
 [Stubbing Functions](#stubbing-functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
 [Stubbing `window.fetch`](#stubbing-windowfetch) | Stubbing, Spying | Use `cy.stub()` to control fetch requests
@@ -207,6 +208,13 @@ Get around the lack of a `.hover()` command.
 - Load Codepen and get around iframe security restrictions.
 - Use [`cy.request()`](https://on.cypress.io/api/request) to load a document into test iframe.
 - Test [HyperApp.js](https://hyperapp.js.org/) application through the DOM and through actions.
+
+### [Testing Redux Store](./examples/blogs__testing-redux-store)
+
+- control application via DOM and check that Redux store has been properly updated
+- drive application by dispatching Redux actions
+- use Redux actions directly from tests
+- load initial Redux state from a fixture file
 
 ### [Vue + Vuex + REST Testing](./examples/blogs__vue-vuex-rest)
 
