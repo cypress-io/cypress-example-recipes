@@ -59,6 +59,8 @@ jobs:
     <<: *defaults
   blogs__e2e-snapshots:
     <<: *defaults
+  blogs__element-coverage:
+    <<: *defaults
   blogs__testing-redux-store:
     <<: *defaults
   blogs__vue-vuex-rest:
