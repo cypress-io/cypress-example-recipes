@@ -1,0 +1,11 @@
+{
+  "name": "blogs__page-actions",
+  "version": "1.0.0",
+  "description": "Testing Redux store using Cypress",
+  "private": true,
+  "scripts": {
+    "start": "../../node_modules/.bin/http-server -p 8888 -c-1",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:open": "../../node_modules/.bin/cypress open"
+  }
+}
