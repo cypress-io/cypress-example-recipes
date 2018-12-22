@@ -113,9 +113,11 @@ workflows:
   all-recipes:
     jobs:
       - build
-      - blogs__codepen-demo:
-          requires:
-            - build
+      # disable for now
+      # https://github.com/cypress-io/cypress-example-recipes/issues/217
+      # - blogs__codepen-demo:
+      #     requires:
+      #       - build
       - blogs__direct-control-angular:
           requires:
             - build
