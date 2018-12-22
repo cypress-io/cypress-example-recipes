@@ -23,11 +23,10 @@ describe('HyperApp Counter Codepen', () => {
         cy.log('document length', html.length)
         cy.wrap(html).its('length').should('be.greaterThan', 2000)
 
-        cy.document().then(document => {
-          cy.log('Writing HTML into test document')
-          document.write(html)
-          document.close()
-        })
+        const doc = cy.state('document')
+        cy.log('Writing HTML into test document')
+        doc.write(html)
+        doc.close()
       })
 
     cy.wait(1000)

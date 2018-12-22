@@ -18,6 +18,7 @@ Recipe | Category | Description
 [Direct Control of AngularJS](#direct-control-of-angularjs) | Blogs | Bypass the DOM and control AngularJS
 [E2E API Testing](#e2e-api-testing) | Blogs | Run your API Tests with a GUI
 [E2E Snapshots](#e2e-snapshots) | Blogs | End-to-End Snapshot Testing
+[Element Coverage](#element-coverage) | Blogs | Track elements covered by tests
 [Codepen.io Testing](#codepen-testing) | Blogs | Test a HyperApp Codepen demo
 [Testing Redux Store](#testing-redux-store) | Blogs | Test an application that uses Redux data store
 [Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Blogs | Test an application that uses central data store
