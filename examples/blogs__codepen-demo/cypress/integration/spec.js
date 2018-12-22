@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 /* eslint-env mocha */
 /* global cy */
 // our Codepen has top level URL
@@ -18,12 +19,19 @@ describe('HyperApp Counter Codepen', () => {
       })
       .its('body')
       .then(html => {
+        cy.log('got document from url', iframeUrl)
+        cy.log('document length', html.length)
+        cy.wrap(html).its('length').should('be.greaterThan', 2000)
+
         cy.document().then(document => {
           cy.log('Writing HTML into test document')
           document.write(html)
           document.close()
         })
       })
+
+    cy.wait(1000)
+    cy.url().should('include', 'localhost:')
     cy.get('main').should('be.visible')
   })
 

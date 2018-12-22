@@ -11,6 +11,7 @@
   "minor": {
     "automerge": false
   },
+  "rangeStrategy": "pin",
   "prHourlyLimit": 2,
   "prConcurrentLimit": 2,
   "updateNotScheduled": false,

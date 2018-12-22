@@ -209,6 +209,12 @@ Get around the lack of a `.hover()` command.
 - Use [`cy.request()`](https://on.cypress.io/api/request) to load a document into test iframe.
 - Test [HyperApp.js](https://hyperapp.js.org/) application through the DOM and through actions.
 
+### [Element Coverage](./examples/blogs__element-coverage)
+
+- Blog post [Element coverage](https://www.cypress.io/blog/2018/12/20/element-coverage/)
+- Overwrite several built-in Cypress commands like `cy.type` and `cy.click`
+- Draw elements after the tests finish
+
 ### [Testing Redux Store](./examples/blogs__testing-redux-store)
 
 - control application via DOM and check that Redux store has been properly updated

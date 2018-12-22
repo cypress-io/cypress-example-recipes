@@ -59,6 +59,8 @@ jobs:
     <<: *defaults
   blogs__e2e-snapshots:
     <<: *defaults
+  blogs__element-coverage:
+    <<: *defaults
   blogs__testing-redux-store:
     <<: *defaults
   blogs__vue-vuex-rest:
@@ -121,6 +123,9 @@ workflows:
           requires:
             - build
       - blogs__e2e-snapshots:
+          requires:
+            - build
+      - blogs__element-coverage:
           requires:
             - build
       - blogs__testing-redux-store:
