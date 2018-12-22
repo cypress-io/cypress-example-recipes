@@ -29,6 +29,8 @@ describe('HyperApp Counter Codepen', () => {
           document.close()
         })
       })
+
+    cy.url().should('include', 'localhost:')
     cy.get('main').should('be.visible')
   })
 
