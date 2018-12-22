@@ -30,6 +30,7 @@ describe('HyperApp Counter Codepen', () => {
         })
       })
 
+    cy.wait(1000)
     cy.url().should('include', 'localhost:')
     cy.get('main').should('be.visible')
   })
