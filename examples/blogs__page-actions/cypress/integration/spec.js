@@ -138,7 +138,7 @@ describe('TodoMVC - React', function () {
     })
   })
 
-  context('Mark all as completed', function () {
+  context.only('Mark all as completed', function () {
     // New commands used here:
     // - cy.check    https://on.cypress.io/api/check
     // - cy.uncheck  https://on.cypress.io/api/uncheck
@@ -149,10 +149,14 @@ describe('TodoMVC - React', function () {
       // Aliases will automatically persist
       // between hooks and are available
       // in your tests below
-      cy.createDefaultTodos().as('todos')
+      cy.window().its('model').invoke('addTodo', TODO_ITEM_ONE)
+      cy.window().its('model').invoke('addTodo', TODO_ITEM_TWO)
+      cy.window().its('model').invoke('addTodo', TODO_ITEM_THREE)
+      cy.get('.todo-list li').as('todos')
+      // cy.createDefaultTodos().as('todos')
     })
 
-    it('should allow me to mark all items as completed', function () {
+    it.only('should allow me to mark all items as completed', function () {
       // complete all todos
       // we use 'check' instead of 'click'
       // because that indicates our intention much clearer
