@@ -314,19 +314,18 @@ describe('TodoMVC', function () {
   })
 
   context('Routing', function () {
-    beforeEach(function () {
-      cy.createDefaultTodos().as('todos')
-    })
+    beforeEach(addDefaultTodos)
 
     it('should allow me to display active items', function () {
-      cy.get('@todos').eq(1).find('.toggle').check()
+      toggle(1)
+      // the UI feature we are actually testing - the "Active" link
       cy.get('.filters').contains('Active').click()
       cy.get('@todos').eq(0).should('contain', TODO_ITEM_ONE)
       cy.get('@todos').eq(1).should('contain', TODO_ITEM_THREE)
     })
 
     it('should respect the back button', function () {
-      cy.get('@todos').eq(1).find('.toggle').check()
+      toggle(1)
       cy.get('.filters').contains('Active').click()
       cy.get('.filters').contains('Completed').click()
       cy.get('@todos').should('have.length', 1)
@@ -337,13 +336,13 @@ describe('TodoMVC', function () {
     })
 
     it('should allow me to display completed items', function () {
-      cy.get('@todos').eq(1).find('.toggle').check()
+      toggle(1)
       cy.get('.filters').contains('Completed').click()
       cy.get('@todos').should('have.length', 1)
     })
 
     it('should allow me to display all items', function () {
-      cy.get('@todos').eq(1).find('.toggle').check()
+      toggle(1)
       cy.get('.filters').contains('Active').click()
       cy.get('.filters').contains('Completed').click()
       cy.get('.filters').contains('All').click()
