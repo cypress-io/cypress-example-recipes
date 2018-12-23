@@ -1,40 +1,12 @@
 /// <reference types="cypress" />
 // @ts-check
-
-// ***********************************************
-// All of these tests are written to implement
-// the official TodoMVC tests written for Selenium.
-//
-// The Cypress tests cover the exact same functionality,
-// and match the same test names as TodoMVC.
-// Please read our getting started guide
-// https://on.cypress.io/introduction-to-cypress
-//
-// You can find the original TodoMVC tests here:
-// https://github.com/tastejs/todomvc/blob/master/tests/test.js
-// ***********************************************
-
-describe('TodoMVC - React', function () {
-
+describe('TodoMVC', function () {
   // setup these constants to match what TodoMVC does
   let TODO_ITEM_ONE = 'buy some cheese'
   let TODO_ITEM_TWO = 'feed the cat'
   let TODO_ITEM_THREE = 'book a doctors appointment'
 
   beforeEach(function () {
-    // By default Cypress will automatically
-    // clear the Local Storage prior to each
-    // test which ensures no todos carry over
-    // between tests.
-    //
-    // Go out and visit our local web server
-    // before each test, which serves us the
-    // TodoMVC App we want to test against
-    //
-    // We've set our baseUrl to be http://localhost:8888
-    // which is automatically prepended to cy.visit
-    //
-    // https://on.cypress.io/api/visit
     cy.visit('/')
   })
 
@@ -63,25 +35,11 @@ describe('TodoMVC - React', function () {
   })
 
   context('New Todo', function () {
-    // New commands used here:
-    // https://on.cypress.io/type
-    // https://on.cypress.io/eq
-    // https://on.cypress.io/find
-    // https://on.cypress.io/contains
-    // https://on.cypress.io/should
-    // https://on.cypress.io/as
 
     it('should allow me to add todo items', function () {
-      // create 1st todo
       cy.get('.new-todo').type(TODO_ITEM_ONE).type('{enter}')
-
-      // make sure the 1st label contains the 1st todo text
       cy.get('.todo-list li').eq(0).find('label').should('contain', TODO_ITEM_ONE)
-
-      // create 2nd todo
       cy.get('.new-todo').type(TODO_ITEM_TWO).type('{enter}')
-
-      // make sure the 2nd label contains the 2nd todo text
       cy.get('.todo-list li').eq(1).find('label').should('contain', TODO_ITEM_TWO)
     })
 
@@ -139,24 +97,18 @@ describe('TodoMVC - React', function () {
   })
 
   context.only('Mark all as completed', function () {
-    // New commands used here:
-    // - cy.check    https://on.cypress.io/api/check
-    // - cy.uncheck  https://on.cypress.io/api/uncheck
+    // uses custom command going through the UI
+    // beforeEach(() => {
+    //   cy.createDefaultTodos().as('todos')
+    // })
 
+    // uses window.model to invoke method to set todo items
     beforeEach(function () {
-      // This is an example of aliasing
-      // within a hook (beforeEach).
-      // Aliases will automatically persist
-      // between hooks and are available
-      // in your tests below
-      cy.window().its('model').invoke('addTodo', TODO_ITEM_ONE)
-      cy.window().its('model').invoke('addTodo', TODO_ITEM_TWO)
-      cy.window().its('model').invoke('addTodo', TODO_ITEM_THREE)
+      cy.window().its('model').invoke('addTodo', TODO_ITEM_ONE, TODO_ITEM_TWO, TODO_ITEM_THREE)
       cy.get('.todo-list li').as('todos')
-      // cy.createDefaultTodos().as('todos')
     })
 
-    it.only('should allow me to mark all items as completed', function () {
+    it('should allow me to mark all items as completed', function () {
       // complete all todos
       // we use 'check' instead of 'click'
       // because that indicates our intention much clearer

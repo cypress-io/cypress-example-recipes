@@ -28,12 +28,14 @@ var app = app || {};
 		this.onChanges.forEach(function (cb) { cb(); });
 	};
 
-	app.TodoModel.prototype.addTodo = function (title) {
-		this.todos = this.todos.concat({
-			id: Utils.uuid(),
-			title: title,
-			completed: false
-		});
+	app.TodoModel.prototype.addTodo = function (...titles) {
+		titles.forEach(title => {
+			this.todos = this.todos.concat({
+				id: Utils.uuid(),
+				title: title,
+				completed: false
+			});
+		})
 
 		this.inform();
 	};
