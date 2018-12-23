@@ -51,6 +51,8 @@ jobs:
             - .cache/Cypress
 
   # define a new job with defailts for each "examples/*" subfolder
+  blogs__application-actions:
+    <<: *defaults
   blogs__codepen-demo:
     <<: *defaults
   blogs__direct-control-angular:
@@ -118,6 +120,9 @@ workflows:
       # - blogs__codepen-demo:
       #     requires:
       #       - build
+      - blogs__application-actions:
+          requires:
+            - build
       - blogs__direct-control-angular:
           requires:
             - build
