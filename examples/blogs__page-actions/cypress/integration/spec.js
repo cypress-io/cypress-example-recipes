@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 // @ts-check
+import { addDefaultTodos } from './utils';
+
 describe('TodoMVC', function () {
   // setup these constants to match what TodoMVC does
   let TODO_ITEM_ONE = 'buy some cheese'
@@ -96,17 +98,8 @@ describe('TodoMVC', function () {
     })
   })
 
-  context.only('Mark all as completed', function () {
-    // uses custom command going through the UI
-    // beforeEach(() => {
-    //   cy.createDefaultTodos().as('todos')
-    // })
-
-    // uses window.model to invoke method to set todo items
-    beforeEach(function () {
-      cy.window().its('model').invoke('addTodo', TODO_ITEM_ONE, TODO_ITEM_TWO, TODO_ITEM_THREE)
-      cy.get('.todo-list li').as('todos')
-    })
+  context('Mark all as completed', function () {
+    beforeEach(addDefaultTodos)
 
     it('should allow me to mark all items as completed', function () {
       // complete all todos
