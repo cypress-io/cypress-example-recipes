@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 // @ts-check
-import { addDefaultTodos } from './utils';
+import { addDefaultTodos, addTodos, toggle } from './utils';
 
 describe('TodoMVC', function () {
   // setup these constants to match what TodoMVC does
@@ -148,14 +148,7 @@ describe('TodoMVC', function () {
   })
 
   context('Item', function () {
-    // New commands used here:
-    // - cy.clear    https://on.cypress.io/api/clear
-
     it('should allow me to mark items as complete', function () {
-      // we are aliasing the return value of
-      // our custom command 'createTodo'
-      //
-      // the return value is the <li> in the <ul.todos-list>
       cy.createTodo(TODO_ITEM_ONE).as('firstTodo')
       cy.createTodo(TODO_ITEM_TWO).as('secondTodo')
 
@@ -203,12 +196,7 @@ describe('TodoMVC', function () {
   })
 
   context('Editing', function () {
-    // New commands used here:
-    // - cy.blur    https://on.cypress.io/api/blur
-
-    beforeEach(function () {
-      cy.createDefaultTodos().as('todos')
-    })
+    beforeEach(addDefaultTodos)
 
     it('should hide other controls when editing', function () {
       cy.get('@todos').eq(1).as('secondTodo')
@@ -275,25 +263,23 @@ describe('TodoMVC', function () {
 
   context('Counter', function () {
     it('should display the current number of todo items', function () {
-      cy.createTodo(TODO_ITEM_ONE)
+      addTodos(TODO_ITEM_ONE)
       cy.get('.todo-count').contains('1 item left')
-      cy.createTodo(TODO_ITEM_TWO)
+      addTodos(TODO_ITEM_TWO)
       cy.get('.todo-count').contains('2 items left')
     })
   })
 
   context('Clear completed button', function () {
-    beforeEach(function () {
-      cy.createDefaultTodos().as('todos')
-    })
+    beforeEach(addDefaultTodos)
 
     it('should display the correct text', function () {
-      cy.get('@todos').eq(0).find('.toggle').check()
+      toggle(0)
       cy.get('.clear-completed').contains('Clear completed')
     })
 
     it('should remove completed items when clicked', function () {
-      cy.get('@todos').eq(1).find('.toggle').check()
+      toggle(1)
       cy.get('.clear-completed').click()
       cy.get('@todos').should('have.length', 2)
       cy.get('@todos').eq(0).should('contain', TODO_ITEM_ONE)
@@ -301,24 +287,25 @@ describe('TodoMVC', function () {
     })
 
     it('should be hidden when there are no items that are completed', function () {
-      cy.get('@todos').eq(1).find('.toggle').check()
+      toggle(1)
       cy.get('.clear-completed').should('be.visible').click()
       cy.get('.clear-completed').should('not.exist')
     })
   })
 
   context('Persistence', function () {
-    it('should persist its data', function () {
-      // mimicking TodoMVC tests
-      // by writing out this function
-      function testState () {
-        cy.get('@firstTodo').should('contain', TODO_ITEM_ONE).and('have.class', 'completed')
-        cy.get('@secondTodo').should('contain', TODO_ITEM_TWO).and('not.have.class', 'completed')
-      }
+    // mimicking TodoMVC tests
+    // by writing out this function
+    function testState () {
+      cy.get('.todo-list li').eq(0)
+        .should('contain', TODO_ITEM_ONE).and('have.class', 'completed')
+      cy.get('.todo-list li').eq(1)
+        .should('contain', TODO_ITEM_TWO).and('not.have.class', 'completed')
+    }
 
-      cy.createTodo(TODO_ITEM_ONE).as('firstTodo')
-      cy.createTodo(TODO_ITEM_TWO).as('secondTodo')
-      cy.get('@firstTodo').find('.toggle').check()
+    it('should persist its data', function () {
+      addTodos(TODO_ITEM_ONE, TODO_ITEM_TWO)
+      toggle(0)
       .then(testState)
 
       .reload()
@@ -327,12 +314,6 @@ describe('TodoMVC', function () {
   })
 
   context('Routing', function () {
-    // New commands used here:
-    // https://on.cypress.io/window
-    // https://on.cypress.io/its
-    // https://on.cypress.io/invoke
-    // https://on.cypress.io/within
-
     beforeEach(function () {
       cy.createDefaultTodos().as('todos')
     })
