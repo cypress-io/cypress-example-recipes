@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 const TODO_ITEM_ONE = 'buy some cheese'
 const TODO_ITEM_TWO = 'feed the cat'
 const TODO_ITEM_THREE = 'book a doctors appointment'
@@ -9,8 +11,9 @@ const TODO_ITEM_THREE = 'book a doctors appointment'
  *  beforeEach(addDefaultTodos)
  */
 export const addDefaultTodos = () => {
-  cy.window().its('model').invoke('addTodo',
-    TODO_ITEM_ONE, TODO_ITEM_TWO, TODO_ITEM_THREE)
+  cy.window()
+    .its('model')
+    .invoke('addTodo', TODO_ITEM_ONE, TODO_ITEM_TWO, TODO_ITEM_THREE)
   cy.get('.todo-list li').as('todos')
 }
 
@@ -28,7 +31,9 @@ export const addDefaultTodos = () => {
   ```
  */
 export const addTodos = (...todos) => {
-  cy.window().its('model').invoke('addTodo', ...todos)
+  cy.window()
+    .its('model')
+    .invoke('addTodo', ...todos)
 }
 
 /**
@@ -44,7 +49,9 @@ export const addTodos = (...todos) => {
  ```
  */
 export const toggle = (k = 0) =>
-  cy.window().its('model')
+  cy
+    .window()
+    .its('model')
     .then(model => {
       expect(k, 'check item index').to.be.lessThan(model.todos.length)
       model.toggle(model.todos[k])
