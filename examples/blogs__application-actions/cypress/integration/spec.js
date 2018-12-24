@@ -1,6 +1,11 @@
+// type definitions for Cypress object "cy"
 /// <reference types="cypress" />
+
+// type definitions for custom commands like "createDefaultTodos"
+/// <reference types="../support" />
+
 // @ts-check
-import { addDefaultTodos, addTodos, toggle } from './utils';
+import { addDefaultTodos, addTodos, toggle } from './utils'
 
 describe('TodoMVC', function () {
   // setup these constants to match what TodoMVC does
@@ -37,26 +42,37 @@ describe('TodoMVC', function () {
   })
 
   context('New Todo', function () {
-
     it('should allow me to add todo items', function () {
-      cy.get('.new-todo').type(TODO_ITEM_ONE).type('{enter}')
-      cy.get('.todo-list li').eq(0).find('label').should('contain', TODO_ITEM_ONE)
-      cy.get('.new-todo').type(TODO_ITEM_TWO).type('{enter}')
-      cy.get('.todo-list li').eq(1).find('label').should('contain', TODO_ITEM_TWO)
+      cy.get('.new-todo')
+        .type(TODO_ITEM_ONE)
+        .type('{enter}')
+      cy.get('.todo-list li')
+        .eq(0)
+        .find('label')
+        .should('contain', TODO_ITEM_ONE)
+      cy.get('.new-todo')
+        .type(TODO_ITEM_TWO)
+        .type('{enter}')
+      cy.get('.todo-list li')
+        .eq(1)
+        .find('label')
+        .should('contain', TODO_ITEM_TWO)
     })
 
     it('adds items', function () {
       // create several todos then check the number of items in the list
       cy.get('.new-todo')
-      .type('todo A{enter}')
-      .type('todo B{enter}') // we can continue working with same element
-      .type('todo C{enter}') // and keep adding new items
-      .type('todo D{enter}')
+        .type('todo A{enter}')
+        .type('todo B{enter}') // we can continue working with same element
+        .type('todo C{enter}') // and keep adding new items
+        .type('todo D{enter}')
       cy.get('.todo-list li').should('have.length', 4)
     })
 
     it('should clear text input field when an item is added', function () {
-      cy.get('.new-todo').type(TODO_ITEM_ONE).type('{enter}')
+      cy.get('.new-todo')
+        .type(TODO_ITEM_ONE)
+        .type('{enter}')
       cy.get('.new-todo').should('have.text', '')
     })
 
@@ -72,9 +88,18 @@ describe('TodoMVC', function () {
       // `cy.contains` can verify this correctly
       cy.get('.todo-count').contains('3 items left')
 
-      cy.get('@todos').eq(0).find('label').should('contain', TODO_ITEM_ONE)
-      cy.get('@todos').eq(1).find('label').should('contain', TODO_ITEM_TWO)
-      cy.get('@todos').eq(2).find('label').should('contain', TODO_ITEM_THREE)
+      cy.get('@todos')
+        .eq(0)
+        .find('label')
+        .should('contain', TODO_ITEM_ONE)
+      cy.get('@todos')
+        .eq(1)
+        .find('label')
+        .should('contain', TODO_ITEM_TWO)
+      cy.get('@todos')
+        .eq(2)
+        .find('label')
+        .should('contain', TODO_ITEM_THREE)
     })
 
     it('should trim text input', function () {
@@ -88,7 +113,9 @@ describe('TodoMVC', function () {
       // we use as explicit assertion here about the text instead of
       // using 'contain' so we can specify the exact text of the element
       // does not have any whitespace around it
-      cy.get('.todo-list li').eq(0).should('have.text', TODO_ITEM_ONE)
+      cy.get('.todo-list li')
+        .eq(0)
+        .should('have.text', TODO_ITEM_ONE)
     })
 
     it('should show #main and #footer when items added', function () {
@@ -108,39 +135,50 @@ describe('TodoMVC', function () {
       cy.get('.toggle-all').check()
 
       // get each todo li and ensure its class is 'completed'
-      cy.get('@todos').eq(0).should('have.class', 'completed')
-      cy.get('@todos').eq(1).should('have.class', 'completed')
-      cy.get('@todos').eq(2).should('have.class', 'completed')
+      cy.get('@todos')
+        .eq(0)
+        .should('have.class', 'completed')
+      cy.get('@todos')
+        .eq(1)
+        .should('have.class', 'completed')
+      cy.get('@todos')
+        .eq(2)
+        .should('have.class', 'completed')
     })
 
     it('should allow me to clear the complete state of all items', function () {
       // check and then immediately uncheck
-      cy.get('.toggle-all').check().uncheck()
+      cy.get('.toggle-all')
+        .check()
+        .uncheck()
 
-      cy.get('@todos').eq(0).should('not.have.class', 'completed')
-      cy.get('@todos').eq(1).should('not.have.class', 'completed')
-      cy.get('@todos').eq(2).should('not.have.class', 'completed')
+      cy.get('@todos')
+        .eq(0)
+        .should('not.have.class', 'completed')
+      cy.get('@todos')
+        .eq(1)
+        .should('not.have.class', 'completed')
+      cy.get('@todos')
+        .eq(2)
+        .should('not.have.class', 'completed')
     })
 
     it('complete all checkbox should update state when items are completed / cleared', function () {
       // alias the .toggle-all for reuse later
-      cy.get('.toggle-all').as('toggleAll')
-      .check()
-      // this assertion is silly here IMO but
-      // it is what TodoMVC does
-      .should('be.checked')
+      cy.get('.toggle-all')
+        .as('toggleAll')
+        .check()
+        // this assertion is silly here IMO but
+        // it is what TodoMVC does
+        .should('be.checked')
 
-      // alias the first todo and then click it
-      cy.get('.todo-list li').eq(0).as('firstTodo')
-      .find('.toggle')
-      .uncheck()
+      toggle(0)
 
       // reference the .toggle-all element again
       // and make sure its not checked
       cy.get('@toggleAll').should('not.be.checked')
 
-      // reference the first todo again and now toggle it
-      cy.get('@firstTodo').find('.toggle').check()
+      toggle(0)
 
       // assert the toggle all is checked again
       cy.get('@toggleAll').should('be.checked')
@@ -152,11 +190,15 @@ describe('TodoMVC', function () {
       cy.createTodo(TODO_ITEM_ONE).as('firstTodo')
       cy.createTodo(TODO_ITEM_TWO).as('secondTodo')
 
-      cy.get('@firstTodo').find('.toggle').check()
+      cy.get('@firstTodo')
+        .find('.toggle')
+        .check()
       cy.get('@firstTodo').should('have.class', 'completed')
 
       cy.get('@secondTodo').should('not.have.class', 'completed')
-      cy.get('@secondTodo').find('.toggle').check()
+      cy.get('@secondTodo')
+        .find('.toggle')
+        .check()
 
       cy.get('@firstTodo').should('have.class', 'completed')
       cy.get('@secondTodo').should('have.class', 'completed')
@@ -166,11 +208,15 @@ describe('TodoMVC', function () {
       cy.createTodo(TODO_ITEM_ONE).as('firstTodo')
       cy.createTodo(TODO_ITEM_TWO).as('secondTodo')
 
-      cy.get('@firstTodo').find('.toggle').check()
+      cy.get('@firstTodo')
+        .find('.toggle')
+        .check()
       cy.get('@firstTodo').should('have.class', 'completed')
       cy.get('@secondTodo').should('not.have.class', 'completed')
 
-      cy.get('@firstTodo').find('.toggle').uncheck()
+      cy.get('@firstTodo')
+        .find('.toggle')
+        .uncheck()
       cy.get('@firstTodo').should('not.have.class', 'completed')
       cy.get('@secondTodo').should('not.have.class', 'completed')
     })
@@ -178,20 +224,30 @@ describe('TodoMVC', function () {
     it('should allow me to edit an item', function () {
       cy.createDefaultTodos().as('todos')
 
-      cy.get('@todos').eq(1).as('secondTodo')
-      // TODO: fix this, dblclick should
-      // have been issued to label
-      .find('label').dblclick()
+      cy.get('@todos')
+        .eq(1)
+        .as('secondTodo')
+        // TODO: fix this, dblclick should
+        // have been issued to label
+        .find('label')
+        .dblclick()
 
       // clear out the inputs current value
       // and type a new value
-      cy.get('@secondTodo').find('.edit').clear()
-      .type('buy some sausages').type('{enter}')
+      cy.get('@secondTodo')
+        .find('.edit')
+        .clear()
+        .type('buy some sausages')
+        .type('{enter}')
 
       // explicitly assert about the text value
-      cy.get('@todos').eq(0).should('contain', TODO_ITEM_ONE)
+      cy.get('@todos')
+        .eq(0)
+        .should('contain', TODO_ITEM_ONE)
       cy.get('@secondTodo').should('contain', 'buy some sausages')
-      cy.get('@todos').eq(2).should('contain', TODO_ITEM_THREE)
+      cy.get('@todos')
+        .eq(2)
+        .should('contain', TODO_ITEM_THREE)
     })
   })
 
@@ -199,65 +255,104 @@ describe('TodoMVC', function () {
     beforeEach(addDefaultTodos)
 
     it('should hide other controls when editing', function () {
-      cy.get('@todos').eq(1).as('secondTodo')
-      .find('label').dblclick()
+      cy.get('@todos')
+        .eq(1)
+        .as('secondTodo')
+        .find('label')
+        .dblclick()
 
-      cy.get('@secondTodo').find('.toggle').should('not.be.visible')
-      cy.get('@secondTodo').find('label').should('not.be.visible')
-
+      cy.get('@secondTodo')
+        .find('.toggle')
+        .should('not.be.visible')
+      cy.get('@secondTodo')
+        .find('label')
+        .should('not.be.visible')
     })
 
     it('should save edits on blur', function () {
-      cy.get('@todos').eq(1).as('secondTodo')
-      .find('label').dblclick()
+      cy.get('@todos')
+        .eq(1)
+        .as('secondTodo')
+        .find('label')
+        .dblclick()
 
       cy.get('@secondTodo')
-      .find('.edit').clear()
-      .type('buy some sausages')
-      // we can just send the blur event directly
-      // to the input instead of having to click
-      // on another button on the page. though you
-      // could do that its just more mental work
-      .blur()
+        .find('.edit')
+        .clear()
+        .type('buy some sausages')
+        // we can just send the blur event directly
+        // to the input instead of having to click
+        // on another button on the page. though you
+        // could do that its just more mental work
+        .blur()
 
-      cy.get('@todos').eq(0).should('contain', TODO_ITEM_ONE)
+      cy.get('@todos')
+        .eq(0)
+        .should('contain', TODO_ITEM_ONE)
       cy.get('@secondTodo').should('contain', 'buy some sausages')
-      cy.get('@todos').eq(2).should('contain', TODO_ITEM_THREE)
+      cy.get('@todos')
+        .eq(2)
+        .should('contain', TODO_ITEM_THREE)
     })
 
     it('should trim entered text', function () {
-      cy.get('@todos').eq(1).as('secondTodo')
-      .find('label').dblclick()
+      cy.get('@todos')
+        .eq(1)
+        .as('secondTodo')
+        .find('label')
+        .dblclick()
 
       cy.get('@secondTodo')
-      .find('.edit').clear()
-      .type('    buy some sausages    ').type('{enter}')
+        .find('.edit')
+        .clear()
+        .type('    buy some sausages    ')
+        .type('{enter}')
 
-      cy.get('@todos').eq(0).should('contain', TODO_ITEM_ONE)
+      cy.get('@todos')
+        .eq(0)
+        .should('contain', TODO_ITEM_ONE)
       cy.get('@secondTodo').should('contain', 'buy some sausages')
-      cy.get('@todos').eq(2).should('contain', TODO_ITEM_THREE)
+      cy.get('@todos')
+        .eq(2)
+        .should('contain', TODO_ITEM_THREE)
     })
 
     it('should remove the item if an empty text string was entered', function () {
-      cy.get('@todos').eq(1).as('secondTodo')
-      .find('label').dblclick()
+      cy.get('@todos')
+        .eq(1)
+        .as('secondTodo')
+        .find('label')
+        .dblclick()
 
       cy.get('@secondTodo')
-      .find('.edit').clear().type('{enter}')
+        .find('.edit')
+        .clear()
+        .type('{enter}')
 
       cy.get('@todos').should('have.length', 2)
     })
 
     it('should cancel edits on escape', function () {
-      cy.get('@todos').eq(1).as('secondTodo')
-      .find('label').dblclick()
+      cy.get('@todos')
+        .eq(1)
+        .as('secondTodo')
+        .find('label')
+        .dblclick()
 
       cy.get('@secondTodo')
-      .find('.edit').clear().type('foo{esc}')
+        .find('.edit')
+        .clear()
+        .type('foo{esc}')
 
-      cy.get('@todos').eq(0).should('contain', TODO_ITEM_ONE)
-      cy.get('@todos').eq(1).should('contain', TODO_ITEM_TWO)
-      cy.get('@todos').eq(2).should('contain', TODO_ITEM_THREE)
+      cy.get('@todos')
+        .eq(0)
+        .should('contain', TODO_ITEM_ONE)
+      cy.get('@todos')
+        .eq(1)
+        .should('contain', TODO_ITEM_TWO)
+      cy.get('@todos')
+        .eq(2)
+        .should('contain', TODO_ITEM_THREE)
     })
   })
 
@@ -282,13 +377,19 @@ describe('TodoMVC', function () {
       toggle(1)
       cy.get('.clear-completed').click()
       cy.get('@todos').should('have.length', 2)
-      cy.get('@todos').eq(0).should('contain', TODO_ITEM_ONE)
-      cy.get('@todos').eq(1).should('contain', TODO_ITEM_THREE)
+      cy.get('@todos')
+        .eq(0)
+        .should('contain', TODO_ITEM_ONE)
+      cy.get('@todos')
+        .eq(1)
+        .should('contain', TODO_ITEM_THREE)
     })
 
     it('should be hidden when there are no items that are completed', function () {
       toggle(1)
-      cy.get('.clear-completed').should('be.visible').click()
+      cy.get('.clear-completed')
+        .should('be.visible')
+        .click()
       cy.get('.clear-completed').should('not.exist')
     })
   })
@@ -297,19 +398,23 @@ describe('TodoMVC', function () {
     // mimicking TodoMVC tests
     // by writing out this function
     function testState () {
-      cy.get('.todo-list li').eq(0)
-        .should('contain', TODO_ITEM_ONE).and('have.class', 'completed')
-      cy.get('.todo-list li').eq(1)
-        .should('contain', TODO_ITEM_TWO).and('not.have.class', 'completed')
+      cy.get('.todo-list li')
+        .eq(0)
+        .should('contain', TODO_ITEM_ONE)
+        .and('have.class', 'completed')
+      cy.get('.todo-list li')
+        .eq(1)
+        .should('contain', TODO_ITEM_TWO)
+        .and('not.have.class', 'completed')
     }
 
     it('should persist its data', function () {
       addTodos(TODO_ITEM_ONE, TODO_ITEM_TWO)
       toggle(0)
-      .then(testState)
+        .then(testState)
 
-      .reload()
-      .then(testState)
+        .reload()
+        .then(testState)
     })
   })
 
@@ -319,15 +424,25 @@ describe('TodoMVC', function () {
     it('should allow me to display active items', function () {
       toggle(1)
       // the UI feature we are actually testing - the "Active" link
-      cy.get('.filters').contains('Active').click()
-      cy.get('@todos').eq(0).should('contain', TODO_ITEM_ONE)
-      cy.get('@todos').eq(1).should('contain', TODO_ITEM_THREE)
+      cy.get('.filters')
+        .contains('Active')
+        .click()
+      cy.get('@todos')
+        .eq(0)
+        .should('contain', TODO_ITEM_ONE)
+      cy.get('@todos')
+        .eq(1)
+        .should('contain', TODO_ITEM_THREE)
     })
 
     it('should respect the back button', function () {
       toggle(1)
-      cy.get('.filters').contains('Active').click()
-      cy.get('.filters').contains('Completed').click()
+      cy.get('.filters')
+        .contains('Active')
+        .click()
+      cy.get('.filters')
+        .contains('Completed')
+        .click()
       cy.get('@todos').should('have.length', 1)
       cy.go('back')
       cy.get('@todos').should('have.length', 2)
@@ -337,15 +452,23 @@ describe('TodoMVC', function () {
 
     it('should allow me to display completed items', function () {
       toggle(1)
-      cy.get('.filters').contains('Completed').click()
+      cy.get('.filters')
+        .contains('Completed')
+        .click()
       cy.get('@todos').should('have.length', 1)
     })
 
     it('should allow me to display all items', function () {
       toggle(1)
-      cy.get('.filters').contains('Active').click()
-      cy.get('.filters').contains('Completed').click()
-      cy.get('.filters').contains('All').click()
+      cy.get('.filters')
+        .contains('Active')
+        .click()
+      cy.get('.filters')
+        .contains('Completed')
+        .click()
+      cy.get('.filters')
+        .contains('All')
+        .click()
       cy.get('@todos').should('have.length', 3)
     })
 
@@ -354,8 +477,12 @@ describe('TodoMVC', function () {
       // nested 'cy' queries to our parent element <ul.filters>
       cy.get('.filters').within(function () {
         cy.contains('All').should('have.class', 'selected')
-        cy.contains('Active').click().should('have.class', 'selected')
-        cy.contains('Completed').click().should('have.class', 'selected')
+        cy.contains('Active')
+          .click()
+          .should('have.class', 'selected')
+        cy.contains('Completed')
+          .click()
+          .should('have.class', 'selected')
       })
     })
   })
