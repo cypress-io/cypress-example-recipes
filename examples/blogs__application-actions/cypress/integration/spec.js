@@ -5,14 +5,9 @@
 /// <reference types="../support" />
 
 // @ts-check
-import { addDefaultTodos, addTodos, toggle } from './utils'
+import { addDefaultTodos, addTodos, TODO_ITEM_ONE, TODO_ITEM_THREE, TODO_ITEM_TWO, toggle } from './utils';
 
 describe('TodoMVC', function () {
-  // setup these constants to match what TodoMVC does
-  let TODO_ITEM_ONE = 'buy some cheese'
-  let TODO_ITEM_TWO = 'feed the cat'
-  let TODO_ITEM_THREE = 'book a doctors appointment'
-
   beforeEach(function () {
     cy.visit('/')
   })
@@ -42,15 +37,17 @@ describe('TodoMVC', function () {
   })
 
   context('New Todo', function () {
+    const NEW_TODO = '.new-todo'
+
     it('should allow me to add todo items', function () {
-      cy.get('.new-todo')
+      cy.get(NEW_TODO)
         .type(TODO_ITEM_ONE)
         .type('{enter}')
       cy.get('.todo-list li')
         .eq(0)
         .find('label')
         .should('contain', TODO_ITEM_ONE)
-      cy.get('.new-todo')
+      cy.get(NEW_TODO)
         .type(TODO_ITEM_TWO)
         .type('{enter}')
       cy.get('.todo-list li')
@@ -61,7 +58,7 @@ describe('TodoMVC', function () {
 
     it('adds items', function () {
       // create several todos then check the number of items in the list
-      cy.get('.new-todo')
+      cy.get(NEW_TODO)
         .type('todo A{enter}')
         .type('todo B{enter}') // we can continue working with same element
         .type('todo C{enter}') // and keep adding new items
@@ -70,10 +67,10 @@ describe('TodoMVC', function () {
     })
 
     it('should clear text input field when an item is added', function () {
-      cy.get('.new-todo')
+      cy.get(NEW_TODO)
         .type(TODO_ITEM_ONE)
         .type('{enter}')
-      cy.get('.new-todo').should('have.text', '')
+      cy.get(NEW_TODO).should('have.text', '')
     })
 
     it('should append new items to the bottom of the list', function () {
@@ -126,13 +123,15 @@ describe('TodoMVC', function () {
   })
 
   context('Mark all as completed', function () {
+    const TOGGLE_ALL = '.toggle-all'
+
     beforeEach(addDefaultTodos)
 
     it('should allow me to mark all items as completed', function () {
       // complete all todos
       // we use 'check' instead of 'click'
       // because that indicates our intention much clearer
-      cy.get('.toggle-all').check()
+      cy.get(TOGGLE_ALL).check()
 
       // get each todo li and ensure its class is 'completed'
       cy.get('@todos')
@@ -148,7 +147,7 @@ describe('TodoMVC', function () {
 
     it('should allow me to clear the complete state of all items', function () {
       // check and then immediately uncheck
-      cy.get('.toggle-all')
+      cy.get(TOGGLE_ALL)
         .check()
         .uncheck()
 
@@ -165,7 +164,7 @@ describe('TodoMVC', function () {
 
     it('complete all checkbox should update state when items are completed / cleared', function () {
       // alias the .toggle-all for reuse later
-      cy.get('.toggle-all')
+      cy.get(TOGGLE_ALL)
         .as('toggleAll')
         .check()
         // this assertion is silly here IMO but
@@ -357,25 +356,29 @@ describe('TodoMVC', function () {
   })
 
   context('Counter', function () {
+    const COUNTER = '.todo-count'
+
     it('should display the current number of todo items', function () {
       addTodos(TODO_ITEM_ONE)
-      cy.get('.todo-count').contains('1 item left')
+      cy.get(COUNTER).contains('1 item left')
       addTodos(TODO_ITEM_TWO)
-      cy.get('.todo-count').contains('2 items left')
+      cy.get(COUNTER).contains('2 items left')
     })
   })
 
   context('Clear completed button', function () {
+    const CLEAR_COMPLETED = '.clear-completed'
+
     beforeEach(addDefaultTodos)
 
     it('should display the correct text', function () {
       toggle(0)
-      cy.get('.clear-completed').contains('Clear completed')
+      cy.get(CLEAR_COMPLETED).contains('Clear completed')
     })
 
     it('should remove completed items when clicked', function () {
       toggle(1)
-      cy.get('.clear-completed').click()
+      cy.get(CLEAR_COMPLETED).click()
       cy.get('@todos').should('have.length', 2)
       cy.get('@todos')
         .eq(0)
@@ -387,10 +390,10 @@ describe('TodoMVC', function () {
 
     it('should be hidden when there are no items that are completed', function () {
       toggle(1)
-      cy.get('.clear-completed')
+      cy.get(CLEAR_COMPLETED)
         .should('be.visible')
         .click()
-      cy.get('.clear-completed').should('not.exist')
+      cy.get(CLEAR_COMPLETED).should('not.exist')
     })
   })
 
@@ -412,21 +415,21 @@ describe('TodoMVC', function () {
       addTodos(TODO_ITEM_ONE, TODO_ITEM_TWO)
       toggle(0)
         .then(testState)
-
         .reload()
         .then(testState)
     })
   })
 
   context('Routing', function () {
+    const clickFilter = (name) =>
+      cy.get('.filters').contains(name).click()
+
     beforeEach(addDefaultTodos)
 
     it('should allow me to display active items', function () {
       toggle(1)
       // the UI feature we are actually testing - the "Active" link
-      cy.get('.filters')
-        .contains('Active')
-        .click()
+      clickFilter('Active')
       cy.get('@todos')
         .eq(0)
         .should('contain', TODO_ITEM_ONE)
@@ -437,12 +440,8 @@ describe('TodoMVC', function () {
 
     it('should respect the back button', function () {
       toggle(1)
-      cy.get('.filters')
-        .contains('Active')
-        .click()
-      cy.get('.filters')
-        .contains('Completed')
-        .click()
+      clickFilter('Active')
+      clickFilter('Completed')
       cy.get('@todos').should('have.length', 1)
       cy.go('back')
       cy.get('@todos').should('have.length', 2)
@@ -452,23 +451,15 @@ describe('TodoMVC', function () {
 
     it('should allow me to display completed items', function () {
       toggle(1)
-      cy.get('.filters')
-        .contains('Completed')
-        .click()
+      clickFilter('Completed')
       cy.get('@todos').should('have.length', 1)
     })
 
     it('should allow me to display all items', function () {
       toggle(1)
-      cy.get('.filters')
-        .contains('Active')
-        .click()
-      cy.get('.filters')
-        .contains('Completed')
-        .click()
-      cy.get('.filters')
-        .contains('All')
-        .click()
+      clickFilter('Active')
+      clickFilter('Completed')
+      clickFilter('All')
       cy.get('@todos').should('have.length', 3)
     })
 
