@@ -56,3 +56,15 @@ export const toggle = (k = 0) =>
       expect(k, 'check item index').to.be.lessThan(model.todos.length)
       model.toggle(model.todos[k])
     })
+
+const ALL_ITEMS = '.todo-list li'
+
+/**
+ * Returns all todo items
+ * @example
+ ```
+    import {allItems} from './utils'
+    allItems().should('not.exist')
+ ```
+ */
+export const allItems = () => cy.get(ALL_ITEMS)

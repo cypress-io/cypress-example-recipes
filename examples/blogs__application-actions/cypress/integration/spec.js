@@ -5,16 +5,9 @@
 /// <reference types="../support" />
 
 // @ts-check
-import { addDefaultTodos, addTodos, TODO_ITEM_ONE, TODO_ITEM_THREE, TODO_ITEM_TWO, toggle } from './utils';
+import { addDefaultTodos, addTodos, allItems, TODO_ITEM_ONE, TODO_ITEM_THREE, TODO_ITEM_TWO, toggle } from './utils';
 
 describe('TodoMVC', function () {
-  const ALL_ITEMS = '.todo-list li'
-
-  /**
-   * Returns all todo items
-   */
-  const allItems = () => cy.get(ALL_ITEMS)
-
   beforeEach(function () {
     cy.visit('/')
   })
