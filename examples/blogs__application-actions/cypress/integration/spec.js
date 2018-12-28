@@ -122,6 +122,19 @@ describe('TodoMVC', function () {
     })
   })
 
+  context('Adds items (spy example)', () => {
+    it('calls inform', () => {
+      cy
+        .window()
+        .its('model')
+        .then(model => {
+          cy.spy(model, 'inform').as('inform')
+        })
+      addDefaultTodos()
+      cy.get('@inform').should('have.been.calledOnce')
+    })
+  })
+
   context('Mark all as completed', function () {
     const TOGGLE_ALL = '.toggle-all'
 
