@@ -15,6 +15,7 @@ Recipe | Category | Description
 [Drag and Drop](#drag-and-drop) | Testing the DOM | Use `.trigger()` to test drag and drop
 [Typescript with Browserify](#typescript-with-browserify) | Preprocessors | Add typescript support with browserify
 [Typescript with Webpack](#typescript-with-webpack) | Preprocessors | Add typescript support with webpack
+[Application Actions](#application-actions) | Blogs | Application actions are a replacement for Page Objects
 [Direct Control of AngularJS](#direct-control-of-angularjs) | Blogs | Bypass the DOM and control AngularJS
 [E2E API Testing](#e2e-api-testing) | Blogs | Run your API Tests with a GUI
 [E2E Snapshots](#e2e-snapshots) | Blogs | End-to-End Snapshot Testing
@@ -181,6 +182,12 @@ Get around the lack of a `.hover()` command.
 
 - Use [`@cypress/webpack-preprocessor`](https://github.com/cypress-io/cypress-webpack-preprocessor) to write Cypress tests in Typescript
 - Lint TypeScript spec code against Cypress type definitions
+
+### [Application Actions](./examples/blogs__application-actions)
+
+- Invoke methods on the application's model object
+- Avoid code duplication and need to create page object hierarchy
+- Run e2e very quickly by skipping UI unless testing that specific UI feature
 
 ### [Direct Control of AngularJS](./examples/blogs__direct-control-angular)
 
