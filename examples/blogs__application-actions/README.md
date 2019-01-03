@@ -10,4 +10,4 @@ Application actions are a replacement for Page Objects
 
 ## Blog post
 
-`Stop using Page Objects and Start using Application Actions`
+[Stop using Page Objects and Start using App Actions](https://www.cypress.io/blog/2019/01/03/stop-using-page-objects-and-start-using-app-actions/)
