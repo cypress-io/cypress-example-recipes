@@ -5,7 +5,8 @@ export const TODO_ITEM_TWO = 'feed the cat'
 export const TODO_ITEM_THREE = 'book a doctors appointment'
 
 /**
- * Creates default todo items using application action.
+ * App action to creates default todo items.
+ *
  * @example
  *  import { addDefaultTodos } from './utils'
  *  beforeEach(addDefaultTodos)
@@ -18,7 +19,8 @@ export const addDefaultTodos = () => {
 }
 
 /**
- * Creates given todos
+ * App action to create one or more todos.
+ *
  * @example
   ```
   import { addTodos } from './utils'
@@ -37,8 +39,10 @@ export const addTodos = (...todos) => {
 }
 
 /**
- * Toggle given todo item. Returns chain so you can attach more Cypress commands
+ * App action to toggle the given todo item.
+ * Returns chain so you can attach more Cypress commands.
  * @param {number} k index of the todo item to toggle, 0 - first item
+ *
  * @example
  ```js
  import { addTodos, toggle } from './utils'
@@ -60,7 +64,8 @@ export const toggle = (k = 0) =>
 const ALL_ITEMS = '.todo-list li'
 
 /**
- * Returns all todo items
+ * Returns all todo items on the page.
+ *
  * @example
  ```
     import {allItems} from './utils'

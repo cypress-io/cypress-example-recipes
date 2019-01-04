@@ -5,7 +5,15 @@
 /// <reference types="../support" />
 
 // @ts-check
-import { addDefaultTodos, addTodos, allItems, TODO_ITEM_ONE, TODO_ITEM_THREE, TODO_ITEM_TWO, toggle } from './utils';
+import {
+  addDefaultTodos,
+  addTodos,
+  allItems,
+  TODO_ITEM_ONE,
+  TODO_ITEM_THREE,
+  TODO_ITEM_TWO,
+  toggle
+} from './utils'
 
 describe('TodoMVC', function () {
   beforeEach(function () {
@@ -37,6 +45,10 @@ describe('TodoMVC', function () {
   })
 
   context('New Todo', function () {
+    // These tests confirm that add new Todo items works.
+    // All tests go through the DOM and events just like a real user would.
+
+    // Input element selector for typing new todo title
     const NEW_TODO = '.new-todo'
 
     it('should allow me to add todo items', function () {
@@ -124,8 +136,7 @@ describe('TodoMVC', function () {
 
   context('Adds items (spy example)', () => {
     it('calls inform', () => {
-      cy
-        .window()
+      cy.window()
         .its('model')
         .then(model => {
           cy.spy(model, 'inform').as('inform')
@@ -136,8 +147,14 @@ describe('TodoMVC', function () {
   })
 
   context('Mark all as completed', function () {
+    // These tests confirm that we can click one toggle button, and the app
+    // marks all items as completed or incomplete again.
+
+    // Selector for the toggle button we are going to use
     const TOGGLE_ALL = '.toggle-all'
 
+    // Note that these tests do NOT create items through the DOM.
+    // Instead they use app action "addDefaultTodos" before each test
     beforeEach(addDefaultTodos)
 
     it('should allow me to mark all items as completed', function () {
@@ -434,9 +451,18 @@ describe('TodoMVC', function () {
   })
 
   context('Routing', function () {
-    const clickFilter = (name) =>
-      cy.get('.filters').contains(name).click()
+    /**
+     * Little utility function to click on a given filter on the page.
+     * We are testing routing links, so these tests go through the DOM.
+     */
+    const clickFilter = name =>
+      cy
+        .get('.filters')
+        .contains(name)
+        .click()
 
+    // but for everything else, like created todos and toggling, these tests
+    // use app actions.
     beforeEach(addDefaultTodos)
 
     it('should allow me to display active items', function () {
