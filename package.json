@@ -69,7 +69,7 @@
     "@cypress/snapshot": "2.0.1",
     "@cypress/webpack-preprocessor": "2.0.1",
     "@medv/finder": "1.1.1",
-    "@types/chai": "4.1.3",
+    "@types/chai": "4.1.7",
     "@types/mocha": "5.2.5",
     "babel-loader": "8.0.4",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
