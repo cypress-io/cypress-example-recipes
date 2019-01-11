@@ -92,6 +92,15 @@ describe('Drag n Drop', function(){
         .trigger('drop')
     }
 
+    // An alternative method without using drag events
+    function dragBalltoHoop () {
+      cy.get('.balls img').first()
+        .trigger('mousedown', { which: 1 })
+      cy.get('.hoop')
+         .trigger('mousemove')
+        .trigger('mouseup');
+    }
+
     beforeEach(function(){
       cy.clock()
       cy.viewport(400, 350)
@@ -134,6 +143,12 @@ describe('Drag n Drop', function(){
     it('removes ball when it is dropped in hoop', function(){
       dropBallInHoop()
       cy.get('.balls img').should('have.length', 3)
+    })
+
+    it('removes 2 balls when it is dragged to hoop', function () {
+      dragBalltoHoop()
+      dragBalltoHoop()
+      cy.get('.balls img').should('have.length', 2)
     })
 
     it('shows success message when all the balls are dropped in hoop', function(){
