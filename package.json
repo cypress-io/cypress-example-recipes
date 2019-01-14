@@ -10,9 +10,7 @@
     "cypress:version": "cypress version",
     "cypress:verify": "cypress verify",
     "start": "echo Call npm start from each example subfolder! && exit -1",
-    "dev": "nodemon ./scripts/start.js --watch examples",
-    "stop-only": "stop-only examples",
-    "lint:js": "eslint --fix scripts/*.js"
+    "stop-only": "stop-only examples"
   },
   "repository": {
     "type": "git",
