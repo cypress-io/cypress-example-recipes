@@ -47,42 +47,27 @@ Recipe | Category | Description
 ```bash
 ## install all dependencies
 npm install
-
-## this will call 'npm start' on
-## each example project's package.json
-## which boots all of the webservers
-npm start
-
-## if you want to make modifications
-## to the node server code and have
-## the servers automatically restart
-npm run dev
 ```
 
 ## Opening Cypress GUI
 
 ```bash
-## this opens the cypress test runner
-## in the GUI mode. because this project
-## is a monorepo - we've opened the test
-## runner in 'global' mode.
-##
-## so to run a specific project you'll
-## need to manually add the folder to Cypress.
-npm run cypress:open
-
-## alternatively, to open a specific
-## example without running in global mode
-cd ./examples/drag-n-drop
+cd ./examples/testing-dom__drag-drop
+# start local server
+npm start &
+# and open Cypress GUI
 npm run cypress:open
 ```
 
 ## Running from the CLI
 
+Same as running Cypress GUI but with `cypress run` command (and any CLI arguments)
+
 ```bash
-## runs all example projects and
-## exits with the total number of
-## failures across all projects
+cd ./examples/testing-dom__drag-drop
+# start local server
+npm start &
+# run Cypress tests headlessly
 npm run cypress:run
 
 ### runs all example projects in specific browser
@@ -92,18 +77,6 @@ npm run cypress:run -- --browser chrome
 ### sends test results, videos, screenshots
 ### to Cypress dashboard
 npm run cypress:run -- --record
-
-### run single example by name
-npm run cypress:run -- --example blogs__codepen-demo
-
-## switch the browser to chrome instead
-## of the default headless Electron browser
-npm run cypress:run:chrome
-
-## alternatively, to run a specific
-## example without running all projects
-cd ./examples/drag-n-drop
-npm run cypress:run
 ```
 
 ## Recipes
