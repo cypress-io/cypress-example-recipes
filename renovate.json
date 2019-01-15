@@ -4,23 +4,30 @@
   ],
   "automerge": true,
   "commitMessage": "{{semanticPrefix}}Update {{depName}} to {{newVersion}} 🌟",
-  "prTitle": "{{semanticPrefix}}{{#if isPin}}Pin{{else}}Update{{/if}} dependency {{depName}} to version {{#if isRange}}{{newVersion}}{{else}}{{#if isMajor}}{{newVersionMajor}}.x{{else}}{{newVersion}}{{/if}}{{/if}} 🌟",
+  "prTitle": "{{semanticPrefix}}{{#if isPin}}Pin{{else}}Update{{/if}} dependency {{depName}} to version {{newVersion}} 🌟",
   "major": {
     "automerge": false
   },
   "minor": {
     "automerge": false
   },
-  "rangeStrategy": "pin",
+  "prConcurrentLimit": 3,
   "prHourlyLimit": 2,
-  "prConcurrentLimit": 2,
-  "updateNotScheduled": false,
-  "timezone": "America/New_York",
+  "rangeStrategy": "pin",
   "schedule": [
-    "after 2am and before 5am on every weekday",
+    "after 10pm and before 5am on every weekday",
     "every weekend"
   ],
+  "updateNotScheduled": false,
+  "timezone": "America/New_York",
   "lockFileMaintenance": {
     "enabled": true
-  }
+  },
+  "separatePatchReleases": true,
+  "separateMultipleMajor": true,
+  "masterIssue": true,
+  "labels": [
+    "type: dependencies",
+    "renovate"
+  ]
 }
