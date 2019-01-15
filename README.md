@@ -15,9 +15,11 @@ Recipe | Category | Description
 [Drag and Drop](#drag-and-drop) | Testing the DOM | Use `.trigger()` to test drag and drop
 [Typescript with Browserify](#typescript-with-browserify) | Preprocessors | Add typescript support with browserify
 [Typescript with Webpack](#typescript-with-webpack) | Preprocessors | Add typescript support with webpack
+[Application Actions](#application-actions) | Blogs | Application actions are a replacement for Page Objects
 [Direct Control of AngularJS](#direct-control-of-angularjs) | Blogs | Bypass the DOM and control AngularJS
 [E2E API Testing](#e2e-api-testing) | Blogs | Run your API Tests with a GUI
 [E2E Snapshots](#e2e-snapshots) | Blogs | End-to-End Snapshot Testing
+[Element Coverage](#element-coverage) | Blogs | Track elements covered by tests
 [Codepen.io Testing](#codepen-testing) | Blogs | Test a HyperApp Codepen demo
 [Testing Redux Store](#testing-redux-store) | Blogs | Test an application that uses Redux data store
 [Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Blogs | Test an application that uses central data store
@@ -45,42 +47,27 @@ Recipe | Category | Description
 ```bash
 ## install all dependencies
 npm install
-
-## this will call 'npm start' on
-## each example project's package.json
-## which boots all of the webservers
-npm start
-
-## if you want to make modifications
-## to the node server code and have
-## the servers automatically restart
-npm run dev
 ```
 
 ## Opening Cypress GUI
 
 ```bash
-## this opens the cypress test runner
-## in the GUI mode. because this project
-## is a monorepo - we've opened the test
-## runner in 'global' mode.
-##
-## so to run a specific project you'll
-## need to manually add the folder to Cypress.
-npm run cypress:open
-
-## alternatively, to open a specific
-## example without running in global mode
-cd ./examples/drag-n-drop
+cd ./examples/testing-dom__drag-drop
+# start local server
+npm start &
+# and open Cypress GUI
 npm run cypress:open
 ```
 
 ## Running from the CLI
 
+Same as running Cypress GUI but with `cypress run` command (and any CLI arguments)
+
 ```bash
-## runs all example projects and
-## exits with the total number of
-## failures across all projects
+cd ./examples/testing-dom__drag-drop
+# start local server
+npm start &
+# run Cypress tests headlessly
 npm run cypress:run
 
 ### runs all example projects in specific browser
@@ -90,18 +77,6 @@ npm run cypress:run -- --browser chrome
 ### sends test results, videos, screenshots
 ### to Cypress dashboard
 npm run cypress:run -- --record
-
-### run single example by name
-npm run cypress:run -- --example blogs__codepen-demo
-
-## switch the browser to chrome instead
-## of the default headless Electron browser
-npm run cypress:run:chrome
-
-## alternatively, to run a specific
-## example without running all projects
-cd ./examples/drag-n-drop
-npm run cypress:run
 ```
 
 ## Recipes
@@ -181,6 +156,12 @@ Get around the lack of a `.hover()` command.
 - Use [`@cypress/webpack-preprocessor`](https://github.com/cypress-io/cypress-webpack-preprocessor) to write Cypress tests in Typescript
 - Lint TypeScript spec code against Cypress type definitions
 
+### [Application Actions](./examples/blogs__application-actions)
+
+- Invoke methods on the application's model object
+- Avoid code duplication and need to create page object hierarchy
+- Run e2e very quickly by skipping UI unless testing that specific UI feature
+
 ### [Direct Control of AngularJS](./examples/blogs__direct-control-angular)
 
 - [Blog article written here](https://www.cypress.io/blog/2017/11/15/Control-Angular-Application-From-E2E-Tests)
@@ -208,6 +189,12 @@ Get around the lack of a `.hover()` command.
 - Load Codepen and get around iframe security restrictions.
 - Use [`cy.request()`](https://on.cypress.io/api/request) to load a document into test iframe.
 - Test [HyperApp.js](https://hyperapp.js.org/) application through the DOM and through actions.
+
+### [Element Coverage](./examples/blogs__element-coverage)
+
+- Blog post [Element coverage](https://www.cypress.io/blog/2018/12/20/element-coverage/)
+- Overwrite several built-in Cypress commands like `cy.type` and `cy.click`
+- Draw elements after the tests finish
 
 ### [Testing Redux Store](./examples/blogs__testing-redux-store)
 
