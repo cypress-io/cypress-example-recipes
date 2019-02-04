@@ -115,89 +115,87 @@ workflows:
   all-recipes:
     jobs:
       - build
-      # disable for now
-      # https://github.com/cypress-io/cypress-example-recipes/issues/217
       - blogs__codepen-demo:
           requires:
             - build
-      # - blogs__application-actions:
-      #     requires:
-      #       - build
-      # - blogs__direct-control-angular:
-      #     requires:
-      #       - build
-      # - blogs__e2e-api-testing:
-      #     requires:
-      #       - build
-      # - blogs__e2e-snapshots:
-      #     requires:
-      #       - build
-      # - blogs__element-coverage:
-      #     requires:
-      #       - build
-      # - blogs__testing-redux-store:
-      #     requires:
-      #       - build
-      # - blogs__vue-vuex-rest:
-      #     requires:
-      #       - build
-      # - extending-cypress__chai-assertions:
-      #     requires:
-      #       - build
-      # - file-upload-react:
-      #     requires:
-      #       - build
-      # - fundamentals__node-modules:
-      #     requires:
-      #       - build
-      # - logging-in__csrf-tokens:
-      #     requires:
-      #       - build
-      # - logging-in__html-web-forms:
-      #     requires:
-      #       - build
-      # - logging-in__single-sign-on:
-      #     requires:
-      #       - build
-      # - logging-in__xhr-web-forms:
-      #     requires:
-      #       - build
-      # - preprocessors__typescript-browserify:
-      #     requires:
-      #       - build
-      # - preprocessors__typescript-webpack:
-      #     requires:
-      #       - build
-      # - server-communication__bootstrapping-your-app:
-      #     requires:
-      #       - build
-      # - stubbing-spying__functions:
-      #     requires:
-      #       - build
-      # - stubbing-spying__window-fetch:
-      #     requires:
-      #       - build
-      # - stubbing-spying__google-analytics:
-      #     requires:
-      #       - build
-      # - testing-dom__drag-drop:
-      #     requires:
-      #       - build
-      # - testing-dom__form-interactions:
-      #     requires:
-      #       - build
-      # - testing-dom__hover-hidden-elements:
-      #     requires:
-      #       - build
-      # - testing-dom__tab-handling-links:
-      #     requires:
-      #       - build
-      # - unit-testing__application-code:
-      #     requires:
-      #       - build
-      # - unit-testing__react-enzyme:
-      #     requires:
-      #       - build
-      # - server-communication__env-variables:
-      #     requires:
-      #       - build
+      - blogs__application-actions:
+          requires:
+            - build
+      - blogs__direct-control-angular:
+          requires:
+            - build
+      - blogs__e2e-api-testing:
+          requires:
+            - build
+      - blogs__e2e-snapshots:
+          requires:
+            - build
+      - blogs__element-coverage:
+          requires:
+            - build
+      - blogs__testing-redux-store:
+          requires:
+            - build
+      - blogs__vue-vuex-rest:
+          requires:
+            - build
+      - extending-cypress__chai-assertions:
+          requires:
+            - build
+      - file-upload-react:
+          requires:
+            - build
+      - fundamentals__node-modules:
+          requires:
+            - build
+      - logging-in__csrf-tokens:
+          requires:
+            - build
+      - logging-in__html-web-forms:
+          requires:
+            - build
+      - logging-in__single-sign-on:
+          requires:
+            - build
+      - logging-in__xhr-web-forms:
+          requires:
+            - build
+      - preprocessors__typescript-browserify:
+          requires:
+            - build
+      - preprocessors__typescript-webpack:
+          requires:
+            - build
+      - server-communication__bootstrapping-your-app:
+          requires:
+            - build
+      - stubbing-spying__functions:
+          requires:
+            - build
+      - stubbing-spying__window-fetch:
+          requires:
+            - build
+      - stubbing-spying__google-analytics:
+          requires:
+            - build
+      - testing-dom__drag-drop:
+          requires:
+            - build
+      - testing-dom__form-interactions:
+          requires:
+            - build
+      - testing-dom__hover-hidden-elements:
+          requires:
+            - build
+      - testing-dom__tab-handling-links:
+          requires:
+            - build
+      - unit-testing__application-code:
+          requires:
+            - build
+      - unit-testing__react-enzyme:
+          requires:
+            - build
+      - server-communication__env-variables:
+          requires:
+            - build

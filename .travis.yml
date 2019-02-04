@@ -27,108 +27,106 @@ jobs:
     # define a separate script for each "examples/*" folder
     # this will run it in a separate job on TravisCI
 
-    # disable for now
-    # https://github.com/cypress-io/cypress-example-recipes/issues/217
     - stage: test
       env:
         - DIR=blogs__codepen-demo
       <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=blogs__direct-control-angular
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=blogs__e2e-api-testing
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=blogs__e2e-snapshots
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=blogs__testing-redux-store
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=blogs__vue-vuex-rest
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=extending-cypress__chai-assertions
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=file-upload-react
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=fundamentals__node-modules
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=logging-in__csrf-tokens
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=logging-in__html-web-forms
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=logging-in__single-sign-on
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=logging-in__xhr-web-forms
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=preprocessors__typescript-browserify
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=preprocessors__typescript-webpack
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=server-communication__bootstrapping-your-app
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=stubbing-spying__functions
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=stubbing-spying__window-fetch
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=testing-dom__drag-drop
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=testing-dom__form-interactions
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=testing-dom__hover-hidden-elements
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=testing-dom__tab-handling-links
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=unit-testing__application-code
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=unit-testing__react-enzyme
-    #   <<: *defaults
-    # - stage: test
-    #   env:
-    #     - DIR=server-communication__env-variables
-    #   <<: *defaults
+    - stage: test
+      env:
+        - DIR=blogs__direct-control-angular
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=blogs__e2e-api-testing
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=blogs__e2e-snapshots
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=blogs__testing-redux-store
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=blogs__vue-vuex-rest
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=extending-cypress__chai-assertions
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=file-upload-react
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=fundamentals__node-modules
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=logging-in__csrf-tokens
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=logging-in__html-web-forms
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=logging-in__single-sign-on
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=logging-in__xhr-web-forms
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=preprocessors__typescript-browserify
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=preprocessors__typescript-webpack
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=server-communication__bootstrapping-your-app
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=stubbing-spying__functions
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=stubbing-spying__window-fetch
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=testing-dom__drag-drop
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=testing-dom__form-interactions
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=testing-dom__hover-hidden-elements
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=testing-dom__tab-handling-links
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=unit-testing__application-code
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=unit-testing__react-enzyme
+      <<: *defaults
+    - stage: test
+      env:
+        - DIR=server-communication__env-variables
+      <<: *defaults
 
 notifications:
   slack:
