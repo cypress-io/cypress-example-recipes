@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 // This recipe is very similar to the 'Logging In - XHR web form'
 // except that is uses regular HTML form submission
 // instead of using XHR's.
@@ -13,17 +15,20 @@
 // Be sure to run `npm start` to start the server
 // before running the tests below.
 
-describe('Logging In - HTML Web Form', function(){
-  context('Unauthorized', function(){
-    it('is redirected on visit to /dashboard when no session', function(){
+describe('Logging In - HTML Web Form', function () {
+  context('Unauthorized', function () {
+    it('is redirected on visit to /dashboard when no session', function () {
       // we must have a valid session cookie to be logged
       // in else we are redirected to /unauthorized
       cy.visit('/dashboard')
-      cy.get('h3').should('contain', 'You are not logged in and cannot access this page')
+      cy.get('h3').should(
+        'contain',
+        'You are not logged in and cannot access this page'
+      )
       cy.url().should('include', 'unauthorized')
     })
 
-    it('is redirected using cy.request', function(){
+    it('is redirected using cy.request', function () {
       // instead of visiting the page above we can test this by issuing
       // a cy.request, checking the status code and redirectedToUrl property.
 
@@ -33,39 +38,38 @@ describe('Logging In - HTML Web Form', function(){
       // that normalizes the url the browser would normally follow during a redirect
       cy.request({
         url: '/dashboard',
-        followRedirect: false // turn off following redirects automatically
-        })
-        .then((resp) => {
-          // should have status code 302
-          expect(resp.status).to.eq(302)
+        followRedirect: false, // turn off following redirects automatically
+      }).then((resp) => {
+        // should have status code 302
+        expect(resp.status).to.eq(302)
 
-          // when we turn off following redirects Cypress will also send us
-          // a 'redirectedToUrl' property with the fully qualified URL that we
-          // were redirected to.
-          expect(resp.redirectedToUrl).to.eq('http://localhost:7077/unauthorized')
-        })
+        // when we turn off following redirects Cypress will also send us
+        // a 'redirectedToUrl' property with the fully qualified URL that we
+        // were redirected to.
+        expect(resp.redirectedToUrl).to.eq('http://localhost:7077/unauthorized')
+      })
     })
   })
 
-  context('HTML form submission', function(){
-    beforeEach(function(){
+  context('HTML form submission', function () {
+    beforeEach(function () {
       cy.visit('/login')
     })
 
-    it('displays errors on login', function(){
+    it('displays errors on login', function () {
       cy.get('input[name=username]').type('jane.lae')
       cy.get('input[name=password]').type('password123{enter}')
 
       // we should have visible errors now
       cy.get('p.error')
-        .should('be.visible')
-        .and('contain', 'Username and/or password is incorrect')
+      .should('be.visible')
+      .and('contain', 'Username and/or password is incorrect')
 
       // and still be on the same URL
       cy.url().should('include', '/login')
     })
 
-    it('redirects to /dashboard on success', function(){
+    it('redirects to /dashboard on success', function () {
       cy.get('input[name=username]').type('jane.lane')
       cy.get('input[name=password]').type('password123{enter}')
 
@@ -78,8 +82,8 @@ describe('Logging In - HTML Web Form', function(){
     })
   })
 
-  context('HTML form submission with cy.request', function(){
-    it('can bypass the UI and yet still test log in', function(){
+  context('HTML form submission with cy.request', function () {
+    it('can bypass the UI and yet still test log in', function () {
       // oftentimes once we have a proper e2e test around logging in
       // there is NO more reason to actually use our UI to log in users
       // doing so wastes is slow because our entire page has to load,
@@ -90,29 +94,28 @@ describe('Logging In - HTML Web Form', function(){
       // and sets cookies under the hood. This acts exactly as if the requests
       // came from the browser
       cy.request({
-          method: 'POST',
-          url: '/login', // baseUrl will be prepended to this url
-          form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
-          body: {
-            username: 'jane.lane',
-            password: 'password123'
-          }
-        })
+        method: 'POST',
+        url: '/login', // baseUrl will be prepended to this url
+        form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
+        body: {
+          username: 'jane.lane',
+          password: 'password123',
+        },
+      })
 
-        // just to prove we have a session
-        cy.getCookie('cypress-session-cookie').should('exist')
+      // just to prove we have a session
+      cy.getCookie('cypress-session-cookie').should('exist')
     })
   })
 
-  context('Reusable "login" custom command', function(){
+  context('Reusable "login" custom command', function () {
     // typically we'd put this in cypress/support/commands.js
     // but because this custom command is specific to this example
     // we'll keep it here
     Cypress.Commands.add('loginByForm', (username, password) => {
-
       Cypress.log({
         name: 'loginByForm',
-        message: username + ' | ' + password
+        message: `${username} | ${password}`,
       })
 
       return cy.request({
@@ -120,35 +123,35 @@ describe('Logging In - HTML Web Form', function(){
         url: '/login',
         form: true,
         body: {
-          username: username,
-          password: password
-        }
+          username,
+          password,
+        },
       })
     })
 
-    beforeEach(function(){
+    beforeEach(function () {
       // login before each test
       cy.loginByForm('jane.lane', 'password123')
     })
 
-    it('can visit /dashboard', function(){
+    it('can visit /dashboard', function () {
       cy.visit('/dashboard')
       cy.get('h1').should('contain', 'jane.lane')
     })
 
-    it('can visit /users', function(){
+    it('can visit /users', function () {
       cy.visit('/users')
       cy.get('h1').should('contain', 'Users')
     })
 
-    it('can simply request other authenticated pages', function(){
+    it('can simply request other authenticated pages', function () {
       // instead of visiting each page and waiting for all
       // the associated resources to load, we can instead
       // just issue a simple HTTP request and make an
       // assertion about the response body
       cy.request('/admin')
-        .its('body')
-        .should('include', '<h1>Admin</h1>')
+      .its('body')
+      .should('include', '<h1>Admin</h1>')
     })
   })
 })
