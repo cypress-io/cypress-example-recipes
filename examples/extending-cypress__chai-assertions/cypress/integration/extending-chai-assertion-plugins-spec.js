@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+/// <reference path="../support/index.d.ts" />
 
 // we installed this node_module in package.json
 // https://github.com/hurrymaplelad/chai-colors
