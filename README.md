@@ -5,6 +5,7 @@ This repo contains various recipes for testing common scenarios using Cypress.
 Recipe | Category | Description
 --- | --- | ---
 [Node Modules](#node-modules) | Fundamentals | Import your own node modules
+[Environment variables](#environment-variables) | Fundamentals | Passing environment variables to tests
 [Single Sign On](#single-sign-on) | Logging In | Log in across multiple servers or providers
 [HTML Web Forms](#html-web-forms) | Logging In | Log in with a basic HTML form
 [XHR Web Forms](#xhr-web-forms) | Logging In | Log in using an XHR
@@ -33,7 +34,6 @@ Recipe | Category | Description
 [Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
 [Bootstrapping your App](#bootstrapping-your-app) | Server Communication | Seed your application with test data
 [Seeding your Database in Node](#seeding-your-database-in-node) | Server Communication | Seed your database with test data
-[Environment variables](#environment-variables) | Fundamentals | Passing environment variables to tests
 
 ## Overview
 
