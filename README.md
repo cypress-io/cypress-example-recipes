@@ -6,6 +6,7 @@ Recipe | Category | Description
 --- | --- | ---
 [Node Modules](#node-modules) | Fundamentals | Import your own node modules
 [Environment variables](#environment-variables) | Fundamentals | Passing environment variables to tests
+[Dynamic tests](#dynamic-tests) | Fundamentals | Create tests dynamically from data
 [Single Sign On](#single-sign-on) | Logging In | Log in across multiple servers or providers
 [HTML Web Forms](#html-web-forms) | Logging In | Log in with a basic HTML form
 [XHR Web Forms](#xhr-web-forms) | Logging In | Log in using an XHR
@@ -281,6 +282,12 @@ Get around the lack of a `.hover()` command.
 - Pass values via `env` object in `cypress.json`.
 - Pass any variable that starts with `CYPRESS_`.
 - Extract any other variable from `process.env` using `cypress/plugins/index.js` callback.
+
+### [Dynamic tests]('./examples/fundamentals__dynamic-tests)
+
+- Run the same test against different viewport resolutions
+- Run the same test against multiple subdomains
+- Generate tests based on the fetched data
 
 [renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
 [renovate-app]: https://renovateapp.com/
