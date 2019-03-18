@@ -1,7 +1,7 @@
 {
   "name": "unit-test-react-enzyme",
   "version": "1.0.0",
-  "description": "Unit testing React code using Enzyme, react-testing-library",
+  "description": "Unit testing React code using Enzyme, react-testing-library and cypress-react-unit-test",
   "scripts": {
     "start": "echo nothing to start, unit testing example",
     "cypress:run": "../../node_modules/.bin/cypress run",
