@@ -248,7 +248,7 @@ Get around the lack of a `.hover()` command.
 
 ### [React](./examples/unit-testing__react)
 
-- Unit test a React JSX Component using [Enzyme](http://airbnb.io/enzyme/) or [react-testing-library](https://github.com/kentcdodds/react-testing-library) library.
+- Unit test a React JSX Component using [Enzyme](http://airbnb.io/enzyme/), [react-testing-library](https://github.com/kentcdodds/react-testing-library) and [cypress-react-unit-test](https://github.com/bahmutov/cypress-react-unit-test) libraries.
 
 ### [File Upload in React](./examples/file-upload-react)
 
