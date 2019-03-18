@@ -289,5 +289,9 @@ Get around the lack of a `.hover()` command.
 - Run the same test against multiple subdomains
 - Generate tests based on the fetched data
 
+## Development
+
+See [Development.md](Development.md)
+
 [renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
 [renovate-app]: https://renovateapp.com/
