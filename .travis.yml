@@ -121,7 +121,7 @@ jobs:
       <<: *defaults
     - stage: test
       env:
-        - DIR=unit-testing__react-enzyme
+        - DIR=unit-testing__react
       <<: *defaults
     - stage: test
       env:

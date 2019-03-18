@@ -124,7 +124,7 @@ jobs:
     <<: *defaults
   unit-testing__application-code:
     <<: *defaults
-  unit-testing__react-enzyme:
+  unit-testing__react:
     <<: *defaults
   server-communication__env-variables:
     <<: *defaults
@@ -234,7 +234,7 @@ workflows:
       - unit-testing__application-code:
           requires:
             - build
-      - unit-testing__react-enzyme:
+      - unit-testing__react:
           requires:
             - build
       - server-communication__env-variables:
