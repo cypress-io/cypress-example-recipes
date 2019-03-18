@@ -81,6 +81,7 @@
     "pluralize": "7.0.0",
     "pretty-ms": "3.2.0",
     "react-scripts": "2.1.0",
+    "react-testing-library": "6.0.0",
     "start-server-and-test": "1.7.12",
     "stop-only": "1.1.0",
     "terminal-banner": "1.1.0",
