@@ -64,10 +64,8 @@ jobs:
   # define a new job with defailts for each "examples/*" subfolder
   blogs__application-actions:
     <<: *defaults
-  # fails in headless mode
-  # https://github.com/cypress-io/cypress-example-recipes/issues/217
-  # blogs__codepen-demo:
-  #   <<: *defaults
+  blogs__codepen-demo:
+    <<: *defaults
   blogs__direct-control-angular:
     <<: *defaults
   blogs__e2e-api-testing:
@@ -138,9 +136,11 @@ workflows:
               only:
                 - master
                 - test-each-recipe-238
-      - blogs__codepen-demo:
-          requires:
-            - build
+      # fails in headless mode
+      # https://github.com/cypress-io/cypress-example-recipes/issues/217
+      # - blogs__codepen-demo:
+      #     requires:
+      #       - build
       - blogs__application-actions:
           requires:
             - build
