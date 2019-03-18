@@ -50,6 +50,13 @@ jobs:
             - app
             - .cache/Cypress
 
+  # dummy job running after all end-to-end tests
+  after-tests:
+    docker:
+      - image: cypress/base:10
+    steps:
+      - run: echo "all good"
+
   # a single utility job that can run multiple examples one by one
   test-examples:
     parallelism: 1
@@ -246,7 +253,7 @@ workflows:
       # we can have a single job wait on all other test jobs here.
       # CircleCI can then just require this 1 job to pass
       # see https://glebbahmutov.com/blog/parallel-or-not/
-      - end-to-end-tests:
+      - after-tests:
           require:
             - blogs__codepen-demo
             - blogs__application-actions
