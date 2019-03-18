@@ -8,6 +8,7 @@ const bluebird = require('bluebird')
 const tb = require('terminal-banner').terminalBanner
 const execa = require('execa')
 const pluralize = require('pluralize')
+const { resolve, join } = require('path')
 
 const getExamples = () => {
   return globby('examples/*', { onlyFiles: false, expandDirectories: false })
@@ -23,6 +24,15 @@ const printFolders = (folders) => {
 
 const testExample = (folder) => {
   tb(`Testing ${folder}`)
+  // runs the same script command in each folder
+  // maybe if there is no script, should skip it?
+  const filename = resolve(join(folder, 'package.json'))
+  const { scripts } = require(filename)
+  if (!scripts || !scripts['test:ci']) {
+    console.log('file %s does not have script "test:ci"', filename)
+    console.log('skipping...')
+    return
+  }
   return execa('npm', ['run', 'test:ci'], { stdio: 'inherit', cwd: folder })
 }
 
@@ -31,13 +41,14 @@ const testExamples = (folders) => {
 }
 
 const filterSomeFolders = (folders) => {
-  // blogs__codepen-demo breaks in headless mode
-  return folders.filter((folder) => !folder.includes('codepen'))
+  // if you want to filter some folders by name for example
+  return folders
 }
 
 bluebird
 .try(getExamples)
-.then((list) => list.slice(0, 7))
+.then((list) => list.sort())
+// .then((list) => list.slice(0, 3))
 .then(filterSomeFolders)
 .tap(printFolders)
 .then(testExamples)

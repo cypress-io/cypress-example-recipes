@@ -59,6 +59,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
+      - run: npm run test:ci
 
   # define a new job with defailts for each "examples/*" subfolder
   blogs__application-actions:
