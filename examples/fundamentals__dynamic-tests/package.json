@@ -1,7 +1,7 @@
 {
-  "name": "es2015-commonsjs-modules",
+  "name": "dynamic-tests",
   "version": "1.0.0",
-  "description": "Use NPM modules from Cypress specs",
+  "description": "Create Cypress tests dynamically from data",
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open"
