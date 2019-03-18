@@ -153,7 +153,6 @@ workflows:
             branches:
               only:
                 - master
-                - allow-chrome-flag
 
       # fails in headless mode
       # https://github.com/cypress-io/cypress-example-recipes/issues/217
