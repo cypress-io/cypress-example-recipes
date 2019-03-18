@@ -107,6 +107,8 @@ jobs:
     <<: *defaults
   server-communication__env-variables:
     <<: *defaults
+  fundamentals__dynamic-tests:
+    <<: *defaults
 
 workflows:
   version: 2
@@ -197,5 +199,8 @@ workflows:
           requires:
             - build
       - server-communication__env-variables:
+          requires:
+            - build
+      - fundamentals__dynamic-tests:
           requires:
             - build
