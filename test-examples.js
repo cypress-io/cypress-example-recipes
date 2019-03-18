@@ -9,6 +9,16 @@ const tb = require('terminal-banner').terminalBanner
 const execa = require('execa')
 const pluralize = require('pluralize')
 const { resolve, join } = require('path')
+const arg = require('arg')
+
+// to run "npm run test:ci:chrome" scripts in each example
+// run this script with "--chrome" CLI flag
+const args = arg({
+  '--chrome': Boolean,
+})
+console.log('args', args)
+
+const scriptName = args['--chrome'] ? 'test:ci:chrome' : 'test:ci'
 
 const getExamples = () => {
   return globby('examples/*', { onlyFiles: false, expandDirectories: false })
@@ -28,12 +38,12 @@ const testExample = (folder) => {
   // maybe if there is no script, should skip it?
   const filename = resolve(join(folder, 'package.json'))
   const { scripts } = require(filename)
-  if (!scripts || !scripts['test:ci']) {
-    console.log('file %s does not have script "test:ci"', filename)
+  if (!scripts || !scripts[scriptName]) {
+    console.log('file %s does not have script "%s"', filename, scriptName)
     console.log('skipping...')
     return
   }
-  return execa('npm', ['run', 'test:ci'], { stdio: 'inherit', cwd: folder })
+  return execa('npm', ['run', scriptName], { stdio: 'inherit', cwd: folder })
 }
 
 const testExamples = (folders) => {
@@ -48,7 +58,7 @@ const filterSomeFolders = (folders) => {
 bluebird
 .try(getExamples)
 .then((list) => list.sort())
-// .then((list) => list.slice(0, 3))
+// .then((list) => list.slice(0, 1))
 .then(filterSomeFolders)
 .tap(printFolders)
 .then(testExamples)
