@@ -61,11 +61,11 @@ jobs:
           at: ~/
       - run: npm run test:ci
   # a single utility script to run multiple examples against Chrome
-  test-examples:
+  test-examples-chrome:
     parallelism: 1
     working_directory: ~/app
     docker:
-      - image: cypress/base:10
+      - image: cypress/browsers:chrome69
     steps:
       - attach_workspace:
           at: ~/
@@ -146,7 +146,7 @@ workflows:
               only:
                 - master
 
-      - test-examples:
+      - test-examples-chrome:
           requires:
             - build
           filters:
