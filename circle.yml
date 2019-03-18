@@ -50,7 +50,7 @@ jobs:
             - app
             - .cache/Cypress
 
-  # a single utility job that can test all examples one by one
+  # a single utility job that can run multiple examples one by one
   test-examples:
     parallelism: 1
     working_directory: ~/app
@@ -60,6 +60,16 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: npm run test:ci
+  # a single utility script to run multiple examples against Chrome
+  test-examples:
+    parallelism: 1
+    working_directory: ~/app
+    docker:
+      - image: cypress/base:10
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run test:ci:chrome
 
   # define a new job with defailts for each "examples/*" subfolder
   blogs__application-actions:
@@ -135,7 +145,16 @@ workflows:
             branches:
               only:
                 - master
-                - test-each-recipe-238
+
+      - test-examples:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - allow-chrome-flag
+
       # fails in headless mode
       # https://github.com/cypress-io/cypress-example-recipes/issues/217
       # - blogs__codepen-demo:
