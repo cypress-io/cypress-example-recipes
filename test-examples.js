@@ -37,10 +37,10 @@ const filterSomeFolders = (folders) => {
 
 bluebird
 .try(getExamples)
-.then((list) => list.slice(0, 3))
+.then((list) => list.slice(0, 7))
 .then(filterSomeFolders)
 .tap(printFolders)
-.then(testExamples)
+// .then(testExamples)
 .catch((e) => {
   console.error(e.message)
   process.exit(1)

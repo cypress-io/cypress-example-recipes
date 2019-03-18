@@ -50,6 +50,16 @@ jobs:
             - app
             - .cache/Cypress
 
+  # a single utility job that can test all examples one by one
+  test-examples:
+    parallelism: 1
+    working_directory: ~/app
+    docker:
+      - image: cypress/base:10
+    steps:
+      - attach_workspace:
+          at: ~/
+
   # define a new job with defailts for each "examples/*" subfolder
   blogs__application-actions:
     <<: *defaults
@@ -117,6 +127,14 @@ workflows:
   all-recipes:
     jobs:
       - build
+      - test-examples:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - test-each-recipe-238
       - blogs__codepen-demo:
           requires:
             - build
