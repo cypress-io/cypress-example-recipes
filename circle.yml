@@ -254,7 +254,7 @@ workflows:
       # CircleCI can then just require this 1 job to pass
       # see https://glebbahmutov.com/blog/parallel-or-not/
       - after-tests:
-          require:
+          requires:
             - blogs__codepen-demo
             - blogs__application-actions
             - blogs__direct-control-angular
