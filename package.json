@@ -10,7 +10,8 @@
     "cypress:version": "cypress version",
     "cypress:verify": "cypress verify",
     "start": "echo Call npm start from each example subfolder! && exit -1",
-    "stop-only": "stop-only examples"
+    "stop-only": "stop-only examples",
+    "test:ci": "node ./test-examples"
   },
   "repository": {
     "type": "git",
