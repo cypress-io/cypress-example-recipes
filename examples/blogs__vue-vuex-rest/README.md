@@ -10,9 +10,11 @@ Testing Vue + Vuex + REST TodoMVC using Cypress.
 
 ## Shows how to
 
-- test application through the GUI
-- test application through the Vuex store
-- test application through REST calls
+Spec files are in [cypress/integration](cypress/integration) folder
+
+- test application through the GUI in [ui-spec.js](cypress/integration/ui-spec.js)
+- test application through the Vuex store in [store-spec.js](cypress/integration/store-spec.js)
+- test application through REST calls in [api-spec.js](cypress/integration/api-spec.js)
 
 ## Script commands
 
