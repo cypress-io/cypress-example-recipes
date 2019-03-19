@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 /* eslint-env mocha */
 /* global cy */
 const add = (a, b) => a + b
