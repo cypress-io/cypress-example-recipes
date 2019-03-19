@@ -6,6 +6,7 @@
     "start": "../../node_modules/.bin/json-server --static . data.json --middlewares ../../node_modules/json-server-reset",
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "reset:db": "node reset-db.js"
+    "reset:db": "node reset-db.js",
+    "reset": "node reset-db.js"
   }
 }
