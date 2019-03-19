@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 /* eslint-env mocha */
 /* global cy, File */
 import {
@@ -27,7 +28,9 @@ describe('UI', () => {
     })
 
     it('starts with zero items', () => {
-      cy.get('.todo-list').find('li').should('have.length', 0)
+      cy.get('.todo-list')
+        .find('li')
+        .should('have.length', 0)
     })
 
     it('adds two items', () => {
@@ -78,10 +81,18 @@ describe('UI', () => {
       // assertions
       getTodoItems().should('have.length', 4)
       getCompleted().should('have.length', 2)
-      getTodo('first item').find('[type="checkbox"]').should('not.be.checked')
-      getTodo('second item').find('[type="checkbox"]').should('not.be.checked')
-      getTodo('item 3').find('[type="checkbox"]').should('be.checked')
-      getTodo('item 4').find('[type="checkbox"]').should('be.checked')
+      getTodo('first item')
+        .find('[type="checkbox"]')
+        .should('not.be.checked')
+      getTodo('second item')
+        .find('[type="checkbox"]')
+        .should('not.be.checked')
+      getTodo('item 3')
+        .find('[type="checkbox"]')
+        .should('be.checked')
+      getTodo('item 4')
+        .find('[type="checkbox"]')
+        .should('be.checked')
     })
 
     it('marks completed items', () => {
@@ -95,9 +106,9 @@ describe('UI', () => {
       // make sure app has rendered the toggled buttons
       getCompleted().should('have.length', 2)
       // single snapshot of entire <ul class="todo-list"> element
-      cy
-        .get('ul.todo-list')
-        .snapshot({ name: 'todo-list with 2 completed items' })
+      cy.get('ul.todo-list').snapshot({
+        name: 'todo-list with 2 completed items'
+      })
     })
   })
 })

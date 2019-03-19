@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 /* eslint-env mocha */
 /* global cy, Cypress */
 import {
@@ -20,30 +21,46 @@ describe('UI to Vuex store', () => {
 
   it('has loading, newTodo and todos properties', () => {
     // getStore().its('state').should('have.keys', ['loading', 'newTodo', 'todos'])
-    getStore().its('state').then(Object.keys).snapshot()
+    getStore()
+      .its('state')
+      .then(Object.keys)
+      .snapshot()
   })
 
   it('starts empty', () => {
     const omitLoading = state => Cypress._.omit(state, 'loading')
 
-    getStore().its('state').then(omitLoading).snapshot()
+    getStore()
+      .its('state')
+      .then(omitLoading)
+      .snapshot()
   })
 
   it('can enter new todo text', () => {
     const text = 'learn how to test with Cypress.io'
-    cy.get('.todoapp').find('.new-todo').type(text).trigger('change')
+    cy.get('.todoapp')
+      .find('.new-todo')
+      .type(text)
+      .trigger('change')
 
-    getStore().its('state.newTodo').snapshot()
+    getStore()
+      .its('state.newTodo')
+      .snapshot()
   })
 
   it('stores todos in the store', () => {
     enterTodo('first todo')
     enterTodo('second todo')
 
-    getStore().its('state.todos').should('have.length', 2)
+    getStore()
+      .its('state.todos')
+      .should('have.length', 2)
 
     const removeIds = list => list.map(todo => Cypress._.omit(todo, 'id'))
-    getStore().its('state.todos').then(removeIds).snapshot()
+    getStore()
+      .its('state.todos')
+      .then(removeIds)
+      .snapshot()
   })
 
   const stubMathRandom = () => {
@@ -60,9 +77,13 @@ describe('UI to Vuex store', () => {
     enterTodo('first todo')
     enterTodo('second todo')
 
-    getStore().its('state.todos').should('have.length', 2)
+    getStore()
+      .its('state.todos')
+      .should('have.length', 2)
 
-    getStore().its('state.todos').snapshot()
+    getStore()
+      .its('state.todos')
+      .snapshot()
   })
 })
 
@@ -74,9 +95,12 @@ describe('Vuex store', () => {
   let store
 
   beforeEach(() => {
-    cy.window().its('app').its('$store').then(s => {
-      store = s
-    })
+    cy.window()
+      .its('app')
+      .its('$store')
+      .then(s => {
+        store = s
+      })
   })
 
   const toJSON = x => JSON.parse(JSON.stringify(x))
@@ -97,7 +121,10 @@ describe('Vuex store', () => {
 
   it('can enter new todo text', () => {
     const text = 'learn how to test with Cypress.io'
-    cy.get('.todoapp').find('.new-todo').type(text).trigger('change')
+    cy.get('.todoapp')
+      .find('.new-todo')
+      .type(text)
+      .trigger('change')
 
     getFromStore('newTodo').snapshot()
   })
@@ -120,7 +147,9 @@ describe('Vuex store', () => {
     enterTodo(title)
 
     const newTitleText = 'this is a second todo title, slowly typed'
-    getNewTodoInput().type(newTitleText, { delay: 100 }).trigger('change')
+    getNewTodoInput()
+      .type(newTitleText, { delay: 100 })
+      .trigger('change')
 
     getNewTodoInput().snapshot()
   })
@@ -130,7 +159,10 @@ describe('Vuex store', () => {
     enterTodo(title)
 
     const text = 'learn how to test with Cypress.io'
-    cy.get('.todoapp').find('.new-todo').type(text).trigger('change')
+    cy.get('.todoapp')
+      .find('.new-todo')
+      .type(text)
+      .trigger('change')
 
     getStore().snapshot()
   })
@@ -176,7 +208,10 @@ describe('Vuex store', () => {
     store.dispatch('clearNewTodo')
 
     // assert UI
-    getTodoItems().should('have.length', 1).first().contains('a new todo')
+    getTodoItems()
+      .should('have.length', 1)
+      .first()
+      .contains('a new todo')
 
     // assert store
     getStore().snapshot()
@@ -197,19 +232,21 @@ describe('Store actions', () => {
       store.dispatch('clearNewTodo')
     })
 
-    getStore().its('state').snapshot()
+    getStore()
+      .its('state')
+      .snapshot()
   })
 
   it('changes the state after delay', () => {
     // this will force store action "setNewTodo" to commit
     // change to the store only after 3 seconds
-    cy.server()
+    // cy.server()
     cy.route({
       method: 'POST',
       url: '/todos',
       delay: 3000,
       response: {}
-    })
+    }).as('post')
 
     getStore().then(store => {
       store.dispatch('setNewTodo', 'a new todo')
@@ -217,7 +254,13 @@ describe('Store actions', () => {
       store.dispatch('clearNewTodo')
     })
 
-    getStore().its('state').snapshot()
+    getStore()
+      .its('state.todos')
+      .should('have.length', 1)
+
+    getStore()
+      .its('state')
+      .snapshot()
   })
 
   it('changes the ui', () => {
@@ -228,17 +271,18 @@ describe('Store actions', () => {
     })
 
     // assert UI
-    getTodoItems().should('have.length', 1).first().contains('a new todo')
+    getTodoItems()
+      .should('have.length', 1)
+      .first()
+      .contains('a new todo')
   })
 
   it('calls server', () => {
     cy.server()
-    cy
-      .route({
-        method: 'POST',
-        url: '/todos'
-      })
-      .as('postTodo')
+    cy.route({
+      method: 'POST',
+      url: '/todos'
+    }).as('postTodo')
 
     getStore().then(store => {
       store.dispatch('setNewTodo', 'a new todo')
@@ -247,19 +291,19 @@ describe('Store actions', () => {
     })
 
     // assert server call
-    cy.wait('@postTodo').its('request.body').snapshot()
+    cy.wait('@postTodo')
+      .its('request.body')
+      .snapshot()
   })
 
   it('calls server with delay', () => {
     cy.server()
-    cy
-      .route({
-        method: 'POST',
-        url: '/todos',
-        delay: 3000,
-        response: {}
-      })
-      .as('postTodo')
+    cy.route({
+      method: 'POST',
+      url: '/todos',
+      delay: 3000,
+      response: {}
+    }).as('postTodo')
 
     getStore().then(store => {
       store.dispatch('setNewTodo', 'a new todo')
@@ -268,6 +312,8 @@ describe('Store actions', () => {
     })
 
     // assert server call - will wait 3 seconds until stubbed server responds
-    cy.wait('@postTodo').its('request.body').snapshot()
+    cy.wait('@postTodo')
+      .its('request.body')
+      .snapshot()
   })
 })

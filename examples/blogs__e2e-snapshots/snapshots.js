@@ -1,5 +1,5 @@
 module.exports = {
-  "__version": "1.4.2",
+  "__version": "3.1.5",
   "adds numbers": {
     "1": 5,
     "2": 11,
@@ -122,7 +122,13 @@ module.exports = {
     "changes the state after delay": {
       "1": {
         "loading": false,
-        "todos": [],
+        "todos": [
+          {
+            "title": "a new todo",
+            "completed": false,
+            "id": "1"
+          }
+        ],
         "newTodo": ""
       }
     },

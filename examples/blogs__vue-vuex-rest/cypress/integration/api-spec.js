@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 /* eslint-env mocha */
 /* global cy */
 import { enterTodo, getTodoItems, makeTodo, resetDatabase, stubMathRandom, visit } from '../support/utils';
