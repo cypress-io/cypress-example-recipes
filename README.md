@@ -30,7 +30,7 @@ Recipe | Category | Description
 [Stubbing methods called on `window`](#stubbing-methods-called-on-window) | Stubbing, Spying | Use `cy.stub()` for methods called on `window`
 [Stubbing Google Analytics](#stubbing-google-analytics) | Stubbing, Spying | Use `cy.stub()` to test Google Analytics calls
 [Application Code](#application-code) | Unit Testing | Import and test your own application code
-[React with Enzyme](#react-with-enzyme) | Unit Testing | Test your React components in isolation
+[React](#react) | Unit Testing | Test your React components in isolation
 [File Upload in React](#file-upload-in-react) | Unit Testing | Test file upload in React app
 [Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
 [Bootstrapping your App](#bootstrapping-your-app) | Server Communication | Seed your application with test data
@@ -246,11 +246,9 @@ Get around the lack of a `.hover()` command.
   * is added or deleted
   * has expected value
 
-### [React with Enzyme](./examples/unit-testing__react-enzyme)
+### [React](./examples/unit-testing__react)
 
-- Unit test a React JSX Component using [Enzyme](http://airbnb.io/enzyme/).
-- Import `enzyme` from `node_modules`.
-- Extend chai assertions with [`chai-enzyme`](https://github.com/producthunt/chai-enzyme).
+- Unit test a React JSX Component using [Enzyme](http://airbnb.io/enzyme/), [react-testing-library](https://github.com/kentcdodds/react-testing-library) and [cypress-react-unit-test](https://github.com/bahmutov/cypress-react-unit-test) libraries.
 
 ### [File Upload in React](./examples/file-upload-react)
 
