@@ -101,6 +101,8 @@ jobs:
     <<: *defaults
   fundamentals__node-modules:
     <<: *defaults
+  fundamentals__fixtures:
+    <<: *defaults
   logging-in__csrf-tokens:
     <<: *defaults
   logging-in__html-web-forms:
@@ -248,6 +250,9 @@ workflows:
       - fundamentals__dynamic-tests:
           requires:
             - build
+      - fundamentals__fixtures:
+          requires:
+            - build
 
       # to avoid constantly tweaking required jobs on CircleCI
       # we can have a single job wait on all other test jobs here.
@@ -266,6 +271,8 @@ workflows:
             - extending-cypress__chai-assertions
             - file-upload-react
             - fundamentals__node-modules
+            - fundamentals__fixtures
+            - fundamentals__dynamic-tests
             - logging-in__csrf-tokens
             - logging-in__html-web-forms
             - logging-in__single-sign-on
@@ -283,4 +290,3 @@ workflows:
             - unit-testing__application-code
             - unit-testing__react
             - server-communication__env-variables
-            - fundamentals__dynamic-tests
