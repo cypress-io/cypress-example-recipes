@@ -122,7 +122,13 @@ module.exports = {
     "changes the state after delay": {
       "1": {
         "loading": false,
-        "todos": [],
+        "todos": [
+          {
+            "title": "a new todo",
+            "completed": false,
+            "id": "1"
+          }
+        ],
         "newTodo": ""
       }
     },

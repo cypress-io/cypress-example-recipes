@@ -240,19 +240,23 @@ describe('Store actions', () => {
   it('changes the state after delay', () => {
     // this will force store action "setNewTodo" to commit
     // change to the store only after 3 seconds
-    cy.server()
+    // cy.server()
     cy.route({
       method: 'POST',
       url: '/todos',
       delay: 3000,
       response: {}
-    })
+    }).as('post')
 
     getStore().then(store => {
       store.dispatch('setNewTodo', 'a new todo')
       store.dispatch('addTodo')
       store.dispatch('clearNewTodo')
     })
+
+    getStore()
+      .its('state.todos')
+      .should('have.length', 1)
 
     getStore()
       .its('state')
