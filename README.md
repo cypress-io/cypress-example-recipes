@@ -283,13 +283,13 @@ Get around the lack of a `.hover()` command.
 - Pass any variable that starts with `CYPRESS_`.
 - Extract any other variable from `process.env` using `cypress/plugins/index.js` callback.
 
-### [Dynamic tests]('./examples/fundamentals__dynamic-tests)
+### [Dynamic tests](./examples/fundamentals__dynamic-tests)
 
 - Run the same test against different viewport resolutions
 - Run the same test against multiple subdomains
 - Generate tests based on the fetched data
 
-### [Fixtures]('./examples/fundamentals__fixtures)
+### [Fixtures](./examples/fundamentals__fixtures)
 
 - loading a single fixture file or multiple fixtures in multiple ways
 
