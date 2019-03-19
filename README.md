@@ -261,6 +261,7 @@ Get around the lack of a `.hover()` command.
 - Extend [`chai`](http://chaijs.com/) with the [`chai-date-string`](http://chaijs.com/plugins/chai-date-string/) assertion plugin.
 - Extend [`chai`](http://chaijs.com/) with the [`chai-colors`](http://chaijs.com/plugins/chai-colors/) assertion plugin.
 - Globally extend [`chai`](http://chaijs.com/) for all specs.
+- Set up Intelligent Code completion for custom assertions.
 
 ### [Bootstrapping your App](./examples/server-communication__bootstrapping-your-app)
 
