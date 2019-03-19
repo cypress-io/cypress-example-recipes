@@ -7,6 +7,7 @@ Recipe | Category | Description
 [Node Modules](#node-modules) | Fundamentals | Import your own node modules
 [Environment variables](#environment-variables) | Fundamentals | Passing environment variables to tests
 [Dynamic tests](#dynamic-tests) | Fundamentals | Create tests dynamically from data
+[Fixtures](#fixtures) | Fundamentals | Loading single or multiple fixtures
 [Single Sign On](#single-sign-on) | Logging In | Log in across multiple servers or providers
 [HTML Web Forms](#html-web-forms) | Logging In | Log in with a basic HTML form
 [XHR Web Forms](#xhr-web-forms) | Logging In | Log in using an XHR
@@ -287,6 +288,10 @@ Get around the lack of a `.hover()` command.
 - Run the same test against different viewport resolutions
 - Run the same test against multiple subdomains
 - Generate tests based on the fetched data
+
+### [Fixtures]('./examples/fundamentals__fixtures)
+
+- loading a single fixture file or multiple fixtures in multiple ways
 
 ## Development
 
