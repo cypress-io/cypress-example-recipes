@@ -5,6 +5,8 @@ This repo contains various recipes for testing common scenarios using Cypress.
 Recipe | Category | Description
 --- | --- | ---
 [Node Modules](#node-modules) | Fundamentals | Import your own node modules
+[Environment variables](#environment-variables) | Fundamentals | Passing environment variables to tests
+[Dynamic tests](#dynamic-tests) | Fundamentals | Create tests dynamically from data
 [Single Sign On](#single-sign-on) | Logging In | Log in across multiple servers or providers
 [HTML Web Forms](#html-web-forms) | Logging In | Log in with a basic HTML form
 [XHR Web Forms](#xhr-web-forms) | Logging In | Log in using an XHR
@@ -28,12 +30,11 @@ Recipe | Category | Description
 [Stubbing methods called on `window`](#stubbing-methods-called-on-window) | Stubbing, Spying | Use `cy.stub()` for methods called on `window`
 [Stubbing Google Analytics](#stubbing-google-analytics) | Stubbing, Spying | Use `cy.stub()` to test Google Analytics calls
 [Application Code](#application-code) | Unit Testing | Import and test your own application code
-[React with Enzyme](#react-with-enzyme) | Unit Testing | Test your React components in isolation
+[React](#react) | Unit Testing | Test your React components in isolation
 [File Upload in React](#file-upload-in-react) | Unit Testing | Test file upload in React app
 [Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
 [Bootstrapping your App](#bootstrapping-your-app) | Server Communication | Seed your application with test data
 [Seeding your Database in Node](#seeding-your-database-in-node) | Server Communication | Seed your database with test data
-[Environment variables](#environment-variables) | Fundamentals | Passing environment variables to tests
 
 ## Overview
 
@@ -223,7 +224,8 @@ Get around the lack of a `.hover()` command.
 - Use [`cy.stub()`](https://on.cypress.io/stub) to verify and control the behavior of a function.
 - Use [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick) to control time.
 - Stub `window.fetch` to control server responses.
-- Replace `window.fetch` with a polyfill that uses XHR and is loaded only for tests
+- Replace `window.fetch` with a polyfill that uses XHR and is loaded only for tests.
+- Delete `window.fetch` during specific visit or every window load.
 
 ### [Stubbing methods called on `window`](./examples/stubbing-spying__window)
 
@@ -244,11 +246,9 @@ Get around the lack of a `.hover()` command.
   * is added or deleted
   * has expected value
 
-### [React with Enzyme](./examples/unit-testing__react-enzyme)
+### [React](./examples/unit-testing__react)
 
-- Unit test a React JSX Component using [Enzyme](http://airbnb.io/enzyme/).
-- Import `enzyme` from `node_modules`.
-- Extend chai assertions with [`chai-enzyme`](https://github.com/producthunt/chai-enzyme).
+- Unit test a React JSX Component using [Enzyme](http://airbnb.io/enzyme/), [react-testing-library](https://github.com/kentcdodds/react-testing-library) and [cypress-react-unit-test](https://github.com/bahmutov/cypress-react-unit-test) libraries.
 
 ### [File Upload in React](./examples/file-upload-react)
 
@@ -261,6 +261,7 @@ Get around the lack of a `.hover()` command.
 - Extend [`chai`](http://chaijs.com/) with the [`chai-date-string`](http://chaijs.com/plugins/chai-date-string/) assertion plugin.
 - Extend [`chai`](http://chaijs.com/) with the [`chai-colors`](http://chaijs.com/plugins/chai-colors/) assertion plugin.
 - Globally extend [`chai`](http://chaijs.com/) for all specs.
+- Set up Intelligent Code completion for custom assertions.
 
 ### [Bootstrapping your App](./examples/server-communication__bootstrapping-your-app)
 
@@ -280,6 +281,16 @@ Get around the lack of a `.hover()` command.
 - Pass values via `env` object in `cypress.json`.
 - Pass any variable that starts with `CYPRESS_`.
 - Extract any other variable from `process.env` using `cypress/plugins/index.js` callback.
+
+### [Dynamic tests]('./examples/fundamentals__dynamic-tests)
+
+- Run the same test against different viewport resolutions
+- Run the same test against multiple subdomains
+- Generate tests based on the fetched data
+
+## Development
+
+See [Development.md](Development.md)
 
 [renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
 [renovate-app]: https://renovateapp.com/

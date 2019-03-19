@@ -4,8 +4,11 @@
   "description": "Testing Redux store using Cypress",
   "private": true,
   "scripts": {
-    "start": "../../node_modules/.bin/http-server -p 8888 -c-1",
+    "start": "../../node_modules/.bin/http-server -p 8888 --silent -c-1",
     "cypress:run": "../../node_modules/.bin/cypress run",
-    "cypress:open": "../../node_modules/.bin/cypress open"
+    "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "test:ci": "../../node_modules/.bin/start-test 8888 cypress:run",
+    "test:ci:chrome": "../../node_modules/.bin/start-test 8888 cypress:run:chrome"
   }
 }

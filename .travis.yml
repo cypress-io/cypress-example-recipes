@@ -17,7 +17,11 @@ defaults: &defaults
     - echo current dir $PWD || true
     - npm start -- --silent &
     - date -R # run starts timestamp
-    - npm run cypress:run -- --record --group $DIR
+    # Travis CI has very unpredictable scheduling, breaking recording
+    # due to long time gaps between the test jobs
+    # https://github.com/cypress-io/cypress-example-recipes/issues/243
+    # Disabling recording for now
+    - npm run cypress:run
     - date -R # run finishes timestamp
     # kill all background jobs (like "npm start &")
     - kill $(jobs -p) || true
@@ -27,12 +31,10 @@ jobs:
     # define a separate script for each "examples/*" folder
     # this will run it in a separate job on TravisCI
 
-    # disable for now
-    # https://github.com/cypress-io/cypress-example-recipes/issues/217
-    # - stage: test
-    #   env:
-    #     - DIR=blogs__codepen-demo
-    #   <<: *defaults
+    - stage: test
+      env:
+        - DIR=blogs__codepen-demo
+      <<: *defaults
     - stage: test
       env:
         - DIR=blogs__direct-control-angular
@@ -123,7 +125,7 @@ jobs:
       <<: *defaults
     - stage: test
       env:
-        - DIR=unit-testing__react-enzyme
+        - DIR=unit-testing__react
       <<: *defaults
     - stage: test
       env:
