@@ -19,6 +19,13 @@ describe('Loading multiple fixtures', () => {
         country: { name: 'United States' }
       })
     })
+
+    it('still has fixtures in the second test', () => {
+      expect({ city, country }).to.deep.equal({
+        city: { name: 'Atlanta' },
+        country: { name: 'United States' }
+      })
+    })
   })
 
   context('once before all tests', () => {
@@ -37,6 +44,15 @@ describe('Loading multiple fixtures', () => {
     })
 
     it('has loaded fixtures', () => {
+      expect({ city, country }).to.deep.equal({
+        city: { name: 'Atlanta' },
+        country: { name: 'United States' }
+      })
+    })
+
+    it('still has loaded fixtures', () => {
+      // we have loaded the fixtures and stored them
+      // in the two variables and they should remain there
       expect({ city, country }).to.deep.equal({
         city: { name: 'Atlanta' },
         country: { name: 'United States' }
