@@ -91,7 +91,7 @@
     "terminal-banner": "1.1.0",
     "ts-loader": "4.5.0",
     "tsify": "4.0.0",
-    "tslint": "5.9.1",
+    "tslint": "5.14.0",
     "typescript": "3.3.3",
     "wait-on": "3.2.0",
     "webpack": "4.10.2"
