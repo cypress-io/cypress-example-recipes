@@ -1,62 +1,86 @@
-# Selecting tests using Mocha-like "fgrep" and "grep"
+# Selecting tests using Mocha-like "grep"
 
-This example uses [cypress-select-tests](https://github.com/bahmutov/cypress-select-tests) preprocessor plugin to filter specs and tests. It is similar to how [Mocha](https://mochajs.org/) has `--fgrep` and `--grep` CLI arguments. This project provides imitation using strings.
+This example uses [cypress-select-tests](https://github.com/bahmutov/cypress-select-tests) preprocessor plugin to filter specs and tests. It is similar to how [Mocha](https://mochajs.org/) has `--grep` CLI argument. This project provides imitation using a string.
 
-Because Cypress ignores unknown CLI parameters, you need to pass `fgrep` and `grep` arguments as environment variables, for example by using `--env` CLI argument.
+Because Cypress ignores unknown CLI parameters, you need to pass `grep` argument as an environment variables, for example by using `--env` CLI argument.
 
 ## Examples
 
-### fgrep to pick specs
+Opens Cypress GUI but only allow running tests with `@admin` in their names
 
 ```bash
-# runs only tests from specs with "foo" in their filename
-$ npm run cypress:open -- --env fgrep=foo
+$ npm run cypress:open -- --env grep=@admin
 ```
 
-Running all tests shows that all tests are skipped, except for tests in file [cypress/integration/foo.js](cypress/integration/foo.js)
+![Running all tests with admin](images/grep-admin.png)
 
-![fgrep foo](images/fgrep-foo.png)
-
-### grep to pick tests
+Runs tests with `edge case` in their name in headless mode
 
 ```bash
-# runs in headless mode, skipping all but one matching test
-$ npm run cypress:run -- --env grep='runs fine'
+$ npm run cypress:run -- --env grep='edge case'
 ```
 
 produces
 
 ```text
-  Running: bar.js...         (1 of 2)
-picking tests to run in file cypress/integration/bar.js
+Running: feature-a.js...     (1 of 2)
+picking tests to run in file cypress/integration/feature-a.js
 
-  - runs ok
-  ✓ runs fine (38ms)
 
-  1 passing (67ms)
-  1 pending
+  feature A
+    - works
+    - reports for @admin
 
-  Running: foo.js...         (2 of 2)
-picking tests to run in file cypress/integration/foo.js
 
-  - has test A
-  - has test B
-  - has test C
+  0 passing (30ms)
+  2 pending
 
-  0 passing (33ms)
-  3 pending
+  Running: feature-b.js...   (2 of 2)
+picking tests to run in file cypress/integration/feature-b.js
+
+
+  feature B
+    - works
+    ✓ an edge case (54ms)
+    - works for @admin
+
+
+  1 passing (87ms)
+  2 pending
 ```
 
 ## Notes
 
-Note how you need to use `--` to separate NPM open or run script command from arguments to Cypress itself.
+### test title
 
-Separate multiple environment variables with commas
+The full test title used for string matching is a concatenation of suite names plus the test's own name.
+
+```js
+describe('app', () => {
+  context('feature A', () => {
+    it('works', () => {
+      // full test name is 'app feature A works'
+    })
+  })
+})
+```
+
+Thus you can run all tests form the given suite
 
 ```bash
-# runs only tests with "works" from specs with "foo"
-$ npm run cypress:run -- --env fgrep=foo,grep=works
+$ npm run cypress:run -- --env grep='feature A'
 ```
+
+## NPM arguments
+
+Note how you need to use `--` to separate NPM open or run script command from arguments to Cypress itself.
+
+```bash
+# runs only tests with "works" in their name
+$ npm run cypress:run -- --env grep=works
+```
+
+## Quote strings with spaces
 
 If you want to pass string with spaces, please quote it like
 

@@ -1,5 +1,5 @@
 describe('feature A', () => {
   it('works', () => {})
 
-  it('reports @admin', () => {})
+  it('reports for @admin', () => {})
 })
