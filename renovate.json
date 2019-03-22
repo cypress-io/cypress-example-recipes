@@ -15,8 +15,7 @@
   "prHourlyLimit": 2,
   "rangeStrategy": "pin",
   "schedule": [
-    "after 10pm and before 5am on every weekday",
-    "every weekend"
+    "after 2am and before 3am on sunday"
   ],
   "updateNotScheduled": false,
   "timezone": "America/New_York",
@@ -29,5 +28,30 @@
   "labels": [
     "type: dependencies",
     "renovate"
+  ],
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "^@cypress",
+        "^cypress"
+      ],
+      "groupName": "cypress",
+      "schedule": [
+        "after 2am and before 4am"
+      ]
+    },
+    {
+      "packagePatterns": "^eslint",
+      "groupName": "eslint"
+    },
+    {
+      "packageNames": [
+        "ts-loader",
+        "tsify",
+        "tslint",
+        "typescript"
+      ],
+      "groupName": "typescript"
+    }
   ]
 }
