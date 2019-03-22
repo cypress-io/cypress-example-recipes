@@ -1,20 +1,26 @@
 # Selecting tests using Mocha-like "grep"
 
-This example uses [cypress-select-tests](https://github.com/bahmutov/cypress-select-tests) preprocessor plugin to filter specs and tests. It is similar to how [Mocha](https://mochajs.org/) has `--grep` CLI argument. This project provides imitation using a string.
+This example uses [cypress-select-tests](https://github.com/bahmutov/cypress-select-tests) preprocessor plugin to filter tests, similar to how [Mocha](https://mochajs.org/) has the `--grep` CLI argument. This project provides an imitation using a string (no regular expressions).
 
 Because Cypress ignores unknown CLI parameters, you need to pass `grep` argument as an environment variables, for example by using `--env` CLI argument.
 
 ## Examples
 
-Opens Cypress GUI but only allow running tests with `@admin` in their names
+### interactive
+
+Open Cypress GUI but only allow running tests with `@admin` in the name
 
 ```bash
 $ npm run cypress:open -- --env grep=@admin
 ```
 
+shows only "@admin" tests were executed, while the rest were skipped
+
 ![Running all tests with admin](images/grep-admin.png)
 
-Runs tests with `edge case` in their name in headless mode
+### headless
+
+Run tests with `edge case` in the name in headless mode
 
 ```bash
 $ npm run cypress:run -- --env grep='edge case'
