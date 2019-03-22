@@ -14,7 +14,9 @@
   "prConcurrentLimit": 3,
   "prHourlyLimit": 2,
   "rangeStrategy": "pin",
-  "schedule": "every weekend",
+  "schedule": [
+    "every weekend"
+  ],
   "updateNotScheduled": false,
   "timezone": "America/New_York",
   "lockFileMaintenance": {
@@ -34,7 +36,9 @@
         "^cypress"
       ],
       "groupName": "cypress",
-      "schedule": "after 2am and before 4am"
+      "schedule": [
+        "after 2am and before 4am"
+      ]
     },
     {
       "packagePatterns": "^eslint",
