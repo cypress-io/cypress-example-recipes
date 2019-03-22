@@ -111,6 +111,12 @@ jobs:
     <<: *defaults
   logging-in__xhr-web-forms:
     <<: *defaults
+  preprocessors__grep:
+    <<: *defaults
+    # in this particular example we want to grep tests
+    # and run only tests with name having "@admin"
+    environment:
+      CYPRESS_grep: '@admin'
   preprocessors__typescript-browserify:
     <<: *defaults
   preprocessors__typescript-webpack:
@@ -208,6 +214,9 @@ workflows:
       - logging-in__xhr-web-forms:
           requires:
             - build
+      - preprocessors__grep:
+          requires:
+            - build
       - preprocessors__typescript-browserify:
           requires:
             - build
@@ -277,6 +286,7 @@ workflows:
             - logging-in__html-web-forms
             - logging-in__single-sign-on
             - logging-in__xhr-web-forms
+            - preprocessors__grep
             - preprocessors__typescript-browserify
             - preprocessors__typescript-webpack
             - server-communication__bootstrapping-your-app

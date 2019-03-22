@@ -14,10 +14,7 @@
   "prConcurrentLimit": 3,
   "prHourlyLimit": 2,
   "rangeStrategy": "pin",
-  "schedule": [
-    "after 10pm and before 5am on every weekday",
-    "every weekend"
-  ],
+  "schedule": "every weekend",
   "updateNotScheduled": false,
   "timezone": "America/New_York",
   "lockFileMaintenance": {
@@ -29,5 +26,15 @@
   "labels": [
     "type: dependencies",
     "renovate"
+  ],
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "^@cypress",
+        "^cypress"
+      ],
+      "groupName": "cypress",
+      "schedule": "after 2am and before 4am"
+    }
   ]
 }
