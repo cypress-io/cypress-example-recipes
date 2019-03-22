@@ -71,6 +71,7 @@
     "cypress-pipe": "1.3.1",
     "cypress-plugin-snapshots": "1.1.2",
     "cypress-react-unit-test": "2.4.0",
+    "cypress-select-tests": "1.1.0",
     "eslint": "5.4.0",
     "eslint-plugin-cypress-dev": "1.1.2",
     "eslint-plugin-mocha": "5.0.0",

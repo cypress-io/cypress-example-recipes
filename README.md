@@ -16,6 +16,7 @@ Recipe | Category | Description
 [Hover and Hidden Elements](#hover-and-hidden-elements) | Testing the DOM | Test hidden elements requiring hover
 [Form Interactions](#form-interactions) | Testing the DOM | Test form elements like input type `range`
 [Drag and Drop](#drag-and-drop) | Testing the DOM | Use `.trigger()` to test drag and drop
+[grep](#grep) | Preprocessors | Filter tests by name using Mocha-like `grep` syntax
 [Typescript with Browserify](#typescript-with-browserify) | Preprocessors | Add typescript support with browserify
 [Typescript with Webpack](#typescript-with-webpack) | Preprocessors | Add typescript support with webpack
 [Application Actions](#application-actions) | Blogs | Application actions are a replacement for Page Objects
@@ -148,6 +149,11 @@ Get around the lack of a `.hover()` command.
 
 - Use [`.trigger()`](https://on.cypress.io/trigger) to test drag-n-drop that uses mouse events.
 - Use [`.trigger()`](https://on.cypress.io/trigger) to test drag-n-drop that uses drag events.
+
+### [grep](./examples/preprocessors__grep)
+
+- Use Mocha-like syntax to select tests to run
+- Implemented as a preprocessor [cypress-select-tests](https://github.com/bahmutov/cypress-select-tests)
 
 ### [Typescript with Browserify](./examples/preprocessors__typescript-browserify)
 
