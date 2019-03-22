@@ -50,7 +50,7 @@
     "morgan": "1.9.0",
     "prop-types": "15.6.2",
     "react": "16.4.0",
-    "react-dom": "16.2.0",
+    "react-dom": "16.2.1",
     "react-redux": "5.1.0",
     "redux": "4.0.1",
     "reselect": "4.0.0",
