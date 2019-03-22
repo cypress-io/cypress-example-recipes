@@ -35,6 +35,19 @@
       ],
       "groupName": "cypress",
       "schedule": "after 2am and before 4am"
+    },
+    {
+      "packagePatterns": "^eslint",
+      "groupName": "eslint"
+    },
+    {
+      "packageNames": [
+        "ts-loader",
+        "tsify",
+        "tslint",
+        "typescript"
+      ],
+      "groupName": "typescript"
     }
   ]
 }
