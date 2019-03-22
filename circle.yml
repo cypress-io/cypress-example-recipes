@@ -113,6 +113,13 @@ jobs:
     <<: *defaults
   preprocessors__grep:
     <<: *defaults
+    # in this particular example we want to select specs
+    # using environment variable "fgrep"
+    # and from spec "cypress/integration/foo.js"
+    # run only tests with name having "test B"
+    environment:
+      CYPRESS_fgrep: foo
+      CYPRESS_grep: 'test B'
   preprocessors__typescript-browserify:
     <<: *defaults
   preprocessors__typescript-webpack:
