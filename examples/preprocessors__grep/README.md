@@ -6,31 +6,61 @@ Because Cypress ignores unknown CLI parameters, you need to pass `fgrep` and `gr
 
 ## Examples
 
-```shell
-## runs only tests from specs with "foo" in their filename
- $ npm run cypress:open -- --env fgrep=foo
+### fgrep to pick specs
+
+```bash
+# runs only tests from specs with "foo" in their filename
+$ npm run cypress:open -- --env fgrep=foo
 ```
 
 Running all tests shows that all tests are skipped, except for tests in file [cypress/integration/foo.js](cypress/integration/foo.js)
 
 ![fgrep foo](images/fgrep-foo.png)
 
-```shell
+### grep to pick tests
+
+```bash
+# runs in headless mode, skipping all but one matching test
+$ npm run cypress:run -- --env grep='runs fine'
 ```
 
-```shell
- ## run tests with "works" in their full titles
- $ npm run cypress:open -- --env grep=works
+produces
 
- ## runs only tests with "works" from specs with "foo"
- $ npm run cypress:run -- --env fgrep=foo,grep=works
- ## runs tests with "feature A" in the title
+```text
+  Running: bar.js...         (1 of 2)
+picking tests to run in file cypress/integration/bar.js
 
- ```
+  - runs ok
+  ✓ runs fine (38ms)
 
-Note how you need to use `--` to separate NPM open or run script command from arguments to Cypress itself. If you want to pass string with spaces, please quote it like
+  1 passing (67ms)
+  1 pending
 
-```shell
+  Running: foo.js...         (2 of 2)
+picking tests to run in file cypress/integration/foo.js
+
+  - has test A
+  - has test B
+  - has test C
+
+  0 passing (33ms)
+  3 pending
+```
+
+## Notes
+
+Note how you need to use `--` to separate NPM open or run script command from arguments to Cypress itself.
+
+Separate multiple environment variables with commas
+
+```bash
+# runs only tests with "works" from specs with "foo"
+$ npm run cypress:run -- --env fgrep=foo,grep=works
+```
+
+If you want to pass string with spaces, please quote it like
+
+```bash
 $ npm run cypress:run -- --env grep='feature A'
 ```
 
