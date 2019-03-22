@@ -111,6 +111,8 @@ jobs:
     <<: *defaults
   logging-in__xhr-web-forms:
     <<: *defaults
+  preprocessors__grep:
+    <<: *defaults
   preprocessors__typescript-browserify:
     <<: *defaults
   preprocessors__typescript-webpack:
@@ -208,6 +210,9 @@ workflows:
       - logging-in__xhr-web-forms:
           requires:
             - build
+      - preprocessors__grep:
+          requires:
+            - build
       - preprocessors__typescript-browserify:
           requires:
             - build
@@ -277,6 +282,7 @@ workflows:
             - logging-in__html-web-forms
             - logging-in__single-sign-on
             - logging-in__xhr-web-forms
+            - preprocessors__grep
             - preprocessors__typescript-browserify
             - preprocessors__typescript-webpack
             - server-communication__bootstrapping-your-app
