@@ -15,7 +15,7 @@
   "prHourlyLimit": 2,
   "rangeStrategy": "pin",
   "schedule": [
-    "every weekend"
+    "after 2am and before 3am on sunday"
   ],
   "updateNotScheduled": false,
   "timezone": "America/New_York",
