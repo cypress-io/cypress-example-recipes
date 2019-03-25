@@ -46,6 +46,8 @@ app.use(session({
 app.set('views', __dirname)
 app.set('view engine', 'hbs')
 
+app.get('/', (req, res) => res.redirect('/login'))
+
 // this is the standard HTML login page
 app.get('/login', csrfProtection, (req, res) => {
   const token = req.csrfToken()
