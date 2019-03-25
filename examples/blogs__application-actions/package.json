@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "start": "../../node_modules/.bin/http-server -p 8888 --silent -c-1",
+    "dev": "../../node_modules/.bin/start-test 8888 cypress:open",
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
     "cypress:open": "../../node_modules/.bin/cypress open",
