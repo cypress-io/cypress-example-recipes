@@ -1,7 +1,4 @@
-// type definitions for Cypress object "cy"
-/// <reference types="cypress" />
-
-// type definitions for custom commands like "createDefaultTodos"
+// type definitions for Cypress and the custom commands like "createDefaultTodos"
 /// <reference types="../support" />
 
 // @ts-check
@@ -138,6 +135,7 @@ describe('TodoMVC', function () {
     it('calls inform', () => {
       cy.window()
         .its('model')
+        .should('be.an', 'object')
         .then(model => {
           cy.spy(model, 'inform').as('inform')
         })
