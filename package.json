@@ -57,9 +57,9 @@
     "todomvc-app-css": "2.1.2"
   },
   "devDependencies": {
-    "@cypress/browserify-preprocessor": "1.0.2",
+    "@cypress/browserify-preprocessor": "2.0.0",
     "@cypress/snapshot": "2.0.1",
-    "@cypress/webpack-preprocessor": "2.0.1",
+    "@cypress/webpack-preprocessor": "3.0.1",
     "@medv/finder": "1.1.1",
     "@types/chai": "4.1.3",
     "@types/mocha": "5.2.5",
