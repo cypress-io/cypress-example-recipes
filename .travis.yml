@@ -3,6 +3,13 @@ node_js:
   # 10.13 includes npm@6 which has good "npm ci" command, and is LTS
   - 10.13
 
+# stop building all branches and pull requests
+# until they have been merged
+# https://github.com/cypress-io/cypress-example-recipes/issues/260
+branches:
+  only:
+  - master
+
 cache:
   directories:
     - ~/.npm
