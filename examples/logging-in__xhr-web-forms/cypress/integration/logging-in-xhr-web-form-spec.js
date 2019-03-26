@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 // This recipe is very similar to the 'Logging In - HTML web form'
 // except that is uses AJAX (XHR's) under the hood instead
 // of using a regular HTML form submission.
@@ -14,6 +16,9 @@
 // before running the tests below.
 
 describe('Logging In - XHR Web Form', function(){
+  const username = 'jane.lane'
+  const password = 'password123'
+
   context('XHR form submission', function(){
     beforeEach(function(){
       cy.visit('/login')
@@ -25,6 +30,7 @@ describe('Logging In - XHR Web Form', function(){
       // alias this route so we can wait on it later
       cy.route('POST', '/login').as('postLogin')
 
+      // incorrect username on password
       cy.get('input[name=username]').type('jane.lae')
       cy.get('input[name=password]').type('password123{enter}')
 
@@ -58,6 +64,7 @@ describe('Logging In - XHR Web Form', function(){
         // alias this route so we can wait on it later
         .as('postLogin')
 
+      // incorrect username on purpose
       cy.get('input[name=username]').type('jane.lae')
       cy.get('input[name=password]').type('password123{enter}')
 
@@ -80,8 +87,9 @@ describe('Logging In - XHR Web Form', function(){
     })
 
     it('redirects to /dashboard on success', function(){
-      cy.get('input[name=username]').type('jane.lane')
-      cy.get('input[name=password]').type('password123{enter}')
+      cy.get('input[name=username]').type(username)
+      cy.get('input[name=password]').type(password)
+      cy.get('form').submit()
 
       // we should be redirected to /dashboard
       cy.url().should('include', '/dashboard')
@@ -102,7 +110,7 @@ describe('Logging In - XHR Web Form', function(){
       cy.window()
         .then(function(win){
           // stub out the Login.redirect method
-          // so it doesnt cause the browser to redirect
+          // so it doesn't cause the browser to redirect
           cy.stub(win.Login, 'redirect').as('redirect')
         })
 
@@ -121,8 +129,9 @@ describe('Logging In - XHR Web Form', function(){
         // alias this route so we can wait on it later
         .as('postLogin')
 
-      cy.get('input[name=username]').type('jane.lane')
-      cy.get('input[name=password]').type('password123{enter}')
+      cy.get('input[name=username]').type(username)
+      cy.get('input[name=password]').type(password)
+      cy.get('form').submit()
 
       cy.wait('@postLogin')
 
@@ -152,8 +161,8 @@ describe('Logging In - XHR Web Form', function(){
           method: 'POST',
           url: '/login', // baseUrl will be prepended to this url
           body: {
-            username: 'jane.lane',
-            password: 'password123'
+            username,
+            password
           }
         })
 
@@ -185,7 +194,7 @@ describe('Logging In - XHR Web Form', function(){
 
     beforeEach(function(){
       // login before each test
-      cy.loginByJSON('jane.lane', 'password123')
+      cy.loginByJSON(username, password)
     })
 
     it('can visit /dashboard', function(){
