@@ -52,9 +52,8 @@ app.get('/login', (req, res) => {
   res.render('./login.hbs')
 })
 
-// specifiy thae the jsonParser shoudld only be
-// used on the one route when its coming from
-// a JSON request
+// specifies that the jsonParser should only be
+// used on the one route when its coming from a JSON request
 app.post('/login', jsonParser, (req, res) => {
   // if this matches the secret username and password
   if(matchesUsernameAndPassword(req.body)){
