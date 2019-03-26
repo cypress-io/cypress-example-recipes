@@ -9,13 +9,14 @@
 // 2. Test error states
 // 3. Stub login XHR with errors and success
 // 4. Stub Login.redirect method
-// 5. Use cy.request for much faster performance
-// 6. Create a custom command
 
 // Be sure to run `npm start` to start the server
 // before running the tests below.
 
 describe('Logging In - XHR Web Form', function(){
+  // normally sensitive information like username and password
+  // should be passed via environment variables
+  // https://on.cypress.io/env
   const username = 'jane.lane'
   const password = 'password123'
 
@@ -24,7 +25,21 @@ describe('Logging In - XHR Web Form', function(){
       cy.visit('/login')
     })
 
+    it('successfully logs in', () => {
+      // we can submit form using "cy.submit" command
+      // https://on.cypress.io/submit
+      cy.get('input[name=username]').type(username)
+      cy.get('input[name=password]').type(password)
+      cy.get('form').submit()
+
+      // we should be in
+      cy.url().should('include', '/dashboard')
+      cy.get('h1').should('contain', 'jane.lane')
+    })
+
     it('displays errors on login', function(){
+      // we can observe both the UI and the network XHR call
+      // during unsuccessful login attempt
       cy.server()
 
       // alias this route so we can wait on it later
@@ -34,7 +49,7 @@ describe('Logging In - XHR Web Form', function(){
       cy.get('input[name=username]').type('jane.lae')
       cy.get('input[name=password]').type('password123{enter}')
 
-      // we should always explictly wait for
+      // we should always explicitly wait for
       // the response for this POST to come back
       // so our tests are not potentially flaky or brittle
       cy.wait('@postLogin')
@@ -50,7 +65,7 @@ describe('Logging In - XHR Web Form', function(){
 
     it('can stub the XHR to force it to fail', function(){
       // instead of letting this XHR hit our backend we can instead
-      // control its behavior programatically by stubbing it
+      // control its behavior programmatically by stubbing it
       cy.server()
 
       // simulate the server returning 503 with
@@ -87,6 +102,8 @@ describe('Logging In - XHR Web Form', function(){
     })
 
     it('redirects to /dashboard on success', function(){
+      // we can submit form using "cy.submit" command
+      // https://on.cypress.io/submit
       cy.get('input[name=username]').type(username)
       cy.get('input[name=password]').type(password)
       cy.get('form').submit()
@@ -143,78 +160,6 @@ describe('Logging In - XHR Web Form', function(){
           // the right arguments from the stubbed routed
           expect(this.redirect).to.be.calledWith('/error')
         })
-    })
-  })
-
-  context('XHR form submission with cy.request', function(){
-    it('can bypass the UI and yet still log in', function(){
-      // oftentimes once we have a proper e2e test around logging in
-      // there is NO more reason to actually use our UI to log in users
-      // doing so wastes a huge amount of time, as our entire page has to load
-      // all associated resources have to load, we have to wait to fill the
-      // form and for the form submission and redirection process
-      //
-      // with cy.request we can bypass all of this because it automatically gets
-      // and sets cookies under the hood which acts exactly as if these requests
-      // came from the browser
-      cy.request({
-          method: 'POST',
-          url: '/login', // baseUrl will be prepended to this url
-          body: {
-            username,
-            password
-          }
-        })
-
-      // just to prove we have a session
-      cy.getCookie('cypress-session-cookie').should('exist')
-    })
-  })
-
-  context('Reusable "login" custom command', function(){
-    // typically we'd put this in cypress/support/commands.js
-    // but because this custom command is specific to this example
-    // we'll keep it here
-    Cypress.Commands.add('loginByJSON', (username, password) => {
-
-      Cypress.log({
-        name: 'loginByJSON',
-        message: username + ' | ' + password
-      })
-
-      return cy.request({
-        method: 'POST',
-        url: '/login',
-        body: {
-          username: username,
-          password: password
-        }
-      })
-    })
-
-    beforeEach(function(){
-      // login before each test
-      cy.loginByJSON(username, password)
-    })
-
-    it('can visit /dashboard', function(){
-      cy.visit('/dashboard')
-      cy.get('h1').should('contain', 'jane.lane')
-    })
-
-    it('can visit /users', function(){
-      cy.visit('/users')
-      cy.get('h1').should('contain', 'Users')
-    })
-
-    it('can simply request other authenticated pages', function(){
-      // instead of visiting each page and waiting for all
-      // the associated resources to load, we can instead
-      // just issue a simple HTTP request and make an
-      // assertion about the response body
-      cy.request('/admin')
-        .its('body')
-        .should('include', '<h1>Admin</h1>')
     })
   })
 })

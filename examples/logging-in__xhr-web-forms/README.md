@@ -4,9 +4,13 @@
 
 See the login XHR code in [login.hbs](login.hbs)
 
-See tests in [cypress/integration/logging-in-xhr-web-form-spec.js](cypress/integration/logging-in-xhr-web-form-spec.js) that show how to log in using UI or [`cy.request`](https://on.cypress.io/request)
-
 ![Tests](images/tests.png)
+
+Test files in [cypress/integration](cypress/integration) folder show:
+
+- in [logging-in-xhr-web-form-spec.js](cypress/integration/logging-in-xhr-web-form-spec.js) how to log in using the UI
+- in [logging-via-request-spec.js](cypress/integration/logging-via-request-spec.js) how to login using [`cy.request`](https://on.cypress.io/request)
+- in [custom-command-spec.js](cypress/integration/custom-command-spec.js) how to write a custom `cy.loginByJSON` command to abstract the quick login using `cy.request`
 
 **tip** to start the server and run Cypress GUI use script `npm run dev`
 
