@@ -71,6 +71,26 @@ app.post('/login', jsonParser, (req, res) => {
   }
 })
 
+app.post('/slow-login', jsonParser, (req, res) => {
+  // if this matches the secret username and password
+  if(matchesUsernameAndPassword(req.body)){
+    // login the user after a delay
+    setTimeout(function () {
+      req.session.user = 'jane.lane'
+
+      // respond with how we should redirect
+      res.json({redirect: "/dashboard"})
+    }, 2000)
+  } else {
+    // else send back JSON error
+    // with unprocessable entity
+    // status code
+    res.status(422).json({
+      error: "Username and/or password is incorrect"
+    })
+  }
+})
+
 app.get('/dashboard', ensureLoggedIn, (req, res) => {
   res.render('./dashboard.hbs', {
     user: req.session.user
