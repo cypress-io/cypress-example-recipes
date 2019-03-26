@@ -1,6 +1,19 @@
 # Recipes [![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) [![Travis CI](https://travis-ci.org/cypress-io/cypress-example-recipes.svg?branch=master)](https://travis-ci.org/cypress-io/cypress-example-recipes) [![renovate-app badge][renovate-badge]][renovate-app]
 
-This repo contains various recipes for testing common scenarios using Cypress.
+> This repo contains various recipes for testing common scenarios using Cypress.
+
+## Logging in recipes
+
+Recipe | Description
+--- | ---
+[Single Sign On](#single-sign-on) | Log in across multiple servers or providers
+[HTML Web Forms](#html-web-forms) | Log in with a basic HTML form
+[XHR Web Forms](#xhr-web-forms) | Log in using an XHR
+[CSRF Tokens](#csrf-tokens) | Log in with a required CSRF token
+
+Also see [Authentication plugins](https://on.cypress.io/plugins#authentication) and watch video ["Organizing Tests, Logging In, Controlling State"](https://www.youtube.com/watch?v=5XQOK0v_YRE)
+
+## Other recipes
 
 Recipe | Category | Description
 --- | --- | ---
@@ -8,10 +21,6 @@ Recipe | Category | Description
 [Environment variables](#environment-variables) | Fundamentals | Passing environment variables to tests
 [Dynamic tests](#dynamic-tests) | Fundamentals | Create tests dynamically from data
 [Fixtures](#fixtures) | Fundamentals | Loading single or multiple fixtures
-[Single Sign On](#single-sign-on) | Logging In | Log in across multiple servers or providers
-[HTML Web Forms](#html-web-forms) | Logging In | Log in with a basic HTML form
-[XHR Web Forms](#xhr-web-forms) | Logging In | Log in using an XHR
-[CSRF Tokens](#csrf-tokens) | Logging In | Log in with a required CSRF token
 [Tab Handling and Links](#tab-handling-and-links) | Testing the DOM | Links that open in a new tab
 [Hover and Hidden Elements](#hover-and-hidden-elements) | Testing the DOM | Test hidden elements requiring hover
 [Form Interactions](#form-interactions) | Testing the DOM | Test form elements like input type `range`
