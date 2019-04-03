@@ -37,3 +37,9 @@ test_script:
 
 # Don't actually build.
 build: off
+
+# stop and wait for SSH section after failure
+# https://www.appveyor.com/docs/how-to/ssh-to-build-worker/
+on_finish:
+  - sh: export APPVEYOR_SSH_BLOCK=true
+  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
