@@ -33,13 +33,11 @@ cache:
   # using APPVEYOR_SAVE_CACHE_ON_ERROR: true environment variable
 
 test_script:
+  # stop and wait for SSH section after failure
+  # https://www.appveyor.com/docs/how-to/ssh-to-build-worker/
+  - sh: export APPVEYOR_SSH_BLOCK=true
+  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
   - npm run test:ci:windows
 
 # Don't actually build.
 build: off
-
-# stop and wait for SSH section after failure
-# https://www.appveyor.com/docs/how-to/ssh-to-build-worker/
-on_finish:
-  - sh: export APPVEYOR_SSH_BLOCK=true
-  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
