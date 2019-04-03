@@ -17,6 +17,9 @@ install:
   - ls '%AppData%\npm-cache' || true
   - ls '%USERPROFILE%\AppData\Local\Cypress\Cache' || true
   - npm ci
+  # install global start-server-and-test
+  # to avoid problems with finding path to it on Windows
+  - npm i -g start-server-and-test
 
 cache:
   # cache NPM packages and Cypress binary
