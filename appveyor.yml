@@ -13,6 +13,13 @@ install:
   - node -e "console.log(process.arch)"
   - npm ci
 
+cache:
+  # cache NPM packages and Cypress binary
+  # https://docs.npmjs.com/files/folders.html#cache
+  # https://on.cypress.io/caching
+  - '%AppData%\npm-cache'
+  - '%USERPROFILE%\AppData\Local\Cypress\Cache'
+
 test_script:
   - npm run test:ci
 
