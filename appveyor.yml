@@ -11,6 +11,11 @@ install:
   - npm --version
   - node -e "console.log(process.platform)"
   - node -e "console.log(process.arch)"
+  # print cached dependencies
+  - echo '%AppData%\npm-cache'
+  - echo '%USERPROFILE%\AppData\Local\Cypress\Cache'
+  - dir '%AppData%\npm-cache'
+  - dir '%USERPROFILE%\AppData\Local\Cypress\Cache'
   - npm ci
 
 cache:

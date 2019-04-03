@@ -59,7 +59,8 @@ const testExample = (folder) => {
     console.log('skipping...')
     return
   }
-  return execa('npm', ['run', scriptName], { stdio: 'inherit', cwd: folder })
+  const script = scripts[scriptName]
+  return execa('npx', ['--call', script], { stdio: 'inherit', cwd: folder })
 }
 
 const testExamples = (folders) => {
