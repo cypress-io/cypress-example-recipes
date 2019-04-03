@@ -21,7 +21,7 @@ cache:
   - '%USERPROFILE%\AppData\Local\Cypress\Cache'
 
 test_script:
-  - npm run test:ci
+  - npm run test:ci:windows
 
 # Don't actually build.
 build: off
