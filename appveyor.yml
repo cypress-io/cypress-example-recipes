@@ -23,8 +23,8 @@ cache:
   # https://www.appveyor.com/docs/build-cache/
   # https://docs.npmjs.com/files/folders.html#cache
   # https://on.cypress.io/caching
-  - '%AppData%\npm-cache' -> package.json
-  - '%USERPROFILE%\AppData\Local\Cypress\Cache' -> package.json
+  - '%AppData%\npm-cache'
+  - '%USERPROFILE%\AppData\Local\Cypress\Cache'
 
 test_script:
   - npm run test:ci:windows
