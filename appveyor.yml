@@ -14,8 +14,8 @@ install:
   # print cached dependencies
   - echo '%AppData%\npm-cache'
   - echo '%USERPROFILE%\AppData\Local\Cypress\Cache'
-  - ls '%AppData%\npm-cache'
-  - ls '%USERPROFILE%\AppData\Local\Cypress\Cache'
+  - ls '%AppData%\npm-cache' || true
+  - ls '%USERPROFILE%\AppData\Local\Cypress\Cache' || true
   - npm ci
 
 cache:
@@ -25,6 +25,9 @@ cache:
   # https://on.cypress.io/caching
   - '%AppData%\npm-cache'
   - '%USERPROFILE%\AppData\Local\Cypress\Cache'
+  # Note: by default cache is only saved for successful builds
+  # you can save cache from the failed builds
+  # using APPVEYOR_SAVE_CACHE_ON_ERROR: true environment variable
 
 test_script:
   - npm run test:ci:windows
