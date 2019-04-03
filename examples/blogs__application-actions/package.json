@@ -5,12 +5,14 @@
   "private": true,
   "scripts": {
     "start": "../../node_modules/.bin/http-server -p 8888 --silent -c-1",
+    "start:win": "bin-up http-server -p 8888 --silent -c-1",
     "dev": "../../node_modules/.bin/start-test 8888 cypress:open",
     "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run:win": "bin-up cypress run",
     "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
     "cypress:open": "../../node_modules/.bin/cypress open",
     "test:ci": "../../node_modules/.bin/start-test 8888 cypress:run",
-    "test:ci:windows": "start-test 8888 cypress:run",
+    "test:ci:windows": "bin-up start-test start:win 8888 cypress:run:win",
     "test:ci:chrome": "../../node_modules/.bin/start-test 8888 cypress:run:chrome"
   }
 }

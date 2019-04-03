@@ -17,9 +17,9 @@ install:
   - ls '%AppData%\npm-cache' || true
   - ls '%USERPROFILE%\AppData\Local\Cypress\Cache' || true
   - npm ci
-  # install global start-server-and-test
-  # to avoid problems with finding path to it on Windows
-  - npm i -g start-server-and-test
+  # install global bin-up
+  # to avoid problems with finding tool paths on Windows
+  - npm i -g bin-up
 
 cache:
   # cache NPM packages and Cypress binary
@@ -35,8 +35,8 @@ cache:
 test_script:
   # stop and wait for SSH section after failure
   # https://www.appveyor.com/docs/how-to/ssh-to-build-worker/
-  - sh: export APPVEYOR_SSH_BLOCK=true
-  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+  # - sh: export APPVEYOR_SSH_BLOCK=true
+  # - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
   - npm run test:ci:windows
 
 # Don't actually build.
