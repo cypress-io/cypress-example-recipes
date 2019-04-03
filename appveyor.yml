@@ -14,16 +14,17 @@ install:
   # print cached dependencies
   - echo '%AppData%\npm-cache'
   - echo '%USERPROFILE%\AppData\Local\Cypress\Cache'
-  - dir '%AppData%\npm-cache'
-  - dir '%USERPROFILE%\AppData\Local\Cypress\Cache'
+  - ls '%AppData%\npm-cache'
+  - ls '%USERPROFILE%\AppData\Local\Cypress\Cache'
   - npm ci
 
 cache:
   # cache NPM packages and Cypress binary
+  # https://www.appveyor.com/docs/build-cache/
   # https://docs.npmjs.com/files/folders.html#cache
   # https://on.cypress.io/caching
-  - '%AppData%\npm-cache'
-  - '%USERPROFILE%\AppData\Local\Cypress\Cache'
+  - '%AppData%\npm-cache' -> package.json
+  - '%USERPROFILE%\AppData\Local\Cypress\Cache' -> package.json
 
 test_script:
   - npm run test:ci:windows
