@@ -11,6 +11,7 @@ install:
   - npm --version
   - node -e "console.log(process.platform)"
   - node -e "console.log(process.arch)"
+  - npm ci
 
 test_script:
   - npm run test:ci
