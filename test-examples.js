@@ -9,16 +9,26 @@ const tb = require('terminal-banner').terminalBanner
 const execa = require('execa')
 const pluralize = require('pluralize')
 const { resolve, join } = require('path')
+const fs = require('fs')
 const arg = require('arg')
 
 // to run "npm run test:ci:chrome" scripts in each example
 // run this script with "--chrome" CLI flag
 const args = arg({
   '--chrome': Boolean,
+  '--windows': Boolean,
 })
 console.log('args', args)
 
-const scriptName = args['--chrome'] ? 'test:ci:chrome' : 'test:ci'
+// default NPM script name
+let scriptName = 'test:ci'
+if (args['--chrome']) {
+  scriptName = 'test:ci:chrome'
+}
+if (args['--windows']) {
+  scriptName = 'test:ci:windows'
+}
+console.log('script name "%s"', scriptName)
 
 const getExamples = () => {
   return globby('examples/*', { onlyFiles: false, expandDirectories: false })
@@ -32,11 +42,27 @@ const printFolders = (folders) => {
   folders.forEach((name) => console.log(' -', name))
 }
 
+const hasPackageScriptName = (folder) => {
+  const filename = resolve(join(folder, 'package.json'))
+  if (!fs.existsSync(filename)) {
+    return false
+  }
+
+  const { scripts } = require(filename)
+  return scripts && scripts[scriptName]
+}
+
 const testExample = (folder) => {
   tb(`Testing ${folder}`)
   // runs the same script command in each folder
   // maybe if there is no script, should skip it?
   const filename = resolve(join(folder, 'package.json'))
+  if (!fs.existsSync(filename)) {
+    console.log('cannot find file "%s"', filename)
+    console.log('skipping...')
+    return
+  }
+
   const { scripts } = require(filename)
   if (!scripts || !scripts[scriptName]) {
     console.log('file %s does not have script "%s"', filename, scriptName)
@@ -55,10 +81,17 @@ const filterSomeFolders = (folders) => {
   return folders
 }
 
+/**
+ * Leaves only folders that have package.json with desired script name
+ */
+const filterByScriptName = (folders) => {
+  return folders.filter(hasPackageScriptName)
+}
+
 bluebird
 .try(getExamples)
 .then((list) => list.sort())
-// .then((list) => list.slice(0, 1))
+.then(filterByScriptName)
 .then(filterSomeFolders)
 .tap(printFolders)
 .then(testExamples)
