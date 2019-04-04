@@ -8,4 +8,4 @@ Key concepts
 - Stub remote server using [`cy.route()`](https://on.cypress.io/route)
 - Alternatively stub `axios.post` method using [`cy.stub()`](https://on.cypress.io/stub)
 
-Alternatively, use [`cypress-file-upload`](https://github.com/abramenal/cypress-file-upload) for file upload testing.
+Alternatively use [`cypress-file-upload`](https://github.com/abramenal/cypress-file-upload) for file upload testing.
