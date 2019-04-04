@@ -38,10 +38,11 @@ jobs:
     # define a separate script for each "examples/*" folder
     # this will run it in a separate job on TravisCI
 
-    - stage: test
-      env:
-        - DIR=blogs__codepen-demo
-      <<: *defaults
+    # skip Codepen demo because Codepen is 502
+    # - stage: test
+    #   env:
+    #     - DIR=blogs__codepen-demo
+    #   <<: *defaults
     - stage: test
       env:
         - DIR=blogs__direct-control-angular
