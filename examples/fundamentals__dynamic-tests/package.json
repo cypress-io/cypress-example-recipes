@@ -4,6 +4,7 @@
   "description": "Create Cypress tests dynamically from data",
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
-    "cypress:open": "../../node_modules/.bin/cypress open"
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "test:ci:windows": "bin-up cypress run"
   }
 }
