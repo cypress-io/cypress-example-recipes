@@ -73,7 +73,7 @@ jobs:
     parallelism: 1
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:chrome69
+      - image: cypress/browsers:node8.15.1-chrome73
     steps:
       - attach_workspace:
           at: ~/
