@@ -170,9 +170,12 @@ workflows:
               only:
                 - master
 
-      - blogs__codepen-demo:
-          requires:
-            - build
+      # Do not run Codepen demo by default - because it depends on
+      # the external service that sometimes gives 502 breaking our tests
+      # - blogs__codepen-demo:
+      #     requires:
+      #       - build
+
       - blogs__application-actions:
           requires:
             - build
@@ -270,7 +273,6 @@ workflows:
       # see https://glebbahmutov.com/blog/parallel-or-not/
       - after-tests:
           requires:
-            - blogs__codepen-demo
             - blogs__application-actions
             - blogs__direct-control-angular
             - blogs__e2e-api-testing
