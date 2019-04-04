@@ -78,7 +78,16 @@ const testExamples = (folders) => {
 
 const filterSomeFolders = (folders) => {
   // if you want to filter some folders by name for example
-  return folders
+  // we want to skip recipes that have outside service dependencies
+  // like Codepen demos
+  const skipCodepenFolder = (name) => {
+    if (name.includes('codepen')) {
+      return false
+    }
+    return true
+  }
+
+  return folders.filter(skipCodepenFolder)
 }
 
 /**
