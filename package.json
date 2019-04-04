@@ -13,6 +13,7 @@
     "stop-only": "stop-only --folder examples --skip node_modules",
     "warn-only": "stop-only --warn --folder examples --skip node_modules",
     "test:ci": "node ./test-examples",
+    "test:ci:windows": "node ./test-examples --windows",
     "test:ci:chrome": "node ./test-examples --chrome"
   },
   "repository": {
