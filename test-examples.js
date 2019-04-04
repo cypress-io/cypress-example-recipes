@@ -42,6 +42,16 @@ const printFolders = (folders) => {
   folders.forEach((name) => console.log(' -', name))
 }
 
+const hasPackageScriptName = (folder) => {
+  const filename = resolve(join(folder, 'package.json'))
+  if (!fs.existsSync(filename)) {
+    return false
+  }
+
+  const { scripts } = require(filename)
+  return scripts && scripts[scriptName]
+}
+
 const testExample = (folder) => {
   tb(`Testing ${folder}`)
   // runs the same script command in each folder
@@ -71,10 +81,17 @@ const filterSomeFolders = (folders) => {
   return folders
 }
 
+/**
+ * Leaves only folders that have package.json with desired script name
+ */
+const filterByScriptName = (folders) => {
+  return folders.filter(hasPackageScriptName)
+}
+
 bluebird
 .try(getExamples)
 .then((list) => list.sort())
-// .then((list) => list.slice(0, 1))
+.then(filterByScriptName)
 .then(filterSomeFolders)
 .tap(printFolders)
 .then(testExamples)
