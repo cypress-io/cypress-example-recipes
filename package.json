@@ -65,7 +65,7 @@
     "@types/chai": "4.1.7",
     "@types/mocha": "5.2.6",
     "arg": "4.1.0",
-    "babel-loader": "8.0.4",
+    "babel-loader": "8.0.5",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
     "bluebird": "3.5.1",
     "cypress": "3.2.0",
