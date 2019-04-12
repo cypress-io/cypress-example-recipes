@@ -11,6 +11,7 @@ Recipe | Description
 [Dynamic tests](#dynamic-tests) | Create tests dynamically from data
 [Fixtures](#fixtures) | Loading single or multiple fixtures
 [Adding Chai Assertions](#adding-chai-assertions) | Add new or custom chai assertions
+[Cypress NPM module](#cypress-npm-module) | Run Cypress via its NPM module API
 
 ## Testing the DOM
 
@@ -310,6 +311,21 @@ Get around the lack of a `.hover()` command.
 - Extend [`chai`](http://chaijs.com/) with the [`chai-colors`](http://chaijs.com/plugins/chai-colors/) assertion plugin.
 - Globally extend [`chai`](http://chaijs.com/) for all specs.
 - Set up Intelligent Code completion for custom assertions.
+
+### [Cypress NPM module]('./examples/fundamentals__npm-module)
+
+- Run Cypress tests using its NPM module API
+
+```js
+require('cypress').run({
+  // options
+}).then(testResults => {
+  // rerun failing specs
+  // or email test report
+  // or post it on Slack
+  // ..
+})
+```
 
 ### [Bootstrapping your App](./examples/server-communication__bootstrapping-your-app)
 
