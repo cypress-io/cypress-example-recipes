@@ -312,7 +312,7 @@ Get around the lack of a `.hover()` command.
 - Globally extend [`chai`](http://chaijs.com/) for all specs.
 - Set up Intelligent Code completion for custom assertions.
 
-### [Cypress module API]('./examples/fundamentals__module-api)
+### [Cypress module API](./examples/fundamentals__module-api)
 
 - Run Cypress tests using its Node module API
 
