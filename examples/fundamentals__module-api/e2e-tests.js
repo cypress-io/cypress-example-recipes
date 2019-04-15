@@ -1,4 +1,4 @@
-// runs Cypress end-to-end tests using Cypress NPM module API
+// runs Cypress end-to-end tests using Cypress Node module API
 // https://on.cypress.io/module-api
 
 const cypress = require('cypress')

@@ -1,7 +1,7 @@
-# cypress-npm-module
-> Run Cypress via its NPM module API
+# cypress-module-api
+> Run Cypress via its module API
 
-Cypress provides NPM module in addition to its CLI commands.
+Cypress provides a Node module in addition to its CLI commands.
 
 See [module API documentation](https://on.cypress.io/module-api)
 
