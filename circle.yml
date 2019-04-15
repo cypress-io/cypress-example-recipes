@@ -146,7 +146,7 @@ jobs:
     <<: *defaults
   fundamentals__dynamic-tests:
     <<: *defaults
-  fundamentals__npm-module:
+  fundamentals__module-api:
     <<: *defaults
 
 workflows:
@@ -268,7 +268,7 @@ workflows:
       - fundamentals__fixtures:
           requires:
             - build
-      - fundamentals__npm-module:
+      - fundamentals__module-api:
           requires:
             - build
 
@@ -290,7 +290,7 @@ workflows:
             - fundamentals__node-modules
             - fundamentals__fixtures
             - fundamentals__dynamic-tests
-            - fundamentals__npm-module
+            - fundamentals__module-api
             - logging-in__csrf-tokens
             - logging-in__html-web-forms
             - logging-in__single-sign-on
