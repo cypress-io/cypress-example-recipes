@@ -146,6 +146,8 @@ jobs:
     <<: *defaults
   fundamentals__dynamic-tests:
     <<: *defaults
+  fundamentals__module-api:
+    <<: *defaults
 
 workflows:
   version: 2
@@ -266,6 +268,9 @@ workflows:
       - fundamentals__fixtures:
           requires:
             - build
+      - fundamentals__module-api:
+          requires:
+            - build
 
       # to avoid constantly tweaking required jobs on CircleCI
       # we can have a single job wait on all other test jobs here.
@@ -285,6 +290,7 @@ workflows:
             - fundamentals__node-modules
             - fundamentals__fixtures
             - fundamentals__dynamic-tests
+            - fundamentals__module-api
             - logging-in__csrf-tokens
             - logging-in__html-web-forms
             - logging-in__single-sign-on
