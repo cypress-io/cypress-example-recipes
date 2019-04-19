@@ -16,9 +16,17 @@ defaults: &defaults
         name: start the server
         background: true
     - run:
+        # only record the tests on Cypress Dashboard
+        # if the record key is set. Usually it is NOT set
+        # for forked pull request because environment variables
+        # are not passed to the external PRs
         command: |
           cd examples/$CIRCLE_JOB
-          npm run cypress:run -- --record --group $CIRCLE_JOB
+          if [ -z "$CYPRESS_RECORD_KEY" ]; then
+            npm run cypress:run
+          else
+            npm run cypress:run -- --record --group $CIRCLE_JOB
+          fi
         name: Cypress tests
 
 jobs:
