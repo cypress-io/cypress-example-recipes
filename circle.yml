@@ -23,9 +23,9 @@ defaults: &defaults
         command: |
           cd examples/$CIRCLE_JOB
           if [ -z "$CYPRESS_RECORD_KEY" ]; then
-            npm run cypress:run -- --record --group $CIRCLE_JOB
-          else
             npm run cypress:run
+          else
+            npm run cypress:run -- --record --group $CIRCLE_JOB
           fi
         name: Cypress tests
 
