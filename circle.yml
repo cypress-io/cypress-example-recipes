@@ -278,6 +278,7 @@ workflows:
       # see https://glebbahmutov.com/blog/parallel-or-not/
       - after-tests:
           requires:
+            - build
             - blogs__application-actions
             - blogs__direct-control-angular
             - blogs__e2e-api-testing
