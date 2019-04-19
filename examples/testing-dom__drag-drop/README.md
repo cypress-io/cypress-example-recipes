@@ -8,3 +8,5 @@ See test file [cypress/integration/drag_n_drop_spec.js](cypress/integration/drag
 - drag events
 
 In both cases, the tests use [`cy.trigger`](https://on.cypress.io/trigger) command.
+
+Alternatively use [`cypress-file-upload`](https://github.com/abramenal/cypress-file-upload) if you test file upload with drag-n-drop component
