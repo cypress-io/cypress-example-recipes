@@ -55,6 +55,7 @@ Recipe | Description
 [Codepen.io Testing](#codepen-testing) | Test a HyperApp Codepen demo
 [Testing Redux Store](#testing-redux-store) | Test an application that uses Redux data store
 [Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Test an application that uses central data store
+[A11y Testing](#a11y-testing) | Accessability testing with [cypress-axe](https://github.com/avanslaars/cypress-axe#readme)
 
 ## Stubbing and spying
 
@@ -206,6 +207,10 @@ Get around the lack of a `.hover()` command.
 
 - Use [`@cypress/webpack-preprocessor`](https://github.com/cypress-io/cypress-webpack-preprocessor) to write Cypress tests in Typescript
 - Lint TypeScript spec code against Cypress type definitions
+
+### [A11y Testing](./examples/blogs__a11y)
+
+This demo shows the [cypress-axe](https://github.com/avanslaars/cypress-axe) plugin which can run the [Axe-core](https://github.com/dequelabs/axe-core) library against the webpage to check if the page follows accessibility practices.
 
 ### [Application Actions](./examples/blogs__application-actions)
 
