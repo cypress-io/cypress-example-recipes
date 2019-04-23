@@ -87,7 +87,9 @@ jobs:
           at: ~/
       - run: npm run test:ci:chrome
 
-  # define a new job with defailts for each "examples/*" subfolder
+  # define a new job with defaults for each "examples/*" subfolder
+  blogs__a11y:
+    <<: *defaults
   blogs__application-actions:
     <<: *defaults
   blogs__codepen-demo:
@@ -186,6 +188,9 @@ workflows:
       #     requires:
       #       - build
 
+      - blogs__a11y:
+          requires:
+            - build
       - blogs__application-actions:
           requires:
             - build
@@ -287,6 +292,7 @@ workflows:
       - after-tests:
           requires:
             - build
+            - blogs__a11y
             - blogs__application-actions
             - blogs__direct-control-angular
             - blogs__e2e-api-testing
