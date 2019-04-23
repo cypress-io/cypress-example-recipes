@@ -1,7 +1,7 @@
 {
   "name": "unit-test-stubbing-dependencies",
   "version": "1.0.0",
-  "description": "",
+  "description": "Shows how to control dependencies during tests using cy.spy and cy.stub",
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",

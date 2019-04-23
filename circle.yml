@@ -16,9 +16,17 @@ defaults: &defaults
         name: start the server
         background: true
     - run:
+        # only record the tests on Cypress Dashboard
+        # if the record key is set. Usually it is NOT set
+        # for forked pull request because environment variables
+        # are not passed to the external PRs
         command: |
           cd examples/$CIRCLE_JOB
-          npm run cypress:run -- --record --group $CIRCLE_JOB
+          if [ -z "$CYPRESS_RECORD_KEY" ]; then
+            npm run cypress:run
+          else
+            npm run cypress:run -- --record --group $CIRCLE_JOB
+          fi
         name: Cypress tests
 
 jobs:
@@ -35,6 +43,7 @@ jobs:
       # run verify and then save cache.
       # this ensures that the Cypress verified status is cached too
       - run: npm run cypress:verify
+      - run: npm run stop-only
       - save_cache:
           key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
           paths:
@@ -72,7 +81,7 @@ jobs:
     parallelism: 1
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:chrome69
+      - image: cypress/browsers:node8.15.1-chrome73
     steps:
       - attach_workspace:
           at: ~/
@@ -111,6 +120,12 @@ jobs:
     <<: *defaults
   logging-in__xhr-web-forms:
     <<: *defaults
+  preprocessors__grep:
+    <<: *defaults
+    # in this particular example we want to grep tests
+    # and run only tests with name having "@admin"
+    environment:
+      CYPRESS_grep: '@admin'
   preprocessors__typescript-browserify:
     <<: *defaults
   preprocessors__typescript-webpack:
@@ -139,6 +154,8 @@ jobs:
     <<: *defaults
   fundamentals__dynamic-tests:
     <<: *defaults
+  fundamentals__module-api:
+    <<: *defaults
 
 workflows:
   version: 2
@@ -163,9 +180,12 @@ workflows:
               only:
                 - master
 
-      - blogs__codepen-demo:
-          requires:
-            - build
+      # Do not run Codepen demo by default - because it depends on
+      # the external service that sometimes gives 502 breaking our tests
+      # - blogs__codepen-demo:
+      #     requires:
+      #       - build
+
       - blogs__application-actions:
           requires:
             - build
@@ -206,6 +226,9 @@ workflows:
           requires:
             - build
       - logging-in__xhr-web-forms:
+          requires:
+            - build
+      - preprocessors__grep:
           requires:
             - build
       - preprocessors__typescript-browserify:
@@ -253,6 +276,9 @@ workflows:
       - fundamentals__fixtures:
           requires:
             - build
+      - fundamentals__module-api:
+          requires:
+            - build
 
       # to avoid constantly tweaking required jobs on CircleCI
       # we can have a single job wait on all other test jobs here.
@@ -260,7 +286,7 @@ workflows:
       # see https://glebbahmutov.com/blog/parallel-or-not/
       - after-tests:
           requires:
-            - blogs__codepen-demo
+            - build
             - blogs__application-actions
             - blogs__direct-control-angular
             - blogs__e2e-api-testing
@@ -273,10 +299,12 @@ workflows:
             - fundamentals__node-modules
             - fundamentals__fixtures
             - fundamentals__dynamic-tests
+            - fundamentals__module-api
             - logging-in__csrf-tokens
             - logging-in__html-web-forms
             - logging-in__single-sign-on
             - logging-in__xhr-web-forms
+            - preprocessors__grep
             - preprocessors__typescript-browserify
             - preprocessors__typescript-webpack
             - server-communication__bootstrapping-your-app

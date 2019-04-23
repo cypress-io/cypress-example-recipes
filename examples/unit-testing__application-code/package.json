@@ -1,10 +1,12 @@
 {
   "name": "unit-test-application-code",
   "version": "1.0.0",
-  "description": "",
+  "description": "Load and unit test application code without loading a web page",
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "test:ci": "npm run cypress:run"
+    "test:ci": "npm run cypress:run",
+    "start": "echo there is no web server to start in this project",
+    "test:ci:windows": "bin-up cypress run"
   }
 }

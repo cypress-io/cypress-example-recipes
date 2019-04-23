@@ -16,6 +16,10 @@
 // before running the tests below.
 
 describe('Logging In - HTML Web Form', function () {
+  // we can use these values to log in
+  const username = 'jane.lane'
+  const password = 'password123'
+
   context('Unauthorized', function () {
     it('is redirected on visit to /dashboard when no session', function () {
       // we must have a valid session cookie to be logged
@@ -57,6 +61,7 @@ describe('Logging In - HTML Web Form', function () {
     })
 
     it('displays errors on login', function () {
+      // incorrect username on purpose
       cy.get('input[name=username]').type('jane.lae')
       cy.get('input[name=password]').type('password123{enter}')
 
@@ -70,8 +75,9 @@ describe('Logging In - HTML Web Form', function () {
     })
 
     it('redirects to /dashboard on success', function () {
-      cy.get('input[name=username]').type('jane.lane')
-      cy.get('input[name=password]').type('password123{enter}')
+      cy.get('input[name=username]').type(username)
+      cy.get('input[name=password]').type(password)
+      cy.get('form').submit()
 
       // we should be redirected to /dashboard
       cy.url().should('include', '/dashboard')
@@ -98,8 +104,8 @@ describe('Logging In - HTML Web Form', function () {
         url: '/login', // baseUrl will be prepended to this url
         form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
         body: {
-          username: 'jane.lane',
-          password: 'password123',
+          username,
+          password
         },
       })
 
@@ -131,15 +137,18 @@ describe('Logging In - HTML Web Form', function () {
 
     beforeEach(function () {
       // login before each test
-      cy.loginByForm('jane.lane', 'password123')
+      cy.loginByForm(username, password)
     })
 
     it('can visit /dashboard', function () {
+      // after cy.request, the session cookie has been set
+      // and we can visit a protected page
       cy.visit('/dashboard')
       cy.get('h1').should('contain', 'jane.lane')
     })
 
     it('can visit /users', function () {
+      // or another protected page
       cy.visit('/users')
       cy.get('h1').should('contain', 'Users')
     })

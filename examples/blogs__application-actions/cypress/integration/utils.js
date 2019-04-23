@@ -14,6 +14,7 @@ export const TODO_ITEM_THREE = 'book a doctors appointment'
 export const addDefaultTodos = () => {
   cy.window()
     .its('model')
+    .should('be.an', 'object')
     .invoke('addTodo', TODO_ITEM_ONE, TODO_ITEM_TWO, TODO_ITEM_THREE)
   cy.get('.todo-list li').as('todos')
 }
@@ -35,6 +36,7 @@ export const addDefaultTodos = () => {
 export const addTodos = (...todos) => {
   cy.window()
     .its('model')
+    .should('be.an', 'object')
     .invoke('addTodo', ...todos)
 }
 
@@ -56,6 +58,7 @@ export const toggle = (k = 0) =>
   cy
     .window()
     .its('model')
+    .should('be.an', 'object')
     .then(model => {
       expect(k, 'check item index').to.be.lessThan(model.todos.length)
       model.toggle(model.todos[k])

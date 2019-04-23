@@ -3,6 +3,13 @@ node_js:
   # 10.13 includes npm@6 which has good "npm ci" command, and is LTS
   - 10.13
 
+# stop building all branches and pull requests
+# until they have been merged
+# https://github.com/cypress-io/cypress-example-recipes/issues/260
+branches:
+  only:
+  - master
+
 cache:
   directories:
     - ~/.npm
@@ -31,10 +38,11 @@ jobs:
     # define a separate script for each "examples/*" folder
     # this will run it in a separate job on TravisCI
 
-    - stage: test
-      env:
-        - DIR=blogs__codepen-demo
-      <<: *defaults
+    # skip Codepen demo because Codepen is 502
+    # - stage: test
+    #   env:
+    #     - DIR=blogs__codepen-demo
+    #   <<: *defaults
     - stage: test
       env:
         - DIR=blogs__direct-control-angular

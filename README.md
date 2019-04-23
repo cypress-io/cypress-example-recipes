@@ -1,41 +1,84 @@
-# Recipes [![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) [![Travis CI](https://travis-ci.org/cypress-io/cypress-example-recipes.svg?branch=master)](https://travis-ci.org/cypress-io/cypress-example-recipes) [![renovate-app badge][renovate-badge]][renovate-app]
+# Recipes [![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) [![Travis CI](https://travis-ci.org/cypress-io/cypress-example-recipes.svg?branch=master)](https://travis-ci.org/cypress-io/cypress-example-recipes) [![Build status](https://ci.appveyor.com/api/projects/status/7p4qkwavheciwbxc/branch/master?svg=true)](https://ci.appveyor.com/project/cypress-io/cypress-example-recipes/branch/master) [![renovate-app badge][renovate-badge]][renovate-app]
 
-This repo contains various recipes for testing common scenarios using Cypress.
+> This repo contains various recipes for testing common scenarios using Cypress: [Fundamentals](#fundamentals), [Testing the DOM](#testing-the-dom), [Logging in](#logging-in-recipes), [Preprocessors](#preprocessors), [Blogs](#blogs), [Stubbing and spying](#stubbing-and-spying), [Unit Testing](#unit-testing), [Server Communication](#server-communication)
 
-Recipe | Category | Description
---- | --- | ---
-[Node Modules](#node-modules) | Fundamentals | Import your own node modules
-[Environment variables](#environment-variables) | Fundamentals | Passing environment variables to tests
-[Dynamic tests](#dynamic-tests) | Fundamentals | Create tests dynamically from data
-[Fixtures](#fixtures) | Fundamentals | Loading single or multiple fixtures
-[Single Sign On](#single-sign-on) | Logging In | Log in across multiple servers or providers
-[HTML Web Forms](#html-web-forms) | Logging In | Log in with a basic HTML form
-[XHR Web Forms](#xhr-web-forms) | Logging In | Log in using an XHR
-[CSRF Tokens](#csrf-tokens) | Logging In | Log in with a required CSRF token
-[Tab Handling and Links](#tab-handling-and-links) | Testing the DOM | Links that open in a new tab
-[Hover and Hidden Elements](#hover-and-hidden-elements) | Testing the DOM | Test hidden elements requiring hover
-[Form Interactions](#form-interactions) | Testing the DOM | Test form elements like input type `range`
-[Drag and Drop](#drag-and-drop) | Testing the DOM | Use `.trigger()` to test drag and drop
-[Typescript with Browserify](#typescript-with-browserify) | Preprocessors | Add typescript support with browserify
-[Typescript with Webpack](#typescript-with-webpack) | Preprocessors | Add typescript support with webpack
-[Application Actions](#application-actions) | Blogs | Application actions are a replacement for Page Objects
-[Direct Control of AngularJS](#direct-control-of-angularjs) | Blogs | Bypass the DOM and control AngularJS
-[E2E API Testing](#e2e-api-testing) | Blogs | Run your API Tests with a GUI
-[E2E Snapshots](#e2e-snapshots) | Blogs | End-to-End Snapshot Testing
-[Element Coverage](#element-coverage) | Blogs | Track elements covered by tests
-[Codepen.io Testing](#codepen-testing) | Blogs | Test a HyperApp Codepen demo
-[Testing Redux Store](#testing-redux-store) | Blogs | Test an application that uses Redux data store
-[Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Blogs | Test an application that uses central data store
-[Stubbing Functions](#stubbing-functions) | Stubbing, Spying | Use `cy.stub()` to test function calls
-[Stubbing `window.fetch`](#stubbing-windowfetch) | Stubbing, Spying | Use `cy.stub()` to control fetch requests
-[Stubbing methods called on `window`](#stubbing-methods-called-on-window) | Stubbing, Spying | Use `cy.stub()` for methods called on `window`
-[Stubbing Google Analytics](#stubbing-google-analytics) | Stubbing, Spying | Use `cy.stub()` to test Google Analytics calls
-[Application Code](#application-code) | Unit Testing | Import and test your own application code
-[React](#react) | Unit Testing | Test your React components in isolation
-[File Upload in React](#file-upload-in-react) | Unit Testing | Test file upload in React app
-[Adding Chai Assertions](#adding-chai-assertions) | Extending Cypress | Add new or custom chai assertions
-[Bootstrapping your App](#bootstrapping-your-app) | Server Communication | Seed your application with test data
-[Seeding your Database in Node](#seeding-your-database-in-node) | Server Communication | Seed your database with test data
+## Fundamentals
+
+Recipe | Description
+--- | ---
+[Node Modules](#node-modules) | Import your own node modules
+[Environment variables](#environment-variables) | Passing environment variables to tests
+[Dynamic tests](#dynamic-tests) | Create tests dynamically from data
+[Fixtures](#fixtures) | Loading single or multiple fixtures
+[Adding Chai Assertions](#adding-chai-assertions) | Add new or custom chai assertions
+[Cypress module API](#cypress-module-api) | Run Cypress via its module API
+
+## Testing the DOM
+
+Recipe | Description
+--- | ---
+[Tab Handling and Links](#tab-handling-and-links) | Links that open in a new tab
+[Hover and Hidden Elements](#hover-and-hidden-elements) | Test hidden elements requiring hover
+[Form Interactions](#form-interactions) | Test form elements like input type `range`
+[Drag and Drop](#drag-and-drop) | Use `.trigger()` to test drag and drop
+
+## Logging in recipes
+
+Recipe | Description
+--- | ---
+[Single Sign On](#single-sign-on) | Log in across multiple servers or providers
+[HTML Web Forms](#html-web-forms) | Log in with a basic HTML form
+[XHR Web Forms](#xhr-web-forms) | Log in using an XHR
+[CSRF Tokens](#csrf-tokens) | Log in with a required CSRF token
+
+Also see [Authentication plugins](https://on.cypress.io/plugins#authentication) and watch video ["Organizing Tests, Logging In, Controlling State"](https://www.youtube.com/watch?v=5XQOK0v_YRE)
+
+## Preprocessors
+
+Recipe | Description
+--- | ---
+[grep](#grep) | Filter tests by name using Mocha-like `grep` syntax
+[Typescript with Browserify](#typescript-with-browserify) | Add typescript support with browserify
+[Typescript with Webpack](#typescript-with-webpack) | Add typescript support with webpack
+
+## Blogs
+
+Demo recipes from the blog posts at [www.cypress.io/blog](https://www.cypress.io/blog)
+
+Recipe | Description
+--- | ---
+[Application Actions](#application-actions) | Application actions are a replacement for Page Objects
+[Direct Control of AngularJS](#direct-control-of-angularjs) | Bypass the DOM and control AngularJS
+[E2E API Testing](#e2e-api-testing) | Run your API Tests with a GUI
+[E2E Snapshots](#e2e-snapshots) | End-to-End Snapshot Testing
+[Element Coverage](#element-coverage) | Track elements covered by tests
+[Codepen.io Testing](#codepen-testing) | Test a HyperApp Codepen demo
+[Testing Redux Store](#testing-redux-store) | Test an application that uses Redux data store
+[Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Test an application that uses central data store
+
+## Stubbing and spying
+
+Recipe | Description
+--- | ---
+[Stubbing Functions](#stubbing-functions) | Use `cy.stub()` to test function calls
+[Stubbing `window.fetch`](#stubbing-windowfetch) | Use `cy.stub()` to control fetch requests
+[Stubbing methods called on `window`](#stubbing-methods-called-on-window) | Use `cy.stub()` for methods called on `window`
+[Stubbing Google Analytics](#stubbing-google-analytics) | Use `cy.stub()` to test Google Analytics calls
+
+## Unit Testing
+
+Recipe | Description
+--- | ---
+[Application Code](#application-code) | Import and test your own application code
+[React](#react) | Test your React components in isolation
+[File Upload in React](#file-upload-in-react) | Test file upload in React app
+
+## Server Communication
+
+Recipe | Description
+--- | ---
+[Bootstrapping your App](#bootstrapping-your-app) | Seed your application with test data
+[Seeding your Database in Node](#seeding-your-database-in-node) | Seed your database with test data
 
 ## Overview
 
@@ -148,6 +191,12 @@ Get around the lack of a `.hover()` command.
 
 - Use [`.trigger()`](https://on.cypress.io/trigger) to test drag-n-drop that uses mouse events.
 - Use [`.trigger()`](https://on.cypress.io/trigger) to test drag-n-drop that uses drag events.
+- Use [`cypress-file-upload`](https://github.com/abramenal/cypress-file-upload) for file upload testing with drag-n-drop.
+
+### [grep](./examples/preprocessors__grep)
+
+- Use Mocha-like syntax to select tests to run
+- Implemented as a preprocessor [cypress-select-tests](https://github.com/bahmutov/cypress-select-tests)
 
 ### [Typescript with Browserify](./examples/preprocessors__typescript-browserify)
 
@@ -256,6 +305,7 @@ Get around the lack of a `.hover()` command.
 - Passing synthetic test file to upload via an [`.trigger('change')`](https://on.cypress.io/trigger) event
 - Stub remote server using [`cy.route()`](https://on.cypress.io/route)
 - Alternatively stub `axios.post` method using [`cy.stub()`](https://on.cypress.io/stub)
+- Alternatively use [`cypress-file-upload`](https://github.com/abramenal/cypress-file-upload) for file upload testing.
 
 ### [Adding Chai Assertions](./examples/extending-cypress__chai-assertions)
 
@@ -263,6 +313,21 @@ Get around the lack of a `.hover()` command.
 - Extend [`chai`](http://chaijs.com/) with the [`chai-colors`](http://chaijs.com/plugins/chai-colors/) assertion plugin.
 - Globally extend [`chai`](http://chaijs.com/) for all specs.
 - Set up Intelligent Code completion for custom assertions.
+
+### [Cypress module API](./examples/fundamentals__module-api)
+
+- Run Cypress tests using its Node module API
+
+```js
+require('cypress').run({
+  // options
+}).then(testResults => {
+  // rerun failing specs
+  // or email test report
+  // or post it on Slack
+  // ...
+})
+```
 
 ### [Bootstrapping your App](./examples/server-communication__bootstrapping-your-app)
 

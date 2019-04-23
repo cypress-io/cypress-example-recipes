@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logging In - XHR Web Form - Login</title>
+  <script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
+  <style type="text/css">
+    body {
+      padding: 0 10px;
+    }
+
+    #form-wrapper {
+      padding: 10px 20px;
+      background-color: #eee;
+    }
+
+    #form-wrapper ul {
+      list-style-type: none;
+    }
+
+    #form-wrapper li {
+      margin: 10px 0;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Slow login.html</h2>
+  <p>
+    This example logs in the user, but with 2 second delay.
+  </p>
+  <div id="form-wrapper">
+    <form>
+      <ul>
+        <li>
+          <label>
+            Username:
+            <input name="username" />
+          </label>
+        </li>
+        <li>
+          <label>
+            Password:
+            <input name="password" />
+          </label>
+        </li>
+        <li>
+          <button type="submit">Submit</button>
+        </li>
+      </ul>
+    </form>
+    <p class="error"></p>
+  </div>
+  <script type="text/javascript">
+    var $username = $("input[name=username]")
+    var $password = $("input[name=password]")
+    var $error    = $(".error")
+
+    window.Login = {
+      redirect: function(str){
+        window.location.pathname = str
+      },
+
+      onSuccess: function(data){
+        var redirect = data.redirect || "/dashboard"
+
+        Login.redirect(redirect)
+      },
+
+      onError: function(jqXhr, textStatus, errorThrown){
+        var status = jqXhr.status
+
+        // if we have a validation problem
+        if(status === 422){
+          // pluck out the error from the JSON
+          var json = jqXhr.responseJSON
+          var text = json && json.error
+        } else {
+          // we dont know what went wrong with the server
+          var text = ["An error occurred:", status, errorThrown].join(" ")
+        }
+
+        // fill it in
+        $error.text(text)
+      }
+    }
+
+    $("form").submit(function(e){
+      // dont actually submit the form
+      e.preventDefault()
+
+      // post some JSON
+      $.post({
+        url: "/slow-login",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify({
+          username: $username.val(),
+          password: $password.val()
+        })
+      })
+      .done(Login.onSuccess)
+      .fail(Login.onError)
+    })
+  </script>
+</body>
+</html>
