@@ -159,13 +159,183 @@ jobs:
   fundamentals__module-api:
     <<: *defaults
 
-workflows:
-  version: 2
+# list all jobs to run and their dependencies here
+# and then use this list from workflow definition
+all_jobs: &all_jobs
+  - build
+  - test-examples:
+      requires:
+        - build
+      filters:
+        branches:
+          only:
+            - master
+
+  - test-examples-chrome:
+      requires:
+        - build
+      filters:
+        branches:
+          only:
+            - master
+
   # when adding new example subfolder with a recipe
   # add its name here to "create" CircleCI job
+
+  # Do not run Codepen demo by default - because it depends on
+  # the external service that sometimes gives 502 breaking our tests
+  # - blogs__codepen-demo:
+  #     requires:
+  #       - build
+
+  - blogs__a11y:
+      requires:
+        - build
+  - blogs__application-actions:
+      requires:
+        - build
+  - blogs__direct-control-angular:
+      requires:
+        - build
+  - blogs__e2e-api-testing:
+      requires:
+        - build
+  - blogs__e2e-snapshots:
+      requires:
+        - build
+  - blogs__element-coverage:
+      requires:
+        - build
+  - blogs__testing-redux-store:
+      requires:
+        - build
+  - blogs__vue-vuex-rest:
+      requires:
+        - build
+  - extending-cypress__chai-assertions:
+      requires:
+        - build
+  - file-upload-react:
+      requires:
+        - build
+  - fundamentals__node-modules:
+      requires:
+        - build
+  - logging-in__csrf-tokens:
+      requires:
+        - build
+  - logging-in__html-web-forms:
+      requires:
+        - build
+  - logging-in__single-sign-on:
+      requires:
+        - build
+  - logging-in__xhr-web-forms:
+      requires:
+        - build
+  - preprocessors__grep:
+      requires:
+        - build
+  - preprocessors__typescript-browserify:
+      requires:
+        - build
+  - preprocessors__typescript-webpack:
+      requires:
+        - build
+  - server-communication__bootstrapping-your-app:
+      requires:
+        - build
+  - stubbing-spying__functions:
+      requires:
+        - build
+  - stubbing-spying__window-fetch:
+      requires:
+        - build
+  - stubbing-spying__google-analytics:
+      requires:
+        - build
+  - testing-dom__drag-drop:
+      requires:
+        - build
+  - testing-dom__form-interactions:
+      requires:
+        - build
+  - testing-dom__hover-hidden-elements:
+      requires:
+        - build
+  - testing-dom__tab-handling-links:
+      requires:
+        - build
+  - unit-testing__application-code:
+      requires:
+        - build
+  - unit-testing__react:
+      requires:
+        - build
+  - server-communication__env-variables:
+      requires:
+        - build
+  - fundamentals__dynamic-tests:
+      requires:
+        - build
+  - fundamentals__fixtures:
+      requires:
+        - build
+  - fundamentals__module-api:
+      requires:
+        - build
+
+  # to avoid constantly tweaking required jobs on CircleCI
+  # we can have a single job wait on all other test jobs here.
+  # CircleCI can then just require this 1 job to pass
+  # see https://glebbahmutov.com/blog/parallel-or-not/
+  - after-tests:
+      requires:
+        - build
+        - blogs__a11y
+        - blogs__application-actions
+        - blogs__direct-control-angular
+        - blogs__e2e-api-testing
+        - blogs__e2e-snapshots
+        - blogs__element-coverage
+        - blogs__testing-redux-store
+        - blogs__vue-vuex-rest
+        - extending-cypress__chai-assertions
+        - file-upload-react
+        - fundamentals__node-modules
+        - fundamentals__fixtures
+        - fundamentals__dynamic-tests
+        - fundamentals__module-api
+        - logging-in__csrf-tokens
+        - logging-in__html-web-forms
+        - logging-in__single-sign-on
+        - logging-in__xhr-web-forms
+        - preprocessors__grep
+        - preprocessors__typescript-browserify
+        - preprocessors__typescript-webpack
+        - server-communication__bootstrapping-your-app
+        - stubbing-spying__functions
+        - stubbing-spying__window-fetch
+        - stubbing-spying__google-analytics
+        - testing-dom__drag-drop
+        - testing-dom__form-interactions
+        - testing-dom__hover-hidden-elements
+        - testing-dom__tab-handling-links
+        - unit-testing__application-code
+        - unit-testing__react
+        - server-communication__env-variables
+
+
+workflows:
+  version: 2
+
+  # run this workflow on each commit and pull request
   all-recipes:
-    # since this is testing a lot of external sites
-    # let's run these tests once per day (at night)
+    jobs: *all_jobs
+
+  # since this is testing a lot of external sites
+  # let's run these tests once per day (at night)
+  nightly:
     triggers:
       - schedule:
           cron: "0 0 * * *"
@@ -173,163 +343,4 @@ workflows:
             branches:
               only:
                 - master
-    jobs:
-      - build
-      - test-examples:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
-
-      - test-examples-chrome:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
-
-      # Do not run Codepen demo by default - because it depends on
-      # the external service that sometimes gives 502 breaking our tests
-      # - blogs__codepen-demo:
-      #     requires:
-      #       - build
-
-      - blogs__a11y:
-          requires:
-            - build
-      - blogs__application-actions:
-          requires:
-            - build
-      - blogs__direct-control-angular:
-          requires:
-            - build
-      - blogs__e2e-api-testing:
-          requires:
-            - build
-      - blogs__e2e-snapshots:
-          requires:
-            - build
-      - blogs__element-coverage:
-          requires:
-            - build
-      - blogs__testing-redux-store:
-          requires:
-            - build
-      - blogs__vue-vuex-rest:
-          requires:
-            - build
-      - extending-cypress__chai-assertions:
-          requires:
-            - build
-      - file-upload-react:
-          requires:
-            - build
-      - fundamentals__node-modules:
-          requires:
-            - build
-      - logging-in__csrf-tokens:
-          requires:
-            - build
-      - logging-in__html-web-forms:
-          requires:
-            - build
-      - logging-in__single-sign-on:
-          requires:
-            - build
-      - logging-in__xhr-web-forms:
-          requires:
-            - build
-      - preprocessors__grep:
-          requires:
-            - build
-      - preprocessors__typescript-browserify:
-          requires:
-            - build
-      - preprocessors__typescript-webpack:
-          requires:
-            - build
-      - server-communication__bootstrapping-your-app:
-          requires:
-            - build
-      - stubbing-spying__functions:
-          requires:
-            - build
-      - stubbing-spying__window-fetch:
-          requires:
-            - build
-      - stubbing-spying__google-analytics:
-          requires:
-            - build
-      - testing-dom__drag-drop:
-          requires:
-            - build
-      - testing-dom__form-interactions:
-          requires:
-            - build
-      - testing-dom__hover-hidden-elements:
-          requires:
-            - build
-      - testing-dom__tab-handling-links:
-          requires:
-            - build
-      - unit-testing__application-code:
-          requires:
-            - build
-      - unit-testing__react:
-          requires:
-            - build
-      - server-communication__env-variables:
-          requires:
-            - build
-      - fundamentals__dynamic-tests:
-          requires:
-            - build
-      - fundamentals__fixtures:
-          requires:
-            - build
-      - fundamentals__module-api:
-          requires:
-            - build
-
-      # to avoid constantly tweaking required jobs on CircleCI
-      # we can have a single job wait on all other test jobs here.
-      # CircleCI can then just require this 1 job to pass
-      # see https://glebbahmutov.com/blog/parallel-or-not/
-      - after-tests:
-          requires:
-            - build
-            - blogs__a11y
-            - blogs__application-actions
-            - blogs__direct-control-angular
-            - blogs__e2e-api-testing
-            - blogs__e2e-snapshots
-            - blogs__element-coverage
-            - blogs__testing-redux-store
-            - blogs__vue-vuex-rest
-            - extending-cypress__chai-assertions
-            - file-upload-react
-            - fundamentals__node-modules
-            - fundamentals__fixtures
-            - fundamentals__dynamic-tests
-            - fundamentals__module-api
-            - logging-in__csrf-tokens
-            - logging-in__html-web-forms
-            - logging-in__single-sign-on
-            - logging-in__xhr-web-forms
-            - preprocessors__grep
-            - preprocessors__typescript-browserify
-            - preprocessors__typescript-webpack
-            - server-communication__bootstrapping-your-app
-            - stubbing-spying__functions
-            - stubbing-spying__window-fetch
-            - stubbing-spying__google-analytics
-            - testing-dom__drag-drop
-            - testing-dom__form-interactions
-            - testing-dom__hover-hidden-elements
-            - testing-dom__tab-handling-links
-            - unit-testing__application-code
-            - unit-testing__react
-            - server-communication__env-variables
+    jobs: *all_jobs
