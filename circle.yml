@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 # testing jobs are all the same, so just use a template
 defaults: &defaults
@@ -166,14 +166,13 @@ workflows:
   all-recipes:
     # since this is testing a lot of external sites
     # let's run these tests once per day (at night)
-    nightly:
-      triggers:
-        - schedule:
-            cron: "0 0 * * *"
-            filters:
-              branches:
-                only:
-                  - master
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
     jobs:
       - build
       - test-examples:
