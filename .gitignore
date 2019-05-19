@@ -11,3 +11,6 @@ screenshots
 videos
 out.js
 examples/*/cypress/logs
+dist
+.nyc_output
+coverage
