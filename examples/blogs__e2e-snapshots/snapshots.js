@@ -1,9 +1,45 @@
 module.exports = {
-  "__version": "3.1.5",
-  "adds numbers": {
-    "1": 5,
-    "2": 11,
-    "negatives": -9
+  "UI": {
+    "advanced": {
+      "marks completed items": {
+        "todo-list with 2 completed items": "<ul class=\"todo-list\">\n  <li class=\"todo\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>first item</label> <button\n        class=\"destroy\"></button></div>\n  </li>\n  <li class=\"todo\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>second item</label> <button\n        class=\"destroy\"></button></div>\n  </li>\n  <li class=\"todo completed\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>item 3</label> <button class=\"destroy\"></button>\n    </div>\n  </li>\n  <li class=\"todo completed\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>item 4</label> <button class=\"destroy\"></button>\n    </div>\n  </li>\n</ul>"
+      }
+    }
+  },
+  "__version": "3.3.0",
+  "via API": {
+    "adds todo deep": {
+      "1": [
+        {
+          "title": "first todo",
+          "completed": false,
+          "id": "1"
+        },
+        {
+          "title": "second todo",
+          "completed": false,
+          "id": "2"
+        }
+      ]
+    },
+    "adds and deletes a todo": {
+      "1": [
+        {
+          "title": "first todo",
+          "completed": false,
+          "id": "1"
+        }
+      ]
+    }
+  },
+  "API": {
+    "is adding todo item": {
+      "1": {
+        "title": "first item",
+        "completed": false,
+        "id": "1"
+      }
+    }
   },
   "UI to Vuex store": {
     "has loading, newTodo and todos properties": {
@@ -147,45 +183,12 @@ module.exports = {
       }
     }
   },
-  "via API": {
-    "adds todo deep": {
-      "1": [
-        {
-          "title": "first todo",
-          "completed": false,
-          "id": "1"
-        },
-        {
-          "title": "second todo",
-          "completed": false,
-          "id": "2"
-        }
-      ]
-    },
-    "adds and deletes a todo": {
-      "1": [
-        {
-          "title": "first todo",
-          "completed": false,
-          "id": "1"
-        }
-      ]
-    }
+  "adds numbers": {
+    "1": 5,
+    "2": 11,
+    "negatives": -9
   },
-  "API": {
-    "is adding todo item": {
-      "1": {
-        "title": "first item",
-        "completed": false,
-        "id": "1"
-      }
-    }
-  },
-  "UI": {
-    "advanced": {
-      "marks completed items": {
-        "todo-list with 2 completed items": "<ul class=\"todo-list\">\n  <li class=\"todo\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>first item</label> <button class=\"destroy\"></button></div>\n  </li>\n  <li class=\"todo\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>second item</label> <button class=\"destroy\"></button></div>\n  </li>\n  <li class=\"todo completed\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>item 3</label> <button class=\"destroy\"></button></div>\n  </li>\n  <li class=\"todo completed\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>item 4</label> <button class=\"destroy\"></button></div>\n  </li>\n</ul>"
-      }
-    }
+  "converts string to lowercase": {
+    "lowercase string": "my string"
   }
 }
