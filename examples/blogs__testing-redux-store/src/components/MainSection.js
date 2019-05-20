@@ -7,12 +7,13 @@ const MainSection = ({ todosCount, completedCount, actions }) =>
   (
     <section className="main">
       {
-        !!todosCount && 
+        !!todosCount &&
         <span>
           <input
             className="toggle-all"
             type="checkbox"
             checked={completedCount === todosCount}
+            onClick={actions.completeAllTodos}
           />
           <label onClick={actions.completeAllTodos}/>
         </span>
