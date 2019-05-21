@@ -16,6 +16,7 @@ render(
 )
 
 // expose store during tests
+/* istanbul ignore else */
 if (window.Cypress) {
   window.store = store
 }
