@@ -71,7 +71,7 @@
     "bluebird": "3.5.4",
     "console.table": "0.10.0",
     "cypress": "3.3.0",
-    "cypress-axe": "0.4.0",
+    "cypress-axe": "0.4.1",
     "cypress-failed-log": "2.5.0",
     "cypress-pipe": "1.4.0",
     "cypress-plugin-snapshots": "1.2.6",
