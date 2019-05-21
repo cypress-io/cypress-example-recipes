@@ -8,7 +8,8 @@
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
     "test:ci": "../../node_modules/.bin/start-test 3000 cypress:run",
-    "serve": "../../node_modules/.bin/parcel serve public/index.html"
+    "serve": "../../node_modules/.bin/parcel serve public/index.html",
+    "dev": "../../node_modules/.bin/start-test serve 1234 cypress:open"
   },
   "browserslist": [
     ">0.2%",
@@ -17,11 +18,12 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "babel-core": "6.26.3",
+    "@babel/core": "7.4.5",
+    "@babel/preset-react": "7.0.0",
     "babel-plugin-transform-class-properties": "6.24.1",
-    "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
-    "cypress-plugin-snapshots": "1.0.6"
+    "cypress-plugin-snapshots": "1.0.6",
+    "cypress-react-unit-test": "2.4.1"
   }
 }

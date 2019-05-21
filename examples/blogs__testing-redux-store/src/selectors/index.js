@@ -7,7 +7,6 @@ const getTodos = state => state.todos
 export const getVisibleTodos = createSelector(
   [getVisibilityFilter, getTodos],
   (visibilityFilter, todos) => {
-    debugger
     switch (visibilityFilter) {
       case SHOW_ALL:
         return todos
@@ -23,10 +22,6 @@ export const getVisibleTodos = createSelector(
 
 export const getCompletedTodoCount = createSelector(
   [getTodos],
-  todos => (
-    todos.reduce((count, todo) =>
-      todo.completed ? count + 1 : count,
-      0
-    )
-  )
+  todos =>
+    todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0)
 )
