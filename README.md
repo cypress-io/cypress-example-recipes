@@ -81,6 +81,15 @@ Recipe | Description
 [Bootstrapping your App](#bootstrapping-your-app) | Seed your application with test data
 [Seeding your Database in Node](#seeding-your-database-in-node) | Seed your database with test data
 
+## Community Recipes
+
+Recipe | Description
+--- | ---
+[Visual Regression Testing](https://github.com/mjhea0/cypress-visual-regression) | Adding visual regression testing to Cypress
+[Code coverage](https://github.com/paulfalgout/cypress-coverage-example) | Cypress with Coverage reports
+[Cucumber](https://github.com/TheBrainFamily/cypress-cucumber-example) | Example usage of Cypress with Cucumber
+[Jest](https://github.com/TheBrainFamily/jest-runner-cypress-example) | Example for the jest-runner-cypress
+
 ## Overview
 
 - This repo is structured similar to how other "Monorepos" work.
