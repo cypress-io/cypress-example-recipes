@@ -6,30 +6,30 @@
 
 Recipe | Description
 --- | ---
-[Node Modules](#node-modules) | Import your own node modules
+[Node Modules](./examples/fundamentals__node-modules) | Import your own node modules
 [Environment variables](#environment-variables) | Passing environment variables to tests
 [Dynamic tests](#dynamic-tests) | Create tests dynamically from data
 [Fixtures](#fixtures) | Loading single or multiple fixtures
-[Adding Chai Assertions](#adding-chai-assertions) | Add new or custom chai assertions
+[Adding Chai Assertions](./examples/extending-cypress__chai-assertions) | Add new or custom chai assertions
 [Cypress module API](#cypress-module-api) | Run Cypress via its module API
 
 ## Testing the DOM
 
 Recipe | Description
 --- | ---
-[Tab Handling and Links](#tab-handling-and-links) | Links that open in a new tab
-[Hover and Hidden Elements](#hover-and-hidden-elements) | Test hidden elements requiring hover
-[Form Interactions](#form-interactions) | Test form elements like input type `range`
-[Drag and Drop](#drag-and-drop) | Use `.trigger()` to test drag and drop
+[Tab Handling and Links](./examples/testing-dom__tab-handling-links) | Links that open in a new tab
+[Hover and Hidden Elements](./examples/testing-dom__hover-hidden-elements) | Test hidden elements requiring hover
+[Form Interactions](./examples/testing-dom__form-interactions) | Test form elements like input type `range`
+[Drag and Drop](./examples/testing-dom__drag-drop) | Use `.trigger()` to test drag and drop
 
 ## Logging in recipes
 
 Recipe | Description
 --- | ---
-[Single Sign On](#single-sign-on) | Log in across multiple servers or providers
-[HTML Web Forms](#html-web-forms) | Log in with a basic HTML form
-[XHR Web Forms](#xhr-web-forms) | Log in using an XHR
-[CSRF Tokens](#csrf-tokens) | Log in with a required CSRF token
+[Single Sign On](./examples/logging-in__single-sign-on) | Log in across multiple servers or providers
+[HTML Web Forms](./examples/logging-in__html-web-forms) | Log in with a basic HTML form
+[XHR Web Forms](./examples/logging-in__xhr-web-forms) | Log in using an XHR
+[CSRF Tokens](./examples/logging-in__csrf-tokens) | Log in with a required CSRF token
 
 Also see [Authentication plugins](https://on.cypress.io/plugins#authentication) and watch video ["Organizing Tests, Logging In, Controlling State"](https://www.youtube.com/watch?v=5XQOK0v_YRE)
 
@@ -37,9 +37,9 @@ Also see [Authentication plugins](https://on.cypress.io/plugins#authentication) 
 
 Recipe | Description
 --- | ---
-[grep](#grep) | Filter tests by name using Mocha-like `grep` syntax
-[Typescript with Browserify](#typescript-with-browserify) | Add typescript support with browserify
-[Typescript with Webpack](#typescript-with-webpack) | Add typescript support with webpack
+[grep](./examples/preprocessors__grep) | Filter tests by name using Mocha-like `grep` syntax
+[Typescript with Browserify](./examples/preprocessors__typescript-browserify) | Add typescript support with browserify
+[Typescript with Webpack](./examples/preprocessors__typescript-webpack) | Add typescript support with webpack
 
 ## Blogs
 
@@ -47,15 +47,15 @@ Demo recipes from the blog posts at [www.cypress.io/blog](https://www.cypress.io
 
 Recipe | Description
 --- | ---
-[Application Actions](#application-actions) | Application actions are a replacement for Page Objects
-[Direct Control of AngularJS](#direct-control-of-angularjs) | Bypass the DOM and control AngularJS
-[E2E API Testing](#e2e-api-testing) | Run your API Tests with a GUI
-[E2E Snapshots](#e2e-snapshots) | End-to-End Snapshot Testing
-[Element Coverage](#element-coverage) | Track elements covered by tests
-[Codepen.io Testing](#codepen-testing) | Test a HyperApp Codepen demo
-[Testing Redux Store](#testing-redux-store) | Test an application that uses Redux data store
-[Vue + Vuex + REST Testing](#vue--vuex--rest-testing) | Test an application that uses central data store
-[A11y Testing](#a11y-testing) | Accessability testing with [cypress-axe](https://github.com/avanslaars/cypress-axe#readme)
+[Application Actions](./examples/blogs__application-actions) | Application actions are a replacement for Page Objects
+[Direct Control of AngularJS](./examples/blogs__direct-control-angular) | Bypass the DOM and control AngularJS
+[E2E API Testing](./examples/blogs__e2e-api-testing) | Run your API Tests with a GUI
+[E2E Snapshots](./examples/blogs__e2e-snapshots) | End-to-End Snapshot Testing
+[Element Coverage](./examples/blogs__element-coverage) | Track elements covered by tests
+[Codepen.io Testing](./examples/blogs__codepen-demo) | Test a HyperApp Codepen demo
+[Testing Redux Store](./examples/blogs__testing-redux-store) | Test an application that uses Redux data store
+[Vue + Vuex + REST Testing](./examples/blogs__vue-vuex-rest) | Test an application that uses central data store
+[A11y Testing](./examples/blogs__a11y) | Accessability testing with [cypress-axe](https://github.com/avanslaars/cypress-axe#readme)
 
 ## Stubbing and spying
 
@@ -70,9 +70,9 @@ Recipe | Description
 
 Recipe | Description
 --- | ---
-[Application Code](#application-code) | Import and test your own application code
-[React](#react) | Test your React components in isolation
-[File Upload in React](#file-upload-in-react) | Test file upload in React app
+[Application Code](./examples/unit-testing__application-code) | Import and test your own application code
+[React](./examples/unit-testing__react) | Test your React components in isolation
+[File Upload in React](./examples/file-upload-react) | Test file upload in React app
 
 ## Server Communication
 
