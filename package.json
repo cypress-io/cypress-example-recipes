@@ -46,6 +46,8 @@
     "http-server": "0.11.1",
     "jquery": "3.4.0",
     "json-server": "0.14.0",
+    "jsonwebtoken": "8.5.1",
+    "level": "5.0.1",
     "lodash": "4.17.11",
     "minimist": "1.2.0",
     "morgan": "1.9.1",
