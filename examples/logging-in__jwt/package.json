@@ -6,6 +6,6 @@
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
     "start": "node src/server",
-    "dev": "../../node_modules/.bin/start-test 7074 cypress:open"
+    "dev": "../../node_modules/.bin/start-test 1337 cypress:open"
   }
 }

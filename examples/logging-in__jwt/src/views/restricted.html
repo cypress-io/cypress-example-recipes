@@ -7,10 +7,32 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/united/bootstrap.min.css">
 </head>
 <body>
-  <h1> You Authenticated! </h1>
+  <h1 data-cy-authenticated> You Authenticated! </h1>
+  <button id="make-private-xhr">Make private API call</button>
   <form action="/logout" method="GET">
     <!-- Log Out of the app -->
     <input type="submit" class="btn btn-danger" value="logout"  />
   </form>
+  <script>
+    const button = document.getElementById('make-private-xhr')
+    button.addEventListener('click', () => {
+      console.log('making private api call')
+
+      function onLoad () {
+        console.log(this.responseText);
+      }
+
+      function onError () {
+        console.error('error')
+        debugger
+      }
+
+      const oReq = new XMLHttpRequest();
+      oReq.addEventListener("load", onLoad);
+      oReq.addEventListener("error", onError);
+      oReq.open("GET", "/private");
+      oReq.send()
+    })
+  </script>
 </body>
 </html>

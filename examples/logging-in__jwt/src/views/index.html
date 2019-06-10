@@ -2,19 +2,40 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="shortcut icon" href="http://i.imgur.com/iZ52mIl.png">
-  <link rel="apple-itouch-icon" href="http://i.imgur.com/iZ52mIl.png"> 
+  <link rel="apple-itouch-icon" href="http://i.imgur.com/iZ52mIl.png">
   <title>Authentication with JSON Web Tokens</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/united/bootstrap.min.css">
 
 </head>
 <body>
   <h1> Login to see <em>amazing</em> content: </h1>
-  <form action="/auth" method="POST">
-    <label for="exampleInputEmail1">Username</label>
-    <input type="text" name="username" placeholder="username" class="form-control"/>
-    <label for="exampleInputEmail1">Password</label>
-    <input type="password" name="password" placeholder="********" class="form-control"/>
-    <input type="submit" class="btn btn-success" value="login"  />
-  </form>
+
+  <label for="exampleInputEmail1">Username</label>
+  <input type="text" name="username" placeholder="username" class="form-control"/>
+  <label for="exampleInputEmail1">Password</label>
+  <input type="password" name="password" placeholder="********" class="form-control"/>
+  <button class="btn btn-success" value="login">Login</button>
+
+  <script>
+    const form = document.querySelector('[value=login]')
+    form.addEventListener('click', (e) => {
+      console.log('login using XHR', e)
+
+      $.post('/auth', {
+        username: $('[name=username]').val(),
+        password: $('[name=password]').val()
+      }).then(res => {
+        if (!res.token) {
+          throw new Error('Missing JWT token on the response')
+        }
+        console.log('setting jwt in local storage')
+        localStorage.setItem('jwt', res.token)
+      })
+
+      e.preventDefault()
+      return false
+    })
+  </script>
 </body>
 </html>

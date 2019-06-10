@@ -1,3 +1,7 @@
 {
-  "baseUrl": "http://localhost:1234"
+  "baseUrl": "http://localhost:1337",
+  "env": {
+    "username": "masterbuilder",
+    "password": "itsnosecret"
+  }
 }
