@@ -172,27 +172,6 @@ Get around the lack of a `.hover()` command.
 - Use [`blacklistHosts`](https://on.cypress.io/configuration#Browser) to block Google Analytics from receiving requests.
 - Use [`cy.stub()`](https://on.cypress.io/stub) to verify that `window.ga(...)` was called with the correct arguments
 
-### [Application Code](./examples/unit-testing__application-code)
-
-- Unit test your own application code libraries.
-- Import modules using ES2015.
-- Test simple math functions.
-- Test the canonical *fizzbuzz* test.
-- Automatically retry assertion until a given property inside an object:
-  * is added or deleted
-  * has expected value
-
-### [React](./examples/unit-testing__react)
-
-- Unit test a React JSX Component using [Enzyme](http://airbnb.io/enzyme/), [react-testing-library](https://github.com/kentcdodds/react-testing-library) and [cypress-react-unit-test](https://github.com/bahmutov/cypress-react-unit-test) libraries.
-
-### [File Upload in React](./examples/file-upload-react)
-
-- Passing synthetic test file to upload via an [`.trigger('change')`](https://on.cypress.io/trigger) event
-- Stub remote server using [`cy.route()`](https://on.cypress.io/route)
-- Alternatively stub `axios.post` method using [`cy.stub()`](https://on.cypress.io/stub)
-- Alternatively use [`cypress-file-upload`](https://github.com/abramenal/cypress-file-upload) for file upload testing.
-
 ### [Bootstrapping your App](./examples/server-communication__bootstrapping-your-app)
 
 - Use [`cy.visit()`](https://on.cypress.io/visit) `onBeforeLoad` callback.
