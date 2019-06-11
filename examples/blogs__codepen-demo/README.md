@@ -2,6 +2,10 @@
 
 Demo of E2E testing HyperApp.js counter app running on Codepen.io.
 
+- Load Codepen and get around iframe security restrictions.
+- Use [`cy.request()`](https://on.cypress.io/api/request) to load a document into test iframe.
+- Test [HyperApp.js](https://hyperapp.js.org/) application through the DOM and through actions.
+
 ## Blog Post
 
 [Testing apps hosted on Codepen.io](https://www.cypress.io/blog/2017/12/05/testing-apps-hosted-on-codepen/)
