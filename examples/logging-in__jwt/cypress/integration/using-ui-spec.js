@@ -33,6 +33,15 @@ it('Logs in using UI', () => {
   cy.location('pathname').should('equal', '/login')
 })
 
+it('fails to access protected resource', () => {
+  cy.request({
+    url: 'http://localhost:4000/users',
+    failOnStatusCode: false,
+  })
+  .its('status')
+  .should('equal', 401)
+})
+
 it('Does not log in with invalid password', () => {
   cy.visit('/')
   cy.location('pathname').should('equal', '/login')
