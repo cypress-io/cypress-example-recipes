@@ -179,14 +179,6 @@ npm run cypress:run -- --record
 - Before each test set the JWT and the user object in `localStorage` before visiting the page
 - The opened page instantly has the user logged in
 
-### [Tab Handling and Links](./examples/testing-dom__tab-handling-links)
-
-- Test anchor links opening in new tabs: `<a target="_blank">`.
-- Test anchor links that link to external domains: `<a href="...">`.
-- Prevent content from opening in a new tab.
-- Request external content that would open in a new tab using [`cy.request()`](https://on.cypress.io/request).
-- Speed up tests by reducing loading times.
-
 ### [Hover and Hidden Elements](./examples/testing-dom__hover-hidden-elements)
 
 - Interact with elements that are hidden by CSS.
@@ -321,13 +313,6 @@ This demo shows the [cypress-axe](https://github.com/avanslaars/cypress-axe) plu
 - Stub remote server using [`cy.route()`](https://on.cypress.io/route)
 - Alternatively stub `axios.post` method using [`cy.stub()`](https://on.cypress.io/stub)
 - Alternatively use [`cypress-file-upload`](https://github.com/abramenal/cypress-file-upload) for file upload testing.
-
-### [Adding Chai Assertions](./examples/extending-cypress__chai-assertions)
-
-- Extend [`chai`](http://chaijs.com/) with the [`chai-date-string`](http://chaijs.com/plugins/chai-date-string/) assertion plugin.
-- Extend [`chai`](http://chaijs.com/) with the [`chai-colors`](http://chaijs.com/plugins/chai-colors/) assertion plugin.
-- Globally extend [`chai`](http://chaijs.com/) for all specs.
-- Set up Intelligent Code completion for custom assertions.
 
 ### [Cypress module API](./examples/fundamentals__module-api)
 
