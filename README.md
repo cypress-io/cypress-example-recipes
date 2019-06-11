@@ -63,9 +63,9 @@ Recipe | Description
 Recipe | Description
 --- | ---
 [Stubbing Functions](./examples/stubbing-spying__functions) | Use `cy.spy()` and `cy.stub()` to test function calls
-[Stubbing `window.fetch`](#stubbing-windowfetch) | Use `cy.stub()` to control fetch requests
-[Stubbing methods called on `window`](#stubbing-methods-called-on-window) | Use `cy.stub()` for methods called on `window`
-[Stubbing Google Analytics](#stubbing-google-analytics) | Use `cy.stub()` to test Google Analytics calls
+[Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch) | Use `cy.stub()` to control fetch requests
+[Stubbing methods called on `window`](./examples/stubbing-spying__window) | Use `cy.stub()` for methods called on `window`
+[Stubbing Google Analytics](./examples/stubbing-spying__google-analytics) | Use `cy.stub()` to test Google Analytics calls
 
 ## Unit Testing
 
@@ -134,26 +134,6 @@ npm run cypress:run -- --browser chrome
 ### to Cypress dashboard
 npm run cypress:run -- --record
 ```
-
-## Recipes
-
-### [Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch)
-
-- Use [`cy.spy()`](https://on.cypress.io/spy) to verify the behavior of a function.
-- Use [`cy.stub()`](https://on.cypress.io/stub) to verify and control the behavior of a function.
-- Use [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick) to control time.
-- Stub `window.fetch` to control server responses.
-- Replace `window.fetch` with a polyfill that uses XHR and is loaded only for tests.
-- Delete `window.fetch` during specific visit or every window load.
-
-### [Stubbing methods called on `window`](./examples/stubbing-spying__window)
-
-- Use [`cy.spy()`](https://on.cypress.io/stub) to test `window.open` behavior.
-
-### [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics)
-
-- Use [`blacklistHosts`](https://on.cypress.io/configuration#Browser) to block Google Analytics from receiving requests.
-- Use [`cy.stub()`](https://on.cypress.io/stub) to verify that `window.ga(...)` was called with the correct arguments
 
 ## Development
 

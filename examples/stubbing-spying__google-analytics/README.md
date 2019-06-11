@@ -4,6 +4,9 @@ This is an example showing how to blacklist requests for `www.google-analytics.c
 
 Even though we are preventing the actual `GA` script from loading, we can still stub the `window.ga` object and ensure its being called correctly.
 
+- Use [`blacklistHosts`](https://on.cypress.io/configuration#Browser) to block Google Analytics from receiving requests.
+- Use [`cy.stub()`](https://on.cypress.io/stub) to verify that `window.ga(...)` was called with the correct arguments
+
 ## Network Requests
 
 This shows how the script is being blocked with a `503` server response code.
