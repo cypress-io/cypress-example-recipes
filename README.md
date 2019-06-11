@@ -137,13 +137,6 @@ npm run cypress:run -- --record
 
 ## Recipes
 
-### [Node Modules](./examples/fundamentals__node-modules)
-
-- Import ES2015 modules.
-- Require CommonJS modules.
-- Organize reusable utility functions.
-- Import 3rd party `node_modules`.
-
 ### [Single Sign On](./examples/logging-in__single-sign-on)
 
 - Login when authentication is done on a 3rd party server.
