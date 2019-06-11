@@ -7,11 +7,11 @@
 Recipe | Description
 --- | ---
 [Node Modules](./examples/fundamentals__node-modules) | Import your own node modules
-[Environment variables](#environment-variables) | Passing environment variables to tests
-[Dynamic tests](#dynamic-tests) | Create tests dynamically from data
-[Fixtures](#fixtures) | Loading single or multiple fixtures
+[Environment variables](./examples/server-communication__env-variables) | Passing environment variables to tests
+[Dynamic tests](./examples/fundamentals__dynamic-tests) | Create tests dynamically from data
+[Fixtures](./examples/fundamentals__fixtures) | Loading single or multiple fixtures
 [Adding Chai Assertions](./examples/extending-cypress__chai-assertions) | Add new or custom chai assertions
-[Cypress module API](#cypress-module-api) | Run Cypress via its module API
+[Cypress module API](./examples/fundamentals__module-api) | Run Cypress via its module API
 
 ## Testing the DOM
 
@@ -148,11 +148,6 @@ Get around the lack of a `.hover()` command.
 
 - Use [`.invoke()`](https://on.cypress.io/invoke) and [`.trigger()`](https://on.cypress.io/trigger) to test a range input (slider).
 
-### [grep](./examples/preprocessors__grep)
-
-- Use Mocha-like syntax to select tests to run
-- Implemented as a preprocessor [cypress-select-tests](https://github.com/bahmutov/cypress-select-tests)
-
 ### [Typescript with Browserify](./examples/preprocessors__typescript-browserify)
 
 - Use [`@cypress/browserify-preprocessor`](https://github.com/cypress-io/cypress-browserify-preprocessor) to write Cypress tests in Typescript
@@ -266,21 +261,6 @@ This demo shows the [cypress-axe](https://github.com/avanslaars/cypress-axe) plu
 - Alternatively stub `axios.post` method using [`cy.stub()`](https://on.cypress.io/stub)
 - Alternatively use [`cypress-file-upload`](https://github.com/abramenal/cypress-file-upload) for file upload testing.
 
-### [Cypress module API](./examples/fundamentals__module-api)
-
-- Run Cypress tests using its Node module API
-
-```js
-require('cypress').run({
-  // options
-}).then(testResults => {
-  // rerun failing specs
-  // or email test report
-  // or post it on Slack
-  // ...
-})
-```
-
 ### [Bootstrapping your App](./examples/server-communication__bootstrapping-your-app)
 
 - Use [`cy.visit()`](https://on.cypress.io/visit) `onBeforeLoad` callback.
@@ -293,22 +273,6 @@ require('cypress').run({
 - Use [`cy.task()`](https://on.cypress.io/task) to communicate with node via the `pluginsFile`.
 - Seed your database with test data.
 - Wrap your `pluginsFile` so you can require files that use ES modules (`import`/`export`).
-
-### [Environment Variables](./examples/server-communication__env-variables)
-
-- Pass values via `env` object in `cypress.json`.
-- Pass any variable that starts with `CYPRESS_`.
-- Extract any other variable from `process.env` using `cypress/plugins/index.js` callback.
-
-### [Dynamic tests](./examples/fundamentals__dynamic-tests)
-
-- Run the same test against different viewport resolutions
-- Run the same test against multiple subdomains
-- Generate tests based on the fetched data
-
-### [Fixtures](./examples/fundamentals__fixtures)
-
-- loading a single fixture file or multiple fixtures in multiple ways
 
 ## Development
 

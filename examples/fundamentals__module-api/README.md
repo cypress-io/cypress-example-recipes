@@ -5,6 +5,17 @@ Cypress provides a Node module in addition to its CLI commands.
 
 See [module API documentation](https://on.cypress.io/module-api)
 
+```js
+require('cypress').run({
+  // options
+}).then(testResults => {
+  // rerun failing specs
+  // or email test report
+  // or post it on Slack
+  // ...
+})
+```
+
 ## Example
 
 In this recipe, execute `npm run cypress:run` script which calls [e2e-tests.js](e2e-tests.js) that finds all spec files in [cypress/integration](cypress/integration), sorts them by the last modified timestamp and runs them using Cypress one by one.

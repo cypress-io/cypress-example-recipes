@@ -1,5 +1,8 @@
 # Selecting tests using Mocha-like "grep"
 
+- Use Mocha-like syntax to select tests to run
+- Implemented as a preprocessor [cypress-select-tests](https://github.com/bahmutov/cypress-select-tests)
+
 This example uses [cypress-select-tests](https://github.com/bahmutov/cypress-select-tests) preprocessor plugin to filter tests, similar to how [Mocha](https://mochajs.org/) has the `--grep` CLI argument. This project provides an imitation using a string (no regular expressions).
 
 Because Cypress ignores unknown CLI parameters, you need to pass `grep` argument as an environment variables, for example by using `--env` CLI argument.

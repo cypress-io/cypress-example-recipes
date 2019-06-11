@@ -4,6 +4,7 @@ You can generate tests from the data you have, see [cypress/integration/spec.js]
 
 - run same test against different viewport resolutions
 - run same test against different sub-domains of your site
+- Generate tests based on the fetched data
 
 ## Dynamic data
 
