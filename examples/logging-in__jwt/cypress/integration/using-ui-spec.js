@@ -32,3 +32,19 @@ it('Logs in using UI', () => {
   cy.contains('a', 'Logout').click()
   cy.location('pathname').should('equal', '/login')
 })
+
+it('Does not log in with invalid password', () => {
+  cy.visit('/')
+  cy.location('pathname').should('equal', '/login')
+
+  // enter valid username and password
+  cy.get('[name=username]').type('username')
+  cy.get('[name=password]').type('wrong-password')
+  cy.contains('button', 'Login').click()
+
+  // still on /login page plus an error is displayed
+  cy.location('pathname').should('equal', '/login')
+  cy.contains('.alert-danger', 'Username or password is incorrect').should(
+    'be.visible'
+  )
+})
