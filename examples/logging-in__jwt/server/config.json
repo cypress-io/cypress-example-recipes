@@ -1,0 +1,3 @@
+﻿{
+    "secret": "Verify JWT using this secret string"
+}
