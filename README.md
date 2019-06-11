@@ -79,8 +79,8 @@ Recipe | Description
 
 Recipe | Description
 --- | ---
-[Bootstrapping your App](#bootstrapping-your-app) | Seed your application with test data
-[Seeding your Database in Node](#seeding-your-database-in-node) | Seed your database with test data
+[Bootstrapping your App](./examples/server-communication__bootstrapping-your-app) | Seed your application with test data
+[Seeding your Database in Node](./examples/server-communication__seeding-database-in-node) | Seed your database with test data
 
 ## Community Recipes
 
@@ -171,19 +171,6 @@ Get around the lack of a `.hover()` command.
 
 - Use [`blacklistHosts`](https://on.cypress.io/configuration#Browser) to block Google Analytics from receiving requests.
 - Use [`cy.stub()`](https://on.cypress.io/stub) to verify that `window.ga(...)` was called with the correct arguments
-
-### [Bootstrapping your App](./examples/server-communication__bootstrapping-your-app)
-
-- Use [`cy.visit()`](https://on.cypress.io/visit) `onBeforeLoad` callback.
-- Start your application with test data.
-- Stub an XHR to seed with test data.
-- Wait on an XHR to finish.
-
-### [Seeding your Database in Node](./examples/server-communication__seeding-database-in-node)
-
-- Use [`cy.task()`](https://on.cypress.io/task) to communicate with node via the `pluginsFile`.
-- Seed your database with test data.
-- Wrap your `pluginsFile` so you can require files that use ES modules (`import`/`export`).
 
 ## Development
 

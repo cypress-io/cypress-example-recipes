@@ -1,6 +1,11 @@
 # bootstrapping-your-app
 > Shows how end-to-end tests can inject data into the application
 
+- Use [`cy.visit()`](https://on.cypress.io/visit) `onBeforeLoad` callback.
+- Start your application with test data.
+- Stub an XHR to seed with test data.
+- Wait on an XHR to finish.
+
 See [cypress/integration/bootstrapping_your_app_spec.js](cypress/integration/bootstrapping_your_app_spec.js) for two solutions.
 
 ## 1. Injecting object into `window`
