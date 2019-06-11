@@ -30,7 +30,7 @@ Recipe | Description
 [HTML Web Forms](./examples/logging-in__html-web-forms) | Log in with a basic HTML form
 [XHR Web Forms](./examples/logging-in__xhr-web-forms) | Log in using an XHR
 [CSRF Tokens](./examples/logging-in__csrf-tokens) | Log in with a required CSRF token
-[Json Web Tokens (JWT)](#jwt) | Log in using JWT
+[Json Web Tokens (JWT)](./examples/logging-in__jwt) | Log in using JWT
 
 Also see [Authentication plugins](https://on.cypress.io/plugins#authentication) and watch video ["Organizing Tests, Logging In, Controlling State"](https://www.youtube.com/watch?v=5XQOK0v_YRE)
 
@@ -136,21 +136,6 @@ npm run cypress:run -- --record
 ```
 
 ## Recipes
-
-### [CSRF Tokens](./examples/logging-in__csrf-tokens)
-
-- Use [`cy.request()`](https://on.cypress.io/request) to get around CSRF protections.
-- Parse CSRF tokens out of HTML.
-- Parse CSRF tokens out of response headers.
-- Expose CSRF via a route.
-- Disable CSRF when not in production.
-
-### [JWT](./examples/logging-in__jwt)
-
-- Test login UI form
-- Use [`cy.request()`](https://on.cypress.io/request) once to get user object and JWT
-- Before each test set the JWT and the user object in `localStorage` before visiting the page
-- The opened page instantly has the user logged in
 
 ### [Hover and Hidden Elements](./examples/testing-dom__hover-hidden-elements)
 

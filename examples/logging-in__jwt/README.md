@@ -1,6 +1,11 @@
 # logging-in__jwt
 > Example of logging in using JWT
 
+- Test login UI form
+- Use [`cy.request()`](https://on.cypress.io/request) once to get user object and JWT
+- Before each test set the JWT and the user object in `localStorage` before visiting the page
+- The opened page instantly has the user logged in
+
 ## Server
 
 Copied from [https://jasonwatmore.com/post/2018/08/06/nodejs-jwt-authentication-tutorial-with-example-api](https://jasonwatmore.com/post/2018/08/06/nodejs-jwt-authentication-tutorial-with-example-api)
