@@ -62,7 +62,7 @@ Recipe | Description
 
 Recipe | Description
 --- | ---
-[Stubbing Functions](#stubbing-functions) | Use `cy.stub()` to test function calls
+[Stubbing Functions](./examples/stubbing-spying__functions) | Use `cy.spy()` and `cy.stub()` to test function calls
 [Stubbing `window.fetch`](#stubbing-windowfetch) | Use `cy.stub()` to control fetch requests
 [Stubbing methods called on `window`](#stubbing-methods-called-on-window) | Use `cy.stub()` for methods called on `window`
 [Stubbing Google Analytics](#stubbing-google-analytics) | Use `cy.stub()` to test Google Analytics calls
@@ -136,23 +136,6 @@ npm run cypress:run -- --record
 ```
 
 ## Recipes
-
-### [Hover and Hidden Elements](./examples/testing-dom__hover-hidden-elements)
-
-- Interact with elements that are hidden by CSS.
-- Use [`.invoke()`](https://on.cypress.io/invoke) and [`.trigger()`](https://on.cypress.io/trigger) to simulate hovering.
-- Trigger `mouseover`, `mouseout`, `mouseenter`, `mouseleave` events.
-Get around the lack of a `.hover()` command.
-
-### [Form Interactions](./examples/testing-dom__form-interactions)
-
-- Use [`.invoke()`](https://on.cypress.io/invoke) and [`.trigger()`](https://on.cypress.io/trigger) to test a range input (slider).
-
-### [Stubbing Functions](./examples/stubbing-spying__functions)
-
-- Use [`cy.stub()`](https://on.cypress.io/stub) to stub dependencies in a unit test.
-- Handle promises returned by stubbed functions.
-- Handle callbacks in stubbed functions.
 
 ### [Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch)
 
