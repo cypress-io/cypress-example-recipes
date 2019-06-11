@@ -137,33 +137,6 @@ npm run cypress:run -- --record
 
 ## Recipes
 
-### [Single Sign On](./examples/logging-in__single-sign-on)
-
-- Login when authentication is done on a 3rd party server.
-- Parse tokens using [`cy.request()`](https://on.cypress.io/request).
-- Manually set tokens on local storage.
-- Map external hosts and point to local servers.
-
-### [HTML Web Forms](./examples/logging-in__html-web-forms)
-
-- Test a standard `username/password` HTML form.
-- Test errors submitting invalid data.
-- Test unauthenticated redirects.
-- Authenticate users with cookies.
-- Create a custom `cy.login()` test command.
-- Bypass needing to use your actual UI.
-- Increase speed of testing with [`cy.request()`](https://on.cypress.io/request).
-
-### [XHR Web Forms](./examples/logging-in__xhr-web-forms)
-
-- Test an AJAX backed `username/password` form.
-- Test errors submitting invalid data.
-- Stub JSON based XHR requests.
-- Stub application functions.
-- Create a custom `cy.login()` test command.
-- Bypass needing to use your actual UI.
-- Increase speed of testing with [`cy.request()`](https://on.cypress.io/request).
-
 ### [CSRF Tokens](./examples/logging-in__csrf-tokens)
 
 - Use [`cy.request()`](https://on.cypress.io/request) to get around CSRF protections.
@@ -189,12 +162,6 @@ Get around the lack of a `.hover()` command.
 ### [Form Interactions](./examples/testing-dom__form-interactions)
 
 - Use [`.invoke()`](https://on.cypress.io/invoke) and [`.trigger()`](https://on.cypress.io/trigger) to test a range input (slider).
-
-### [Drag and Drop](./examples/testing-dom__drag-drop)
-
-- Use [`.trigger()`](https://on.cypress.io/trigger) to test drag-n-drop that uses mouse events.
-- Use [`.trigger()`](https://on.cypress.io/trigger) to test drag-n-drop that uses drag events.
-- Use [`cypress-file-upload`](https://github.com/abramenal/cypress-file-upload) for file upload testing with drag-n-drop.
 
 ### [grep](./examples/preprocessors__grep)
 

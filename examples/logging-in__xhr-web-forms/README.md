@@ -6,6 +6,14 @@ See the login XHR code in [login.hbs](login.hbs)
 
 ![Tests](images/tests.png)
 
+- Test an AJAX backed `username/password` form.
+- Test errors submitting invalid data.
+- Stub JSON based XHR requests.
+- Stub application functions.
+- Create a custom `cy.login()` test command.
+- Bypass needing to use your actual UI.
+- Increase speed of testing with [`cy.request()`](https://on.cypress.io/request).
+
 Test files in [cypress/integration](cypress/integration) folder show:
 
 - in [logging-in-xhr-web-form-spec.js](cypress/integration/logging-in-xhr-web-form-spec.js) how to log in using the UI
