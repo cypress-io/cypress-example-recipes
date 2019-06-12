@@ -2,8 +2,8 @@
 
 This is an example showing TypeScript tests with Cypress using Webpack. See Cypress' [TypeScript Support](https://on.cypress.io/typescript-support) docs for more details.
 
-It uses [webpack](https://github.com/webpack/webpack) to transpile TypeScript tests
-via [@cypress/webpack-preprocessor](https://github.com/cypress-io/cypress-webpack-preprocessor)
+- Uses [webpack](https://github.com/webpack/webpack) to transpile TypeScript tests via [@cypress/webpack-preprocessor](https://github.com/cypress-io/cypress-webpack-preprocessor)
+- Lints TypeScript spec code against Cypress type definitions
 
 See:
 - [webpack.config.js](webpack.config.js)

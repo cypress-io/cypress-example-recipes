@@ -1,6 +1,14 @@
 # unit-test-application-code
 > Load and unit test application code without loading a web page
 
+- Unit test your own application code libraries.
+- Import modules using ES2015.
+- Test simple math functions.
+- Test the canonical *fizzbuzz* test.
+- Automatically retry assertion until a given property inside an object:
+  * is added or deleted
+  * has expected value
+
 In [cypress/integration](cypress/integration) folder the specs show:
 
 - [unit_test_application_code_spec.js](cypress/integration/unit_test_application_code_spec.js) loads functions from the application and unit tests them.

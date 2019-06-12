@@ -5,6 +5,7 @@ The app server [app_server.js](app_server.js) runs on port 7074 and the auth ser
 
 The tests show how to:
 
+- Login when authentication is done on a 3rd party server.
 - Automatically parse tokens using [`cy.request()`](https://on.cypress.io/request) and set as cookies
 - Manually set tokens on local storage (similar to SPA flow).
 - Map external hosts like `auth.corp.com:7075` and point to local servers `127.0.0.1:7075` in [cypress.json](cypress.json)

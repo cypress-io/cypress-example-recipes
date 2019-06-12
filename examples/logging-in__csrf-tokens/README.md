@@ -6,6 +6,12 @@ If you start this application with `npm start` and open `localhost:7076` you wil
 
 ![Login](images/csrf.png)
 
+- Use [`cy.request()`](https://on.cypress.io/request) to get around CSRF protections.
+- Parse CSRF tokens out of HTML.
+- Parse CSRF tokens out of response headers.
+- Expose CSRF via a route.
+- Disable CSRF when not in production.
+
 The tests in [cypress/integration/logging-in-csrf-tokens-spec.js](cypress/integration/logging-in-csrf-tokens-spec.js) show various approaches to logging with CSRF token, utilizing [`cy.request`](https://on.cypress.io/request) to log in.
 
 ![Tests](images/tests.png)

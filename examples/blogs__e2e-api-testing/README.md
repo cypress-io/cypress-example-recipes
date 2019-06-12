@@ -8,4 +8,7 @@ We wrote a [companion blog post](https://www.cypress.io/blog/2017/11/07/Add-GUI-
 
 Please read that if you'd like to understand more about writing E2E API tests in Cypress.
 
+- Use `cy.request()` to perform API Testing
+- Use the Cypress GUI to help debug requests
+
 ![API testing using Cypress](img/demo.png)
