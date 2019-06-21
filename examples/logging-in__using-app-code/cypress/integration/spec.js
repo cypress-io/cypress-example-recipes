@@ -12,6 +12,25 @@ it('logs in by using application service', () => {
   // to the command log, since we already logged a good message right above
   cy.wrap(userService.login(Cypress.env('username'), Cypress.env('password')), {
     log: false
+  }).then(user => {
+    // the userService.login resolves with "user" object
+    // and we can assert its values inside .then()
+
+    // confirm general shape of the object
+    expect(user).to.be.an('object')
+    expect(user).to.have.keys([
+      'firstName',
+      'lastName',
+      'username',
+      'id',
+      'token'
+    ])
+    // we don't know the token or id, but we know the expected names
+    expect(user).to.contain({
+      username: 'test',
+      firstName: 'Test',
+      lastName: 'User'
+    })
   })
 
   // cy.visit command will wait for the promise returned from
