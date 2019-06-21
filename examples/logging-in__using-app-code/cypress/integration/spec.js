@@ -40,3 +40,28 @@ it('logs in by using application service', () => {
   // we should be logged in
   cy.contains('Hi Test!').should('be.visible')
 })
+
+it('can assert against resolved object using .should', () => {
+  cy.log('user service login')
+
+  // same login promise
+  cy.wrap(userService.login(Cypress.env('username'), Cypress.env('password')), {
+    log: false
+  })
+    // but resolved value checked using implicit assertions
+    // that can be easier to read
+    .should('be.an', 'object')
+    .and('have.keys', ['firstName', 'lastName', 'username', 'id', 'token'])
+    .and('contain', {
+      username: 'test',
+      firstName: 'Test',
+      lastName: 'User'
+    })
+
+  // cy.visit command will wait for the promise returned from
+  // the "userService.login" to resolve. Then local storage item is set
+  // and the visit will immediately be authenticated and logged in
+  cy.visit('/')
+  // we should be logged in
+  cy.contains('Hi Test!').should('be.visible')
+})
