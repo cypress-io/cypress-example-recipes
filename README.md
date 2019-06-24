@@ -31,6 +31,7 @@ Recipe | Description
 [XHR Web Forms](./examples/logging-in__xhr-web-forms) | Log in using an XHR
 [CSRF Tokens](./examples/logging-in__csrf-tokens) | Log in with a required CSRF token
 [Json Web Tokens (JWT)](./examples/logging-in__jwt) | Log in using JWT
+[Using application code](./examples/logging-in__using-app-code) | Log in by calling the application code
 
 Also see [Authentication plugins](https://on.cypress.io/plugins#authentication) and watch video ["Organizing Tests, Logging In, Controlling State"](https://www.youtube.com/watch?v=5XQOK0v_YRE)
 

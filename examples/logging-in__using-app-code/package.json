@@ -1,0 +1,13 @@
+{
+  "name": "logging-in__jwt",
+  "version": "1.0.0",
+  "description": "Example of logging in using JWT",
+  "scripts": {
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "start:server": "node server",
+    "start:app": "../../node_modules/.bin/webpack-dev-server --port 8081",
+    "start": "../../node_modules/.bin/run-p start:server start:app",
+    "dev": "../../node_modules/.bin/start-test 8081 cypress:open"
+  }
+}

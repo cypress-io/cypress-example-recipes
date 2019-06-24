@@ -124,6 +124,8 @@ jobs:
     <<: *defaults
   logging-in__jwt:
     <<: *defaults
+  logging-in__using-app-code:
+    <<: *defaults
   preprocessors__grep:
     <<: *defaults
     # in this particular example we want to grep tests
@@ -238,6 +240,9 @@ all_jobs: &all_jobs
   - logging-in__jwt:
       requires:
         - build
+  - logging-in__using-app-code:
+      requires:
+        - build
   - preprocessors__grep:
       requires:
         - build
@@ -316,6 +321,7 @@ all_jobs: &all_jobs
         - logging-in__single-sign-on
         - logging-in__xhr-web-forms
         - logging-in__jwt
+        - logging-in__using-app-code
         - preprocessors__grep
         - preprocessors__typescript-browserify
         - preprocessors__typescript-webpack

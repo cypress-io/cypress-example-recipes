@@ -30,7 +30,7 @@ The front-end SPA logs in and stores the JWT and user information in the `localS
 
 ![JWT token](images/jwt.png)
 
-All Ajax requests to the protected resources need to have `Authorization` header with the `Beater <token>` value.
+All Ajax requests to the protected resources need to have `Authorization` header with the `Bearer <token>` value.
 
 ![Authenticated Ajax call](images/get-users.png)
 
