@@ -7,4 +7,6 @@ This example shows how you can use your own application code to log in. The "nor
 
 ![Passing test](images/login.png)
 
+The spec also shows how to wrap application code in a custom command, which is automatically wrapped.
+
 **note:** in order to import the login service, we need to bundle the spec code using same Webpack bundler configuration as the application code. We do it by using [cypress-webpack-preprocessor](https://github.com/cypress-io/cypress-webpack-preprocessor), see [cypress/plugins/index.js](cypress/plugins/index.js)

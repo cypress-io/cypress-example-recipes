@@ -65,3 +65,26 @@ it('can assert against resolved object using .should', () => {
   // we should be logged in
   cy.contains('Hi Test!').should('be.visible')
 })
+
+/**
+ * Custom command to log in using application method.
+ * Commands are automatically waited on, thus we don't need extra "cy.wrap"
+ * around the returned promise.
+ *
+ * @example cy.login()
+ */
+Cypress.Commands.add(
+  'login',
+  (username = Cypress.env('username'), password = Cypress.env('password')) => {
+    return userService.login(username, password)
+  }
+)
+
+it('log in by wrapping application code in custom command', () => {
+  // custom commands are automatically chained
+  cy.login()
+  // thus the visit will not start until the promise returned
+  // by the application code inside the custom command "login" resolves
+  cy.visit('/')
+  cy.contains('Hi Test!').should('be.visible')
+})
