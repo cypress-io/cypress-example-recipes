@@ -70,7 +70,7 @@
     "@cypress/webpack-preprocessor": "4.1.0",
     "@medv/finder": "1.1.1",
     "@types/chai": "4.1.7",
-    "@types/mocha": "5.2.6",
+    "@types/mocha": "5.2.7",
     "arg": "4.1.0",
     "axe-core": "3.2.2",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
