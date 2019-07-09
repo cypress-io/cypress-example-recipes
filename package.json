@@ -76,7 +76,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
     "bluebird": "3.5.5",
     "console.table": "0.10.0",
-    "cypress": "3.3.2",
+    "cypress": "3.4.0",
     "cypress-axe": "0.5.1",
     "cypress-failed-log": "2.5.1",
     "cypress-pipe": "1.4.0",
