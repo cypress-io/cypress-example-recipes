@@ -21,6 +21,7 @@ Recipe | Description
 [Hover and Hidden Elements](./examples/testing-dom__hover-hidden-elements) | Test hidden elements requiring hover
 [Form Interactions](./examples/testing-dom__form-interactions) | Test form elements like input type `range`
 [Drag and Drop](./examples/testing-dom__drag-drop) | Use `.trigger()` to test drag and drop
+[Shadow DOM](./examples/testing-dom__shadow-dom) | You need to use any of available custom commands
 
 ## Logging in recipes
 
