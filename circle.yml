@@ -276,6 +276,9 @@ all_jobs: &all_jobs
   - testing-dom__tab-handling-links:
       requires:
         - build
+  - testing-dom__wait-for-resource:
+      requires:
+        - build
   - unit-testing__application-code:
       requires:
         - build
@@ -333,6 +336,7 @@ all_jobs: &all_jobs
         - testing-dom__form-interactions
         - testing-dom__hover-hidden-elements
         - testing-dom__tab-handling-links
+        - testing-dom__wait-for-resource
         - unit-testing__application-code
         - unit-testing__react
         - server-communication__env-variables
