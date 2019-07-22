@@ -42,6 +42,10 @@ And the TypeScript and IntelliSense should be happy
 
 ![Custom command help working](images/custom-command-found.png)
 
+## 3rd party modules
+
+As an example this spec includes 3rd party module [cypress-wait-until](https://github.com/NoriSte/cypress-wait-until). This module ships with its own TypeScript definition, which allows `cy.waitUntil` to work.
+
 ## More info
 
 - [Cypress custom commands](https://on.cypress.io/custom-commands)
