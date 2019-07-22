@@ -19,7 +19,7 @@ Cypress.Commands.add('waitForResource', (name, options = {}) => {
     // note that ".then" method has options first, callback second
     // https://on.cypress.io/then
     { log, timeout },
-    win => {
+    (win) => {
       return new Cypress.Promise((resolve, reject) => {
         let foundResource
 
@@ -31,18 +31,20 @@ Cypress.Commands.add('waitForResource', (name, options = {}) => {
             // nothing needs to be done, successfully found the resource
             return
           }
+
           clearInterval(interval)
           reject(new Error(`Timed out waiting for resource ${name}`))
         }, timeout)
 
         const interval = setInterval(() => {
           foundResource = win.performance
-            .getEntriesByType('resource')
-            .find(item => item.name.endsWith(name))
+          .getEntriesByType('resource')
+          .find((item) => item.name.endsWith(name))
           if (!foundResource) {
             // resource not found, will try again
             return
           }
+
           clearInterval(interval)
           // let's resolve with the found performance object
           // to allow tests to inspect it
@@ -63,17 +65,17 @@ it('applies app.css styles', () => {
 
 it('app.css is a tiny resource', () => {
   cy.visit('/')
-  cy.waitForResource('app.css').should(resourceTiming => {
+  cy.waitForResource('app.css').should((resourceTiming) => {
     // there are lots of timing properties in this object
     expect(resourceTiming)
-      .property('entryType')
-      .to.equal('resource')
+    .property('entryType')
+    .to.equal('resource')
     expect(resourceTiming, 'the CSS file is very small (in bytes)')
-      .property('transferSize')
-      .to.be.lt(300)
-    expect(resourceTiming, 'loads in less than 50ms')
-      .property('duration')
-      .to.be.lt(50)
+    .property('transferSize')
+    .to.be.lt(300)
+    expect(resourceTiming, 'loads in less than 150ms')
+    .property('duration')
+    .to.be.lt(150)
   })
 })
 
