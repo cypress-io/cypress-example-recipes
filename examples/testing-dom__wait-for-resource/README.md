@@ -51,3 +51,7 @@ it('applies app.css styles', () => {
 ```
 
 The custom command `cy.waitForResource` is written directly in the spec file. Another custom command `cy.waitForResources` is coded in [cypress/support/index.js](cypress/support/index.js)
+
+## 3rd party module
+
+The [cypress/integration/spec.js](cypress/integration/spec.js) also includes a test that uses [cypress-wait-until](https://github.com/NoriSte/cypress-wait-until) 3rd party module with custom command `cy.waitUntil` to retry finding the performance entry with expected name.
