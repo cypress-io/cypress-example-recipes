@@ -1,0 +1,11 @@
+{
+  "name": "wait-for-resource",
+  "version": "1.0.0",
+  "description": "Shows how to wait for delayed CSS to load before continuing with the test",
+  "scripts": {
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "start": "../../node_modules/.bin/http-server -c-1 -p 4500 public",
+    "dev": "../../node_modules/.bin/start-test 4500 cypress:open"
+  }
+}
