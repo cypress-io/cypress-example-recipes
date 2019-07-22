@@ -1,0 +1,18 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="base.css" />
+</head>
+<body>
+  <main>
+    <h1>Page title</h1>
+  </main>
+  <script>
+    setTimeout(() => {
+      // now load dynamic style to apply to H1 element
+      let link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.type = 'text/css'
+      link.href = 'app.css'
+      document.head.appendChild(link)
+    }, 1000)
+  </script>
+</body>
