@@ -13,6 +13,8 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+require('cypress-wait-until')
+
 const { isPlainObject, last } = Cypress._
 
 /**
@@ -47,8 +49,8 @@ Cypress.Commands.add('waitForResources', (...args) => {
     // note that ".then" method has options first, callback second
     // https://on.cypress.io/then
     { log, timeout },
-    win => {
-      return new Cypress.Promise(resolve => {
+    (win) => {
+      return new Cypress.Promise((resolve, reject) => {
         // flag set when we find all names
         let foundResources
 
@@ -60,6 +62,7 @@ Cypress.Commands.add('waitForResources', (...args) => {
             // nothing needs to be done, successfully found the resource
             return
           }
+
           clearInterval(interval)
           reject(
             new Error(`Timed out waiting for resources ${names.join(', ')}`)
@@ -67,16 +70,17 @@ Cypress.Commands.add('waitForResources', (...args) => {
         }, timeout)
 
         const interval = setInterval(() => {
-          foundResources = names.every(name =>
+          foundResources = names.every((name) =>
             win.performance
-              .getEntriesByType('resource')
-              .find(item => item.name.endsWith(name))
+            .getEntriesByType('resource')
+            .find((item) => item.name.endsWith(name))
           )
           if (!foundResources) {
             // some resource not found, will try again
             return
           }
-          cy.log(`Found all resources`)
+
+          cy.log('Found all resources')
           clearInterval(interval)
           resolve()
         }, 100)

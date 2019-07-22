@@ -86,3 +86,23 @@ it('waits for multiple resources', () => {
   // red color means the style from "app.css" has been loaded and applied
   cy.get('h1', { timeout: 250 }).should('have.css', 'color', 'rgb(255, 0, 0)')
 })
+
+it('waits on resource using wait-until 3rd party plugin', () => {
+  cy.visit('/')
+
+  // 3rd party module "cypress-wait-until" is really useful
+  // for simple conditions like waiting for an item
+  // @see https://github.com/NoriSte/cypress-wait-until
+  cy.waitUntil(() =>
+    cy.window().then((win) =>
+      win.performance
+      .getEntriesByType('resource')
+      // note: ".some(...)" method returns boolean value
+      // which cypress-wait-until expects
+      .some((item) => item.name.endsWith('app.css'))
+    )
+  )
+
+  // red color means the style from "app.css" has been loaded and applied
+  cy.get('h1', { timeout: 250 }).should('have.css', 'color', 'rgb(255, 0, 0)')
+})
