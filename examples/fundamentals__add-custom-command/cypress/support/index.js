@@ -12,3 +12,9 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
+
+// load https://github.com/NoriSte/cypress-wait-until
+// which adds "cy.waitUntil" command
+// note that this 3rd party module includes TypeScript "types"
+// file that correctly adds "waitUntil" to the Cypress Chainer namespace
+require('cypress-wait-until')
