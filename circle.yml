@@ -152,6 +152,8 @@ jobs:
     <<: *defaults
   testing-dom__tab-handling-links:
     <<: *defaults
+  testing-dom__wait-for-resource:
+    <<: *defaults
   unit-testing__application-code:
     <<: *defaults
   unit-testing__react:
