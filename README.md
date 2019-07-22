@@ -10,6 +10,7 @@ Recipe | Description
 [Environment variables](./examples/server-communication__env-variables) | Passing environment variables to tests
 [Dynamic tests](./examples/fundamentals__dynamic-tests) | Create tests dynamically from data
 [Fixtures](./examples/fundamentals__fixtures) | Loading single or multiple fixtures
+[Adding Custom Commands](./examples/fundamentals__add-custom-command) | Write your own commands like `cy.myCommand`
 [Adding Chai Assertions](./examples/extending-cypress__chai-assertions) | Add new or custom chai assertions
 [Cypress module API](./examples/fundamentals__module-api) | Run Cypress via its module API
 
