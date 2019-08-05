@@ -4,5 +4,6 @@
   "eslint.alwaysShowStatus": true,
   "eslint.autoFixOnSave": true,
   "standard.enable": false,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "workbench.colorCustomizations": {}
 }
