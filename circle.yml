@@ -1,5 +1,10 @@
 version: 2.1
 
+# for testing on Windows
+# https://circleci.com/docs/2.0/hello-world-windows/
+orbs:
+  win: circleci/windows@1
+
 # testing jobs are all the same, so just use a template
 defaults: &defaults
   parallelism: 1
@@ -351,13 +356,25 @@ all_jobs: &all_jobs
         - unit-testing__react
         - server-communication__env-variables
 
-
 workflows:
   version: 2
 
   # run this workflow on each commit and pull request
-  all-recipes:
-    jobs: *all_jobs
+  # linux-all-recipes:
+  #   jobs: *all_jobs
+
+  windows-recipes:
+    jobs:
+      - dynamic-data:
+          executor:
+            name: win/vs2019
+            shell: bash.exe
+          steps:
+            - checkout
+            - run: ls -lah
+            - run: ls -lah ~
+            - run: node -v
+            - run: npm -v
 
   # since this is testing a lot of external sites
   # let's run these tests once per day (at night)
