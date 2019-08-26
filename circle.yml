@@ -55,6 +55,8 @@ defaults-win: &defaults-win
           npm run start --if-present
         name: start the server
         background: true
+    # "fix" Cypress pipe on Windows
+    - run: sed -i "s/'pipe'/'inherit'/" node_modules\cypress\lib\exec\spawn.js
     - run:
         # only record the tests on Cypress Dashboard
         # if the record key is set. Usually it is NOT set
