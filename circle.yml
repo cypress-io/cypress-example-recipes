@@ -443,7 +443,10 @@ workflows:
 
   windows-recipes:
     jobs:
-      - win-fundamentals__fixtures
+      - build-windows
+      - win-fundamentals__fixtures:
+          requires:
+            - build-windows
 
   # since this is testing a lot of external sites
   # let's run these tests once per day (at night)
