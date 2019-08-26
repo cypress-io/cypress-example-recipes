@@ -137,7 +137,7 @@ jobs:
           root: ~/
           paths:
             - app
-            # - "C:\\Users\\circleci\\AppData\\Local\\Cypress\\Cache"
+            - C:\Users\circleci\AppData\Local\Cypress\Cache
 
   # dummy job running after all end-to-end tests
   after-tests:
