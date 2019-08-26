@@ -108,6 +108,8 @@ jobs:
       - restore_cache:
           key: cache-dirs-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
       - run: npm ci
+      # show where NPM caches its modules
+      - run: npm config get cache
       # run verify and then save cache.
       # this ensures that the Cypress verified status is cached too
       - run: npm run cypress:verify
@@ -184,8 +186,8 @@ jobs:
     <<: *defaults
   fundamentals__node-modules:
     <<: *defaults
-  fundamentals__fixtures:
-    <<: *defaults
+  # fundamentals__fixtures:
+  #   <<: *defaults
   fundamentals__add-custom-command:
     <<: *defaults
   logging-in__csrf-tokens:
@@ -241,8 +243,9 @@ jobs:
   #
   # Windows jobs
   #
-  win-fundamentals__fixtures:
+  fundamentals__fixtures:
     <<: *defaults-win
+
   sanity-check:
     executor:
       name: win/vs2019
@@ -446,7 +449,7 @@ workflows:
   windows-recipes:
     jobs:
       - build-windows
-      - win-fundamentals__fixtures:
+      - fundamentals__fixtures:
           requires:
             - build-windows
 
