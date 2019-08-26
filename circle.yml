@@ -173,6 +173,16 @@ jobs:
     <<: *defaults
   fundamentals__module-api:
     <<: *defaults
+  sanity-check:
+    executor:
+      name: win/vs2019
+      shell: bash.exe
+    steps:
+      - checkout
+      - run: ls -lah
+      - run: ls -lah ~
+      - run: node -v
+      - run: npm -v
 
 # list all jobs to run and their dependencies here
 # and then use this list from workflow definition
@@ -365,16 +375,7 @@ workflows:
 
   windows-recipes:
     jobs:
-      - dynamic-data:
-          executor:
-            name: win/vs2019
-            shell: bash.exe
-          steps:
-            - checkout
-            - run: ls -lah
-            - run: ls -lah ~
-            - run: node -v
-            - run: npm -v
+      - sanity-check
 
   # since this is testing a lot of external sites
   # let's run these tests once per day (at night)
