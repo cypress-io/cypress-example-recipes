@@ -44,7 +44,7 @@ defaults-win: &defaults-win
     shell: bash.exe
   steps:
     - attach_workspace:
-        at: ~/
+        at: C:\
     - run: ls -lah
     # some examples have the server part
     # so start it in the background
