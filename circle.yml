@@ -138,11 +138,11 @@ jobs:
       # and the Cypress binary to workspace, which is the fastest way
       # for Circle jobs to pass files
       - persist_to_workspace:
-          root: .
+          root: C:\
           paths:
-            - ~/app
+            - Users\circleci\app
             # cannot persist to workspace external folder it seems
-            - C:\Users\circleci\AppData\Local\Cypress\Cache
+            - Users\circleci\AppData\Local\Cypress\Cache
             # - cypress-cache
 
   # dummy job running after all end-to-end tests
