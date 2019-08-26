@@ -126,8 +126,8 @@ jobs:
           key: cache-dirs-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
           paths:
             # could not use environment variables for some reason
-            - "C:\\Users\\circleci\\AppData\\Roaming\\npm-cache"
-            - "C:\\Users\\circleci\\AppData\\Local\\Cypress\\Cache"
+            - "%APPDATA%\\npm-cache"
+            # - "C:\\Users\\circleci\\AppData\\Local\\Cypress\\Cache"
       # all other test jobs will run AFTER this build job finishes
       # to avoid reinstalling dependencies, we persist the source folder "app"
       # and the Cypress binary to workspace, which is the fastest way
@@ -136,7 +136,7 @@ jobs:
           root: ~/
           paths:
             - app
-            - "C:\\Users\\circleci\\AppData\\Local\\Cypress\\Cache"
+            # - "C:\\Users\\circleci\\AppData\\Local\\Cypress\\Cache"
 
   # dummy job running after all end-to-end tests
   after-tests:
