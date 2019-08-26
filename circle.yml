@@ -122,10 +122,11 @@ jobs:
       # not working on Windows for now - finds "only" in vendor folder and non-JS files
       # - run: npm run stop-only
       - save_cache:
+          # save NPM modules and Cypress binary to avoid downloading them again and again
           key: cache-dirs-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
           paths:
-            - ~/.npm
-            - ~/.cache
+            - $APPDATA\npm-cache
+            - $LOCALAPPDATA\Cypress\Cache
       # all other test jobs will run AFTER this build job finishes
       # to avoid reinstalling dependencies, we persist the source folder "app"
       # and the Cypress binary to workspace, which is the fastest way
@@ -134,7 +135,7 @@ jobs:
           root: ~/
           paths:
             - app
-            - .cache/Cypress
+            - $LOCALAPPDATA\Cypress\Cache
 
   # dummy job running after all end-to-end tests
   after-tests:

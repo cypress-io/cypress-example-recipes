@@ -5,6 +5,6 @@
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "test:ci:windows": "bin-up cypress run"
+    "test:ci:windows": "..\\..\\node_modules\\.bin\\cypress run"
   }
 }
