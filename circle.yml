@@ -106,16 +106,18 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: cache-dirs-windows-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
+          key: cache-dirs-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
       - run: npm ci
       # run verify and then save cache.
       # this ensures that the Cypress verified status is cached too
       - run: npm run cypress:verify
       - run: npx cypress cache path
       - run: npx cypress cache list
-      - run: npm run stop-only
+      - run: echo ~
+      # not working on Windows for now - finds "only" in vendor folder and non-JS files
+      # - run: npm run stop-only
       - save_cache:
-          key: cache-dirs-windows-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
+          key: cache-dirs-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
           paths:
             - ~/.npm
             - ~/.cache
