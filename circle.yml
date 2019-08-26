@@ -36,6 +36,37 @@ defaults: &defaults
           fi
         name: Cypress tests
 
+defaults-win: &defaults-win
+  parallelism: 1
+  working_directory: ~/app
+  executor:
+    name: win/vs2019
+    shell: bash.exe
+  steps:
+    - attach_workspace:
+        at: ~/
+    # some examples have the server part
+    # so start it in the background
+    - run:
+        command: |
+          cd examples/$CIRCLE_JOB
+          npm run start --if-present
+        name: start the server
+        background: true
+    - run:
+        # only record the tests on Cypress Dashboard
+        # if the record key is set. Usually it is NOT set
+        # for forked pull request because environment variables
+        # are not passed to the external PRs
+        command: |
+          cd examples/$CIRCLE_JOB
+          if [ -z "$CYPRESS_RECORD_KEY" ]; then
+            npm run cypress:run
+          else
+            npm run cypress:run -- --record --group $CIRCLE_JOB
+          fi
+        name: Cypress tests
+
 jobs:
   # a single job that installs dependencies (NPM and Cypress)
   build:
@@ -50,9 +81,41 @@ jobs:
       # run verify and then save cache.
       # this ensures that the Cypress verified status is cached too
       - run: npm run cypress:verify
+      - run: npx cypress cache path
       - run: npm run stop-only
       - save_cache:
           key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      # all other test jobs will run AFTER this build job finishes
+      # to avoid reinstalling dependencies, we persist the source folder "app"
+      # and the Cypress binary to workspace, which is the fastest way
+      # for Circle jobs to pass files
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - app
+            - .cache/Cypress
+
+  build-windows:
+    working_directory: ~/app
+    executor:
+      name: win/vs2019
+      shell: bash.exe
+    steps:
+      - checkout
+      - restore_cache:
+          key: cache-dirs-windows-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
+      - run: npm ci
+      # run verify and then save cache.
+      # this ensures that the Cypress verified status is cached too
+      - run: npm run cypress:verify
+      - run: npx cypress cache path
+      - run: npx cypress cache list
+      - run: npm run stop-only
+      - save_cache:
+          key: cache-dirs-windows-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
           paths:
             - ~/.npm
             - ~/.cache
@@ -173,6 +236,11 @@ jobs:
     <<: *defaults
   fundamentals__module-api:
     <<: *defaults
+  #
+  # Windows jobs
+  #
+  win-fundamentals__fixtures:
+    <<: *defaults-win
   sanity-check:
     executor:
       name: win/vs2019
@@ -375,7 +443,7 @@ workflows:
 
   windows-recipes:
     jobs:
-      - sanity-check
+      - win-fundamentals__fixtures
 
   # since this is testing a lot of external sites
   # let's run these tests once per day (at night)
