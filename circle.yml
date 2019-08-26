@@ -105,6 +105,7 @@ jobs:
       shell: bash.exe
     environment:
       CYPRESS_CACHE_FOLDER: ~/cypress-cache
+      DEBUG: cypress:cli
     steps:
       - checkout
       - restore_cache:
