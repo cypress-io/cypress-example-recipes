@@ -45,11 +45,13 @@ defaults-win: &defaults-win
   steps:
     - attach_workspace:
         at: ~/
+    - run: ls -lah
     # some examples have the server part
     # so start it in the background
     - run:
         command: |
-          cd examples\\$CIRCLE_JOB
+          cd examples
+          cd $CIRCLE_JOB
           npm run start --if-present
         name: start the server
         background: true
@@ -59,7 +61,8 @@ defaults-win: &defaults-win
         # for forked pull request because environment variables
         # are not passed to the external PRs
         command: |
-          cd examples\\$CIRCLE_JOB
+          cd examples
+          cd $CIRCLE_JOB
           if [ -z "$CYPRESS_RECORD_KEY" ]; then
             npm run test:ci:windows --if-present
           else
