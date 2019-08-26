@@ -13,4 +13,20 @@ describe('requires fixtures', () => {
   it('has country', () => {
     expect(country).to.deep.equal({ name: 'United States' })
   })
+
+  context('sanity JavaScript tests', () => {
+    // confirm that the spec information is present
+
+    it('has __dirname', () => {
+      expect(__dirname).to.be.a('string')
+      expect(__dirname).to.equal('/cypress/integration')
+    })
+
+    it('has __filename', () => {
+      expect(__filename).to.be.a('string')
+      expect(__filename).to.equal(
+        '/cypress/integration/require-fixtures-spec.js'
+      )
+    })
+  })
 })
