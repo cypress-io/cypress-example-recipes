@@ -31,6 +31,7 @@ describe('Dynamic tests', () => {
     // so we need to load JSON file using "require"
     const colors = require('../fixtures/colors')
     const rainbow = ['red', 'orange', 'yellow', 'green', 'blue', 'violet']
+
     colors.forEach((color) => {
       it(`has color ${color}`, () => {
         cy.wrap(color).should('be.oneOf', rainbow)
@@ -39,6 +40,9 @@ describe('Dynamic tests', () => {
   })
 
   context('dynamic users', () => {
+    // this example fetches list of 3 users from the server
+    // and then creates 3 separate tests to check something about each user
+
     before(() => {
       // receive the dynamic list of users
       cy.request('https://jsonplaceholder.cypress.io/users?limit=3')
@@ -59,8 +63,58 @@ describe('Dynamic tests', () => {
           // we need to use "function () {}" callback for "it"
           // to make sure "this" points at the test context
           const user = this.users[k]
+
           cy.log(`user ${user.name} ${user.email}`)
           cy.wrap(user).should('have.property', 'name')
+        })
+      })
+    })
+  })
+
+  context('generated using cy.task', () => {
+    before(() => {
+      cy.task('getData').as('letters')
+    })
+
+    describe('dynamic letters', () => {
+      it('has fetched letters', function () {
+        // note that to access test context "this" we need
+        // to use "function () {...}" callback form for the test
+        expect(this.letters).to.be.an('array')
+      })
+
+      // We cannot access "this.letters" yet, it will only
+      // be set once the tests are ready to run
+      // so we need to somehow decide how many tests to generate
+      // For example, we know that there should be 3 letters in the returned list
+      Cypress._.range(0, 3).forEach((k) => {
+        it(`tests letter #${k}`, function () {
+          const letter = this.letters[k]
+
+          cy.wrap(letter).should('match', /a|b|c/)
+        })
+      })
+    })
+  })
+
+  context('generated using cy.task and saved in closure', () => {
+    // instead of using test context "this" to save fetched list
+    // use closure variable to save it and never worry about
+    // "this" and "() => {...}" vs "function () {...}" syntax
+    let letters
+
+    before(() => {
+      cy.task('getData').then((list) => {
+        letters = list
+      })
+    })
+
+    describe('fetched letters', () => {
+      Cypress._.range(0, 3).forEach((k) => {
+        it(`tests letter #${k}`, () => {
+          const letter = letters[k]
+
+          cy.wrap(letter).should('match', /a|b|c/)
         })
       })
     })
