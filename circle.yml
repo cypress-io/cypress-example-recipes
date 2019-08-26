@@ -127,7 +127,7 @@ jobs:
           paths:
             # could not use environment variables for some reason
             # - "%APPDATA%\\npm-cache"
-            # - "C:\\Users\\circleci\\AppData\\Local\\Cypress\\Cache"
+            - C:\Users\circleci\AppData\Local\Cypress\Cache
             - C:\Users\circleci\AppData\Roaming\npm-cache
       # all other test jobs will run AFTER this build job finishes
       # to avoid reinstalling dependencies, we persist the source folder "app"
