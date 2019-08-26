@@ -104,7 +104,7 @@ jobs:
       name: win/vs2019
       shell: bash.exe
     environment:
-      CYPRESS_CACHE_FOLDER: ~/cypress-cache
+      # CYPRESS_CACHE_FOLDER: ~/cypress-cache
       DEBUG: cypress:cli
     steps:
       - checkout
@@ -130,20 +130,20 @@ jobs:
           paths:
             # could not use environment variables for some reason
             # - "%APPDATA%\\npm-cache"
-            # - C:\Users\circleci\AppData\Local\Cypress\Cache
-            - ~/cypress-cache
+            - C:\Users\circleci\AppData\Local\Cypress\Cache
+            # - ~/cypress-cache
             - C:\Users\circleci\AppData\Roaming\npm-cache
       # all other test jobs will run AFTER this build job finishes
       # to avoid reinstalling dependencies, we persist the source folder "app"
       # and the Cypress binary to workspace, which is the fastest way
       # for Circle jobs to pass files
       - persist_to_workspace:
-          root: ~/
+          root: .
           paths:
-            - app
+            - ~/app
             # cannot persist to workspace external folder it seems
-            # - C:\Users\circleci\AppData\Local\Cypress\Cache
-            - cypress-cache
+            - C:\Users\circleci\AppData\Local\Cypress\Cache
+            # - cypress-cache
 
   # dummy job running after all end-to-end tests
   after-tests:
