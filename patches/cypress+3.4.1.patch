@@ -1,5 +1,5 @@
 diff --git a/node_modules/cypress/lib/exec/spawn.js b/node_modules/cypress/lib/exec/spawn.js
-index ed13727..c339919 100644
+index ed13727..9976bc2 100644
 --- a/node_modules/cypress/lib/exec/spawn.js
 +++ b/node_modules/cypress/lib/exec/spawn.js
 @@ -138,28 +138,43 @@ module.exports = {
@@ -15,7 +15,7 @@ index ed13727..c339919 100644
 +        //  child STDERR => process STDERR with additional filtering
 +        if (child.stdin) {
 +          debug('piping process STDIN into child STDIN');
-+          child.stdin.pipe(process.stdin);
++          process.stdin.pipe(child.stdin);
 +        }
 +
 +        if (child.stdout) {
