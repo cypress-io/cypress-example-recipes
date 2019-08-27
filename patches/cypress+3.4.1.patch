@@ -1,13 +1,65 @@
 diff --git a/node_modules/cypress/lib/exec/spawn.js b/node_modules/cypress/lib/exec/spawn.js
-index ed13727..e7e305d 100644
+index ed13727..c339919 100644
 --- a/node_modules/cypress/lib/exec/spawn.js
 +++ b/node_modules/cypress/lib/exec/spawn.js
-@@ -138,7 +138,7 @@ module.exports = {
+@@ -138,28 +138,43 @@ module.exports = {
          child.on('close', resolve);
          child.on('error', reject);
  
 -        child.stdin && child.stdin.pipe(process.stdin);
-+        child.stdin && process.stdin.pipe(child.stdin);
-         child.stdout && child.stdout.pipe(process.stdout);
+-        child.stdout && child.stdout.pipe(process.stdout);
++        // if stdio options is set to 'pipe', then
++        //   we should set up pipes:
++        //  process STDIN (read stream) => child STDIN (writeable)
++        //  child STDOUT => process STDOUT
++        //  child STDERR => process STDERR with additional filtering
++        if (child.stdin) {
++          debug('piping process STDIN into child STDIN');
++          child.stdin.pipe(process.stdin);
++        }
++
++        if (child.stdout) {
++          debug('piping child STDOUT to process STDOUT');
++          child.stdout.pipe(process.stdout);
++        }
  
          // if this is defined then we are manually piping for linux
+         // to filter out the garbage
+-        child.stderr && child.stderr.on('data', function (data) {
+-          var str = data.toString();
+-
+-          // bail if this is warning line garbage
+-          if (isGarbageLineWarning(str)) {
+-            return;
+-          }
++        if (child.stderr) {
++          debug('piping child STDERR to process STDERR');
++          child.stderr.on('data', function (data) {
++            var str = data.toString();
++
++            // bail if this is warning line garbage
++            if (isGarbageLineWarning(str)) {
++              return;
++            }
+ 
+-          // if we have a callback and this explictly returns
+-          // false then bail
+-          if (onStderrData && onStderrData(str) === false) {
+-            return;
+-          }
++            // if we have a callback and this explictly returns
++            // false then bail
++            if (onStderrData && onStderrData(str) === false) {
++              return;
++            }
+ 
+-          // else pass it along!
+-          process.stderr.write(data);
+-        });
++            // else pass it along!
++            process.stderr.write(data);
++          });
++        }
+ 
+         // https://github.com/cypress-io/cypress/issues/1841
+         // In some versions of node, it will throw on windows
