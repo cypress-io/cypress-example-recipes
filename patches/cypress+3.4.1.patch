@@ -1,18 +1,13 @@
 diff --git a/node_modules/cypress/lib/exec/spawn.js b/node_modules/cypress/lib/exec/spawn.js
-index ed13727..16f3df0 100644
+index ed13727..e7e305d 100644
 --- a/node_modules/cypress/lib/exec/spawn.js
 +++ b/node_modules/cypress/lib/exec/spawn.js
-@@ -138,7 +138,12 @@ module.exports = {
+@@ -138,7 +138,7 @@ module.exports = {
          child.on('close', resolve);
          child.on('error', reject);
  
 -        child.stdin && child.stdin.pipe(process.stdin);
-+        console.log('process.stdin is TTY?', process.stdin.isTTY)
-+        console.log('child.stdin is TTY?', child.stdin.isTTY)
-+        if (process.stdin && child.stdin) {
-+          // child.stdin.pipe(process.stdin);
-+          process.stdin.pipe(child.stdin)
-+        }
++        child.stdin && process.stdin.pipe(child.stdin);
          child.stdout && child.stdout.pipe(process.stdout);
  
          // if this is defined then we are manually piping for linux
