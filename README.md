@@ -1,6 +1,6 @@
 # Recipes [![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) [![Build status](https://ci.appveyor.com/api/projects/status/7p4qkwavheciwbxc/branch/master?svg=true)](https://ci.appveyor.com/project/cypress-io/cypress-example-recipes/branch/master) [![renovate-app badge][renovate-badge]][renovate-app]
 
-> This repo contains various recipes for testing common scenarios using Cypress: [Fundamentals](#fundamentals), [Testing the DOM](#testing-the-dom), [Logging in](#logging-in-recipes), [Preprocessors](#preprocessors), [Blogs](#blogs), [Stubbing and spying](#stubbing-and-spying), [Unit Testing](#unit-testing), [Server Communication](#server-communication)
+> This repo contains various recipes for testing common scenarios using Cypress: [Fundamentals](#fundamentals), [Testing the DOM](#testing-the-dom), [Logging in](#logging-in-recipes), [Preprocessors](#preprocessors), [Blogs](#blogs), [Stubbing and spying](#stubbing-and-spying), [Unit Testing](#unit-testing), [Server Communication](#server-communication), [Other Cypress Recipes](#other-cypress-recipes), [Community Recipes](#community-recipes)
 
 ## Fundamentals
 
@@ -85,6 +85,14 @@ Recipe | Description
 --- | ---
 [Bootstrapping your App](./examples/server-communication__bootstrapping-your-app) | Seed your application with test data
 [Seeding your Database in Node](./examples/server-communication__seeding-database-in-node) | Seed your database with test data
+
+## Other Cypress Recipes
+
+Recipe | Description
+--- | ---
+[Visual Testing](https://on.cypress.io/visual-testing) | Official Cypress guide to visual testing
+[Code Coverage](https://on.cypress.io/code-coverage) | Official Cypress guide to code coverage
+[detect-page-reload](https://glebbahmutov.com/blog/detect-page-reload/) | How to detect from Cypress test when a page reloads using object property assertions
 
 ## Community Recipes
 
