@@ -1,6 +1,6 @@
 # Recipes [![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) [![Build status](https://ci.appveyor.com/api/projects/status/7p4qkwavheciwbxc/branch/master?svg=true)](https://ci.appveyor.com/project/cypress-io/cypress-example-recipes/branch/master) [![renovate-app badge][renovate-badge]][renovate-app]
 
-> This repo contains various recipes for testing common scenarios using Cypress: [Fundamentals](#fundamentals), [Testing the DOM](#testing-the-dom), [Logging in](#logging-in-recipes), [Preprocessors](#preprocessors), [Blogs](#blogs), [Stubbing and spying](#stubbing-and-spying), [Unit Testing](#unit-testing), [Server Communication](#server-communication)
+> This repo contains various recipes for testing common scenarios using Cypress: [Fundamentals](#fundamentals), [Testing the DOM](#testing-the-dom), [Logging in](#logging-in-recipes), [Preprocessors](#preprocessors), [Blogs](#blogs), [Stubbing and spying](#stubbing-and-spying), [Unit Testing](#unit-testing), [Server Communication](#server-communication), [Other Cypress Recipes](#other-cypress-recipes), [Community Recipes](#community-recipes)
 
 ## Fundamentals
 
@@ -85,6 +85,23 @@ Recipe | Description
 --- | ---
 [Bootstrapping your App](./examples/server-communication__bootstrapping-your-app) | Seed your application with test data
 [Seeding your Database in Node](./examples/server-communication__seeding-database-in-node) | Seed your database with test data
+
+## Other Cypress Recipes
+
+Recipe | Description
+--- | ---
+[Visual Testing](https://on.cypress.io/visual-testing) | Official Cypress guide to visual testing
+[Code Coverage](https://on.cypress.io/code-coverage) | Official Cypress guide to code coverage
+[detect-page-reload](https://glebbahmutov.com/blog/detect-page-reload/) | How to detect from Cypress test when a page reloads using object property assertions
+[run in Docker](https://www.cypress.io/blog/2019/05/02/run-cypress-with-a-single-docker-command/) | Run Cypress with a single Docker command
+[SSR E2E](https://glebbahmutov.com/blog/ssr-e2e/) | End-to-end Testing for Server-Side Rendered Pages
+[Using TS aliases](https://glebbahmutov.com/blog/using-ts-aliases-in-cypress-tests/) | Using TypeScript aliases in Cypress tests
+[stub-navigator-api](https://glebbahmutov.com/blog/stub-navigator-api/) | Stub navigator API in end-to-end tests
+[Readable Cypress.io tests](https://glebbahmutov.com/blog/readable-tests/) | How to write readable tests using custom commands and custom Chai assertions
+[Parallel or not](https://glebbahmutov.com/blog/parallel-or-not/) | Run Cypress in parallel mode on CircleCI depending on environment variables
+[Use TypeScript With Cypress](https://glebbahmutov.com/blog/use-typescript-with-cypress/) | Step by step tutorial how to set up TypeScript support in Cypress using WebPack bundler
+[Cypress should callback](https://glebbahmutov.com/blog/cypress-should-callback/) | Examples of `.should(cb)` assertions
+[Cypress jump](https://glebbahmutov.com/blog/cypress-jump/) | Create a React component using JSX and inject it into live application from a Cypress test
 
 ## Community Recipes
 
