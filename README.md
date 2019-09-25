@@ -60,7 +60,8 @@ Recipe | Description
 [Codepen.io Testing](./examples/blogs__codepen-demo) | Test a HyperApp Codepen demo
 [Testing Redux Store](./examples/blogs__testing-redux-store) | Test an application that uses Redux data store
 [Vue + Vuex + REST Testing](./examples/blogs__vue-vuex-rest) | Test an application that uses central data store
-[A11y Testing](./examples/blogs__a11y) | Accessability testing with [cypress-axe](https://github.com/avanslaars/cypress-axe#readme)
+[A11y Testing](./examples/blogs__a11y) | Accessibility testing with [cypress-axe](https://github.com/avanslaars/cypress-axe#readme)
+[Automate Angular Testing](https://www.cypress.io/blog/2019/08/02/guest-post-angular-adding-cypress-ui-tests-to-your-devops-pipeline/) | Run Angular tests in a build environment  
 
 ## Stubbing and spying
 
