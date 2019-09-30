@@ -18,16 +18,20 @@ const args = arg({
   '--chrome': Boolean,
   '--windows': Boolean,
 })
+
 console.log('args', args)
 
 // default NPM script name
 let scriptName = 'test:ci'
+
 if (args['--chrome']) {
   scriptName = 'test:ci:chrome'
 }
+
 if (args['--windows']) {
   scriptName = 'test:ci:windows'
 }
+
 console.log('script name "%s"', scriptName)
 
 const getExamples = () => {
@@ -44,11 +48,13 @@ const printFolders = (folders) => {
 
 const hasPackageScriptName = (folder) => {
   const filename = resolve(join(folder, 'package.json'))
+
   if (!fs.existsSync(filename)) {
     return false
   }
 
   const { scripts } = require(filename)
+
   return scripts && scripts[scriptName]
 }
 
@@ -57,18 +63,23 @@ const testExample = (folder) => {
   // runs the same script command in each folder
   // maybe if there is no script, should skip it?
   const filename = resolve(join(folder, 'package.json'))
+
   if (!fs.existsSync(filename)) {
     console.log('cannot find file "%s"', filename)
     console.log('skipping...')
+
     return
   }
 
   const { scripts } = require(filename)
+
   if (!scripts || !scripts[scriptName]) {
     console.log('file %s does not have script "%s"', filename, scriptName)
     console.log('skipping...')
+
     return
   }
+
   return execa('npm', ['run', scriptName], { stdio: 'inherit', cwd: folder })
 }
 
@@ -84,6 +95,7 @@ const filterSomeFolders = (folders) => {
     if (name.includes('codepen')) {
       return false
     }
+
     return true
   }
 
