@@ -6,7 +6,6 @@
     "start": "echo nothing to start",
     "cypress:run": "node ./e2e-tests",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "test:ci": "node ./e2e-tests",
-    "test:ci:windows": "node ./e2e-tests"
+    "test:ci": "node ./e2e-tests"
   }
 }
