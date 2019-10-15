@@ -24,6 +24,7 @@ Recipe | Description
 [Drag and Drop](./examples/testing-dom__drag-drop) | Use `.trigger()` to test drag and drop
 [Shadow DOM](./examples/testing-dom__shadow-dom) | You need to use any of available custom commands
 [Waiting for static resource](./examples/testing-dom__wait-for-resource) | Shows how to wait for CSS or any other static resource to load
+[CSV load and table test](./examples/testing-dom__csv-table) | Loads CSV file and compares objects against cells in a table
 
 ## Logging in recipes
 
@@ -61,7 +62,7 @@ Recipe | Description
 [Testing Redux Store](./examples/blogs__testing-redux-store) | Test an application that uses Redux data store
 [Vue + Vuex + REST Testing](./examples/blogs__vue-vuex-rest) | Test an application that uses central data store
 [A11y Testing](./examples/blogs__a11y) | Accessibility testing with [cypress-axe](https://github.com/avanslaars/cypress-axe#readme)
-[Automate Angular Testing](https://www.cypress.io/blog/2019/08/02/guest-post-angular-adding-cypress-ui-tests-to-your-devops-pipeline/) | Run Angular tests in a build environment  
+[Automate Angular Testing](https://www.cypress.io/blog/2019/08/02/guest-post-angular-adding-cypress-ui-tests-to-your-devops-pipeline/) | Run Angular tests in a build environment
 
 ## Stubbing and spying
 
