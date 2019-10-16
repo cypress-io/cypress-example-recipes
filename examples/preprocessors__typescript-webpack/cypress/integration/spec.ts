@@ -1,9 +1,11 @@
+// import function "add" from another TypeScript file
 import { add } from '../support/add'
 
 describe('TypeScript', () => {
   it('works', () => {
     // note TypeScript definition
     const x: number = 42
+    expect(x).to.equal(42)
   })
 
   it('checks shape of an object', () => {
