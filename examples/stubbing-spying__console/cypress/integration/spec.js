@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
-describe('Console', () => {
-  describe('spying console.log', function () {
+context('Console', () => {
+  describe('spying on console.log', function () {
     beforeEach(function () {
       cy.visit('/index.html', {
         onBeforeLoad (win) {
@@ -9,13 +9,13 @@ describe('Console', () => {
       })
     })
 
-    it('see console log being called with text', function () {
+    it('calls console.log with expected text', function () {
       cy.get('#console-log').click()
       cy.get('@consoleLog').should('be.calledWith', 'Hello World!')
     })
   })
 
-  describe('stubs console.log', function () {
+  describe('stubbing console.log', function () {
     let parameter
 
     beforeEach(() => {
@@ -28,7 +28,7 @@ describe('Console', () => {
       })
     })
 
-    it('utilize promise to wait until stub has been executed', function () {
+    it('waits until stub has been executed and we get a value', function () {
       cy.get('#console-log').click()
       // We need to wait until the application calls "console.log"
       // and our local closure variable "parameter" gets a value.
