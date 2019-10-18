@@ -72,6 +72,7 @@ Recipe | Description
 [Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch) | Use `cy.stub()` to control fetch requests
 [Stubbing methods called on `window`](./examples/stubbing-spying__window) | Use `cy.stub()` for methods called on `window`
 [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics) | Use `cy.stub()` to test Google Analytics calls
+[Stubbing methods called on `console`](./examples/stubbing-spying__console) | Use `cy.stub()` for methods called on `console`
 
 ## Unit Testing
 
