@@ -16,7 +16,10 @@
       var btn = document.getElementById('console-log')
 
       btn.addEventListener('click', function(event) {
-        console.log("Hello World!")
+        // let's introduce an async behavior just for fun
+        setTimeout(() => {
+          console.log("Hello World!")
+        }, 500)
       })
     </script>
   </body>
