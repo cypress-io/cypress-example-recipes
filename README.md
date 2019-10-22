@@ -101,7 +101,7 @@ Recipe | Description
 [stub-navigator-api](https://glebbahmutov.com/blog/stub-navigator-api/) | Stub navigator API in end-to-end tests
 [Readable Cypress.io tests](https://glebbahmutov.com/blog/readable-tests/) | How to write readable tests using custom commands and custom Chai assertions
 [Parallel or not](https://glebbahmutov.com/blog/parallel-or-not/) | Run Cypress in parallel mode on CircleCI depending on environment variables
-[Use TypeScript With Cypress](https://glebbahmutov.com/blog/use-typescript-with-cypress/) | Step by step tutorial how to set up TypeScript support in Cypress using WebPack bundler
+[Use TypeScript With Cypress](https://glebbahmutov.com/blog/use-typescript-with-cypress/) | Step by step tutorial on how to set up TypeScript support in Cypress using WebPack bundler
 [Cypress should callback](https://glebbahmutov.com/blog/cypress-should-callback/) | Examples of `.should(cb)` assertions
 [Cypress jump](https://glebbahmutov.com/blog/cypress-jump/) | Create a React component using JSX and inject it into live application from a Cypress test
 
@@ -117,7 +117,7 @@ Recipe | Description
 ## Overview
 
 - This repo is structured similar to how other "Monorepos" work.
-- Each [`example project`](./examples) has it's own Cypress configuration, tests, backend and frontend assets.
+- Each [`example project`](./examples) has its own Cypress configuration, tests, backend and frontend assets.
 - Each of these [`example projects`](./examples) share a single "root" Cypress that is installed in the root `node_modules` folder.
 - This structure looks different from normal projects, but its the easiest way to manage multiple projects without installing Cypress independently for each one.
 
