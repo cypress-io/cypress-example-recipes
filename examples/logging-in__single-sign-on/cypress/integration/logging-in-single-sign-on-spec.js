@@ -40,14 +40,13 @@
 // There are other various implementation differences but they all share
 // the same fundamental concepts which we can test in Cypress.
 
-const _   = Cypress._
+const _ = Cypress._
 
 // require node's url module
 const url = require('url')
 
-describe('Logging In - Single Sign on', function(){
+describe('Logging In - Single Sign on', function () {
   Cypress.Commands.add('loginBySingleSignOn', (overrides = {}) => {
-
     Cypress.log({
       name: 'loginBySingleSignOn'
     })
@@ -63,7 +62,7 @@ describe('Logging In - Single Sign on', function(){
       form: true, // we are submitting a regular form body
       body: {
         username: 'jane.lane',
-        password: 'password123',
+        password: 'password123'
       }
     }
 
@@ -73,7 +72,7 @@ describe('Logging In - Single Sign on', function(){
     cy.request(options)
   })
 
-  context('Use redirectTo and a session cookie to login', function(){
+  context('Use redirectTo and a session cookie to login', function () {
     // This first example assumes we have an app server that
     // is capable of handling the redirect and set a session cookie
 
@@ -83,29 +82,31 @@ describe('Logging In - Single Sign on', function(){
     // 3. have our app server set an HttpOnly session cookie
     // 4. check that we are now properly logged in
 
-    it('is 403 unauthorized without a session cookie', function(){
+    it('is 403 unauthorized without a session cookie', function () {
       // smoke test just to show that without logging in we cannot
       // visit the dashboard
       cy.visit('/dashboard')
-      cy.get('h3').should('contain', 'You are not logged in and cannot access this page')
+      cy.get('h3').should(
+        'contain',
+        'You are not logged in and cannot access this page'
+      )
       cy.url().should('include', 'unauthorized')
     })
 
-    it('can authenticate with cy.request', function(){
+    it('can authenticate with cy.request', function () {
       // before we start, there should be no session cookie
       cy.getCookie('cypress-session-cookie').should('not.exist')
 
       // this automatically gets + sets cookies on the browser
       // and follows all of the redirects that ultimately get
       // us to /dashboard.html
-      cy.loginBySingleSignOn()
-        .then((resp) => {
-          // yup this should all be good
-          expect(resp.status).to.eq(200)
+      cy.loginBySingleSignOn().then(resp => {
+        // yup this should all be good
+        expect(resp.status).to.eq(200)
 
-          // we're at http://localhost:7074/dashboard contents
-          expect(resp.body).to.include('<h1>Welcome to the Dashboard!</h1>')
-        })
+        // we're at http://localhost:7074/dashboard contents
+        expect(resp.body).to.include('<h1>Welcome to the Dashboard!</h1>')
+      })
 
       // the redirected page hits the server, and the server middleware
       // parses the authentication token and returns the dashboard view
@@ -120,134 +121,135 @@ describe('Logging In - Single Sign on', function(){
     })
   })
 
-  context('Manually parse id_token and set on local storage to login', function(){
-    // This second example assumes we are building a SPA
-    // without a server to handle setting the session cookie.
+  context(
+    'Manually parse id_token and set on local storage to login',
+    function () {
+      // This second example assumes we are building a SPA
+      // without a server to handle setting the session cookie.
 
-    // The flow will be:
-    // 1. Disable following automatic redirects
-    // 2. Sign into auth.corp.com
-    // 3. Parse out the id_token manually
-    // 4. Visit our application
-    // 5. Before it loads, set token on local storage
-    // 6. Make sure the XHR goes out and the response
-    //    is correct + #main has the correct response text
+      // The flow will be:
+      // 1. Disable following automatic redirects
+      // 2. Sign into auth.corp.com
+      // 3. Parse out the id_token manually
+      // 4. Visit our application
+      // 5. Before it loads, set token on local storage
+      // 6. Make sure the XHR goes out and the response
+      //    is correct + #main has the correct response text
 
-    it('knows when there is no session token', function(){
-      // by default our SPA app checks for id_token set in local storage
-      // and will display a message if its not set
-      //
-      // else it will make an XHR request to the backend and display the results
-      cy.visit('/')
-      cy.get('#main')
-        .should('contain', 'No session token set!')
-    })
+      it('knows when there is no session token', function () {
+        // by default our SPA app checks for id_token set in local storage
+        // and will display a message if its not set
+        //
+        // else it will make an XHR request to the backend and display the results
+        cy.visit('/')
+        cy.get('#main').should('contain', 'No session token set!')
+      })
 
+      /**
+       * Assuming "cy.request" was called with `{followRedirect: false}` grabs the
+       * redirected to URI, parses it and returns just the "id_token".
+       */
+      const responseToToken = resp => {
+        // we can use the redirectedToUrl property that Cypress adds
+        // whenever we turn off following redirects
+        //
+        // and use node's url.parse module (and parse the query params)
+        const uri = url.parse(resp.redirectedToUrl, true)
 
-    /**
-     * Assuming "cy.request" was called with `{followRedirect: false}` grabs the
-     * redirected to URI, parses it and returns just the "id_token".
-    */
-    const responseToToken = (resp) => {
-      // we can use the redirectedToUrl property that Cypress adds
-      // whenever we turn off following redirects
-      //
-      // and use node's url.parse module (and parse the query params)
-      const uri = url.parse(resp.redirectedToUrl, true)
+        // we now have query params as an object and can return
+        // the id_token
+        expect(uri.query).to.have.property('id_token')
+        return uri.query.id_token
+      }
 
-      // we now have query params as an object and can return
-      // the id_token
-      expect(uri.query).to.have.property('id_token')
-      return uri.query.id_token
-    }
+      it('can parse out id_token and set on local storage', function () {
+        // dont follow redirects so we can manually parse out the id_token
+        cy.loginBySingleSignOn({ followRedirect: false })
+          .then(responseToToken)
+          .then(id_token => {
+            cy.server()
+            // observe the "GET /config" call from the application
+            cy.route('/config').as('getConfig')
 
-    it('can parse out id_token and set on local storage', function(){
-      // dont follow redirects so we can manually parse out the id_token
-      cy.loginBySingleSignOn({followRedirect: false})
-        .then(responseToToken)
-        .then((id_token) => {
-          cy.server()
-          // observe the "GET /config" call from the application
-          cy.route('/config').as('getConfig')
-
-          // now go visit our app
-          cy.visit('/', {
-            onBeforeLoad: function(win){
-              // and before the page finishes loading
-              // set the id_token in local storage
-              win.localStorage.setItem('id_token', id_token)
-            }
-          })
-
-          // wait for the /config XHR
-          cy.wait('@getConfig')
-            .its('response.body')
-            .should('deep.eq', {
-              foo: 'bar',
-              some: 'config',
-              loggedIn: true
+            // now go visit our app
+            cy.visit('/', {
+              onBeforeLoad: function (win) {
+                // and before the page finishes loading
+                // set the id_token in local storage
+                win.localStorage.setItem('id_token', id_token)
+              }
             })
 
-          // and now our #main should be filled
-          // with the response body
-          cy.get('#main')
-            .invoke('text')
-            .should((text) => {
-              // parse the text into JSON
-              const json = JSON.parse(text)
-
-              expect(json).to.deep.eq({
+            // wait for the /config XHR
+            cy.wait('@getConfig')
+              .its('response.body')
+              .should('deep.eq', {
                 foo: 'bar',
                 some: 'config',
                 loggedIn: true
               })
-            })
+
+            // and now our #main should be filled
+            // with the response body
+            cy.get('#main')
+              .invoke('text')
+              .should(text => {
+                // parse the text into JSON
+                const json = JSON.parse(text)
+
+                expect(json).to.deep.eq({
+                  foo: 'bar',
+                  some: 'config',
+                  loggedIn: true
+                })
+              })
+          })
+      })
+
+      describe('Log in once for speed', () => {
+        // in this example we follow SPA workflow, get the auth token once
+        // and then set it in window.localStorage before each test
+        // and voilá - we are logged in very quickly
+
+        before(function () {
+          // before any tests execute, get the token once
+          // as save it in the test context - thus the callback
+          // is using "function () { ... }" form and NOT arrow function
+          cy.loginBySingleSignOn({ followRedirect: false })
+            .then(responseToToken)
+            .as('token') // saves under "this.token"
         })
-    })
 
-    describe('Log in once for speed', () => {
-      // in this example we follow SPA workflow, get the auth token once
-      // and then set it in window.localStorage before each test
-      // and voilá - we are logged in very quickly
-
-      before(function () {
-        // before any tests execute, get the token once
-        // as save it in the test context - thus the callback
-        // is using "function () { ... }" form and NOT arrow function
-        cy.loginBySingleSignOn({followRedirect: false})
-          .then(responseToToken)
-          .as('token') // saves under "this.token"
-      })
-
-      beforeEach(function () {
-        // before every test we need to grab "this.token"
-        // and set it in the local storage,
-        // so the application sends with and the user is authenticated
-        cy.on('window:before:load', win => {
-          win.localStorage.setItem('id_token', this.token)
+        beforeEach(function () {
+          // before every test we need to grab "this.token"
+          // and set it in the local storage,
+          // so the application sends with and the user is authenticated
+          cy.on('window:before:load', win => {
+            win.localStorage.setItem('id_token', this.token)
+          })
         })
-      })
 
-      it('opens page as logged in user', () => {
-        cy.visit('/')
-        cy.contains('"loggedIn":true')
-      })
+        it('opens page as logged in user', () => {
+          cy.visit('/')
+          cy.contains('"loggedIn":true')
+        })
 
-      it('config returns logged in: true', function () {
-        // note again this test uses "function () { ... }" callback
-        // in order to get access to the test context "this.token" saved above
+        it('config returns logged in: true', function () {
+          // note again this test uses "function () { ... }" callback
+          // in order to get access to the test context "this.token" saved above
 
-        cy.server()
-        // observe the "GET /config" call from the application
-        cy.route('/config').as('getConfig')
+          cy.server()
+          // observe the "GET /config" call from the application
+          cy.route('/config').as('getConfig')
 
-        cy.visit('/')
+          cy.visit('/')
 
-        cy.wait('@getConfig')
-          .then((xhr) => {
+          cy.wait('@getConfig').then(xhr => {
             // inspect sent and received information
-            expect(xhr.request.headers, 'request includes token header')
-              .to.have.property('x-session-token', this.token)
+            expect(
+              xhr.request.headers,
+              'request includes token header'
+            ).to.have.property('x-session-token', this.token)
 
             expect(xhr.response.body, 'response body').to.deep.equal({
               foo: 'bar',
@@ -255,7 +257,8 @@ describe('Logging In - Single Sign on', function(){
               some: 'config'
             })
           })
+        })
       })
-    })
-  })
+    }
+  )
 })

@@ -3,6 +3,7 @@ const minimist   = require('minimist')
 const morgan     = require('morgan')
 const session    = require('express-session')
 const express    = require('express')
+const debug      = require('debug')('sso')
 
 const app        = express()
 
@@ -14,10 +15,16 @@ const ensureLoggedIn = (req, res, next) => {
   // or we have it in a x-session-token header
   //
   // NOTE: typically you'd use an Authorization bearer header
-  // but for simplicitiy we're setting x-session-token
+  // but for simplicity we're setting x-session-token
   if (req.session.id_token || req.get('x-session-token')) {
+    if (req.session.id_token) {
+      debug('session has id token')
+    } else if (req.get('x-session-token')) {
+      debug('request has x-session-token')
+    }
     next()
   } else {
+    debug('nope, redirecting to /unauthorized')
     res.redirect('/unauthorized')
   }
 }
@@ -48,11 +55,14 @@ app.get('/set_token', (req, res) => {
   // set the session id_token to whatever
   // is set in the query params of the URL
   req.session.id_token = req.query.id_token
+  debug('/set_token, query token is %s', req.query.id_token)
+  debug('redirecting to /dashboard')
 
   res.redirect('/dashboard')
 })
 
 app.get('/dashboard', ensureLoggedIn, (req, res) => {
+  debug('rendering dashboard')
   res.render('./dashboard.hbs')
 })
 
@@ -65,10 +75,12 @@ app.get('/config', ensureLoggedIn, (req, res) => {
 })
 
 app.get('/unauthorized', (req, res) => {
+  debug('rendering unauthorized')
   res.render('./unauthorized.hbs')
 })
 
 app.get('/', (req, res) => {
+  debug('rendering /index')
   res.render("./index.hbs")
 })
 
