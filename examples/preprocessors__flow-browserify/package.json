@@ -1,0 +1,14 @@
+{
+  "name": "cypress-example-flow-browserify",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "echo",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:open": "../../node_modules/.bin/cypress open"
+  },
+  "devDependencies": {
+    "@babel/preset-flow": "^7.0.0",
+    "@cypress/browserify-preprocessor": "^2.1.1"
+  }
+}
