@@ -162,6 +162,8 @@ jobs:
     <<: *defaults
   testing-dom__wait-for-resource:
     <<: *defaults
+  testing-dom__performance-metrics:
+    <<: *defaults  
   testing-dom__csv-table:
     <<: *defaults
   unit-testing__application-code:
@@ -303,6 +305,9 @@ all_jobs: &all_jobs
   - testing-dom__csv-table:
       requires:
         - build
+  - testing-dom__performance-metrics:
+      requires:
+        - build
   - unit-testing__application-code:
       requires:
         - build
@@ -365,6 +370,7 @@ all_jobs: &all_jobs
         - testing-dom__tab-handling-links
         - testing-dom__wait-for-resource
         - testing-dom__csv-table
+        - testing-dom__performance-metrics
         - unit-testing__application-code
         - unit-testing__react
         - server-communication__env-variables
