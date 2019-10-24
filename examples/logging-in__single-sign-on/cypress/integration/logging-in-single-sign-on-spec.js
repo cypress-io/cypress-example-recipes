@@ -48,7 +48,7 @@ const url = require('url')
 describe('Logging In - Single Sign on', function () {
   Cypress.Commands.add('loginBySingleSignOn', (overrides = {}) => {
     Cypress.log({
-      name: 'loginBySingleSignOn'
+      name: 'loginBySingleSignOn',
     })
 
     const options = {
@@ -57,13 +57,13 @@ describe('Logging In - Single Sign on', function () {
       qs: {
         // use qs to set query string to the url that creates
         // http://auth.corp.com:8080?redirectTo=http://localhost:7074/set_token
-        redirectTo: 'http://localhost:7074/set_token'
+        redirectTo: 'http://localhost:7074/set_token',
       },
       form: true, // we are submitting a regular form body
       body: {
         username: 'jane.lane',
-        password: 'password123'
-      }
+        password: 'password123',
+      },
     }
 
     // allow us to override defaults with passed in overrides
@@ -100,7 +100,7 @@ describe('Logging In - Single Sign on', function () {
       // this automatically gets + sets cookies on the browser
       // and follows all of the redirects that ultimately get
       // us to /dashboard.html
-      cy.loginBySingleSignOn().then(resp => {
+      cy.loginBySingleSignOn().then((resp) => {
         // yup this should all be good
         expect(resp.status).to.eq(200)
 
@@ -149,7 +149,7 @@ describe('Logging In - Single Sign on', function () {
        * Assuming "cy.request" was called with `{followRedirect: false}` grabs the
        * redirected to URI, parses it and returns just the "id_token".
        */
-      const responseToToken = resp => {
+      const responseToToken = (resp) => {
         // we can use the redirectedToUrl property that Cypress adds
         // whenever we turn off following redirects
         //
@@ -159,51 +159,52 @@ describe('Logging In - Single Sign on', function () {
         // we now have query params as an object and can return
         // the id_token
         expect(uri.query).to.have.property('id_token')
+
         return uri.query.id_token
       }
 
       it('can parse out id_token and set on local storage', function () {
         // dont follow redirects so we can manually parse out the id_token
         cy.loginBySingleSignOn({ followRedirect: false })
-          .then(responseToToken)
-          .then(id_token => {
-            cy.server()
-            // observe the "GET /config" call from the application
-            cy.route('/config').as('getConfig')
+        .then(responseToToken)
+        .then((id_token) => {
+          cy.server()
+          // observe the "GET /config" call from the application
+          cy.route('/config').as('getConfig')
 
-            // now go visit our app
-            cy.visit('/', {
-              onBeforeLoad: function (win) {
+          // now go visit our app
+          cy.visit('/', {
+            onBeforeLoad (win) {
                 // and before the page finishes loading
                 // set the id_token in local storage
                 win.localStorage.setItem('id_token', id_token)
-              }
-            })
-
-            // wait for the /config XHR
-            cy.wait('@getConfig')
-              .its('response.body')
-              .should('deep.eq', {
-                foo: 'bar',
-                some: 'config',
-                loggedIn: true
-              })
-
-            // and now our #main should be filled
-            // with the response body
-            cy.get('#main')
-              .invoke('text')
-              .should(text => {
-                // parse the text into JSON
-                const json = JSON.parse(text)
-
-                expect(json).to.deep.eq({
-                  foo: 'bar',
-                  some: 'config',
-                  loggedIn: true
-                })
-              })
+              },
           })
+
+          // wait for the /config XHR
+          cy.wait('@getConfig')
+          .its('response.body')
+          .should('deep.eq', {
+            foo: 'bar',
+            some: 'config',
+            loggedIn: true,
+          })
+
+          // and now our #main should be filled
+          // with the response body
+          cy.get('#main')
+          .invoke('text')
+          .should((text) => {
+            // parse the text into JSON
+            const json = JSON.parse(text)
+
+            expect(json).to.deep.eq({
+              foo: 'bar',
+              some: 'config',
+              loggedIn: true,
+            })
+          })
+        })
       })
 
       describe('Log in once for speed', () => {
@@ -216,15 +217,15 @@ describe('Logging In - Single Sign on', function () {
           // as save it in the test context - thus the callback
           // is using "function () { ... }" form and NOT arrow function
           cy.loginBySingleSignOn({ followRedirect: false })
-            .then(responseToToken)
-            .as('token') // saves under "this.token"
+          .then(responseToToken)
+          .as('token') // saves under "this.token"
         })
 
         beforeEach(function () {
           // before every test we need to grab "this.token"
           // and set it in the local storage,
           // so the application sends with and the user is authenticated
-          cy.on('window:before:load', win => {
+          cy.on('window:before:load', (win) => {
             win.localStorage.setItem('id_token', this.token)
           })
         })
@@ -244,7 +245,7 @@ describe('Logging In - Single Sign on', function () {
 
           cy.visit('/')
 
-          cy.wait('@getConfig').then(xhr => {
+          cy.wait('@getConfig').then((xhr) => {
             // inspect sent and received information
             expect(
               xhr.request.headers,
@@ -254,7 +255,7 @@ describe('Logging In - Single Sign on', function () {
             expect(xhr.response.body, 'response body').to.deep.equal({
               foo: 'bar',
               loggedIn: true,
-              some: 'config'
+              some: 'config',
             })
           })
         })

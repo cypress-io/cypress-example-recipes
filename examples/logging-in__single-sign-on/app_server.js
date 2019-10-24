@@ -16,6 +16,8 @@ const ensureLoggedIn = (req, res, next) => {
   //
   // NOTE: typically you'd use an Authorization bearer header
   // but for simplicity we're setting x-session-token
+  debug('ensureLoggedIn middleware, headers %o session %o', req.rawHeaders, req.session)
+
   if (req.session.id_token || req.get('x-session-token')) {
     if (req.session.id_token) {
       debug('session has id token')
