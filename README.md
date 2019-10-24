@@ -46,6 +46,7 @@ Recipe | Description
 [grep](./examples/preprocessors__grep) | Filter tests by name using Mocha-like `grep` syntax
 [Typescript with Browserify](./examples/preprocessors__typescript-browserify) | Add typescript support with browserify
 [Typescript with Webpack](./examples/preprocessors__typescript-webpack) | Add typescript support with webpack
+[Flow with Browserify](./examples/preprocessors__flow-browserify) | Add flow support with browserify
 
 ## Blogs
 
