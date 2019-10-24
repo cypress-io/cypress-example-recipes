@@ -14,3 +14,7 @@ The tests show how to:
 **tip** to start the server and run Cypress GUI use script `npm run dev`
 
 Highly recommended: watch video ["Organizing Tests, Logging In, Controlling State"](https://www.youtube.com/watch?v=5XQOK0v_YRE)
+
+## Debugging
+
+To see debug logs from the server, run the server with `DEBUG=sso`

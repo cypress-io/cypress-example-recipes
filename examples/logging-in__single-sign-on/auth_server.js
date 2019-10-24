@@ -2,8 +2,8 @@ const url        = require('url')
 const minimist   = require('minimist')
 const morgan     = require('morgan')
 const bodyParser = require('body-parser')
-const session    = require('express-session')
 const express    = require('express')
+const debug      = require('debug')('sso')
 
 const app        = express()
 
@@ -11,6 +11,7 @@ const app        = express()
 const port = minimist(process.argv.slice(2)).port
 
 const matchesUsernameAndPassword = (body = {}) => {
+  debug('checking username "%s" and password "%s', body.username, body.password)
   return body.username === 'jane.lane' && body.password === 'password123'
 }
 
@@ -20,8 +21,10 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(morgan("dev"))
 
 app.post('/login', urlencodedParser, (req, res) => {
+  debug('in /login')
   // if this matches the secret username and password
   if(matchesUsernameAndPassword(req.body)){
+    debug('username and password match, redirecting to "%s"', req.query.redirectTo)
     // assume we always have this query param property
     const redirectTo = req.query.redirectTo
 
@@ -32,8 +35,12 @@ app.post('/login', urlencodedParser, (req, res) => {
     // id_token (for a simple example)
     outgoing.query = { id_token: 'abc123def456'}
 
-    res.redirect(outgoing.format())
+    const format = outgoing.format()
+    debug('redirecting to %o', format)
+
+    res.redirect(format)
   } else {
+    debug('setting status 401')
     res.sendStatus(401)
   }
 })
