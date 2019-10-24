@@ -1,5 +1,6 @@
 {
   "env": {
-    "my-var": "ok"
+    "my-var": "ok",
+    "unicode-var": "привет"
   }
 }
