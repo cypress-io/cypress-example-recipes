@@ -84,14 +84,14 @@ jobs:
       - run: npm run test:ci -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
   # a single utility script to run multiple examples against Chrome
   test-examples-chrome:
-    parallelism: 1
+    parallelism: 4
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node8.15.1-chrome73
+      - image: cypress/browsers:node12.0.0-chrome75
     steps:
       - attach_workspace:
           at: ~/
-      - run: npm run test:ci:chrome
+      - run: npm run test:ci:chrome -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
 
   # define a new job with defaults for each "examples/*" subfolder
   blogs__a11y:
@@ -209,123 +209,123 @@ all_jobs: &all_jobs
   #     requires:
   #       - build
 
-  # - blogs__a11y:
-  #     requires:
-  #       - build
-  # - blogs__application-actions:
-  #     requires:
-  #       - build
-  # - blogs__direct-control-angular:
-  #     requires:
-  #       - build
-  # - blogs__e2e-api-testing:
-  #     requires:
-  #       - build
-  # - blogs__e2e-snapshots:
-  #     requires:
-  #       - build
-  # - blogs__element-coverage:
-  #     requires:
-  #       - build
-  # - blogs__testing-redux-store:
-  #     requires:
-  #       - build
-  # - blogs__vue-vuex-rest:
-  #     requires:
-  #       - build
-  # - extending-cypress__chai-assertions:
-  #     requires:
-  #       - build
-  # - file-upload-react:
-  #     requires:
-  #       - build
-  # - fundamentals__node-modules:
-  #     requires:
-  #       - build
-  # - fundamentals__add-custom-command:
-  #     requires:
-  #       - build
-  # - logging-in__csrf-tokens:
-  #     requires:
-  #       - build
-  # - logging-in__html-web-forms:
-  #     requires:
-  #       - build
-  # - logging-in__single-sign-on:
-  #     requires:
-  #       - build
-  # - logging-in__xhr-web-forms:
-  #     requires:
-  #       - build
-  # - logging-in__jwt:
-  #     requires:
-  #       - build
-  # - logging-in__using-app-code:
-  #     requires:
-  #       - build
-  # - preprocessors__grep:
-  #     requires:
-  #       - build
-  # - preprocessors__typescript-browserify:
-  #     requires:
-  #       - build
-  # - preprocessors__typescript-webpack:
-  #     requires:
-  #       - build
-  # - server-communication__bootstrapping-your-app:
-  #     requires:
-  #       - build
-  # - stubbing-spying__functions:
-  #     requires:
-  #       - build
-  # - stubbing-spying__window-fetch:
-  #     requires:
-  #       - build
-  # - stubbing-spying__console:
-  #     requires:
-  #       - build
-  # - stubbing-spying__window:
-  #     requires:
-  #       - build
-  # - stubbing-spying__google-analytics:
-  #     requires:
-  #       - build
-  # - testing-dom__drag-drop:
-  #     requires:
-  #       - build
-  # - testing-dom__form-interactions:
-  #     requires:
-  #       - build
-  # - testing-dom__hover-hidden-elements:
-  #     requires:
-  #       - build
-  # - testing-dom__tab-handling-links:
-  #     requires:
-  #       - build
-  # - testing-dom__wait-for-resource:
-  #     requires:
-  #       - build
-  # - testing-dom__csv-table:
-  #     requires:
-  #       - build
-  # - unit-testing__application-code:
-  #     requires:
-  #       - build
-  # - unit-testing__react:
-  #     requires:
-  #       - build
-  # - server-communication__env-variables:
-  #     requires:
-  #       - build
-  # - fundamentals__dynamic-tests:
-  #     requires:
-  #       - build
-  # - fundamentals__fixtures:
-  #     requires:
-  #       - build
-  # - fundamentals__module-api:
-  #     requires:
-  #       - build
+  - blogs__a11y:
+      requires:
+        - build
+  - blogs__application-actions:
+      requires:
+        - build
+  - blogs__direct-control-angular:
+      requires:
+        - build
+  - blogs__e2e-api-testing:
+      requires:
+        - build
+  - blogs__e2e-snapshots:
+      requires:
+        - build
+  - blogs__element-coverage:
+      requires:
+        - build
+  - blogs__testing-redux-store:
+      requires:
+        - build
+  - blogs__vue-vuex-rest:
+      requires:
+        - build
+  - extending-cypress__chai-assertions:
+      requires:
+        - build
+  - file-upload-react:
+      requires:
+        - build
+  - fundamentals__node-modules:
+      requires:
+        - build
+  - fundamentals__add-custom-command:
+      requires:
+        - build
+  - logging-in__csrf-tokens:
+      requires:
+        - build
+  - logging-in__html-web-forms:
+      requires:
+        - build
+  - logging-in__single-sign-on:
+      requires:
+        - build
+  - logging-in__xhr-web-forms:
+      requires:
+        - build
+  - logging-in__jwt:
+      requires:
+        - build
+  - logging-in__using-app-code:
+      requires:
+        - build
+  - preprocessors__grep:
+      requires:
+        - build
+  - preprocessors__typescript-browserify:
+      requires:
+        - build
+  - preprocessors__typescript-webpack:
+      requires:
+        - build
+  - server-communication__bootstrapping-your-app:
+      requires:
+        - build
+  - stubbing-spying__functions:
+      requires:
+        - build
+  - stubbing-spying__window-fetch:
+      requires:
+        - build
+  - stubbing-spying__console:
+      requires:
+        - build
+  - stubbing-spying__window:
+      requires:
+        - build
+  - stubbing-spying__google-analytics:
+      requires:
+        - build
+  - testing-dom__drag-drop:
+      requires:
+        - build
+  - testing-dom__form-interactions:
+      requires:
+        - build
+  - testing-dom__hover-hidden-elements:
+      requires:
+        - build
+  - testing-dom__tab-handling-links:
+      requires:
+        - build
+  - testing-dom__wait-for-resource:
+      requires:
+        - build
+  - testing-dom__csv-table:
+      requires:
+        - build
+  - unit-testing__application-code:
+      requires:
+        - build
+  - unit-testing__react:
+      requires:
+        - build
+  - server-communication__env-variables:
+      requires:
+        - build
+  - fundamentals__dynamic-tests:
+      requires:
+        - build
+  - fundamentals__fixtures:
+      requires:
+        - build
+  - fundamentals__module-api:
+      requires:
+        - build
 
   # to avoid constantly tweaking required jobs on CircleCI
   # we can have a single job wait on all other test jobs here.
@@ -334,46 +334,48 @@ all_jobs: &all_jobs
   - after-tests:
       requires:
         - build
-        # - blogs__a11y
-        # - blogs__application-actions
-        # - blogs__direct-control-angular
-        # - blogs__e2e-api-testing
-        # - blogs__e2e-snapshots
-        # - blogs__element-coverage
-        # - blogs__testing-redux-store
-        # - blogs__vue-vuex-rest
-        # - extending-cypress__chai-assertions
-        # - file-upload-react
-        # - fundamentals__node-modules
-        # - fundamentals__fixtures
-        # - fundamentals__dynamic-tests
-        # - fundamentals__module-api
-        # - fundamentals__add-custom-command
-        # - logging-in__csrf-tokens
-        # - logging-in__html-web-forms
-        # - logging-in__single-sign-on
-        # - logging-in__xhr-web-forms
-        # - logging-in__jwt
-        # - logging-in__using-app-code
-        # - preprocessors__grep
-        # - preprocessors__typescript-browserify
-        # - preprocessors__typescript-webpack
-        # - server-communication__bootstrapping-your-app
-        # - stubbing-spying__functions
-        # - stubbing-spying__window-fetch
-        # - stubbing-spying__google-analytics
-        # - stubbing-spying__window
-        # - stubbing-spying__console
-        # - testing-dom__drag-drop
-        # - testing-dom__form-interactions
-        # - testing-dom__hover-hidden-elements
-        # - testing-dom__tab-handling-links
-        # - testing-dom__wait-for-resource
-        # - testing-dom__csv-table
-        # - unit-testing__application-code
-        # - unit-testing__react
-        # - server-communication__env-variables
-
+        - blogs__a11y
+        - blogs__application-actions
+        - blogs__direct-control-angular
+        - blogs__e2e-api-testing
+        - blogs__e2e-snapshots
+        - blogs__element-coverage
+        - blogs__testing-redux-store
+        - blogs__vue-vuex-rest
+        - extending-cypress__chai-assertions
+        - file-upload-react
+        - fundamentals__node-modules
+        - fundamentals__fixtures
+        - fundamentals__dynamic-tests
+        - fundamentals__module-api
+        - fundamentals__add-custom-command
+        - logging-in__csrf-tokens
+        - logging-in__html-web-forms
+        - logging-in__single-sign-on
+        - logging-in__xhr-web-forms
+        - logging-in__jwt
+        - logging-in__using-app-code
+        - preprocessors__grep
+        - preprocessors__typescript-browserify
+        - preprocessors__typescript-webpack
+        - server-communication__bootstrapping-your-app
+        - stubbing-spying__functions
+        - stubbing-spying__window-fetch
+        - stubbing-spying__google-analytics
+        - stubbing-spying__window
+        - stubbing-spying__console
+        - testing-dom__drag-drop
+        - testing-dom__form-interactions
+        - testing-dom__hover-hidden-elements
+        - testing-dom__tab-handling-links
+        - testing-dom__wait-for-resource
+        - testing-dom__csv-table
+        - unit-testing__application-code
+        - unit-testing__react
+        - server-communication__env-variables
+        # "meta" jobs
+        - test-examples
+        - test-examples-chrome
 
 workflows:
   version: 2
