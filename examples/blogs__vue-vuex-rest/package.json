@@ -8,6 +8,7 @@
     "cypress:open": "../../node_modules/.bin/cypress open",
     "reset:db": "node reset-db.js",
     "reset": "node reset-db.js",
-    "dev": "../../node_modules/.bin/start-test 3000 cypress:open"
+    "dev": "../../node_modules/.bin/start-test 3000 cypress:open",
+    "test:ci": "../../node_modules/.bin/start-test 3000 cypress:run"
   }
 }
