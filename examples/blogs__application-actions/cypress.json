@@ -1,4 +1,5 @@
 {
   "baseUrl": "http://localhost:8888",
-  "ignoreTestFiles": "utils.js"
+  "ignoreTestFiles": "utils.js",
+  "fixturesFolder": false
 }

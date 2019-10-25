@@ -1,3 +1,5 @@
 {
-  "blacklistHosts": "www.google-analytics.com"
+  "blacklistHosts": "www.google-analytics.com",
+  "fixturesFolder": false,
+  "supportFile": false
 }
