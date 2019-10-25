@@ -6,6 +6,5 @@
   ],
   "env": {
     "cypress-plugin-snapshots": {}
-  },
-  "fixturesFolder": false
+  }
 }
