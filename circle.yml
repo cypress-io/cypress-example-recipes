@@ -71,7 +71,7 @@ jobs:
   # a single utility job that can run multiple examples one by one
   # but with chunking
   test-examples:
-    parallelism: 5
+    parallelism: 20
     working_directory: ~/app
     docker:
       - image: cypress/base:10
@@ -84,7 +84,7 @@ jobs:
       - run: npm run test:ci -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
   # a single utility script to run multiple examples against Chrome
   test-examples-chrome:
-    parallelism: 4
+    parallelism: 10
     working_directory: ~/app
     docker:
       - image: cypress/browsers:node12.0.0-chrome75
