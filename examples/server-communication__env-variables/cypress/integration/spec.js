@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 describe('process environment variables', () => {
   it('has variable my-var from cypress.json', () => {
-    expect(Cypress.env('my-var')).to.equal("ok")
+    expect(Cypress.env('my-var')).to.equal('ok')
   })
 
   it('has variables FOO and BAR from process.env', () => {
@@ -9,7 +9,7 @@ describe('process environment variables', () => {
     // see how FOO and BAR were copied in "cypress/plugins/index.js"
     expect(Cypress.env()).to.contain({
       FOO: '42',
-      BAR: 'baz'
+      BAR: 'baz',
     })
   })
 

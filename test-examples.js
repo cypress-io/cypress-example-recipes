@@ -11,14 +11,21 @@ const pluralize = require('pluralize')
 const { resolve, join } = require('path')
 const fs = require('fs')
 const arg = require('arg')
+const la = require('lazy-ass')
+const is = require('check-more-types')
 
 // to run "npm run test:ci:chrome" scripts in each example
 // run this script with "--chrome" CLI flag
 const args = arg({
   '--chrome': Boolean,
   '--windows': Boolean,
+  '--chunk': Number,
+  '--total-chunks': Number,
 })
 
+// fill default values
+args['--chunk'] = args['--chunk'] || 0
+args['--total-chunks'] = args['--total-chunks'] || 1
 console.log('args', args)
 
 // default NPM script name
@@ -102,6 +109,40 @@ const filterSomeFolders = (folders) => {
   return folders.filter(skipCodepenFolder)
 }
 
+const filterByChunk = (chunk, totalChunks) => {
+  la(
+    is.number(chunk) && chunk >= 0,
+    'expected chunk to be a number >= 0',
+    chunk
+  )
+  la(
+    is.number(totalChunks) && totalChunks > 0,
+    'expected total chunks to be >= 1',
+    totalChunks
+  )
+  la(
+    chunk < totalChunks,
+    'expected chunk',
+    chunk,
+    'to be less than total chunks',
+    totalChunks
+  )
+
+  return function filterFolders (folders) {
+    const chunkLength = Math.ceil(folders.length / totalChunks)
+
+    console.log(
+      'Total folders %d chunks %d chunk size %d current chunk %d',
+      folders.length,
+      totalChunks,
+      chunkLength,
+      chunk
+    )
+
+    return folders.slice(chunkLength * chunk, chunkLength * (chunk + 1))
+  }
+}
+
 /**
  * Leaves only folders that have package.json with desired script name
  */
@@ -114,6 +155,7 @@ bluebird
 .then((list) => list.sort())
 .then(filterByScriptName)
 .then(filterSomeFolders)
+.then(filterByChunk(args['--chunk'], args['--total-chunks']))
 .tap(printFolders)
 .then(testExamples)
 .catch((e) => {
