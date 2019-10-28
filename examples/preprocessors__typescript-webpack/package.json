@@ -10,6 +10,7 @@
     "lint": "../../node_modules/.bin/tslint --project ./tsconfig.json",
     "postlint": "npm run tsc",
     "tsc": "../../node_modules/.bin/tsc --pretty --noEmit",
-    "precypress:run": "npm run lint"
+    "precypress:run": "npm run lint",
+    "test:ci": "../../node_modules/.bin/cypress run"
   }
 }

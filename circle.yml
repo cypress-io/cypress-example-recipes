@@ -69,25 +69,29 @@ jobs:
       - run: echo "all good"
 
   # a single utility job that can run multiple examples one by one
+  # but with chunking
   test-examples:
-    parallelism: 1
+    parallelism: 20
     working_directory: ~/app
     docker:
       - image: cypress/base:10
     steps:
       - attach_workspace:
           at: ~/
-      - run: npm run test:ci
+      # when running in parallel, the total number of parallel containers
+      # is in variable CIRCLE_NODE_TOTAL and the current container index in CIRCLE_NODE_INDEX
+      # which starts at 0 and goes to $CIRCLE_NODE_TOTAL - 1
+      - run: npm run test:ci -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
   # a single utility script to run multiple examples against Chrome
   test-examples-chrome:
-    parallelism: 1
+    parallelism: 10
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node8.15.1-chrome73
+      - image: cypress/browsers:node12.0.0-chrome75
     steps:
       - attach_workspace:
           at: ~/
-      - run: npm run test:ci:chrome
+      - run: npm run test:ci:chrome -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
 
   # define a new job with defaults for each "examples/*" subfolder
   blogs__a11y:
@@ -186,6 +190,7 @@ all_jobs: &all_jobs
         branches:
           only:
             - master
+            - allow-testing-in-chunks
 
   - test-examples-chrome:
       requires:
@@ -281,7 +286,7 @@ all_jobs: &all_jobs
         - build
   - stubbing-spying__window:
       requires:
-        - build        
+        - build
   - stubbing-spying__google-analytics:
       requires:
         - build
@@ -368,7 +373,9 @@ all_jobs: &all_jobs
         - unit-testing__application-code
         - unit-testing__react
         - server-communication__env-variables
-
+        # "meta" jobs
+        - test-examples
+        - test-examples-chrome
 
 workflows:
   version: 2
