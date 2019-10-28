@@ -2,10 +2,10 @@
   "name": "spy-stub-clock",
   "version": "1.0.0",
   "description": "",
-
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "start": "node server.js --port 7080"
+    "start": "node server.js --port 7080",
+    "test:ci": "../../node_modules/.bin/start-test 7080 cypress:run"
   }
 }
