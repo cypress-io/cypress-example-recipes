@@ -76,3 +76,21 @@ describe('loading images', () => {
 ```
 
 ![Test in action](images/wait-for-image.gif)
+
+Alternatively, we can use `IMG.naturalWidth` or `IMG.naturalHeight` properties which are set when the image loads.
+
+```js
+// we can wait for the <img> element to appear
+// but the image has not been loaded yet.
+cy.get('[alt="delayed image"]')
+  .should('be.visible')
+  .and(($img) => {
+    // "naturalWidth" and "naturalHeight" are set when the image loads
+    expect(
+      $img[0].naturalWidth,
+      'image has natural width'
+    ).to.be.greaterThan(0)
+  })
+```
+
+![Using natural width to detect when image loads](images/natural-width.gif)

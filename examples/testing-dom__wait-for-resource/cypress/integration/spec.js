@@ -129,4 +129,20 @@ describe('loading images', () => {
     // Let's wait for the actual image to load
     cy.waitForResource('cypress-logo.png')
   })
+
+  it('waits for the image to have actual dimensions', () => {
+    cy.visit('/')
+
+    // we can wait for the <img> element to appear
+    // but the image has not been loaded yet.
+    cy.get('[alt="delayed image"]')
+    .should('be.visible')
+    .and(($img) => {
+      // "naturalWidth" and "naturalHeight" are set when the image loads
+      expect(
+        $img[0].naturalWidth,
+        'image has natural width'
+      ).to.be.greaterThan(0)
+    })
+  })
 })
