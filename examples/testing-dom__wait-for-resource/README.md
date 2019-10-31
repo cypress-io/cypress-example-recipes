@@ -37,7 +37,7 @@ cy.window().then(win => {
 })
 ```
 
-From the tests, we can call the above code wrapped in a custom command.
+From the tests, we can call the above code wrapped in a custom command `cy.waitForResource`.
 
 ```js
 // cypress/integration/spec.js
@@ -55,3 +55,24 @@ The custom command `cy.waitForResource` is written directly in the spec file. An
 ## 3rd party module
 
 The [cypress/integration/spec.js](cypress/integration/spec.js) also includes a test that uses [cypress-wait-until](https://github.com/NoriSte/cypress-wait-until) 3rd party module with custom command `cy.waitUntil` to retry finding the performance entry with expected name.
+
+## Delayed image
+
+The spec file also shows how to ensure that an image has fully loaded.
+
+```js
+describe('loading images', () => {
+  it('waits for the image to load', () => {
+    cy.visit('/')
+
+    // we can wait for the <img> element to appear
+    // but the image has not been loaded yet.
+    cy.get('[alt="delayed image"]').should('be.visible')
+
+    // Let's wait for the actual image to load
+    cy.waitForResource('cypress-logo.png')
+  })
+})
+```
+
+![Test in action](images/wait-for-image.gif)

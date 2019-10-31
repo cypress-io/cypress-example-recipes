@@ -46,6 +46,7 @@ Cypress.Commands.add('waitForResource', (name, options = {}) => {
           }
 
           clearInterval(interval)
+          cy.log('✅ success')
           // let's resolve with the found performance object
           // to allow tests to inspect it
           resolve(foundResource)
@@ -55,54 +56,69 @@ Cypress.Commands.add('waitForResource', (name, options = {}) => {
   )
 })
 
-it('applies app.css styles', () => {
-  cy.visit('/')
-  cy.waitForResource('base.css')
-  cy.waitForResource('app.css')
-  // red color means the style from "app.css" has been loaded and applied
-  cy.get('h1', { timeout: 250 }).should('have.css', 'color', 'rgb(255, 0, 0)')
-})
+describe('loading style', () => {
+  it('applies app.css styles', () => {
+    cy.visit('/')
+    cy.waitForResource('base.css')
+    cy.waitForResource('app.css')
+    // red color means the style from "app.css" has been loaded and applied
+    cy.get('h1', { timeout: 250 }).should('have.css', 'color', 'rgb(255, 0, 0)')
+  })
 
-it('app.css is a tiny resource', () => {
-  cy.visit('/')
-  cy.waitForResource('app.css').should((resourceTiming) => {
-    // there are lots of timing properties in this object
-    expect(resourceTiming)
-    .property('entryType')
-    .to.equal('resource')
-    expect(resourceTiming, 'the CSS file is very small (in bytes)')
-    .property('transferSize')
-    .to.be.lt(300)
-    expect(resourceTiming, 'loads in less than 150ms')
-    .property('duration')
-    .to.be.lt(150)
+  it('app.css is a tiny resource', () => {
+    cy.visit('/')
+    cy.waitForResource('app.css').should((resourceTiming) => {
+      // there are lots of timing properties in this object
+      expect(resourceTiming)
+      .property('entryType')
+      .to.equal('resource')
+      expect(resourceTiming, 'the CSS file is very small (in bytes)')
+      .property('transferSize')
+      .to.be.lt(300)
+      expect(resourceTiming, 'loads in less than 150ms')
+      .property('duration')
+      .to.be.lt(150)
+    })
+  })
+
+  it('waits for multiple resources', () => {
+    cy.visit('/')
+    // the "cy.waitForResources" command was written in cypress/support/index.js file
+    cy.waitForResources('base.css', 'app.css')
+    // red color means the style from "app.css" has been loaded and applied
+    cy.get('h1', { timeout: 250 }).should('have.css', 'color', 'rgb(255, 0, 0)')
+  })
+
+  it('waits on resource using wait-until 3rd party plugin', () => {
+    cy.visit('/')
+
+    // 3rd party module "cypress-wait-until" is really useful
+    // for simple conditions like waiting for an item
+    // @see https://github.com/NoriSte/cypress-wait-until
+    cy.waitUntil(() =>
+      cy.window().then((win) =>
+        win.performance
+        .getEntriesByType('resource')
+        // note: ".some(...)" method returns boolean value
+        // which cypress-wait-until expects
+        .some((item) => item.name.endsWith('app.css'))
+      )
+    )
+
+    // red color means the style from "app.css" has been loaded and applied
+    cy.get('h1', { timeout: 250 }).should('have.css', 'color', 'rgb(255, 0, 0)')
   })
 })
 
-it('waits for multiple resources', () => {
-  cy.visit('/')
-  // the "cy.waitForResources" command was written in cypress/support/index.js file
-  cy.waitForResources('base.css', 'app.css')
-  // red color means the style from "app.css" has been loaded and applied
-  cy.get('h1', { timeout: 250 }).should('have.css', 'color', 'rgb(255, 0, 0)')
-})
+describe('loading images', () => {
+  it('waits for the image to load', () => {
+    cy.visit('/')
 
-it('waits on resource using wait-until 3rd party plugin', () => {
-  cy.visit('/')
+    // we can wait for the <img> element to appear
+    // but the image has not been loaded yet.
+    cy.get('[alt="delayed image"]').should('be.visible')
 
-  // 3rd party module "cypress-wait-until" is really useful
-  // for simple conditions like waiting for an item
-  // @see https://github.com/NoriSte/cypress-wait-until
-  cy.waitUntil(() =>
-    cy.window().then((win) =>
-      win.performance
-      .getEntriesByType('resource')
-      // note: ".some(...)" method returns boolean value
-      // which cypress-wait-until expects
-      .some((item) => item.name.endsWith('app.css'))
-    )
-  )
-
-  // red color means the style from "app.css" has been loaded and applied
-  cy.get('h1', { timeout: 250 }).should('have.css', 'color', 'rgb(255, 0, 0)')
+    // Let's wait for the actual image to load
+    cy.waitForResource('cypress-logo.png')
+  })
 })
