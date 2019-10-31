@@ -23,7 +23,7 @@ Recipe | Description
 [Form Interactions](./examples/testing-dom__form-interactions) | Test form elements like input type `range`
 [Drag and Drop](./examples/testing-dom__drag-drop) | Use `.trigger()` to test drag and drop
 [Shadow DOM](./examples/testing-dom__shadow-dom) | You need to use any of available custom commands
-[Waiting for static resource](./examples/testing-dom__wait-for-resource) | Shows how to wait for CSS or any other static resource to load
+[Waiting for static resource](./examples/testing-dom__wait-for-resource) | Shows how to wait for CSS, image, or any other static resource to load
 [CSV load and table test](./examples/testing-dom__csv-table) | Loads CSV file and compares objects against cells in a table
 
 ## Logging in recipes
