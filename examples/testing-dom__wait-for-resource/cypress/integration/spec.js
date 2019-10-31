@@ -40,16 +40,22 @@ Cypress.Commands.add('waitForResource', (name, options = {}) => {
           foundResource = win.performance
           .getEntriesByType('resource')
           .find((item) => item.name.endsWith(name))
+
           if (!foundResource) {
             // resource not found, will try again
             return
           }
 
           clearInterval(interval)
-          cy.log('✅ success')
-          // let's resolve with the found performance object
-          // to allow tests to inspect it
-          resolve(foundResource)
+          // because cy.log changes the subject, let's resolve the returned promise
+          // with log + returned actual result
+          resolve(
+            cy.log('✅ success').then(() => {
+              // let's resolve with the found performance object
+              // to allow tests to inspect it
+              return foundResource
+            })
+          )
         }, 100)
       })
     }
@@ -67,7 +73,9 @@ describe('loading style', () => {
 
   it('app.css is a tiny resource', () => {
     cy.visit('/')
-    cy.waitForResource('app.css').should((resourceTiming) => {
+    cy.waitForResource('app.css').then((resourceTiming) => {
+      expect(resourceTiming, 'got resource timing').to.not.be.null
+
       // there are lots of timing properties in this object
       expect(resourceTiming)
       .property('entryType')
