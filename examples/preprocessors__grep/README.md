@@ -74,7 +74,7 @@ describe('app', () => {
 })
 ```
 
-Thus you can run all tests form the given suite
+Thus you can run all tests from the given suite
 
 ```bash
 $ npm run cypress:run -- --env grep='feature A'

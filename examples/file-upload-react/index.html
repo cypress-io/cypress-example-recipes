@@ -17,7 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/babel">
-      var FileUploadApp = React.createClass({
+      let FileUploadApp = React.createClass({
         render: function() {
           return (
             <div>
@@ -27,10 +27,14 @@
           )
         },
 
-        fileUpload (e) {
+        getFileToUpload (e) {
           // either upload file directly from the event (from a test)
           // or from the DOM file input list
-          const file = e.nativeEvent.testFile || e.nativeEvent.target.files[0]
+          return e.nativeEvent.testFile || e.nativeEvent.target.files[0]
+        },
+
+        fileUpload (e) {
+          const file = this.getFileToUpload(e)
           const data = new FormData()
 
           // log just for the demo
@@ -44,10 +48,16 @@
         }
       });
 
-      ReactDOM.render(
+      let app = ReactDOM.render(
         <FileUploadApp/>,
         document.getElementById('app')
       );
+      // if the application is being tested from Cypress
+      // pass the reference to the application instance
+      // via "window" object, so the tests can directly interact with the app
+      if (window.Cypress) {
+        window.app = app
+      }
     </script>
   </body>
 </html>
