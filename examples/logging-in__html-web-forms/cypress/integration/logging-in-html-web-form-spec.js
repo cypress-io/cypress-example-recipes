@@ -80,6 +80,7 @@ describe('Logging In - HTML Web Form', function () {
       cy.get('form').submit()
 
       // we should be redirected to /dashboard
+      cy.location('pathname').should('eq', '/dashboard')
       cy.url().should('include', '/dashboard')
       cy.get('h1').should('contain', 'jane.lane')
 
