@@ -26,6 +26,7 @@ describe('Logging In - CSRF Tokens', function(){
    * A utility function to check that we are seeing the dashboard page
    */
   const inDashboard = () => {
+    cy.location('pathname').should('eq', '/dashboard')
     cy.location('href').should('match', /dashboard$/)
     cy.contains('h2', 'dashboard.html')
   }
