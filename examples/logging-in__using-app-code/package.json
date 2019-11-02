@@ -8,6 +8,7 @@
     "start:server": "node server",
     "start:app": "../../node_modules/.bin/webpack-dev-server --port 8081",
     "start": "../../node_modules/.bin/run-p start:server start:app",
-    "dev": "../../node_modules/.bin/start-test 8081 cypress:open"
+    "dev": "../../node_modules/.bin/start-test 8081 cypress:open",
+    "test:ci": "../../node_modules/.bin/start-test 8081 cypress:run"
   }
 }
