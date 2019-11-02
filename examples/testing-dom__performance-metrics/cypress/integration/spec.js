@@ -24,8 +24,8 @@ describe('Check some performance metrics', () => {
   it('ensure max load time for images', () => {
     cy.visit('/index.html').its('performance').then(p => {
       const imgs = p.getEntriesByType('resource').filter(x => x.initiatorType === 'img')
-      const slowestImg = imgs.reduce((p, c) => c.duration > p.duration ? p : c, { duration: 0 })
-      assert.isAtMost(slowestImg.duration, 400, `image '${slowestImg.name}' takes too much time to load`)
+      const slowestImg = imgs.reduce((p, c) => c.duration > p.duration ? c : p, { duration: 0 })
+      assert.isAtMost(slowestImg.duration, 400, `image '${slowestImg.name}' should be loaded in reasonable time`)
     })
   })
 
