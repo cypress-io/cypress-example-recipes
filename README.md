@@ -23,7 +23,7 @@ Recipe | Description
 [Form Interactions](./examples/testing-dom__form-interactions) | Test form elements like input type `range`
 [Drag and Drop](./examples/testing-dom__drag-drop) | Use `.trigger()` to test drag and drop
 [Shadow DOM](./examples/testing-dom__shadow-dom) | You need to use any of available custom commands
-[Waiting for static resource](./examples/testing-dom__wait-for-resource) | Shows how to wait for CSS or any other static resource to load
+[Waiting for static resource](./examples/testing-dom__wait-for-resource) | Shows how to wait for CSS, image, or any other static resource to load
 [CSV load and table test](./examples/testing-dom__csv-table) | Loads CSV file and compares objects against cells in a table
 
 ## Logging in recipes
@@ -71,7 +71,7 @@ Recipe | Description
 --- | ---
 [Stubbing Functions](./examples/stubbing-spying__functions) | Use `cy.spy()` and `cy.stub()` to test function calls
 [Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch) | Use `cy.stub()` to control fetch requests
-[Stubbing methods called on `window`](./examples/stubbing-spying__window) | Use `cy.stub()` for methods called on `window`
+[Stubbing `window.open` and `console.log`](./examples/stubbing-spying__window) | Use `cy.stub()` and `cy.spy()` to test application behavior
 [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics) | Use `cy.stub()` to test Google Analytics calls
 [Spying and stubbing methods on `console` object](./examples/stubbing-spying__console) | Use `cy.spy()` and `cy.stub()` on `console.log`
 
