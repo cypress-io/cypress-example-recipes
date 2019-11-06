@@ -2,7 +2,7 @@
 
 This is an example showing how to add Flow support for Cypress using Browserify.
 
-Wheter you use Flow in your test files or just in the source files you need to preprocess them before running the tests so Cypress runs plain javascript.
+Whether you use Flow in your test files or just in the source files you need to preprocess them before running the tests so Cypress runs plain JavaScript.
 
 It uses [browserify](http://browserify.org/) to preprocess Flow files
 via [@cypress/browserify-preprocessor](https://github.com/cypress-io/cypress-browserify-preprocessor)
