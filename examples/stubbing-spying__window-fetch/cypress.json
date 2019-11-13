@@ -1,4 +1,6 @@
 {
   "baseUrl": "http://localhost:7080",
-  "ignoreTestFiles": "deferred.js"
+  "ignoreTestFiles": "deferred.js",
+  "fixturesFolder": false,
+  "pluginsFile": false
 }

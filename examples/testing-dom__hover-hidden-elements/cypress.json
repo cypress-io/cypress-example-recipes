@@ -1,3 +1,6 @@
 {
-  "baseUrl": "http://localhost:7073"
+  "baseUrl": "http://localhost:7073",
+  "fixturesFolder": false,
+  "pluginsFile": false,
+  "supportFile": false
 }
