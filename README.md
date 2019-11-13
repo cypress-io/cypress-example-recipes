@@ -25,6 +25,7 @@ Recipe | Description
 [Shadow DOM](./examples/testing-dom__shadow-dom) | You need to use any of available custom commands
 [Waiting for static resource](./examples/testing-dom__wait-for-resource) | Shows how to wait for CSS, image, or any other static resource to load
 [CSV load and table test](./examples/testing-dom__csv-table) | Loads CSV file and compares objects against cells in a table
+[Evaluate performance metrics](./examples/testing-dom__performance-metrics) | Utilize Cypress to monitor a website
 
 ## Logging in recipes
 

@@ -3,5 +3,6 @@
   "env": {
     "username": "test",
     "password": "test"
-  }
+  },
+  "supportFile": false
 }
