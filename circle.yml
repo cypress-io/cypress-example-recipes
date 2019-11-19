@@ -47,7 +47,7 @@ jobs:
       - run: npm i -g @cypress/commit-message-install
       # if there is no special JSON comment in the current commit body
       # then this command does nothing
-      - run: commit-message-install
+      - run: commit-message-install --else "echo nothing custom to install"
 
       # run verify and then save cache.
       # this ensures that the Cypress verified status is cached too
