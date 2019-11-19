@@ -7,6 +7,6 @@
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
     "test:ci": "../../node_modules/.bin/cypress run",
-    "test:ci:brave": "../../node_modules/.bin/cypress open --config pluginsFile=cypress/plugins/brave.js --browser brave"
+    "test:ci:brave": "../../node_modules/.bin/cypress run --config pluginsFile=cypress/plugins/brave.js --browser brave"
   }
 }
