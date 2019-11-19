@@ -26,5 +26,11 @@ npx cypress open --config pluginsFile=cypress/plugins/brave.js
 If you want to use Brave browser during non-interactive run, pass its name
 
 ```shell
-npx cypress open --config pluginsFile=cypress/plugins/brave.js --browser brave
+npx cypress run --config pluginsFile=cypress/plugins/brave.js --browser brave
+```
+
+**Tip:** if you are passing lots of `--config` options, set them in a new configuration file, like `cypress-brave.json` and use
+
+```shell
+npx cypress run --config-file cypress-brave.json
 ```
