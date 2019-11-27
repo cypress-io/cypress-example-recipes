@@ -1,0 +1,13 @@
+[ignore]
+.*/node_modules
+
+[include]
+
+[libs]
+src/flow-types.js
+
+[lints]
+
+[options]
+
+[strict]
