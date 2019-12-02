@@ -160,6 +160,8 @@ jobs:
     # and run only tests with name having "@admin"
     environment:
       CYPRESS_grep: '@admin'
+  preprocessors__flow-browserify:
+    <<: *defaults
   preprocessors__typescript-browserify:
     <<: *defaults
   preprocessors__typescript-webpack:
@@ -297,6 +299,9 @@ all_jobs: &all_jobs
   - preprocessors__grep:
       requires:
         - build
+  - preprocessors__flow-browserify:
+      requires:
+        - build
   - preprocessors__typescript-browserify:
       requires:
         - build
@@ -390,6 +395,7 @@ all_jobs: &all_jobs
         - logging-in__jwt
         - logging-in__using-app-code
         - preprocessors__grep
+        - preprocessors__flow-browserify
         - preprocessors__typescript-browserify
         - preprocessors__typescript-webpack
         - server-communication__bootstrapping-your-app
