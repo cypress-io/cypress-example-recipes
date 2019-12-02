@@ -89,6 +89,7 @@ jobs:
       # is in variable CIRCLE_NODE_TOTAL and the current container index in CIRCLE_NODE_INDEX
       # which starts at 0 and goes to $CIRCLE_NODE_TOTAL - 1
       - run: npm run test:ci -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+
   # a single utility script to run multiple examples against Chrome
   test-examples-chrome:
     parallelism: 10
@@ -99,6 +100,18 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: npm run test:ci:chrome -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+
+  # a single utility script to run multiple examples against Brave browser
+  test-examples-brave:
+    # only one recipe shows how to run Cypress using Brave browser
+    parallelism: 1
+    working_directory: ~/app
+    docker:
+      - image: cypress/browsers:node12.13.0-chrome78-ff70-brave78
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run test:ci:brave -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
 
   # define a new job with defaults for each "examples/*" subfolder
   blogs__a11y:
@@ -210,6 +223,15 @@ all_jobs: &all_jobs
         branches:
           only:
             - master
+
+  - test-examples-brave:
+      requires:
+        - build
+      filters:
+        branches:
+          only:
+            - master
+            - 3.7.0
 
   # when adding new example subfolder with a recipe
   # add its name here to "create" CircleCI job

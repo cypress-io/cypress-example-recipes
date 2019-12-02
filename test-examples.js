@@ -18,6 +18,7 @@ const is = require('check-more-types')
 // run this script with "--chrome" CLI flag
 const args = arg({
   '--chrome': Boolean,
+  '--brave': Boolean,
   '--windows': Boolean,
   '--chunk': Number,
   '--total-chunks': Number,
@@ -33,6 +34,10 @@ let scriptName = 'test:ci'
 
 if (args['--chrome']) {
   scriptName = 'test:ci:chrome'
+}
+
+if (args['--brave']) {
+  scriptName = 'test:ci:brave'
 }
 
 if (args['--windows']) {
