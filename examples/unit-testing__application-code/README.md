@@ -15,4 +15,4 @@ In [cypress/integration](cypress/integration) folder the specs show:
 - [wait-for-object-property-spec.js](cypress/integration/wait-for-object-property-spec.js) shows how Cypress can wrap and object and wait for a new property to be added to it (or deleted or modified).
 - [wait-for-window-property-spec.js](cypress/integration/wait-for-window-property-spec.js) shows how an application can "signal" that it is ready to be tested by adding a property to the `window` object. The test will wait for the new property to appear.
 
-**note:** the specs load the application directly, there is no web server to start. Just do `npm run cypress:run` to open Cypress anf run the unit tests.
+**note:** the specs load the application directly, there is no web server to start. Just do `npm run cypress:run` to open Cypress and run the unit tests.
