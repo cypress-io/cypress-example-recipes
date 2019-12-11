@@ -76,6 +76,7 @@ Recipe | Description
 [Stubbing `window.open` and `console.log`](./examples/stubbing-spying__window) | Use `cy.stub()` and `cy.spy()` to test application behavior
 [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics) | Use `cy.stub()` to test Google Analytics calls
 [Spying and stubbing methods on `console` object](./examples/stubbing-spying__console) | Use `cy.spy()` and `cy.stub()` on `console.log`
+[Stub ressource loading](./examples/stubbing__ressources) | Use `MutationObserver` to stub ressource loading like `img` tags
 
 ## Unit Testing
 
