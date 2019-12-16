@@ -1,4 +1,4 @@
-# Stubbing Ressources
+# Stubbing Resources
 
 The spec file [cypress/integration/spec.js](cypress/integration/spec.js) shows how to stub ressources that are loaded e.g. by `img` tag.
 
