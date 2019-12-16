@@ -15,7 +15,8 @@
     "test:ci": "node ./test-examples",
     "test:ci:windows": "node ./test-examples --windows",
     "test:ci:chrome": "node ./test-examples --chrome",
-    "test:ci:brave": "node ./test-examples --brave"
+    "test:ci:brave": "node ./test-examples --brave",
+    "test:ci:firefox": "node ./test-examples --firefox"
   },
   "repository": {
     "type": "git",
