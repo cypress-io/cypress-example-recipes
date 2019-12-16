@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
-describe('Stub loading of ressources', () => {
+describe('Stub loading of resources', () => {
   it('requested image can be exchanged', () => {
     cy.server();
     cy.route({
