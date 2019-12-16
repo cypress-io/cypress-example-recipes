@@ -33,18 +33,13 @@ describe('Stub loading of resources', () => {
 });
 
 // helper function to observe DOM changes
-var observeDOM = (obj, callback) => {
-  if (!obj || !obj.nodeType === 1) {
-    return;
+function observeDOM(obj, callback) {
+  if (!obj || obj.nodeType !== Node.ELEMENT_NODE) {
+    throw new Error("can not observe this element");
   }
 
-  if (MutationObserver) {
-    var obs = new MutationObserver(mutations => {
-      callback(mutations);
-    })
-    obs.observe(obj, { childList: true, subtree: true });
-  } else if (window.addEventListener) {
-    obj.addEventListener('DOMNodeInserted', callback, false);
-    obj.addEventListener('DOMNodeRemoved', callback, false);
-  }
+  var obs = new MutationObserver(mutations => {
+    callback(mutations);
+  });
+  obs.observe(obj, { childList: true, subtree: true });
 }
