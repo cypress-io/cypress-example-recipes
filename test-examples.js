@@ -23,6 +23,9 @@ const args = arg({
   '--windows': Boolean,
   '--chunk': Number,
   '--total-chunks': Number,
+  // TODO switch from separate --chrome|--brave|--firefox
+  // to using "--browser chrome" or "--browser firefox" argument
+  '--browser': String,
 })
 
 // fill default values
