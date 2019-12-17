@@ -6,6 +6,8 @@ defaults: &defaults
   working_directory: ~/app
   docker:
     - image: cypress/base:10
+  environment:
+    TERM: xterm
   steps:
     - attach_workspace:
         at: ~/
@@ -37,6 +39,8 @@ jobs:
     working_directory: ~/app
     docker:
       - image: cypress/base:10
+    environment:
+      TERM: xterm
     steps:
       - checkout
       - restore_cache:
@@ -82,6 +86,8 @@ jobs:
     working_directory: ~/app
     docker:
       - image: cypress/base:10
+    environment:
+      TERM: xterm
     steps:
       - attach_workspace:
           at: ~/
@@ -96,6 +102,8 @@ jobs:
     working_directory: ~/app
     docker:
       - image: cypress/browsers:node12.0.0-chrome75
+    environment:
+      TERM: xterm
     steps:
       - attach_workspace:
           at: ~/
@@ -108,6 +116,8 @@ jobs:
     working_directory: ~/app
     docker:
       - image: cypress/browsers:node12.13.0-chrome78-ff70-brave78
+    environment:
+      TERM: xterm
     steps:
       - attach_workspace:
           at: ~/
