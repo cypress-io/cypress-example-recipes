@@ -6,6 +6,10 @@ This recipe shows how to spy on a network request and assert the request data an
 
 ![Multiple assertions](images/assertions.png)
 
+[cypress/integration/spok-spec.js](cypress/integration/spok-spec.js) asserts multiple values and schema properties using [cy-spok](https://github.com/bahmutov/cy-spok) plugin built on top of [spok](https://github.com/thlorenz/spok)
+
+![Spok assertions](images/spok.png)
+
 ## See also
 
 - [Cypress network guide](https://on.cypress.io/network-requests)
