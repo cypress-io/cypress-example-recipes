@@ -49,3 +49,57 @@ it('asserts multiple XHR properties at once using cy-spok', () => {
     },
   }))
 })
+
+// there is a bug in Cypress with chaining multiple assertion callbacks
+// like .should(cb1).should(cb2)
+// https://github.com/cypress-io/cypress/issues/4981
+// but we can use multiple callbacks by chaining .then(cb1).then(cb2)
+// which works fine since our request object cannot change
+it('can chain assertions using .then', () => {
+  cy.visit('index.html')
+
+  cy.server()
+  cy.route('POST', '/posts').as('post')
+
+  cy.get('#delayed-load').click()
+  // the request has gone out - let's wait for it
+  // and then assert some of its properties
+  cy.wait('@post').then(spok({
+    status: 201,
+  }))
+  // let's confirm the request object
+  .its('request.body')
+  // notice that we want to confirm that the "body" field is a string
+  // and it starts with certain prefix. Since we cannot AND conditions
+  // we can split checks across 2 spoks
+  .then(spok({
+    title: 'example post',
+    userId: 1,
+    body: spok.string,
+  }))
+  // cy.then(cb) yields its original subject
+  // thus the second .then(cb) can work with the same request
+  // https://on.cypress.io/then
+  .then(spok({
+    body: spok.startsWith('this is a post'),
+  }))
+
+  // cy.its(...) yields the property value
+  // so if we want to validate the response object
+  // we need to get the XHR object again
+  // by now the object exists, thus we can use cy.get()
+  cy.get('@post').its('response').should(spok({
+    headers: {
+      'content-type': 'application/json; charset=utf-8',
+      'cache-control': 'no-cache',
+    },
+    body: {
+      title: 'example post',
+      body: spok.string,
+      userId: 1,
+      // we don't know the exact id the server assigns to the new post
+      // but it should be > 100
+      id: spok.gt(100),
+    },
+  }))
+})
