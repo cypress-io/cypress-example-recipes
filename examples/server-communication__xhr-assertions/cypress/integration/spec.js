@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+/* eslint-disable no-console */
 it('sends XHR to the server and gets expected response', () => {
   cy.visit('index.html')
 
@@ -10,14 +11,20 @@ it('sends XHR to the server and gets expected response', () => {
   cy.get('#load').click()
   cy.contains('#output', '"title": "example post"').should('be.visible')
 
-  // confirm the properties on the request object
+  // tip: log the request object to see everything it has in the console
+  cy.get('@post').then(console.log)
+
+  // confirm the request status
   cy.get('@post').should('have.property', 'status', 201)
-  // we cannot chain any more assertions because
-  // the "have.property" assertion yields the property's value
+
+  // we cannot chain any more assertions to the above request object
+  // because the "have.property" assertion yields the property's value
   // so let's just grab the request object again and run multiple assertions
   cy.get('@post').should((req) => {
     expect(req.method).to.equal('POST')
     expect(req.url).to.match(/\/posts$/)
+    // it is good practice to add message to the assertion
+    expect(req, 'has duration in ms').to.have.property('duration').and.be.a('number')
   })
 
   // let's confirm the request sent to the server
