@@ -6,25 +6,10 @@
   </div>
 
   <script>
-    function get(url) {
-      return new Promise(resolve => {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = () => {
-          if (xmlHttp.readyState != 4) {
-            return;
-          }
-          resolve(JSON.parse(xmlHttp.responseText));
-        }
-        xmlHttp.open("GET", url, true);
-        xmlHttp.send(null);
-      })
-    }
-
     document.getElementById("button").addEventListener("click", async () => {
-      const result = await get("/apirequest");
       var div = document.querySelector("#img-container");
       var img = document.createElement("img");
-      img.src = result.src;
+      img.src = "path/to/img.png";
       div.appendChild(img)
     })
 
