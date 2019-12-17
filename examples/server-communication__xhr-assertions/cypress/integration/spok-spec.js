@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 
+// see https://github.com/bahmutov/cy-spok
 const spok = require('cy-spok')
 
 it('asserts multiple XHR properties at once using cy-spok', () => {
