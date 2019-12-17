@@ -57,3 +57,26 @@ it('sends XHR to the server and gets expected response', () => {
     })
   })
 })
+
+it('sends request after delay', () => {
+  cy.visit('index.html')
+
+  // before the request goes out we need to set up spying
+  // see https://on.cypress.io/network-requests
+  cy.server()
+  cy.route('POST', '/posts').as('post')
+
+  cy.get('#load').click()
+
+  // the XHR request has NOT happened yet - we are not checking the UI
+  // to "wait" for it. Thus we cannot use cy.get("@post"),
+  // instead we need to wait for the request to happen
+  // using cy.wait("@post") call
+  //
+  //  https://on.cypress.io/wait
+  //  https://on.cypress.io/get
+  cy.wait('@post').should((xhr) => {
+    expect(xhr.status, 'successful POST').to.equal(201)
+    // assert any other XHR properties
+  })
+})
