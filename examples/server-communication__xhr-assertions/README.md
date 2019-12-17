@@ -9,3 +9,4 @@ This recipe shows how to spy on a network request and assert the request data an
 ## See also
 
 - [Cypress network guide](https://on.cypress.io/network-requests)
+- Cypress Testing Workshop [XHR chapter](https://github.com/cypress-io/testing-workshop-cypress#xhr)

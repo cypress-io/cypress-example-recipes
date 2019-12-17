@@ -198,6 +198,8 @@ jobs:
     <<: *defaults
   server-communication__env-variables:
     <<: *defaults
+  server-communication__xhr-assertions:
+    <<: *defaults
   fundamentals__dynamic-tests:
     <<: *defaults
   fundamentals__module-api:
@@ -308,9 +310,6 @@ all_jobs: &all_jobs
   - preprocessors__typescript-webpack:
       requires:
         - build
-  - server-communication__bootstrapping-your-app:
-      requires:
-        - build
   - stubbing-spying__functions:
       requires:
         - build
@@ -353,7 +352,13 @@ all_jobs: &all_jobs
   - unit-testing__react:
       requires:
         - build
+  - server-communication__bootstrapping-your-app:
+      requires:
+        - build
   - server-communication__env-variables:
+      requires:
+        - build
+  - server-communication__xhr-assertions:
       requires:
         - build
   - fundamentals__dynamic-tests:
@@ -399,6 +404,8 @@ all_jobs: &all_jobs
         - preprocessors__typescript-browserify
         - preprocessors__typescript-webpack
         - server-communication__bootstrapping-your-app
+        - server-communication__env-variables
+        - server-communication__xhr-assertions
         - stubbing-spying__functions
         - stubbing-spying__window-fetch
         - stubbing-spying__google-analytics
@@ -413,7 +420,6 @@ all_jobs: &all_jobs
         - testing-dom__performance-metrics
         - unit-testing__application-code
         - unit-testing__react
-        - server-communication__env-variables
         # "meta" jobs
         - test-examples
         - test-examples-chrome
