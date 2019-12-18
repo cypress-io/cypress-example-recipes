@@ -91,6 +91,7 @@ Recipe | Description
 --- | ---
 [Bootstrapping your App](./examples/server-communication__bootstrapping-your-app) | Seed your application with test data
 [Seeding your Database in Node](./examples/server-communication__seeding-database-in-node) | Seed your database with test data
+[XHR assertions](./examples/server-communication__xhr-assertions) | Spy and assert on application's network calls
 
 ## Other Cypress Recipes
 
