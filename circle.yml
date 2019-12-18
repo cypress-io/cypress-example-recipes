@@ -188,6 +188,8 @@ jobs:
     <<: *defaults
   stubbing-spying__console:
     <<: *defaults
+  stubbing__resources:
+    <<: *defaults  
   testing-dom__drag-drop:
     <<: *defaults
   testing-dom__form-interactions:
@@ -335,6 +337,9 @@ all_jobs: &all_jobs
   - stubbing-spying__google-analytics:
       requires:
         - build
+  - stubbing__resources:
+      requires:
+        - build      
   - testing-dom__drag-drop:
       requires:
         - build
@@ -421,6 +426,7 @@ all_jobs: &all_jobs
         - stubbing-spying__google-analytics
         - stubbing-spying__window
         - stubbing-spying__console
+        - stubbing__resources
         - testing-dom__drag-drop
         - testing-dom__form-interactions
         - testing-dom__hover-hidden-elements
