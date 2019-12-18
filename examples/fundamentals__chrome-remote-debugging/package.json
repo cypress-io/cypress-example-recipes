@@ -1,0 +1,14 @@
+{
+  "name": "chrome-remote-debugging",
+  "version": "1.0.0",
+  "description": "Use the CRI in your tests",
+  "scripts": {
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "test:ci": "../../node_modules/.bin/cypress run",
+    "test:ci:windows": "bin-up cypress run"
+  },
+  "devDependencies": {
+    "chrome-remote-interface": "^0.28.1"
+  }
+}
