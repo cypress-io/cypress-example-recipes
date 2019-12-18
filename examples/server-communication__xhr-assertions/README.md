@@ -1,6 +1,6 @@
 # Assertions checking network request and response
 
-This recipe shows how to spy on a network request and assert the request data and the response
+This recipe shows how to spy on a network call and assert its request and response data.
 
 [cypress/integration/spec.js](cypress/integration/spec.js) runs multiple assertions against an XHR object
 
