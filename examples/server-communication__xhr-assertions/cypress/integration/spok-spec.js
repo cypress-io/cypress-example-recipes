@@ -20,7 +20,9 @@ it('asserts multiple XHR properties at once using cy-spok', () => {
   cy.get('@post').should(spok({
     status: 201,
     url: spok.endsWith('posts'),
-    duration: spok.gt(10), // network request takes at least 10ms
+    // network request takes at least 10ms
+    // but should finish in less than 1 second
+    duration: spok.range(10, 1000),
     statusMessage: spok.string,
     // check the request inside XHR object
     request: {
