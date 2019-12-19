@@ -41,6 +41,8 @@ cy.wait('@post').should('have.property', 'status', 201)
 
 ![cy.wait works](images/cy-wait-example.png)
 
+Find the above tests in [cypress/integration/wait-vs-get.js](cypress/integration/wait-vs-get.js)
+
 ## See also
 
 - [Cypress network guide](https://on.cypress.io/network-requests)
