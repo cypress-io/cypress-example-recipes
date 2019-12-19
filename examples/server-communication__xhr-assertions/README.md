@@ -10,6 +10,37 @@ This recipe shows how to spy on a network call and assert its request and respon
 
 ![Spok assertions](images/spok.png)
 
+## cy.wait vs cy.get for network requests
+
+Both `cy.get(<alias>)` and `cy.wait(<alias>)` can yield a network request, but there is a difference. The command [cy.wait](https://on.cypress.io/wait) will retry finding the matching request until the call is made, or the command times out. The command [cy.get](https://on.cypress.io/get) on the other hand, when dealing with aliases, just returns whatever it finds _at that moment_ and does not retry.
+
+In a situation when the network call might not have happened yet, `cy.get` will fail. For example, the followig test fails
+
+```js
+it('waits for async network request using cy.wait', () => {
+  cy.visit('index.html')
+
+  cy.server()
+  cy.route('POST', '/posts').as('post')
+
+  cy.get('#delayed-load').click()
+  // cy.get does NOT work
+  // because it immediately returns null object,
+  // since the request has not happened yet
+  cy.get('@post').should('have.property', 'status', 201)
+})
+```
+![cy.get fails](images/cy-get-example.png)
+
+The command `cy.wait` retries and "waits" until the matching network call really happens. Same test, but the last lines passes
+
+```js
+cy.get('#delayed-load').click()
+cy.wait('@post').should('have.property', 'status', 201)
+```
+
+![cy.wait works](images/cy-wait-example.png)
+
 ## See also
 
 - [Cypress network guide](https://on.cypress.io/network-requests)

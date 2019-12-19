@@ -66,7 +66,7 @@ it('sends request after delay', () => {
   cy.server()
   cy.route('POST', '/posts').as('post')
 
-  cy.get('#load').click()
+  cy.get('#delayed-load').click()
 
   // the XHR request has NOT happened yet - we are not checking the UI
   // to "wait" for it. Thus we cannot use cy.get("@post"),
