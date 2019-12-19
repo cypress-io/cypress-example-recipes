@@ -9,11 +9,17 @@ it('sends XHR to the server and gets expected response', () => {
   cy.route('POST', '/posts').as('post')
 
   cy.get('#load').click()
+  // make sure the XHR completes and the UI changes
   cy.contains('#output', '"title": "example post"').should('be.visible')
+
+  // because the UI has changed, we know the XHR has completed
+  // and we can retrieve it using cy.get(<alias>)
+  // see https://on.cypress.io/get
 
   // tip: log the request object to see everything it has in the console
   cy.get('@post').then(console.log)
 
+  // you can retrieve the XHR multiple times - returns the same object
   // confirm the request status
   cy.get('@post').should('have.property', 'status', 201)
 
@@ -74,9 +80,17 @@ it('sends request after delay', () => {
   // using cy.wait("@post") call
   //
   //  https://on.cypress.io/wait
-  //  https://on.cypress.io/get
   cy.wait('@post').should((xhr) => {
     expect(xhr.status, 'successful POST').to.equal(201)
+    expect(xhr.url, 'post url').to.match(/\/posts$/)
     // assert any other XHR properties
+  })
+
+  // if you need to assert again, retrieve the same XHR object
+  // using cy.get(<alias>) - because by now the request has happened
+  cy.get('@post').its('request.body').should('deep.equal', {
+    title: 'example post',
+    body: 'this is a post sent to the server',
+    userId: 1,
   })
 })

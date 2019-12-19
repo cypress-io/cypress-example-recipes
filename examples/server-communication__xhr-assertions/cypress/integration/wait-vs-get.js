@@ -23,3 +23,21 @@ it('cy.wait waits for the network request to happen', () => {
   cy.get('#delayed-load').click()
   cy.wait('@post').should('have.property', 'status', 201)
 })
+
+it('cy.wait then cy.get to retrieve the same XHR', () => {
+  cy.visit('index.html')
+
+  cy.server()
+  cy.route('POST', '/posts').as('post')
+
+  cy.get('#delayed-load').click()
+  // there is only 1 POST request
+  cy.wait('@post').then((xhr1) => {
+    // ask for the XHR again using cy.get
+    // by now it has happened for sure,
+    // and cy.get should yield same XHR object
+    cy.get('@post').then((xhr2) => {
+      expect(xhr1, 'same XHR').to.equal(xhr2)
+    })
+  })
+})
