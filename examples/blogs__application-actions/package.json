@@ -10,9 +10,11 @@
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:run:win": "bin-up cypress run",
     "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
+    "cypress:run:firefox": "../../node_modules/.bin/cypress run --browser firefox",
     "cypress:open": "../../node_modules/.bin/cypress open",
     "test:ci": "../../node_modules/.bin/start-test 8888 cypress:run",
     "test:ci:windows": "bin-up start-test start:win 8888 cypress:run:win",
-    "test:ci:chrome": "../../node_modules/.bin/start-test 8888 cypress:run:chrome"
+    "test:ci:chrome": "../../node_modules/.bin/start-test 8888 cypress:run:chrome",
+    "test:ci:firefox": "../../node_modules/.bin/start-test 8888 cypress:run:firefox"
   }
 }

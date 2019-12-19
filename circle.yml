@@ -6,6 +6,8 @@ defaults: &defaults
   working_directory: ~/app
   docker:
     - image: cypress/base:10
+  environment:
+    TERM: xterm
   steps:
     - attach_workspace:
         at: ~/
@@ -37,6 +39,8 @@ jobs:
     working_directory: ~/app
     docker:
       - image: cypress/base:10
+    environment:
+      TERM: xterm
     steps:
       - checkout
       - restore_cache:
@@ -82,6 +86,8 @@ jobs:
     working_directory: ~/app
     docker:
       - image: cypress/base:10
+    environment:
+      TERM: xterm
     steps:
       - attach_workspace:
           at: ~/
@@ -96,6 +102,8 @@ jobs:
     working_directory: ~/app
     docker:
       - image: cypress/browsers:node12.0.0-chrome75
+    environment:
+      TERM: xterm
     steps:
       - attach_workspace:
           at: ~/
@@ -108,6 +116,8 @@ jobs:
     working_directory: ~/app
     docker:
       - image: cypress/browsers:node12.13.0-chrome78-ff70-brave78
+    environment:
+      TERM: xterm
     steps:
       - attach_workspace:
           at: ~/
@@ -178,6 +188,8 @@ jobs:
     <<: *defaults
   stubbing-spying__console:
     <<: *defaults
+  stubbing__resources:
+    <<: *defaults  
   testing-dom__drag-drop:
     <<: *defaults
   testing-dom__form-interactions:
@@ -197,6 +209,8 @@ jobs:
   unit-testing__react:
     <<: *defaults
   server-communication__env-variables:
+    <<: *defaults
+  server-communication__xhr-assertions:
     <<: *defaults
   fundamentals__dynamic-tests:
     <<: *defaults
@@ -310,9 +324,6 @@ all_jobs: &all_jobs
   - preprocessors__typescript-webpack:
       requires:
         - build
-  - server-communication__bootstrapping-your-app:
-      requires:
-        - build
   - stubbing-spying__functions:
       requires:
         - build
@@ -328,6 +339,9 @@ all_jobs: &all_jobs
   - stubbing-spying__google-analytics:
       requires:
         - build
+  - stubbing__resources:
+      requires:
+        - build      
   - testing-dom__drag-drop:
       requires:
         - build
@@ -355,7 +369,13 @@ all_jobs: &all_jobs
   - unit-testing__react:
       requires:
         - build
+  - server-communication__bootstrapping-your-app:
+      requires:
+        - build
   - server-communication__env-variables:
+      requires:
+        - build
+  - server-communication__xhr-assertions:
       requires:
         - build
   - fundamentals__dynamic-tests:
@@ -405,11 +425,14 @@ all_jobs: &all_jobs
         - preprocessors__typescript-browserify
         - preprocessors__typescript-webpack
         - server-communication__bootstrapping-your-app
+        - server-communication__env-variables
+        - server-communication__xhr-assertions
         - stubbing-spying__functions
         - stubbing-spying__window-fetch
         - stubbing-spying__google-analytics
         - stubbing-spying__window
         - stubbing-spying__console
+        - stubbing__resources
         - testing-dom__drag-drop
         - testing-dom__form-interactions
         - testing-dom__hover-hidden-elements
@@ -419,7 +442,6 @@ all_jobs: &all_jobs
         - testing-dom__performance-metrics
         - unit-testing__application-code
         - unit-testing__react
-        - server-communication__env-variables
         # "meta" jobs
         - test-examples
         - test-examples-chrome

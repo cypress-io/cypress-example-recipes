@@ -1,0 +1,19 @@
+<html>
+
+<body>
+  <button id="button">load</button>
+  <div id="img-container">
+  </div>
+
+  <script>
+    document.getElementById("button").addEventListener("click", () => {
+      var div = document.querySelector("#img-container");
+      var img = document.createElement("img");
+      img.src = "images/rose.png";
+      div.appendChild(img)
+    })
+
+  </script>
+</body>
+
+</html>

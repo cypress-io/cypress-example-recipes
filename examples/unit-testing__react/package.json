@@ -7,6 +7,7 @@
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
     "test:ci": "npm run cypress:run",
-    "test:ci:windows": "bin-up cypress run"
+    "test:ci:windows": "bin-up cypress run",
+    "test:ci:firefox": "npm run cypress:run -- --browser firefox"
   }
 }

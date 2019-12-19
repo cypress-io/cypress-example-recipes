@@ -4,9 +4,11 @@
   "description": "Shows how to change the value of a range input",
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run:firefox": "../../node_modules/.bin/cypress run --browser firefox",
     "cypress:open": "../../node_modules/.bin/cypress open",
     "start": "node server.js --port 7072",
     "dev": "../../node_modules/.bin/start-test 7072 cypress:open",
-    "test:ci": "../../node_modules/.bin/start-test 7072 cypress:run"
+    "test:ci": "../../node_modules/.bin/start-test 7072 cypress:run",
+    "test:ci:firefox": "../../node_modules/.bin/start-test 7072 cypress:run:firefox"
   }
 }

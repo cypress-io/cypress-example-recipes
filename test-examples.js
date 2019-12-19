@@ -19,9 +19,13 @@ const is = require('check-more-types')
 const args = arg({
   '--chrome': Boolean,
   '--brave': Boolean,
+  '--firefox': Boolean,
   '--windows': Boolean,
   '--chunk': Number,
   '--total-chunks': Number,
+  // TODO switch from separate --chrome|--brave|--firefox
+  // to using "--browser chrome" or "--browser firefox" argument
+  '--browser': String,
 })
 
 // fill default values
@@ -38,6 +42,10 @@ if (args['--chrome']) {
 
 if (args['--brave']) {
   scriptName = 'test:ci:brave'
+}
+
+if (args['--firefox']) {
+  scriptName = 'test:ci:firefox'
 }
 
 if (args['--windows']) {
