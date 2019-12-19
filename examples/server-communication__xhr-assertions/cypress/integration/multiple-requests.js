@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-/* eslint-disable no-console */
 it('waits for multiple requests to finish', () => {
   cy.visit('index.html')
   cy.server()
