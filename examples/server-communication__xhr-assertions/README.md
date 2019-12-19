@@ -43,6 +43,14 @@ cy.wait('@post').should('have.property', 'status', 201)
 
 Find the above tests in [cypress/integration/wait-vs-get.js](cypress/integration/wait-vs-get.js)
 
+**Tip:** you can inspect the full XHR object by logging it to the console
+
+```javascript
+cy.wait('@post').then(console.log)
+```
+
+![XHR logged to console](images/log-xhr.png)
+
 ## See also
 
 - [Cypress network guide](https://on.cypress.io/network-requests)
