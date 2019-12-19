@@ -7,8 +7,5 @@
     "cypress:open": "../../node_modules/.bin/cypress open",
     "test:ci": "../../node_modules/.bin/cypress run",
     "test:ci:windows": "bin-up cypress run"
-  },
-  "devDependencies": {
-    "chrome-remote-interface": "^0.28.1"
   }
 }
