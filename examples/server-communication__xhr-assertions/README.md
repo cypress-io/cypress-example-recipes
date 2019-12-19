@@ -51,6 +51,12 @@ cy.wait('@post').then(console.log)
 
 ![XHR logged to console](images/log-xhr.png)
 
+## Multiple requests
+
+[cypress/integration/multiple-requests.js](cypress/integration/multiple-requests.js) shows how to wait for multiple matching requests and how to retrieve them all, or individually.
+
+![multiple requests](images/multiple.png)
+
 ## See also
 
 - [Cypress network guide](https://on.cypress.io/network-requests)
