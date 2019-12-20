@@ -57,6 +57,12 @@ cy.wait('@post').then(console.log)
 
 ![multiple requests](images/multiple.png)
 
+## Controlling the clock
+
+We can skip the initial 1 second delay set using `setTimeout(..., 1000)` inside the application by controlling the application's clock. See [cypress/integration/clock-control.js](cypress/integration/clock-control.js).
+
+![Fast test via clock control](images/clock.gif)
+
 ## See also
 
 - [Cypress network guide](https://on.cypress.io/network-requests)
