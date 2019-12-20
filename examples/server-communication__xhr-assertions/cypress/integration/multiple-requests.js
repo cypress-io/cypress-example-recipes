@@ -18,7 +18,7 @@ it('waits for multiple requests to finish', () => {
   .then((xhrs) => {
     // xhrs is an array of network call objects
     expect(xhrs[0], 'first request status').to.have.property('status', 201)
-    expect(xhrs[0], 'second request status').to.have.property('status', 201)
+    expect(xhrs[1], 'second request status').to.have.property('status', 201)
   })
 
   // and we can make assertions about each separate call
