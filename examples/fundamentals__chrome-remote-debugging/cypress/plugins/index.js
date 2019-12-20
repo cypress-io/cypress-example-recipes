@@ -8,9 +8,7 @@ function ensureRdpPort(args) {
     }
 
     const port = 40000 + Math.round(Math.random() * 25000)
-
     args.push(`--remote-debugging-port=${port}`)
-
     return port
 }
 
@@ -21,7 +19,7 @@ module.exports = (on, config) => {
         port = ensureRdpPort(args);
         // https://github.com/cypress-io/cypress/issues/832
         // https://github.com/cypress-io/cypress/issues/5949
-        // currently not working :-)
+        // remove comments above after the issues have ben fixed
         args.push('--headless');
     })
     on("task", {
