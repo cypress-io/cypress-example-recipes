@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "Use the CRI in your tests",
   "scripts": {
-    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run:chrome": "../../node_modules/.bin/cypress run --headless --browser chrome",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "test:ci": "../../node_modules/.bin/cypress run",
-    "test:ci:windows": "bin-up cypress run"
+    "test:ci:chrome": "npm run cypress:run:chrome"
   }
 }

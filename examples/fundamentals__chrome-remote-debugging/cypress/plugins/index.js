@@ -19,6 +19,10 @@ let port = 0;
 module.exports = (on, config) => {
     on('before:browser:launch', (browser, args) => {
         port = ensureRdpPort(args);
+        // https://github.com/cypress-io/cypress/issues/832
+        // https://github.com/cypress-io/cypress/issues/5949
+        // currently not working :-)
+        args.push('--headless');
     })
     on("task", {
         activatePrintMediaQuery: async () => {
