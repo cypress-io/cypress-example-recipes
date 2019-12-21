@@ -18,6 +18,26 @@ it('sends XHR to the server and gets expected response', () => {
 
   // tip: log the request object to see everything it has in the console
   cy.get('@post').then(console.log)
+})
+
+it('gets the expected response', () => {
+  cy.visit('index.html')
+
+  // before the request goes out we need to set up spying
+  // see https://on.cypress.io/network-requests
+  cy.server()
+  cy.route('POST', '/posts').as('post')
+
+  cy.get('#load').click()
+  // make sure the XHR completes and the UI changes
+  cy.contains('#output', '"title": "example post"').should('be.visible')
+
+  // because the UI has changed, we know the XHR has completed
+  // and we can retrieve it using cy.get(<alias>)
+  // see https://on.cypress.io/get
+
+  // tip: log the request object to see everything it has in the console
+  cy.get('@post').then(console.log)
 
   // you can retrieve the XHR multiple times - returns the same object
   // confirm the request status
@@ -44,7 +64,7 @@ it('sends XHR to the server and gets expected response', () => {
     // because the response object is not going to change
     // we can use cy.then() callback to run assertions just once
     // without retrying
-    // see https://on.cypress.io/task and https://on.cypress.io/retry-ability
+    // see https://on.cypress.io/then and https://on.cypress.io/retry-ability
     expect(res.headers).to.include({
       'cache-control': 'no-cache',
       expires: '-1',
