@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "../../node_modules/.bin/http-server -p 8888 --silent -c-1",
-    "start:win": "bin-up http-server -p 8888 --silent -c-1",
+    "start:win": "bin-up http-server -p 8888 -c-1",
     "dev": "../../node_modules/.bin/start-test 8888 cypress:open",
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:run:win": "bin-up cypress run",
