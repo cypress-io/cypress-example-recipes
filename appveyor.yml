@@ -1,7 +1,7 @@
 # https://www.appveyor.com/docs/lang/nodejs-iojs/
 # Test against the latest version of this Node.js version
 environment:
-  nodejs_version: "10"
+  nodejs_version: "12"
 
 # Install scripts. (runs after repo cloning)
 install:
@@ -19,7 +19,7 @@ install:
   - npm ci
   # install global bin-up
   # to avoid problems with finding tool paths on Windows
-  - npm i -g bin-up
+  - npm i -g bin-up@1.2.2
 
 cache:
   # cache NPM packages and Cypress binary
