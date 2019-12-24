@@ -1,0 +1,81 @@
+body {
+    font: 14px "Century Gothic", Futura, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+ol, ul {
+    padding-left: 30px;
+}
+.board-row:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.status {
+    margin-bottom: 10px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.square {
+    background: #fff;
+    border: 1px solid #000;
+    float: left;
+    font-size: 6rem;
+    font-weight: bold;
+    line-height: 34px;
+    height: 8rem;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 8rem;
+    transition: all 0.5s ease;
+}
+.function-button {
+    background: #fff;
+    color: #000;
+    padding: 0;
+    border: none;
+    transition: all 0.5s ease;
+}
+.function-button:disabled {
+    opacity: 0.5;
+}
+.square:focus, .function-button:focus {
+    outline: none;
+}
+.icons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+.game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    transition: all 0.5s ease;
+}
+#root {
+    height: 100%;
+}
+.revert {
+    background-color: #000;
+    color: #FFF;
+    transition: all 0.5s ease;
+}
+.revert .square {
+    border: 1px solid #FFF;
+    background-color: black;
+    color: #FFF;
+    transition: all 0.5s ease;
+}
+.revert .function-button {
+    background: #000;
+    color: #fff;
+    transition: all 0.5s ease;
+}
