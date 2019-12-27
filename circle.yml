@@ -142,6 +142,8 @@ jobs:
     <<: *defaults
   blogs__vue-vuex-rest:
     <<: *defaults
+  blogs__use-react-devtools:
+    <<: *defaults
   extending-cypress__chai-assertions:
     <<: *defaults
   file-upload-react:
@@ -189,7 +191,7 @@ jobs:
   stubbing-spying__console:
     <<: *defaults
   stubbing__resources:
-    <<: *defaults  
+    <<: *defaults
   testing-dom__drag-drop:
     <<: *defaults
   testing-dom__form-interactions:
@@ -280,6 +282,9 @@ all_jobs: &all_jobs
   - blogs__vue-vuex-rest:
       requires:
         - build
+  - blogs__use-react-devtools:
+    requires:
+      - build
   - extending-cypress__chai-assertions:
       requires:
         - build
@@ -339,7 +344,7 @@ all_jobs: &all_jobs
         - build
   - stubbing__resources:
       requires:
-        - build      
+        - build
   - testing-dom__drag-drop:
       requires:
         - build
@@ -401,6 +406,7 @@ all_jobs: &all_jobs
         - blogs__element-coverage
         - blogs__testing-redux-store
         - blogs__vue-vuex-rest
+        - blogs__use-react-devtools
         - extending-cypress__chai-assertions
         - file-upload-react
         - fundamentals__node-modules
