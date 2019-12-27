@@ -283,8 +283,8 @@ all_jobs: &all_jobs
       requires:
         - build
   - blogs__use-react-devtools:
-    requires:
-      - build
+      requires:
+        - build
   - extending-cypress__chai-assertions:
       requires:
         - build
