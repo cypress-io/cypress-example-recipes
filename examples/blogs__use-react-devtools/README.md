@@ -8,4 +8,4 @@ React DevTools extension copied from installed extension in Chrome by finding it
 
 1. React Components shows both Cypress UI and the application under test.
 2. Running multiple tests or rerunning the test keeps adding new components, without removing the existing ones
-3. the components are not mapped correctly to the scaled iframe position
+3. The components are not mapped correctly to the scaled iframe position
