@@ -13,6 +13,7 @@ function ensureRdpPort(args) {
 }
 
 let port = 0;
+let client = null;
 
 module.exports = (on, config) => {
     on('before:browser:launch', (browser, args) => {
@@ -23,12 +24,19 @@ module.exports = (on, config) => {
         args.push('--headless');
     })
     on("task", {
+        resetCRI: async () => {
+            if (client) {
+                await client.close();
+            }
+
+            return Promise.resolve(true);
+        },
         activatePrintMediaQuery: async () => {
-            const client = await CDP({ port });
+            client = await CDP({ port });
             return client.send('Emulation.setEmulatedMedia', { media: "print" })
         },
         activateHoverPseudo: async ({ selector }) => {
-            const client = await CDP({ port });
+            client = await CDP({ port });
             await client.DOM.enable();
             await client.CSS.enable();
             // as the Window consists of two IFrames, we must retrive the right one

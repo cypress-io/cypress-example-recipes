@@ -1,6 +1,6 @@
 describe("Test", () => {
     beforeEach(() => {
-        cy.visit("index.html");
+        cy.task("resetCRI").visit("index.html");
     })
     it("Printable div is not visible normally", () => {
         cy.get("#printable").should("not.be.visible");
@@ -15,5 +15,18 @@ describe("Test", () => {
     it("Hover pseudo element is active", () => {
         cy.task("activateHoverPseudo", { selector: "#pseudo-hover" });
         cy.get("#pseudo-hover span").should("be.visible");
+    })
+
+    describe("reset to clean state", () => {
+        it("check visibility of div", () => {
+            cy.get("#not-in-printable").should("be.visible");
+            cy.task("activatePrintMediaQuery");
+            cy.get("#not-in-printable").should("not.be.visible");
+        })
+        it("div should be visible again before print media query is activated", () => {
+            cy.get("#not-in-printable").should("be.visible");
+            cy.task("activatePrintMediaQuery");
+            cy.get("#not-in-printable").should("not.be.visible");
+        })
     })
 })
