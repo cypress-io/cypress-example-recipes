@@ -17,6 +17,16 @@ describe('TodoMVC', function () {
     cy.visit('/')
   })
 
+  afterEach(() => {
+    // In firefox, blur handlers will fire upon navigation if there is an activeElement.
+    // Since todos are updated on blur after editing,
+    // this is needed to blur activeElement after each test to prevent state leakage between tests.
+    cy.window().then((win) => {
+      // @ts-ignore
+      win.document.activeElement.blur()
+    })
+  })
+
   context('When page is initially opened', function () {
     it('should focus on the todo input field', function () {
       // get the currently focused element and assert
