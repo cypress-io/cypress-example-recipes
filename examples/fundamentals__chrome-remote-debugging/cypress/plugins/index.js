@@ -27,16 +27,17 @@ module.exports = (on, config) => {
         resetCRI: async () => {
             if (client) {
                 await client.close();
+                client = null;
             }
 
             return Promise.resolve(true);
         },
         activatePrintMediaQuery: async () => {
-            client = await CDP({ port });
+            client = client || await CDP({ port });
             return client.send('Emulation.setEmulatedMedia', { media: "print" })
         },
         activateHoverPseudo: async ({ selector }) => {
-            client = await CDP({ port });
+            client = client || await CDP({ port });
             await client.DOM.enable();
             await client.CSS.enable();
             // as the Window consists of two IFrames, we must retrive the right one
