@@ -1,10 +1,12 @@
 {
   "name": "logging-in-single-sign-on",
   "version": "1.0.0",
-  "description": "",
+  "description": "Login when authentication is done on a 3rd party server",
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "start": "node app_server.js --port 7074 & node auth_server.js --port 7075"
+    "start": "node app_server.js --port 7074 & node auth_server.js --port 7075",
+    "dev": "../../node_modules/.bin/start-test 7074 cypress:open",
+    "test:ci": "../../node_modules/.bin/start-test 7074 cypress:run"
   }
 }

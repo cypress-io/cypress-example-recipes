@@ -1,10 +1,12 @@
 {
   "name": "bootstrapping-your-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Shows how end-to-end tests can inject data into the application",
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "start": "node server.js --port 7070"
+    "start": "node server.js --port 7070",
+    "dev": "../../node_modules/.bin/start-test http://localhost:7070/bootstrap.html cypress:open",
+    "test:ci": "../../node_modules/.bin/start-test http://localhost:7070/bootstrap.html cypress:run"
   }
 }

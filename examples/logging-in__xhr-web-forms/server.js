@@ -45,14 +45,15 @@ app.use(session({
 app.set('views', __dirname)
 app.set('view engine', 'hbs')
 
+app.get('/', (req, res) => res.redirect('/login'))
+
 // this is the standard HTML login page
 app.get('/login', (req, res) => {
   res.render('./login.hbs')
 })
 
-// specifiy thae the jsonParser shoudld only be
-// used on the one route when its coming from
-// a JSON request
+// specifies that the jsonParser should only be
+// used on the one route when its coming from a JSON request
 app.post('/login', jsonParser, (req, res) => {
   // if this matches the secret username and password
   if(matchesUsernameAndPassword(req.body)){
@@ -60,6 +61,26 @@ app.post('/login', jsonParser, (req, res) => {
 
     // respond with how we should redirect
     res.json({redirect: "/dashboard"})
+  } else {
+    // else send back JSON error
+    // with unprocessable entity
+    // status code
+    res.status(422).json({
+      error: "Username and/or password is incorrect"
+    })
+  }
+})
+
+app.post('/slow-login', jsonParser, (req, res) => {
+  // if this matches the secret username and password
+  if(matchesUsernameAndPassword(req.body)){
+    // login the user after a delay
+    setTimeout(function () {
+      req.session.user = 'jane.lane'
+
+      // respond with how we should redirect
+      res.json({redirect: "/dashboard"})
+    }, 2000)
   } else {
     // else send back JSON error
     // with unprocessable entity

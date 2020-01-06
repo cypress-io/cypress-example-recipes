@@ -10,3 +10,4 @@ tmp
 screenshots
 videos
 out.js
+examples/*/cypress/logs

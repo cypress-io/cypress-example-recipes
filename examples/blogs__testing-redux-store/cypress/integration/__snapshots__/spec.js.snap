@@ -1,0 +1,26 @@
+exports[`snapshots #0`] = 
+{
+  "todos": [
+    {
+      "completed": false,
+      "id": 0,
+      "text": "Use Redux"
+    },
+    {
+      "completed": false,
+      "id": 1,
+      "text": "first"
+    },
+    {
+      "completed": true,
+      "id": 2,
+      "text": "second"
+    },
+    {
+      "completed": false,
+      "id": 3,
+      "text": "third"
+    }
+  ],
+  "visibilityFilter": "show_completed"
+};

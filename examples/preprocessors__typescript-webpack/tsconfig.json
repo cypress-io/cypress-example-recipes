@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es5", /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
-    "module": "commonjs", /* Specify module code generation: 'none', commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
-    "skipLibCheck": true, // do not check types in node_modules folder
-    "strict": true, /* Enable all strict type-checking options. */
+    "target": "es5",
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "strict": true,
     "types": [
+      // load Cypress global type
       "cypress"
-    ],
+    ]
   },
   "include": [
-    // spec files
-    "cypress/*/*.ts"
+    // process only spec files
+    "cypress/**/*.ts"
   ]
 }

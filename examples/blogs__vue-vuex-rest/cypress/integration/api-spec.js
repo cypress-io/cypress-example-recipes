@@ -1,13 +1,7 @@
+/// <reference types="cypress" />
 /* eslint-env mocha */
 /* global cy */
-import {
-  resetDatabase,
-  visit,
-  makeTodo,
-  enterTodo,
-  getTodoItems,
-  stubMathRandom
-} from '../support/utils'
+import { enterTodo, getTodoItems, makeTodo, resetDatabase, stubMathRandom, visit } from '../support/utils';
 
 // testing TodoMVC server API
 describe('via API', () => {
@@ -65,6 +59,31 @@ describe('via API', () => {
       }
     ])
   })
+})
+
+// sets up spying on route "GET /todos" under name "todos"
+// after visiting the page
+// waits for the alias "todos" to make sure
+// the application has actually made the request
+it('loads todos on start', () => {
+  cy.server()
+  cy.route('/todos').as('todos')
+  cy.visit('/')
+  cy.wait('@todos')
+})
+
+// stubs expected API call with JSON response
+// from a fixture file
+it('loads todos from fixture file', () => {
+  cy.server()
+  // loads response from "cypress/fixtures/todos.json"
+  cy.route('/todos', 'fixture:todos')
+  cy.visit('/')
+  getTodoItems()
+    .should('have.length', 2)
+    .contains('li', 'mock second')
+    .find('.toggle')
+    .should('be.checked')
 })
 
 it('initial todos', () => {

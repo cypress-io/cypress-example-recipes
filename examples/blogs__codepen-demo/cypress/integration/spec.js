@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 /* eslint-env mocha */
 /* global cy */
 // our Codepen has top level URL
@@ -7,23 +8,30 @@ const iframeUrl = 'https://s.codepen.io/bahmutov/fullpage/ZaMxgz'
 describe('HyperApp Counter Codepen', () => {
   beforeEach(function loadAppIFrameAndSetAsOurTestDocument () {
     // we could even cache the received HTML code
-    cy
-      .request({
-        method: 'GET',
-        url: iframeUrl,
-        headers: {
-          Referer: url,
-          accept: 'text/html'
-        }
-      })
-      .its('body')
-      .then(html => {
-        cy.document().then(document => {
-          cy.log('Writing HTML into test document')
-          document.write(html)
-          document.close()
-        })
-      })
+    cy.request({
+      method: 'GET',
+      url: iframeUrl,
+      headers: {
+        Referer: url,
+        accept: 'text/html',
+      },
+    })
+    .its('body')
+    .then((html) => {
+      cy.log('got document from url', iframeUrl)
+      cy.log('document length', html.length)
+      cy.wrap(html)
+      .its('length')
+      .should('be.greaterThan', 2000)
+
+      const doc = cy.state('document')
+      cy.log('Writing HTML into test document')
+      doc.write(html)
+      doc.close()
+    })
+
+    cy.wait(1000)
+    cy.url().should('include', 'localhost:')
     cy.get('main').should('be.visible')
   })
 
@@ -43,7 +51,9 @@ describe('HyperApp Counter Codepen', () => {
     getPlus().click()
     getPlus().click()
     getMinus().click()
-    getCount().contains(2).should('be.visible')
+    getCount()
+    .contains(2)
+    .should('be.visible')
   })
 
   it('has decrement button disabled initially', () => {
@@ -51,9 +61,13 @@ describe('HyperApp Counter Codepen', () => {
   })
 
   it('cannot decrement by clicking on disabled minus button', () => {
-    getCount().contains(0).should('be.visible')
+    getCount()
+    .contains(0)
+    .should('be.visible')
     getMinus().click({ force: true }) // because button is disabled
-    getCount().contains(0).should('be.visible')
+    getCount()
+    .contains(0)
+    .should('be.visible')
   })
 
   it('enables decrement button for positive numbers', () => {
@@ -72,21 +86,25 @@ describe('HyperApp Counter Codepen', () => {
     getApp().should('have.all.keys', 'down', 'up')
   })
 
-  it("can drive DOM via App's actions", () => {
-    getApp().then(actions => {
+  it('can drive DOM via App\'s actions', () => {
+    getApp().then((actions) => {
       actions.up()
       actions.up()
       actions.up()
       actions.down()
-      getCount().contains(2).should('be.visible')
+      getCount()
+      .contains(2)
+      .should('be.visible')
     })
   })
 
   it('can even drive App into invalid state', () => {
-    getApp().then(actions => {
+    getApp().then((actions) => {
       actions.down()
       actions.down()
-      getCount().contains(-2).should('be.visible')
+      getCount()
+      .contains(-2)
+      .should('be.visible')
       getMinus().should('be.disabled')
     })
   })

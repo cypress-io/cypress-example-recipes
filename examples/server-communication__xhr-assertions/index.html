@@ -1,0 +1,28 @@
+<body>
+  <button id="load">Make request</button> <button id="delayed-load">Make delayed request</button>
+  <pre id="output"></pre>
+  <script>
+
+    const makeRequest = () => {
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "https://jsonplaceholder.cypress.io/posts")
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+      const data = {
+        title: 'example post',
+        body: 'this is a post sent to the server',
+        userId: 1
+      }
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          document.getElementById('output').innerText = xhr.response
+        }
+      }
+      xhr.send(JSON.stringify(data))
+    }
+
+    document.getElementById('load').addEventListener('click', makeRequest)
+    document.getElementById('delayed-load').addEventListener('click', () => {
+      setTimeout(makeRequest, 1000)
+    })
+  </script>
+</body>

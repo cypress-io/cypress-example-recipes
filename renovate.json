@@ -4,22 +4,54 @@
   ],
   "automerge": true,
   "commitMessage": "{{semanticPrefix}}Update {{depName}} to {{newVersion}} 🌟",
-  "prTitle": "{{semanticPrefix}}{{#if isPin}}Pin{{else}}Update{{/if}} dependency {{depName}} to version {{#if isRange}}{{newVersion}}{{else}}{{#if isMajor}}{{newVersionMajor}}.x{{else}}{{newVersion}}{{/if}}{{/if}} 🌟",
+  "prTitle": "{{semanticPrefix}}{{#if isPin}}Pin{{else}}Update{{/if}} dependency {{depName}} to version {{newVersion}} 🌟",
   "major": {
     "automerge": false
   },
   "minor": {
     "automerge": false
   },
+  "prConcurrentLimit": 3,
   "prHourlyLimit": 2,
-  "prConcurrentLimit": 2,
+  "rangeStrategy": "pin",
+  "schedule": [
+    "after 2am and before 3am on sunday"
+  ],
   "updateNotScheduled": false,
   "timezone": "America/New_York",
-  "schedule": [
-    "after 2am and before 5am on every weekday",
-    "every weekend"
-  ],
   "lockFileMaintenance": {
     "enabled": true
-  }
+  },
+  "separatePatchReleases": true,
+  "separateMultipleMajor": true,
+  "masterIssue": true,
+  "labels": [
+    "type: dependencies",
+    "renovate"
+  ],
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "^@cypress",
+        "^cypress"
+      ],
+      "groupName": "cypress",
+      "schedule": [
+        "after 2am and before 4am"
+      ]
+    },
+    {
+      "packagePatterns": "^eslint",
+      "groupName": "eslint"
+    },
+    {
+      "packageNames": [
+        "ts-loader",
+        "tsify",
+        "tslint",
+        "typescript"
+      ],
+      "groupName": "typescript"
+    }
+  ]
 }

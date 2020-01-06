@@ -1,8 +1,13 @@
+/// <reference types="cypress" />
+
 // This recipe expands on the previous 'Logging in' examples
 // and shows you how to use cy.request when your backend
 // validates POSTs against a CSRF token
 //
 describe('Logging In - CSRF Tokens', function(){
+  const username = 'cypress'
+  const password = 'password123'
+
   Cypress.Commands.add('loginByCSRF', (csrfToken) => {
     cy.request({
         method: 'POST',
@@ -10,15 +15,36 @@ describe('Logging In - CSRF Tokens', function(){
         failOnStatusCode: false, // dont fail so we can make assertions
         form: true, // we are submitting a regular form body
         body: {
-          username: 'cypress',
-          password: 'password123',
+          username,
+          password,
           _csrf: csrfToken // insert this as part of form body
         }
       })
   })
 
+  /**
+   * A utility function to check that we are seeing the dashboard page
+   */
+  const inDashboard = () => {
+    cy.location('href').should('match', /dashboard$/)
+    cy.contains('h2', 'dashboard.html')
+  }
+
+  /**
+   * A utility function to confirm we can visit a protected page
+   */
+  const visitDashboard = () => {
+    cy.visit('/dashboard')
+    inDashboard()
+  }
+
   beforeEach(function(){
     cy.viewport(500, 380)
+  })
+
+  it('redirects to /login', () => {
+    cy.visit('/')
+    cy.location('href').should('match', /login$/)
   })
 
   it('403 status without a valid CSRF token', function(){
@@ -48,6 +74,10 @@ describe('Logging In - CSRF Tokens', function(){
             expect(resp.body).to.include("<h2>dashboard.html</h2>")
           })
       })
+
+    // successful "cy.request" sets all returned cookies, thus we should
+    // be able to visit the protected page - we are logged in!
+    visitDashboard()
   })
 
   it('strategy #2: parse token from response headers', function(){
@@ -65,6 +95,7 @@ describe('Logging In - CSRF Tokens', function(){
             expect(resp.body).to.include("<h2>dashboard.html</h2>")
           })
       })
+    visitDashboard()
   })
 
   it('strategy #3: expose CSRF via a route when not in production', function(){
@@ -80,5 +111,18 @@ describe('Logging In - CSRF Tokens', function(){
             expect(resp.body).to.include("<h2>dashboard.html</h2>")
           })
       })
+    visitDashboard()
+  })
+
+  it('strategy #4: slow login via UI', () => {
+    // Not recommended: log into the application like a user
+    // by typing into the form and clicking Submit
+    // While this works, it is slow and exercises the login form
+    // and NOT the feature you are trying to test.
+    cy.visit('/login')
+    cy.get('input[name=username]').type(username)
+    cy.get('input[name=password]').type(password)
+    cy.get('form').submit()
+    inDashboard()
   })
 })

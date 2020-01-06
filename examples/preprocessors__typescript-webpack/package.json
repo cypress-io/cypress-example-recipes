@@ -8,7 +8,8 @@
     "build": "webpack --output-filename out.js --entry ./cypress/integration/*.ts",
     "lint": "tslint --project ./tsconfig.json",
     "postlint": "npm run tsc",
-    "tsc": "./node_modules/typescript/bin/tsc --pretty --noEmit",
+    "tsc": "../../node_modules/.bin/tsc --pretty --noEmit",
+    "test:ci": "../../node_modules/.bin/cypress run",
     "precypress:run": "npm run lint"
   },
   "devDependencies": {

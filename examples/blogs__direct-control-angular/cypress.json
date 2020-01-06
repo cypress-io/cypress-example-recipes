@@ -1,3 +1,6 @@
 {
-  "baseUrl": "http://todomvc.com/examples/angularjs"
+  "baseUrl": "http://todomvc.com/examples/angularjs",
+  "fixturesFolder": false,
+  "pluginsFile": false,
+  "supportFile": false
 }

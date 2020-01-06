@@ -1,0 +1,7 @@
+{
+  "env": {
+    "my-var": "ok"
+  },
+  "fixturesFolder": false,
+  "supportFile": false
+}

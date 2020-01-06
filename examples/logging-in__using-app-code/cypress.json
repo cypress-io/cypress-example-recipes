@@ -1,0 +1,8 @@
+{
+  "baseUrl": "http://localhost:8081",
+  "env": {
+    "username": "test",
+    "password": "test"
+  },
+  "supportFile": false
+}

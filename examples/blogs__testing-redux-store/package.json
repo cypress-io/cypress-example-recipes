@@ -1,0 +1,21 @@
+{
+  "name": "blogs__testing-redux-store",
+  "version": "1.0.0",
+  "description": "Testing Redux store using Cypress",
+  "private": true,
+  "scripts": {
+    "start": "../../node_modules/.bin/react-scripts start",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "test:ci": "../../node_modules/.bin/start-test 3000 cypress:run"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "cypress-plugin-snapshots": "1.0.6"
+  }
+}

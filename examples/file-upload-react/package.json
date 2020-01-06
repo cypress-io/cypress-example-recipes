@@ -5,6 +5,8 @@
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "start": "echo nothing to start, this recipe does not run server"
+    "start": "echo nothing to start, this recipe does not run server",
+    "test:ci": "../../node_modules/.bin/cypress run",
+    "test:ci:windows": "bin-up cypress run"
   }
 }
