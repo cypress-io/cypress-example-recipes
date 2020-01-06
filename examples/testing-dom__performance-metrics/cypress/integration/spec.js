@@ -1,3 +1,4 @@
+/* global assert */
 describe('Check some performance metrics', () => {
   it('check page load time', () => {
     cy.visit('/index.html', {
