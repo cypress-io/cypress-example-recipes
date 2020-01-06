@@ -1,7 +1,5 @@
 import { add } from '../support/add'
 
-declare function expect(any):any
-
 describe('TypeScript', () => {
   it('works', () => {
     // note TypeScript definition
@@ -22,5 +20,12 @@ describe('TypeScript', () => {
 
   it('adds numbers', () => {
     expect(add(2, 3)).to.equal(5)
+  })
+
+  it('yields the subject to .then callback', () => {
+    cy.wrap({ foo: 'bar' })
+      .then(o => {
+        expect(o).to.have.property('foo', 'bar')
+      })
   })
 })
