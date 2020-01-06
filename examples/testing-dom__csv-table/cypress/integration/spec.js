@@ -17,9 +17,11 @@ it('has table rows for each row of CSV file', () => {
         expect($cells[0])
         .to.have.property('innerText')
         .equal(record['First name'])
+
         expect($cells[1])
         .to.have.property('innerText')
         .equal(record['Last name'])
+
         expect($cells[2])
         .to.have.property('innerText')
         .equal(record['Occupation'])

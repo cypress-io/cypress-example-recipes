@@ -70,11 +70,12 @@ Cypress.Commands.add('waitForResources', (...args) => {
         }, timeout)
 
         const interval = setInterval(() => {
-          foundResources = names.every((name) =>
-            win.performance
+          foundResources = names.every((name) => {
+            return win.performance
             .getEntriesByType('resource')
             .find((item) => item.name.endsWith(name))
-          )
+          })
+
           if (!foundResources) {
             // some resource not found, will try again
             return
