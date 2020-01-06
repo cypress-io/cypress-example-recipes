@@ -27,5 +27,6 @@ export const reverseString = (s) => {
  */
 export const twice = async (s) => {
   await delay(500)
+
   return s + s
 }

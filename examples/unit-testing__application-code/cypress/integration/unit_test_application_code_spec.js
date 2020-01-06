@@ -26,7 +26,7 @@ describe('Unit Test Application Code', function () {
     function numsExpectedToEq (arr, expected) {
       // loop through the array of nums and make
       // sure they equal what is expected
-      arr.forEach(num => {
+      arr.forEach((num) => {
         expect(fizzbuzz(num)).to.eq(expected)
       })
     }
