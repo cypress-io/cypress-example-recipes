@@ -1,8 +1,10 @@
 module.exports = {
   mode: 'development',
+  // make sure the source maps work
+  devtool: 'eval-source-map',
   // webpack will transpile TS and JS files
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
   },
   module: {
     rules: [
@@ -16,11 +18,11 @@ module.exports = {
             loader: 'ts-loader',
             options: {
               // skip typechecking for speed
-              transpileOnly: true
-            }
-          }
-        ]
-      }
-    ]
-  }
+              transpileOnly: true,
+            },
+          },
+        ],
+      },
+    ],
+  },
 }

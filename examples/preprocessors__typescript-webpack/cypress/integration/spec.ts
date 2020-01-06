@@ -45,4 +45,14 @@ describe('TypeScript', () => {
   it('uses custom command cy.foo()', () => {
     cy.foo().should('be.equal', 'foo')
   })
+
+  it('yields the subject to .then callback', () => {
+    cy.wrap({ foo: 'bar' })
+      .then(o => {
+        // webpack config should set the source maps correctly
+        // to make sure when debugger is hit, the correct source line is shown
+        // debugger
+        expect(o).to.have.property('foo', 'bar')
+      })
+  })
 })
