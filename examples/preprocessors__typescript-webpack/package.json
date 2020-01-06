@@ -5,19 +5,11 @@
   "scripts": {
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "build": "webpack --output-filename out.js --entry ./cypress/integration/*.ts",
-    "lint": "tslint --project ./tsconfig.json",
+    "build": "../../node_modules/.bin/webpack --output-filename out.js --entry ./cypress/integration/*.ts",
+    "lint": "../../node_modules/.bin/tslint --project ./tsconfig.json",
     "postlint": "npm run tsc",
     "tsc": "../../node_modules/.bin/tsc --pretty --noEmit",
     "test:ci": "../../node_modules/.bin/cypress run",
     "precypress:run": "npm run lint"
-  },
-  "devDependencies": {
-    "@cypress/webpack-preprocessor": "2.0.1",
-    "ts-loader": "4.4.2",
-    "tslint": "5.11.0",
-    "typescript": "2.9.2",
-    "webpack": "4.16.1",
-    "webpack-cli": "3.1.0"
   }
 }
