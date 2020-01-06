@@ -78,7 +78,7 @@ jobs:
       - image: cypress/base:10
     steps:
       - attach_workspace:
-        at: ~/
+          at: ~/
       # fails with error: Cannot read property 'push' of undefined
       # - run: npx eslint examples/blogs__application-actions
       - run: |
