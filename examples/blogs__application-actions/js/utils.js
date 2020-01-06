@@ -1,8 +1,9 @@
-/* global localStorage */
-let app = app || {};
+/* global localStorage, window */
+window.app = window.app || {}
 
-(function () {
+;(function () {
   'use strict'
+  let app = window.app
 
   app.Utils = {
     uuid () {

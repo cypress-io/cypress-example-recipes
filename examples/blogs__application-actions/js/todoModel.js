@@ -1,7 +1,9 @@
-let app = app || {}
+/* global window */
+window.app = window.app || {}
 
 ;(function () {
   'use strict'
+  let app = window.app
 
   let Utils = app.Utils
 
