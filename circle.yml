@@ -91,7 +91,8 @@ jobs:
           examples/blogs__vue-vuex-rest/cypress \
           examples/preprocessors__grep \
           examples/preprocessors__typescript-browserify \
-          examples/preprocessors__typescript-webpack
+          examples/preprocessors__typescript-webpack \
+          examples/unit-testing__react
 
   # dummy job running after all end-to-end tests
   after-tests:
@@ -254,7 +255,6 @@ all_jobs: &all_jobs
         branches:
           only:
             - master
-            - allow-testing-in-chunks
 
   - test-examples-chrome:
       requires:

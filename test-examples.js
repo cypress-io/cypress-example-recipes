@@ -63,6 +63,7 @@ const printFolders = (folders) => {
     'Will be running tests in %s',
     pluralize('folder', folders.length, true)
   )
+
   folders.forEach((name) => console.log(' -', name))
 }
 
@@ -128,11 +129,13 @@ const filterByChunk = (chunk, totalChunks) => {
     'expected chunk to be a number >= 0',
     chunk
   )
+
   la(
     is.number(totalChunks) && totalChunks > 0,
     'expected total chunks to be >= 1',
     totalChunks
   )
+
   la(
     chunk < totalChunks,
     'expected chunk',
