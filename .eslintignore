@@ -5,3 +5,5 @@ node_modules
 **/vendor
 # don't ignore hidden files, useful for formatting json config files
 !.*
+# most TS configs have comments, which generates lint warnings
+tsconfig.json

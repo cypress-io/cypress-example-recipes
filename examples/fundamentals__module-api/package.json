@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Run Cypress via its module API",
   "scripts": {
-    "start": "echo nothing to start",
-    "cypress:run": "node ./e2e-tests",
     "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "node ./e2e-tests",
+    "start": "echo nothing to start",
     "test:ci": "node ./e2e-tests"
   }
 }

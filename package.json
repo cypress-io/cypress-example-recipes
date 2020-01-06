@@ -16,7 +16,8 @@
     "test:ci:windows": "node ./test-examples --windows",
     "test:ci:chrome": "node ./test-examples --chrome",
     "test:ci:brave": "node ./test-examples --brave",
-    "test:ci:firefox": "node ./test-examples --firefox"
+    "test:ci:firefox": "node ./test-examples --firefox",
+    "lint": "eslint --ext .json,.js examples"
   },
   "repository": {
     "type": "git",
