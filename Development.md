@@ -9,8 +9,8 @@
 Many recipes are linted using [@cypress/eslint-plugin-dev](https://github.com/cypress-io/eslint-plugin-dev). You can lint a single folder or lint and auto-fix with:
 
 ```shell
-$ npx eslint examples/blogs__vue-vuex-rest/cypress
-$ npx eslint examples/blogs__vue-vuex-rest/cypress --fix
+$ npm run lint -- examples/blogs__vue-vuex-rest/cypress
+$ npm run lint -- examples/blogs__vue-vuex-rest/cypress --fix
 ```
 
 ### Testing in specific browser
