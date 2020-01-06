@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/cypress-io/cypress-example-recipes#readme",
   "dependencies": {
+    "babel-register": "6.26.0",
     "body-parser": "1.18.2",
     "chai-colors": "1.0.1",
     "chai-date-string": "0.1.0",
