@@ -1,6 +1,4 @@
 /// <reference types="cypress" />
-/* eslint-env mocha */
-/* global cy, File */
 import {
   resetDatabase,
   visit,
@@ -10,12 +8,14 @@ import {
   getNewTodoInput,
   toggle,
   getTodo,
-  getCompleted
+  getCompleted,
 } from '../support/utils'
 
-it('loads the app', () => {
-  visit()
-  getTodoApp().should('be.visible')
+describe('app', () => {
+  it('loads', () => {
+    visit()
+    getTodoApp().should('be.visible')
+  })
 })
 
 describe('UI', () => {
@@ -29,8 +29,8 @@ describe('UI', () => {
 
     it('starts with zero items', () => {
       cy.get('.todo-list')
-        .find('li')
-        .should('have.length', 0)
+      .find('li')
+      .should('have.length', 0)
     })
 
     it('adds two items', () => {
@@ -41,12 +41,14 @@ describe('UI', () => {
 
     it('enters text in the input', () => {
       const text = 'do something'
+
       getNewTodoInput().type(text)
       getNewTodoInput().should('have.value', text)
     })
 
     it('can add many items', () => {
       const N = 100
+
       for (let k = 0; k < N; k += 1) {
         enterTodo(`item ${k + 1}`)
       }
@@ -60,10 +62,10 @@ describe('UI', () => {
       enterTodo('second item')
 
       getTodoItems()
-        .contains('first item')
-        .parent()
-        .find('.destroy')
-        .click({ force: true }) // because it only becomes visible on hover
+      .contains('first item')
+      .parent()
+      .find('.destroy')
+      .click({ force: true }) // because it only becomes visible on hover
 
       cy.contains('first item').should('not.exist')
       cy.contains('second item').should('exist')
@@ -82,17 +84,20 @@ describe('UI', () => {
       getTodoItems().should('have.length', 4)
       getCompleted().should('have.length', 2)
       getTodo('first item')
-        .find('[type="checkbox"]')
-        .should('not.be.checked')
+      .find('[type="checkbox"]')
+      .should('not.be.checked')
+
       getTodo('second item')
-        .find('[type="checkbox"]')
-        .should('not.be.checked')
+      .find('[type="checkbox"]')
+      .should('not.be.checked')
+
       getTodo('item 3')
-        .find('[type="checkbox"]')
-        .should('be.checked')
+      .find('[type="checkbox"]')
+      .should('be.checked')
+
       getTodo('item 4')
-        .find('[type="checkbox"]')
-        .should('be.checked')
+      .find('[type="checkbox"]')
+      .should('be.checked')
     })
 
     it('marks completed items', () => {
@@ -107,7 +112,7 @@ describe('UI', () => {
       getCompleted().should('have.length', 2)
       // single snapshot of entire <ul class="todo-list"> element
       cy.get('ul.todo-list').snapshot({
-        name: 'todo-list with 2 completed items'
+        name: 'todo-list with 2 completed items',
       })
     })
   })

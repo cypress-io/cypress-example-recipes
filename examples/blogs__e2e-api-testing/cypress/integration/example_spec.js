@@ -1,5 +1,4 @@
 // @ts-check
-/* eslint-env mocha */
 describe('todos API', () => {
   /**
    * @typedef {Object} Todo
@@ -7,32 +6,36 @@ describe('todos API', () => {
    * @property {string} task
    */
 
-   /** @type {Todo[]} */
+  /** @type {Todo[]} */
   const initialItems = [
     {
-      "id": 1,
-      "task": "read something"
+      'id': 1,
+      'task': 'read something',
     },
     {
-      "id": 2,
-      "task": "write something"
-    }
+      'id': 2,
+      'task': 'write something',
+    },
   ]
 
-  const getItems = () =>
-    cy.request('/todos')
-      .its('body')
+  const getItems = () => {
+    return cy.request('/todos')
+    .its('body')
+  }
 
   /** @type {(todo:Todo) => Cypress.Chainable} */
-  const add = item =>
-    cy.request('POST', '/todos', item)
+  const add = (item) => {
+    return cy.request('POST', '/todos', item)
+  }
 
-  const deleteItem = item =>
-    cy.request('DELETE', `/todos/${item.id}`)
+  const deleteItem = (item) => {
+    return cy.request('DELETE', `/todos/${item.id}`)
+  }
 
-  const deleteAll = () =>
-    getItems()
-      .each(deleteItem)
+  const deleteAll = () => {
+    return getItems()
+    .each(deleteItem)
+  }
 
   const reset = () => {
     deleteAll()
@@ -44,43 +47,44 @@ describe('todos API', () => {
 
   it('returns JSON', () => {
     cy.request('/todos')
-      .its('headers')
-      .its('content-type')
-      .should('include', 'application/json')
+    .its('headers')
+    .its('content-type')
+    .should('include', 'application/json')
   })
 
   it('loads 2 items', () => {
     cy.request('/todos')
-      .its('body')
-      .should('have.length', 2)
+    .its('body')
+    .should('have.length', 2)
   })
 
   it('loads the initial items', () => {
     getItems()
-      .should('deep.eq', initialItems)
+    .should('deep.eq', initialItems)
   })
 
   it('returns id + task objects', () => {
     getItems()
-      .each(value =>
-        expect(value).to.have.all.keys('id', 'task')
-      )
+    .each((value) => {
+      return expect(value).to.have.all.keys('id', 'task')
+    })
   })
 
   it('adds an item', () => {
     const randomId = Cypress._.random(0, 10000)
-    const item = {id:randomId, task:'life'}
+    const item = { id: randomId, task: 'life' }
 
     add(item)
     cy.request(`/todos/${randomId}`)
-      .its('body')
-      .should('deep.eq', item)
+    .its('body')
+    .should('deep.eq', item)
   })
 
   it('deletes an item', () => {
     const id = initialItems[0].id
+
     cy.request('DELETE', `/todos/${id}`)
     getItems()
-      .should('have.length', 1)
+    .should('have.length', 1)
   })
 })

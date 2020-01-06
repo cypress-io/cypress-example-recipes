@@ -1,9 +1,10 @@
-var app = app || {}
+let app = app || {}
 
 ;(function () {
   'use strict'
 
   let Utils = app.Utils
+
   // Generic "model" object. You can use whatever
   // framework you want. For this application it
   // may not even be worth separating this logic
