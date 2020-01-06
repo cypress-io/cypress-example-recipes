@@ -88,7 +88,8 @@ jobs:
           examples/blogs__e2e-api-testing \
           examples/blogs__e2e-snapshots \
           examples/blogs__element-coverage \
-          examples/blogs__testing-redux-store/cypress
+          examples/blogs__testing-redux-store/cypress \
+          examples/blogs__vue-vuex-rest/cypress
 
   # dummy job running after all end-to-end tests
   after-tests:
