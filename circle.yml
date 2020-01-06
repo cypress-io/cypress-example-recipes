@@ -79,10 +79,14 @@ jobs:
     steps:
       - attach_workspace:
         at: ~/
-      - run: npx eslint examples/blogs__a11y
       # fails with error: Cannot read property 'push' of undefined
       # - run: npx eslint examples/blogs__application-actions
-      - run: npx eslint examples/blogs__codepen-demo
+      - run: |
+          npx eslint examples/blogs__a11y \
+          examples/blogs__codepen-demo \
+          examples/blogs__direct-control-angular \
+          examples/blogs__e2e-api-testing \
+          examples/blogs__e2e-snapshots
 
   # dummy job running after all end-to-end tests
   after-tests:
