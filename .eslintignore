@@ -1,0 +1,7 @@
+examples/blogs__e2e-snapshots/snapshots.js
+examples/blogs__element-coverage/src
+examples/preprocessors__typescript-webpack/dist
+node_modules
+**/vendor
+# don't ignore hidden files, useful for formatting json config files
+!.*

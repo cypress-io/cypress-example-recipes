@@ -1,10 +1,9 @@
 /// <reference types="cypress" />
-/* eslint-env mocha */
-/* global cy */
 // our Codepen has top level URL
 const url = 'https://codepen.io/bahmutov/full/ZaMxgz/'
 // that loads app from this URL
 const iframeUrl = 'https://s.codepen.io/bahmutov/fullpage/ZaMxgz'
+
 describe('HyperApp Counter Codepen', () => {
   beforeEach(function loadAppIFrameAndSetAsOurTestDocument () {
     // we could even cache the received HTML code
@@ -25,6 +24,7 @@ describe('HyperApp Counter Codepen', () => {
       .should('be.greaterThan', 2000)
 
       const doc = cy.state('document')
+
       cy.log('Writing HTML into test document')
       doc.write(html)
       doc.close()
@@ -37,6 +37,7 @@ describe('HyperApp Counter Codepen', () => {
 
   // a few utility functions for working with the app's DOM
   const getCount = () => cy.get('main').find('h1')
+
   it('starts with zero', () => {
     getCount().contains('0')
   })
@@ -64,6 +65,7 @@ describe('HyperApp Counter Codepen', () => {
     getCount()
     .contains(0)
     .should('be.visible')
+
     getMinus().click({ force: true }) // because button is disabled
     getCount()
     .contains(0)
@@ -105,6 +107,7 @@ describe('HyperApp Counter Codepen', () => {
       getCount()
       .contains(-2)
       .should('be.visible')
+
       getMinus().should('be.disabled')
     })
   })

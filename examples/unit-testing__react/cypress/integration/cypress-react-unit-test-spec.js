@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+/* eslint-disable react/jsx-filename-extension */
 import 'cypress-react-unit-test'
 import React from 'react'
 import Greeting from '../../greeting'

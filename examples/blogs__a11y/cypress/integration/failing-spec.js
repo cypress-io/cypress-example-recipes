@@ -8,8 +8,7 @@ describe('A11y fails', () => {
     cy.contains('p', 'hard to read')
   })
 
-  // skip this test on purpose - if you enable it
-  // it will fail with color contrast error
+  // NOTE: skip this test on purpose - enable to see failing color contrast check
   it.skip('does not pass accessibility check', () => {
     cy.contains('p', 'hard to read')
     cy.injectAxe()
