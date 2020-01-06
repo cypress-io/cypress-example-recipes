@@ -176,8 +176,6 @@ jobs:
     <<: *defaults
   preprocessors__typescript-webpack:
     <<: *defaults
-  server-communication__bootstrapping-your-app:
-    <<: *defaults
   stubbing-spying__functions:
     <<: *defaults
   stubbing-spying__window-fetch:
@@ -189,7 +187,7 @@ jobs:
   stubbing-spying__console:
     <<: *defaults
   stubbing__resources:
-    <<: *defaults  
+    <<: *defaults
   testing-dom__drag-drop:
     <<: *defaults
   testing-dom__form-interactions:
@@ -208,7 +206,11 @@ jobs:
     <<: *defaults
   unit-testing__react:
     <<: *defaults
+  server-communication__bootstrapping-your-app:
+    <<: *defaults
   server-communication__env-variables:
+    <<: *defaults
+  server-communication__seeding-database-in-node:
     <<: *defaults
   server-communication__xhr-assertions:
     <<: *defaults
@@ -337,7 +339,7 @@ all_jobs: &all_jobs
         - build
   - stubbing__resources:
       requires:
-        - build      
+        - build
   - testing-dom__drag-drop:
       requires:
         - build
@@ -369,6 +371,9 @@ all_jobs: &all_jobs
       requires:
         - build
   - server-communication__env-variables:
+      requires:
+        - build
+  - server-communication__seeding-database-in-node:
       requires:
         - build
   - server-communication__xhr-assertions:
@@ -418,6 +423,7 @@ all_jobs: &all_jobs
         - preprocessors__typescript-webpack
         - server-communication__bootstrapping-your-app
         - server-communication__env-variables
+        - server-communication__seeding-database-in-node
         - server-communication__xhr-assertions
         - stubbing-spying__functions
         - stubbing-spying__window-fetch

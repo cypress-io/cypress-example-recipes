@@ -51,6 +51,18 @@ cy.wait('@post').then(console.log)
 
 ![XHR logged to console](images/log-xhr.png)
 
+## Multiple requests
+
+[cypress/integration/multiple-requests.js](cypress/integration/multiple-requests.js) shows how to wait for multiple matching requests and how to retrieve them all, or individually.
+
+![multiple requests](images/multiple.png)
+
+## Controlling the clock
+
+We can skip the initial 1 second delay set using `setTimeout(..., 1000)` inside the application by controlling the application's clock. See [cypress/integration/clock-control.js](cypress/integration/clock-control.js).
+
+![Fast test via clock control](images/clock.gif)
+
 ## See also
 
 - [Cypress network guide](https://on.cypress.io/network-requests)
