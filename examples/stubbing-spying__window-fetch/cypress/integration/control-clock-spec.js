@@ -32,7 +32,9 @@ describe('clock', function () {
   describe('when favorite fruits are returned', function () {
     beforeEach(function () {
       this.fetchFavoritesDeferred.resolve({
-        json () { return ['Apple', 'Banana', 'Cantaloupe'] },
+        json () {
+          return ['Apple', 'Banana', 'Cantaloupe']
+        },
         ok: true,
       })
     })
@@ -43,8 +45,10 @@ describe('clock', function () {
 
       cy.get('@favoriteFruits').first()
       .should('have.text', 'Apple')
+
       cy.get('@favoriteFruits').eq(1)
       .should('have.text', 'Banana')
+
       cy.get('@favoriteFruits').eq(2)
       .should('have.text', 'Cantaloupe')
     })
@@ -54,9 +58,12 @@ describe('clock', function () {
         // since we aliased the window.fetch stub to 'fetchFavorites',
         // it becomes available as this.fetchFavorites in our tests
         this.fetchFavorites.onCall(1).resolves({
-          json () { return ['Orange', 'Cherry', 'Raspberry', 'Pineapple'] },
+          json () {
+            return ['Orange', 'Cherry', 'Raspberry', 'Pineapple']
+          },
           ok: true,
         })
+
         // move time 30 seconds and the setInterval will be triggered
         // that polls for the fruit
         cy.tick(30000)
@@ -72,10 +79,13 @@ describe('clock', function () {
 
         cy.get('@favoriteFruits').first()
         .should('have.text', 'Orange')
+
         cy.get('@favoriteFruits').eq(1)
         .should('have.text', 'Cherry')
+
         cy.get('@favoriteFruits').eq(2)
         .should('have.text', 'Raspberry')
+
         cy.get('@favoriteFruits').eq(3)
         .should('have.text', 'Pineapple')
       })

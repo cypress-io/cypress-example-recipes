@@ -1,10 +1,10 @@
-const _          = require('lodash')
-const path       = require('path')
-const minimist   = require('minimist')
-const express    = require('express')
+const _ = require('lodash')
+const path = require('path')
+const minimist = require('minimist')
+const express = require('express')
 
-const fruits     = require('./fruits')
-const app        = express()
+const fruits = require('./fruits')
+const app = express()
 
 // get port from passed in args from scripts/start.js
 const port = minimist(process.argv.slice(2)).port
