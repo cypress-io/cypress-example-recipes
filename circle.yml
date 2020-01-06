@@ -72,6 +72,15 @@ jobs:
             - app
             - .cache/Cypress
 
+  lint:
+    working_directory: ~/app
+    docker:
+      - image: cypress/base:10
+    steps:
+      - attach_workspace:
+        at: ~/
+      - run: npx eslint examples/blogs__a11y/
+
   # dummy job running after all end-to-end tests
   after-tests:
     docker:
@@ -223,6 +232,9 @@ jobs:
 # and then use this list from workflow definition
 all_jobs: &all_jobs
   - build
+  - lint:
+      requires:
+        - build
   - test-examples:
       requires:
         - build
@@ -398,6 +410,7 @@ all_jobs: &all_jobs
   - after-tests:
       requires:
         - build
+        - lint
         - blogs__a11y
         - blogs__application-actions
         - blogs__direct-control-angular
