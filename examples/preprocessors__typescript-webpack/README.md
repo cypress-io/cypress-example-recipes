@@ -35,3 +35,9 @@ The E2E tests should run in Cypress right away. There are few other commands con
 
 - `npm run build` runs Webpack to convert spec TS file into `out.js`
 - `npm run lint` lints TypeScript specs using [tslint](https://palantir.github.io/tslint) and then TypeScript compiler to type check test source files.
+
+## Source maps
+
+[webpack.config.js](webpack.config.js) sets the source maps, if there is `debugger` keyword or an exception from the TypeScript code, its position should be shown correctly.
+
+![Debugger](img/source-map.png)

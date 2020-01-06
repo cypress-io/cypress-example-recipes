@@ -39,7 +39,9 @@ describe('stubbing', function () {
   describe('when favorite fruits are returned', function () {
     beforeEach(function () {
       this.fetchFavoritesDeferred.resolve({
-        json () { return ['Apple', 'Banana', 'Cantaloupe'] },
+        json () {
+          return ['Apple', 'Banana', 'Cantaloupe']
+        },
         ok: true,
       })
     })
@@ -50,8 +52,10 @@ describe('stubbing', function () {
 
       cy.get('@favoriteFruits').first()
       .should('have.text', 'Apple')
+
       cy.get('@favoriteFruits').eq(1)
       .should('have.text', 'Banana')
+
       cy.get('@favoriteFruits').eq(2)
       .should('have.text', 'Cantaloupe')
     })
@@ -60,7 +64,9 @@ describe('stubbing', function () {
   describe('when no favorite fruits are returned', function () {
     beforeEach(function () {
       this.fetchFavoritesDeferred.resolve({
-        json () { return [] },
+        json () {
+          return []
+        },
         ok: true,
       })
     })

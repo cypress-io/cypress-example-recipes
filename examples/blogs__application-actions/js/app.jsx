@@ -1,12 +1,8 @@
-/* jshint quotmark:false */
-/* jshint white:false */
-/* jshint trailing:false */
-/* jshint newcap:false */
-/* global React, Router */
-var app = app || {}
+window.app = window.app || {}
 
 ;(function () {
   'use strict'
+  let app = window.app
 
   app.ALL_TODOS = 'all'
   app.ACTIVE_TODOS = 'active'

@@ -4,11 +4,11 @@
   "description": "Showing elements the test has interacted with",
   "private": true,
   "scripts": {
-    "start": "../../node_modules/.bin/react-scripts start",
-    "wait-on": "../../node_modules/.bin/wait-on http://localhost:3000",
-    "cypress:run": "npm run wait-on && ../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "test:ci": "../../node_modules/.bin/start-test 3000 cypress:run"
+    "cypress:run": "npm run wait-on && ../../node_modules/.bin/cypress run",
+    "start": "../../node_modules/.bin/react-scripts start",
+    "test:ci": "../../node_modules/.bin/start-test 3000 cypress:run",
+    "wait-on": "../../node_modules/.bin/wait-on http://localhost:3000"
   },
   "browserslist": [
     ">0.2%",

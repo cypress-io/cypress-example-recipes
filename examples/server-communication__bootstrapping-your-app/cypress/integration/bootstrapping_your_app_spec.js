@@ -40,6 +40,7 @@ describe('Bootstrapping App Test Data', function () {
           win._bootstrappedData = data
         },
       })
+
       cy.get('pre')
       .invoke('text')
       .should('eq', JSON.stringify(data))
@@ -94,6 +95,7 @@ describe('Bootstrapping App Test Data', function () {
           url: '/data.json',
           response: data,
         }).as('getData')
+
         cy.visit('/xhr.html')
         cy.wait('@getData')
         cy.get('pre')

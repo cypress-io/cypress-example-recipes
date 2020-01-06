@@ -110,6 +110,7 @@ Recipe | Description
 [Use TypeScript With Cypress](https://glebbahmutov.com/blog/use-typescript-with-cypress/) | Step by step tutorial on how to set up TypeScript support in Cypress using WebPack bundler
 [Cypress should callback](https://glebbahmutov.com/blog/cypress-should-callback/) | Examples of `.should(cb)` assertions
 [Cypress jump](https://glebbahmutov.com/blog/cypress-jump/) | Create a React component using JSX and inject it into live application from a Cypress test
+[Unit testing Vuex data store using Cypress.io Test Runner](https://dev.to/bahmutov/unit-testing-vuex-data-store-using-cypress-io-test-runner-3g4n) | Complete walkthrough for anyone trying to unit test a data store
 
 ## Community Recipes
 

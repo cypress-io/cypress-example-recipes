@@ -80,9 +80,11 @@ describe('loading style', () => {
       expect(resourceTiming)
       .property('entryType')
       .to.equal('resource')
+
       expect(resourceTiming, 'the CSS file is very small (in bytes)')
       .property('transferSize')
       .to.be.lt(300)
+
       expect(resourceTiming, 'loads in less than 150ms')
       .property('duration')
       .to.be.lt(150)
@@ -103,15 +105,15 @@ describe('loading style', () => {
     // 3rd party module "cypress-wait-until" is really useful
     // for simple conditions like waiting for an item
     // @see https://github.com/NoriSte/cypress-wait-until
-    cy.waitUntil(() =>
-      cy.window().then((win) =>
-        win.performance
+    cy.waitUntil(() => {
+      return cy.window().then((win) => {
+        return win.performance
         .getEntriesByType('resource')
         // note: ".some(...)" method returns boolean value
         // which cypress-wait-until expects
         .some((item) => item.name.endsWith('app.css'))
-      )
-    )
+      })
+    })
 
     // red color means the style from "app.css" has been loaded and applied
     cy.get('h1', { timeout: 250 }).should('have.css', 'color', 'rgb(255, 0, 0)')

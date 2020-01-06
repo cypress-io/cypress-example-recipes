@@ -8,7 +8,7 @@ const port = minimist(process.argv.slice(2)).port
 
 const data = {
   env: 'development',
-  api: 'https://api.company.com'
+  api: 'https://api.company.com',
 }
 
 app.set('views', __dirname)
@@ -19,7 +19,7 @@ app.use('/node_modules', express.static(path.join(__dirname, '..', '..', 'node_m
 
 app.get('/bootstrap.html', (req, res) => {
   res.render('./bootstrap.hbs', {
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
   })
 })
 

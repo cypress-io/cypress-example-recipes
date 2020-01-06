@@ -1,17 +1,17 @@
 /// <reference types="cypress" />
-/* global cy */
+/* eslint-disable no-console */
 export const resetDatabase = () => {
   console.log('resetDatabase')
   cy.request({
     method: 'POST',
     url: '/reset',
     body: {
-      todos: []
-    }
+      todos: [],
+    },
   })
 }
 
-export const visit = skipWaiting => {
+export const visit = (skipWaiting) => {
   console.log('visit this =', this)
 
   if (typeof skipWaiting !== 'boolean') {
@@ -19,11 +19,13 @@ export const visit = skipWaiting => {
   }
 
   const waitForInitialLoad = !skipWaiting
+
   console.log('visit will wait for initial todos', waitForInitialLoad)
   if (waitForInitialLoad) {
     cy.server()
     cy.route('/todos').as('initialTodos')
   }
+
   cy.visit('/')
   console.log('cy.visit /')
   if (waitForInitialLoad) {
@@ -47,8 +49,9 @@ export const stubMathRandom = () => {
   // first two digits are disregarded, so our "random" sequence of ids
   // should be '1', '2', '3', ...
   let counter = 101
+
   cy.stub(Math, 'random').callsFake(() => counter++)
-  cy.window().then(win => {
+  cy.window().then((win) => {
     // inside test iframe
     cy.stub(win.Math, 'random').callsFake(() => counter++)
   })
@@ -57,10 +60,11 @@ export const stubMathRandom = () => {
 export const makeTodo = (text = 'todo') => {
   const id = newId()
   const title = `${text} ${id}`
+
   return {
     id,
     title,
-    completed: false
+    completed: false,
   }
 }
 
@@ -78,5 +82,6 @@ export const enterTodo = (text = 'example todo') => {
   // I am going to use combined selector to always grab
   // the element and not use stale reference from previous chain call
   const lastItem = '.todoapp .todo-list li:last'
+
   cy.get(lastItem).should('contain', text)
 }

@@ -40,6 +40,7 @@ describe('Stubbing Dependencies', function () {
     // to return a resolved promise
     beforeEach(function () {
       cy.stub(api, 'login').resolves('user-id-123')
+
       return this.auth.login('user', 'pass')
     })
 
@@ -58,6 +59,7 @@ describe('Stubbing Dependencies', function () {
     beforeEach(function () {
       cy.stub(api, 'login').rejects(new Error('Wrong password'))
       cy.stub(util, 'log')
+
       return this.auth.login('user', 'pass')
     })
 
@@ -75,6 +77,7 @@ describe('Stubbing Dependencies', function () {
     // easy way to call that callback
     beforeEach(function () {
       cy.stub(api, 'login').resolves('user-id-123')
+
       return this.auth.login('user', 'pass').then(() => {
         api.onUnauth.yield()
       })

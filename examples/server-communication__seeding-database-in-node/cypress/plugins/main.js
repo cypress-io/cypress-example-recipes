@@ -7,6 +7,6 @@ export default (on) => {
       return seed(data).then(() => {
         return data
       })
-    }
+    },
   })
 }

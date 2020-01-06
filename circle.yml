@@ -72,6 +72,16 @@ jobs:
             - app
             - .cache/Cypress
 
+  lint:
+    working_directory: ~/app
+    docker:
+      - image: cypress/base:10
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run lint:json
+      - run: npm run lint
+
   # dummy job running after all end-to-end tests
   after-tests:
     docker:
@@ -178,8 +188,6 @@ jobs:
     <<: *defaults
   preprocessors__typescript-webpack:
     <<: *defaults
-  server-communication__bootstrapping-your-app:
-    <<: *defaults
   stubbing-spying__functions:
     <<: *defaults
   stubbing-spying__window-fetch:
@@ -210,7 +218,11 @@ jobs:
     <<: *defaults
   unit-testing__react:
     <<: *defaults
+  server-communication__bootstrapping-your-app:
+    <<: *defaults
   server-communication__env-variables:
+    <<: *defaults
+  server-communication__seeding-database-in-node:
     <<: *defaults
   server-communication__xhr-assertions:
     <<: *defaults
@@ -223,6 +235,9 @@ jobs:
 # and then use this list from workflow definition
 all_jobs: &all_jobs
   - build
+  - lint:
+      requires:
+        - build
   - test-examples:
       requires:
         - build
@@ -230,7 +245,6 @@ all_jobs: &all_jobs
         branches:
           only:
             - master
-            - allow-testing-in-chunks
 
   - test-examples-chrome:
       requires:
@@ -378,6 +392,9 @@ all_jobs: &all_jobs
   - server-communication__env-variables:
       requires:
         - build
+  - server-communication__seeding-database-in-node:
+      requires:
+        - build
   - server-communication__xhr-assertions:
       requires:
         - build
@@ -398,6 +415,7 @@ all_jobs: &all_jobs
   - after-tests:
       requires:
         - build
+        - lint
         - blogs__a11y
         - blogs__application-actions
         - blogs__direct-control-angular
@@ -426,6 +444,7 @@ all_jobs: &all_jobs
         - preprocessors__typescript-webpack
         - server-communication__bootstrapping-your-app
         - server-communication__env-variables
+        - server-communication__seeding-database-in-node
         - server-communication__xhr-assertions
         - stubbing-spying__functions
         - stubbing-spying__window-fetch

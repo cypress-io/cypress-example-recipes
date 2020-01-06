@@ -1,11 +1,11 @@
-const path       = require('path')
-const minimist   = require('minimist')
-const morgan     = require('morgan')
-const session    = require('express-session')
-const express    = require('express')
-const debug      = require('debug')('sso')
+const path = require('path')
+const minimist = require('minimist')
+const morgan = require('morgan')
+const session = require('express-session')
+const express = require('express')
+const debug = require('debug')('sso')
 
-const app        = express()
+const app = express()
 
 // get port from passed in args from scripts/start.js
 const port = minimist(process.argv.slice(2)).port
@@ -24,6 +24,7 @@ const ensureLoggedIn = (req, res, next) => {
     } else if (req.get('x-session-token')) {
       debug('request has x-session-token')
     }
+
     next()
   } else {
     debug('nope, redirecting to /unauthorized')
@@ -32,7 +33,7 @@ const ensureLoggedIn = (req, res, next) => {
 }
 
 app.use('/node_modules', express.static(path.join(__dirname, '..', '..', 'node_modules')))
-app.use(morgan("dev"))
+app.use(morgan('dev'))
 
 // store a session cookie called
 // 'cypress-session-cookie'
@@ -40,7 +41,7 @@ app.use(session({
   name: 'cypress-session-cookie',
   secret: 'sekret',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
 }))
 
 // app.use((req, res, next) => {
@@ -72,7 +73,7 @@ app.get('/config', ensureLoggedIn, (req, res) => {
   res.json({
     foo: 'bar',
     some: 'config',
-    loggedIn: true
+    loggedIn: true,
   })
 })
 
@@ -83,7 +84,7 @@ app.get('/unauthorized', (req, res) => {
 
 app.get('/', (req, res) => {
   debug('rendering /index')
-  res.render("./index.hbs")
+  res.render('./index.hbs')
 })
 
 app.listen(port, () => {

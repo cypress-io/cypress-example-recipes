@@ -1,9 +1,12 @@
-var app = app || {}
+/* global window */
+window.app = window.app || {}
 
 ;(function () {
   'use strict'
+  let app = window.app
 
   let Utils = app.Utils
+
   // Generic "model" object. You can use whatever
   // framework you want. For this application it
   // may not even be worth separating this logic

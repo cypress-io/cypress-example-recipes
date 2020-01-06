@@ -4,6 +4,22 @@
 - there is a script [test-examples.js](test-examples.js) useful to run all examples one by one
   * note that the script only runs an example if it has `npm run test:ci` script command.
 
+### Linting
+
+Many recipes are linted using [@cypress/eslint-plugin-dev](https://github.com/cypress-io/eslint-plugin-dev). You can lint a single folder or lint and auto-fix with:
+
+```shell
+$ npx eslint examples/blogs__vue-vuex-rest/cypress
+$ npx eslint examples/blogs__vue-vuex-rest/cypress --fix
+```
+
+There are NPM scripts for linting code and JSON files
+
+```shell
+npm run lint
+npm run lint:json
+```
+
 ### Testing in specific browser
 
 You can test some examples using a specific browser. For example, to run just some folders using Brave browser, call

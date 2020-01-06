@@ -1,3 +1,5 @@
+/* global chai */
+/* eslint-disable react/jsx-filename-extension */
 import Adapter from 'enzyme-adapter-react-16'
 import React from 'react'
 import chaiEnzyme from 'chai-enzyme'
@@ -25,15 +27,17 @@ chai.use(chaiEnzyme())
 // using enzyme in multiple tests
 configure({ adapter: new Adapter() })
 
-describe('Unit Test React with Enzyme', function(){
-  context('<Greeting />', function(){
-    it('displays default greeting', function(){
+describe('Unit Test React with Enzyme', function () {
+  context('<Greeting />', function () {
+    it('displays default greeting', function () {
       const component = shallow(<Greeting />)
+
       expect(component.find('p')).to.have.text('Hello World')
     })
 
-    it('updates greeting when button is clicked', function(){
+    it('updates greeting when button is clicked', function () {
       const component = shallow(<Greeting />)
+
       component.find('button').simulate('click')
       expect(component.find('p')).to.have.text('Bonjour World')
     })
