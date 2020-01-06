@@ -27,6 +27,7 @@ describe('File upload', () => {
       // save stub under an alias
       cy.stub(axios, 'post').as('file-upload')
     })
+
     // load mock data from a fixture or construct here
     const testFile = new File(['data to upload'], 'upload.txt')
 

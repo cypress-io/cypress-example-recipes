@@ -1,14 +1,17 @@
 examples/blogs__e2e-snapshots/snapshots.js
 examples/blogs__element-coverage/src
-examples/preprocessors__typescript-webpack/dist
 examples/preprocessors__flow-browserify
-node_modules
+examples/blogs__testing-redux-store/src
+**/node_modules
 **/vendor
 # don't ignore hidden files, useful for formatting json config files
 !.*
 # most TS configs have comments, which generates lint warnings
 tsconfig.json
+# generated files
 .cache
+examples/blogs__testing-redux-store/dist
+examples/preprocessors__typescript-webpack/dist
 # a couple of problematic JSON files
 examples/logging-in__jwt/server/config.json
 examples/logging-in__using-app-code/server/config.json
