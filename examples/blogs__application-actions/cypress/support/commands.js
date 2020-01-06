@@ -13,7 +13,6 @@
 
 /* eslint-env browser */
 Cypress.Commands.add('createDefaultTodos', function () {
-
   let TODO_ITEM_ONE = 'buy some cheese'
   let TODO_ITEM_TWO = 'feed the cat'
   let TODO_ITEM_THREE = 'book a doctors appointment'
@@ -56,7 +55,6 @@ Cypress.Commands.add('createDefaultTodos', function () {
 })
 
 Cypress.Commands.add('createTodo', function (todo) {
-
   let cmd = Cypress.log({
     name: 'create todo',
     message: todo,
