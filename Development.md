@@ -13,6 +13,13 @@ $ npx eslint examples/blogs__vue-vuex-rest/cypress
 $ npx eslint examples/blogs__vue-vuex-rest/cypress --fix
 ```
 
+There are NPM scripts for linting code and JSON files
+
+```shell
+npm run lint
+npm run lint:json
+```
+
 ### Testing in specific browser
 
 You can test some examples using a specific browser. For example, to run just some folders using Brave browser, call

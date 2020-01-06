@@ -79,6 +79,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
+      - run: npm run lint:json
       - run: |
           npx eslint examples/blogs__a11y \
           examples/blogs__application-actions \

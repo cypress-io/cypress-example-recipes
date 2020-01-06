@@ -7,3 +7,7 @@ node_modules
 !.*
 # most TS configs have comments, which generates lint warnings
 tsconfig.json
+.cache
+# a couple of problematic JSON files
+examples/logging-in__jwt/server/config.json
+examples/logging-in__using-app-code/server/config.json
