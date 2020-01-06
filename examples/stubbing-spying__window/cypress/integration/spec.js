@@ -8,6 +8,7 @@ describe('window open', function () {
     cy.window().then((win) => {
       cy.stub(win, 'open').as('windowOpen')
     })
+
     cy.get('#open-window').click()
     cy.get('@windowOpen').should('be.calledWith', 'page1.html')
   })

@@ -12,6 +12,7 @@ describe('polyfill window.fetch from tests', function () {
   // grab fetch polyfill from remote URL, could be also from a local package
   before(() => {
     const polyfillUrl = 'https://unpkg.com/unfetch/dist/unfetch.umd.js'
+
     cy.request(polyfillUrl)
     .then((response) => {
       polyfill = response.body

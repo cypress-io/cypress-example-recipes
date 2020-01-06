@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Unit testing React code using Enzyme, react-testing-library and cypress-react-unit-test",
   "scripts": {
-    "start": "echo nothing to start, unit testing example",
-    "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "start": "echo nothing to start, unit testing example",
     "test:ci": "npm run cypress:run",
-    "test:ci:windows": "bin-up cypress run",
-    "test:ci:firefox": "npm run cypress:run -- --browser firefox"
+    "test:ci:firefox": "npm run cypress:run -- --browser firefox",
+    "test:ci:windows": "bin-up cypress run"
   }
 }

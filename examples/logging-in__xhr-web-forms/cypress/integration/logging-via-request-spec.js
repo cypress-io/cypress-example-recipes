@@ -1,11 +1,10 @@
 /// <reference types="cypress" />
 
-describe('Logging in using XHR request', function(){
-
+describe('Logging in using XHR request', function () {
   const username = 'jane.lane'
   const password = 'password123'
 
-  it('can bypass the UI and yet still log in', function(){
+  it('can bypass the UI and yet still log in', function () {
     // oftentimes once we have a proper e2e test around logging in
     // there is NO more reason to actually use our UI to log in users
     // doing so wastes a huge amount of time, as our entire page has to load
@@ -20,8 +19,8 @@ describe('Logging in using XHR request', function(){
       url: '/login', // baseUrl will be prepended to this url
       body: {
         username,
-        password
-      }
+        password,
+      },
     })
 
     // just to prove we have a session

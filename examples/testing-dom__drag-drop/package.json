@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Performing Drag & Drop by triggering mouse and drag events",
   "scripts": {
-    "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "start": "node server.js --port 7071",
+    "cypress:run": "../../node_modules/.bin/cypress run",
     "dev": "../../node_modules/.bin/start-test http://localhost:7071/puzzle.html cypress:open",
+    "start": "node server.js --port 7071",
     "test:ci": "../../node_modules/.bin/start-test http://localhost:7071/puzzle.html cypress:run"
   }
 }

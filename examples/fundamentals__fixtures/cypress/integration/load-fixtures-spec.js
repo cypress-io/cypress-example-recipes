@@ -5,10 +5,11 @@ describe('Loading multiple fixtures', () => {
     let country
 
     beforeEach(() => {
-      cy.fixture('city').then(c => {
+      cy.fixture('city').then((c) => {
         city = c
       })
-      cy.fixture('country').then(c => {
+
+      cy.fixture('country').then((c) => {
         country = c
       })
     })
@@ -16,14 +17,14 @@ describe('Loading multiple fixtures', () => {
     it('has loaded fixtures', () => {
       expect({ city, country }).to.deep.equal({
         city: { name: 'Atlanta' },
-        country: { name: 'United States' }
+        country: { name: 'United States' },
       })
     })
 
     it('still has fixtures in the second test', () => {
       expect({ city, country }).to.deep.equal({
         city: { name: 'Atlanta' },
-        country: { name: 'United States' }
+        country: { name: 'United States' },
       })
     })
   })
@@ -35,10 +36,11 @@ describe('Loading multiple fixtures', () => {
     before(() => {
       // load fixtures once before any tests
       // and they are kept in closure variables
-      cy.fixture('city').then(c => {
+      cy.fixture('city').then((c) => {
         city = c
       })
-      cy.fixture('country').then(c => {
+
+      cy.fixture('country').then((c) => {
         country = c
       })
     })
@@ -46,7 +48,7 @@ describe('Loading multiple fixtures', () => {
     it('has loaded fixtures', () => {
       expect({ city, country }).to.deep.equal({
         city: { name: 'Atlanta' },
-        country: { name: 'United States' }
+        country: { name: 'United States' },
       })
     })
 
@@ -55,7 +57,7 @@ describe('Loading multiple fixtures', () => {
       // in the two variables and they should remain there
       expect({ city, country }).to.deep.equal({
         city: { name: 'Atlanta' },
-        country: { name: 'United States' }
+        country: { name: 'United States' },
       })
     })
   })
@@ -64,10 +66,11 @@ describe('Loading multiple fixtures', () => {
     // notice how "beforeEach" callback uses "function"
     // form to make sure Mocha context points correctly at "this"
     beforeEach(function () {
-      cy.fixture('city').then(c => {
+      cy.fixture('city').then((c) => {
         this.city = c
       })
-      cy.fixture('country').then(c => {
+
+      cy.fixture('country').then((c) => {
         this.country = c
       })
     })
@@ -105,10 +108,11 @@ describe('Loading multiple fixtures', () => {
       // load fixtures just once, need to store in
       // closure variables because Mocha context is cleared
       // before each test
-      cy.fixture('city').then(c => {
+      cy.fixture('city').then((c) => {
         city = c
       })
-      cy.fixture('country').then(c => {
+
+      cy.fixture('country').then((c) => {
         country = c
       })
     })

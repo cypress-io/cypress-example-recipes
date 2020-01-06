@@ -6,9 +6,9 @@
 // Additionally we'll show you how to fire mouse events
 // on an element so that JavaScript event callbacks are invoked.
 
-describe('Hover and Hidden Elements', function(){
-  context('hidden elements', function(){
-    beforeEach(function(){
+describe('Hover and Hidden Elements', function () {
+  context('hidden elements', function () {
+    beforeEach(function () {
       // In `examples/hover_hidden_elements/hidden.html`,
       // the html page includes an element that is hidden until
       // the :hover CSS psuedo selector is triggered by a mouse hover
@@ -19,17 +19,17 @@ describe('Hover and Hidden Elements', function(){
       cy.visit('/hidden.html')
     })
 
-    it('solution #1: force events to happen', function(){
+    it('solution #1: force events to happen', function () {
       // By default, before Cypress interacts with an element,
       // it checks to ensure the element is not hidden
       //
       // Some commands, like cy.click, allow you to pass 'force: true'
       // as an option to bypass these checks and allow the event to happen anyway
-      cy.get('button').click({force: true})
+      cy.get('button').click({ force: true })
       cy.get('#message').should('contain', 'the button was clicked')
     })
 
-    it('solution #2: force the element to be visible before click', function(){
+    it('solution #2: force the element to be visible before click', function () {
       // We get a lot of value out of letting Cypress ensure the element
       // is interactable and its nice to not 'force' events to happen.
       //
@@ -45,7 +45,7 @@ describe('Hover and Hidden Elements', function(){
       cy.get('#message').should('contain', 'the button was clicked')
     })
 
-    it('solution #3: verify visibility prior to showing element', function(){
+    it('solution #3: verify visibility prior to showing element', function () {
       // We can improve on solution #2 above by adding some tests
       // around the elements visibility.
       //
@@ -56,8 +56,8 @@ describe('Hover and Hidden Elements', function(){
     })
   })
 
-  context('mouse events', function(){
-    beforeEach(function(){
+  context('mouse events', function () {
+    beforeEach(function () {
       // In `examples/hover_hidden_elements/mouse.html`,
       // the html page includes a button that is bound to several
       // mouse events. This shows you how to cause those events to fire.
@@ -65,9 +65,9 @@ describe('Hover and Hidden Elements', function(){
       cy.visit('/mouse.html')
     })
 
-    describe('if your app uses jQuery', function(){
+    describe('if your app uses jQuery', function () {
       ['mouseover', 'mouseout', 'mouseenter', 'mouseleave'].forEach((event) => {
-        it(`triggers event: '${event}`, function(){
+        it(`triggers event: '${event}`, function () {
           // if your app uses jQuery, then we can trigger a jQuery
           // event that causes the event callback to fire
           cy.get('#with-jquery').invoke('trigger', event)
@@ -76,9 +76,9 @@ describe('Hover and Hidden Elements', function(){
       })
     })
 
-    describe('if your app does not use jQuery', function(){
+    describe('if your app does not use jQuery', function () {
       ['mouseover', 'mouseout', 'mouseenter', 'mouseleave'].forEach((event) => {
-        it(`dispatches event: '${event}`, function(){
+        it(`dispatches event: '${event}`, function () {
           // if your app doesnt use jQuery then we use .trigger()
           // https://on.cypress.io/trigger
 

@@ -79,20 +79,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: |
-          npx eslint examples/blogs__a11y \
-          examples/blogs__application-actions \
-          examples/blogs__codepen-demo \
-          examples/blogs__direct-control-angular \
-          examples/blogs__e2e-api-testing \
-          examples/blogs__e2e-snapshots \
-          examples/blogs__element-coverage \
-          examples/blogs__testing-redux-store/cypress \
-          examples/blogs__vue-vuex-rest/cypress \
-          examples/preprocessors__grep \
-          examples/preprocessors__typescript-browserify \
-          examples/preprocessors__typescript-webpack \
-          examples/unit-testing__react
+      - run: npm run lint:json
+      - run: npm run lint
 
   # dummy job running after all end-to-end tests
   after-tests:

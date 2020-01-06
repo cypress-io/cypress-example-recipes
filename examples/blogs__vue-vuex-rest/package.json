@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Testing Vue + Vuex + REST TodoMVC using Cypress",
   "scripts": {
-    "start": "../../node_modules/.bin/json-server --static . data.json --middlewares ../../node_modules/json-server-reset",
-    "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "reset:db": "node reset-db.js",
-    "reset": "node reset-db.js",
+    "cypress:run": "../../node_modules/.bin/cypress run",
     "dev": "../../node_modules/.bin/start-test 3000 cypress:open",
+    "reset": "node reset-db.js",
+    "reset:db": "node reset-db.js",
+    "start": "../../node_modules/.bin/json-server --static . data.json --middlewares ../../node_modules/json-server-reset",
     "test:ci": "../../node_modules/.bin/start-test 3000 cypress:run"
   }
 }

@@ -1,5 +1,3 @@
-/* global Cypress, cy */
-
 // in our cypress.json file we have blacklisted www.google-analytics.com
 // which prevents the GA script from ever loading. however because there
 // is still a global 'window.ga' function, that means we can stub it

@@ -13,15 +13,15 @@
 // Be sure to run `npm start` to start the server
 // before running the tests below.
 
-describe('Logging In - XHR Web Form', function(){
+describe('Logging In - XHR Web Form', function () {
   // normally sensitive information like username and password
   // should be passed via environment variables
   // https://on.cypress.io/env
   const username = 'jane.lane'
   const password = 'password123'
 
-  context('XHR form submission', function(){
-    beforeEach(function(){
+  context('XHR form submission', function () {
+    beforeEach(function () {
       cy.visit('/login')
     })
 
@@ -37,7 +37,7 @@ describe('Logging In - XHR Web Form', function(){
       cy.get('h1').should('contain', 'jane.lane')
     })
 
-    it('displays errors on login', function(){
+    it('displays errors on login', function () {
       // we can observe both the UI and the network XHR call
       // during unsuccessful login attempt
       cy.server()
@@ -56,14 +56,14 @@ describe('Logging In - XHR Web Form', function(){
 
       // we should have visible errors now
       cy.get('p.error')
-        .should('be.visible')
-        .and('contain', 'Username and/or password is incorrect')
+      .should('be.visible')
+      .and('contain', 'Username and/or password is incorrect')
 
       // and still be on the same URL
       cy.url().should('include', '/login')
     })
 
-    it('can stub the XHR to force it to fail', function(){
+    it('can stub the XHR to force it to fail', function () {
       // instead of letting this XHR hit our backend we can instead
       // control its behavior programmatically by stubbing it
       cy.server()
@@ -71,13 +71,13 @@ describe('Logging In - XHR Web Form', function(){
       // simulate the server returning 503 with
       // empty JSON response body
       cy.route({
-          method: 'POST',
-          url: '/login',
-          status: 503,
-          response: {}
-        })
-        // alias this route so we can wait on it later
-        .as('postLogin')
+        method: 'POST',
+        url: '/login',
+        status: 503,
+        response: {},
+      })
+      // alias this route so we can wait on it later
+      .as('postLogin')
 
       // incorrect username on purpose
       cy.get('input[name=username]').type('jane.lae')
@@ -86,22 +86,22 @@ describe('Logging In - XHR Web Form', function(){
       // we can even test that the correct request
       // body was sent in this XHR
       cy.wait('@postLogin')
-        .its('requestBody')
-        .should('deep.eq', {
-          username: 'jane.lae',
-          password: 'password123'
-        })
+      .its('requestBody')
+      .should('deep.eq', {
+        username: 'jane.lae',
+        password: 'password123',
+      })
 
       // we should have visible errors now
       cy.get('p.error')
-        .should('be.visible')
-        .and('contain', 'An error occurred: 503 Service Unavailable')
+      .should('be.visible')
+      .and('contain', 'An error occurred: 503 Service Unavailable')
 
       // and still be on the same URL
       cy.url().should('include', '/login')
     })
 
-    it('redirects to /dashboard on success', function(){
+    it('redirects to /dashboard on success', function () {
       // we can submit form using "cy.submit" command
       // https://on.cypress.io/submit
       cy.get('input[name=username]').type(username)
@@ -116,7 +116,7 @@ describe('Logging In - XHR Web Form', function(){
       cy.getCookie('cypress-session-cookie').should('exist')
     })
 
-    it('redirects on a stubbed XHR', function(){
+    it('redirects on a stubbed XHR', function () {
       // When we stub the XHR we will no longer have a valid
       // cookie which means that on our Login.onSuccess callback
       // when we try to navigate to /dashboard we are unauthorized
@@ -125,26 +125,26 @@ describe('Logging In - XHR Web Form', function(){
       // and test that its called with the right data.
       //
       cy.window()
-        .then(function(win){
-          // stub out the Login.redirect method
-          // so it doesn't cause the browser to redirect
-          cy.stub(win.Login, 'redirect').as('redirect')
-        })
+      .then(function (win) {
+        // stub out the Login.redirect method
+        // so it doesn't cause the browser to redirect
+        cy.stub(win.Login, 'redirect').as('redirect')
+      })
 
       cy.server()
 
       // simulate the server returning 503 with
       // empty JSON response body
       cy.route({
-          method: 'POST',
-          url: '/login',
-          response: {
-            // simulate a redirect to another page
-            redirect: '/error'
-          }
-        })
-        // alias this route so we can wait on it later
-        .as('postLogin')
+        method: 'POST',
+        url: '/login',
+        response: {
+          // simulate a redirect to another page
+          redirect: '/error',
+        },
+      })
+      // alias this route so we can wait on it later
+      .as('postLogin')
 
       cy.get('input[name=username]').type(username)
       cy.get('input[name=password]').type(password)
@@ -154,12 +154,12 @@ describe('Logging In - XHR Web Form', function(){
 
       // we should not have any visible errors
       cy.get('p.error')
-        .should('not.be.visible')
-        .then(function(){
-          // our redirect function should have been called with
-          // the right arguments from the stubbed routed
-          expect(this.redirect).to.be.calledWith('/error')
-        })
+      .should('not.be.visible')
+      .then(function () {
+        // our redirect function should have been called with
+        // the right arguments from the stubbed routed
+        expect(this.redirect).to.be.calledWith('/error')
+      })
     })
   })
 })

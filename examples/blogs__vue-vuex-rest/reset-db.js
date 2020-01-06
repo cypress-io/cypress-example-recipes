@@ -6,9 +6,10 @@ const resetDatabase = () => {
 
   // for simple cases, can just overwrite the data file
   const data = {
-    todos: []
+    todos: [],
   }
-  const str = JSON.stringify(data, null, 2) + '\n'
+  const str = `${JSON.stringify(data, null, 2)}\n`
+
   write('./data.json', str)
 }
 

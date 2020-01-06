@@ -34,6 +34,7 @@ context('waiting for a property of an object', () => {
 
   it('waits for added property value', () => {
     const o = {}
+
     setTimeout(() => {
       o.foo = 42
     }, 100)
@@ -48,6 +49,7 @@ context('waiting for a property of an object', () => {
 
   it('waits for added property using .its', () => {
     const o = {}
+
     setTimeout(() => {
       o.foo = 42
     }, 100)
@@ -62,6 +64,7 @@ context('waiting for a property of an object', () => {
     const o = {
       foo: 42,
     }
+
     setTimeout(() => {
       delete o.foo
     }, 100)
@@ -76,6 +79,7 @@ context('waiting for a property of an object', () => {
 
   it('waits for added property value using .its', () => {
     const o = {}
+
     setTimeout(() => {
       o.foo = 42
     }, 100)
@@ -88,6 +92,7 @@ context('waiting for a property of an object', () => {
 
   it('waits for added nested property value', () => {
     const o = {}
+
     setTimeout(() => {
       o.foo = {
         bar: {
@@ -111,6 +116,7 @@ context('waiting for a property of an object', () => {
         },
       },
     }
+
     setTimeout(() => {
       delete o.foo.bar.baz
     }, 100)
