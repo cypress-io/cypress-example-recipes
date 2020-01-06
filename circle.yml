@@ -89,7 +89,10 @@ jobs:
           examples/blogs__e2e-snapshots \
           examples/blogs__element-coverage \
           examples/blogs__testing-redux-store/cypress \
-          examples/blogs__vue-vuex-rest/cypress
+          examples/blogs__vue-vuex-rest/cypress \
+          examples/preprocessors__grep \
+          examples/preprocessors__typescript-browserify \
+          examples/preprocessors__typescript-webpack
 
   # dummy job running after all end-to-end tests
   after-tests:
