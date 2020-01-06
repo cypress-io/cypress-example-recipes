@@ -90,6 +90,7 @@ describe('Logging In - Single Sign on', function () {
         'contain',
         'You are not logged in and cannot access this page'
       )
+
       cy.url().should('include', 'unauthorized')
     })
 
@@ -175,10 +176,10 @@ describe('Logging In - Single Sign on', function () {
           // now go visit our app
           cy.visit('/', {
             onBeforeLoad (win) {
-                // and before the page finishes loading
-                // set the id_token in local storage
-                win.localStorage.setItem('id_token', id_token)
-              },
+              // and before the page finishes loading
+              // set the id_token in local storage
+              win.localStorage.setItem('id_token', id_token)
+            },
           })
 
           // wait for the /config XHR

@@ -29,6 +29,7 @@ describe('Logging In - HTML Web Form', function () {
         'contain',
         'You are not logged in and cannot access this page'
       )
+
       cy.url().should('include', 'unauthorized')
     })
 
@@ -105,7 +106,7 @@ describe('Logging In - HTML Web Form', function () {
         form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
         body: {
           username,
-          password
+          password,
         },
       })
 
