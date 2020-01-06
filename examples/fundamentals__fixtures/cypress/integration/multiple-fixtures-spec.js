@@ -1,18 +1,21 @@
 /// <reference types="cypress" />
+/* eslint-disable no-console */
+
 describe('Loading multiple fixtures', () => {
   it('loads fixtures one by one', () => {
     // pyramid of doom of fixtures
-    cy.fixture('city').then(city => {
-      cy.fixture('country').then(country => {
+    cy.fixture('city').then((city) => {
+      cy.fixture('country').then((country) => {
         // thanks to JavaScript closures we have access to both fixtures
         expect({ city, country }).to.deep.equal({
           city: { name: 'Atlanta' },
-          country: { name: 'United States' }
+          country: { name: 'United States' },
         })
       })
     })
   })
 
+  // NOTE: test showing possible race condition
   it.skip('loads fixtures using Cypress.Promise.all - not recommended due to race condition', () => {
     // see discussion of Cypress.Promise.all in
     // https://github.com/cypress-io/cypress/issues/2932
