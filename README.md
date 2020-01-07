@@ -14,6 +14,7 @@ Recipe | Description
 [Adding Chai Assertions](./examples/extending-cypress__chai-assertions) | Add new or custom chai assertions with correct types
 [Cypress module API](./examples/fundamentals__module-api) | Run Cypress via its module API
 [Custom browsers](./examples/fundamentals_custom-browsers) | Control which browsers the project can use, or even add a custom browser into the list
+[React DevTools](./examples/blogs__use-react-devtools) | Loads React DevTools Chrome extension automatically
 
 ## Testing the DOM
 
