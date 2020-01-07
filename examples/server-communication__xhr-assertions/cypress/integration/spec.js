@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+// @ts-check
 /* eslint-disable no-console */
 describe('XHR', () => {
   it('sends XHR to the server and gets expected response', () => {
@@ -60,6 +61,10 @@ describe('XHR', () => {
       body: 'this is a post sent to the server',
       userId: 1,
     })
+
+    // alternative: use "requestBody" alias to "request.body" property access
+    cy.get('@post').its('requestBody')
+    .should('have.property', 'title', 'example post')
 
     // get the same request object again and confirm the response
     cy.get('@post').its('response').then((res) => {
