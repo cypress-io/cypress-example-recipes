@@ -1,0 +1,25 @@
+{
+  "name": "use-react-devtools",
+  "version": "1.0.0",
+  "description": "Loading React DevTools Chrome extension",
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "dev": "../../node_modules/.bin/start-test 3000 cypress:open",
+    "start": "../../node_modules/.bin/react-scripts start",
+    "test:ci": "../../node_modules/.bin/start-test 3000 cypress:run",
+    "test:ci:chrome": "../../node_modules/.bin/start-test 3000 cypress:run"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

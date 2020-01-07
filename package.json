@@ -9,7 +9,8 @@
     "lint": "eslint examples",
     "lint:json": "eslint --ext .json examples",
     "start": "echo Call npm start from each example subfolder!",
-    "stop-only": "stop-only --folder examples --skip node_modules",
+    "stop-only": "stop-only --folder examples --skip node_modules --skip dist --skip .cache --skip build",
+    "warn-only": "stop-only --warn --folder examples --skip node_modules --skip dist --skip .cache --skip build",
     "test:ci": "node ./test-examples",
     "test:ci:brave": "node ./test-examples --brave",
     "test:ci:chrome": "node ./test-examples --chrome",
@@ -23,6 +24,9 @@
     }
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.7",
     "babel-register": "6.26.0",
     "body-parser": "1.18.2",
     "chai-colors": "1.0.1",
@@ -53,6 +57,7 @@
     "react": "16.4.0",
     "react-dom": "16.2.1",
     "react-redux": "5.1.0",
+    "react-tooltip": "^3.11.1",
     "redux": "4.0.1",
     "reselect": "4.0.0",
     "rootpath": "0.1.2",
