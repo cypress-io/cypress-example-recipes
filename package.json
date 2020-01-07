@@ -73,8 +73,8 @@
   "devDependencies": {
     "@babel/preset-flow": "7.0.0",
     "@cypress/browserify-preprocessor": "2.1.1",
-    "@cypress/snapshot": "2.1.6",
     "@cypress/eslint-plugin-dev": "5.0.0",
+    "@cypress/snapshot": "2.1.6",
     "@cypress/webpack-preprocessor": "4.1.1",
     "@medv/finder": "1.1.2",
     "@types/chai": "4.1.7",
@@ -102,8 +102,10 @@
     "glob": "7.1.4",
     "globby": "9.1.0",
     "html-webpack-plugin": "3.2.0",
+    "husky": "4.0.0",
     "json-server-reset": "1.0.0",
     "lazy-ass": "1.6.0",
+    "lint-staged": "9.5.0",
     "neat-csv": "5.1.0",
     "nodemon": "1.18.11",
     "npm-run-all": "4.1.5",
@@ -124,5 +126,16 @@
     "webpack": "4.29.6",
     "webpack-cli": "3.3.3",
     "webpack-dev-server": "3.7.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
