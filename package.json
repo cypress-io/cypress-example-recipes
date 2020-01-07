@@ -90,7 +90,7 @@
     "cypress-axe": "0.5.3",
     "cypress-failed-log": "2.5.1",
     "cypress-file-upload": "3.5.3",
-    "cypress-pipe": "1.5.0",
+    "cypress-pipe": "1.6.0",
     "cypress-plugin-snapshots": "1.2.9",
     "cypress-react-unit-test": "2.4.3",
     "cypress-select-tests": "1.4.1",
