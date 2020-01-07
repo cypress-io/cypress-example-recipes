@@ -61,6 +61,10 @@ describe('XHR', () => {
       userId: 1,
     })
 
+    // alternative: use "requestBody" alias to "request.body" property access
+    cy.get('@post').its('requestBody')
+    .should('have.property', 'title', 'example post')
+
     // get the same request object again and confirm the response
     cy.get('@post').its('response').then((res) => {
     // because the response object is not going to change
