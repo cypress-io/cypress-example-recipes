@@ -20,30 +20,29 @@ import { upperFirst, lowerFirst } from 'lodash'
 // and also require node_modules from our package.json
 const minimist = require('minimist')
 
-describe("Modules", function(){
-
+describe('Modules', function () {
   // you can use ES2015 module import syntax
-  context('ES2015', function(){
-    it('can import default function', function(){
+  context('ES2015', function () {
+    it('can import default function', function () {
       expect(getSelector('checkbox')).to.eq('.my-app-checkbox')
     })
 
-    it('can import upperFirst from lodash', function(){
+    it('can import upperFirst from lodash', function () {
       expect(upperFirst('jane')).to.eq('Jane')
     })
 
-    it('can import lowerFirst from lodash', function(){
+    it('can import lowerFirst from lodash', function () {
       expect(lowerFirst('JANE')).to.eq('jANE')
     })
   })
 
   // you can also use node's CommonJS require syntax
-  context('CommonJS', function(){
-    it('can require module.exports', function(){
+  context('CommonJS', function () {
+    it('can require module.exports', function () {
       expect(appendKey('jane.lane@devs.com')).to.eq('jane.lane@devs.com+APIkey123')
     })
 
-    it('can require minimist', function(){
+    it('can require minimist', function () {
       // minimist is a command line argument parsing tool
       // that is traditionally used in node (we use it at Cypress)
       //
@@ -54,7 +53,7 @@ describe("Modules", function(){
         count: 1,
         foo: 'bar',
         quux: false,
-        _: []
+        _: [],
       })
     })
   })

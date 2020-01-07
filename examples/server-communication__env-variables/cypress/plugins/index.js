@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -20,5 +21,6 @@ module.exports = (on, config) => {
   config.env.FOO = process.env.FOO
   config.env.BAR = process.env.BAR
   console.log('extended config.env with process.env.{FOO, BAR}')
+
   return config
 }

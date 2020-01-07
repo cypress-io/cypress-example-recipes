@@ -1,3 +1,3 @@
-module.exports = function(str) {
-  return str + "+APIkey123"
+module.exports = function (str) {
+  return `${str}+APIkey123`
 }

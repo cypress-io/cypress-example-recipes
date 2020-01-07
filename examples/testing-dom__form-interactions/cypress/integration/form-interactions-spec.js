@@ -3,13 +3,13 @@
 // Eventually, this will be expanded to includes examples of interacting
 // with various form elements
 
-describe('Form Interactions', function(){
-  beforeEach(function(){
+describe('Form Interactions', function () {
+  beforeEach(function () {
     cy.viewport(400, 300)
     cy.visit('/index.html')
   })
 
-  it('updates range value when moving slider', function(){
+  it('updates range value when moving slider', function () {
     // To interact with a range input (slider), we need to set its value and
     // then trigger the appropriate event to signal it has changed
 
@@ -20,9 +20,10 @@ describe('Form Interactions', function(){
     // which is fired as a user moves the slider, but is not supported
     // by some browsers
     cy.get('input[type=range]').as('range')
-      .invoke('val', 25)
-      .trigger('change')
+    .invoke('val', 25)
+    .trigger('change')
+
     cy.get('@range').siblings('p')
-      .should('have.text', '25')
+    .should('have.text', '25')
   })
 })

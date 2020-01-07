@@ -1,10 +1,10 @@
-const minimist   = require('minimist')
-const morgan     = require('morgan')
+const minimist = require('minimist')
+const morgan = require('morgan')
 const bodyParser = require('body-parser')
-const session    = require('express-session')
-const express    = require('express')
+const session = require('express-session')
+const express = require('express')
 
-const app        = express()
+const app = express()
 
 // get port from passed in args from scripts/start.js
 const port = minimist(process.argv.slice(2)).port
@@ -24,7 +24,7 @@ const ensureLoggedIn = (req, res, next) => {
 // parse regular form submission bodies
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-app.use(morgan("dev"))
+app.use(morgan('dev'))
 
 // store a session cookie called
 // 'cypress-session-cookie'
@@ -32,7 +32,7 @@ app.use(session({
   name: 'cypress-session-cookie',
   secret: 'sekret',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
 }))
 
 // app.use((req, res, next) => {
@@ -55,21 +55,21 @@ app.get('/login', (req, res) => {
 // the login form
 app.post('/login', urlencodedParser, (req, res) => {
   // if this matches the secret username and password
-  if(matchesUsernameAndPassword(req.body)){
+  if (matchesUsernameAndPassword(req.body)) {
     req.session.user = 'jane.lane'
 
     res.redirect('/dashboard')
   } else {
     // render login with errors
     res.render('./login.hbs', {
-      error: 'Username and/or password is incorrect'
+      error: 'Username and/or password is incorrect',
     })
   }
 })
 
 app.get('/dashboard', ensureLoggedIn, (req, res) => {
   res.render('./dashboard.hbs', {
-    user: req.session.user
+    user: req.session.user,
   })
 })
 

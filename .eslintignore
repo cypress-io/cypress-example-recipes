@@ -1,0 +1,21 @@
+examples/blogs__e2e-snapshots/snapshots.js
+examples/blogs__element-coverage/src
+examples/preprocessors__flow-browserify
+examples/blogs__testing-redux-store/src
+**/node_modules
+**/vendor
+# React DevTools extension source code
+examples/blogs__use-react-devtools/4.2.1_0
+# and demo game
+examples/blogs__use-react-devtools/src
+# don't ignore hidden files, useful for formatting json config files
+!.*
+# most TS configs have comments, which generates lint warnings
+tsconfig.json
+# generated files
+.cache
+examples/blogs__testing-redux-store/dist
+examples/preprocessors__typescript-webpack/dist
+# a couple of problematic JSON files
+examples/logging-in__jwt/server/config.json
+examples/logging-in__using-app-code/server/config.json

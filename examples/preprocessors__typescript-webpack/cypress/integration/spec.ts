@@ -5,6 +5,7 @@ describe('TypeScript', () => {
   it('works', () => {
     // note TypeScript definition
     const x: number = 42
+
     expect(x).to.equal(42)
   })
 
@@ -13,6 +14,7 @@ describe('TypeScript', () => {
       age: 21,
       name: 'Joe',
     }
+
     expect(object).to.have.all.keys('name', 'age')
   })
 
@@ -23,8 +25,9 @@ describe('TypeScript', () => {
   it('tests our example site', () => {
     cy.visit('https://example.cypress.io/')
     cy.get('.home-list')
-      .contains('Querying')
-      .click()
+    .contains('Querying')
+    .click()
+
     cy.get('#query-btn').should('contain', 'Button')
   })
 
@@ -48,11 +51,11 @@ describe('TypeScript', () => {
 
   it('yields the subject to .then callback', () => {
     cy.wrap({ foo: 'bar' })
-      .then(o => {
-        // webpack config should set the source maps correctly
-        // to make sure when debugger is hit, the correct source line is shown
-        // debugger
-        expect(o).to.have.property('foo', 'bar')
-      })
+    .then((o) => {
+      // webpack config should set the source maps correctly
+      // to make sure when debugger is hit, the correct source line is shown
+      // debugger
+      expect(o).to.have.property('foo', 'bar')
+    })
   })
 })

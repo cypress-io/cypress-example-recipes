@@ -2,6 +2,7 @@
 
 // login just once using API
 let user
+
 before(function fetchUser () {
   cy.request('POST', 'http://localhost:4000/users/authenticate', {
     username: Cypress.env('username'),
@@ -26,31 +27,33 @@ beforeEach(function setUser () {
   // the page should be opened and the user should be logged in
 })
 
-it('makes authenticated request', () => {
+describe('JWT', () => {
+  it('makes authenticated request', () => {
   // we can make authenticated request ourselves
   // since we know the token
-  cy.request({
-    url: 'http://localhost:4000/users',
-    auth: {
-      bearer: user.token,
-    },
+    cy.request({
+      url: 'http://localhost:4000/users',
+      auth: {
+        bearer: user.token,
+      },
+    })
+    .its('body')
+    .should('deep.equal', [
+      {
+        id: 1,
+        username: 'test',
+        firstName: 'Test',
+        lastName: 'User',
+      },
+    ])
   })
-  .its('body')
-  .should('deep.equal', [
-    {
-      id: 1,
-      username: 'test',
-      firstName: 'Test',
-      lastName: 'User',
-    },
-  ])
-})
 
-it('is logged in', () => {
-  cy.contains('Hi Test!').should('be.visible')
-})
+  it('is logged in', () => {
+    cy.contains('Hi Test!').should('be.visible')
+  })
 
-it('shows loaded user', () => {
+  it('shows loaded user', () => {
   // this user information came from authenticated XHR call
-  cy.contains('li', 'Test User').should('be.visible')
+    cy.contains('li', 'Test User').should('be.visible')
+  })
 })

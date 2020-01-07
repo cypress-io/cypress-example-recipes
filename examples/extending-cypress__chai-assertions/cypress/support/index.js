@@ -1,3 +1,4 @@
+/* global chai */
 // because this file is imported from cypress/support/index.js
 // that means all other spec files will have this assertion plugin
 // available to them because the supportFile is bundled and served
@@ -32,5 +33,6 @@ const isFoo = (_chai, utils) => {
 
   _chai.Assertion.addMethod('foo', assertIsFoo)
 }
+
 // registers our assertion function "isFoo" with Chai
 chai.use(isFoo)

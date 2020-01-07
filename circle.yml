@@ -72,6 +72,16 @@ jobs:
             - app
             - .cache/Cypress
 
+  lint:
+    working_directory: ~/app
+    docker:
+      - image: cypress/base:10
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run lint:json
+      - run: npm run lint
+
   # dummy job running after all end-to-end tests
   after-tests:
     docker:
@@ -141,6 +151,8 @@ jobs:
   blogs__testing-redux-store:
     <<: *defaults
   blogs__vue-vuex-rest:
+    <<: *defaults
+  blogs__use-react-devtools:
     <<: *defaults
   extending-cypress__chai-assertions:
     <<: *defaults
@@ -225,6 +237,9 @@ jobs:
 # and then use this list from workflow definition
 all_jobs: &all_jobs
   - build
+  - lint:
+      requires:
+        - build
   - test-examples:
       requires:
         - build
@@ -232,7 +247,6 @@ all_jobs: &all_jobs
         branches:
           only:
             - master
-            - allow-testing-in-chunks
 
   - test-examples-chrome:
       requires:
@@ -278,6 +292,9 @@ all_jobs: &all_jobs
       requires:
         - build
   - blogs__vue-vuex-rest:
+      requires:
+        - build
+  - blogs__use-react-devtools:
       requires:
         - build
   - extending-cypress__chai-assertions:
@@ -396,6 +413,7 @@ all_jobs: &all_jobs
   - after-tests:
       requires:
         - build
+        - lint
         - blogs__a11y
         - blogs__application-actions
         - blogs__direct-control-angular
@@ -404,6 +422,7 @@ all_jobs: &all_jobs
         - blogs__element-coverage
         - blogs__testing-redux-store
         - blogs__vue-vuex-rest
+        - blogs__use-react-devtools
         - extending-cypress__chai-assertions
         - file-upload-react
         - fundamentals__node-modules

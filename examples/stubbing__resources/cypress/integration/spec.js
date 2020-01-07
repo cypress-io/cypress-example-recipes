@@ -36,6 +36,7 @@ describe('Stub loading of resources', () => {
         mutations[0].addedNodes[0].src = `data:image/png;base64,${imgStr}`
       })
     })
+
     cy.get('button').click()
 
     // image element will have "naturalWidth" set when it loads
@@ -44,5 +45,3 @@ describe('Stub loading of resources', () => {
     cy.get('#img-container > img').should(($img) => expect($img[0].naturalWidth).to.equal(100))
   })
 })
-
-

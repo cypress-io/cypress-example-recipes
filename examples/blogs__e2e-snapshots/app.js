@@ -33,6 +33,7 @@
       },
       REMOVE_TODO (state, todo) {
         let todos = state.todos
+
         todos.splice(todos.indexOf(todo), 1)
       },
       CLEAR_NEW_TODO (state) {
@@ -58,11 +59,13 @@
           // do not add empty todos
           return
         }
+
         const todo = {
           title: state.newTodo,
           completed: false,
           id: randomId(),
         }
+
         axios.post('/todos', todo).then(() => {
           commit('ADD_TODO', todo)
         })
@@ -137,12 +140,15 @@
         // or read it off the native event
         const f = this.file || e.target.files[0]
         const reader = new FileReader()
+
         reader.onload = (e) => {
           const list = JSON.parse(e.target.result)
+
           list.forEach((todo) => {
             this.$store.commit('ADD_TODO', todo)
           })
         }
+
         reader.readAsText(f)
       },
     },

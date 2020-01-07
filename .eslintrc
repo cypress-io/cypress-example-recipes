@@ -1,7 +1,10 @@
 {
+  "plugins": [
+    "@cypress/dev"
+  ],
   "extends": [
-    "plugin:cypress-dev/general",
-    "plugin:cypress-dev/tests"
+    "plugin:@cypress/dev/general",
+    "plugin:@cypress/dev/tests"
   ],
   "env": {
     "node": true

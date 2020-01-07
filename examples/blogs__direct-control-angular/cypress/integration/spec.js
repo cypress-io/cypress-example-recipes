@@ -1,12 +1,15 @@
+/* eslint-disable no-console */
 const getAngular = () => cy.window().its('angular')
 
-const getElementScope = (selector) =>
-  cy.get(selector).then(($el) => getAngular().then((ng) => ng.element($el).scope()))
+const getElementScope = (selector) => {
+  return cy.get(selector).then(($el) => getAngular().then((ng) => ng.element($el).scope()))
+}
 
-const getElementInjector = (selector) =>
-  cy
+const getElementInjector = (selector) => {
+  return cy
   .get(selector)
   .then(($el) => getAngular().then((ng) => ng.element($el).injector()))
+}
 
 const addTodo = (text) => cy.get('.new-todo').type(text).type('{enter}')
 
@@ -35,6 +38,7 @@ describe('Angular TodoMVC', () => {
     .window()
     .then((win) => {
       console.log('got app window object', win)
+
       return win
     })
     .its('angular')
@@ -54,6 +58,7 @@ describe('Angular TodoMVC', () => {
 
   it('can get todo', () => {
     const title = 'learn E2E testing with Cypress'
+
     addTodo(title)
 
     getElementScope('.todo-list li:first').its('todo').should('deep.equal', {
@@ -64,6 +69,7 @@ describe('Angular TodoMVC', () => {
 
   it('can change todo via Angular scope', () => {
     const title = 'learn E2E testing with Cypress'
+
     addTodo(title)
 
     getElementScope('.todo-list li:first').its('todo').then((todo) => {
@@ -125,6 +131,7 @@ describe('Angular TodoMVC', () => {
 
     getElementInjector('.todo-list').then((injector) => {
       const store = injector.get('localStorage')
+
       todos.forEach((t) => store.insert(t))
     })
 
