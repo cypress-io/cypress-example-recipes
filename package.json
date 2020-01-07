@@ -3,33 +3,25 @@
   "version": "0.0.0",
   "description": "This repo contains various recipes for testing common scenarios in your application using Cypress.",
   "main": "index.js",
-  "engines": {
-    "node": "11.6.0"
-  },
   "scripts": {
-    "cypress:version": "cypress version",
     "cypress:verify": "cypress verify",
+    "cypress:version": "cypress version",
+    "lint": "eslint examples",
+    "lint:json": "eslint --ext .json examples",
     "start": "echo Call npm start from each example subfolder!",
     "stop-only": "stop-only --folder examples --skip node_modules",
-    "warn-only": "stop-only --warn --folder examples --skip node_modules",
     "test:ci": "node ./test-examples",
-    "test:ci:windows": "node ./test-examples --windows",
-    "test:ci:chrome": "node ./test-examples --chrome",
     "test:ci:brave": "node ./test-examples --brave",
+    "test:ci:chrome": "node ./test-examples --chrome",
     "test:ci:firefox": "node ./test-examples --firefox",
-    "lint": "eslint examples",
-    "lint:json": "eslint --ext .json examples"
+    "test:ci:windows": "node ./test-examples --windows",
+    "warn-only": "stop-only --warn --folder examples --skip node_modules"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cypress-io/cypress-example-recipes.git"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
-  "author": "Brian Mann",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/cypress-io/cypress-example-recipes/issues"
-  },
-  "homepage": "https://github.com/cypress-io/cypress-example-recipes#readme",
   "dependencies": {
     "babel-register": "6.26.0",
     "body-parser": "1.18.2",
@@ -73,8 +65,8 @@
   "devDependencies": {
     "@babel/preset-flow": "7.0.0",
     "@cypress/browserify-preprocessor": "2.1.1",
-    "@cypress/snapshot": "2.1.6",
     "@cypress/eslint-plugin-dev": "5.0.0",
+    "@cypress/snapshot": "2.1.6",
     "@cypress/webpack-preprocessor": "4.1.1",
     "@medv/finder": "1.1.2",
     "@types/chai": "4.1.7",
@@ -102,8 +94,10 @@
     "glob": "7.1.4",
     "globby": "9.1.0",
     "html-webpack-plugin": "3.2.0",
+    "husky": "4.0.0",
     "json-server-reset": "1.0.0",
     "lazy-ass": "1.6.0",
+    "lint-staged": "9.5.0",
     "neat-csv": "5.1.0",
     "nodemon": "1.18.11",
     "npm-run-all": "4.1.5",
@@ -124,5 +118,28 @@
     "webpack": "4.29.6",
     "webpack-cli": "3.3.3",
     "webpack-dev-server": "3.7.1"
+  },
+  "engines": {
+    "node": "11.6.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cypress-io/cypress-example-recipes.git"
+  },
+  "homepage": "https://github.com/cypress-io/cypress-example-recipes#readme",
+  "author": "Brian Mann",
+  "bugs": {
+    "url": "https://github.com/cypress-io/cypress-example-recipes/issues"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "eslint --ext .json --fix",
+      "git add"
+    ]
   }
 }
