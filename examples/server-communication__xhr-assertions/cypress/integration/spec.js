@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-// @ts-check
 /* eslint-disable no-console */
 describe('XHR', () => {
   it('sends XHR to the server and gets expected response', () => {
