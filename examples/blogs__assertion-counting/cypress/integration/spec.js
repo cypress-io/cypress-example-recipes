@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import 'cypress-wait-until'
+import { plan } from 'cypress-expect-n-assertions'
 
 describe('Window confirm', () => {
   // NOTE: skipping this test because it does not wait correctly for assertion to execute
@@ -62,5 +63,33 @@ describe('Window confirm', () => {
     cy.get('#click').click()
     // see https://github.com/NoriSte/cypress-wait-until
     cy.waitUntil(() => called)
+  })
+
+  context('plan', () => {
+    it('waits for window confirm to happen using waitUntil', () => {
+      plan(1)
+      cy.visit('index.html')
+      let called
+
+      cy.on('window:confirm', (message) => {
+        expect(message).to.equal('Are you sure?')
+        called = true
+      })
+
+      cy.get('#click').click()
+      // see https://github.com/NoriSte/cypress-wait-until
+      cy.waitUntil(() => called)
+    })
+
+    it('waits for planned number of assertion to run', () => {
+      plan(1)
+      cy.visit('index.html')
+
+      cy.on('window:confirm', (message) => {
+        expect(message).to.equal('Are you sure?')
+      })
+
+      cy.get('#click').click()
+    })
   })
 })
