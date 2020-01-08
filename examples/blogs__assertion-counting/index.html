@@ -1,0 +1,15 @@
+<html lang="en">
+  <body>
+    <main>
+      <h1>Assertion counting</h1>
+      <p>Click on the button, should show Window confirm dialog</p>
+      <button id="click">Click</button>
+    </main>
+    <script>
+      const confirmIt = () => {
+        window.confirm('Are you sure?')
+      }
+      document.getElementById('click').addEventListener('click', confirmIt)
+    </script>
+  </body>
+</html>
