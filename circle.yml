@@ -138,7 +138,7 @@ jobs:
     <<: *defaults
   blogs__assertion-counting:
     <<: *defaults
-    blogs__application-actions:
+  blogs__application-actions:
     <<: *defaults
   blogs__codepen-demo:
     <<: *defaults
