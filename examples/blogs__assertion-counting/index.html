@@ -1,0 +1,18 @@
+<html lang="en">
+  <body>
+    <main>
+      <h1>Assertion counting</h1>
+      <p>Click on the button, should show Window confirm dialog</p>
+      <button id="click">Click</button>
+    </main>
+    <script>
+      const confirmIt = () => {
+        // show the confirm prompt after a delay
+        setTimeout(() => {
+          window.confirm('Are you sure?')
+        }, 1000)
+      }
+      document.getElementById('click').addEventListener('click', confirmIt)
+    </script>
+  </body>
+</html>

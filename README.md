@@ -67,6 +67,7 @@ Recipe | Description
 [A11y Testing](./examples/blogs__a11y) | Accessibility testing with [cypress-axe](https://github.com/avanslaars/cypress-axe#readme)
 [Automate Angular Testing](https://www.cypress.io/blog/2019/08/02/guest-post-angular-adding-cypress-ui-tests-to-your-devops-pipeline/) | Run Angular tests in a build environment
 [React DevTools](./examples/blogs__use-react-devtools) | Loads React DevTools Chrome extension automatically
+[Expect N assertions](./examples/blogs__assertion-counting) | How to expect a certain number of assertions in a test
 
 ## Stubbing and spying
 

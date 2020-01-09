@@ -136,6 +136,8 @@ jobs:
   # define a new job with defaults for each "examples/*" subfolder
   blogs__a11y:
     <<: *defaults
+  blogs__assertion-counting:
+    <<: *defaults
   blogs__application-actions:
     <<: *defaults
   blogs__codepen-demo:
@@ -273,6 +275,9 @@ all_jobs: &all_jobs
   #       - build
 
   - blogs__a11y:
+      requires:
+        - build
+  - blogs__assertion-counting:
       requires:
         - build
   - blogs__application-actions:
@@ -417,6 +422,7 @@ all_jobs: &all_jobs
         - build
         - lint
         - blogs__a11y
+        - blogs__assertion-counting
         - blogs__application-actions
         - blogs__direct-control-angular
         - blogs__e2e-api-testing
