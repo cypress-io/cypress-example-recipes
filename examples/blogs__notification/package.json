@@ -1,0 +1,10 @@
+{
+  "name": "notification",
+  "version": "1.0.0",
+  "description": "How to test browser notifications from Cypress",
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "test:ci": "../../node_modules/.bin/cypress run"
+  }
+}
