@@ -68,6 +68,7 @@ Recipe | Description
 [Automate Angular Testing](https://www.cypress.io/blog/2019/08/02/guest-post-angular-adding-cypress-ui-tests-to-your-devops-pipeline/) | Run Angular tests in a build environment
 [React DevTools](./examples/blogs__use-react-devtools) | Loads React DevTools Chrome extension automatically
 [Expect N assertions](./examples/blogs__assertion-counting) | How to expect a certain number of assertions in a test
+[Browser notifications](./examples/blogs__notification) | How to test application that uses [`Notification`](https://developer.mozilla.org/en-US/docs/Web/API/notification)
 
 ## Stubbing and spying
 
