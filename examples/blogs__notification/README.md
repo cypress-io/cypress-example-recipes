@@ -26,6 +26,12 @@ If you enable notifications from Cypress itself, you will see a popup if you cli
 
 The rest of the tests stubs Notification constructor to avoid popups
 
+## Cannot use spy
+
+⚠️ In the tests we use `cy.stub(win, 'Notification')` and not `cy.spy(win, 'Notification')` because the [Sinon.js spy](https://on.cypress.io/spy) Cypress creates does not call the original function with `new` keyword.
+
+![Cannot use spy](images/cannot-use-spy.png)
+
 ## See also
 
 - Cypress guide to [Stubs, spies and clocks](https://on.cypress.io/stubs-spies-and-clocks)
