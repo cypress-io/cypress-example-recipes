@@ -32,6 +32,47 @@ The rest of the tests stubs Notification constructor to avoid popups
 
 ![Cannot use spy](images/cannot-use-spy.png)
 
+Cypress issue [#6129](https://github.com/cypress-io/cypress/issues/6129)
+
+### Workaround - spy via wrapper
+
+To solve the above problem, we can wrap the native `Notification` constructor with our own function that always calls the problematic constructor using `new` keyword.
+
+```js
+it('spying on Notification via workaround', () => {
+  cy.visit('index.html', {
+    onBeforeLoad (win) {
+      // let's wrap Notification constructor
+      // to make sure it is always called with "new" keyword
+      const _Notification = win.Notification
+
+      win.Notification = function MockNotification (text) {
+        // use "new" when calling true Notification
+        return new _Notification(text)
+      }
+
+      // and copy the rest of the important properties
+      win.Notification.requestPermission = _Notification.requestPermission
+      win.Notification.permission = 'granted'
+
+      // now spy on the wrapped Notification method
+      cy.spy(win, 'Notification').as('Notification')
+    },
+  })
+
+  cy.get('button').click()
+  cy.get('@Notification')
+  .should('have.been.calledWithNew')
+  .and('have.been.calledWithExactly', 'Permission was granted before')
+  .and('have.been.calledWithNew')
+})
+```
+
+![Spy is working](images/spying-via-workaround.png)
+
+See the actual notification popup during test visible in the screenshot.
+
+
 ## See also
 
 - Cypress guide to [Stubs, spies and clocks](https://on.cypress.io/stubs-spies-and-clocks)
