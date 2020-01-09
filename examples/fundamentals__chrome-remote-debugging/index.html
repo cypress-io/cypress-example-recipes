@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <style>
+        #printable {
+            display: none;
+        }
+
+        #pseudo-hover span {
+            display: none;
+        }
+
+        #pseudo-hover:hover span {
+            display: block;
+        }
+
+        @media print {
+            #printable {
+                display: block;
+            }
+
+            #not-in-printable {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="not-in-printable">not visible if print media query is activated</div>
+    <div id="printable">
+        <h1>This is displayed only in "print" mode</h1>
+    </div>
+    <div id="pseudo-hover">
+        <h1>Hover over this element</h1>
+        <span>Display only on hover</span>
+    </div>
+</body>
+
+</html>

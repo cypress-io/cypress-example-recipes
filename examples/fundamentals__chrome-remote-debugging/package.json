@@ -1,0 +1,10 @@
+{
+  "name": "chrome-remote-debugging",
+  "version": "1.0.0",
+  "description": "Use the CRI in your tests",
+  "scripts": {
+    "cypress:run:chrome": "../../node_modules/.bin/cypress run --headless --browser chrome",
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "test:ci:chrome": "npm run cypress:run:chrome"
+  }
+}
