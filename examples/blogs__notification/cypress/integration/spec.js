@@ -5,6 +5,19 @@ describe('Browser notifications', () => {
     cy.window().should('have.property', 'Notification').should('be.a', 'function')
   })
 
+  it('shows alert if the browser does not support notifications', () => {
+    cy.visit('index.html', {
+      onBeforeLoad (win) {
+        delete win.Notification
+      },
+    })
+
+    cy.on('window:alert', cy.stub().as('alerted'))
+    cy.get('button').click()
+    cy.get('@alerted').should('have.been.calledOnce')
+    .and('have.been.calledWith', 'This browser does not support desktop notification')
+  })
+
   it('creates Notification if was previously granted', () => {
     // see cy.visit options in https://on.cypress.io/visit
     cy.visit('index.html', {

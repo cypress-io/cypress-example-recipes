@@ -26,6 +26,33 @@ If you enable notifications from Cypress itself, you will see a popup if you cli
 
 The rest of the tests stubs Notification constructor to avoid popups
 
+## Testing if the browser does not support notifications
+
+Application code
+```js
+// Let's check if the browser supports notifications
+if (!("Notification" in window)) {
+  alert("This browser does not support desktop notification");
+  return
+}
+```
+
+Test
+```js
+it('shows alert if the browser does not support notifications', () => {
+  cy.visit('index.html', {
+    onBeforeLoad (win) {
+      delete win.Notification
+    },
+  })
+
+  cy.on('window:alert', cy.stub().as('alerted'))
+  cy.get('button').click()
+  cy.get('@alerted').should('have.been.calledOnce')
+  .and('have.been.calledWith', 'This browser does not support desktop notification')
+})
+```
+
 ## Cannot use spy
 
 ⚠️ In the tests we use `cy.stub(win, 'Notification')` and not `cy.spy(win, 'Notification')` because the [Sinon.js spy](https://on.cypress.io/spy) Cypress creates does not call the original function with `new` keyword.
