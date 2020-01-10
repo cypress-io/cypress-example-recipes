@@ -114,6 +114,8 @@ jobs:
       - image: cypress/browsers:node12.0.0-chrome75
     environment:
       TERM: xterm
+      # no need to record these runs yet
+      CYPRESS_RECORD_KEY: ''
     steps:
       - attach_workspace:
           at: ~/
