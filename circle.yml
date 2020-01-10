@@ -116,6 +116,8 @@ jobs:
       TERM: xterm
       # no need to record these runs yet
       CYPRESS_RECORD_KEY: ''
+      # while debugging https://github.com/cypress-io/cypress/issues/6053
+      DEBUG: cypress:server:protocol
     steps:
       - attach_workspace:
           at: ~/
@@ -131,6 +133,8 @@ jobs:
       TERM: xterm
       # no need to record these runs yet
       CYPRESS_RECORD_KEY: ''
+      # while debugging https://github.com/cypress-io/cypress/issues/6053
+      DEBUG: cypress:server:protocol
     steps:
       - attach_workspace:
           at: ~/
