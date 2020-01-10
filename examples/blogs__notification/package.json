@@ -5,6 +5,8 @@
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
-    "test:ci": "../../node_modules/.bin/cypress run"
+    "test:ci": "../../node_modules/.bin/cypress run",
+    "test:ci:chrome": "../../node_modules/.bin/cypress run --browser chrome",
+    "test:ci:chrome:headless": "../../node_modules/.bin/cypress run --browser chrome --headless"
   }
 }
