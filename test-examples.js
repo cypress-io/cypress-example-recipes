@@ -26,6 +26,7 @@ const args = arg({
   // TODO switch from separate --chrome|--brave|--firefox
   // to using "--browser chrome" or "--browser firefox" argument
   '--browser': String,
+  '--headless': Boolean,
 })
 
 // fill default values
@@ -37,7 +38,11 @@ console.log('args', args)
 let scriptName = 'test:ci'
 
 if (args['--chrome']) {
-  scriptName = 'test:ci:chrome'
+  if (args['--headless']) {
+    scriptName = 'test:ci:chrome:headless'
+  } else {
+    scriptName = 'test:ci:chrome'
+  }
 }
 
 if (args['--brave']) {
