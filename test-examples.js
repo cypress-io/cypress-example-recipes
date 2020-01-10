@@ -27,6 +27,7 @@ const args = arg({
   // to using "--browser chrome" or "--browser firefox" argument
   '--browser': String,
   '--headless': Boolean,
+  '--record': Boolean,
 })
 
 // fill default values
@@ -106,7 +107,15 @@ const testExample = (folder) => {
     return
   }
 
-  return execa('npm', ['run', scriptName], { stdio: 'inherit', cwd: folder })
+  const npmArgs = ['run', scriptName]
+  const npmOptions = { stdio: 'inherit', cwd: folder }
+
+  if (args['--record']) {
+    npmArgs.push('--')
+    npmArgs.push('--record')
+  }
+
+  return execa('npm', npmArgs, npmOptions)
 }
 
 const testExamples = (folders) => {
