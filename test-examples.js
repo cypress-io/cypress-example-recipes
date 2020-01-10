@@ -26,6 +26,8 @@ const args = arg({
   // TODO switch from separate --chrome|--brave|--firefox
   // to using "--browser chrome" or "--browser firefox" argument
   '--browser': String,
+  '--headless': Boolean,
+  '--record': Boolean,
 })
 
 // fill default values
@@ -37,7 +39,11 @@ console.log('args', args)
 let scriptName = 'test:ci'
 
 if (args['--chrome']) {
-  scriptName = 'test:ci:chrome'
+  if (args['--headless']) {
+    scriptName = 'test:ci:chrome:headless'
+  } else {
+    scriptName = 'test:ci:chrome'
+  }
 }
 
 if (args['--brave']) {
@@ -101,7 +107,15 @@ const testExample = (folder) => {
     return
   }
 
-  return execa('npm', ['run', scriptName], { stdio: 'inherit', cwd: folder })
+  const npmArgs = ['run', scriptName]
+  const npmOptions = { stdio: 'inherit', cwd: folder }
+
+  if (args['--record']) {
+    npmArgs.push('--')
+    npmArgs.push('--record')
+  }
+
+  return execa('npm', npmArgs, npmOptions)
 }
 
 const testExamples = (folders) => {

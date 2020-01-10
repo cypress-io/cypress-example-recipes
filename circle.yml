@@ -114,10 +114,31 @@ jobs:
       - image: cypress/browsers:node12.0.0-chrome75
     environment:
       TERM: xterm
+      # no need to record these runs yet
+      CYPRESS_RECORD_KEY: ''
+      # while debugging https://github.com/cypress-io/cypress/issues/6053
+      DEBUG: cypress:server:protocol
     steps:
       - attach_workspace:
           at: ~/
       - run: npm run test:ci:chrome -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+
+  # run recipes that have "test:ci:chrome:headless" script
+  test-examples-chrome-headless:
+    parallelism: 1
+    working_directory: ~/app
+    docker:
+      - image: cypress/browsers:node12.14.0-chrome79-ff71
+    environment:
+      TERM: xterm
+      # no need to record these runs yet
+      CYPRESS_RECORD_KEY: ''
+      # while debugging https://github.com/cypress-io/cypress/issues/6053
+      DEBUG: cypress:server:protocol
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run test:ci:chrome:headless -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
 
   # a single utility script to run multiple examples against Brave browser
   test-examples-brave:
@@ -256,6 +277,10 @@ all_jobs: &all_jobs
       requires:
         - build
 
+  - test-examples-chrome-headless:
+      requires:
+        - build
+
   - test-examples-brave:
       requires:
         - build
@@ -263,7 +288,6 @@ all_jobs: &all_jobs
         branches:
           only:
             - master
-            - 3.7.0
 
   # when adding new example subfolder with a recipe
   # add its name here to "create" CircleCI job
@@ -474,6 +498,7 @@ all_jobs: &all_jobs
         # "meta" jobs
         - test-examples
         - test-examples-chrome
+        - test-examples-chrome-headless
 
 workflows:
   version: 2

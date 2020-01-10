@@ -13,6 +13,7 @@
     "test:ci": "node ./test-examples",
     "test:ci:brave": "node ./test-examples --brave",
     "test:ci:chrome": "node ./test-examples --chrome",
+    "test:ci:chrome:headless": "node ./test-examples --chrome --headless",
     "test:ci:firefox": "node ./test-examples --firefox",
     "test:ci:windows": "node ./test-examples --windows",
     "warn-only": "stop-only --warn --folder examples --skip node_modules"
