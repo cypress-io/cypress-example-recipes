@@ -44,7 +44,9 @@ describe('Browser notifications', () => {
     })
 
     cy.get('button').click()
-    cy.get('@ask').should('have.been.calledOnce').and('have.been.calledBefore', cy.get('@Notification'))
+    cy.get('@ask')
+    .should('have.been.calledOnce')
+    .and('have.been.calledBefore', cy.get('@Notification'))
   })
 
   it('asks for permission first, does nothing if denied', () => {

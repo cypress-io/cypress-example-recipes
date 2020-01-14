@@ -11,7 +11,7 @@
       if (Notification.permission === "granted") {
         console.log('permission was granted before')
         // If it's okay let's create a notification
-        var notification = new window.Notification("Permission was granted before");
+        new Notification("Permission was granted before");
         return
       }
 
@@ -24,7 +24,7 @@
           if (permission === "granted") {
             console.log('permission granted, showing hi')
             console.log(Notification)
-            var notification = new Notification("Hi there!");
+            new Notification("Hi there!");
           }
         });
 
