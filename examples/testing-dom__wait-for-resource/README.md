@@ -94,3 +94,13 @@ cy.get('[alt="delayed image"]')
 ```
 
 ![Using natural width to detect when image loads](images/natural-width.gif)
+
+## Delayed script
+
+Similar to delayed style element, we can wait for delayed `<script src="...">` tag to finish loading its script.
+
+```js
+cy.visit('/')
+cy.waitForResource('a-script.js')
+```
+![Delayed script test](images/delayed-script.png)

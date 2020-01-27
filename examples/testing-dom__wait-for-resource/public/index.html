@@ -34,5 +34,12 @@
 
         document.body.appendChild(image)
       }, 1500)
+
+    // example of a delayed JS load
+    setTimeout(() => {
+      const script = document.createElement('script')
+      script.src = 'a-script.js'
+      document.head.appendChild(script)
+    }, 1500)
   </script>
 </body>
