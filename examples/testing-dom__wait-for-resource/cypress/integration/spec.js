@@ -148,3 +148,17 @@ describe('loading images', () => {
     })
   })
 })
+
+describe('loading script', () => {
+  it('waits for the script to load', () => {
+    cy.visit('/')
+    cy.window().its('console').then((console) => cy.spy(console, 'log').as('console'))
+    cy.waitForResource('a-script.js')
+    // once the resource is loaded, the spy "@console" should be set
+    // this is why the code below is using https://on.cypress.io/then
+    // to avoid retrying if the assertion is failing
+    cy.get('@console').then((spy) => {
+      expect(spy).to.have.been.calledOnce
+    })
+  })
+})
