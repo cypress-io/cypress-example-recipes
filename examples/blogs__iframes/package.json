@@ -1,0 +1,10 @@
+{
+  "name": "iframes",
+  "version": "1.0.0",
+  "description": "Interacting with iframes",
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "test:ci": "../../node_modules/.bin/cypress run"
+  }
+}
