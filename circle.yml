@@ -163,6 +163,8 @@ jobs:
     <<: *defaults
   blogs__notification:
     <<: *defaults
+  blogs__iframes:
+    <<: *defaults
   blogs__codepen-demo:
     <<: *defaults
   blogs__direct-control-angular:
@@ -305,6 +307,9 @@ all_jobs: &all_jobs
       requires:
         - build
   - blogs__notification:
+      requires:
+        - build
+  - blogs__iframes:
       requires:
         - build
   - blogs__application-actions:
@@ -452,6 +457,7 @@ all_jobs: &all_jobs
         - blogs__assertion-counting
         - blogs__application-actions
         - blogs__notification
+        - blogs__iframes
         - blogs__direct-control-angular
         - blogs__e2e-api-testing
         - blogs__e2e-snapshots
