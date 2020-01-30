@@ -68,7 +68,7 @@ it('spies on XHR request', () => {
   })
 
   // and we can confirm the UI has updated correctly
-  getIframeBody().find('#result').should('include.text', '"delectus aut autem"')
+  cy.getIframeBody().find('#result').should('include.text', '"delectus aut autem"')
 })
 
 it('stubs XHR response', () => {
@@ -84,7 +84,7 @@ it('stubs XHR response', () => {
     userId: 101,
   }).as('getTodo')
 
-  getIframeBody().find('#run-button').should('have.text', 'Try it').click()
+  cy.getIframeBody().find('#run-button').should('have.text', 'Try it').click()
   // and we can confirm the UI shows our stubbed response
-  getIframeBody().find('#result').should('include.text', '"write tests"')
+  cy.getIframeBody().find('#result').should('include.text', '"write tests"')
 })
