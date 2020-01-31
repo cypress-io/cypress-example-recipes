@@ -1,11 +1,12 @@
 # Interacting with iframes
 
 This recipe shows how to:
-- access elements inside an iframe coming from 3rd party domain
-- spy on `window.fetch` calls from the iframe
-- stub network calls coming from the iframe
 
-TODO add link to the blog post
+- Access elements inside an iframe coming from 3rd party domain
+- Spy on `window.fetch` calls from the iframe
+- Stub network calls coming from the iframe
+
+<!-- TODO add link to the blog post -->
 
 Spec | Description
 --- | ---
