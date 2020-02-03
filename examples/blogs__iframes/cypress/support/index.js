@@ -4,7 +4,7 @@ Cypress.Commands.add('getIframeBody', () => {
   cy.log('getIframeBody')
 
   return cy
-  .get('iframe[src="https://jsonplaceholder.typicode.com/"]', { log: false })
+  .get('iframe[data-cy="the-frame"]', { log: false })
   .its('0.contentDocument.body', { log: false }).should('not.be.empty')
   // wraps "body" DOM element to allow
   // chaining more Cypress commands, like ".find(...)"
