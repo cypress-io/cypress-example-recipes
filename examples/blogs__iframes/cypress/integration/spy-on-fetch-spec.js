@@ -3,7 +3,7 @@ import { skipOn } from '@cypress/skip-test'
 
 const getIframeWindow = () => {
   return cy
-  .get('iframe[src="https://jsonplaceholder.typicode.com/"]')
+  .get('iframe[data-cy="the-frame"]')
   .its('0.contentWindow').should('exist')
 }
 
@@ -24,7 +24,7 @@ describe('Recipe: blogs__iframes', () => {
       // otherwise we would have used "cy.wait('@fetch')"
       cy.get('@fetch').should('have.been.calledOnce')
       // let's confirm the url argument
-      .and('have.been.calledWith', 'https://jsonplaceholder.typicode.com/todos/1')
+      .and('have.been.calledWith', 'https://jsonplaceholder.cypress.io/todos/1')
     })
   })
 })

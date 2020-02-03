@@ -16,7 +16,7 @@ before(() => {
 // yields iframe's document
 const getIframeDocument = () => {
   return cy
-  .get('iframe[src="https://jsonplaceholder.typicode.com/"]')
+  .get('iframe[data-cy="the-frame"]')
   .its('0.contentDocument').should('exist')
 }
 
@@ -26,7 +26,7 @@ const getIframeBody = () => {
 
 const getIframeWindow = () => {
   return cy
-  .get('iframe[src="https://jsonplaceholder.typicode.com/"]')
+  .get('iframe[data-cy="the-frame"]')
   .its('0.contentWindow').should('exist')
 }
 
