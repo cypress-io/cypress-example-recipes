@@ -23,8 +23,10 @@ const getIframeBody = () => {
   .then(cy.wrap)
 }
 
-it('gets the post', () => {
-  cy.visit('index.html')
-  getIframeBody().find('#run-button').should('have.text', 'Try it').click()
-  getIframeBody().find('#result').should('include.text', '"delectus aut autem"')
+describe('Recipe: blogs__iframes', () => {
+  it('gets the post', () => {
+    cy.visit('index.html')
+    getIframeBody().find('#run-button').should('have.text', 'Try it').click()
+    getIframeBody().find('#result').should('include.text', '"delectus aut autem"')
+  })
 })

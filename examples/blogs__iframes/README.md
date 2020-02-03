@@ -1,17 +1,17 @@
 # Interacting with iframes
 
-This recipe shows how to:
+The page [index.html](index.html) contains an iframe, and we want our tests to work with that iframe. This recipe shows how to:
 
-- Access elements inside an iframe coming from 3rd party domain
+- Access elements inside an iframe coming from a 3rd party domain
 - Spy on `window.fetch` calls from the iframe
 - Stub network calls coming from the iframe
 
-<!-- TODO add link to the blog post -->
+TODO add link to the blog post
 
 Spec | Description
 --- | ---
 [first-spec.js](cypress/integration/first-spec.js) | Loads the [index.html](index.html)
-[button-spec.js](cypress/integration/button-spec.js) | Clicks the button inside the iframe and checks the text
+[button-spec.js](cypress/integration/button-spec.js) | Clicks the button inside an iframe and checks the text
 [single-its-spec.js](cypress/integration/single-its-spec.js) | Uses a single Cypress command to retry while iframe is loading
 [custom-command-spec.js](cypress/integration/custom-command-spec.js) | Moves iframe access into a reusable common custom command
 [spy-on-fetch-spec.js](cypress/integration/spy-on-fetch-spec.js) | Accesses `window` inside the iframe and spies on `fetch` calls
