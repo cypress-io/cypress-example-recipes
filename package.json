@@ -71,6 +71,7 @@
     "@babel/preset-flow": "7.0.0",
     "@cypress/browserify-preprocessor": "2.1.1",
     "@cypress/eslint-plugin-dev": "5.0.0",
+    "@cypress/skip-test": "2.4.1",
     "@cypress/snapshot": "2.1.7",
     "@cypress/webpack-preprocessor": "4.1.1",
     "@medv/finder": "1.1.2",

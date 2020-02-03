@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
-/* eslint-disable mocha/no-global-tests */
+import { skipOn } from '@cypress/skip-test'
+
 const getIframeDocument = () => {
   return cy
   .get('iframe[src="https://jsonplaceholder.typicode.com/"]')
@@ -24,9 +25,11 @@ const getIframeBody = () => {
 }
 
 describe('Recipe: blogs__iframes', () => {
-  it('gets the post', () => {
-    cy.visit('index.html')
-    getIframeBody().find('#run-button').should('have.text', 'Try it').click()
-    getIframeBody().find('#result').should('include.text', '"delectus aut autem"')
+  skipOn('firefox', () => {
+    it('gets the post', () => {
+      cy.visit('index.html')
+      getIframeBody().find('#run-button').should('have.text', 'Try it').click()
+      getIframeBody().find('#result').should('include.text', '"delectus aut autem"')
+    })
   })
 })
