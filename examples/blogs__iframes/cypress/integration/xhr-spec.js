@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import { skipOn } from '@cypress/skip-test'
 
 let polyfill
 
@@ -48,45 +49,47 @@ const replaceIFrameFetchWithXhr = () => {
 }
 
 describe('Recipe: blogs__iframes', () => {
-  it('spies on XHR request', () => {
-    cy.visit('index.html')
+  skipOn('firefox', () => {
+    it('spies on XHR request', () => {
+      cy.visit('index.html')
 
-    replaceIFrameFetchWithXhr()
-    // spy on XHR before clicking the button
-    cy.server()
-    cy.route('/todos/1').as('getTodo')
+      replaceIFrameFetchWithXhr()
+      // spy on XHR before clicking the button
+      cy.server()
+      cy.route('/todos/1').as('getTodo')
 
-    getIframeBody().find('#run-button').should('have.text', 'Try it').click()
+      getIframeBody().find('#run-button').should('have.text', 'Try it').click()
 
-    // let's wait for XHR request to happen
-    // for more examples, see recipe "XHR Assertions"
-    // in repository https://github.com/cypress-io/cypress-example-recipes
-    cy.wait('@getTodo').its('response.body').should('deep.equal', {
-      completed: false,
-      id: 1,
-      title: 'delectus aut autem',
-      userId: 1,
+      // let's wait for XHR request to happen
+      // for more examples, see recipe "XHR Assertions"
+      // in repository https://github.com/cypress-io/cypress-example-recipes
+      cy.wait('@getTodo').its('response.body').should('deep.equal', {
+        completed: false,
+        id: 1,
+        title: 'delectus aut autem',
+        userId: 1,
+      })
+
+      // and we can confirm the UI has updated correctly
+      cy.getIframeBody().find('#result').should('include.text', '"delectus aut autem"')
     })
 
-    // and we can confirm the UI has updated correctly
-    cy.getIframeBody().find('#result').should('include.text', '"delectus aut autem"')
-  })
+    it('stubs XHR response', () => {
+      cy.visit('index.html')
 
-  it('stubs XHR response', () => {
-    cy.visit('index.html')
+      replaceIFrameFetchWithXhr()
+      // spy on XHR before clicking the button
+      cy.server()
+      cy.route('/todos/1', {
+        completed: true,
+        id: 1,
+        title: 'write tests',
+        userId: 101,
+      }).as('getTodo')
 
-    replaceIFrameFetchWithXhr()
-    // spy on XHR before clicking the button
-    cy.server()
-    cy.route('/todos/1', {
-      completed: true,
-      id: 1,
-      title: 'write tests',
-      userId: 101,
-    }).as('getTodo')
-
-    cy.getIframeBody().find('#run-button').should('have.text', 'Try it').click()
-    // and we can confirm the UI shows our stubbed response
-    cy.getIframeBody().find('#result').should('include.text', '"write tests"')
+      cy.getIframeBody().find('#run-button').should('have.text', 'Try it').click()
+      // and we can confirm the UI shows our stubbed response
+      cy.getIframeBody().find('#result').should('include.text', '"write tests"')
+    })
   })
 })

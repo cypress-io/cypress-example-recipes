@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import { skipOn } from '@cypress/skip-test'
 
 const getIframeBody = () => {
   // get the iframe > document > body
@@ -13,9 +14,11 @@ const getIframeBody = () => {
 }
 
 describe('Recipe: blogs__iframes', () => {
-  it('gets the post using single its', () => {
-    cy.visit('index.html')
-    getIframeBody().find('#run-button').should('have.text', 'Try it').click()
-    getIframeBody().find('#result').should('include.text', '"delectus aut autem"')
+  skipOn('firefox', () => {
+    it('gets the post using single its', () => {
+      cy.visit('index.html')
+      getIframeBody().find('#run-button').should('have.text', 'Try it').click()
+      getIframeBody().find('#result').should('include.text', '"delectus aut autem"')
+    })
   })
 })
