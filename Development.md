@@ -4,6 +4,34 @@
 - there is a script [test-examples.js](test-examples.js) useful to run all examples one by one
   * note that the script only runs an example if it has `npm run test:ci` script command.
 
+### Domains
+
+When adding a new recipe, please either use local server or Cypress-controlled domain to avoid the recipe failing when the 3rd party server outside of our control changes or goes down. For example we have `jsonplaceholder.cypress.io` that we can use instead of `jsonplaceholder.typicode.com`.
+
+### Test names
+
+It is a good idea to wrap all tests in a suite using `describe` with the recipes name. For example,
+
+```js
+// examples/blogs__iframes/cypress/integration/xhr-spec.js
+describe('Recipe: blogs__iframes', () => {
+  it('spies on XHR request', () => {
+    ...
+  })
+  it('stubs XHR response', () => {
+    ...
+  })
+})
+```
+
+This makes it easy to understand where the test is coming from when looking at the terminal output.
+
+```text
+  Recipe: blogs__iframes
+    ✓ spies on XHR request (939ms)
+    ✓ stubs XHR response (350ms)
+```
+
 ### Linting
 
 Many recipes are linted using [@cypress/eslint-plugin-dev](https://github.com/cypress-io/eslint-plugin-dev). You can lint a single folder or lint and auto-fix with:
@@ -45,6 +73,8 @@ And we can test Firefox support by running
 ```shell
 npm run test:ci:firefox
 ```
+
+**Tip:** you can skip tests in a particular browser using [@cypress/skip-tests](https://github.com/cypress-io/cypress-skip-test) module.
 
 ### Recipes for upcoming Test Runner versions
 
