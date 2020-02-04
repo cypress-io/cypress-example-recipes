@@ -90,6 +90,7 @@
     "cypress-expect-n-assertions": "1.0.0",
     "cypress-failed-log": "2.6.0",
     "cypress-file-upload": "3.5.3",
+    "cypress-iframe": "1.0.1",
     "cypress-pipe": "1.6.0",
     "cypress-plugin-snapshots": "1.2.9",
     "cypress-react-unit-test": "2.4.3",
