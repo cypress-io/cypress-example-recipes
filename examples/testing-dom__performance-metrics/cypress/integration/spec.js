@@ -17,11 +17,24 @@ describe('Check some performance metrics', () => {
   })
 
   it('check image load time', () => {
-    cy.visit('/index.html').its('performance').then((p) => {
-      const img = p.getEntriesByType('resource').filter((x) => x.name.indexOf('performance-example.png'))[0]
+    // finds performance entry for an image the page is loading
+    const findImage = (win) => {
+      const isOurImage = (x) => x.name.endsWith('images/cypress-bw.png')
+      const foundImages = win.performance.getEntriesByType('resource').filter(isOurImage)
 
-      assert.isAtMost(img.duration, 400)
-    })
+      expect(foundImages).to.have.length(1)
+
+      return foundImages[0]
+    }
+
+    cy.visit('/index.html')
+
+    // retries until window has performance object
+    // with information about loaded image resource
+    cy.window().should(findImage)
+
+    // now that the image is there for sure, let's look at its duration
+    cy.window().then(findImage).its('duration').should('be.lt', 400)
   })
 
   it('ensure max load time for images', () => {

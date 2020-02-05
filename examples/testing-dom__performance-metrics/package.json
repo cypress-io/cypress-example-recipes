@@ -4,6 +4,7 @@
   "description": "Shows how to evaluate some performance metrics",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run"
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "test:ci:firefox": "../../node_modules/.bin/cypress run --browser firefox"
   }
 }
