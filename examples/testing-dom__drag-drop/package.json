@@ -5,8 +5,10 @@
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run:firefox": "../../node_modules/.bin/cypress run --browser firefox",
     "dev": "../../node_modules/.bin/start-test http://localhost:7071/puzzle.html cypress:open",
     "start": "node server.js --port 7071",
-    "test:ci": "../../node_modules/.bin/start-test http://localhost:7071/puzzle.html cypress:run"
+    "test:ci": "../../node_modules/.bin/start-test http://localhost:7071/puzzle.html cypress:run",
+    "test:ci:firefox": "../../node_modules/.bin/start-test http://localhost:7071/puzzle.html cypress:run:firefox"
   }
 }
