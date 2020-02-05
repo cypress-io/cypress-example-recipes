@@ -1,9 +1,17 @@
 /// <reference types="cypress" />
 
 import fizzbuzz from '../../fizzbuzz'
-import { add, divide, multiply, subtract } from '../../math'
+// math exports a default object with methods
+import math from '../../math'
 
 describe('Unit Test Application Code', function () {
+  const { add, divide, multiply, subtract } = math
+
+  before(() => {
+    // check if the import worked correctly
+    expect(add, 'add').to.be.a('function')
+  })
+
   context('math.js', function () {
     it('can add numbers', function () {
       expect(add(1, 2)).to.eq(3)
