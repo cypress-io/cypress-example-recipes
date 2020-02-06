@@ -24,7 +24,7 @@ const findBraveBrowserInfo = (browserPath) => {
     return {
       name: 'brave',
       channel: 'stable',
-      family: 'chromium',
+      family: 'chrome',
       displayName: 'Brave',
       version,
       path: browserPath,
@@ -56,8 +56,20 @@ module.exports = (on, config) => {
     return
   }
 
+  // kind of hack - we don't know the Cypress version running
+  // so we need to look at known Electron browser
+  const electron = config.browsers.find((browser) => browser.name === 'electron')
+
+  if (!electron) {
+    console.error('Could not find even Electron browser ⚠️')
+
+    return
+  }
+
   // Cypress v3.7.0+
   return findBraveBrowser().then((browser) => {
+    browser.family = electron.family
+
     return {
       browsers: [browser],
     }
