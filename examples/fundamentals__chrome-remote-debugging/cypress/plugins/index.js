@@ -19,7 +19,9 @@ let port = 0
 let client = null
 
 module.exports = (on, config) => {
-  on('before:browser:launch', (browser, args) => {
+  on('before:browser:launch', (browser, launchOptions) => {
+    const { args } = launchOptions
+
     port = ensureRdpPort(args)
     debug('ensureRdpPort %d', port)
     debug('Chrome arguments %o', args)
