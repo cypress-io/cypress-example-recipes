@@ -23,7 +23,8 @@ const findBraveBrowserInfo = (browserPath) => {
   .then(({ version, majorVersion }) => {
     return {
       name: 'brave',
-      family: 'chrome',
+      channel: 'stable',
+      family: 'chromium',
       displayName: 'Brave',
       version,
       path: browserPath,
