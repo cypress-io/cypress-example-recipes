@@ -18,18 +18,19 @@ const parseBraveVersion = (stdout) => {
 
 const findBraveBrowserInfo = (browserPath) => {
   return execa(browserPath, ['--version'])
-  .then((result) => result.stdout)
-  .then(parseBraveVersion)
-  .then(({ version, majorVersion }) => {
-    return {
-      name: 'brave',
-      family: 'chrome',
-      displayName: 'Brave',
-      version,
-      path: browserPath,
-      majorVersion,
-    }
-  })
+    .then((result) => result.stdout)
+    .then(parseBraveVersion)
+    .then(({ version, majorVersion }) => {
+      return {
+        name: 'brave',
+        channel: 'stable',
+        family: 'chromium',
+        displayName: 'Brave',
+        version,
+        path: browserPath,
+        majorVersion,
+      }
+    })
 }
 
 const findBraveBrowser = () => {
