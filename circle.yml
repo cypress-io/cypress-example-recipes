@@ -283,13 +283,16 @@ all_jobs: &all_jobs
       requires:
         - build
 
-  - test-examples-brave:
-      requires:
-        - build
-      filters:
-        branches:
-          only:
-            - master
+  # disabled Brave testing for now
+  # on v3 it needs --browser brave
+  # but v4 whitelists browser names and does not allow "brave"
+  # - test-examples-brave:
+  #     requires:
+  #       - build
+  #     filters:
+  #       branches:
+  #         only:
+  #           - master
 
   # when adding new example subfolder with a recipe
   # add its name here to "create" CircleCI job
