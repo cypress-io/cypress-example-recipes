@@ -12,4 +12,15 @@
       document.body.appendChild(el)
     }, 1000)
   </script>
+
+  <script>
+    // method is added to the "window" object dynamically
+    setTimeout(() => {
+      window.asyncAdd = (a, b) => {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve(a + b), 1000)
+        })
+      }
+    }, 1000)
+  </script>
 </body>

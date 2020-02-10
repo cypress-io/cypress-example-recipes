@@ -46,6 +46,10 @@ And the TypeScript and IntelliSense should be happy
 
 As an example this spec includes 3rd party module [cypress-wait-until](https://github.com/NoriSte/cypress-wait-until). This module ships with its own TypeScript definition, which allows `cy.waitUntil` to work.
 
+## Async commands
+
+A custom command can call an async function from the application, the resolved value will be automatically yielded to the next command or assertion in the test. See [cypress/integration/async-command.js](cypress/integration/async-command.js) file.
+
 ## More info
 
 - [Cypress custom commands](https://on.cypress.io/custom-commands)
