@@ -6,7 +6,7 @@ The page [index.html](index.html) contains an iframe, and we want our tests to w
 - Spy on `window.fetch` calls from the iframe
 - Stub network calls coming from the iframe
 
-TODO add link to the blog post
+Read the companion blog post [Working with iframes in Cypress](https://cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/)
 
 Spec | Description
 --- | ---
