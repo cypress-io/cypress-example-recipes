@@ -11,6 +11,6 @@ module.exports = (on, config) => {
 
   // Cypress v3.7.0+
   return {
-    browsers: config.browsers.filter((browser) => browser.family === 'electron'),
+    browsers: config.browsers.filter((browser) => browser.name === 'electron'),
   }
 }
