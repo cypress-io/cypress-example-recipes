@@ -1,6 +1,6 @@
 # Testing Redux Store
 
-Testing Redux store using Cypress.
+Testing Redux store using Cypress as described in [this blog post](https://www.cypress.io/blog/2018/11/14/testing-redux-store/).
 
 ## Shows how to
 
