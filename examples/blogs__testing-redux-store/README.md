@@ -14,3 +14,33 @@ Testing Redux store using Cypress as described in [this blog post](https://www.c
 ## Application
 
 The example TodoMVC application in this folder was copied from [https://github.com/reduxjs/redux/tree/master/examples/todomvc](https://github.com/reduxjs/redux/tree/master/examples/todomvc) on November 2018.
+
+The application exposes the reference to to the store while running inside Cypress-controlled browsers like this
+
+```js
+const store = createStore(reducer)
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
+
+// expose store when run in Cypress
+if (window.Cypress) {
+  window.store = store
+}
+```
+
+And the tests can access the store using
+
+```js
+it('has expected state on load', () => {
+  cy.visit('/')
+  cy.window().its('store').then(store => {
+    // manipulate the store reference
+  })
+})
+```
+
