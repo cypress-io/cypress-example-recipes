@@ -28,6 +28,7 @@ Recipe | Description
 [Waiting for static resource](./examples/testing-dom__wait-for-resource) | Shows how to wait for CSS, image, or any other static resource to load
 [CSV load and table test](./examples/testing-dom__csv-table) | Loads CSV file and compares objects against cells in a table
 [Evaluate performance metrics](./examples/testing-dom__performance-metrics) | Utilize Cypress to monitor a website
+[Root style](./examples/testing-dom__root-style) | Trigger input color change that modifies CSS variable
 
 ## Logging in recipes
 
