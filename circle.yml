@@ -422,6 +422,9 @@ all_jobs: &all_jobs
   - testing-dom__performance-metrics:
       requires:
         - build
+  - testing-dom__root-style:
+      requires:
+        - build
   - unit-testing__application-code:
       requires:
         - build
