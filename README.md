@@ -29,6 +29,7 @@ Recipe | Description
 [CSV load and table test](./examples/testing-dom__csv-table) | Loads CSV file and compares objects against cells in a table
 [Evaluate performance metrics](./examples/testing-dom__performance-metrics) | Utilize Cypress to monitor a website
 [Root style](./examples/testing-dom__root-style) | Trigger input color change that modifies CSS variable
+[Select widgets](./examples/testing-dom__select2) | Working with `<select>` elements and [Select2](https://select2.org/) widgets
 
 ## Logging in recipes
 
