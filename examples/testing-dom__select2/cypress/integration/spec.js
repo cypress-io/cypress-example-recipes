@@ -1,4 +1,6 @@
 /// <reference types="cypress" />
+import 'cypress-pipe'
+
 beforeEach(() => {
   cy.visit('index.html')
 })
@@ -95,10 +97,14 @@ describe('select2', () => {
         expect(list[2].title).to.equal('Vermont')
       })
 
-      // TODO find a shorter way to express the assertion?
-      // .should('have.length', 3)
-      // .then((list) => list.map((k, el) => el.title))
-      // .should('deep.equal', ['Connecticut', 'Massachusetts', 'Vermont'])
+      // alternative: extract titles and then make an assertion
+      // and use https://github.com/NicholasBoll/cypress-pipe
+      // to preserve http://on.cypress.io/retry-ability
+      const getTitles = (list) => Cypress._.map(list, (li) => li.title)
+
+      cy.get('#states + .select2 .select2-selection__choice')
+      .pipe(getTitles)
+      .should('deep.equal', ['Connecticut', 'Massachusetts', 'Vermont'])
     })
 
     it('adds several states by typing', () => {
