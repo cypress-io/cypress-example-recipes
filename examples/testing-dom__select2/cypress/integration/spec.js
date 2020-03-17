@@ -154,4 +154,17 @@ describe('select2', () => {
       cy.get('#states').invoke('val').should('deep.equal', ['MA', 'VT'])
     })
   })
+
+  context('programmatic control', () => {
+    it('returns selected items', () => {
+      cy.get('#states').select(['MA', 'VT', 'CT'], { force: true })
+      // https://select2.org/programmatic-control/retrieving-selections
+      cy.get('#states').invoke('select2', 'data')
+      .should((list) => {
+        const names = Cypress._.map(list, 'text')
+
+        expect(names).to.deep.equal(['Connecticut', 'Massachusetts', 'Vermont'])
+      })
+    })
+  })
 })
