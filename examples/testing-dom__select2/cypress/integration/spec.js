@@ -38,6 +38,9 @@ describe('HTML select element', () => {
       // and because it is an array we need to use deep equality
       // against the yielded list from ".invoke('val')"
       cy.get('#my-states').invoke('val').should('deep.equal', ['CT', 'MA', 'VT'])
+
+      // remove the focus from <select> element
+      cy.get('#my-states').blur()
     })
   })
 })
@@ -61,16 +64,23 @@ describe('select2', () => {
 
     it('selects Massachusetts by typing', () => {
       cy.log('--- Pick state by typing ---')
-      // Select2 widget is inserted immediately after our <select> node
-      // thus we can click on it using CSS " + " selector
-      cy.get('#favorite-state + .select2').click()
-      cy.get('input[aria-controls="select2-favorite-state-results"]').type('Mass{enter}')
+      // first, open the widget
+      cy.get('#select2-favorite-state-container').click()
+      // then type into the widget's input element
+      // use custom selector to handle cases when there are multiple widgets
+      // on the page. Also delay typing each character for better demo
+      cy.get('input[aria-controls="select2-favorite-state-results"]').type('Mass{enter}', {
+        delay: 500,
+      })
 
       // confirm the value of the selected element
       cy.get('#favorite-state').should('have.value', 'MA')
 
       // confirm Select2 widget renders the state name
       cy.get('#select2-favorite-state-container').should('have.text', 'Massachusetts')
+
+      // remove the focus remaining on the widget after typing
+      // cy.get('.select2-selection').blur()
     })
   })
 
@@ -114,7 +124,7 @@ describe('select2', () => {
       // after we click on the Select2 widget, the search drop down and input appear
       .find('.select2-search')
       // type parts of the states' names, just like a real user would
-      .type('Verm{enter}Mass{enter}Conn{enter}')
+      .type('Verm{enter}Mass{enter}Conn{enter}', { delay: 500 })
 
       // confirm the selected value - note that the values are sorted
       // and because it is an array we need to use deep equality
