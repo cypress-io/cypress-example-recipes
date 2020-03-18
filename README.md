@@ -138,7 +138,7 @@ Recipe | Description
 ## Installation
 
 ```bash
-## install all dependencies
+## install all dependencies from the root directory
 npm install
 ```
 
