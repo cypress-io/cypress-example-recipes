@@ -1,4 +1,6 @@
 /// <reference types="cypress-file-upload" />
+// See official documentation at https://github.com/abramenal/cypress-file-upload
+
 describe('cypress-upload-file plugin', () => {
   beforeEach(() => {
     cy.visit('index.html')
@@ -10,14 +12,8 @@ describe('cypress-upload-file plugin', () => {
     cy.server()
     cy.route('POST', 'https://some-server.com/upload', 200).as('upload')
 
-    cy.get('#file1').upload(
-      {
-        fileContent: 'file contest',
-        fileName: 'test.txt',
-        mimeType: 'plain/text',
-      },
-      { subjectType: 'input' }
-    )
+    // finds file at cypress/fixtures/test.txt
+    cy.get('#file1').attachFile('test.txt')
 
     // make sure upload has happened
     cy.wait('@upload')
