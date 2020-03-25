@@ -118,6 +118,7 @@ Recipe | Description
 [Cypress should callback](https://glebbahmutov.com/blog/cypress-should-callback/) | Examples of `.should(cb)` assertions
 [Cypress jump](https://glebbahmutov.com/blog/cypress-jump/) | Create a React component using JSX and inject it into live application from a Cypress test
 [Unit testing Vuex data store using Cypress.io Test Runner](https://dev.to/bahmutov/unit-testing-vuex-data-store-using-cypress-io-test-runner-3g4n) | Complete walkthrough for anyone trying to unit test a data store
+[Triple Tested Static Site](https://glebbahmutov.com/blog/triple-tested/) | How to test static sites three times before and after deployment to GitHub pages
 
 ## Community Recipes
 
