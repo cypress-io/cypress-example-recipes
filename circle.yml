@@ -255,6 +255,8 @@ jobs:
     <<: *defaults
   server-communication__seeding-database-in-node:
     <<: *defaults
+  server-communication__visit-2nd-domain:
+    <<: *defaults
   server-communication__xhr-assertions:
     <<: *defaults
   fundamentals__dynamic-tests:
@@ -448,6 +450,9 @@ all_jobs: &all_jobs
   - server-communication__xhr-assertions:
       requires:
         - build
+  - server-communication__visit-2nd-domain:
+      requires:
+        - build
   - fundamentals__dynamic-tests:
       requires:
         - build
@@ -499,6 +504,7 @@ all_jobs: &all_jobs
         - server-communication__env-variables
         - server-communication__seeding-database-in-node
         - server-communication__xhr-assertions
+        - server-communication__visit-2nd-domain
         - stubbing-spying__functions
         - stubbing-spying__window-fetch
         - stubbing-spying__google-analytics
