@@ -16,14 +16,17 @@
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  // the URL will set by the first test
   let href
 
   on('task', {
     saveUrl (url) {
       href = url
 
+      // cy.task() requires returning a Promise
+      // or anything BUT undefined to signal that
+      // the task is finished
+      // see https://on.cypress.io/task
       return null
     },
 
