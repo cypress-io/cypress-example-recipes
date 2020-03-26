@@ -1,4 +1,4 @@
-# Recipes [![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) [![Build status](https://ci.appveyor.com/api/projects/status/7p4qkwavheciwbxc/branch/master?svg=true)](https://ci.appveyor.com/project/cypress-io/cypress-example-recipes/branch/master) [![renovate-app badge][renovate-badge]][renovate-app]
+# Recipes [![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) [![Build status](https://ci.appveyor.com/api/projects/status/7p4qkwavheciwbxc/branch/master?svg=true)](https://ci.appveyor.com/project/cypress-io/cypress-example-recipes/branch/master) [![renovate-app badge][renovate-badge]][renovate-app] [![Cypress Dashboard][dashboard badge]][dashboard url]
 
 > This repo contains various recipes for testing common scenarios using Cypress: [Fundamentals](#fundamentals), [Testing the DOM](#testing-the-dom), [Logging in](#logging-in-recipes), [Preprocessors](#preprocessors), [Blogs](#blogs), [Stubbing and spying](#stubbing-and-spying), [Unit Testing](#unit-testing), [Server Communication](#server-communication), [Other Cypress Recipes](#other-cypress-recipes), [Community Recipes](#community-recipes)
 
@@ -173,9 +173,13 @@ npm run cypress:run -- --browser chrome
 npm run cypress:run -- --record
 ```
 
+[![Cypress Dashboard][dashboard badge]][dashboard url]
+
 ## Development
 
 See [Development.md](Development.md)
 
 [renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
 [renovate-app]: https://renovateapp.com/
+[dashboard badge]: https://img.shields.io/badge/cypress-dashboard-brightgreen.svg
+[dashboard url]: https://dashboard.cypress.io/projects/6p53jw/runs
