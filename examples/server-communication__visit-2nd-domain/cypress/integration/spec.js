@@ -11,7 +11,7 @@ describe('Two domains', () => {
     .invoke('attr', 'href')
     .then((url) => {
       // save the value in the plugins process
-      // that is preserved between test and browser restarts
+      // that is preserved between browser page reloads
       expect(url).to.be.a('string')
       cy.task('saveUrl', url)
     })
