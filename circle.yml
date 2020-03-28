@@ -114,10 +114,31 @@ jobs:
       - image: cypress/browsers:node12.0.0-chrome75
     environment:
       TERM: xterm
+      # no need to record these runs yet
+      CYPRESS_RECORD_KEY: ''
+      # while debugging https://github.com/cypress-io/cypress/issues/6053
+      DEBUG: cypress:server:protocol
     steps:
       - attach_workspace:
           at: ~/
       - run: npm run test:ci:chrome -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+
+  # run recipes that have "test:ci:chrome:headless" script
+  test-examples-chrome-headless:
+    parallelism: 1
+    working_directory: ~/app
+    docker:
+      - image: cypress/browsers:node12.14.0-chrome79-ff71
+    environment:
+      TERM: xterm
+      # no need to record these runs yet
+      CYPRESS_RECORD_KEY: ''
+      # while debugging https://github.com/cypress-io/cypress/issues/6053
+      DEBUG: cypress:server:protocol
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run test:ci:chrome:headless -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
 
   # a single utility script to run multiple examples against Brave browser
   test-examples-brave:
@@ -136,7 +157,13 @@ jobs:
   # define a new job with defaults for each "examples/*" subfolder
   blogs__a11y:
     <<: *defaults
+  blogs__assertion-counting:
+    <<: *defaults
   blogs__application-actions:
+    <<: *defaults
+  blogs__notification:
+    <<: *defaults
+  blogs__iframes:
     <<: *defaults
   blogs__codepen-demo:
     <<: *defaults
@@ -214,6 +241,10 @@ jobs:
     <<: *defaults
   testing-dom__csv-table:
     <<: *defaults
+  testing-dom__root-style:
+    <<: *defaults
+  testing-dom__select2:
+    <<: *defaults
   unit-testing__application-code:
     <<: *defaults
   unit-testing__react:
@@ -224,11 +255,15 @@ jobs:
     <<: *defaults
   server-communication__seeding-database-in-node:
     <<: *defaults
+  server-communication__visit-2nd-domain:
+    <<: *defaults
   server-communication__xhr-assertions:
     <<: *defaults
   fundamentals__dynamic-tests:
     <<: *defaults
   fundamentals__module-api:
+    <<: *defaults
+  fundamentals__chrome-remote-debugging:
     <<: *defaults
   third-party-mailosaur:
     <<: *defaults
@@ -251,19 +286,21 @@ all_jobs: &all_jobs
   - test-examples-chrome:
       requires:
         - build
-      filters:
-        branches:
-          only:
-            - master
 
-  - test-examples-brave:
+  - test-examples-chrome-headless:
       requires:
         - build
-      filters:
-        branches:
-          only:
-            - master
-            - 3.7.0
+
+  # disabled Brave testing for now
+  # on v3 it needs --browser brave
+  # but v4 whitelists browser names and does not allow "brave"
+  # - test-examples-brave:
+  #     requires:
+  #       - build
+  #     filters:
+  #       branches:
+  #         only:
+  #           - master
 
   # when adding new example subfolder with a recipe
   # add its name here to "create" CircleCI job
@@ -275,6 +312,15 @@ all_jobs: &all_jobs
   #       - build
 
   - blogs__a11y:
+      requires:
+        - build
+  - blogs__assertion-counting:
+      requires:
+        - build
+  - blogs__notification:
+      requires:
+        - build
+  - blogs__iframes:
       requires:
         - build
   - blogs__application-actions:
@@ -382,6 +428,12 @@ all_jobs: &all_jobs
   - testing-dom__performance-metrics:
       requires:
         - build
+  - testing-dom__root-style:
+      requires:
+        - build
+  - testing-dom__select2:
+      requires:
+        - build
   - unit-testing__application-code:
       requires:
         - build
@@ -398,6 +450,9 @@ all_jobs: &all_jobs
       requires:
         - build
   - server-communication__xhr-assertions:
+      requires:
+        - build
+  - server-communication__visit-2nd-domain:
       requires:
         - build
   - fundamentals__dynamic-tests:
@@ -422,7 +477,10 @@ all_jobs: &all_jobs
         - build
         - lint
         - blogs__a11y
+        - blogs__assertion-counting
         - blogs__application-actions
+        - blogs__notification
+        - blogs__iframes
         - blogs__direct-control-angular
         - blogs__e2e-api-testing
         - blogs__e2e-snapshots
@@ -451,6 +509,7 @@ all_jobs: &all_jobs
         - server-communication__env-variables
         - server-communication__seeding-database-in-node
         - server-communication__xhr-assertions
+        - server-communication__visit-2nd-domain
         - stubbing-spying__functions
         - stubbing-spying__window-fetch
         - stubbing-spying__google-analytics
@@ -464,11 +523,14 @@ all_jobs: &all_jobs
         - testing-dom__wait-for-resource
         - testing-dom__csv-table
         - testing-dom__performance-metrics
+        - testing-dom__root-style
+        - testing-dom__select2
         - unit-testing__application-code
         - unit-testing__react
         # "meta" jobs
         - test-examples
         - test-examples-chrome
+        - test-examples-chrome-headless
         - third-party-mailosaur
 
 workflows:
