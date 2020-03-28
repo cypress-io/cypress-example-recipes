@@ -27,7 +27,7 @@ describe('third-party-mailosaur', function () {
 
     it('checks created random email', function () {
       cy.wrap(userEmail).should('exist')
-        .and('include', Cypress.env('MAILOSAUR_SERVERID'))
+      .and('include', Cypress.env('MAILOSAUR_SERVERID'))
     })
 
     it('sends basic message to mailosaur and gets a response - can take 20secs', function () {
@@ -50,11 +50,11 @@ describe('third-party-mailosaur', function () {
           to: 'somebody',
         },
       })
-        .should((response) => {
-          expect(response.status).to.be.oneOf([204, 200])
+      .should((response) => {
+        expect(response.status).to.be.oneOf([204, 200])
 
-          return response.body
-        }).then((res) => cy.log(res))
+        return response.body
+      }).then((res) => cy.log(res))
     })
 
     it('posts a message with helper function - can take 20secs', function () {
