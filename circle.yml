@@ -230,7 +230,7 @@ jobs:
     <<: *defaults
   fundamentals__module-api:
     <<: *defaults
-  3rd-party-mailosaur:
+  third-party-mailosaur:
     <<: *defaults
 
 # list all jobs to run and their dependencies here
@@ -409,7 +409,7 @@ all_jobs: &all_jobs
   - fundamentals__module-api:
       requires:
         - build
-  - 3rd-party-mailosaur:
+  - third-party-mailosaur:
       requires:
         - build
 
@@ -469,7 +469,7 @@ all_jobs: &all_jobs
         # "meta" jobs
         - test-examples
         - test-examples-chrome
-        - 3rd-party-mailosaur
+        - third-party-mailosaur
 
 workflows:
   version: 2

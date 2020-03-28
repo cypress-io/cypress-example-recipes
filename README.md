@@ -113,11 +113,11 @@ Demo recipes from the blog posts at [www.cypress.io/blog](https://www.cypress.io
 | [Cypress jump](https://glebbahmutov.com/blog/cypress-jump/)                                                                                         | Create a React component using JSX and inject it into live application from a Cypress test |
 | [Unit testing Vuex data store using Cypress.io Test Runner](https://dev.to/bahmutov/unit-testing-vuex-data-store-using-cypress-io-test-runner-3g4n) | Complete walkthrough for anyone trying to unit test a data store                           |
 
-## 3rd party Recipes
+## Third party Recipes
 
-| Recipe                                                                      | Description                                                                                                                                                                                         |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Testing emails with Cypress and Mailosaur](./examples/3rd-party-mailosaur) | Utilizes `cy.request` or `cy.task` with [Mailosaur's Node package](https://www.npmjs.com/package/mailosaur) to test emails sent with [sendmail npm package](https://www.npmjs.com/package/sendmail) |
+| Recipe                                                                        | Description                                                                                                                                                                                         |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Testing emails with Cypress and Mailosaur](./examples/third-party-mailosaur) | Utilizes `cy.request` or `cy.task` with [Mailosaur's Node package](https://www.npmjs.com/package/mailosaur) to test emails sent with [sendmail npm package](https://www.npmjs.com/package/sendmail) |
 
 ## Community Recipes
 
