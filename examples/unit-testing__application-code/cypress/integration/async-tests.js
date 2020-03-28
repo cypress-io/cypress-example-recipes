@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 
+// these are promise-returning / async functions
 import { reverseString, twice } from '../../async-methods'
 
 describe('Async reverse', () => {
@@ -45,8 +46,27 @@ describe('Async twice', () => {
     // if we start using Cypress commands, the test becomes asynchronous
     // and will wait for all commands in the chain to finish
     // before the test finishes
+    // https://on.cypress.io/wrap
     cy.wrap('fox')
     .then(twice).then(twice)
     .should('equal', 'foxfoxfoxfox')
+  })
+
+  it('waits for wrapped promise', () => {
+    // if you have promise-returning function
+    // (async functions are just a sugar, they return a promise too!)
+    // wrap it so Cypress waits for their automatically
+    // https://on.cypress.io/wrap
+    cy.wrap(twice('async')).should('equal', 'asyncasync')
+    // another wrap - the function is called _immediately_
+    // but Cypress will process it AFTER the first "cy.wrap"
+    cy.wrap(twice('await')).should('equal', 'awaitawait')
+
+    // if you want start the second promise AFTER the first one finishes
+    // use https://on.cypress.io/then
+    cy.wrap(twice('first'))
+    .should('equal', 'firstfirst')
+    .then(() => twice('second'))
+    .should('equal', 'secondsecond')
   })
 })
