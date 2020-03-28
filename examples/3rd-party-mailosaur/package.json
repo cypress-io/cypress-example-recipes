@@ -1,0 +1,10 @@
+{
+  "name": "cypress-mailosaur",
+  "version": "1.0.0",
+  "description": "Testing Mailosaur with Cypress",
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "test:ci": "../../node_modules/.bin/cypress run"
+  }
+}

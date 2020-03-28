@@ -5,7 +5,7 @@ defaults: &defaults
   parallelism: 1
   working_directory: ~/app
   docker:
-    - image: cypress/base:10
+    - image: cypress/base:13.6.0
   environment:
     TERM: xterm
   steps:
@@ -38,7 +38,7 @@ jobs:
   build:
     working_directory: ~/app
     docker:
-      - image: cypress/base:10
+      - image: cypress/base:13.6.0
     environment:
       TERM: xterm
     steps:
@@ -75,7 +75,7 @@ jobs:
   lint:
     working_directory: ~/app
     docker:
-      - image: cypress/base:10
+      - image: cypress/base:13.6.0
     steps:
       - attach_workspace:
           at: ~/
@@ -85,7 +85,7 @@ jobs:
   # dummy job running after all end-to-end tests
   after-tests:
     docker:
-      - image: cypress/base:10
+      - image: cypress/base:13.6.0
     steps:
       - run: echo "all good"
 
@@ -95,7 +95,7 @@ jobs:
     parallelism: 20
     working_directory: ~/app
     docker:
-      - image: cypress/base:10
+      - image: cypress/base:13.6.0
     environment:
       TERM: xterm
     steps:
@@ -229,6 +229,8 @@ jobs:
   fundamentals__dynamic-tests:
     <<: *defaults
   fundamentals__module-api:
+    <<: *defaults
+  3rd-party-mailosaur:
     <<: *defaults
 
 # list all jobs to run and their dependencies here
@@ -407,6 +409,9 @@ all_jobs: &all_jobs
   - fundamentals__module-api:
       requires:
         - build
+  - 3rd-party-mailosaur:
+      requires:
+        - build
 
   # to avoid constantly tweaking required jobs on CircleCI
   # we can have a single job wait on all other test jobs here.
@@ -464,6 +469,7 @@ all_jobs: &all_jobs
         # "meta" jobs
         - test-examples
         - test-examples-chrome
+        - 3rd-party-mailosaur
 
 workflows:
   version: 2
