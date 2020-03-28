@@ -5,7 +5,7 @@ defaults: &defaults
   parallelism: 1
   working_directory: ~/app
   docker:
-    - image: cypress/base:13.6.0
+    - image: cypress/base:10
   environment:
     TERM: xterm
   steps:
@@ -38,7 +38,7 @@ jobs:
   build:
     working_directory: ~/app
     docker:
-      - image: cypress/base:13.6.0
+      - image: cypress/base:10
     environment:
       TERM: xterm
     steps:
@@ -75,7 +75,7 @@ jobs:
   lint:
     working_directory: ~/app
     docker:
-      - image: cypress/base:13.6.0
+      - image: cypress/base:10
     steps:
       - attach_workspace:
           at: ~/
@@ -85,7 +85,7 @@ jobs:
   # dummy job running after all end-to-end tests
   after-tests:
     docker:
-      - image: cypress/base:13.6.0
+      - image: cypress/base:10
     steps:
       - run: echo "all good"
 
@@ -95,7 +95,7 @@ jobs:
     parallelism: 20
     working_directory: ~/app
     docker:
-      - image: cypress/base:13.6.0
+      - image: cypress/base:10
     environment:
       TERM: xterm
     steps:
