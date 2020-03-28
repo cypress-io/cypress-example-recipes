@@ -121,6 +121,13 @@ Recipe | Description
 [Unit testing Vuex data store using Cypress.io Test Runner](https://dev.to/bahmutov/unit-testing-vuex-data-store-using-cypress-io-test-runner-3g4n) | Complete walkthrough for anyone trying to unit test a data store
 [Triple Tested Static Site](https://glebbahmutov.com/blog/triple-tested/) | How to test static sites three times before and after deployment to GitHub pages
 
+
+## Third party Recipes
+
+| Recipe | Description                                                                                                                                                                                         |
+| - | -|
+| [Testing emails with Cypress and Mailosaur](./examples/third-party-mailosaur) | Utilizes `cy.request` or `cy.task` with [Mailosaur's Node package](https://www.npmjs.com/package/mailosaur) to test emails sent with [sendmail npm package](https://www.npmjs.com/package/sendmail) |
+
 ## Community Recipes
 
 Recipe | Description

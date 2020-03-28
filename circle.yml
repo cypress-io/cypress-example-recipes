@@ -265,6 +265,8 @@ jobs:
     <<: *defaults
   fundamentals__chrome-remote-debugging:
     <<: *defaults
+  third-party-mailosaur:
+    <<: *defaults
 
 # list all jobs to run and their dependencies here
 # and then use this list from workflow definition
@@ -462,6 +464,9 @@ all_jobs: &all_jobs
   - fundamentals__module-api:
       requires:
         - build
+  - third-party-mailosaur:
+      requires:
+        - build
 
   # to avoid constantly tweaking required jobs on CircleCI
   # we can have a single job wait on all other test jobs here.
@@ -520,6 +525,7 @@ all_jobs: &all_jobs
         - testing-dom__performance-metrics
         - testing-dom__root-style
         - testing-dom__select2
+        - third-party-mailosaur
         - unit-testing__application-code
         - unit-testing__react
         # "meta" jobs
