@@ -18,7 +18,7 @@ module.exports = (on, config) => {
     testFinished (attributes) {
       // console.log(name)
       console.log('%s: "%s" %dms', attributes.state, attributes.title, attributes.duration)
-      ipc.of.cypressListener.emit({
+      ipc.of.cypressListener.emit('test:after:run', {
         state: attributes.state,
         title: attributes.title,
         duration: attributes.duration,

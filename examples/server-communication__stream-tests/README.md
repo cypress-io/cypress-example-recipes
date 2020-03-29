@@ -18,6 +18,12 @@ const ipc = require('node-ipc')
 ipc.config.id = 'cypressListener'
 ipc.serve(() => {
   cypress.run().then(...)
+
+  // receive stream of events
+  ipc.server.on('test:after:run', (data) => {
+    console.log('test finsihed: "%s" %s %dms',
+      data.title, data.state, data.duration)
+  })
 })
 ```
 
@@ -31,7 +37,7 @@ on('task', {
   testFinished (attributes) {
     console.log('%s: "%s" %dms',
       attributes.state, attributes.title, attributes.duration)
-    ipc.of.cypressListener.emit({
+    ipc.of.cypressListener.emit('test:after:run', {
       state: attributes.state,
       title: attributes.title,
       duration: attributes.duration,
