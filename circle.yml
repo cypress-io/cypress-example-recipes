@@ -265,8 +265,6 @@ jobs:
     <<: *defaults
   fundamentals__chrome-remote-debugging:
     <<: *defaults
-  third-party-mailosaur:
-    <<: *defaults
 
 # list all jobs to run and their dependencies here
 # and then use this list from workflow definition
@@ -462,9 +460,6 @@ all_jobs: &all_jobs
       requires:
         - build
   - fundamentals__module-api:
-      requires:
-        - build
-  - third-party-mailosaur:
       requires:
         - build
 
