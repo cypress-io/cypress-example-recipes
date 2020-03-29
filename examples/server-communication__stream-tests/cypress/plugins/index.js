@@ -6,7 +6,7 @@ const ipc = require('node-ipc')
 
 ipc.connectTo('cypressListener', () => {
   ipc.of.cypressListener.on('connect', () => {
-    ipc.log('## connected to Cypress listener ##'.rainbow)
+    ipc.log('## connected to Cypress listener ##')
   })
 })
 
@@ -18,7 +18,11 @@ module.exports = (on, config) => {
     testFinished (attributes) {
       // console.log(name)
       console.log('%s: "%s" %dms', attributes.state, attributes.title, attributes.duration)
-      ipc.of.cypressListener.emit(attributes.title)
+      ipc.of.cypressListener.emit({
+        state: attributes.state,
+        title: attributes.title,
+        duration: attributes.duration,
+      })
 
       return null
     },

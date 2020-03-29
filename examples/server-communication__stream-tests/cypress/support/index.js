@@ -25,6 +25,4 @@ after(sendTestAttributes)
 
 Cypress.on('test:after:run', (attributes, test) => {
   testAttributesToSend = attributes
-  // console.log('attributes %o', attributes)
-  // console.log('test', test)
 })

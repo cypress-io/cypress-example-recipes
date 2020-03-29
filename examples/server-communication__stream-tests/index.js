@@ -9,7 +9,6 @@ ipc.serve(() => {
 
   cypress.run().then((results) => {
     console.log('all done ✔️')
-    // console.log('%o', results)
     ipc.server.stop()
   }, (err) => {
     console.error(err.message)
@@ -17,7 +16,7 @@ ipc.serve(() => {
   })
 
   ipc.server.on('message', (data) => {
-    ipc.log('got a message'.deba, data)
+    ipc.log('got a message'.debug, data)
   })
 })
 
