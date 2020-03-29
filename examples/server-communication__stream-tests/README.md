@@ -1,6 +1,8 @@
 # stream-tests
 > Run Cypress using NPM module API and receive event after each test finishes
 
+![How it works](images/how-it-works.png)
+
 You can launch the testing process with `node .`. The script [index.js](index.js) runs the tests using [Cypress NPM module API](https://on.cypress.io/module-api)
 
 ```js
