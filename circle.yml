@@ -520,7 +520,6 @@ all_jobs: &all_jobs
         - testing-dom__performance-metrics
         - testing-dom__root-style
         - testing-dom__select2
-        - third-party-mailosaur
         - unit-testing__application-code
         - unit-testing__react
         # "meta" jobs
