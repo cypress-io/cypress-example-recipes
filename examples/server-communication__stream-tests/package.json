@@ -5,6 +5,7 @@
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "node .",
-    "test": "node ."
+    "test": "node .",
+    "test:ci": "node ."
   }
 }
