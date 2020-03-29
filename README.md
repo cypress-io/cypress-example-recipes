@@ -101,6 +101,7 @@ Recipe | Description
 [Seeding your Database in Node](./examples/server-communication__seeding-database-in-node) | Seed your database with test data
 [XHR assertions](./examples/server-communication__xhr-assertions) | Spy and assert on application's network calls
 [Visiting 2nd domain](./examples/server-communication__visit-2nd-domain) | Visiting two different domains from two different tests
+[Stream test results](./examples/server-communication__stream-tests) | Streams each test result from the browser to the plugins to an external process via IPC
 
 ## Other Cypress Recipes
 
