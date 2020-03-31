@@ -1,4 +1,5 @@
 # Stubbing `window.fetch`
+> Work around inability to control network requests that use `window.fetch` [#95][issue]
 
 - Use [`cy.spy()`](https://on.cypress.io/spy) to verify the behavior of a function.
 - Use [`cy.stub()`](https://on.cypress.io/stub) to verify and control the behavior of a function.
@@ -10,7 +11,7 @@ See individual spec files in [cypress/integration](cypress/integration) folder.
 
 ## Deleting `fetch`
 
-Until issue [#95](https://github.com/cypress-io/cypress/issues/95) is implemented, if your application uses `fetch` protocol to make Ajax requests, Cypress cannot see or stub these network calls. To quickly check what requests the web application is making, open DevTools Network tab and check the "type" column. If the type shows `xhr`, Cypress can see it. If the type says `fetch`, Cypress cannot intercept it yet.
+Until issue [#95][issue] is implemented, if your application uses `fetch` protocol to make Ajax requests, Cypress cannot see or stub these network calls. To quickly check what requests the web application is making, open DevTools Network tab and check the "type" column. If the type shows `xhr`, Cypress can see it. If the type says `fetch`, Cypress cannot intercept it yet.
 
 ![Ajax type](images/type.png)
 
@@ -39,3 +40,5 @@ Cypress.on('window:before:load', (win) => {
   delete win.fetch
 })
 ```
+
+[issue]: https://github.com/cypress-io/cypress/issues/95
