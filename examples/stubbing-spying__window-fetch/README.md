@@ -1,22 +1,28 @@
 # Stubbing `window.fetch`
+> Work around inability to control network requests that use `window.fetch` [#95][issue]
 
-- Use [`cy.spy()`](https://on.cypress.io/spy) to verify the behavior of a function.
-- Use [`cy.stub()`](https://on.cypress.io/stub) to verify and control the behavior of a function.
-- Use [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick) to control time.
-- Stub `window.fetch` to control server responses.
-- Replace `window.fetch` with a polyfill that uses XHR and is loaded only for tests, see [polyfill-fetch-from-tests-spec.js](cypress/integration/polyfill-fetch-from-tests-spec.js)
+You can spy and stub `window.fetch` directly, or, to recreate the same [Network support](https://on.cypress.io/network-requests) experience, remove `window.fetch` completely and let your application fall back to `XMLHttpRequest` protocol. If the application does NOT have fallback mechanism, then the Cypress tests can provide it using a polyfill.
 
 See individual spec files in [cypress/integration](cypress/integration) folder.
 
+Spec | Description
+--- | ---
+[spy-on-fetch-spec.js](cypress/integration/spy-on-fetch-spec.js) | Observes calls the application makes using `window.fetch` via [`cy.spy()`](https://on.cypress.io/spy)
+[stub-fetch-spec.js](cypress/integration/stub-fetch-spec.js) | Replaces `window.fetch` with a stubbed method via [`cy.stub()`](https://on.cypress.io/stub) the tests can control
+[polyfill-fetch-from-tests-spec.js](cypress/integration/polyfill-fetch-from-tests-spec.js) | Removes `window.fetch` method and replaces it with a polyfill based on XMLHttpRequest
+[control-clock-spec.js](cypress/integration/control-clock-spec.js) | **Bonus:** shows how to "speed-up" application to make Ajax calls by controlling time using [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick)
+
 ## Deleting `fetch`
 
-Until issue [#95](https://github.com/cypress-io/cypress/issues/95) is implemented, if your application uses `fetch` protocol to make Ajax requests, Cypress cannot see or stub these network calls. To quickly check what requests the web application is making, open DevTools Network tab and check the "type" column. If the type shows `xhr`, Cypress can see it. If the type says `fetch`, Cypress cannot intercept it yet.
+Until issue [#95][issue] is implemented, if your application uses `fetch` protocol to make Ajax requests, Cypress cannot see or stub these network calls. To quickly check what requests the web application is making, open DevTools Network tab and check the "type" column. If the type shows `xhr`, Cypress can see it. If the type says `fetch`, Cypress cannot intercept it yet.
 
 ![Ajax type](images/type.png)
 
 **Tip:** if the "type" column is not there, add it by right-clicking on any column and checking "Type" entry.
 
 ![Add type column to Network tab](images/add-type-column.png)
+
+You can delete `window.fetch` during individual visit, or for every loaded window.
 
 ### Delete in `cy.visit`
 
@@ -39,3 +45,5 @@ Cypress.on('window:before:load', (win) => {
   delete win.fetch
 })
 ```
+
+[issue]: https://github.com/cypress-io/cypress/issues/95
