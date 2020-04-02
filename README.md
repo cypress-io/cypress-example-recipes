@@ -130,7 +130,7 @@ Recipe | Description
 [Code coverage](https://github.com/paulfalgout/cypress-coverage-example) | Cypress with Coverage reports
 [Cucumber](https://github.com/TheBrainFamily/cypress-cucumber-example) | Example usage of Cypress with Cucumber
 [Jest](https://github.com/TheBrainFamily/jest-runner-cypress-example) | Example for the jest-runner-cypress
-[Mailosaur](https://github.com/muratkeremozcan/cypressExamples/tree/master/cypress-mailosaur) | Utilizes `cy.request` or `cy.task` with [Mailosaur's Node package](https://www.npmjs.com/package/mailosaur) to test emails sent with [sendmail npm package](https://www.npmjs.com/package/sendmail)
+[Mailosaur](https://github.com/muratkeremozcan/cypressExamples/tree/master/cypress-mailosaur) | Utilizes `cy.request()` or `cy.task()` with [`mailosaur`](https://www.npmjs.com/package/mailosaur) to test emails sent with [`sendmail`](https://www.npmjs.com/package/sendmail)
 
 ## Overview
 
