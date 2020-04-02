@@ -1,0 +1,11 @@
+{
+  "name": "stream-tests",
+  "version": "1.0.0",
+  "description": "Run Cypress using NPM module API and receive event after each test finishes",
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "node .",
+    "test": "node .",
+    "test:ci": "node ."
+  }
+}

@@ -79,7 +79,7 @@ Recipe | Description
 Recipe | Description
 --- | ---
 [Stubbing Functions](./examples/stubbing-spying__functions) | Use `cy.spy()` and `cy.stub()` to test function calls
-[Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch) | Use `cy.stub()` to control fetch requests
+[Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch) | Work around the `window.fetch` limitation
 [Stubbing `window.open` and `console.log`](./examples/stubbing-spying__window) | Use `cy.stub()` and `cy.spy()` to test application behavior
 [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics) | Use `cy.stub()` to test Google Analytics calls
 [Spying and stubbing methods on `console` object](./examples/stubbing-spying__console) | Use `cy.spy()` and `cy.stub()` on `console.log`
@@ -101,6 +101,7 @@ Recipe | Description
 [Seeding your Database in Node](./examples/server-communication__seeding-database-in-node) | Seed your database with test data
 [XHR assertions](./examples/server-communication__xhr-assertions) | Spy and assert on application's network calls
 [Visiting 2nd domain](./examples/server-communication__visit-2nd-domain) | Visiting two different domains from two different tests
+[Stream test results](./examples/server-communication__stream-tests) | Streams each test result from the browser to the plugins to an external process via IPC
 
 ## Other Cypress Recipes
 
