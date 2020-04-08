@@ -15,10 +15,11 @@ module.exports = {
         exclude: [/node_modules/],
         use: [
           {
-            loader: 'ts-loader',
+            loader: 'babel-loader',
             options: {
-              // skip typechecking for speed
-              transpileOnly: true,
+              presets: [
+                '@babel/typescript',
+              ],
             },
           },
         ],
