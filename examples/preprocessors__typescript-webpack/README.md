@@ -11,7 +11,8 @@ Because this recipe is part of the monorepo with lots of examples, we don't want
 
 - `webpack`
 - `@cypress/webpack-preprocessor`
-- `ts-loader`
+- `babel-loader`
+- `@babel/preset-typescript`
 - `typescript`
 
 ## See

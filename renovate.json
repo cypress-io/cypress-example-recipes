@@ -46,8 +46,7 @@
     },
     {
       "packageNames": [
-        "ts-loader",
-        "tsify",
+        "@babel/preset-typescript",
         "tslint",
         "typescript"
       ],
