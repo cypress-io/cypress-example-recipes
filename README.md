@@ -84,6 +84,7 @@ Recipe | Description
 [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics) | Use `cy.stub()` to test Google Analytics calls
 [Spying and stubbing methods on `console` object](./examples/stubbing-spying__console) | Use `cy.spy()` and `cy.stub()` on `console.log`
 [Stub resource loading](./examples/stubbing__resources) | Use `MutationObserver` to stub resource loading like `img` tags
+[Stub `navigator.cookieEnabled` property](./examples/stubbing-spying__navigator) | Use `cy.stub()` to mock the `navigator.cookieEnabled` property
 
 ## Unit Testing
 
