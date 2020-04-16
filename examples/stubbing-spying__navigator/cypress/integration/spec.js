@@ -3,8 +3,9 @@ context('Navigator', () => {
   describe('stubbing navigator.cookieEnabled', () => {
     it('cookies are disabled for user', () => {
       cy.visit('index.html', {
-        onBeforeLoad(win) {
-          cy.stub(win.navigator, 'cookieEnabled', false).as('cookieEnabled')
+        onBeforeLoad (win) {
+          // stub property using https://on.cypress.io/stub
+          cy.stub(win.navigator, 'cookieEnabled', false)
         },
       })
 
