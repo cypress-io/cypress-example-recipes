@@ -1,12 +1,21 @@
 /// <reference types="cypress" />
 const neatCSV = require('neat-csv')
 
+/* eslint-disable no-console */
+
+Cypress.on('test:after:run', (attributes) => {
+  console.log('Test "%s" has finished in %dms', attributes.title, attributes.duration)
+})
+
 describe('CSV', () => {
-  beforeEach(() => {
+  let table
+
+  before(() => {
     cy.readFile('records.csv')
     .then(neatCSV) // converts text into list of objects
-    .as('data')
-    /* eslint-disable-next-line no-console */
+    .then((data) => {
+      table = data
+    })
     .then(console.table) // convenient method for printing list of objects in DevTools console
   })
 
@@ -14,7 +23,7 @@ describe('CSV', () => {
     // convert list of objects into list of lists
     // rawData will be like
     // [ [Joe, Smith, student], [Mary, Sue, driver], ...]
-    const rawData = this.data.map(Cypress._.values)
+    const rawData = table.map(Cypress._.values)
 
     cy.visit('index.html')
 
@@ -37,14 +46,12 @@ describe('CSV', () => {
     }
   })
 
-  it('has table rows for each row of CSV file (fast)', function () {
-    const records = this.data
-
+  it('has table rows for each row of CSV file 🏃‍♂', function () {
     cy.visit('index.html')
     cy.get('table tbody tr').should(($rows) => {
       // go through each row and confirm it shows the right information from CSV
       $rows.each((k, $row) => {
-        const record = records[k]
+        const record = table[k]
         const $cells = $row.children
 
         expect($cells[0])
@@ -59,6 +66,39 @@ describe('CSV', () => {
         .to.have.property('innerText')
         .equal(record['Occupation'])
       })
+    })
+  })
+
+  it('checks entire table row 🏇', function () {
+    // convert list of objects into list of lists
+    // rawData will be like
+    // [ [Joe, Smith, student], [Mary, Sue, driver], ...]
+    const rawData = table.map(Cypress._.values)
+
+    cy.visit('index.html')
+    cy.get('table tbody tr').should(($rows) => {
+      // go through each row and confirm it shows the right information from CSV
+      $rows.each((k, $row) => {
+        const record = rawData[k]
+        const cells = Cypress._.map($row.children, 'innerText')
+
+        expect(cells).to.deep.equal(record)
+      })
+    })
+  })
+
+  it('checks entire object of values from DOM 🚀', function () {
+    // convert list of objects into list of lists and then flatten
+    // rawValues will be a single array
+    // [Joe, Smith, student, Mary, Sue, driver, ...]
+    const rawValues = Cypress._.flatten(table.map(Cypress._.values))
+
+    cy.visit('index.html')
+    cy.get('table tbody').then((tbody) => {
+      const cells = tbody.find('td')
+      const values = Cypress._.map(cells, 'innerText')
+
+      expect(values).to.deep.equal(rawValues)
     })
   })
 })
