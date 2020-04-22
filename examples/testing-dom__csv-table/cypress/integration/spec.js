@@ -12,11 +12,11 @@ describe('CSV', () => {
 
   before(() => {
     cy.readFile('records.csv')
-      .then(neatCSV) // converts text into list of objects
-      .then((data) => {
-        table = data
-      })
-      .then(console.table) // convenient method for printing list of objects in DevTools console
+    .then(neatCSV) // converts text into list of objects
+    .then((data) => {
+      table = data
+    })
+    .then(console.table) // convenient method for printing list of objects in DevTools console
   })
 
   it('checks table using DOM aliases (slow)', () => {
@@ -28,20 +28,20 @@ describe('CSV', () => {
     cy.visit('index.html')
 
     cy.get('table tbody tr')
-      // make sure the table has loaded
-      .should('have.length.of', rawData.length - 1)
-      .as('cyRows')
+    // make sure the table has loaded
+    .should('have.length.of', rawData.length - 1)
+    .as('cyRows')
 
     for (let row = 0; row < rawData.length; row++) {
       cy.get('@cyRows')
-        .eq(row)
-        .find('td')
-        .as('cyRowColumns')
+      .eq(row)
+      .find('td')
+      .as('cyRowColumns')
 
       for (let column = 0; column < rawData[row].length; column++) {
         cy.get('@cyRowColumns')
-          .eq(column)
-          .should('contain', rawData[row][column])
+        .eq(column)
+        .should('contain', rawData[row][column])
       }
     }
   })
@@ -55,16 +55,16 @@ describe('CSV', () => {
         const $cells = $row.children
 
         expect($cells[0])
-          .to.have.property('innerText')
-          .equal(record['First name'])
+        .to.have.property('innerText')
+        .equal(record['First name'])
 
         expect($cells[1])
-          .to.have.property('innerText')
-          .equal(record['Last name'])
+        .to.have.property('innerText')
+        .equal(record['Last name'])
 
         expect($cells[2])
-          .to.have.property('innerText')
-          .equal(record['Occupation'])
+        .to.have.property('innerText')
+        .equal(record['Occupation'])
       })
     })
   })
