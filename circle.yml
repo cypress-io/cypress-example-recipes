@@ -251,6 +251,8 @@ jobs:
     <<: *defaults
   unit-testing__react:
     <<: *defaults
+  unit-testing__react-skeleton:
+    <<: *defaults
   server-communication__bootstrapping-your-app:
     <<: *defaults
   server-communication__env-variables:
@@ -445,6 +447,9 @@ all_jobs: &all_jobs
   - unit-testing__react:
       requires:
         - build
+  - unit-testing__react-skeleton:
+      requires:
+        - build
   - server-communication__bootstrapping-your-app:
       requires:
         - build
@@ -534,6 +539,7 @@ all_jobs: &all_jobs
         - testing-dom__select2
         - unit-testing__application-code
         - unit-testing__react
+        - unit-testing__react-skeleton
         # "meta" jobs
         - test-examples
         - test-examples-chrome

@@ -8,7 +8,7 @@ import { SkeletonTheme } from 'react-loading-skeleton'
 
 // matches Post.story.js
 describe('Post skeletons', () => {
-  it.only('just renders Post', () => {
+  it('just renders Post', () => {
     mount(<Post />)
   })
 

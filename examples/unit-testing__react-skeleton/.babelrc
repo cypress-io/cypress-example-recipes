@@ -7,11 +7,7 @@
     },
     "@emotion/babel-preset-css-prop"
   ],
-  "env": {
-    "test": {
-      "plugins": [
-        "babel-plugin-istanbul"
-      ]
-    }
-  }
+  "plugins": [
+    "babel-plugin-istanbul"
+  ]
 }
