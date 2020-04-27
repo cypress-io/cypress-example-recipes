@@ -1,0 +1,14 @@
+{
+  "plugins": [
+    "@cypress/dev"
+  ],
+  "extends": [
+    "plugin:@cypress/dev/general",
+    "plugin:@cypress/dev/react"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
