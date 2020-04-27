@@ -5,6 +5,8 @@ import { ApolloProvider } from 'react-apollo'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 
 const client = new ApolloClient({
+  // TODO move external 3rd party URL to either this repo
+  // or to our service, similar to jsonplaceholder.cypress.io
   uri: 'https://75183.sse.codesandbox.io/',
 })
 
