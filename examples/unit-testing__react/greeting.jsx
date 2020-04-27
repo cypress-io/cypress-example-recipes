@@ -5,7 +5,7 @@ export default class Greeting extends Component {
     super(...args)
 
     this.state = {
-      greeting: 'Hello'
+      greeting: 'Hello',
     }
   }
 
@@ -22,7 +22,7 @@ export default class Greeting extends Component {
 
   updateGreeting () {
     this.setState({
-      greeting: 'Bonjour'
+      greeting: 'Bonjour',
     })
   }
 }

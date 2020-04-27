@@ -10,6 +10,8 @@ A little React [greeting.jsx](greeting.jsx) component is tested (inside Cypress 
 
 ### cypress-react-unit-test example
 
+⚠️ This is an experimental feature that uses `"experimentalComponentTesting": true` flag in [cypress.json](cypress.json) and requires Cypress v4.5.0+. See [on.cypress.io/experimental](https://on.cypress.io/experimental) for more details.
+
 The screenshot below shows how [cypress-react-unit-test](https://github.com/bahmutov/cypress-react-unit-test) mounts a React component as "mini" web application.
 
 ![Testing React component using cypress-react-unit-test](images/button-click.png)
