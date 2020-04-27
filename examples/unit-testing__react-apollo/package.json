@@ -1,7 +1,7 @@
 {
-  "name": "unit-testing__react-skeleton",
+  "name": "unit-testing__react-apollo",
   "version": "1.0.0",
-  "description": "Component testing a React app that uses react-loading-skeleton",
+  "description": "Component testing for React Apollo application",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",

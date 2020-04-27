@@ -1,0 +1,39 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0 100px 0 100px;
+}
+th {
+  padding: 0.75em;
+  height: 100%;
+  border-collapse: collapse;
+  border-bottom: 2px solid;
+  background-color: #212529;
+  border-bottom-color: #dee2e6;
+  color: white;
+}
+td {
+  border-top: 1px solid #dee2e6;
+  text-align: center;
+  padding: 8px;
+  background-color: #212529;
+}
+table {
+  table-layout: fixed;
+  font-weight: 400;
+  border-collapse: collapse;
+  width: 100%;
+  display: table;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  color: white;
+  border-bottom: white;
+}
+button {
+  padding: 10px;
+  margin: 10px 0 10px 0;
+}
