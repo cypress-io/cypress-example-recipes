@@ -12,3 +12,5 @@ videos
 out.js
 examples/*/cypress/logs
 snapshots.js
+.nyc_output
+coverage

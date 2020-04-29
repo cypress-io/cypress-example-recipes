@@ -1,0 +1,13 @@
+{
+  "name": "unit-testing__react-apollo",
+  "version": "1.0.0",
+  "description": "Component testing for React Apollo application",
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "start": "echo nothing to start, unit testing example",
+    "test:ci": "npm run cypress:run",
+    "test:ci:firefox": "npm run cypress:run -- --browser firefox",
+    "test:ci:windows": "bin-up cypress run"
+  }
+}

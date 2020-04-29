@@ -1,0 +1,13 @@
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    {
+      "plugins": ["@babel/plugin-proposal-class-properties"]
+    },
+    "@emotion/babel-preset-css-prop"
+  ],
+  "plugins": [
+    "babel-plugin-istanbul"
+  ]
+}

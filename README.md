@@ -92,6 +92,7 @@ Recipe | Description
 --- | ---
 [Application Code](./examples/unit-testing__application-code) | Import and test your own application code
 [React](./examples/unit-testing__react) | Test your React components in isolation
+[React Skeleton](./examples/unit-testing__react-skeleton) | Component testing for React
 [File Upload in React](./examples/file-upload-react) | Test file upload in React app
 
 ## Server Communication

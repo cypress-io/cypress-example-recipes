@@ -1,0 +1,26 @@
+{
+  "data": {
+    "books": [
+      {
+        "title": "Cypress book",
+        "author": {
+          "name": "Cypress team",
+          "email": "nice@email.com",
+          "__typename": "Author"
+        },
+        "synopsis": "It's a test!",
+        "__typename": "Book"
+      },
+      {
+        "title": "Testing novel",
+        "author": {
+          "name": "Cypress team",
+          "email": "nice@email.com",
+          "__typename": "Author"
+        },
+        "synopsis": "A story of love for tests",
+        "__typename": "Book"
+      }
+    ]
+  }
+}
