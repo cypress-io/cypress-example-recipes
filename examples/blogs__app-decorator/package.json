@@ -4,9 +4,9 @@
   "description": "Using class decorator to automatically attach instance to window",
   "private": true,
   "scripts": {
-    "cy:open": "../../node_modules/.bin/cypress open",
-    "cy:run": "../../node_modules/.bin/cypress run",
-    "dev": "../../node_modules/.bin/start-test 1234 cy:open",
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "dev": "../../node_modules/.bin/start-test 1234 cypress:open",
     "start": "../../node_modules/.bin/parcel serve src/index.html"
   },
   "devDependencies": {
