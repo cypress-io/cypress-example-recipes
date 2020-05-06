@@ -1,7 +1,7 @@
-# App decorator
-> Using class decorator to automatically attach instance to window
+# JavaScript class decorator
+> Using class decorator to automatically attach instance to the window
 
-The application source code uses a [class decorator](https://www.sitepoint.com/javascript-decorators-what-they-are/) to automatically save created instances on the `window` object when running inside Cypress.
+The application source code uses a [class decorator](https://www.sitepoint.com/javascript-decorators-what-they-are/) to automatically save any created instances on the `window` object when running inside Cypress.
 
 ```js
 // src/components/TodoList.jsx
@@ -36,3 +36,26 @@ it('creates Todo components', () => {
 ![Test](images/app-decorator.png)
 
 Note: class decorators are an experimental JavaScript feature. In this recipe they are transpiled using Babel plugins in the [.babelrc](.babelrc) file.
+
+There are two class decorators in the [src/decorators/index.js](src/decorators/index.js) file.
+
+```js
+import {CypressSingleton, CypressInstances} from './decorators'
+
+// use CypressSingleton if there is only one instance of a class
+// for example Todo application only has a single input component
+@CypressSingleton('input')
+class TodoFormInput {
+  ...
+}
+// from the test use
+cy.window().its('input') // yields TodoFormInput
+
+// there might be multiple Todo item components
+@CypressInstances('todos')
+class TodoItem {
+  ...
+}
+// from the test use
+cy.window().its('todos') // yields TodoItem[]
+```

@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-describe('TodoApp with App Decorator', () => {
+describe('TodoApp with Class Decorator', () => {
   it('sets TodoInput', () => {
     cy.visit('/')
     // a class decorator for TodoTextInput sets instance reference

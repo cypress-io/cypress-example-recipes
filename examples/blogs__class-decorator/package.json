@@ -1,7 +1,7 @@
 {
-  "name": "app-decorator",
+  "name": "class-decorator",
   "version": "0.0.0",
-  "description": "Using class decorator to automatically attach instance to window",
+  "description": "Using class decorator to automatically attach instance to the window",
   "private": true,
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",

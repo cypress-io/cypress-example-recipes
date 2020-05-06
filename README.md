@@ -73,7 +73,7 @@ Recipe | Description
 [Expect N assertions](./examples/blogs__assertion-counting) | How to expect a certain number of assertions in a test
 [Browser notifications](./examples/blogs__notification) | How to test application that uses [`Notification`](https://developer.mozilla.org/en-US/docs/Web/API/notification)
 [Testing iframes](./examples/blogs__iframes) | Accessing elements in 3rd party iframe, spy and stub network calls from iframe
-[Class decorators](./examples/blogs__app-decorator) | Using class decorator to expose objects created by the application so they are reachable from tests
+[Class decorators](./examples/blogs__class-decorator) | Using JavaScript class decorator to expose objects created by the application so they are reachable from tests
 
 ## Stubbing and spying
 
