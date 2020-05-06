@@ -35,4 +35,4 @@ it('creates Todo components', () => {
 
 ![Test](images/app-decorator.png)
 
-Note: class decorators are an experimental JavaScript feature. In this recipe they are transpiled using Babel plugins in [.babelrc](.babelrc) file.
+Note: class decorators are an experimental JavaScript feature. In this recipe they are transpiled using Babel plugins in the [.babelrc](.babelrc) file.
