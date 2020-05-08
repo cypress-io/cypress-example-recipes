@@ -157,6 +157,8 @@ jobs:
   # define a new job with defaults for each "examples/*" subfolder
   blogs__a11y:
     <<: *defaults
+  blogs__class-decorator:
+    <<: *defaults
   blogs__assertion-counting:
     <<: *defaults
   blogs__application-actions:
@@ -316,6 +318,9 @@ all_jobs: &all_jobs
   #       - build
 
   - blogs__a11y:
+      requires:
+        - build
+  - blogs__class-decorator:
       requires:
         - build
   - blogs__assertion-counting:
@@ -487,6 +492,7 @@ all_jobs: &all_jobs
         - build
         - lint
         - blogs__a11y
+        - blogs__class-decorator
         - blogs__assertion-counting
         - blogs__application-actions
         - blogs__notification
