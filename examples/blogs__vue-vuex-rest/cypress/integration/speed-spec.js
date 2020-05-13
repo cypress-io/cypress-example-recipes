@@ -1,15 +1,43 @@
 /// <reference types="Cypress" />
 
 let commands = []
+let testAttributes
+
+// sends test results to the plugins process
+// using cy.task https://on.cypress.io/task
+const sendTestTimings = () => {
+  if (!testAttributes) {
+    return
+  }
+
+  const attr = testAttributes
+
+  testAttributes = null
+
+  cy.task('testTimings', attr)
+}
+
+beforeEach(sendTestTimings)
+
+after(sendTestTimings)
+
+Cypress.on('test:before:run', () => {
+  commands.length = 0
+})
 
 Cypress.on('test:after:run', (attributes) => {
   /* eslint-disable no-console */
   console.log('Test "%s" has finished in %dms', attributes.title, attributes.duration)
   console.table(commands)
-  commands.length = 0
+  testAttributes = {
+    title: attributes.title,
+    duration: attributes.duration,
+    commands: Cypress._.cloneDeep(commands),
+  }
 })
 
 Cypress.on('command:start', (c) => {
+  console.log('command start', c.attributes.name)
   commands.push({
     name: c.attributes.name,
     started: +new Date(),
@@ -17,6 +45,7 @@ Cypress.on('command:start', (c) => {
 })
 
 Cypress.on('command:end', (c) => {
+  console.log('command end', c.attributes.name)
   const lastCommand = commands[commands.length - 1]
 
   if (lastCommand.name !== c.attributes.name) {
@@ -120,6 +149,37 @@ describe('speed', () => {
     // delete one item and confirm it was deleted
 
     cy.contains('.todo-list li', 'b').find('.destroy').click({ force: true })
+    cy.wait('@delete')
+
+    cy.get('.todo-list li')
+    .should('have.length', 1)
+  })
+
+  it('deletes an item', () => {
+    // reset the backend data using a fixture file
+    cy.fixture('todos').then((todos) => {
+      cy.request({
+        method: 'POST',
+        url: '/reset',
+        body: {
+          todos,
+        },
+      })
+    })
+
+    // spy on the application's XHR calls
+    cy.server()
+    cy.route('DELETE', '/todos/*').as('delete')
+
+    // load the application
+    cy.visit('/')
+    cy.get('.todoapp').should('be.visible')
+
+    cy.get('.todo-list li')
+    .should('have.length', 2)
+
+    // delete one item and confirm it was deleted
+    cy.contains('.todo-list li', 'mock second').find('.destroy').click({ force: true })
     cy.wait('@delete')
 
     cy.get('.todo-list li')
