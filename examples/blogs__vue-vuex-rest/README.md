@@ -25,3 +25,5 @@ Spec files are in [cypress/integration](cypress/integration) folder
 ## Speed test
 
 Spec file [cypress/integration/speed-spec.js](cypress/integration/speed-spec.js) shows how to get test and command timings.
+
+![Speed spec](img/speed-spec.png)
