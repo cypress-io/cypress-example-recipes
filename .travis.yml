@@ -28,7 +28,7 @@ defaults: &defaults
     # due to long time gaps between the test jobs
     # https://github.com/cypress-io/cypress-example-recipes/issues/243
     # Disabling recording for now
-    - npm run cypress:run
+    - cypress run --record --key 426d9fd7-4be2-470a-9c67-ae5d57ddb450
     - date -R # run finishes timestamp
     # kill all background jobs (like "npm start &")
     - kill $(jobs -p) || true
