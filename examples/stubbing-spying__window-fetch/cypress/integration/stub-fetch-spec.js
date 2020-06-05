@@ -19,6 +19,31 @@ describe('stubbing', function () {
     cy.get('.loader').should('not.exist')
   })
 
+  it('can spy on network calls from the second page', () => {
+    cy.server()
+    cy.route('/favorite-fruits').as('favoriteFruits')
+    cy.visit('/')
+    cy.wait('@favoriteFruits')
+
+    cy.contains('a', 'Go to page 2').click()
+    cy.url().should('match', /\/page2\.html$/)
+    // the second page also requests the fruits
+    cy.wait('@favoriteFruits')
+  })
+
+  it('can stub network calls for each page', () => {
+    cy.server()
+    cy.route('/favorite-fruits', ['apples 🍎'])
+    cy.visit('/')
+    cy.contains('apples 🍎')
+
+    // change the response before going to the second page
+    cy.route('/favorite-fruits', ['grapes 🍇'])
+    cy.contains('a', 'Go to page 2').click()
+    cy.url().should('match', /\/page2\.html$/)
+    cy.contains('grapes 🍇')
+  })
+
   describe('when favorite fruits are returned', function () {
     it('displays the list of fruits', function () {
       cy.server()
