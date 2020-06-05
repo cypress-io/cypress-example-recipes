@@ -5,37 +5,38 @@ describe('element-one', () => {
     cy.visit('/index.html')
   })
 
-  it('should render a button', () => {
+  it('renders a button', () => {
     cy
-      .get('element-one')
-      .shadow()
-      .find('button')
-      .should('exist');
-  });
+    .get('element-one')
+    .shadow()
+    .find('button')
+    .should('exist')
+  })
 
-  it('should render a message on button click', () => {
+  it('renders a message on button click', () => {
     cy
-      .get('element-one')
-      .shadow()
-      .find('button')
-      .click()
+    .get('element-one')
+    .shadow()
+    .find('button')
+    .click()
+
     cy
-      .get('element-one')
-      .shadow()
-      .find('p')
-      .then((node) => {
-        expect(node.text()).to.equal('I am element 1!');
-      });
-  });
-});
+    .get('element-one')
+    .shadow()
+    .find('p')
+    .then((node) => {
+      expect(node.text()).to.equal('I am element 1!')
+    })
+  })
+})
 
 describe('element-two', () => {
-  it('should render a default slot', () => {
+  it('renders a default slot', () => {
     cy
-      .get('element-two')
-      .find('.container > slot', {ignoreShadowBoundaries: true})
-      .then((slot) => {
-        expect(slot.assignedNodes()[0]).to.equal(cy.$$('element-two > p')[0]);
-      });
-  });
-});
+    .get('element-two')
+    .find('.container > slot', { ignoreShadowBoundaries: true })
+    .then(($slot) => {
+      expect($slot[0].assignedElements()[0]).to.equal(cy.$$('element-two > p')[0])
+    })
+  })
+})
