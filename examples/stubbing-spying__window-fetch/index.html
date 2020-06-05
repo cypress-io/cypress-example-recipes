@@ -25,7 +25,8 @@
         if (response.ok) {
           return response.json()
         } else {
-          throw new Error(response.statusText)
+          const errorMessage = response.headers.get('status-text') || response.statusText
+          throw new Error(errorMessage)
         }
       })
       .then((response) => {
