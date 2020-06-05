@@ -42,6 +42,11 @@ describe('stubbing', function () {
     cy.contains('a', 'Go to page 2').click()
     cy.url().should('match', /\/page2\.html$/)
     cy.contains('grapes 🍇')
+
+    // change the response before going back to the index page
+    cy.route('/favorite-fruits', ['kiwi 🥝'])
+    cy.contains('a', 'Go back').click()
+    cy.contains('kiwi 🥝')
   })
 
   describe('when favorite fruits are returned', function () {
