@@ -1,6 +1,10 @@
 /// <reference types="cypress" />
 
 describe('element-one', () => {
+  beforeEach(() => {
+    cy.visit('/index.html')
+  })
+
   it('should render a button', () => {
     cy
       .get('element-one')
