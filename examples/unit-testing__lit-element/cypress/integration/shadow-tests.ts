@@ -34,7 +34,7 @@ describe('element-two', () => {
   it('renders a default slot', () => {
     cy
     .get('element-two')
-    .find('.container > slot', { ignoreShadowBoundaries: true })
+    .find('.container > slot', { includeShadowDom: true })
     .then(($slot) => {
       expect($slot[0].assignedElements()[0]).to.equal(cy.$$('element-two > p')[0])
     })
