@@ -54,5 +54,12 @@ module.exports = (on, config) => {
 
       return hasRecordAsync(title, ms)
     },
+
+    testTimings (attributes) {
+      console.log('Test "%s" has finished in %dms', attributes.title, attributes.duration)
+      console.table(attributes.commands)
+
+      return null
+    },
   })
 }

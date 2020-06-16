@@ -21,3 +21,9 @@ Spec files are in [cypress/integration](cypress/integration) folder
 ## Script commands
 
 - `npm run reset:db` resets [data.json](data.json) to have empty list of todos
+
+## Speed test
+
+Spec file [cypress/integration/speed-spec.js](cypress/integration/speed-spec.js) shows how to get test and command timings.
+
+![Speed spec](img/speed-spec.png)
