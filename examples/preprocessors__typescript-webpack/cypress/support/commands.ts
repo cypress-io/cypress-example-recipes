@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 // add a custom command cy.foo()
+// @ts-ignore
 Cypress.Commands.add('foo', () => 'foo')
 
 // see more example of adding custom commands to Cypress TS interface
