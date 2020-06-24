@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+// @ts-check
 
 describe('stubbing', function () {
   // A big advantage of controlling the response is we can test
@@ -8,7 +9,7 @@ describe('stubbing', function () {
     cy.server()
     cy.route({
       url: '/favorite-fruits',
-      reponse: [],
+      response: [],
       delay: 1000,
     })
 
@@ -17,6 +18,7 @@ describe('stubbing', function () {
 
     // once the network call finishes, the loader goes away
     cy.get('.loader').should('not.exist')
+    cy.contains('.favorite-fruits', 'No favorites')
   })
 
   it('can spy on network calls from the second page', () => {
