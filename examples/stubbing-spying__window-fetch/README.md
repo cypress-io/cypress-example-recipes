@@ -13,6 +13,12 @@ Spec | Description
 
 ## Stubbing `fetch`
 
-Cypress wraps the native XMLHttpRequest object to allow observing and stubbing network requests from the application. It also polyfills the native `window.fetch` method to work via wrapped XMLHttpRequest - this is how we allow network stubbing for applications that use `fetch` calls.
+Cypress wraps the native XMLHttpRequest object to allow observing and stubbing network requests from the application. It also polyfills the native `window.fetch` method to work via wrapped XMLHttpRequest - this is how we allow network stubbing for applications that use `fetch` calls. See [cypress.json](cypress.json)
+
+```json
+{
+  "experimentalFetchPolyfill": true
+}
+```
 
 In the future we plan to move network stubbing into Cypress' proxy layer, allowing much more powerful and complete network control. Watch issue [#95][issue] for progress.
