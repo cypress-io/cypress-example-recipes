@@ -52,7 +52,7 @@
     "graphql": "14.5.8",
     "hbs": "4.0.1",
     "http-server": "0.11.1",
-    "jquery": "3.4.0",
+    "jquery": "3.5.0",
     "json-server": "0.14.0",
     "jsonwebtoken": "8.5.1",
     "lit-element": "2.3.1",
