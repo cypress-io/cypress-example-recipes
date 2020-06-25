@@ -411,7 +411,7 @@ function getNativeBeforeInputChars(topLevelType, nativeEvent) {
 
       // If it's a spacebar character, assume that we have already handled
       // it at the keypress level and bail immediately. Android Chrome
-      // doesn't give us keycodes, so we need to blacklist it.
+      // doesn't give us keycodes, so we need to ignore it.
       if (chars === SPACEBAR_CHAR && hasSpaceKeypress) {
         return null;
       }
@@ -7133,7 +7133,7 @@ var ReactCompositeComponentMixin = {
           var addendum = getDeclarationErrorAddendum(this);
 
           if (location === ReactPropTypeLocations.prop) {
-            // Preface gives us something to blacklist in warning module
+            // Preface gives us something to ignore in warning module
             ("production" !== "development" ? warning(
               false,
               'Failed Composite propType: %s%s',
@@ -8032,7 +8032,7 @@ function putListener(id, registrationName, listener, transaction) {
   );
 }
 
-// For HTML, certain tags should omit their close tag. We keep a whitelist for
+// For HTML, certain tags should omit their close tag. We keep a list for
 // those special cased tags.
 
 var omittedCloseTags = {

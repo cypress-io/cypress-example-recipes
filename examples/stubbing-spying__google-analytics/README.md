@@ -1,6 +1,6 @@
 # Stubbing Google Analytics
 
-This is an example showing how to blacklist requests for `www.google-analytics.com`.
+This is an example showing how to block requests for `www.google-analytics.com`.
 
 Even though we are preventing the actual `GA` script from loading, we can still stub the `window.ga` object and ensure its being called correctly.
 
