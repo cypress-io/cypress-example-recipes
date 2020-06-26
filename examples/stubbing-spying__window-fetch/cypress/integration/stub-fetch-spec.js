@@ -2,6 +2,20 @@
 // @ts-check
 
 describe('stubbing', function () {
+  it('shows no Response message', () => {
+    cy.visit('/', {
+      onBeforeLoad (win) {
+        cy.stub(win, 'fetch').withArgs('/favorite-fruits')
+        .resolves({
+          ok: true,
+          json: () => [],
+        })
+      },
+    })
+
+    cy.contains('No favorites').should('be.visible')
+  })
+
   it('directly stubs window.fetch to test loading indicator', () => {
     // stub the "fetch(/favorite-fruits)" call from the app
     cy.visit('/', {
@@ -113,6 +127,7 @@ describe('stubbing', function () {
         url: '/favorite-fruits',
         status: 500,
         response: '',
+        delay: 2000,
         headers: {
           'status-text': 'Orchard under maintenance',
         },
