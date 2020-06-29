@@ -13,6 +13,7 @@ Recipe | Description
 [Adding Custom Commands](./examples/fundamentals__add-custom-command) | Write your own custom commands with correct types
 [Adding Chai Assertions](./examples/extending-cypress__chai-assertions) | Add new or custom chai assertions with correct types
 [Cypress module API](./examples/fundamentals__module-api) | Run Cypress via its module API
+[Wrapping Cypress module API](./examples/fundamentals__module-api-wrap) | Writing a wrapper around "cypress run" command line parsing
 [Custom browsers](./examples/fundamentals__custom-browsers) | Control which browsers the project can use, or even add a custom browser into the list
 [use Chrome Remote Interface](./examples/fundamentals__chrome-remote-debugging) | Use Chrome debugger protocol to trigger hover state and print media style
 
