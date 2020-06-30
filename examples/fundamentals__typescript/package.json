@@ -1,0 +1,11 @@
+{
+  "name": "with-typescript",
+  "version": "1.0.0",
+  "description": "Use out-of-the-box TypeScript with TypeScript",
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "test:ci": "../../node_modules/.bin/cypress run",
+    "test:ci:windows": "bin-up cypress run"
+  }
+}
