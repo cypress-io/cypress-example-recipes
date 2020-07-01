@@ -4,6 +4,7 @@
   "description": "Use out-of-the-box TypeScript with TypeScript",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
+    "precypress:run": "npm run lint",
     "cypress:run": "../../node_modules/.bin/cypress run",
     "lint": "../../node_modules/.bin/tslint --project ./tsconfig.json",
     "postlint": "npm run tsc",
