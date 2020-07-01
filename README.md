@@ -15,6 +15,7 @@ Recipe | Description
 [Cypress module API](./examples/fundamentals__module-api) | Run Cypress via its module API
 [Custom browsers](./examples/fundamentals__custom-browsers) | Control which browsers the project can use, or even add a custom browser into the list
 [use Chrome Remote Interface](./examples/fundamentals__chrome-remote-debugging) | Use Chrome debugger protocol to trigger hover state and print media style
+[Out-of-the-box TypeScript](./examples/fundamentals__typescript) | Write tests in TypeScript without setting up preprocessors
 
 ## Testing the DOM
 
