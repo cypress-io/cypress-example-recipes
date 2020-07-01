@@ -275,6 +275,8 @@ jobs:
     <<: *defaults
   fundamentals__chrome-remote-debugging:
     <<: *defaults
+  fundamentals__typescript:
+    <<: *defaults
 
 # list all jobs to run and their dependencies here
 # and then use this list from workflow definition
@@ -487,6 +489,9 @@ all_jobs: &all_jobs
   - fundamentals__module-api:
       requires:
         - build
+  - fundamentals__typescript:
+      requires:
+        - build
 
   # to avoid constantly tweaking required jobs on CircleCI
   # we can have a single job wait on all other test jobs here.
@@ -516,6 +521,7 @@ all_jobs: &all_jobs
         - fundamentals__dynamic-tests
         - fundamentals__module-api
         - fundamentals__add-custom-command
+        - fundamentals__typescript
         - logging-in__csrf-tokens
         - logging-in__html-web-forms
         - logging-in__single-sign-on
