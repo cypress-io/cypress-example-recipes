@@ -1,0 +1,6 @@
+{
+    "include": [
+        "cypress/integration/*.ts",
+        "cypress/integration/**/*.ts",
+    ]
+}
