@@ -1,17 +1,21 @@
 /* global window */
 /// <reference path="../types.d.ts" />
 
-// @ts-expect-error
-window.add(2, 3)
+before(() => {
+  // @ts-expect-error
+  window.add = (a, b) => a + b
+})
 
 describe('tests', () => {
   it('test custom command', () => {
-    cy.visit('https://cypress.io')
-    cy.clickLink('get started')
+    cy.visit('cypress/fixtures/test.html')
+    cy.clickLink('click me')
   })
 
   it('test extending AUTWindow', () => {
     cy.window().then((win) => {
+      win.add = (a, b) => a + b
+
       return win.add(2, 3)
     })
   })
