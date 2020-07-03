@@ -1,3 +1,4 @@
+// This file is required to make `npm run tsc` work.
 {
     "include": [
         "cypress/integration/*.ts",
