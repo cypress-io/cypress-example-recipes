@@ -158,6 +158,38 @@ describe('select2', () => {
   context('ajax data source', () => {
     // Select2 Ajax data fetch docs at https://select2.org/data-sources/ajax
 
+    // NOTE: test shows what will NOT work
+    it.skip('selects a value - WILL NOT WORK, JUST A DEMO', () => {
+      // clicking on the container starts Ajax call
+      cy.get('#select2-user-container').click()
+
+      // we know the choice elements have this class
+      cy.get('.select2-results__option')
+      // so let's try finding the element with the text
+      // WILL NOT WORK because our search is limited
+      // to the initial empty set of results
+      // from the previous ".get" command
+      .contains('Leanne Graham').click()
+
+      // confirm the right user is found
+      cy.get('#user').should('have.value', '1')
+      cy.get('#select2-user-container').should('have.text', 'Leanne Graham')
+    })
+
+    it('selects a value by waiting for loading class to go away', () => {
+      // clicking on the container starts Ajax call
+      cy.get('#select2-user-container').click()
+
+      cy.get('.select2-results__option')
+      .should('not.have.class', 'loading-results')
+      // great, now the results are shown in the DOM
+      .contains('Leanne Graham').click()
+
+      // confirm the right user is found
+      cy.get('#user').should('have.value', '1')
+      cy.get('#select2-user-container').should('have.text', 'Leanne Graham')
+    })
+
     it('selects a value by retrying', () => {
       // clicking on the container starts Ajax call
       cy.get('#select2-user-container').click()
