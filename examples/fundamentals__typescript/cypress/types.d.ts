@@ -18,6 +18,8 @@ declare namespace Cypress {
   }
 
   interface ApplicationWindow {
+    // let TS know the application's code will add
+    // method window.add with the following signature
     add(a: number, b: number): number
   }
 }
