@@ -156,44 +156,54 @@ describe('select2', () => {
   })
 
   context('ajax data source', () => {
-    it('selects a value', () => {
-      // https://select2.org/data-sources/ajax
+    // Select2 Ajax data fetch docs at https://select2.org/data-sources/ajax
 
-      // Approach 1 (doesn't work): click on the container to
-      // populate the values, and then select the value
-      // cy.get('#select2-user-container').click()
-      // cy.get('.select2-results__option').contains('Leanne Graham').click()
-      // cy.get('#user').should('have.value', '1')
+    it('selects a value by retrying', () => {
+      // clicking on the container starts Ajax call
+      cy.get('#select2-user-container').click()
 
-      // Approach 2 (doesn't work): using wait for xhr
-      // cy.server()
-      // cy.route('https://jsonplaceholder.cypress.io/users?_type=query').as('users')
-      // cy.get('#select2-user-container').click()
-      // cy.wait('@users')
-      // cy.get('.select2-results__option').contains('Leanne Graham').click()
-      // cy.get('#user').should('have.value', '1')
+      // we need to retry getting the option until it is found
+      // then we can click it. To retry finding the element with text
+      // we should use https://on.cypress.io/contains
+      cy.contains('.select2-results__option', 'Leanne Graham').click()
 
-      // Approach 3: using .should to wait (works inconsistently)
+      // confirm the right user is found
+      cy.get('#user').should('have.value', '1')
+      cy.get('#select2-user-container').should('have.text', 'Leanne Graham')
+    })
+
+    it('selects a value after the list has been is populated', () => {
+      // clicking on the container starts Ajax call
+      cy.get('#select2-user-container').click()
+
+      // let's wait for the list of options to be populated
+      // before trying to find a specific item
+      cy.get('.select2-results__option').should('have.length.gt', 3)
+      // and now we can find the user among the results
+      .contains('Leanne Graham').click()
+
+      // confirm the right user is found
+      cy.get('#user').should('have.value', '1')
+      cy.get('#select2-user-container').should('have.text', 'Leanne Graham')
+    })
+
+    it('selects a value after Ajax completes', () => {
       cy.server()
-      cy.route('https://jsonplaceholder.cypress.io/users*').as('users')
-
-      // click on the select2 container, which makes the ajax call
+      cy.route('https://jsonplaceholder.cypress.io/users?_type=query').as('users')
       cy.get('#select2-user-container').click()
       cy.wait('@users')
 
-      // select a value
-      cy.get('.select2-results__option').contains('Leanne Graham').should('be.visible').click()
+      // The Ajax call has completed - but that does not mean the widget
+      // has populated the DOM elements. Thus we need to use the same
+      // retry mechanism until an option with expected text exists
+      cy.contains('.select2-results__option', 'Leanne Graham').click()
 
-      // confirm the value of the selected element
+      // confirm the right user is found
       cy.get('#user').should('have.value', '1')
-
-      // confirm Select2 widget renders the name
       cy.get('#select2-user-container').should('have.text', 'Leanne Graham')
     })
 
     it('selects a value by typing and selecting', () => {
-      // https://select2.org/data-sources/ajax
-
       cy.server()
       cy.route('https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem').as('user_search')
 
@@ -204,14 +214,35 @@ describe('select2', () => {
       cy.get('input[aria-controls="select2-user-results"]').type('clem{enter}')
       cy.wait('@user_search')
 
-      // select a value
-      cy.get('.select2-results__option').contains('Clementine Bauch').should('be.visible').click()
+      // select a value, again by retrying command
+      // https://on.cypress.io/retry-ability
+      cy.contains('.select2-results__option', 'Clementine Bauch').should('be.visible').click()
 
       // confirm the value of the selected element
       cy.get('#user').should('have.value', '3')
 
       // confirm Select2 widget renders the name
       cy.get('#select2-user-container').should('have.text', 'Clementine Bauch')
+    })
+
+    it('selects the user returned by the Ajax call', () => {
+      // instead of hard-coding the user id and name, let's
+      // select the user using the Ajax response data
+      cy.server()
+      cy.route('https://jsonplaceholder.cypress.io/users?_type=query').as('users')
+      cy.get('#select2-user-container').click()
+      cy.wait('@users').its('responseBody').should('have.length', 10)
+      // let's take user #5
+      .its('5')
+      .then((user) => {
+        expect(user).to.have.property('name')
+        expect(user).to.have.property('id')
+
+        cy.contains('.select2-results__option', user.name).click()
+        // the Select2 widget picks the right user
+        cy.get('#user').should('have.value', user.id)
+        cy.get('#select2-user-container').should('have.text', user.name)
+      })
     })
   })
 
