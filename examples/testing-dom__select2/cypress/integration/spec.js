@@ -155,6 +155,66 @@ describe('select2', () => {
     })
   })
 
+  context('ajax data source', () => {
+    it('selects a value', () => {
+      // https://select2.org/data-sources/ajax
+
+      // Approach 1 (doesn't work): click on the container to
+      // populate the values, and then select the value
+      // cy.get('#select2-user-container').click()
+      // cy.get('.select2-results__option').contains('Leanne Graham').click()
+      // cy.get('#user').should('have.value', '1')
+
+      // Approach 2 (doesn't work): using wait for xhr
+      // cy.server()
+      // cy.route('https://jsonplaceholder.cypress.io/users?_type=query').as('users')
+      // cy.get('#select2-user-container').click()
+      // cy.wait('@users')
+      // cy.get('.select2-results__option').contains('Leanne Graham').click()
+      // cy.get('#user').should('have.value', '1')
+
+      // Approach 3: using .should to wait (works inconsistently)
+      cy.server()
+      cy.route('https://jsonplaceholder.cypress.io/users*').as('users')
+
+      // click on the select2 container, which makes the ajax call
+      cy.get('#select2-user-container').click()
+      cy.wait('@users')
+
+      // select a value
+      cy.get('.select2-results__option').contains('Leanne Graham').should('be.visible').click()
+
+      // confirm the value of the selected element
+      cy.get('#user').should('have.value', '1')
+
+      // confirm Select2 widget renders the name
+      cy.get('#select2-user-container').should('have.text', 'Leanne Graham')
+    })
+
+    it('selects a value by typing and selecting', () => {
+      // https://select2.org/data-sources/ajax
+
+      cy.server()
+      cy.route('https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem').as('user_search')
+
+      // first open the container, which makes the initial ajax call
+      cy.get('#select2-user-container').click()
+
+      // then type into the input element to trigger search, and wait for results
+      cy.get('input[aria-controls="select2-user-results"]').type('clem{enter}')
+      cy.wait('@user_search')
+
+      // select a value
+      cy.get('.select2-results__option').contains('Clementine Bauch').should('be.visible').click()
+
+      // confirm the value of the selected element
+      cy.get('#user').should('have.value', '3')
+
+      // confirm Select2 widget renders the name
+      cy.get('#select2-user-container').should('have.text', 'Clementine Bauch')
+    })
+  })
+
   context('programmatic control', () => {
     it('returns selected items', () => {
       cy.get('#states').select(['MA', 'VT', 'CT'], { force: true })
