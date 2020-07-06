@@ -244,6 +244,32 @@ describe('select2', () => {
         cy.get('#select2-user-container').should('have.text', user.name)
       })
     })
+
+    it('selects the user from stubbed Ajax call', () => {
+      cy.server()
+      // do not go to the server, mock the response instead
+      // but return the response after a delay
+      cy.route({
+        url: 'https://jsonplaceholder.cypress.io/users?_type=query',
+        response: [{
+          id: 101,
+          name: 'Joe Smith',
+        }, {
+          id: 201,
+          name: 'Mary Jane',
+        }],
+        delay: 2000,
+      })
+
+      cy.get('#select2-user-container').click()
+
+      // keep retrying finding the element until it is present
+      cy.contains('.select2-results__option', 'Mary Jane', { timeout: 2500 }).click()
+
+      // confirm the user was selected
+      cy.get('#user').should('have.value', 201)
+      cy.get('#select2-user-container').should('have.text', 'Mary Jane')
+    })
   })
 
   context('programmatic control', () => {
