@@ -12,6 +12,7 @@
 /// <reference path="../../../node_modules/cypress/types/cypress-global-vars.d.ts" />
 
 declare namespace Cypress {
+  // add custom Cypress command to the interface Chainable<Subject>
   interface Chainable<Subject=any> {
     // let TS know we have a custom command cy.clickLink(...)
     clickLink(label: string | number | RegExp): void
