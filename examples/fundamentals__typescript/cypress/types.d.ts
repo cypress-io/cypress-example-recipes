@@ -18,6 +18,8 @@ declare namespace Cypress {
     clickLink(label: string | number | RegExp): void
   }
 
+  // add properties the application adds to its "window" object
+  // by adding them to the interface ApplicationWindow
   interface ApplicationWindow {
     // let TS know the application's code will add
     // method window.add with the following signature
