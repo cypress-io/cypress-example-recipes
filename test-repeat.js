@@ -30,7 +30,7 @@ for (let k = 0; k < repeatNtimes; k += 1) {
     runOptions.record = true
     runOptions.group = args['--group']
 
-    if (runOptions.group && repeatNtimes > 0) {
+    if (runOptions.group && repeatNtimes > 1) {
       // make sure if we are repeating this example
       // then the recording has group names on the Dashboard
       // like "example-1-of-20", "example-2-of-20", ...
