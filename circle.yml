@@ -2,6 +2,11 @@ version: 2.1
 
 # testing jobs are all the same, so just use a template
 defaults: &defaults
+  parameters:
+    repeat:
+      description: Number of times to run this particular example
+      type: integer
+      default: 1
   parallelism: 1
   working_directory: ~/app
   docker:
@@ -26,11 +31,7 @@ defaults: &defaults
         # are not passed to the external PRs
         command: |
           cd examples/$CIRCLE_JOB
-          if [ -z "$CYPRESS_RECORD_KEY" ]; then
-            npm run cypress:run
-          else
-            npm run cypress:run -- --record --group $CIRCLE_JOB
-          fi
+          node ../../test-repeat -n << parameters.repeat >> --group $CIRCLE_JOB
         name: Cypress tests
 
 jobs:
@@ -451,6 +452,7 @@ all_jobs: &all_jobs
   - testing-dom__select2:
       requires:
         - build
+      repeat: 5
   - unit-testing__application-code:
       requires:
         - build

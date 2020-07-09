@@ -107,3 +107,16 @@ Simply commit an empty set of changes with `git commit --allow-empty` and set th
 and push to the branch. The CircleCI will install Cypress from the above links and then will go through the CI run, allowing you to confirm that the new recipes are working.
 
 Once the new Cypress version is published, merge the branch.
+
+## Fighting flake
+
+If you notice a recipe test failing sometimes, run more of it! In [circle.yml](circle.yml) a job can take `repeat: N` parameter to run the recipe N times. Increase the number of times to run the recipe to flush out flaky tests and fix them.
+
+Example recipe to run 5 times
+
+```
+- testing-dom__select2:
+    requires:
+      - build
+    repeat: 5
+```
