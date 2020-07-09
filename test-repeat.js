@@ -1,5 +1,9 @@
 /* eslint-disable no-console */
 // a small utility script to run Cypress N times
+
+// if there is an .env file, lots it and add to process.env
+require('dotenv').config()
+
 const arg = require('arg')
 const cypress = require('cypress')
 
