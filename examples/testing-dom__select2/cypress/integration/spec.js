@@ -237,13 +237,23 @@ describe('select2', () => {
 
     it('selects a value by typing and selecting', () => {
       cy.server()
+      cy.route('https://jsonplaceholder.cypress.io/users?_type=query').as('query')
       cy.route('https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem').as('user_search')
 
       // first open the container, which makes the initial ajax call
       cy.get('#select2-user-container').click()
 
-      // then type into the input element to trigger search, and wait for results
-      cy.get('input[aria-controls="select2-user-results"]').type('clem{enter}')
+      // let's wait for Select2 widget to finish its full query
+      cy.wait('@query')
+
+      cy.get('.select2-results__option')
+      .should('not.have.class', 'loading-results')
+
+      // then type into the input element to trigger search
+      cy.get('input[aria-controls="select2-user-results"]')
+      .type('clem', { delay: 150 })
+
+      // and wait for results from XHR "query=clem"
       cy.wait('@user_search')
 
       // select a value, again by retrying command
