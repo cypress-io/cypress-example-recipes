@@ -255,6 +255,13 @@ describe('select2', () => {
 
       // and wait for results from XHR "query=clem"
       cy.wait('@user_search')
+      .its('responseBody.length').then((numberOfResults) => {
+        // make sure the Select2 has updated to show just
+        // the above number of items. Otherwise the next
+        // step might fail since the widget suddenly re-renders
+        // to show only the new results
+        cy.get('.select2-results__option').should('have.length', numberOfResults)
+      })
 
       // select a value, again by retrying command
       // https://on.cypress.io/retry-ability
