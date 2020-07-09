@@ -26,11 +26,7 @@ defaults: &defaults
         # are not passed to the external PRs
         command: |
           cd examples/$CIRCLE_JOB
-          if [ -z "$CYPRESS_RECORD_KEY" ]; then
-            npm run cypress:run
-          else
-            npm run cypress:run -- --record --group $CIRCLE_JOB
-          fi
+          node ../../test-repeat --group $CIRCLE_JOB
         name: Cypress tests
 
 jobs:
