@@ -179,30 +179,31 @@ describe('select2', () => {
     // NOTE: example of a flaky test where the element will be detached from the DOM
     // used as a blog post demo
     it.skip('selects a value by typing and selecting', () => {
-      cy.server()
-      cy.route({
-        url: 'https://jsonplaceholder.cypress.io/users?_type=query',
-        response: 'fixture:query.json',
-        delay: 1000,
-      }).as('query')
+      // if you want to stub network calls to simulate slow server responses
+      // cy.server()
+      // cy.route({
+      //   url: 'https://jsonplaceholder.cypress.io/users?_type=query',
+      //   response: 'fixture:query.json',
+      //   delay: 1000,
+      // }).as('query')
 
-      cy.route({
-        url: 'https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem',
-        response: 'fixture:clem.json',
-        delay: 1000,
-      }).as('user_search')
+      // cy.route({
+      //   url: 'https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem',
+      //   response: 'fixture:clem.json',
+      //   delay: 1000,
+      // }).as('user_search')
 
       // first open the container, which makes the initial ajax call
       cy.get('#select2-user-container').click()
 
       // flake solution: wait for the widget to load the initial set of users
-      cy.get('.select2-results__option').should('have.length.gt', 3)
+      // cy.get('.select2-results__option').should('have.length.gt', 3)
 
       // then type into the input element to trigger search, and wait for results
       cy.get('input[aria-controls="select2-user-results"]').type('clem')
 
       // flake solution: wait for the search for "clem" to finish
-      cy.get('.select2-results__option').should('have.length', 2)
+      // cy.get('.select2-results__option').should('have.length', 2)
 
       cy.contains('.select2-results__option', 'Clementine Bauch').should('be.visible')
       .click()
