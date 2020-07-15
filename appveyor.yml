@@ -1,7 +1,7 @@
 # https://www.appveyor.com/docs/lang/nodejs-iojs/
 # Test against the latest version of this Node.js version
 environment:
-  nodejs_version: "10"
+  nodejs_version: "12"
 
 # Install scripts. (runs after repo cloning)
 install:
@@ -33,7 +33,7 @@ cache:
   # using APPVEYOR_SAVE_CACHE_ON_ERROR: true environment variable
 
 test_script:
-  - npm run test:ci:windows
+  - npm run test:ci:windows -- --record
 
 # Don't actually build, we are only interested in tests
 build: off
