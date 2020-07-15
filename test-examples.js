@@ -58,6 +58,11 @@ if (args['--windows']) {
   scriptName = 'test:ci:windows'
 }
 
+if (args['--record']) {
+  // assuming that every package.json has script with ":record" suffix
+  scriptName += ':record'
+}
+
 console.log('script name "%s"', scriptName)
 
 const getExamples = () => {
@@ -109,11 +114,6 @@ const testExample = (folder) => {
 
   const npmArgs = ['run', scriptName]
   const npmOptions = { stdio: 'inherit', cwd: folder }
-
-  if (args['--record']) {
-    npmArgs.push('--')
-    npmArgs.push('--record')
-  }
 
   return execa('npm', npmArgs, npmOptions)
 }
