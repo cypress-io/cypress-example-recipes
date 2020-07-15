@@ -176,6 +176,80 @@ describe('select2', () => {
       cy.get('#select2-user-container').should('have.text', 'Leanne Graham')
     })
 
+    // NOTE: example of a flaky test where the element will be detached from the DOM
+    // used as a blog post demo
+    it.skip('selects a value by typing and selecting', () => {
+      cy.server()
+      cy.route({
+        url: 'https://jsonplaceholder.cypress.io/users?_type=query',
+        response: 'fixture:query.json',
+        delay: 1000,
+      }).as('query')
+
+      cy.route({
+        url: 'https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem',
+        response: 'fixture:clem.json',
+        delay: 1000,
+      }).as('user_search')
+
+      // first open the container, which makes the initial ajax call
+      cy.get('#select2-user-container').click()
+
+      // flake solution: wait for the widget to load the initial set of users
+      cy.get('.select2-results__option').should('have.length.gt', 3)
+
+      // then type into the input element to trigger search, and wait for results
+      cy.get('input[aria-controls="select2-user-results"]').type('clem')
+
+      // flake solution: wait for the search for "clem" to finish
+      cy.get('.select2-results__option').should('have.length', 2)
+
+      cy.contains('.select2-results__option', 'Clementine Bauch').should('be.visible')
+      .click()
+
+      // confirm Select2 widget renders the name
+      cy.get('#select2-user-container').should('have.text', 'Clementine Bauch')
+    })
+
+    it('selects a value by typing and selecting (no flake)', () => {
+      cy.server()
+      cy.route('https://jsonplaceholder.cypress.io/users?_type=query').as('query')
+      cy.route('https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem').as('user_search')
+
+      // first open the container, which makes the initial ajax call
+      cy.get('#select2-user-container').click()
+
+      // let's wait for Select2 widget to finish its full query
+      cy.wait('@query')
+
+      cy.get('.select2-results__option')
+      .should('not.have.class', 'loading-results')
+
+      // then type into the input element to trigger search
+      cy.get('input[aria-controls="select2-user-results"]')
+      .type('clem', { delay: 150 })
+
+      // and wait for results from XHR "query=clem"
+      cy.wait('@user_search')
+      .its('responseBody.length').then((numberOfResults) => {
+        // make sure the Select2 has updated to show just
+        // the above number of items. Otherwise the next
+        // step might fail since the widget suddenly re-renders
+        // to show only the new results
+        cy.get('.select2-results__option').should('have.length', numberOfResults)
+      })
+
+      // select a value, again by retrying command
+      // https://on.cypress.io/retry-ability
+      cy.contains('.select2-results__option', 'Clementine Bauch').should('be.visible').click()
+
+      // confirm the value of the selected element
+      cy.get('#user').should('have.value', '3')
+
+      // confirm Select2 widget renders the name
+      cy.get('#select2-user-container').should('have.text', 'Clementine Bauch')
+    })
+
     it('selects a value by waiting for loading class to go away', () => {
       // clicking on the container starts Ajax call
       cy.get('#select2-user-container').click()
@@ -235,7 +309,7 @@ describe('select2', () => {
       cy.get('#select2-user-container').should('have.text', 'Leanne Graham')
     })
 
-    it('selects a value by typing and selecting', () => {
+    it('selects a value by typing and selecting (no flake)', () => {
       cy.server()
       cy.route('https://jsonplaceholder.cypress.io/users?_type=query').as('query')
       cy.route('https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem').as('user_search')
