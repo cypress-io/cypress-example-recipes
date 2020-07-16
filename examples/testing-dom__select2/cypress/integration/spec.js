@@ -212,7 +212,7 @@ describe('select2', () => {
       // before trying to find a specific item
       cy.get('.select2-results__option').should('have.length.gt', 3)
       // and now we can find the user among the results
-      .contains('Leanne Graham').click()
+      cy.contains('.select2-results__option', 'Leanne Graham').click()
 
       // confirm the right user is found
       cy.get('#user').should('have.value', '1')

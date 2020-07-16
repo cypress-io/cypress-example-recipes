@@ -6,8 +6,10 @@
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
     "start": "../../node_modules/.bin/react-scripts start",
-    "test:ci": "../../node_modules/.bin/start-test 3000 cypress:run"
+    "test:ci": "../../node_modules/.bin/start-test 3000 cypress:run",
+    "test:ci:record": "../../node_modules/.bin/start-test 3000 cypress:run:record"
   },
   "devDependencies": {
     "cypress-plugin-snapshots": "1.0.6"

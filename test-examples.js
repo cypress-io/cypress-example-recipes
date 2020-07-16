@@ -13,6 +13,7 @@ const fs = require('fs')
 const arg = require('arg')
 const la = require('lazy-ass')
 const is = require('check-more-types')
+const debug = require('debug')('cypress-example-recipes')
 
 // to run "npm run test:ci:chrome" scripts in each example
 // run this script with "--chrome" CLI flag
@@ -78,6 +79,17 @@ const printFolders = (folders) => {
   folders.forEach((name) => console.log(' -', name))
 }
 
+const debugPrintFolders = (folders) => {
+  if (debug.enabled) {
+    console.error(
+      'Will be running tests in %s',
+      pluralize('folder', folders.length, true)
+    )
+  }
+
+  folders.forEach((name) => console.error(' -', name))
+}
+
 const hasPackageScriptName = (folder) => {
   const filename = resolve(join(folder, 'package.json'))
 
@@ -113,6 +125,9 @@ const testExample = (folder) => {
   }
 
   const npmArgs = ['run', scriptName]
+
+  console.log('npm arguments: %s', npmArgs.join(' '))
+
   const npmOptions = { stdio: 'inherit', cwd: folder }
 
   return execa('npm', npmArgs, npmOptions)
@@ -185,6 +200,7 @@ bluebird
 .then((list) => list.sort())
 .then(filterByScriptName)
 .then(filterSomeFolders)
+.tap(debugPrintFolders)
 .then(filterByChunk(args['--chunk'], args['--total-chunks']))
 .tap(printFolders)
 .then(testExamples)

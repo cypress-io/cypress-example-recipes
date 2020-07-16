@@ -6,9 +6,11 @@
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:run:firefox": "../../node_modules/.bin/cypress run --browser firefox",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
     "dev": "../../node_modules/.bin/start-test 7072 cypress:open",
     "start": "node server.js --port 7072",
     "test:ci": "../../node_modules/.bin/start-test 7072 cypress:run",
-    "test:ci:firefox": "../../node_modules/.bin/start-test 7072 cypress:run:firefox"
+    "test:ci:firefox": "../../node_modules/.bin/start-test 7072 cypress:run:firefox",
+    "test:ci:record": "../../node_modules/.bin/start-test 7072 cypress:run:record"
   }
 }
