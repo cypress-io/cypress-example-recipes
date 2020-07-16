@@ -212,11 +212,11 @@ describe('select2', () => {
       // before trying to find a specific item
       cy.get('.select2-results__option').should('have.length.gt', 3)
       // and now we can find the user among the results
-      .contains('Leanne Graham').click()
+      cy.contains('.select2-results__option', 'Leanne Graham').click()
 
       // confirm the right user is found
-      cy.get('#user', 'selected user value').should('have.value', '1')
-      cy.get('#select2-user-container', 'selected user text').should('have.text', 'Leanne Graham')
+      cy.get('#user').should('have.value', '1')
+      cy.get('#select2-user-container').should('have.text', 'Leanne Graham')
     })
 
     it('selects a value after Ajax completes', () => {
