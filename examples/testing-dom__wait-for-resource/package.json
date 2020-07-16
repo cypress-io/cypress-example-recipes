@@ -7,7 +7,7 @@
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
     "cypress:run:firefox": "../../node_modules/.bin/cypress run --browser firefox",
-    "cypress:run:record": "../../node_modules/.bin/cypress run --record --group wait-for-resource",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
     "dev": "../../node_modules/.bin/start-test 4500 cypress:open",
     "start": "../../node_modules/.bin/http-server -c-1 -p 4500 public",
     "test:ci": "../../node_modules/.bin/start-test 4500 cypress:run",
