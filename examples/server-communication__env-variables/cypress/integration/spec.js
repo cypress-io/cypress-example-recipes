@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+// https://on.cypress.io/environment-variables
 describe('process environment variables', () => {
   it('has variable my-var from cypress.json', () => {
     expect(Cypress.env('my-var')).to.equal('ok')
@@ -17,5 +18,15 @@ describe('process environment variables', () => {
     // CYPRESS_ping=123 cypress open
     // NOTE passed variable is a number
     expect(Cypress.env('ping')).to.equal(123)
+  })
+
+  it('removes CYPRESS_ and cypress_ prefixes', () => {
+    cy.wrap(Cypress.env())
+    .should('include', {
+      'my-var': 'ok',
+      ping: 123,
+      HOST: 'laura.dev.local',
+      api_server: 'http://localhost:8888/api/v1/',
+    })
   })
 })
