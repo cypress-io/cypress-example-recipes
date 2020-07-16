@@ -130,7 +130,7 @@ const testExample = (folder) => {
 
   const npmOptions = { stdio: 'inherit', cwd: folder }
 
-  return execa('npm', npmArgs, npmOptions)
+  // return execa('npm', npmArgs, npmOptions)
 }
 
 const testExamples = (folders) => {
