@@ -293,6 +293,8 @@ all_jobs: &all_jobs
         branches:
           only:
             - master
+            # for https://github.com/cypress-io/cypress-example-recipes/issues/531
+            - record-test-examples-job
 
   - test-examples-chrome:
       requires:

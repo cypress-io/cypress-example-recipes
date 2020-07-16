@@ -113,6 +113,15 @@ const testExample = (folder) => {
   }
 
   const npmArgs = ['run', scriptName]
+
+  if (process.env.CYPRESS_RECORD_KEY) {
+    if (!scriptName.includes(':record')) {
+      npmArgs.push('--', '--record')
+    }
+  }
+
+  console.log('npm arguments: %s', npmArgs.join(' '))
+
   const npmOptions = { stdio: 'inherit', cwd: folder }
 
   return execa('npm', npmArgs, npmOptions)
