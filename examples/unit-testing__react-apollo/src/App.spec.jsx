@@ -17,7 +17,9 @@ describe('App', () => {
     .as('booksText')
   })
 
-  it('can mock window fetch', function () {
+  // FIXME: this tests fails due to a cross-origin error from codesandbox.io
+  // https://github.com/cypress-io/cypress-example-recipes/issues/534
+  it.skip('can mock window fetch', function () {
     cy.stub(window, 'fetch').withArgs('https://test/')
     .resolves({
       text: cy.stub().resolves(this.booksText).as('text'),
