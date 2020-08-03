@@ -12,7 +12,12 @@ declare namespace Cypress {
     /**
      * Custom command to select DOM element by data-cy attribute.
      * @example cy.dataCy('greeting')
-    */
+     */
     dataCy(value: string): Chainable<Element>
+
+    /**
+     * Custom command that adds two given numbers
+     */
+    asyncAdd(a: number, b: number): Chainable<number>
   }
 }

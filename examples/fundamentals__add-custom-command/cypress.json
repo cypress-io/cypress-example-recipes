@@ -1,5 +1,6 @@
 {
   "viewportHeight": 200,
   "viewportWidth": 300,
-  "pluginsFile": false
+  "pluginsFile": false,
+  "fixturesFolder": false
 }

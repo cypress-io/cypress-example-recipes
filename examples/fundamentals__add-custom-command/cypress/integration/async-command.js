@@ -1,4 +1,7 @@
-/// <reference types="cypress" />
+// by loading custom commands from the support file,
+// we also load the global Cypress type definition
+/// <reference path="../support/index.d.ts" />
+
 Cypress.Commands.add('asyncAdd', (a, b) => {
   cy.log(`${a} + ${b}`)
   // our application in "index.html" has placed a promise-returning

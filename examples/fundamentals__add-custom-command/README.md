@@ -50,6 +50,8 @@ As an example this spec includes 3rd party module [cypress-wait-until](https://g
 
 A custom command can call an async function from the application, the resolved value will be automatically yielded to the next command or assertion in the test. See [cypress/integration/async-command.js](cypress/integration/async-command.js) file.
 
+![Async add custom command](images/async-add.png)
+
 ## More info
 
 - [Cypress custom commands](https://on.cypress.io/custom-commands)
