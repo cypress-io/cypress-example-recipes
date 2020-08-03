@@ -32,6 +32,7 @@ defaults: &defaults
         command: |
           cd examples/$CIRCLE_JOB
           if [ -n "<< parameters.test-command >>" ]; then
+            echo "Running command: << parameters.test-command >>"
             << parameters.test-command >>
           else
             node ../../test-repeat -n << parameters.repeat >> --group $CIRCLE_JOB
