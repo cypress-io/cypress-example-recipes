@@ -4,17 +4,19 @@ import { mount } from 'cypress-react-unit-test'
 import ApolloClient from 'apollo-boost'
 
 describe('App', () => {
-  it('loads real thing', () => {
-    mount(<App />)
-    // it might take a while to load real data from remote server
-    cy.get('[data-cy=book]', { timeout: 20000 })
-    .should('have.length.gte', 1)
-  })
-
   beforeEach(() => {
     cy.fixture('books')
     .then(JSON.stringify)
     .as('booksText')
+  })
+
+  // FIXME: this tests fails due to a cross-origin error from codesandbox.io
+  // https://github.com/cypress-io/cypress-example-recipes/issues/534
+  it.skip('loads real thing', () => {
+    mount(<App />)
+    // it might take a while to load real data from remote server
+    cy.get('[data-cy=book]', { timeout: 20000 })
+    .should('have.length.gte', 1)
   })
 
   it('can mock window fetch', function () {

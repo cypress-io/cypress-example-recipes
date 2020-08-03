@@ -1,5 +1,5 @@
 {
-  "name": "unit-test-react-enzyme",
+  "name": "unit-testing__react",
   "version": "1.0.0",
   "description": "Unit testing React code using Enzyme, react-testing-library and cypress-react-unit-test",
   "scripts": {
@@ -8,6 +8,8 @@
     "start": "echo nothing to start, unit testing example",
     "test:ci": "npm run cypress:run",
     "test:ci:firefox": "npm run cypress:run -- --browser firefox",
-    "test:ci:windows": "bin-up cypress run"
+    "test:ci:record": "npm run cypress:run -- --record",
+    "test:ci:windows": "bin-up cypress run",
+    "test:ci:windows:record": "bin-up cypress run --record --group unit-testing__react"
   }
 }

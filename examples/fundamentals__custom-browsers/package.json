@@ -7,6 +7,7 @@
     "cypress:run": "../../node_modules/.bin/cypress run",
     "start": "echo nothing to start",
     "test:ci": "../../node_modules/.bin/cypress run",
-    "test:ci:brave": "../../node_modules/.bin/cypress run --config pluginsFile=cypress/plugins/brave.js"
+    "test:ci:brave": "../../node_modules/.bin/cypress run --config pluginsFile=cypress/plugins/brave.js",
+    "test:ci:record": "../../node_modules/.bin/cypress run --record"
   }
 }
