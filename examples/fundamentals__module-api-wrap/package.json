@@ -1,0 +1,10 @@
+{
+  "name": "cypress-module-api-wrap",
+  "version": "1.0.0",
+  "description": "Run Cypress via its module API by parsing cypress run arguments",
+  "scripts": {
+    "start": "echo nothing to start",
+    "test": "node ./run-me cypress run --record false --config video=false,viewportHeight=300,viewportWidth=100 --env MY_FLAG=true --port 5004",
+    "test:ci": "npm run test"
+  }
+}
