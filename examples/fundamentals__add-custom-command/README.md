@@ -44,7 +44,18 @@ And the TypeScript and IntelliSense should be happy
 
 ## 3rd party modules
 
-As an example this spec includes 3rd party module [cypress-wait-until](https://github.com/NoriSte/cypress-wait-until). This module ships with its own TypeScript definition, which allows `cy.waitUntil` to work.
+As an example this spec includes 3rd party module [cypress-wait-until](https://github.com/NoriSte/cypress-wait-until). This module ships with its own TypeScript definition, which allows `cy.waitUntil` to work. Load the types from the `support/index.d.ts` file
+
+```js
+// load the global Cypress types
+/// <reference types="cypress" />
+// load the 3rd party command definition for cy.waitUntil()
+/// <reference types="cypress-wait-until" />
+```
+
+![IntelliSense for cy.waitUntil command](images/wait-until.png)
+
+**Tip:** use JSDoc comments to document your commands.
 
 ## Async commands
 
