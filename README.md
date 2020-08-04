@@ -10,7 +10,8 @@ Recipe | Description
 [Environment variables](./examples/server-communication__env-variables) | Passing environment variables to tests
 [Dynamic tests](./examples/fundamentals__dynamic-tests) | Create tests dynamically from data
 [Fixtures](./examples/fundamentals__fixtures) | Loading single or multiple fixtures
-[Adding Custom Commands](./examples/fundamentals__add-custom-command) | Write your own custom commands with correct types
+[Adding Custom Commands](./examples/fundamentals__add-custom-command) | Write your own custom commands using JavaScript with correct types for IntelliSense to work
+[Adding Custom Commands (TS)](./examples/fundamentals__add-custom-command-ts) | Write your own custom commands using TypeScript
 [Adding Chai Assertions](./examples/extending-cypress__chai-assertions) | Add new or custom chai assertions with correct types
 [Cypress module API](./examples/fundamentals__module-api) | Run Cypress via its module API
 [Wrapping Cypress module API](./examples/fundamentals__module-api-wrap) | Writing a wrapper around "cypress run" command line parsing

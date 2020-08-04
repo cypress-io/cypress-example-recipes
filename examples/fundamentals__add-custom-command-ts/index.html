@@ -1,0 +1,26 @@
+<body>
+  <main>
+    <h1 data-cy="greeting">Page title</h1>
+    <p>This is a simple page with a <pre>data-cy="greeting"</pre> element.</p>
+  </main>
+  <script>
+    // adds another data-cy element dynamically
+    setTimeout(() => {
+      let el = document.createElement('div')
+      el.setAttribute('data-cy', 'dynamic')
+      el.innerText = 'This element was added dynamically'
+      document.body.appendChild(el)
+    }, 1000)
+  </script>
+
+  <script>
+    // method is added to the "window" object dynamically
+    setTimeout(() => {
+      window.asyncAdd = (a, b) => {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve(a + b), 1000)
+        })
+      }
+    }, 1000)
+  </script>
+</body>
