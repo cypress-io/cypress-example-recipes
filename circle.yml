@@ -197,6 +197,8 @@ jobs:
     <<: *defaults
   fundamentals__fixtures:
     <<: *defaults
+  fundamentals__timeout:
+    <<: *defaults
   fundamentals__add-custom-command:
     <<: *defaults
   fundamentals__add-custom-command-ts:
@@ -510,6 +512,9 @@ all_jobs: &all_jobs
   - fundamentals__fixtures:
       requires:
         - build
+  - fundamentals__timeout:
+      requires:
+        - build
   - fundamentals__module-api:
       requires:
         - build
@@ -543,6 +548,7 @@ all_jobs: &all_jobs
         - file-upload-react
         - fundamentals__node-modules
         - fundamentals__fixtures
+        - fundamentals__timeout
         - fundamentals__dynamic-tests
         - fundamentals__module-api
         - fundamentals__module-api-wrap
