@@ -5,8 +5,8 @@ The example shows how to stop a test if it takes too long to execute, similar to
 ```js
 // this test fails after two seconds due to timeout
 it('does not finish long tests', () => {
-  testTimeout(seconds(2))
-  cy.wait(seconds(10))
+  testTimeout(2 * 1000)
+  cy.wait(10 * 1000)
 })
 ```
 

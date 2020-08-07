@@ -16,7 +16,8 @@ Recipe | Description
 [Cypress module API](./examples/fundamentals__module-api) | Run Cypress via its module API
 [Wrapping Cypress module API](./examples/fundamentals__module-api-wrap) | Writing a wrapper around "cypress run" command line parsing
 [Custom browsers](./examples/fundamentals__custom-browsers) | Control which browsers the project can use, or even add a custom browser into the list
-[use Chrome Remote Interface](./examples/fundamentals__chrome-remote-debugging) | Use Chrome debugger protocol to trigger hover state and print media style
+[Use Chrome Remote Interface](./examples/fundamentals__chrome-remote-debugging) | Use Chrome debugger protocol to trigger hover state and print media style
+[Per-test timeout](./examples/fundamentals__timeout) | Fail a test if it runs longer than the specified time limit
 
 ## Testing the DOM
 
