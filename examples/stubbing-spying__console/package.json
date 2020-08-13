@@ -10,6 +10,7 @@
     "start": "echo",
     "test:ci": "npm run cypress:run",
     "test:ci:chrome": "npm run cypress:run:chrome",
-    "test:ci:firefox": "npm run cypress:run:firefox"
+    "test:ci:firefox": "npm run cypress:run:firefox",
+    "test:ci:record": "npm run cypress:run -- --record"
   }
 }
