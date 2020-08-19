@@ -10,12 +10,15 @@ Recipe | Description
 [Environment variables](./examples/server-communication__env-variables) | Passing environment variables to tests
 [Dynamic tests](./examples/fundamentals__dynamic-tests) | Create tests dynamically from data
 [Fixtures](./examples/fundamentals__fixtures) | Loading single or multiple fixtures
-[Adding Custom Commands](./examples/fundamentals__add-custom-command) | Write your own custom commands with correct types
+[Adding Custom Commands](./examples/fundamentals__add-custom-command) | Write your own custom commands using JavaScript with correct types for IntelliSense to work
+[Adding Custom Commands (TS)](./examples/fundamentals__add-custom-command-ts) | Write your own custom commands using TypeScript
 [Adding Chai Assertions](./examples/extending-cypress__chai-assertions) | Add new or custom chai assertions with correct types
 [Cypress module API](./examples/fundamentals__module-api) | Run Cypress via its module API
+[Wrapping Cypress module API](./examples/fundamentals__module-api-wrap) | Writing a wrapper around "cypress run" command line parsing
 [Custom browsers](./examples/fundamentals__custom-browsers) | Control which browsers the project can use, or even add a custom browser into the list
-[use Chrome Remote Interface](./examples/fundamentals__chrome-remote-debugging) | Use Chrome debugger protocol to trigger hover state and print media style
+[Use Chrome Remote Interface](./examples/fundamentals__chrome-remote-debugging) | Use Chrome debugger protocol to trigger hover state and print media style
 [Out-of-the-box TypeScript](./examples/fundamentals__typescript) | Write tests in TypeScript without setting up preprocessors
+[Per-test timeout](./examples/fundamentals__timeout) | Fail a test if it runs longer than the specified time limit
 
 ## Testing the DOM
 
@@ -84,6 +87,7 @@ Recipe | Description
 [Stubbing Functions](./examples/stubbing-spying__functions) | Use `cy.spy()` and `cy.stub()` to test function calls
 [Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch) | Work around the `window.fetch` limitation
 [Stubbing `window.open` and `console.log`](./examples/stubbing-spying__window) | Use `cy.stub()` and `cy.spy()` to test application behavior
+[Stubbing `window.print`](./examples/stubbing-spying__window-print) | Use `cy.stub()` to test `window.print` call made from the application
 [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics) | Use `cy.stub()` to test Google Analytics calls
 [Spying and stubbing methods on `console` object](./examples/stubbing-spying__console) | Use `cy.spy()` and `cy.stub()` on `console.log`
 [Stub resource loading](./examples/stubbing__resources) | Use `MutationObserver` to stub resource loading like `img` tags

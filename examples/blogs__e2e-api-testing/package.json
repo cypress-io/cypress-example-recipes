@@ -1,14 +1,18 @@
 {
-  "name": "cypress-example-api-testing",
+  "name": "blogs__e2e-api-testing",
   "version": "1.0.0",
   "description": "Cypress E2E runner can also test Rest and other APIs",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
     "cypress:run:windows": "bin-up cypress run",
+    "cypress:run:windows:record": "bin-up cypress run --record --group blogs__e2e-api-testing",
     "start": "../../node_modules/.bin/json-server db.json --port 7081 --quiet",
     "start:windows": "bin-up json-server db.json --port 7081 --quiet",
     "test:ci": "../../node_modules/.bin/start-test 7081 cypress:run",
-    "test:ci:windows": "bin-up start-test start:windows 7081 cypress:run:windows"
+    "test:ci:record": "../../node_modules/.bin/start-test 7081 cypress:run:record",
+    "test:ci:windows": "bin-up start-test start:windows 7081 cypress:run:windows",
+    "test:ci:windows:record": "bin-up start-test start:windows 7081 cypress:run:windows:record"
   }
 }

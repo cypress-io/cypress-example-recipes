@@ -23,7 +23,7 @@ describe('network', () => {
       url: spok.endsWith('posts'),
       // network request takes at least 10ms
       // but should finish in less than 1 second
-      duration: spok.range(10, 1000),
+      duration: spok.range(10, 1500),
       statusMessage: spok.string,
       // check the request inside XHR object
       request: {

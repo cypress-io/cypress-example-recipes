@@ -1,11 +1,13 @@
 {
-  "name": "dynamic-tests",
+  "name": "fundamentals__fixtures",
   "version": "1.0.0",
   "description": "Create Cypress tests dynamically from data",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
     "test:ci": "../../node_modules/.bin/cypress run",
-    "test:ci:windows": "bin-up cypress run"
+    "test:ci:record": "../../node_modules/.bin/cypress run --record",
+    "test:ci:windows": "bin-up cypress run",
+    "test:ci:windows:record": "bin-up cypress run --record --group fundamentals__fixtures"
   }
 }

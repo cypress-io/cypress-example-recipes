@@ -1,11 +1,13 @@
 {
-  "name": "es2015-commonsjs-modules",
+  "name": "fundamentals__node_modules",
   "version": "1.0.0",
   "description": "Use NPM modules from Cypress specs",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
     "test:ci": "../../node_modules/.bin/cypress run",
-    "test:ci:windows": "bin-up cypress run"
+    "test:ci:record": "../../node_modules/.bin/cypress run --record",
+    "test:ci:windows": "bin-up cypress run",
+    "test:ci:windows:record": "bin-up cypress run --record --group fundamentals__node_modules"
   }
 }
