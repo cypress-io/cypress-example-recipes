@@ -8,6 +8,8 @@
     "start": "echo there is no web server to start in this project",
     "test:ci": "npm run cypress:run",
     "test:ci:firefox": "npm run cypress:run -- --browser firefox",
-    "test:ci:windows": "bin-up cypress run"
+    "test:ci:record": "npm run cypress:run -- --record",
+    "test:ci:windows": "bin-up cypress run",
+    "test:ci:windows:record": "bin-up cypress run --record --group unit-test-application-code"
   }
 }

@@ -8,42 +8,17 @@ See individual spec files in [cypress/integration](cypress/integration) folder.
 Spec | Description
 --- | ---
 [spy-on-fetch-spec.js](cypress/integration/spy-on-fetch-spec.js) | Observes calls the application makes using `window.fetch` via [`cy.spy()`](https://on.cypress.io/spy)
-[stub-fetch-spec.js](cypress/integration/stub-fetch-spec.js) | Replaces `window.fetch` with a stubbed method via [`cy.stub()`](https://on.cypress.io/stub) the tests can control
-[polyfill-fetch-from-tests-spec.js](cypress/integration/polyfill-fetch-from-tests-spec.js) | Removes `window.fetch` method and replaces it with a polyfill based on XMLHttpRequest
+[stub-fetch-spec.js](cypress/integration/stub-fetch-spec.js) | Uses Cypress default network stubbing to intercept `fetch` calls from the application
 [control-clock-spec.js](cypress/integration/control-clock-spec.js) | **Bonus:** shows how to "speed-up" application to make Ajax calls by controlling time using [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick)
 
-## Deleting `fetch`
+## Stubbing `fetch`
 
-Until issue [#95][issue] is implemented, if your application uses `fetch` protocol to make Ajax requests, Cypress cannot see or stub these network calls. To quickly check what requests the web application is making, open DevTools Network tab and check the "type" column. If the type shows `xhr`, Cypress can see it. If the type says `fetch`, Cypress cannot intercept it yet.
+Cypress wraps the native XMLHttpRequest object to allow observing and stubbing network requests from the application. It also polyfills the native `window.fetch` method to work via wrapped XMLHttpRequest - this is how we allow network stubbing for applications that use `fetch` calls. See [cypress.json](cypress.json)
 
-![Ajax type](images/type.png)
-
-**Tip:** if the "type" column is not there, add it by right-clicking on any column and checking "Type" entry.
-
-![Add type column to Network tab](images/add-type-column.png)
-
-You can delete `window.fetch` during individual visit, or for every loaded window.
-
-### Delete in `cy.visit`
-
-You can delete `window.fetch` when calling `cy.visit`, which in most libraries drops back to using XHR
-
-```javascript
-cy.visit('/', {
-  onBeforeLoad (win) {
-    delete win.fetch
-  },
-})
+```json
+{
+  "experimentalFetchPolyfill": true
+}
 ```
 
-### Delete on every window load
-
-You can register a callback to execute on each `window:load`
-
-```javascript
-Cypress.on('window:before:load', (win) => {
-  delete win.fetch
-})
-```
-
-[issue]: https://github.com/cypress-io/cypress/issues/95
+In the future we plan to move network stubbing into Cypress' proxy layer, allowing much more powerful and complete network control. Watch issue [#95][issue] for progress.

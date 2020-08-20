@@ -3,8 +3,6 @@
 // This app we are testing shows a random list of
 // "favorite fruits" that refreshes every 30 seconds
 
-const deferred = require('./deferred')
-
 // The favorite fruits are refreshed every 30 seconds
 // It would slow down our tests dramatically to literally
 // wait that long to verify the behavior.
@@ -15,31 +13,13 @@ const deferred = require('./deferred')
 // using the real server would lead to flaky tests, so we
 // stub out window.fetch again in order to control the response
 describe('clock', function () {
-  beforeEach(function () {
-    this.fetchFavoritesDeferred = deferred()
-
-    cy.clock()
-    cy.visit('/', {
-      onBeforeLoad (win) {
-        cy.stub(win, 'fetch')
-        .withArgs('/favorite-fruits')
-        .as('fetchFavorites')
-        .returns(this.fetchFavoritesDeferred.promise)
-      },
-    })
-  })
-
   describe('when favorite fruits are returned', function () {
-    beforeEach(function () {
-      this.fetchFavoritesDeferred.resolve({
-        json () {
-          return ['Apple', 'Banana', 'Cantaloupe']
-        },
-        ok: true,
-      })
-    })
-
     it('displays list of fruits', function () {
+      cy.server()
+      // aliasing allows us to easily get access to our stub
+      cy.route('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe'])
+      cy.visit('/')
+
       cy.get('.favorite-fruits li').as('favoriteFruits')
       .should('have.length', 3)
 
@@ -54,26 +34,23 @@ describe('clock', function () {
     })
 
     describe('polling every 30 secs', function () {
-      beforeEach(function () {
-        // since we aliased the window.fetch stub to 'fetchFavorites',
-        // it becomes available as this.fetchFavorites in our tests
-        this.fetchFavorites.onCall(1).resolves({
-          json () {
-            return ['Orange', 'Cherry', 'Raspberry', 'Pineapple']
-          },
-          ok: true,
-        })
+      it('displays the new list of fruits', () => {
+        cy.clock()
+        cy.server()
+        // aliasing allows us to easily get access to our stub
+        cy.route('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe'])
+        cy.visit('/')
 
+        // initial list of fruits is shown
+        cy.get('.favorite-fruits li').should('have.length', 3)
+
+        // now prepare for the second call
+        cy.route('/favorite-fruits', ['Orange', 'Cherry', 'Raspberry', 'Pineapple'])
         // move time 30 seconds and the setInterval will be triggered
         // that polls for the fruit
         cy.tick(30000)
-      })
 
-      it('fetches fruit again', function () {
-        expect(this.fetchFavorites).to.be.calledTwice
-      })
-
-      it('displays the new list of fruits', function () {
+        // make sure the updated list is shown
         cy.get('.favorite-fruits li').as('favoriteFruits')
         .should('have.length', 4)
 

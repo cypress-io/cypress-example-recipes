@@ -7,12 +7,14 @@
     "cypress:run": "../../node_modules/.bin/cypress run",
     "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
     "cypress:run:chrome:headless": "../../node_modules/.bin/cypress run --browser chrome --headless",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
     "dev": "../../node_modules/.bin/start-test 3000 cypress:open",
     "reset": "node reset-db.js",
     "reset:db": "node reset-db.js",
     "start": "../../node_modules/.bin/json-server --static . data.json --middlewares ../../node_modules/json-server-reset",
     "test:ci": "../../node_modules/.bin/start-test 3000 cypress:run",
     "test:ci:chrome": "../../node_modules/.bin/start-test 3000 cypress:run:chrome",
-    "test:ci:chrome:headless": "../../node_modules/.bin/start-test 3000 cypress:run:chrome:headless"
+    "test:ci:chrome:headless": "../../node_modules/.bin/start-test 3000 cypress:run:chrome:headless",
+    "test:ci:record": "../../node_modules/.bin/start-test 3000 cypress:run:record"
   }
 }

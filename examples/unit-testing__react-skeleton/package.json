@@ -5,9 +5,12 @@
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
     "start": "echo nothing to start, unit testing example",
     "test:ci": "npm run cypress:run",
     "test:ci:firefox": "npm run cypress:run -- --browser firefox",
-    "test:ci:windows": "bin-up cypress run"
+    "test:ci:record": "npm run cypress:run:record",
+    "test:ci:windows": "bin-up cypress run",
+    "test:ci:windows:record": "bin-up cypress run --record --group unit-testing__react-skeleton"
   }
 }

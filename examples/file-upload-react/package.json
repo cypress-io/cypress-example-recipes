@@ -7,6 +7,8 @@
     "cypress:run": "../../node_modules/.bin/cypress run",
     "start": "echo nothing to start, this recipe does not run server",
     "test:ci": "../../node_modules/.bin/cypress run",
-    "test:ci:windows": "bin-up cypress run"
+    "test:ci:record": "../../node_modules/.bin/cypress run --record",
+    "test:ci:windows": "bin-up cypress run",
+    "test:ci:windows:record": "bin-up cypress run --record --group file-upload-react"
   }
 }

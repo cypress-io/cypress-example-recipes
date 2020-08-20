@@ -13,6 +13,7 @@ const fs = require('fs')
 const arg = require('arg')
 const la = require('lazy-ass')
 const is = require('check-more-types')
+const debug = require('debug')('cypress-example-recipes')
 
 // to run "npm run test:ci:chrome" scripts in each example
 // run this script with "--chrome" CLI flag
@@ -58,6 +59,11 @@ if (args['--windows']) {
   scriptName = 'test:ci:windows'
 }
 
+if (args['--record']) {
+  // assuming that every package.json has script with ":record" suffix
+  scriptName += ':record'
+}
+
 console.log('script name "%s"', scriptName)
 
 const getExamples = () => {
@@ -71,6 +77,17 @@ const printFolders = (folders) => {
   )
 
   folders.forEach((name) => console.log(' -', name))
+}
+
+const debugPrintFolders = (folders) => {
+  if (debug.enabled) {
+    console.error(
+      'Will be running tests in %s',
+      pluralize('folder', folders.length, true)
+    )
+  }
+
+  folders.forEach((name) => console.error(' -', name))
 }
 
 const hasPackageScriptName = (folder) => {
@@ -108,12 +125,10 @@ const testExample = (folder) => {
   }
 
   const npmArgs = ['run', scriptName]
-  const npmOptions = { stdio: 'inherit', cwd: folder }
 
-  if (args['--record']) {
-    npmArgs.push('--')
-    npmArgs.push('--record')
-  }
+  console.log('npm arguments: %s', npmArgs.join(' '))
+
+  const npmOptions = { stdio: 'inherit', cwd: folder }
 
   return execa('npm', npmArgs, npmOptions)
 }
@@ -185,6 +200,7 @@ bluebird
 .then((list) => list.sort())
 .then(filterByScriptName)
 .then(filterSomeFolders)
+.tap(debugPrintFolders)
 .then(filterByChunk(args['--chunk'], args['--total-chunks']))
 .tap(printFolders)
 .then(testExamples)

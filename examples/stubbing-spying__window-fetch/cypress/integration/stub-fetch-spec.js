@@ -1,52 +1,102 @@
 /// <reference types="Cypress" />
-
-// Here, we completely stub out window.fetch, allowing
-// us to more finely control the server responses
-//
-// This allows us to test various data responses like errors
-const deferred = require('./deferred')
+// @ts-check
 
 describe('stubbing', function () {
-  beforeEach(function () {
-    // We use a deferred object to make it easy to test
-    // different scenarios
-    this.fetchFavoritesDeferred = deferred()
-
-    // We use cy.visit({onBeforeLoad: ...}) to stub
-    // window.fetch before any app code runs
+  it('shows no Response message', () => {
     cy.visit('/', {
       onBeforeLoad (win) {
-        cy.stub(win, 'fetch')
-        .withArgs('/favorite-fruits')
-        .as('fetchFavorites')
-        .returns(this.fetchFavoritesDeferred.promise)
+        cy.stub(win, 'fetch').withArgs('/favorite-fruits')
+        .resolves({
+          ok: true,
+          json: () => [],
+        })
       },
     })
+
+    cy.contains('No favorites').should('be.visible')
   })
 
-  it('requests favorite fruits', function () {
-    // aliasing allows us to easily get access to our stub
-    cy.get('@fetchFavorites').should('be.calledWith', '/favorite-fruits')
+  it('directly stubs window.fetch to test loading indicator', () => {
+    // stub the "fetch(/favorite-fruits)" call from the app
+    cy.visit('/', {
+      onBeforeLoad (win) {
+        cy.stub(win, 'fetch').withArgs('/favorite-fruits')
+        .resolves(
+          // use Bluebird promise bundled with Cypress
+          // to resolve after 2000ms
+          Cypress.Promise.resolve({
+            ok: true,
+            json: () => ['Pineapple 🍍'],
+          }).delay(2000)
+        )
+      },
+    })
+
+    // at first, the app is showing the loading indicator
+    cy.get('.loader').should('be.visible')
+    // once the promise is resolved, the loading indicator goes away
+    cy.get('.loader').should('not.exist')
+    cy.contains('li', 'Pineapple 🍍')
   })
 
   // A big advantage of controlling the response is we can test
   // how our app handles a slow response, which normally might be
   // difficult against a fast development server
   it('shows loader while fetching fruits', function () {
-    cy.get('.loader')
+    // stub the XHR request from the app
+    cy.server()
+    cy.route({
+      url: '/favorite-fruits',
+      response: [],
+      delay: 1000,
+    })
+
+    cy.visit('/')
+    cy.get('.loader').should('be.visible')
+
+    // once the network call finishes, the loader goes away
+    cy.get('.loader').should('not.exist')
+    cy.contains('.favorite-fruits', 'No favorites')
+  })
+
+  it('can spy on network calls from the second page', () => {
+    cy.server()
+    cy.route('/favorite-fruits').as('favoriteFruits')
+    cy.visit('/')
+    cy.wait('@favoriteFruits')
+
+    cy.contains('a', 'Go to page 2').click()
+    cy.url().should('match', /\/page2\.html$/)
+    // the second page also requests the fruits
+    cy.wait('@favoriteFruits')
+  })
+
+  it('can stub network calls for each page', () => {
+    cy.server()
+    cy.route('/favorite-fruits', ['apples 🍎'])
+    cy.visit('/')
+    cy.contains('apples 🍎')
+
+    // change the response before going to the second page
+    cy.route('/favorite-fruits', ['grapes 🍇'])
+    cy.contains('a', 'Go to page 2').click()
+    cy.url().should('match', /\/page2\.html$/)
+    cy.contains('grapes 🍇')
+
+    // change the response before going back to the index page
+    cy.route('/favorite-fruits', ['kiwi 🥝'])
+    cy.contains('a', 'Go back').click()
+    cy.contains('kiwi 🥝')
   })
 
   describe('when favorite fruits are returned', function () {
-    beforeEach(function () {
-      this.fetchFavoritesDeferred.resolve({
-        json () {
-          return ['Apple', 'Banana', 'Cantaloupe']
-        },
-        ok: true,
-      })
-    })
-
     it('displays the list of fruits', function () {
+      cy.server()
+      // aliasing allows us to easily get access to our stub
+      cy.route('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe']).as('fetchFavorites')
+      cy.visit('/')
+      cy.wait('@fetchFavorites')
+
       cy.get('.favorite-fruits li').as('favoriteFruits')
       .should('have.length', 3)
 
@@ -62,29 +112,29 @@ describe('stubbing', function () {
   })
 
   describe('when no favorite fruits are returned', function () {
-    beforeEach(function () {
-      this.fetchFavoritesDeferred.resolve({
-        json () {
-          return []
-        },
-        ok: true,
-      })
-    })
-
     it('displays empty message', function () {
+      cy.server()
+      cy.route('/favorite-fruits', [])
+      cy.visit('/')
       cy.get('.favorite-fruits').should('have.text', 'No favorites')
     })
   })
 
   describe('when request fails', function () {
-    beforeEach(function () {
-      this.fetchFavoritesDeferred.resolve({
-        ok: false,
-        statusText: 'Orchard under maintenance',
-      })
-    })
-
     it('displays error', function () {
+      cy.server()
+      cy.route({
+        url: '/favorite-fruits',
+        status: 500,
+        response: '',
+        delay: 2000,
+        headers: {
+          'status-text': 'Orchard under maintenance',
+        },
+      })
+
+      cy.visit('/')
+
       cy.get('.favorite-fruits')
       .should('have.text', 'Failed loading favorite fruits: Orchard under maintenance')
     })
