@@ -117,7 +117,7 @@ jobs:
     parallelism: 10
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node12.0.0-chrome75
+      - image: cypress/browsers:node14.7.0-chrome84
     environment:
       TERM: xterm
       # no need to record these runs yet
