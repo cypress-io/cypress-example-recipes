@@ -321,7 +321,7 @@ all_jobs: &all_jobs
 
   # disabled Brave testing for now
   # on v3 it needs --browser brave
-  # but v4 whitelists browser names and does not allow "brave"
+  # but v4 filters browser names and does not allow "brave"
   # - test-examples-brave:
   #     requires:
   #       - build

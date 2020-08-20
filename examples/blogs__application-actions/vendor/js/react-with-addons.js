@@ -8032,7 +8032,7 @@ function putListener(id, registrationName, listener, transaction) {
   );
 }
 
-// For HTML, certain tags should omit their close tag. We keep a whitelist for
+// For HTML, certain tags should omit their close tag. We keep a list for
 // those special cased tags.
 
 var omittedCloseTags = {

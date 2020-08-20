@@ -1,4 +1,4 @@
-// in our cypress.json file we have blocked www.google-analytics.com
+// in our cypress.json file we have blocked the www.google-analytics.com host
 // which prevents the GA script from ever loading. however because there
 // is still a global 'window.ga' function, that means we can stub it
 // and ensure its called correctly.
