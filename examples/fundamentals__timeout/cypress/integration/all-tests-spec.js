@@ -8,7 +8,7 @@ describe('Global timeout of 3 seconds', () => {
   // first attempt: using "beforeEach" hook to call testTimeout
   // DOES NOT WORK - the hook has its own runnable context, but
   // does not have access to the test to be executed
-  // context.only('of 3 seconds in every test', () => {
+  // context('of 3 seconds in every test', () => {
   //   beforeEach(() => {
   //     testTimeout(seconds(3))
   //   })
