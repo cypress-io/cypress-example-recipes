@@ -2,7 +2,7 @@
 
 import { seconds, testTimeout } from './timeout'
 
-describe('Global timeout', () => {
+describe('Global timeout of 3 seconds', () => {
   // Let's try to time limit _every test_
 
   // first attempt: using "beforeEach" hook to call testTimeout

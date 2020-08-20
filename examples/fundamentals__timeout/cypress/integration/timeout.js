@@ -7,6 +7,10 @@
  */
 export const seconds = (n) => n * 1000
 
+// keep an object with timers for tests where we set
+// the timeout to avoid setting multiple timers
+global.timers = new Map()
+
 /**
  * Stops the current Cypress test if it takes longer than the provided timeout
  * @param {number} ms Test timeout in milliseconds
@@ -23,9 +27,15 @@ export function testTimeout (ms, test) {
     throw new Error('Could not determine current test')
   }
 
+  if (global.timers.has(currentTest)) {
+    console.log('removing existing timer for test', currentTest)
+    clearTimeout(global.timers.get(currentTest))
+    global.timers.delete(currentTest)
+  }
+
   const startedAt = +new Date()
 
-  setTimeout(() => {
+  const timer = setTimeout(() => {
     const testNow = cy.state('runnable')
 
     console.log('test started', currentTest)
@@ -49,4 +59,6 @@ export function testTimeout (ms, test) {
       throw new Error(`Test ran longer than ${ms}ms`)
     }
   }, ms)
+
+  global.timers.set(currentTest, timer)
 }

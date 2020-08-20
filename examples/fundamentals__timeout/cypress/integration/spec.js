@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-/* eslint-disable no-console */
 
 import { seconds, testTimeout } from './timeout'
 
@@ -13,7 +12,7 @@ describe('Sets timeout in every test', () => {
 
   // this test fails after two seconds due to timeout
   // NOTE: enable to see test timeout in action
-  it.skip('allows 2 second test, runs for 10 seconds', () => {
+  it.skip('allows 2 second test, runs for 10 seconds (should fail)', () => {
     testTimeout(seconds(2))
     cy.wait(seconds(10))
   })
