@@ -1,0 +1,59 @@
+body {
+  color: #333;
+  font-family: sans-serif;
+  padding: 40px;
+}
+
+h1 {
+  font-size: 1.2em;
+}
+
+.favorite-fruits {
+  line-height: 1.5;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+/* Source: https://github.com/lukehaas/css-loaders */
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+}
+.loader {
+  margin-left: 25px;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(160, 160, 160, 0.4);
+  border-right: 1.1em solid rgba(160, 160, 160, 0.4);
+  border-bottom: 1.1em solid rgba(160, 160, 160, 0.4);
+  border-left: 1.1em solid #999;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

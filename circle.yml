@@ -128,6 +128,12 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: npm run test:ci:chrome -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+      # store test artifacts from any failing projects
+      # if the project is not running on this machine, no worries
+      - store_artifacts:
+          path: ~/app/examples/blogs__iframes/cypress/videos
+      - store_artifacts:
+          path: ~/app/examples/blogs__iframes/cypress/screenshots
 
   # run recipes that have "test:ci:chrome:headless" script
   test-examples-chrome-headless:
@@ -230,6 +236,8 @@ jobs:
   stubbing-spying__functions:
     <<: *defaults
   stubbing-spying__window-fetch:
+    <<: *defaults
+  stubbing-spying__route2:
     <<: *defaults
   stubbing-spying__window-print:
     <<: *defaults
@@ -354,6 +362,9 @@ all_jobs: &all_jobs
   - blogs__iframes:
       requires:
         - build
+      # investigate flake
+      # https://github.com/cypress-io/cypress-example-recipes/issues/558
+      repeat: 10
   - blogs__application-actions:
       requires:
         - build
@@ -427,6 +438,9 @@ all_jobs: &all_jobs
       requires:
         - build
   - stubbing-spying__window-fetch:
+      requires:
+        - build
+  - stubbing-spying__route2:
       requires:
         - build
   - stubbing-spying__window-print:
@@ -578,6 +592,7 @@ all_jobs: &all_jobs
         - server-communication__stream-tests
         - stubbing-spying__functions
         - stubbing-spying__window-fetch
+        - stubbing-spying__route2
         - stubbing-spying__window-print
         - stubbing-spying__google-analytics
         - stubbing-spying__navigator

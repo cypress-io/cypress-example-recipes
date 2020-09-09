@@ -86,6 +86,7 @@ Recipe | Description
 --- | ---
 [Stubbing Functions](./examples/stubbing-spying__functions) | Use `cy.spy()` and `cy.stub()` to test function calls
 [Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch) | Work around the `window.fetch` limitation
+[Stubbing using `cy.route2`](./examples/stubbing-spying__route2) | Control network using `cy.route2` API
 [Stubbing `window.open` and `console.log`](./examples/stubbing-spying__window) | Use `cy.stub()` and `cy.spy()` to test application behavior
 [Stubbing `window.print`](./examples/stubbing-spying__window-print) | Use `cy.stub()` to test `window.print` call made from the application
 [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics) | Use `cy.stub()` to test Google Analytics calls
@@ -185,7 +186,9 @@ npm run cypress:run -- --browser chrome
 npm run cypress:run -- --record
 ```
 
-[![Cypress Dashboard][dashboard badge]][dashboard url]
+You can find the recording at the Cypress Dashboard linked below
+
+[![cypress-example-recipes](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/6p53jw/master&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/6p53jw/runs)
 
 ## Development
 
@@ -193,5 +196,3 @@ See [Development.md](Development.md)
 
 [renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
 [renovate-app]: https://renovateapp.com/
-[dashboard badge]: https://img.shields.io/badge/cypress-dashboard-brightgreen.svg
-[dashboard url]: https://dashboard.cypress.io/projects/6p53jw/runs
