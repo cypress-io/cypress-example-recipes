@@ -3,5 +3,5 @@
   "ignoreTestFiles": "deferred.js",
   "fixturesFolder": false,
   "pluginsFile": false,
-  "experimentalFetchPolyfill": true
+  "experimentalNetworkStubbing": true
 }
