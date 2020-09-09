@@ -4,6 +4,8 @@ describe('route2', () => {
   context('stubbing', function () {
     it('shows no Response message', () => {
       // stub server response with []
+      // for now have to stringify empty arrays
+      // https://github.com/cypress-io/cypress/issues/8532
       cy.route2('/favorite-fruits', JSON.stringify([]))
       cy.visit('/')
       cy.contains('No favorites').should('be.visible')
@@ -113,6 +115,7 @@ describe('route2', () => {
 
     describe('when request fails', function () {
       it('displays error', function () {
+        // you can be explicit with the reply
         cy.route2('/favorite-fruits', (req) => {
           req.reply({
             statusCode: 500,
@@ -128,6 +131,22 @@ describe('route2', () => {
         cy.get('.favorite-fruits')
         .should('have.text', 'Failed loading favorite fruits: Orchard under maintenance')
       })
+    })
+
+    it('displays error (short)', function () {
+      // you can give the response object with status code
+      cy.route2('/favorite-fruits', {
+        statusCode: 500,
+        body: '',
+        headers: {
+          'status-text': 'Orchard under maintenance',
+        },
+      })
+
+      cy.visit('/')
+
+      cy.get('.favorite-fruits')
+      .should('have.text', 'Failed loading favorite fruits: Orchard under maintenance')
     })
   })
 })
