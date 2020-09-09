@@ -9,6 +9,9 @@ describe('route2', () => {
 
     it('requests favorite fruits', function () {
       cy.wait('@fetchFruits')
+      // TODO: can we inspect the response object from the server?
+      // like response body...
+
       cy.get('.favorite-fruits li').should('have.length', 5)
     })
   })

@@ -12,6 +12,8 @@ function getFavoriteFruits () {
 
   fetch('/favorite-fruits')
   .then((response) => {
+    /* eslint-disable-next-line no-console */
+    console.log('fetch response', response)
     if (response.ok) {
       return response.json()
     }
@@ -21,6 +23,8 @@ function getFavoriteFruits () {
     throw new Error(errorMessage)
   })
   .then((response) => {
+    /* eslint-disable-next-line no-console */
+    console.log('server response', response)
     updateFavoriteFruits(response.length ? response : 'No favorites')
   })
   .catch((error) => {
