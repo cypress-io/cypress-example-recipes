@@ -86,6 +86,7 @@ Recipe | Description
 --- | ---
 [Stubbing Functions](./examples/stubbing-spying__functions) | Use `cy.spy()` and `cy.stub()` to test function calls
 [Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch) | Work around the `window.fetch` limitation
+[Stubbing using `cy.route2`](./examples/stubbing-spying__route2) | Control network using `cy.route2` API
 [Stubbing `window.open` and `console.log`](./examples/stubbing-spying__window) | Use `cy.stub()` and `cy.spy()` to test application behavior
 [Stubbing `window.print`](./examples/stubbing-spying__window-print) | Use `cy.stub()` to test `window.print` call made from the application
 [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics) | Use `cy.stub()` to test Google Analytics calls

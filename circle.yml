@@ -231,6 +231,8 @@ jobs:
     <<: *defaults
   stubbing-spying__window-fetch:
     <<: *defaults
+  stubbing-spying__route2:
+    <<: *defaults
   stubbing-spying__window-print:
     <<: *defaults
   stubbing-spying__google-analytics:
@@ -429,6 +431,9 @@ all_jobs: &all_jobs
   - stubbing-spying__window-fetch:
       requires:
         - build
+  - stubbing-spying__route2:
+      requires:
+        - build
   - stubbing-spying__window-print:
       requires:
         - build
@@ -578,6 +583,7 @@ all_jobs: &all_jobs
         - server-communication__stream-tests
         - stubbing-spying__functions
         - stubbing-spying__window-fetch
+        - stubbing-spying__route2
         - stubbing-spying__window-print
         - stubbing-spying__google-analytics
         - stubbing-spying__navigator
