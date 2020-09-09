@@ -4,6 +4,7 @@
 // which is "loaded" once
 const city = require('../fixtures/city.json')
 const country = require('../fixtures/country.json')
+const path = require('path')
 
 describe('requires fixtures', () => {
   it('has city', () => {
@@ -19,13 +20,16 @@ describe('requires fixtures', () => {
 
     it('has __dirname', () => {
       expect(__dirname).to.be.a('string')
-      expect(__dirname).to.equal('cypress/integration')
+      // on Windows OS the directory is "cypress\integration"
+      // on other operating systems it is "cypress/integration"
+      // use path.join to be cross-platform
+      expect(__dirname).to.equal(path.join('cypress', 'integration'))
     })
 
     it('has __filename', () => {
       expect(__filename).to.be.a('string')
       expect(__filename).to.equal(
-        'cypress/integration/require-fixtures-spec.js'
+        path.join('cypress', 'integration', 'require-fixtures-spec.js')
       )
     })
   })
