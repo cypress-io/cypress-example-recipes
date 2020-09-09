@@ -47,6 +47,21 @@ describe('route2', () => {
       cy.contains('.favorite-fruits', 'No favorites')
     })
 
+    // NOTE: this does not work: cannot use cy commands inside the request handler
+    it.skip('shows loading indicator (alternative)', function () {
+      cy.route2('/favorite-fruits', (req) => {
+        req.reply((res) => {
+          cy.get('.loader').should('be.visible')
+          res.send(JSON.stringify([]))
+        })
+      })
+
+      cy.visit('/')
+      // once the network call finishes, the loader goes away
+      cy.get('.loader').should('not.exist')
+      cy.contains('.favorite-fruits', 'No favorites')
+    })
+
     it('can spy on network calls from the second page', () => {
       cy.route2('/favorite-fruits').as('favoriteFruits')
       cy.visit('/')
