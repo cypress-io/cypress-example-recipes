@@ -362,6 +362,9 @@ all_jobs: &all_jobs
   - blogs__iframes:
       requires:
         - build
+      # investigate flake
+      # https://github.com/cypress-io/cypress-example-recipes/issues/558
+      repeat: 10
   - blogs__application-actions:
       requires:
         - build
