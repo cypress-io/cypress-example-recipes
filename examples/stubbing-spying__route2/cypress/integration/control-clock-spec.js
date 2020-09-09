@@ -17,7 +17,6 @@ describe('route2', () => {
   context('clock', function () {
     describe('when favorite fruits are returned', function () {
       it('displays list of fruits', function () {
-        cy.server()
         // https://on.cypress.io/route2
         cy.route2('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe'])
         cy.visit('/')
@@ -38,7 +37,6 @@ describe('route2', () => {
       describe('polling every 30 secs', function () {
         it('displays the new list of fruits', () => {
           cy.clock()
-          cy.server()
 
           // first request - respond with 3 fruits
           // second request - respond with 4 fruits
