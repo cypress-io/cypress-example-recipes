@@ -128,6 +128,12 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: npm run test:ci:chrome -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+      # store test artifacts from any failing projects
+      # if the project is not running on this machine, no worries
+      - store_artifacts:
+          path: ~/app/examples/blogs__iframes/cypress/videos
+      - store_artifacts:
+          path: ~/app/examples/blogs__iframes/cypress/screenshots
 
   # run recipes that have "test:ci:chrome:headless" script
   test-examples-chrome-headless:
