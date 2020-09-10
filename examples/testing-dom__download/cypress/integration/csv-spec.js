@@ -12,6 +12,11 @@ describe('file download', () => {
     cy.get('[data-cy=download-csv]').click()
 
     cy.log('**read downloaded file**')
+
+    // give the browser time to download the file
+    // before trying to read it
+    cy.wait(1000)
+
     // file path is relative to the working folder
     cy.readFile('./cypress/downloads/records.csv')
     // parse CSV text into objects

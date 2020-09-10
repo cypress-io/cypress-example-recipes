@@ -475,7 +475,7 @@ all_jobs: &all_jobs
         - build
       # because we cannot specify the download folder in Electron
       # run the tests in Chrome
-      test-command: npm run test:ci:chrome
+      test-command: npm run test:ci:chrome:record
   - testing-dom__form-interactions:
       requires:
         - build
