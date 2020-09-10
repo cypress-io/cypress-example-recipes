@@ -13,9 +13,10 @@ describe('file download', () => {
 
     cy.log('**read downloaded file**')
 
-    // give the browser time to download the file
-    // before trying to read it
-    cy.wait(1000)
+    // Give the browser time to download the file
+    // before trying to read it. Since we don't have built-in
+    // retry logic for tasks or inside the tasks, just wait
+    cy.wait(2000)
 
     // file path is relative to the working folder
     cy.readFile('./cypress/downloads/records.csv')
