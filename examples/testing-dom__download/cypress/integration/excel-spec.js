@@ -14,7 +14,7 @@ describe('file download', () => {
     // Give the browser time to download the file
     // before trying to read it. Since we don't have built-in
     // retry logic for tasks or inside the tasks, just wait
-    cy.wait(2000)
+    cy.wait(5000)
 
     const downloadedFilename = './cypress/downloads/people.xlsx'
 
