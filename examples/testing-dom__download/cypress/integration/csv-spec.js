@@ -11,7 +11,13 @@ describe('file download', () => {
     cy.contains('h1', 'Download CSV')
     cy.get('[data-cy=download-csv]').click()
 
-    cy.log('**read downloadeded file**')
+    cy.log('**read downloaded file**')
+
+    // Give the browser time to download the file
+    // before trying to read it. Since we don't have built-in
+    // retry logic for tasks or inside the tasks, just wait
+    cy.wait(5000)
+
     // file path is relative to the working folder
     cy.readFile('./cypress/downloads/records.csv')
     // parse CSV text into objects

@@ -4,6 +4,7 @@
   "description": "This repo contains various recipes for testing common scenarios in your application using Cypress.",
   "main": "index.js",
   "scripts": {
+    "cypress:info": "cypress info",
     "cypress:verify": "cypress verify",
     "cypress:version": "cypress version",
     "lint": "eslint examples",
@@ -130,6 +131,7 @@
     "pretty-ms": "3.2.0",
     "react-scripts": "3.3.0",
     "react-testing-library": "6.0.0",
+    "read-excel-file": "4.0.7",
     "start-server-and-test": "1.10.6",
     "stop-only": "3.0.1",
     "terminal-banner": "1.1.0",
