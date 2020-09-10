@@ -4,6 +4,7 @@
   "description": "This repo contains various recipes for testing common scenarios in your application using Cypress.",
   "main": "index.js",
   "scripts": {
+    "cypress:info": "cypress info",
     "cypress:verify": "cypress verify",
     "cypress:version": "cypress version",
     "lint": "eslint examples",
