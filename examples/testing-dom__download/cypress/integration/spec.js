@@ -1,4 +1,6 @@
 /// <reference types="cypress" />
+const neatCSV = require('neat-csv')
+
 describe('file download', () => {
   beforeEach(() => {
     cy.task('clearDownloads')
@@ -9,8 +11,21 @@ describe('file download', () => {
     cy.contains('h1', 'Download CSV')
     cy.get('[data-cy=download-csv]').click()
 
-    cy.log('**read downloaded file**')
-    // file path relative to the working folder
+    cy.log('**read downloadeded file**')
+    // file path is relative to the working folder
     cy.readFile('./cypress/downloads/records.csv')
+    // parse CSV text into objects
+    .then(neatCSV)
+    .then((list) => {
+      expect(list, 'number of records').to.have.length(3)
+      expect(list[0], 'first record').to.deep.equal({
+        Age: '20',
+        City: 'Boston',
+        'First name': 'Joe',
+        'Last name': 'Smith',
+        Occupation: 'student',
+        State: 'MA',
+      })
+    })
   })
 })

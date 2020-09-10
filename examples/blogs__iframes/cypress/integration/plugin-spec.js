@@ -5,7 +5,9 @@ import { skipOn } from '@cypress/skip-test'
 
 describe('Recipe: blogs__iframes', () => {
   skipOn('firefox', () => {
-    it('fetches post using iframes plugin', () => {
+    // using test retries to get occasional (rare) flake
+    // https://github.com/cypress-io/cypress-example-recipes/issues/558
+    it('fetches post using iframes plugin', { retries: { runMode: 2 } }, () => {
       cy.visit('index.html')
       cy.frameLoaded('[data-cy="the-frame"]')
       // after the frame has loaded, we can use "cy.iframe()"
