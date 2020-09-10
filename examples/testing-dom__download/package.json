@@ -12,7 +12,7 @@
     "cypress:run:win:record": "bin-up cypress run --record --browser chrome",
     "dev": "../../node_modules/.bin/start-test 8070 cypress:open",
     "start": "../../node_modules/.bin/serve -l 8070 public",
-    "start:win": "bin-up serve -l 8070 --no-clipboard",
+    "start:win": "bin-up serve -l 8070 --no-clipboard public",
     "test:ci:chrome": "../../node_modules/.bin/start-test 8070 cypress:run:chrome",
     "test:ci:chrome:record": "../../node_modules/.bin/start-test 8070 cypress:run:chrome:record",
     "test:ci:firefox": "../../node_modules/.bin/start-test 8070 cypress:run:firefox",
