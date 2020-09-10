@@ -8,6 +8,7 @@
     "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
     "cypress:run:firefox": "../../node_modules/.bin/cypress run --browser firefox",
     "cypress:run:win": "bin-up cypress run",
+    "cypress:run:win:record": "bin-up cypress run --browser chrome",
     "dev": "../../node_modules/.bin/start-test 8070 cypress:open",
     "start": "../../node_modules/.bin/serve -l 8070 public",
     "start:win": "bin-up serve -l 8070 --no-clipboard",

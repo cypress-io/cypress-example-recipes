@@ -253,6 +253,8 @@ jobs:
     <<: *defaults
   testing-dom__drag-drop:
     <<: *defaults
+  testing-dom__download:
+    <<: *defaults
   testing-dom__form-interactions:
     <<: *defaults
   testing-dom__hover-hidden-elements:
@@ -467,6 +469,12 @@ all_jobs: &all_jobs
   - testing-dom__drag-drop:
       requires:
         - build
+  - testing-dom__download:
+      requires:
+        - build
+      # because we cannot specify the download folder in Electron
+      # run the tests in Chrome
+      test-command: npm run test:ci:chrome
   - testing-dom__form-interactions:
       requires:
         - build
@@ -600,6 +608,7 @@ all_jobs: &all_jobs
         - stubbing-spying__console
         - stubbing__resources
         - testing-dom__drag-drop
+        - testing-dom__download
         - testing-dom__form-interactions
         - testing-dom__hover-hidden-elements
         - testing-dom__lit-element
