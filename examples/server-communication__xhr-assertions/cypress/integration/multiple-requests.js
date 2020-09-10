@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 describe('waits', () => {
-  it('for multiple requests to finish', () => {
+  // using test retries to get occasional (rare) flake
+  it('for multiple requests to finish', { retries: { runMode: 2 } }, () => {
     cy.visit('index.html')
     cy.server()
     cy.route('POST', '/posts').as('post')
