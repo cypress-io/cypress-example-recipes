@@ -9,21 +9,25 @@ describe('file download', () => {
     cy.contains('h1', 'Download XLSX')
     cy.get('[data-cy=download-xlsx]').click()
 
-    cy.log('**read downloadeded file**')
-    // file path is relative to the working folder
-    cy.readFile('./cypress/downloads/records.xlsx')
-    // parse Excel file into objects
-    // .then(neatCSV)
-    // .then((list) => {
-    //   expect(list, 'number of records').to.have.length(3)
-    //   expect(list[0], 'first record').to.deep.equal({
-    //     Age: '20',
-    //     City: 'Boston',
-    //     'First name': 'Joe',
-    //     'Last name': 'Smith',
-    //     Occupation: 'student',
-    //     State: 'MA',
-    //   })
-    // })
+    cy.log('**read downloaded file**')
+    // give the browser time to download the file
+    // before trying to read it
+    cy.wait(1000)
+
+    // the first utility library we use to parse Excel files
+    // only works in Node, thus we can read and parse
+    // the downloaded file using cy.task
+    cy.task('readExcelFile', './cypress/downloads/people.xlsx')
+    // returns an array of lines read from Excel file
+    .should('have.length', 4)
+    .then((list) => {
+      expect(list[0], 'header line').to.deep.equal([
+        'First name', 'Last name', 'Occupation', 'Age', 'City', 'State',
+      ])
+
+      expect(list[1], 'first person').to.deep.equal([
+        'Joe', 'Smith', 'student', 20, 'Boston', 'MA',
+      ])
+    })
   })
 })

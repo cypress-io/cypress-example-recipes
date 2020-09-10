@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 const path = require('path')
 const fs = require('fs')
+const readXlsxFile = require('read-excel-file/node')
 
 // place downloads into "cypress/downloads" folder
 const downloadDirectory = path.join(__dirname, '..', 'downloads')
@@ -21,12 +22,22 @@ module.exports = (on, config) => {
 
   // register utility task to clear the downloads folder
   on('task', {
-    clearDownloads: () => {
+    clearDownloads () {
       console.log('clearing folder %s', downloadDirectory)
 
       fs.rmdirSync(downloadDirectory, { recursive: true })
 
       return null
+    },
+
+    readExcelFile (filename) {
+      // we must read the Excel file using Node library
+      // and can return the parsed list to the browser
+      // for the spec code to validate it
+      console.log('reading Excel file %s', filename)
+      console.log('from cwd %s', process.cwd())
+
+      return readXlsxFile(filename)
     },
   })
 

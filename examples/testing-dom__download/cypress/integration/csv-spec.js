@@ -11,7 +11,7 @@ describe('file download', () => {
     cy.contains('h1', 'Download CSV')
     cy.get('[data-cy=download-csv]').click()
 
-    cy.log('**read downloadeded file**')
+    cy.log('**read downloaded file**')
     // file path is relative to the working folder
     cy.readFile('./cypress/downloads/records.csv')
     // parse CSV text into objects
