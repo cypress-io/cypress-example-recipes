@@ -189,7 +189,7 @@ npm run cypress:run -- --record
 
 You can find the recording at the Cypress Dashboard linked below
 
-[![cypress-example-recipes](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/6p53jw/master&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/6p53jw/runs)
+[![Cypress Dashboard][dashboard badge]][dashboard url]
 
 ## Development
 
@@ -197,3 +197,5 @@ See [Development.md](Development.md)
 
 [renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
 [renovate-app]: https://renovateapp.com/
+[dashboard badge]: https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/6p53jw/master&style=flat&logo=cypress
+[dashboard url]: https://dashboard.cypress.io/projects/6p53jw/runs
