@@ -9,7 +9,9 @@ const getIframeWindow = () => {
 
 describe('Recipe: blogs__iframes', () => {
   skipOn('firefox', () => {
-    it('spies on window.fetch method call', () => {
+    // using test retries to get occasional (rare) flake
+    // https://github.com/cypress-io/cypress-example-recipes/issues/558
+    it('spies on window.fetch method call', { retries: { runMode: 2 } }, () => {
       cy.visit('index.html')
 
       getIframeWindow().then((win) => {
