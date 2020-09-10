@@ -6,6 +6,12 @@ const fs = require('fs')
 // place downloads into "cypress/downloads" folder
 const downloadDirectory = path.join(__dirname, '..', 'downloads')
 
+const isFirefox = (browser) => browser.family === 'firefox'
+// excludes Electron, but includes Chrome and Edge
+const isChromium = (browser) => {
+  return browser.family === 'chromium' && browser.name !== 'electron'
+}
+
 /**
  * @type {Cypress.PluginConfig}
  */
@@ -28,13 +34,13 @@ module.exports = (on, config) => {
   on('before:browser:launch', (browser, options) => {
     console.log('browser %o', browser)
 
-    if (browser.family === 'chromium' && browser.name !== 'electron') {
+    if (isChromium(browser)) {
       options.preferences.default['download'] = { default_directory: downloadDirectory }
 
       return options
     }
 
-    if (browser.family === 'firefox') {
+    if (isFirefox(browser)) {
       options.preferences['browser.download.dir'] = downloadDirectory
       options.preferences['browser.download.folderList'] = 2
 
@@ -45,5 +51,12 @@ module.exports = (on, config) => {
     }
   })
 
-  // TODO: filter out Electron browser since it is not supported yet
+  // customize list of browsers to exclude Electron, since it
+  // does not let us set the download folder to avoid system file save prompt
+  // https://on.cypress.io/configuration-api
+  // https://github.com/cypress-io/cypress-example-recipes/issues/560
+
+  return {
+    browsers: config.browsers.filter((b) => isChromium(b) || isFirefox(b)),
+  }
 }
