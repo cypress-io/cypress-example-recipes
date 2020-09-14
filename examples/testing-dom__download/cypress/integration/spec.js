@@ -95,4 +95,26 @@ describe('file download', () => {
       ])
     })
   })
+
+  it('downloads local PNG image', () => {
+    // image comes from the same domain as the page
+    cy.visit('/')
+    cy.contains('h1', 'Download CSV')
+    cy.get('[data-cy=download-png]').click()
+
+    cy.log('**confirm downloaded image**')
+
+    const downloadedFilename = path.join(downloadsFolder, 'logo.png')
+
+    // ensure the file has been saved before trying to parse it
+    cy.readFile(downloadedFilename, 'binary', { timeout: 15000 })
+    .should((buffer) => {
+      // by having length assertion we ensure the file has text
+      // since we don't know when the browser finishes writing it to disk
+
+      // Tip: use expect() form to avoid dumping binary contents
+      // of the buffer into the Command Log
+      expect(buffer.length).to.be.gt(1000)
+    })
+  })
 })
