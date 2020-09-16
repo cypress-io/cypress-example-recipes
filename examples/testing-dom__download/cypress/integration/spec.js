@@ -172,4 +172,24 @@ describe('file download', () => {
       expect(lines).to.have.length.gt(20)
     })
   })
+
+  // NOTE: because the file is downloaded from a domain we don't control
+  it.skip('downloads remote CSV file', { browser: '!firefox' }, () => {
+    // the site we are about to visit has an error on load,
+    // so let's ignore it
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      // returning false here prevents Cypress from
+      // failing the test
+      return false
+    })
+
+    cy.visit('https://www.appsloveworld.com/sample-csv-file/')
+    cy.get('.Downloadbutton').first().click()
+
+    cy.log('**confirm downloaded CSV file**')
+    const downloadedFilename = path.join(downloadsFolder, 'Sample100.csv')
+
+    cy.readFile(downloadedFilename, { timeout: 15000 })
+    .should('have.length.gt', 100)
+  })
 })
