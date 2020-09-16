@@ -27,7 +27,7 @@ describe('file download', () => {
 
   it('downloads CSV file', () => {
     cy.visit('/')
-    cy.contains('h1', 'Download CSV')
+    cy.contains('h3', 'Download CSV')
     cy.get('[data-cy=download-csv]').click()
 
     cy.log('**read downloaded file**')
@@ -59,7 +59,7 @@ describe('file download', () => {
     // let's download a binary file
 
     cy.visit('/')
-    cy.contains('h1', 'Download XLSX')
+    cy.contains('h3', 'Download XLSX')
     cy.get('[data-cy=download-xlsx]').click()
 
     cy.log('**confirm downloaded file**')
@@ -117,7 +117,7 @@ describe('file download', () => {
     })
   })
 
-  // The next step tries to download file located in
+  // The next step tries to download an image file located in
   // the second domain. It runs in Chromium browsers with
   // "chromeWebSecurity": false, but we need to skip it in Firefox
   it('downloads remote PNG image', { browser: '!firefox' }, () => {
@@ -137,6 +137,39 @@ describe('file download', () => {
       // Tip: use expect() form to avoid dumping binary contents
       // of the buffer into the Command Log
       expect(buffer.length).to.be.gt(1000)
+    })
+  })
+
+  it('downloads remote TXT file', { browser: '!firefox' }, () => {
+    // the text file comes from a domain different from the page
+    cy.visit('/')
+    cy.get('[data-cy=download-remote-txt]').click()
+
+    cy.log('**confirm downloaded text file**')
+    const downloadedFilename = path.join(downloadsFolder, 'robots.txt')
+
+    cy.readFile(downloadedFilename).should((text) => {
+      // validate the downloaded robots.txt file
+      const lines = text.split('\n')
+
+      expect(lines).to.have.length.gt(2)
+      expect(lines[0]).to.equal('User-agent: *')
+    })
+  })
+
+  it('downloads remote JS file', { browser: '!firefox' }, () => {
+    // the JavaScript file comes from a domain different from the page
+    cy.visit('/')
+    cy.get('[data-cy=download-remote-js]').click()
+
+    cy.log('**confirm downloaded JavaScript file**')
+    const downloadedFilename = path.join(downloadsFolder, 'analytics.js')
+
+    cy.readFile(downloadedFilename).should((text) => {
+      // validate the downloaded file
+      const lines = text.split('\n')
+
+      expect(lines).to.have.length.gt(20)
     })
   })
 })
