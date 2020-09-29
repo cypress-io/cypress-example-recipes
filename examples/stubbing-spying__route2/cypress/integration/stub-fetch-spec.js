@@ -182,6 +182,33 @@ describe('route2', () => {
       .should('have.text', 'Failed loading favorite fruits: Orchard under maintenance')
     })
 
+    it('stubs a request that goes to another domain', () => {
+      cy.visit('/')
+
+      const users = [{
+        id: '1',
+        email: 'test@email.com',
+        username: 'Test User',
+      }]
+
+      cy.route2('https://jsonplaceholder.cypress.io/users', {
+        body: users,
+        headers: {
+          'access-control-allow-origin': Cypress.config('baseUrl'),
+        },
+      }).as('users')
+
+      cy.get('#load-users').click()
+      // ⚠️ response is text
+      cy.wait('@users').its('response.body')
+      .then(JSON.parse).should('have.length', 1)
+      .its('0') // grab the first user from the list
+      .should('deep.equal', users[0])
+
+      // the user should be shown on the page
+      cy.contains('.user', `${users[0].id} - ${users[0].email}`).should('be.visible')
+    })
+
     describe('CSS', () => {
       it('highlights LI elements using injected CSS', () => {
         // let's intercept the stylesheet the application is loading
