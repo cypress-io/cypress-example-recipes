@@ -14,7 +14,10 @@ describe('route2', () => {
     // 🐅 -> kenguru
     cy.route2('/images', {
       fixture: 'roo.jpg',
-      headers: { 'content-type': 'image/jpeg' },
+      headers: {
+        'content-type': 'image/jpeg',
+        'cache-control': 'public, max-age=0',
+      },
     }).as('image')
 
     cy.visit('/pics.html')

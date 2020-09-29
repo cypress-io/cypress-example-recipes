@@ -208,7 +208,7 @@ describe('route2', () => {
       // the user should be shown on the page
       cy.contains('.user', `${users[0].id} - ${users[0].email}`).should('be.visible')
     })
-    
+
     describe('CSS', () => {
       it('highlights LI elements using injected CSS', () => {
         // let's intercept the stylesheet the application is loading
