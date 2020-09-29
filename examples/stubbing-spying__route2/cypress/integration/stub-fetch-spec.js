@@ -183,11 +183,17 @@ describe('route2', () => {
     })
 
     describe('CSS', () => {
-      // NOTE: does it work? Sometimes it does, sometimes it does not
-      it.skip('highlights LI elements using injected CSS', () => {
+      it('highlights LI elements using injected CSS', () => {
         // let's intercept the stylesheet the application is loading
         // to highlight list items with a border
         cy.route2('styles.css', (req) => {
+          // to avoid caching responses and the server responding
+          // with nothing (because the resource has not changed)
+          // and force the server to send the CSS file
+          // delete caching headers from the request
+          delete req.headers['if-modified-since']
+          delete req.headers['if-none-match']
+
           req.reply((res) => {
             res.send(`${res.body}
               li {
