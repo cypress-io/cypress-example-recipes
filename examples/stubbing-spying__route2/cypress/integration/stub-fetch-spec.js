@@ -184,11 +184,14 @@ describe('route2', () => {
 
     describe('CSS', () => {
       // NOTE: does it work? Sometimes it does, sometimes it does not
-      it.skip('highlights LI elements using injected CSS', () => {
+      it('highlights LI elements using injected CSS', () => {
         // let's intercept the stylesheet the application is loading
         // to highlight list items with a border
         cy.route2('styles.css', (req) => {
           req.reply((res) => {
+            console.log('server sent styles')
+            console.log(res.body) // empty?
+
             res.send(`${res.body}
               li {
                 border: 1px solid pink;
