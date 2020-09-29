@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-
+/* eslint-disable no-console */
 describe('route2', () => {
   context('stubbing', function () {
     it('shows no Response message', () => {
@@ -162,6 +162,28 @@ describe('route2', () => {
 
       cy.get('.favorite-fruits')
       .should('have.text', 'Failed loading favorite fruits: Orchard under maintenance')
+    })
+
+    describe('CSS', () => {
+      it('highlights LI elements using injected CSS', () => {
+        // let's intercept the stylesheet the application is loading
+        // to highlight list items with a border
+        cy.route2('styles.css', (req) => {
+          req.reply((res) => {
+            res.send(`${res.body}
+              li {
+                border: 1px solid pink;
+              }
+            `)
+          })
+        })
+
+        cy.visit('/')
+        // confirm the CSS was injected and applied
+        cy.get('li').should('have.length.gt', 1).first().invoke('css', 'border')
+        .should('be.a', 'string')
+        .and('include', 'solid')
+      })
     })
   })
 })
