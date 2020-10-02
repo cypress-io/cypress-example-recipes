@@ -44,69 +44,73 @@ describe('route2', () => {
       it('matches using minimatch', () => {
         // our application issues GET "/favorite-fruits"
         // which matches all these wildcards
-        const URL = '/favorite-fruits'
+        // NOTE: we are matching full url
+        const URL = `${Cypress.config('baseUrl')}/favorite-fruits`
 
-        expect(Cypress.minimatch(URL, '/*-fruits'), '/*-fruits').to.be.true
-        expect(Cypress.minimatch(URL, '/favorite-*'), '/favorite-*').to.be.true
-        expect(Cypress.minimatch(URL, '/favorite-fruits'), '/favorite-fruits').to.be.true
+        expect(Cypress.minimatch(URL, '**/*-fruits'), '**/*-fruits').to.be.true
+        expect(Cypress.minimatch(URL, '**/favorite-*'), '**/favorite-*').to.be.true
+        expect(Cypress.minimatch(URL, '**/favorite-fruits'), '**/favorite-fruits').to.be.true
       })
 
       it('matches *-fruits', () => {
-        cy.route2('/*-fruits').as('fruits')
+        cy.route2('**/*-fruits').as('fruits')
         cy.visit('/')
-        cy.wait('@fruits', { timeout: 200 })
+        cy.wait('@fruits')
       })
 
       it('matches favorite-*', () => {
-        cy.route2('/favorite-*').as('favorite')
+        cy.route2('**/favorite-*').as('favorite')
         cy.visit('/')
-        cy.wait('@favorite', { timeout: 200 })
+        cy.wait('@favorite')
       })
 
       it('matches favorite-fruits', () => {
         cy.route2('/favorite-fruits').as('favorite-fruits')
         cy.visit('/')
-        cy.wait('@favorite-fruits', { timeout: 200 })
+        cy.wait('@favorite-fruits')
       })
 
       it('uses the first found route matcher', () => {
-        cy.route2('/*-fruits').as('fruits')
-        cy.route2('/favorite-*').as('favorite')
-        cy.route2('/favorite-fruits').as('favorite-fruits')
+        cy.route2('**/*-fruits').as('fruits')
+        cy.route2('**/favorite-*').as('favorite')
+        cy.route2('**/favorite-fruits').as('favorite-fruits')
 
         cy.visit('/')
-        // which one matches? I expected the "fruits"
-        cy.wait('@fruits', { timeout: 200 })
+        // matches all 3 routes
+        cy.wait('@fruits')
+        cy.wait('@favorite')
+        cy.wait('@favorite-fruits')
+      })
+
+      it('uses the first found route matcher (2)', () => {
+        cy.route2('**/*-fruits-does-not-exist').as('fruits') // this does not match
+        cy.route2('**/favorite-*').as('favorite')
+        cy.route2('**/favorite-fruits').as('favorite-fruits')
+
+        cy.visit('/')
+        // matches last two routes
+        cy.wait('@favorite')
+        cy.wait('@favorite-fruits')
       })
     })
 
     describe('without a slash', () => {
-      it('matches using minimatch', () => {
-        // our application issues GET "/favorite-fruits"
-        // which matches all these wildcards
-        const URL = '/favorite-fruits'
-
-        expect(Cypress.minimatch(URL, '*-fruits'), '*-fruits').to.be.true
-        expect(Cypress.minimatch(URL, 'favorite-*'), 'favorite-*').to.be.true
-        expect(Cypress.minimatch(URL, 'favorite-fruits'), 'favorite-fruits').to.be.true
-      })
-
       it('matches *-fruits', () => {
         cy.route2('*-fruits').as('fruits')
         cy.visit('/')
-        cy.wait('@fruits', { timeout: 200 })
+        cy.wait('@fruits')
       })
 
       it('matches favorite-*', () => {
         cy.route2('favorite-*').as('favorite')
         cy.visit('/')
-        cy.wait('@favorite', { timeout: 200 })
+        cy.wait('@favorite')
       })
 
       it('matches favorite-fruits', () => {
         cy.route2('favorite-fruits').as('favorite-fruits')
         cy.visit('/')
-        cy.wait('@favorite-fruits', { timeout: 200 })
+        cy.wait('@favorite-fruits')
       })
 
       it('uses the first found route matcher', () => {
@@ -115,8 +119,10 @@ describe('route2', () => {
         cy.route2('favorite-fruits').as('favorite-fruits')
 
         cy.visit('/')
-        // which one matches? I expected the "fruits"
-        cy.wait('@fruits', { timeout: 200 })
+        // all 3 routes match
+        cy.wait('@fruits')
+        cy.wait('@favorite')
+        cy.wait('@favorite-fruits')
       })
     })
   })
