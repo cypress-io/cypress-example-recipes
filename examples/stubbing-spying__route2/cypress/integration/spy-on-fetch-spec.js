@@ -35,4 +35,89 @@ describe('route2', () => {
       cy.get('.user').should('have.length', 3)
     })
   })
+
+  context('matches order', () => {
+    describe('when starts with a slash', () => {
+      // seems minimatch fails if the matcher URL starts with a /
+      // and includes * character
+
+      it('matches using minimatch', () => {
+        // our application issues GET "/favorite-fruits"
+        // which matches all these wildcards
+        const URL = '/favorite-fruits'
+
+        expect(Cypress.minimatch(URL, '/*-fruits'), '/*-fruits').to.be.true
+        expect(Cypress.minimatch(URL, '/favorite-*'), '/favorite-*').to.be.true
+        expect(Cypress.minimatch(URL, '/favorite-fruits'), '/favorite-fruits').to.be.true
+      })
+
+      it('matches *-fruits', () => {
+        cy.route2('/*-fruits').as('fruits')
+        cy.visit('/')
+        cy.wait('@fruits', { timeout: 200 })
+      })
+
+      it('matches favorite-*', () => {
+        cy.route2('/favorite-*').as('favorite')
+        cy.visit('/')
+        cy.wait('@favorite', { timeout: 200 })
+      })
+
+      it('matches favorite-fruits', () => {
+        cy.route2('/favorite-fruits').as('favorite-fruits')
+        cy.visit('/')
+        cy.wait('@favorite-fruits', { timeout: 200 })
+      })
+
+      it('uses the first found route matcher', () => {
+        cy.route2('/*-fruits').as('fruits')
+        cy.route2('/favorite-*').as('favorite')
+        cy.route2('/favorite-fruits').as('favorite-fruits')
+
+        cy.visit('/')
+        // which one matches? I expected the "fruits"
+        cy.wait('@fruits', { timeout: 200 })
+      })
+    })
+
+    describe('without a slash', () => {
+      it('matches using minimatch', () => {
+        // our application issues GET "/favorite-fruits"
+        // which matches all these wildcards
+        const URL = '/favorite-fruits'
+
+        expect(Cypress.minimatch(URL, '*-fruits'), '*-fruits').to.be.true
+        expect(Cypress.minimatch(URL, 'favorite-*'), 'favorite-*').to.be.true
+        expect(Cypress.minimatch(URL, 'favorite-fruits'), 'favorite-fruits').to.be.true
+      })
+
+      it('matches *-fruits', () => {
+        cy.route2('*-fruits').as('fruits')
+        cy.visit('/')
+        cy.wait('@fruits', { timeout: 200 })
+      })
+
+      it('matches favorite-*', () => {
+        cy.route2('favorite-*').as('favorite')
+        cy.visit('/')
+        cy.wait('@favorite', { timeout: 200 })
+      })
+
+      it('matches favorite-fruits', () => {
+        cy.route2('favorite-fruits').as('favorite-fruits')
+        cy.visit('/')
+        cy.wait('@favorite-fruits', { timeout: 200 })
+      })
+
+      it('uses the first found route matcher', () => {
+        cy.route2('*-fruits').as('fruits')
+        cy.route2('favorite-*').as('favorite')
+        cy.route2('favorite-fruits').as('favorite-fruits')
+
+        cy.visit('/')
+        // which one matches? I expected the "fruits"
+        cy.wait('@fruits', { timeout: 200 })
+      })
+    })
+  })
 })
