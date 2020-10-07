@@ -8,11 +8,15 @@ describe('route2', () => {
     })
 
     it('requests favorite fruits', function () {
-      cy.wait('@fetchFruits')
-      // TODO: can we inspect the response object from the server?
-      // like response body...
-      // https://github.com/cypress-io/cypress/issues/8536
-      cy.get('.favorite-fruits li').should('have.length', 5)
+      cy.wait('@fetchFruits').its('response.body')
+      .then(JSON.parse) // convert string to array
+      .then((fruits) => {
+        cy.get('.favorite-fruits li').should('have.length', fruits.length)
+
+        fruits.forEach((fruit) => {
+          cy.contains('.favorite-fruits li', fruit)
+        })
+      })
     })
 
     it('spying on 2nd domain', () => {

@@ -136,6 +136,16 @@ describe('route2', () => {
         cy.get('@favoriteFruits').eq(2)
         .should('have.text', 'Cantaloupe')
       })
+
+      it('shows fruits', function () {
+        const fruits = ['Apple', 'Banana', 'Cantaloupe']
+
+        cy.route2('/favorite-fruits', fruits)
+        cy.visit('/')
+        fruits.forEach((fruit) => {
+          cy.contains('.favorite-fruits li', fruit)
+        })
+      })
     })
 
     describe('when no favorite fruits are returned', function () {
@@ -235,6 +245,37 @@ describe('route2', () => {
         cy.get('li').should('have.length.gt', 1).first().invoke('css', 'border')
         .should('be.a', 'string')
         .and('include', 'solid')
+      })
+    })
+
+    describe('HTML', () => {
+      it('modifies the page itself', () => {
+        const pageUrl = `${Cypress.config('baseUrl')}/`
+
+        cy.route2('/', (req) => {
+          // we are only interested in the HTML root resource
+          if (req.url !== pageUrl) {
+            return
+          }
+
+          req.reply((res) => {
+            const style = `
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              background-color: pink;
+              text-align: center;
+              text-size: large;
+              padding: 1em;
+            `
+
+            res.body += `<footer style="${style}">⚠️ This is a Cypress test ⚠️</footer>`
+          })
+        })
+
+        cy.visit('/')
+        cy.contains('footer', 'Cypress test').should('be.visible')
       })
     })
   })
