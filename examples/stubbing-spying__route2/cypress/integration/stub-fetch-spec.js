@@ -247,5 +247,36 @@ describe('route2', () => {
         .and('include', 'solid')
       })
     })
+
+    describe('HTML', () => {
+      it('modifies the page itself', () => {
+        const pageUrl = `${Cypress.config('baseUrl')}/`
+
+        cy.route2('/', (req) => {
+          // we are only interested in the HTML root resource
+          if (req.url !== pageUrl) {
+            return
+          }
+
+          req.reply((res) => {
+            const style = `
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              background-color: pink;
+              text-align: center;
+              text-size: large;
+              padding: 1em;
+            `
+
+            res.body += `<footer style="${style}">⚠️ This is a Cypress test ⚠️</footer>`
+          })
+        })
+
+        cy.visit('/')
+        cy.contains('footer', 'Cypress test').should('be.visible')
+      })
+    })
   })
 })
