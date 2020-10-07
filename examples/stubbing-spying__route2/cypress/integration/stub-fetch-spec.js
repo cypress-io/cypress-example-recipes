@@ -136,6 +136,16 @@ describe('route2', () => {
         cy.get('@favoriteFruits').eq(2)
         .should('have.text', 'Cantaloupe')
       })
+
+      it('shows fruits', function () {
+        const fruits = ['Apple', 'Banana', 'Cantaloupe']
+
+        cy.route2('/favorite-fruits', fruits)
+        cy.visit('/')
+        fruits.forEach((fruit) => {
+          cy.contains('.favorite-fruits li', fruit)
+        })
+      })
     })
 
     describe('when no favorite fruits are returned', function () {
