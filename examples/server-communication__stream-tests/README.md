@@ -1,5 +1,5 @@
 # stream-tests
-> Run Cypress using NPM module API and receive event after each test finishes
+> Run Cypress using NPM module API and receive event after each test finishes. Read blog post [Streaming Test Results](https://www.cypress.io/blog/2020/04/01/streaming-test-results/)
 
 ![How it works](images/how-it-works.png)
 
