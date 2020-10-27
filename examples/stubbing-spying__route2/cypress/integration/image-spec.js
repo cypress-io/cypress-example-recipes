@@ -10,7 +10,7 @@ describe('route2', () => {
   })
 
   it('stubs a static image', () => {
-    // 🐅 -> kenguru
+    // 🐅 -> 🦘
     cy.route2('/images', {
       fixture: 'roo.jpg',
       headers: {
@@ -25,7 +25,7 @@ describe('route2', () => {
   })
 
   it('stubs a static image using fixture', () => {
-    // 🐅 -> kenguru
+    // 🐅 -> 🦘
     cy.route2('/images', { fixture: 'roo.jpg' })
     cy.visit('/pics.html')
     // we DO see the roo image, but again, just like the test above
