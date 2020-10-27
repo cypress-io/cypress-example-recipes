@@ -444,6 +444,8 @@ all_jobs: &all_jobs
       requires:
         - build
   - stubbing-spying__route2:
+      # make sure there is no flake in cy.route2
+      repeat: 5
       requires:
         - build
   - stubbing-spying__window-print:
