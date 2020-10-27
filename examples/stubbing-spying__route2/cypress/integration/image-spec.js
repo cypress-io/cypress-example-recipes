@@ -38,9 +38,7 @@ describe('route2', () => {
     cy.get('img').invoke('height').should('closeTo', 450, 1)
   })
 
-  // skipping because sometimes crashes
-  // NOTE: https://github.com/cypress-io/cypress/issues/8858
-  it.skip('redirects static image', () => {
+  it('redirects static image', () => {
     // instead of serving an image from a fixture
     // we can redirect the request for the image
     // to another route
