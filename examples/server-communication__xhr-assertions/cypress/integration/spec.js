@@ -17,8 +17,11 @@ describe('XHR', () => {
     // and we can retrieve it using cy.get(<alias>)
     // see https://on.cypress.io/get
 
+    // increase the command timeout, because Ajax request
+    // can take longer on CI than expected
+    cy.get('@post', { timeout: 150000 })
     // tip: log the request object to see everything it has in the console
-    cy.get('@post').then(console.log)
+    .then(console.log)
   })
 
   it('gets the expected response', () => {
