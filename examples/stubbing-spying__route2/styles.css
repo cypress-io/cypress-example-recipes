@@ -15,6 +15,12 @@ h1 {
   padding-bottom: 20px;
 }
 
+#network-status {
+  position: absolute;
+  bottom: 2em;
+  right: 1em;
+}
+
 /* Source: https://github.com/lukehaas/css-loaders */
 .loader,
 .loader:after {

@@ -6,6 +6,9 @@ describe('route2', () => {
   // since we are using Chrome debugger protocol API
   // we should only run these tests when NOT in Firefox browser
   context('app', { browser: '!firefox' }, () => {
+    // the application is making request to this url
+    const url = 'https://jsonplaceholder.cypress.io/users'
+
     // https://caniuse.com/online-status
     const assertOnline = () => {
       return cy.wrap(window).its('navigator.onLine').should('be.true')
@@ -53,10 +56,31 @@ describe('route2', () => {
     beforeEach(goOnline)
     afterEach(goOnline)
 
-    it('shows error message when offline', () => {
-      assertOnline()
+    it('shows network status', () => {
+      cy.visit('/')
+      cy.contains('#network-status', 'online')
+      .wait(1000) // for demo purpose
 
-      const url = 'https://jsonplaceholder.cypress.io/users'
+      goOffline()
+      cy.contains('#network-status', 'offline')
+      .wait(1000) // for demo purpose
+    })
+
+    it('shows error if we stub the network call', () => {
+      assertOnline()
+      cy.visit('/')
+      cy.route2(url, { forceNetworkError: true }).as('users')
+      cy.get('#load-users').click()
+      cy.contains('#users', 'Problem fetching users Failed to fetch')
+
+      // cannot wait for the route2 that forces network error
+      // https://github.com/cypress-io/cypress/issues/9062
+      // cy.wait('@users', { timeout: 1000 }) // the network call happens
+    })
+
+    // NOTE: https://github.com/cypress-io/cypress/issues/9063
+    it.skip('shows error trying to fetch users in offline mode', () => {
+      assertOnline()
 
       cy.route2(url).as('users')
 
