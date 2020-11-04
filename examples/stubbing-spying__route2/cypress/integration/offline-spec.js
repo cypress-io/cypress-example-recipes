@@ -93,37 +93,81 @@ describe('offline mode', { browser: '!firefox' }, () => {
   })
 
   it('shows error trying to fetch users in offline mode', () => {
-    assertOnline()
-
-    cy.route2(url).as('users')
-
     cy.visit('/offline.html')
-
     assertOnline()
 
     // since this call returns a promise, must tell Cypress to wait
     // for it to be resolved
     goOffline()
-
     assertOffline()
 
-    // let's spy on the "fetch" method the app calls
-    cy.window().then((w) => cy.spy(w, 'fetch').withArgs(`${url}?_limit=3`).as('fetchUsers'))
     cy.get('#load-users').click()
-
-    cy.get('@fetchUsers').should('have.been.calledOnce')
-
-    // the cy.route2 network call does NOT happen
-    // because the browser does not fire it
-    // and thus our network proxy does not see it
     cy.contains('#users', 'Problem fetching users Failed to fetch')
 
     // now let's go back online and fetch the users
     goOnline()
     cy.get('#load-users').click()
     cy.get('.user').should('have.length', 3)
+  })
+
+  it('makes fetch request when offline', () => {
+    cy.visit('/offline.html')
+
+    goOffline()
+    assertOffline()
+
+    // let's spy on the "fetch" method the app calls
+    cy.window().then((w) => cy.spy(w, 'fetch').withArgs(`${url}?_limit=3`).as('fetchUsers'))
+
+    cy.get('#load-users').click()
+    cy.get('@fetchUsers').should('have.been.calledOnce')
+
+    // now let's go back online and fetch the users
+    goOnline()
+    cy.get('#load-users').click()
+    cy.get('.user').should('have.length', 3)
     cy.get('@fetchUsers').should('have.been.calledTwice')
-    // and the network call happens
-    cy.wait('@users').its('response.body').then(JSON.parse).should('have.length', 3)
+  })
+
+  it('does not reach the outside network when offline', () => {
+    cy.visit('/offline.html')
+
+    // before we go offline we have to set up network intercepts
+    // since they need to be communicated outside the browser
+    // and lets keep track the number of network calls made
+    let callCount = 0
+
+    cy.route2(url, () => {
+      callCount += 1
+    }).as('users')
+
+    goOffline()
+    assertOffline()
+
+    cy.get('#load-users').click()
+    cy.contains('#users', 'Problem fetching users Failed to fetch')
+
+    // the cy.route2 network call does NOT happen
+    // because the browser does not fire it
+    // and thus our network proxy does not see it
+    cy.then(() => {
+      expect(callCount, 'no network calls made').to.equal(0)
+    })
+
+    // now let's go back online and fetch the users
+    goOnline()
+    cy.get('#load-users').click()
+    // we can retry the assertion to know when the network call has happened
+    // using .should callback function with an assertion inside
+    .should(() => {
+      expect(callCount, 'single network call').to.equal(1)
+    })
+
+    cy.wait('@users')
+    .its('response.body')
+    .then(JSON.parse)
+    .should('have.length', 3)
+
+    cy.get('.user').should('have.length', 3)
   })
 })
