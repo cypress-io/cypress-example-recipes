@@ -22,6 +22,12 @@ describe('route2', () => {
       .then(() => {
         return Cypress.automation('remote:debugger:protocol',
           {
+            command: 'Network.enable',
+          })
+      })
+      .then(() => {
+        return Cypress.automation('remote:debugger:protocol',
+          {
             command: 'Network.emulateNetworkConditions',
             params: {
               offline: true,
@@ -47,6 +53,12 @@ describe('route2', () => {
               downloadThroughput: -1,
               uploadThroughput: -1,
             },
+          })
+      })
+      .then(() => {
+        return Cypress.automation('remote:debugger:protocol',
+          {
+            command: 'Network.disable',
           })
       })
     }
@@ -78,8 +90,7 @@ describe('route2', () => {
       // cy.wait('@users', { timeout: 1000 }) // the network call happens
     })
 
-    // NOTE: https://github.com/cypress-io/cypress/issues/9063
-    it.skip('shows error trying to fetch users in offline mode', () => {
+    it('shows error trying to fetch users in offline mode', () => {
       assertOnline()
 
       cy.route2(url).as('users')
@@ -103,6 +114,15 @@ describe('route2', () => {
       // the cy.route2 network call does NOT happen
       // because the browser does not fire it
       // and thus our network proxy does not see it
+      cy.contains('#users', 'Problem fetching users Failed to fetch')
+
+      // now let's go back online and fetch the users
+      goOnline()
+      cy.get('#load-users').click()
+      cy.get('.user').should('have.length', 3)
+      cy.get('@fetchUsers').should('have.been.calledTwice')
+      // and the network call happens
+      cy.wait('@users').its('response.body').then(JSON.parse).should('have.length', 3)
     })
   })
 })
