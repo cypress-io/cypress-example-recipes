@@ -294,6 +294,8 @@ jobs:
     <<: *defaults
   server-communication__stream-tests:
     <<: *defaults
+  server-communication__offline:
+    <<: *defaults
   fundamentals__dynamic-tests:
     <<: *defaults
   fundamentals__module-api:
@@ -530,6 +532,9 @@ all_jobs: &all_jobs
   - server-communication__stream-tests:
       requires:
         - build
+  - server-communication__offline:
+      requires:
+        - build
   - fundamentals__dynamic-tests:
       requires:
         - build
@@ -598,6 +603,7 @@ all_jobs: &all_jobs
         - server-communication__xhr-assertions
         - server-communication__visit-2nd-domain
         - server-communication__stream-tests
+        - server-communication__offline
         - stubbing-spying__functions
         - stubbing-spying__window-fetch
         - stubbing-spying__route2

@@ -61,6 +61,7 @@ const goOnline = () => {
 
 // since we are using Chrome debugger protocol API
 // we should only run these tests when NOT in Firefox browser
+// see https://on.cypress.io/configuration#Test-Configuration
 describe('offline mode', { browser: '!firefox' }, () => {
   // the application is making request to this url
   const url = 'https://jsonplaceholder.cypress.io/users'
@@ -71,7 +72,7 @@ describe('offline mode', { browser: '!firefox' }, () => {
   afterEach(goOnline)
 
   it('shows network status', () => {
-    cy.visit('/offline.html')
+    cy.visit('/')
     cy.contains('#network-status', 'online')
     .wait(1000) // for demo purpose
 
@@ -82,7 +83,7 @@ describe('offline mode', { browser: '!firefox' }, () => {
 
   it('shows error if we stub the network call', () => {
     assertOnline()
-    cy.visit('/offline.html')
+    cy.visit('/')
     cy.route2(url, { forceNetworkError: true }).as('users')
     cy.get('#load-users').click()
     cy.contains('#users', 'Problem fetching users Failed to fetch')
@@ -93,7 +94,7 @@ describe('offline mode', { browser: '!firefox' }, () => {
   })
 
   it('shows error trying to fetch users in offline mode', () => {
-    cy.visit('/offline.html')
+    cy.visit('/')
     assertOnline()
 
     // since this call returns a promise, must tell Cypress to wait
@@ -111,7 +112,7 @@ describe('offline mode', { browser: '!firefox' }, () => {
   })
 
   it('makes fetch request when offline', () => {
-    cy.visit('/offline.html')
+    cy.visit('/')
 
     goOffline()
     assertOffline()
@@ -130,7 +131,7 @@ describe('offline mode', { browser: '!firefox' }, () => {
   })
 
   it('does not reach the outside network when offline', () => {
-    cy.visit('/offline.html')
+    cy.visit('/')
 
     // before we go offline we have to set up network intercepts
     // since they need to be communicated outside the browser
