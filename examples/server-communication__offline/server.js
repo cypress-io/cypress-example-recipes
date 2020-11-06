@@ -1,10 +1,7 @@
-const _ = require('lodash')
 const path = require('path')
 const minimist = require('minimist')
 const express = require('express')
 const morgan = require('morgan')
-
-const fruits = require('./fruits')
 const app = express()
 
 // get port from passed in args from scripts/start.js
@@ -16,10 +13,6 @@ app.use('/node_modules', express.static(path.join(__dirname, '..', '..', 'node_m
 
 app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/index.html`)
-})
-
-app.get('/favorite-fruits', (req, res) => {
-  res.json(_.sampleSize(fruits, 5))
 })
 
 app.listen(port)
