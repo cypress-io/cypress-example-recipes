@@ -1,0 +1,7 @@
+{
+  "baseUrl": "http://localhost:58000/",
+  "experimentalNetworkStubbing": true,
+  "fixturesFolder": false,
+  "supportFile": false,
+  "pluginsFile": false
+}
