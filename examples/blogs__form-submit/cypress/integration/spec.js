@@ -1,10 +1,10 @@
 /// <reference types="cypress" />
 
-describe('Testing a submitting select box', () => {
+describe('Form submit', () => {
   // NOTE: This fails in Chrome >= 83, but succeeds in Chrome 80 and in Firefox
   it.skip('no explicit wait, this will fail but shouldn\'t', () => {
     cy.visit('')
-    cy.get('select').select('Second')
+    cy.get('select').pause().select('Second')
     cy.get('input').type('Hallo')
   })
 
@@ -17,7 +17,7 @@ describe('Testing a submitting select box', () => {
 
   it('wait for document network call', () => {
     cy.visit('')
-    cy.route2('/').as('doc')
+    cy.route2('/?').as('doc')
     cy.get('select').select('Second')
     cy.wait('@doc')
     cy.get('input').type('Hallo')

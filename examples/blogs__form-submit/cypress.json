@@ -3,5 +3,6 @@
   "experimentalNetworkStubbing": true,
   "fixturesFolder": false,
   "supportFile": false,
-  "pluginsFile": false
+  "pluginsFile": false,
+  "defaultCommandTimeout": 1000
 }
