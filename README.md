@@ -80,6 +80,7 @@ Recipe | Description
 [Browser notifications](./examples/blogs__notification) | How to test application that uses [`Notification`](https://developer.mozilla.org/en-US/docs/Web/API/notification)
 [Testing iframes](./examples/blogs__iframes) | Accessing elements in 3rd party iframe, spy and stub network calls from iframe
 [Class decorators](./examples/blogs__class-decorator) | Using JavaScript class decorator to expose objects created by the application so they are reachable from tests
+[Form Submit](./examples/blogs__form-submit) | Removing flake from the test where a page is reloaded after form submission
 
 ## Stubbing and spying
 
