@@ -1,9 +1,9 @@
 /// <reference types="Cypress" />
 
-describe('route2', () => {
+describe('http', () => {
   context('spying', function () {
     beforeEach(function () {
-      cy.route2('/favorite-fruits').as('fetchFruits')
+      cy.http('/favorite-fruits').as('fetchFruits')
       cy.visit('/')
     })
 
@@ -20,7 +20,7 @@ describe('route2', () => {
     })
 
     it('spying on 2nd domain', () => {
-      cy.route2('https://jsonplaceholder.cypress.io/users').as('users')
+      cy.http('https://jsonplaceholder.cypress.io/users').as('users')
       cy.get('#load-users').click()
       // ⚠️ response is text
       cy.wait('@users').its('response.body')

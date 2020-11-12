@@ -240,7 +240,7 @@ jobs:
     <<: *defaults
   stubbing-spying__window-fetch:
     <<: *defaults
-  stubbing-spying__route2:
+  stubbing-spying__http:
     <<: *defaults
   stubbing-spying__window-print:
     <<: *defaults
@@ -450,8 +450,8 @@ all_jobs: &all_jobs
   - stubbing-spying__window-fetch:
       requires:
         - build
-  - stubbing-spying__route2:
-      # make sure there is no flake in cy.route2
+  - stubbing-spying__http:
+      # make sure there is no flake in cy.http
       repeat: 5
       requires:
         - build
@@ -612,7 +612,7 @@ all_jobs: &all_jobs
         - server-communication__offline
         - stubbing-spying__functions
         - stubbing-spying__window-fetch
-        - stubbing-spying__route2
+        - stubbing-spying__http
         - stubbing-spying__window-print
         - stubbing-spying__google-analytics
         - stubbing-spying__navigator
