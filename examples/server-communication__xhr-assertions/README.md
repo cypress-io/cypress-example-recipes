@@ -63,6 +63,19 @@ We can skip the initial 1 second delay set using `setTimeout(..., 1000)` inside 
 
 ![Fast test via clock control](images/clock.gif)
 
+## Test retries
+
+If we decide to assert the network call's duration yet avoid specifying extremely large limit to avoid spurious test failures, we can use test retries to re-run the test. See [cypress/integration/duration-spec.js](cypress/integration/duration-spec.js)
+
+```js
+it('is faster than 300ms', { retries: 3 }, () => {
+  ...
+  cy.wait('@post').its('duration').should('be.lessThan', 300)
+})
+```
+
+![Test retries on failure](images/re-run.gif)
+
 ## See also
 
 - [Cypress network guide](https://on.cypress.io/network-requests)
