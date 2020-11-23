@@ -166,7 +166,6 @@ describe('offline mode', { browser: '!firefox' }, () => {
 
     cy.wait('@users')
     .its('response.body')
-    .then(JSON.parse)
     .should('have.length', 3)
 
     cy.get('.user').should('have.length', 3)

@@ -16,7 +16,7 @@ describe('intercept', () => {
         req.reply((res) => {
           // add Kiwi to the list received from the server
           console.log('original response from the server is %s %o', typeof res.body, res.body)
-          const list = JSON.parse(res.body)
+          const list = res.body
 
           list.push('Kiwi')
           res.send(list)
@@ -211,7 +211,7 @@ describe('intercept', () => {
       cy.get('#load-users').click()
       // ⚠️ response is text
       cy.wait('@users').its('response.body')
-      .then(JSON.parse).should('have.length', 1)
+      .should('have.length', 1)
       .its('0') // grab the first user from the list
       .should('deep.equal', users[0])
 
