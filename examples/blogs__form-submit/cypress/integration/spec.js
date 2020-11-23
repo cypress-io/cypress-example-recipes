@@ -17,7 +17,7 @@ describe('Form submit', () => {
 
   it('wait for document network call', () => {
     cy.visit('')
-    cy.route2('/?').as('doc')
+    cy.intercept('/?').as('doc')
     cy.get('select').select('Second')
     cy.wait('@doc')
     cy.get('input').type('Hallo')

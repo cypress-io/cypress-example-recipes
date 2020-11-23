@@ -13,12 +13,12 @@
 // using the real server would lead to flaky tests, so we
 // stub out window.fetch again in order to control the response
 
-describe('route2', () => {
+describe('intercept', () => {
   context('clock', function () {
     describe('when favorite fruits are returned', function () {
       it('displays list of fruits', function () {
-        // https://on.cypress.io/route2
-        cy.route2('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe'])
+        // https://on.cypress.io/intercept
+        cy.intercept('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe'])
         cy.visit('/')
 
         cy.get('.favorite-fruits li').as('favoriteFruits')
@@ -44,7 +44,7 @@ describe('route2', () => {
           const firstList = ['Apple', 'Banana', 'Cantaloupe']
           const secondList = ['Orange', 'Cherry', 'Raspberry', 'Pineapple']
 
-          cy.route2('/favorite-fruits', (req) => {
+          cy.intercept('/favorite-fruits', (req) => {
             k += 1
             if (k === 1) {
               req.reply(firstList)
