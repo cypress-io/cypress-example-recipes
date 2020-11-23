@@ -209,7 +209,6 @@ describe('intercept', () => {
       }).as('users')
 
       cy.get('#load-users').click()
-      // ⚠️ response is text
       cy.wait('@users').its('response.body')
       .should('have.length', 1)
       .its('0') // grab the first user from the list
