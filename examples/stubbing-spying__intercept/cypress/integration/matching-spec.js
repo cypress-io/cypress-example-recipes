@@ -1,11 +1,11 @@
 /// <reference types="Cypress" />
 
-describe('route2', () => {
+describe('intercept', () => {
   context('matches order', () => {
     it('uses the first found route matcher that responds', () => {
-      cy.route2('*-fruits').as('fruits') // does not reply
-      cy.route2('favorite-*', ['Lemons 🍋']).as('favorite') // replies with a fruit
-      cy.route2('favorite-fruits').as('favorite-fruits') // does not reply
+      cy.intercept('*-fruits').as('fruits') // does not reply
+      cy.intercept('favorite-*', ['Lemons 🍋']).as('favorite') // replies with a fruit
+      cy.intercept('favorite-fruits').as('favorite-fruits') // does not reply
 
       cy.visit('/')
       cy.wait('@fruits') // first route matches
@@ -31,27 +31,27 @@ describe('route2', () => {
       })
 
       it('matches *-fruits', () => {
-        cy.route2('**/*-fruits').as('fruits')
+        cy.intercept('**/*-fruits').as('fruits')
         cy.visit('/')
         cy.wait('@fruits')
       })
 
       it('matches favorite-*', () => {
-        cy.route2('**/favorite-*').as('favorite')
+        cy.intercept('**/favorite-*').as('favorite')
         cy.visit('/')
         cy.wait('@favorite')
       })
 
       it('matches favorite-fruits', () => {
-        cy.route2('**/favorite-fruits').as('favorite-fruits')
+        cy.intercept('**/favorite-fruits').as('favorite-fruits')
         cy.visit('/')
         cy.wait('@favorite-fruits')
       })
 
       it('matches all routes that do not respond', () => {
-        cy.route2('**/*-fruits').as('fruits')
-        cy.route2('**/favorite-*').as('favorite')
-        cy.route2('**/favorite-fruits').as('favorite-fruits')
+        cy.intercept('**/*-fruits').as('fruits')
+        cy.intercept('**/favorite-*').as('favorite')
+        cy.intercept('**/favorite-fruits').as('favorite-fruits')
 
         cy.visit('/')
         // matches all 3 routes
@@ -61,9 +61,9 @@ describe('route2', () => {
       })
 
       it('uses the first found route matcher (2)', () => {
-        cy.route2('**/*-fruits-does-not-exist').as('fruits') // this does not match
-        cy.route2('**/favorite-*').as('favorite')
-        cy.route2('**/favorite-fruits').as('favorite-fruits')
+        cy.intercept('**/*-fruits-does-not-exist').as('fruits') // this does not match
+        cy.intercept('**/favorite-*').as('favorite')
+        cy.intercept('**/favorite-fruits').as('favorite-fruits')
 
         cy.visit('/')
         // matches last two routes
@@ -74,27 +74,27 @@ describe('route2', () => {
 
     describe('without minimatch, just wildcards', () => {
       it('matches *-fruits', () => {
-        cy.route2('*-fruits').as('fruits')
+        cy.intercept('*-fruits').as('fruits')
         cy.visit('/')
         cy.wait('@fruits')
       })
 
       it('matches favorite-*', () => {
-        cy.route2('favorite-*').as('favorite')
+        cy.intercept('favorite-*').as('favorite')
         cy.visit('/')
         cy.wait('@favorite')
       })
 
       it('matches favorite-fruits', () => {
-        cy.route2('favorite-fruits').as('favorite-fruits')
+        cy.intercept('favorite-fruits').as('favorite-fruits')
         cy.visit('/')
         cy.wait('@favorite-fruits')
       })
 
       it('matches all routes that do not respond', () => {
-        cy.route2('*-fruits').as('fruits')
-        cy.route2('favorite-*').as('favorite')
-        cy.route2('favorite-fruits').as('favorite-fruits')
+        cy.intercept('*-fruits').as('fruits')
+        cy.intercept('favorite-*').as('favorite')
+        cy.intercept('favorite-fruits').as('favorite-fruits')
 
         cy.visit('/')
         // all 3 routes match

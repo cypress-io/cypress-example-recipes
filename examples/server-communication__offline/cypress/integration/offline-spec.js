@@ -84,11 +84,11 @@ describe('offline mode', { browser: '!firefox' }, () => {
   it('shows error if we stub the network call', () => {
     assertOnline()
     cy.visit('/')
-    cy.route2(url, { forceNetworkError: true }).as('users')
+    cy.intercept(url, { forceNetworkError: true }).as('users')
     cy.get('#load-users').click()
     cy.contains('#users', 'Problem fetching users Failed to fetch')
 
-    // cannot wait for the route2 that forces network error
+    // cannot wait for the intercept that forces network error
     // https://github.com/cypress-io/cypress/issues/9062
     // cy.wait('@users', { timeout: 1000 }) // the network call happens
   })
@@ -138,7 +138,7 @@ describe('offline mode', { browser: '!firefox' }, () => {
     // and lets keep track the number of network calls made
     let callCount = 0
 
-    cy.route2(url, () => {
+    cy.intercept(url, () => {
       callCount += 1
     }).as('users')
 
@@ -148,7 +148,7 @@ describe('offline mode', { browser: '!firefox' }, () => {
     cy.get('#load-users').click()
     cy.contains('#users', 'Problem fetching users Failed to fetch')
 
-    // the cy.route2 network call does NOT happen
+    // the cy.intercept network call does NOT happen
     // because the browser does not fire it
     // and thus our network proxy does not see it
     cy.then(() => {
@@ -166,7 +166,6 @@ describe('offline mode', { browser: '!firefox' }, () => {
 
     cy.wait('@users')
     .its('response.body')
-    .then(JSON.parse)
     .should('have.length', 3)
 
     cy.get('.user').should('have.length', 3)

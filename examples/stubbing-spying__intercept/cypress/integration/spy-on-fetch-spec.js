@@ -1,15 +1,14 @@
 /// <reference types="Cypress" />
 
-describe('route2', () => {
+describe('intercept', () => {
   context('spying', function () {
     beforeEach(function () {
-      cy.route2('/favorite-fruits').as('fetchFruits')
+      cy.intercept('/favorite-fruits').as('fetchFruits')
       cy.visit('/')
     })
 
     it('requests favorite fruits', function () {
       cy.wait('@fetchFruits').its('response.body')
-      .then(JSON.parse) // convert string to array
       .then((fruits) => {
         cy.get('.favorite-fruits li').should('have.length', fruits.length)
 
@@ -20,11 +19,9 @@ describe('route2', () => {
     })
 
     it('spying on 2nd domain', () => {
-      cy.route2('https://jsonplaceholder.cypress.io/users').as('users')
+      cy.intercept('https://jsonplaceholder.cypress.io/users').as('users')
       cy.get('#load-users').click()
-      // ⚠️ response is text
-      cy.wait('@users').its('response.body')
-      .then(JSON.parse).should('have.length', 3)
+      cy.wait('@users').its('response.body').should('have.length', 3)
       .its('0') // grab the first user from the list
       .then((user) => {
         expect(user).to.have.property('id')

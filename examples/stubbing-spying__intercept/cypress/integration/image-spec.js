@@ -1,8 +1,8 @@
 /// <reference types="Cypress" />
 
-describe('route2', () => {
+describe('intercept', () => {
   it('spies on loading a static image', () => {
-    cy.route2('/images').as('image')
+    cy.intercept('/images').as('image')
     cy.visit('/pics.html')
     // how to check if the /image route was called once?
     // @see https://github.com/cypress-io/cypress/issues/8934
@@ -11,7 +11,7 @@ describe('route2', () => {
 
   it('stubs a static image', () => {
     // 🐅 -> 🦘
-    cy.route2('/images', {
+    cy.intercept('/images', {
       fixture: 'roo.jpg',
       headers: {
         'content-type': 'image/jpeg',
@@ -26,7 +26,7 @@ describe('route2', () => {
 
   it('stubs a static image using fixture', () => {
     // 🐅 -> 🦘
-    cy.route2('/images', { fixture: 'roo.jpg' })
+    cy.intercept('/images', { fixture: 'roo.jpg' })
     cy.visit('/pics.html')
     // we DO see the roo image, but again, just like the test above
     // cannot wait for it using cy.wait
@@ -42,7 +42,7 @@ describe('route2', () => {
     // instead of serving an image from a fixture
     // we can redirect the request for the image
     // to another route
-    cy.route2({
+    cy.intercept({
       method: 'GET',
       url: '/images/tiger.jpg',
     }, (req) => {
