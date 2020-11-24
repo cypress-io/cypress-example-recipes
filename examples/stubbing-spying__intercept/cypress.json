@@ -2,6 +2,5 @@
   "baseUrl": "http://localhost:7080",
   "ignoreTestFiles": "deferred.js",
   "pluginsFile": false,
-  "supportFile": false,
-  "experimentalNetworkStubbing": true
+  "supportFile": false
 }
