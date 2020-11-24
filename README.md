@@ -115,6 +115,7 @@ Recipe | Description
 [Visiting 2nd domain](./examples/server-communication__visit-2nd-domain) | Visiting two different domains from two different tests
 [Stream test results](./examples/server-communication__stream-tests) | Streams each test result from the browser to the plugins to an external process via IPC
 [Offline](./examples/server-communication__offline) | Test web application when the network is offline
+[Server timing](./examples/server-communication__server-timing) | Report server timing results from Cypress test
 
 ## Other Cypress Recipes
 
