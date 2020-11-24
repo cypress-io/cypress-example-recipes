@@ -51,5 +51,17 @@ describe('Server', () => {
     .invoke('getEntriesByType', 'navigation')
     .its('0.serverTiming.0')
     .then(logTiming)
+
+    // we can even assert that the duration is below certain limit
+    cy.window().its('performance')
+    .invoke('getEntriesByType', 'navigation')
+    .its('0.serverTiming')
+    .then((timings) => {
+      // find the cache timing among all server timings
+      return Cypress._.find(timings, { name: 'cache' })
+    })
+    .then((cacheTiming) => {
+      expect(cacheTiming).property('duration').to.be.lessThan(2100)
+    })
   })
 })
