@@ -1,6 +1,9 @@
 /// <reference types="cypress" />
 /* eslint-disable no-console */
-describe('XHR', () => {
+
+// prevent rare flake in these tests due to json-server
+// not being very strong when hit from multiple clients
+describe('XHR', { retries: 3 }, () => {
   it('sends XHR to the server and gets expected response', () => {
     cy.visit('index.html')
 
