@@ -1,5 +1,66 @@
 /// <reference types="Cypress" />
 
+describe('get vs GET', () => {
+  context('cy.route', () => {
+    let polyfill
+
+    // grab fetch polyfill from remote URL, could be also from a local package
+    before(() => {
+      const polyfillUrl = 'https://unpkg.com/unfetch/dist/unfetch.umd.js'
+
+      cy.request(polyfillUrl)
+      .then((response) => {
+        polyfill = response.body
+      })
+    })
+
+    it('works with GET', function () {
+      cy.server()
+      cy.route('get', '/favorite-fruits').as('fruits')
+      cy.visit('/', {
+        onBeforeLoad (win) {
+          delete win.fetch
+          win.eval(polyfill)
+          win.fetch = win.unfetch
+        },
+      })
+
+      cy.wait('@fruits')
+    })
+
+    it('works with get', function () {
+      cy.server()
+      cy.route('get', '/favorite-fruits').as('fruits')
+      cy.visit('/', {
+        onBeforeLoad (win) {
+          delete win.fetch
+          win.eval(polyfill)
+          win.fetch = win.unfetch
+        },
+      })
+
+      cy.wait('@fruits')
+    })
+  })
+
+  context('cy.intercept', () => {
+    it('works with GET', function () {
+      cy.intercept('GET', '/favorite-fruits').as('fruits')
+      cy.visit('/')
+
+      cy.wait('@fruits')
+    })
+
+    // NOTE: does NOT work with "get"
+    it.skip('works with get', function () {
+      cy.intercept('get', '/favorite-fruits').as('fruits')
+      cy.visit('/')
+
+      cy.wait('@fruits')
+    })
+  })
+})
+
 describe('intercept', () => {
   context('spying', function () {
     beforeEach(function () {
