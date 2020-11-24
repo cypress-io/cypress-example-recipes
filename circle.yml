@@ -51,7 +51,7 @@ jobs:
       - checkout
       - restore_cache:
           key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
-      - run: npm install
+      - run: npm ci
 
       # Use Git commit message to install any pre-release versions of Cypress
       - run: npm i -g @cypress/commit-message-install

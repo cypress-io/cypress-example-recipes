@@ -16,7 +16,7 @@ install:
   - echo '%USERPROFILE%\AppData\Local\Cypress\Cache'
   - ls '%AppData%\npm-cache' || true
   - ls '%USERPROFILE%\AppData\Local\Cypress\Cache' || true
-  - npm install
+  - npm ci
   # install global bin-up
   # to avoid problems with finding tool paths on Windows
   - npm i -g bin-up
