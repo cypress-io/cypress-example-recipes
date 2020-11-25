@@ -6,6 +6,78 @@ describe('file download', () => {
   // with respect to the current working folder
   const downloadsFolder = 'cypress/downloads'
 
+  const validateCsvList = (list) => {
+    expect(list, 'number of records').to.have.length(3)
+    expect(list[0], 'first record').to.deep.equal({
+      Age: '20',
+      City: 'Boston',
+      'First name': 'Joe',
+      'Last name': 'Smith',
+      Occupation: 'student',
+      State: 'MA',
+    })
+  }
+
+  const validateExcelFile = () => {
+    const downloadedFilename = path.join(downloadsFolder, 'people.xlsx')
+
+    // ensure the file has been saved before trying to parse it
+    cy.readFile(downloadedFilename, 'binary', { timeout: 15000 })
+    .should((buffer) => {
+      // by having length assertion we ensure the file has text
+      // since we don't know when the browser finishes writing it to disk
+
+      // Tip: use expect() form to avoid dumping binary contents
+      // of the buffer into the Command Log
+      expect(buffer.length).to.be.gt(100)
+    })
+
+    cy.log('**the file exists**')
+
+    // the first utility library we use to parse Excel files
+    // only works in Node, thus we can read and parse
+    // the downloaded file using cy.task
+    cy.task('readExcelFile', downloadedFilename)
+    // returns an array of lines read from Excel file
+    .should('have.length', 4)
+    .then((list) => {
+      expect(list[0], 'header line').to.deep.equal([
+        'First name', 'Last name', 'Occupation', 'Age', 'City', 'State',
+      ])
+
+      expect(list[1], 'first person').to.deep.equal([
+        'Joe', 'Smith', 'student', 20, 'Boston', 'MA',
+      ])
+    })
+  }
+
+  const validateImage = () => {
+    const downloadedFilename = path.join(downloadsFolder, 'logo.png')
+
+    // ensure the file has been saved before trying to parse it
+    cy.readFile(downloadedFilename, 'binary', { timeout: 15000 })
+    .should((buffer) => {
+      // by having length assertion we ensure the file has text
+      // since we don't know when the browser finishes writing it to disk
+
+      // Tip: use expect() form to avoid dumping binary contents
+      // of the buffer into the Command Log
+      expect(buffer.length).to.be.gt(1000)
+    })
+  }
+
+  const validateTextFile = () => {
+    const downloadedFilename = path.join(downloadsFolder, 'robots.txt')
+
+    cy.readFile(downloadedFilename).should((text) => {
+      // validate the downloaded robots.txt file
+      const lines = text.split('\n')
+
+      expect(lines).to.have.length.gt(2)
+      expect(lines[0]).to.equal('User-agent: *')
+    })
+  }
+
   beforeEach(() => {
     cy.task('clearDownloads')
 
@@ -39,142 +111,111 @@ describe('file download', () => {
   //   )
   // })
 
-  it('downloads CSV file', () => {
-    cy.visit('/')
-    cy.contains('h3', 'Download CSV')
-    cy.get('[data-cy=download-csv]').click()
+  context('from local domain localhost:8070', () => {
+    it('CSV file', () => {
+      cy.visit('/')
+      cy.contains('h3', 'Download CSV')
+      cy.get('[data-cy=download-csv]').click()
 
-    cy.log('**read downloaded file**')
+      cy.log('**read downloaded file**')
 
-    // file path is relative to the working folder
-    const filename = path.join(downloadsFolder, 'records.csv')
+      // file path is relative to the working folder
+      const filename = path.join(downloadsFolder, 'records.csv')
 
-    // browser might take a while to download the file,
-    // so use "cy.readFile" to retry until the file exists
-    // and has length - and we assume that it has finished downloading then
-    cy.readFile(filename, { timeout: 15000 })
-    .should('have.length.gt', 50)
-    // parse CSV text into objects
-    .then(neatCSV)
-    .then((list) => {
-      expect(list, 'number of records').to.have.length(3)
-      expect(list[0], 'first record').to.deep.equal({
-        Age: '20',
-        City: 'Boston',
-        'First name': 'Joe',
-        'Last name': 'Smith',
-        Occupation: 'student',
-        State: 'MA',
-      })
-    })
-  })
-
-  it('downloads Excel file', () => {
-    // let's download a binary file
-
-    cy.visit('/')
-    cy.contains('h3', 'Download XLSX')
-    cy.get('[data-cy=download-xlsx]').click()
-
-    cy.log('**confirm downloaded file**')
-
-    const downloadedFilename = path.join(downloadsFolder, 'people.xlsx')
-
-    // ensure the file has been saved before trying to parse it
-    cy.readFile(downloadedFilename, 'binary', { timeout: 15000 })
-    .should((buffer) => {
-      // by having length assertion we ensure the file has text
-      // since we don't know when the browser finishes writing it to disk
-
-      // Tip: use expect() form to avoid dumping binary contents
-      // of the buffer into the Command Log
-      expect(buffer.length).to.be.gt(100)
+      // browser might take a while to download the file,
+      // so use "cy.readFile" to retry until the file exists
+      // and has length - and we assume that it has finished downloading then
+      cy.readFile(filename, { timeout: 15000 })
+      .should('have.length.gt', 50)
+      // parse CSV text into objects
+      .then(neatCSV)
+      .then(validateCsvList)
     })
 
-    cy.log('**the file exists**')
+    it('Excel file', () => {
+      // let's download a binary file
 
-    // the first utility library we use to parse Excel files
-    // only works in Node, thus we can read and parse
-    // the downloaded file using cy.task
-    cy.task('readExcelFile', downloadedFilename)
-    // returns an array of lines read from Excel file
-    .should('have.length', 4)
-    .then((list) => {
-      expect(list[0], 'header line').to.deep.equal([
-        'First name', 'Last name', 'Occupation', 'Age', 'City', 'State',
-      ])
+      cy.visit('/')
+      cy.contains('h3', 'Download XLSX')
+      cy.get('[data-cy=download-xlsx]').click()
 
-      expect(list[1], 'first person').to.deep.equal([
-        'Joe', 'Smith', 'student', 20, 'Boston', 'MA',
-      ])
+      cy.log('**confirm downloaded file**')
+
+      validateExcelFile()
     })
-  })
 
-  // limiting this test to Chrome browsers
-  // since in FF we get a cross-origin request error
-  it('downloads local PNG image', { browser: '!firefox' }, () => {
-    // image comes from the same domain as the page
-    cy.visit('/')
-    cy.get('[data-cy=download-png]').click()
+    it('TXT file', { browser: '!firefox' }, () => {
+      cy.visit('/')
+      cy.get('[data-cy=download-txt]').click()
 
-    cy.log('**confirm downloaded image**')
+      cy.log('**confirm downloaded text file**')
+      validateTextFile()
+    })
 
-    const downloadedFilename = path.join(downloadsFolder, 'logo.png')
+    // limiting this test to Chrome browsers
+    // since in FF we get a cross-origin request error
+    it('PNG image', { browser: '!firefox' }, () => {
+      // image comes from the same domain as the page
+      cy.visit('/')
+      cy.get('[data-cy=download-png]').click()
 
-    // ensure the file has been saved before trying to parse it
-    cy.readFile(downloadedFilename, 'binary', { timeout: 15000 })
-    .should((buffer) => {
-      // by having length assertion we ensure the file has text
-      // since we don't know when the browser finishes writing it to disk
-
-      // Tip: use expect() form to avoid dumping binary contents
-      // of the buffer into the Command Log
-      expect(buffer.length).to.be.gt(1000)
+      cy.log('**confirm downloaded image**')
+      validateImage()
     })
   })
 
   // The next step tries to download an image file located in
   // the second domain. It runs in Chromium browsers with
   // "chromeWebSecurity": false, but we need to skip it in Firefox
-  context('from remote domain', { browser: '!firefox' }, () => {
-    it('downloads remote PNG image', () => {
-    // image comes from a domain different from the page
+  context('from remote domain localhost:9000', { browser: '!firefox' }, () => {
+    it('CSV file', () => {
       cy.visit('/')
-      cy.get('[data-cy=download-remote-png]').click()
+      cy.contains('h3', 'Download CSV')
+      cy.get('[data-cy=download-remote-csv]').click()
 
-      cy.log('**confirm downloaded image**')
-      const downloadedFilename = path.join(downloadsFolder, 'logo.png')
+      cy.log('**read downloaded file**')
 
-      // ensure the file has been saved before trying to parse it
-      cy.readFile(downloadedFilename, 'binary', { timeout: 15000 })
-      .should((buffer) => {
-      // by having length assertion we ensure the file has text
-      // since we don't know when the browser finishes writing it to disk
+      // file path is relative to the working folder
+      const filename = path.join(downloadsFolder, 'records.csv')
 
-        // Tip: use expect() form to avoid dumping binary contents
-        // of the buffer into the Command Log
-        expect(buffer.length).to.be.gt(1000)
-      })
+      // browser might take a while to download the file,
+      // so use "cy.readFile" to retry until the file exists
+      // and has length - and we assume that it has finished downloading then
+      cy.readFile(filename, { timeout: 15000 })
+      .should('have.length.gt', 50)
+      // parse CSV text into objects
+      .then(neatCSV)
+      .then(validateCsvList)
     })
 
-    it('downloads remote TXT file', () => {
+    it('Excel file', () => {
+      cy.visit('/')
+      cy.get('[data-cy=download-remote-xlsx]').click()
+
+      cy.log('**confirm downloaded file**')
+
+      validateExcelFile()
+    })
+
+    it('TXT file', () => {
     // the text file comes from a domain different from the page
       cy.visit('/')
       cy.get('[data-cy=download-remote-txt]').click()
 
       cy.log('**confirm downloaded text file**')
-      const downloadedFilename = path.join(downloadsFolder, 'robots.txt')
-
-      cy.readFile(downloadedFilename).should((text) => {
-      // validate the downloaded robots.txt file
-        const lines = text.split('\n')
-
-        expect(lines).to.have.length.gt(2)
-        expect(lines[0]).to.equal('User-agent: *')
-      })
+      validateTextFile()
     })
 
-    it('downloads remote JS file', () => {
+    it('PNG image', () => {
+    // image comes from a domain different from the page
+      cy.visit('/')
+      cy.get('[data-cy=download-remote-png]').click()
+
+      cy.log('**confirm downloaded image**')
+      validateImage()
+    })
+
+    it('JS file', () => {
     // the JavaScript file comes from a domain different from the page
       cy.visit('/')
       cy.get('[data-cy=download-remote-js]').click()
@@ -188,26 +229,6 @@ describe('file download', () => {
 
         expect(lines).to.have.length.gt(20)
       })
-    })
-
-    // NOTE: because the file is downloaded from a domain we don't control
-    it.skip('downloads remote CSV file', () => {
-    // the site we are about to visit has an error on load,
-    // so let's ignore it
-      Cypress.on('uncaught:exception', (err, runnable) => {
-      // returning false here prevents Cypress from
-      // failing the test
-        return false
-      })
-
-      cy.visit('https://www.appsloveworld.com/sample-csv-file/')
-      cy.get('.Downloadbutton').first().click()
-
-      cy.log('**confirm downloaded CSV file**')
-      const downloadedFilename = path.join(downloadsFolder, 'Sample100.csv')
-
-      cy.readFile(downloadedFilename, { timeout: 15000 })
-      .should('have.length.gt', 100)
     })
   })
 })
