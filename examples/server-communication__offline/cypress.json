@@ -1,7 +1,8 @@
 {
   "baseUrl": "http://localhost:7080",
-  "ignoreTestFiles": "deferred.js",
   "fixturesFolder": false,
   "pluginsFile": false,
-  "experimentalNetworkStubbing": true
+  "supportFile": false,
+  "viewportWidth": 500,
+  "viewportHeight": 400
 }

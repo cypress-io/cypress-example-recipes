@@ -1,6 +1,9 @@
 /// <reference types="cypress" />
 /* eslint-disable no-console */
-describe('XHR', () => {
+
+// prevent rare flake in these tests due to json-server
+// not being very strong when hit from multiple clients
+describe('XHR', { retries: 3 }, () => {
   it('sends XHR to the server and gets expected response', () => {
     cy.visit('index.html')
 
@@ -17,8 +20,11 @@ describe('XHR', () => {
     // and we can retrieve it using cy.get(<alias>)
     // see https://on.cypress.io/get
 
+    // increase the command timeout, because Ajax request
+    // can take longer on CI than expected
+    cy.get('@post', { timeout: 150000 })
     // tip: log the request object to see everything it has in the console
-    cy.get('@post').then(console.log)
+    .then(console.log)
   })
 
   it('gets the expected response', () => {

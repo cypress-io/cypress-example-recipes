@@ -80,6 +80,7 @@ Recipe | Description
 [Browser notifications](./examples/blogs__notification) | How to test application that uses [`Notification`](https://developer.mozilla.org/en-US/docs/Web/API/notification)
 [Testing iframes](./examples/blogs__iframes) | Accessing elements in 3rd party iframe, spy and stub network calls from iframe
 [Class decorators](./examples/blogs__class-decorator) | Using JavaScript class decorator to expose objects created by the application so they are reachable from tests
+[Form Submit](./examples/blogs__form-submit) | Removing flake from the test where a page is reloaded after form submission
 
 ## Stubbing and spying
 
@@ -87,7 +88,7 @@ Recipe | Description
 --- | ---
 [Stubbing Functions](./examples/stubbing-spying__functions) | Use `cy.spy()` and `cy.stub()` to test function calls
 [Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch) | Work around the `window.fetch` limitation
-[Stubbing using `cy.route2`](./examples/stubbing-spying__route2) | Control network using `cy.route2` API
+[Stubbing using `cy.intercept`](./examples/stubbing-spying__intercept) | Control network using `cy.intercept` API
 [Stubbing `window.open` and `console.log`](./examples/stubbing-spying__window) | Use `cy.stub()` and `cy.spy()` to test application behavior
 [Stubbing `window.print`](./examples/stubbing-spying__window-print) | Use `cy.stub()` to test `window.print` call made from the application
 [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics) | Use `cy.stub()` to test Google Analytics calls
@@ -113,6 +114,8 @@ Recipe | Description
 [XHR assertions](./examples/server-communication__xhr-assertions) | Spy and assert on application's network calls
 [Visiting 2nd domain](./examples/server-communication__visit-2nd-domain) | Visiting two different domains from two different tests
 [Stream test results](./examples/server-communication__stream-tests) | Streams each test result from the browser to the plugins to an external process via IPC
+[Offline](./examples/server-communication__offline) | Test web application when the network is offline
+[Server timing](./examples/server-communication__server-timing) | Report server timing results from Cypress test
 
 ## Other Cypress Recipes
 

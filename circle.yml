@@ -196,6 +196,8 @@ jobs:
     <<: *defaults
   blogs__use-react-devtools:
     <<: *defaults
+  blogs__form-submit:
+    <<: *defaults
   extending-cypress__chai-assertions:
     <<: *defaults
   file-upload-react:
@@ -238,7 +240,7 @@ jobs:
     <<: *defaults
   stubbing-spying__window-fetch:
     <<: *defaults
-  stubbing-spying__route2:
+  stubbing-spying__intercept:
     <<: *defaults
   stubbing-spying__window-print:
     <<: *defaults
@@ -293,6 +295,10 @@ jobs:
   server-communication__xhr-assertions:
     <<: *defaults
   server-communication__stream-tests:
+    <<: *defaults
+  server-communication__offline:
+    <<: *defaults
+  server-communication__server-timing:
     <<: *defaults
   fundamentals__dynamic-tests:
     <<: *defaults
@@ -392,6 +398,9 @@ all_jobs: &all_jobs
   - blogs__use-react-devtools:
       requires:
         - build
+  - blogs__form-submit:
+      requires:
+        - build
   - extending-cypress__chai-assertions:
       requires:
         - build
@@ -443,7 +452,9 @@ all_jobs: &all_jobs
   - stubbing-spying__window-fetch:
       requires:
         - build
-  - stubbing-spying__route2:
+  - stubbing-spying__intercept:
+      # make sure there is no flake in cy.intercept
+      repeat: 5
       requires:
         - build
   - stubbing-spying__window-print:
@@ -528,6 +539,12 @@ all_jobs: &all_jobs
   - server-communication__stream-tests:
       requires:
         - build
+  - server-communication__offline:
+      requires:
+        - build
+  - server-communication__server-timing:
+      requires:
+        - build
   - fundamentals__dynamic-tests:
       requires:
         - build
@@ -569,6 +586,7 @@ all_jobs: &all_jobs
         - blogs__testing-redux-store
         - blogs__vue-vuex-rest
         - blogs__use-react-devtools
+        - blogs__form-submit
         - extending-cypress__chai-assertions
         - file-upload-react
         - fundamentals__node-modules
@@ -596,9 +614,11 @@ all_jobs: &all_jobs
         - server-communication__xhr-assertions
         - server-communication__visit-2nd-domain
         - server-communication__stream-tests
+        - server-communication__offline
+        - server-communication__server-timing
         - stubbing-spying__functions
         - stubbing-spying__window-fetch
-        - stubbing-spying__route2
+        - stubbing-spying__intercept
         - stubbing-spying__window-print
         - stubbing-spying__google-analytics
         - stubbing-spying__navigator
