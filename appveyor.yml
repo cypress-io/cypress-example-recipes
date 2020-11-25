@@ -28,8 +28,8 @@ cache:
   # https://on.cypress.io/caching
   # because we use exact version dependencies
   # we can key caches using package.json file
-  - '%AppData%\npm-cache' -> package.json
-  - '%USERPROFILE%\AppData\Local\Cypress\Cache' -> package.json
+  - '%AppData%\npm-cache -> package.json'
+  - '%USERPROFILE%\AppData\Local\Cypress\Cache -> package.json'
   # Note: by default cache is only saved for successful builds
   # you can save cache from the failed builds
   # using APPVEYOR_SAVE_CACHE_ON_ERROR: true environment variable
