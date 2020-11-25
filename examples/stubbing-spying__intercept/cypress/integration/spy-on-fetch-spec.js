@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
 
+// https://on.cypress.io/intercept
 describe('intercept', () => {
   context('spying', function () {
     beforeEach(function () {

@@ -104,4 +104,51 @@ describe('intercept', () => {
       })
     })
   })
+
+  context('using regex', () => {
+    beforeEach(() => {
+      cy.visit('/')
+    })
+
+    it('intercepts user #2 with exact URL', () => {
+      cy.intercept('/users/2').as('second')
+      cy.get('#load-second-user').click()
+
+      cy.contains('.user', '2 - Shanna@melissa.tv').should('be.visible')
+      cy.wait('@second').its('response.body').should('include', {
+        email: 'Shanna@melissa.tv',
+      })
+    })
+
+    it('gets any user using regex', () => {
+      cy.intercept(/\/users\/\d+$/).as('anyUser')
+      cy.get('#load-second-user').click()
+
+      cy.contains('.user', '2 - Shanna@melissa.tv').should('be.visible')
+      cy.wait('@anyUser').its('response.body').should('include', {
+        id: 2,
+        email: 'Shanna@melissa.tv',
+      })
+    })
+
+    it('mocks a user using regex', () => {
+      cy.intercept(/\/users\/\d+$/, {
+        body: {
+          id: 101,
+          email: 'test-user@cypress.io',
+        },
+        headers: {
+          'access-control-allow-origin': Cypress.config('baseUrl'),
+        },
+      }).as('anyUser')
+
+      cy.get('#load-second-user').click()
+
+      cy.wait('@anyUser').its('request.url')
+      // let the browser parse the url for us
+      .then((url) => new URL(url)).should('have.property', 'pathname', '/users/2')
+
+      cy.contains('.user', '101 - test-user@cypress.io').should('be.visible')
+    })
+  })
 })
