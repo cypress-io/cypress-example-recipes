@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
 
+// https://on.cypress.io/intercept
 describe('intercept', () => {
   context('spying', function () {
     beforeEach(function () {
@@ -93,6 +94,33 @@ describe('intercept', () => {
 
       cy.get('#load-five-users').click()
       cy.wait('@users5')
+    })
+  })
+
+  context('using regex', () => {
+    beforeEach(() => {
+      cy.visit('/')
+    })
+
+    it('intercepts user #2 with exact URL', () => {
+      cy.intercept('/users/2').as('second')
+      cy.get('#load-second-user').click()
+
+      cy.contains('.user', '2 - Shanna@melissa.tv').should('be.visible')
+      cy.wait('@second').its('response.body').should('include', {
+        email: 'Shanna@melissa.tv',
+      })
+    })
+
+    it('gets any user using regex', () => {
+      cy.intercept(/\/users\/\d+$/).as('anyUser')
+      cy.get('#load-second-user').click()
+
+      cy.contains('.user', '2 - Shanna@melissa.tv').should('be.visible')
+      cy.wait('@anyUser').its('response.body').should('include', {
+        id: 2,
+        email: 'Shanna@melissa.tv',
+      })
     })
   })
 })
