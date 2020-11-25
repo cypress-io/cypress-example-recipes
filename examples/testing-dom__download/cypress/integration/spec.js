@@ -11,9 +11,10 @@ describe('file download', () => {
 
     // The next command allow downloads in Electron, Chrome, and Edge
     // without any users popups or file save dialogs.
-    if (Cypress.browser.name !== 'firefox') {
+    if (!Cypress.isBrowser('firefox')) {
       // since this call returns a promise, must tell Cypress to wait
       // for it to be resolved
+      cy.log('Page.setDownloadBehavior')
       cy.wrap(
         Cypress.automation('remote:debugger:protocol',
           {
@@ -25,9 +26,22 @@ describe('file download', () => {
     }
   })
 
+  // unfortunately this does not work
+  // https://github.com/cypress-io/cypress/issues/8594
+  // beforeEach({ browser: '!firefox' }, () => {
+  //   cy.wrap(
+  //     Cypress.automation('remote:debugger:protocol',
+  //       {
+  //         command: 'Page.setDownloadBehavior',
+  //         params: { behavior: 'allow', downloadPath: downloadsFolder },
+  //       }),
+  //     { log: false }
+  //   )
+  // })
+
   it('downloads CSV file', () => {
     cy.visit('/')
-    cy.contains('h1', 'Download CSV')
+    cy.contains('h3', 'Download CSV')
     cy.get('[data-cy=download-csv]').click()
 
     cy.log('**read downloaded file**')
@@ -59,7 +73,7 @@ describe('file download', () => {
     // let's download a binary file
 
     cy.visit('/')
-    cy.contains('h1', 'Download XLSX')
+    cy.contains('h3', 'Download XLSX')
     cy.get('[data-cy=download-xlsx]').click()
 
     cy.log('**confirm downloaded file**')
@@ -96,8 +110,9 @@ describe('file download', () => {
     })
   })
 
-  // NOTE: skipped because it is causing failures in CI, but this should still work for other projects
-  it.skip('downloads local PNG image', () => {
+  // limiting this test to Chrome browsers
+  // since in FF we get a cross-origin request error
+  it('downloads local PNG image', { browser: '!firefox' }, () => {
     // image comes from the same domain as the page
     cy.visit('/')
     cy.get('[data-cy=download-png]').click()
@@ -118,26 +133,81 @@ describe('file download', () => {
     })
   })
 
-  // The next step tries to download file located in
+  // The next step tries to download an image file located in
   // the second domain. It runs in Chromium browsers with
   // "chromeWebSecurity": false, but we need to skip it in Firefox
-  it('downloads remote PNG image', { browser: '!firefox' }, () => {
+  context('from remote domain', { browser: '!firefox' }, () => {
+    it('downloads remote PNG image', () => {
     // image comes from a domain different from the page
-    cy.visit('/')
-    cy.get('[data-cy=download-remote-png]').click()
+      cy.visit('/')
+      cy.get('[data-cy=download-remote-png]').click()
 
-    cy.log('**confirm downloaded image**')
-    const downloadedFilename = path.join(downloadsFolder, 'logo.png')
+      cy.log('**confirm downloaded image**')
+      const downloadedFilename = path.join(downloadsFolder, 'logo.png')
 
-    // ensure the file has been saved before trying to parse it
-    cy.readFile(downloadedFilename, 'binary', { timeout: 15000 })
-    .should((buffer) => {
+      // ensure the file has been saved before trying to parse it
+      cy.readFile(downloadedFilename, 'binary', { timeout: 15000 })
+      .should((buffer) => {
       // by having length assertion we ensure the file has text
       // since we don't know when the browser finishes writing it to disk
 
-      // Tip: use expect() form to avoid dumping binary contents
-      // of the buffer into the Command Log
-      expect(buffer.length).to.be.gt(1000)
+        // Tip: use expect() form to avoid dumping binary contents
+        // of the buffer into the Command Log
+        expect(buffer.length).to.be.gt(1000)
+      })
+    })
+
+    it('downloads remote TXT file', () => {
+    // the text file comes from a domain different from the page
+      cy.visit('/')
+      cy.get('[data-cy=download-remote-txt]').click()
+
+      cy.log('**confirm downloaded text file**')
+      const downloadedFilename = path.join(downloadsFolder, 'robots.txt')
+
+      cy.readFile(downloadedFilename).should((text) => {
+      // validate the downloaded robots.txt file
+        const lines = text.split('\n')
+
+        expect(lines).to.have.length.gt(2)
+        expect(lines[0]).to.equal('User-agent: *')
+      })
+    })
+
+    it('downloads remote JS file', () => {
+    // the JavaScript file comes from a domain different from the page
+      cy.visit('/')
+      cy.get('[data-cy=download-remote-js]').click()
+
+      cy.log('**confirm downloaded JavaScript file**')
+      const downloadedFilename = path.join(downloadsFolder, 'analytics.js')
+
+      cy.readFile(downloadedFilename).should((text) => {
+      // validate the downloaded file
+        const lines = text.split('\n')
+
+        expect(lines).to.have.length.gt(20)
+      })
+    })
+
+    // NOTE: because the file is downloaded from a domain we don't control
+    it.skip('downloads remote CSV file', () => {
+    // the site we are about to visit has an error on load,
+    // so let's ignore it
+      Cypress.on('uncaught:exception', (err, runnable) => {
+      // returning false here prevents Cypress from
+      // failing the test
+        return false
+      })
+
+      cy.visit('https://www.appsloveworld.com/sample-csv-file/')
+      cy.get('.Downloadbutton').first().click()
+
+      cy.log('**confirm downloaded CSV file**')
+      const downloadedFilename = path.join(downloadsFolder, 'Sample100.csv')
+
+      cy.readFile(downloadedFilename, { timeout: 15000 })
+      .should('have.length.gt', 100)
     })
   })
 })
