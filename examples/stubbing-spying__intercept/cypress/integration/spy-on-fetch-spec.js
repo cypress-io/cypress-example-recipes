@@ -36,4 +36,48 @@ describe('intercept', () => {
       cy.get('.user').should('have.length', 3)
     })
   })
+
+  context('uses query', () => {
+    beforeEach(() => {
+      cy.visit('/')
+    })
+
+    // there are two buttons on the page
+    // one loads 3 users with "/users?_limit=3"
+    // another loads 5 users with "/users?_limit=5"
+    // let's spy on each request separately
+
+    it('spies using full url', () => {
+      cy.intercept('/users?_limit=3').as('users3')
+      cy.intercept('/users?_limit=5').as('users5')
+
+      cy.get('#load-users').click()
+      cy.wait('@users3')
+
+      cy.get('#load-five-users').click()
+      cy.wait('@users5')
+    })
+
+    it('spies using query parameter', () => {
+      cy.intercept({
+        pathname: '/users',
+        query: {
+          _limit: '3',
+        },
+      }).as('users3')
+
+      cy.intercept({
+        pathname: '/users',
+        query: {
+          _limit: '5',
+        },
+      }).as('users5')
+
+      cy.get('#load-users').click()
+      cy.wait('@users3')
+
+      cy.get('#load-five-users').click()
+      cy.wait('@users5')
+    })
+  })
 })
