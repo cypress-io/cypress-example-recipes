@@ -35,6 +35,21 @@ describe('intercept', () => {
       // there should be three users displayed on the page
       cy.get('.user').should('have.length', 3)
     })
+
+    it('checks the status code', () => {
+      cy.intercept('/users').as('users')
+      cy.get('#load-five-users').click()
+      cy.wait('@users').its('response').then((response) => {
+        expect(response).to.include({
+          statusCode: 200,
+          statusMessage: 'OK',
+        })
+
+        // or check every property separately
+        expect(response).property('statusCode').to.equal(200)
+        expect(response).property('body').to.have.length(5)
+      })
+    })
   })
 
   context('uses query', () => {
