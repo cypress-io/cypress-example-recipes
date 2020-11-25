@@ -35,7 +35,7 @@ Recipe | Description
 [Root style](./examples/testing-dom__root-style) | Trigger input color change that modifies CSS variable
 [Select widgets](./examples/testing-dom__select2) | Working with `<select>` elements and [Select2](https://select2.org/) widgets
 [Lit Elements](./examples/testing-dom__lit-element) | Testing Lit Elements with Shadow DOM
-[File download](./examples/testing-dom__download) | Download and validate files
+[File download](./examples/testing-dom__download) | Download and validate CSV, Excel, text and image files
 
 ## Logging in recipes
 
