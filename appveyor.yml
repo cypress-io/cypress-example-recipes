@@ -35,6 +35,8 @@ cache:
   # using APPVEYOR_SAVE_CACHE_ON_ERROR: true environment variable
 
 test_script:
+  - npx cypress version
+  - npx cypress info
   - npm run test:ci:windows:record
 
 # Don't actually build, we are only interested in tests
