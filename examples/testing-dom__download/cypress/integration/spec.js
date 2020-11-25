@@ -66,6 +66,18 @@ describe('file download', () => {
     })
   }
 
+  const validateTextFile = () => {
+    const downloadedFilename = path.join(downloadsFolder, 'robots.txt')
+
+    cy.readFile(downloadedFilename).should((text) => {
+      // validate the downloaded robots.txt file
+      const lines = text.split('\n')
+
+      expect(lines).to.have.length.gt(2)
+      expect(lines[0]).to.equal('User-agent: *')
+    })
+  }
+
   beforeEach(() => {
     cy.task('clearDownloads')
 
@@ -99,8 +111,8 @@ describe('file download', () => {
   //   )
   // })
 
-  context('from remote domain localhost:8070', () => {
-    it('downloads CSV file', () => {
+  context('from local domain localhost:8070', () => {
+    it('CSV file', () => {
       cy.visit('/')
       cy.contains('h3', 'Download CSV')
       cy.get('[data-cy=download-csv]').click()
@@ -120,7 +132,7 @@ describe('file download', () => {
       .then(validateCsvList)
     })
 
-    it('downloads Excel file', () => {
+    it('Excel file', () => {
       // let's download a binary file
 
       cy.visit('/')
@@ -132,43 +144,23 @@ describe('file download', () => {
       validateExcelFile()
     })
 
-    it('downloads TXT file', { browser: '!firefox' }, () => {
+    it('TXT file', { browser: '!firefox' }, () => {
       cy.visit('/')
       cy.get('[data-cy=download-txt]').click()
 
       cy.log('**confirm downloaded text file**')
-      const downloadedFilename = path.join(downloadsFolder, 'robots.txt')
-
-      cy.readFile(downloadedFilename).should((text) => {
-        // validate the downloaded robots.txt file
-        const lines = text.split('\n')
-
-        expect(lines).to.have.length.gt(2)
-        expect(lines[0]).to.equal('User-agent: *')
-      })
+      validateTextFile()
     })
 
     // limiting this test to Chrome browsers
     // since in FF we get a cross-origin request error
-    it('downloads local PNG image', { browser: '!firefox' }, () => {
+    it('PNG image', { browser: '!firefox' }, () => {
       // image comes from the same domain as the page
       cy.visit('/')
       cy.get('[data-cy=download-png]').click()
 
       cy.log('**confirm downloaded image**')
-
-      const downloadedFilename = path.join(downloadsFolder, 'logo.png')
-
-      // ensure the file has been saved before trying to parse it
-      cy.readFile(downloadedFilename, 'binary', { timeout: 15000 })
-      .should((buffer) => {
-        // by having length assertion we ensure the file has text
-        // since we don't know when the browser finishes writing it to disk
-
-        // Tip: use expect() form to avoid dumping binary contents
-        // of the buffer into the Command Log
-        expect(buffer.length).to.be.gt(1000)
-      })
+      validateImage()
     })
   })
 
@@ -176,7 +168,7 @@ describe('file download', () => {
   // the second domain. It runs in Chromium browsers with
   // "chromeWebSecurity": false, but we need to skip it in Firefox
   context('from remote domain localhost:9000', { browser: '!firefox' }, () => {
-    it('downloads remote CSV file', () => {
+    it('CSV file', () => {
       cy.visit('/')
       cy.contains('h3', 'Download CSV')
       cy.get('[data-cy=download-remote-csv]').click()
@@ -196,7 +188,7 @@ describe('file download', () => {
       .then(validateCsvList)
     })
 
-    it('downloads remove Excel file', () => {
+    it('Excel file', () => {
       cy.visit('/')
       cy.get('[data-cy=download-remote-xlsx]').click()
 
@@ -205,24 +197,16 @@ describe('file download', () => {
       validateExcelFile()
     })
 
-    it('downloads remote TXT file', () => {
+    it('TXT file', () => {
     // the text file comes from a domain different from the page
       cy.visit('/')
       cy.get('[data-cy=download-remote-txt]').click()
 
       cy.log('**confirm downloaded text file**')
-      const downloadedFilename = path.join(downloadsFolder, 'robots.txt')
-
-      cy.readFile(downloadedFilename).should((text) => {
-      // validate the downloaded robots.txt file
-        const lines = text.split('\n')
-
-        expect(lines).to.have.length.gt(2)
-        expect(lines[0]).to.equal('User-agent: *')
-      })
+      validateTextFile()
     })
 
-    it('downloads remote PNG image', () => {
+    it('PNG image', () => {
     // image comes from a domain different from the page
       cy.visit('/')
       cy.get('[data-cy=download-remote-png]').click()
@@ -231,7 +215,7 @@ describe('file download', () => {
       validateImage()
     })
 
-    it('downloads remote JS file', () => {
+    it('JS file', () => {
     // the JavaScript file comes from a domain different from the page
       cy.visit('/')
       cy.get('[data-cy=download-remote-js]').click()
