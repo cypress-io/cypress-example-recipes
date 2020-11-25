@@ -110,6 +110,22 @@ describe('file download', () => {
     })
   })
 
+  it('downloads TXT file', { browser: '!firefox' }, () => {
+    cy.visit('/')
+    cy.get('[data-cy=download-txt]').click()
+
+    cy.log('**confirm downloaded text file**')
+    const downloadedFilename = path.join(downloadsFolder, 'robots.txt')
+
+    cy.readFile(downloadedFilename).should((text) => {
+      // validate the downloaded robots.txt file
+      const lines = text.split('\n')
+
+      expect(lines).to.have.length.gt(2)
+      expect(lines[0]).to.equal('User-agent: *')
+    })
+  })
+
   // limiting this test to Chrome browsers
   // since in FF we get a cross-origin request error
   it('downloads local PNG image', { browser: '!firefox' }, () => {
