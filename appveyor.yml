@@ -26,8 +26,10 @@ cache:
   # https://www.appveyor.com/docs/build-cache/
   # https://docs.npmjs.com/files/folders.html#cache
   # https://on.cypress.io/caching
-  - '%AppData%\npm-cache'
-  - '%USERPROFILE%\AppData\Local\Cypress\Cache'
+  # because we use exact version dependencies
+  # we can key caches using package.json file
+  - '%AppData%\npm-cache' -> package.json
+  - '%USERPROFILE%\AppData\Local\Cypress\Cache' -> package.json
   # Note: by default cache is only saved for successful builds
   # you can save cache from the failed builds
   # using APPVEYOR_SAVE_CACHE_ON_ERROR: true environment variable
