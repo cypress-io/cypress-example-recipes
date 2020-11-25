@@ -26,7 +26,14 @@ defaults: &defaults
         command: |
           cd examples/$CIRCLE_JOB
           npm run start --if-present
-        name: start the server
+        name: start the server (if needed)
+        background: true
+    # some jobs have 2nd start command to simulate 2nd domain
+    - run:
+        command: |
+          cd examples/$CIRCLE_JOB
+          npm run start:second --if-present
+        name: start the 2nd server (if any)
         background: true
     - run:
         command: |
