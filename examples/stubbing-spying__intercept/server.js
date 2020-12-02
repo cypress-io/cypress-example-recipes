@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const _ = require('lodash')
 const path = require('path')
 const minimist = require('minimist')
@@ -18,8 +19,22 @@ app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/index.html`)
 })
 
+app.get('/redirect-example', (req, res) => {
+  res.sendFile(`${__dirname}/redirect-example.html`)
+})
+
 app.get('/favorite-fruits', (req, res) => {
   res.json(_.sampleSize(fruits, 5))
+})
+
+app.get('/logout', (req, res) => {
+  console.log('logging out, redirecting to /')
+  res.redirect('/')
+})
+
+app.get('/getout', (req, res) => {
+  console.log('logging out, redirecting to www.cypress.io')
+  res.redirect('https://www.cypress.io')
 })
 
 app.listen(port)
