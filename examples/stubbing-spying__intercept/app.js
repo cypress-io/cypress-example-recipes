@@ -84,9 +84,30 @@ const loadUser = (id) => {
   }
 }
 
+function postUser () {
+  const user = {
+    id: 101,
+    name: 'Joe Smith',
+  }
+
+  return fetch('https://jsonplaceholder.cypress.io/users', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  })
+}
+
 document.getElementById('load-users').addEventListener('click', loadUsers(3))
 document.getElementById('load-five-users').addEventListener('click', loadUsers(5))
 document.getElementById('load-second-user').addEventListener('click', loadUser(2))
+const postUserButton = document.getElementById('post-user')
+
+if (postUserButton) {
+  postUserButton.addEventListener('click', postUser)
+}
 
 const updateNetworkStatus = () => {
   const el = document.getElementById('network-status')
