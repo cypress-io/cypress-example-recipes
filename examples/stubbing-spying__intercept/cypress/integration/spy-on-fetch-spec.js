@@ -53,6 +53,33 @@ describe('intercept', () => {
     })
   })
 
+  context('spying on PUT request', () => {
+    it('can spy using URL substring', () => {
+      cy.visit('/')
+      cy.intercept('PUT', '/users').as('updateUser')
+      cy.get('#put-user').click()
+      cy.wait('@updateUser').then((xhr) => {
+        expect(xhr.response.statusCode).to.equal(200)
+      })
+    })
+
+    // there is no difference how to write the URL matcher
+    it('can spy using URL regexp', () => {
+      cy.visit('/')
+      cy.intercept('PUT', /\/users\/\d+$/).as('updateUser')
+      cy.get('#put-user').click()
+      cy.wait('@updateUser')
+      .its('response')
+      .should('deep.include', {
+        statusCode: 200,
+        body: {
+          id: 1,
+          name: 'Joe Smith',
+        },
+      })
+    })
+  })
+
   context('uses query', () => {
     beforeEach(() => {
       cy.visit('/')
