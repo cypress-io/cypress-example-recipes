@@ -21,9 +21,15 @@ describe('intercept', () => {
         cy.intercept('/users').as('users')
         cy.intercept('/users/2').as('secondUser')
         cy.get('#load-second-user').click()
-        // both interceptors should be tripped
+
+        // confirm that both interceptors are matched
         cy.wait('@users')
+        .its('request.url')
+        .should('equal', 'https://jsonplaceholder.cypress.io/users/2')
+
         cy.wait('@secondUser')
+        .its('request.url')
+        .should('equal', 'https://jsonplaceholder.cypress.io/users/2')
       })
 
       it('use regex to match exactly', () => {
@@ -34,6 +40,28 @@ describe('intercept', () => {
         cy.get('#load-second-user').click()
         // only the second interceptor should match
         cy.wait('@secondUser')
+        .its('request.url')
+        .should('equal', 'https://jsonplaceholder.cypress.io/users/2')
+      })
+
+      it('use regex to match exactly and check if the other intercept has not fired', () => {
+        cy.visit('/')
+        let usersMatched = false
+
+        cy.intercept(/\/users$/, () => {
+          usersMatched = true
+        })
+
+        cy.intercept(/\/users\/2$/).as('secondUser')
+        cy.get('#load-second-user').click()
+        // only the second interceptor should match
+        cy.wait('@secondUser')
+        .its('request.url')
+        .should('equal', 'https://jsonplaceholder.cypress.io/users/2')
+        // but the first intercept should have never fired
+        .then(() => {
+          expect(usersMatched, 'users intercept').to.be.false
+        })
       })
     })
 
