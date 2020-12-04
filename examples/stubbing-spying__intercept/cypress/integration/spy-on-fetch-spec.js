@@ -78,6 +78,15 @@ describe('intercept', () => {
         },
       })
     })
+
+    it('can spy using URL case-insensitive regexp', () => {
+      cy.visit('/')
+      cy.intercept('PUT', /users/i).as('updateUser')
+      cy.get('#put-user').click()
+      cy.wait('@updateUser')
+      .its('response.statusCode')
+      .should('equal', 200)
+    })
   })
 
   context('uses query', () => {
