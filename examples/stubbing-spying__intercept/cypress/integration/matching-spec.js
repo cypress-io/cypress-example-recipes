@@ -2,17 +2,39 @@
 
 describe('intercept', () => {
   context('matches order', () => {
-    it('uses the first found route matcher that responds', () => {
-      cy.intercept('*-fruits').as('fruits') // does not reply
-      cy.intercept('favorite-*', ['Lemons 🍋']).as('favorite') // replies with a fruit
-      cy.intercept('favorite-fruits').as('favorite-fruits') // does not reply
+    describe('multiple matches', () => {
+      it('uses the first found route matcher that responds', () => {
+        cy.intercept('*-fruits').as('fruits') // does not reply
+        cy.intercept('favorite-*', ['Lemons 🍋']).as('favorite') // replies with a fruit
+        cy.intercept('favorite-fruits').as('favorite-fruits') // does not reply
 
-      cy.visit('/')
-      cy.wait('@fruits') // first route matches
-      cy.wait('@favorite') // second route matches
-      // but the third route never gets the request
-      // since the second route has replied
-      cy.contains('li', 'Lemons 🍋').should('be.visible')
+        cy.visit('/')
+        cy.wait('@fruits') // first route matches
+        cy.wait('@favorite') // second route matches
+        // but the third route never gets the request
+        // since the second route has replied
+        cy.contains('li', 'Lemons 🍋').should('be.visible')
+      })
+
+      it('using substring matches multiple interceptors', () => {
+        cy.visit('/')
+        cy.intercept('/users').as('users')
+        cy.intercept('/users/2').as('secondUser')
+        cy.get('#load-second-user').click()
+        // both interceptors should be tripped
+        cy.wait('@users')
+        cy.wait('@secondUser')
+      })
+
+      it('use regex to match exactly', () => {
+        // if you want to be precise, use regular expressions
+        cy.visit('/')
+        cy.intercept(/\/users$/).as('users')
+        cy.intercept(/\/users\/2$/).as('secondUser')
+        cy.get('#load-second-user').click()
+        // only the second interceptor should match
+        cy.wait('@secondUser')
+      })
     })
 
     describe('when starts with a slash', () => {
