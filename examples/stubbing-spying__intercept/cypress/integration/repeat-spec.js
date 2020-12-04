@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 describe('intercept', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/')
   })
 
