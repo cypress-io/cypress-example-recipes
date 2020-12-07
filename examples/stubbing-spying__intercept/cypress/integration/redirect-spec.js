@@ -27,6 +27,7 @@ describe('intercept redirects', () => {
         res.headers.location = '/'
         // need to provide something for the updated "res"
         // object to be used
+        // https://github.com/cypress-io/cypress/issues/9555
         res.send('stay here')
       })
     })
