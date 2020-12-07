@@ -2,17 +2,67 @@
 
 describe('intercept', () => {
   context('matches order', () => {
-    it('uses the first found route matcher that responds', () => {
-      cy.intercept('*-fruits').as('fruits') // does not reply
-      cy.intercept('favorite-*', ['Lemons 🍋']).as('favorite') // replies with a fruit
-      cy.intercept('favorite-fruits').as('favorite-fruits') // does not reply
+    describe('multiple matches', () => {
+      it('uses the first found route matcher that responds', () => {
+        cy.intercept('*-fruits').as('fruits') // does not reply
+        cy.intercept('favorite-*', ['Lemons 🍋']).as('favorite') // replies with a fruit
+        cy.intercept('favorite-fruits').as('favorite-fruits') // does not reply
 
-      cy.visit('/')
-      cy.wait('@fruits') // first route matches
-      cy.wait('@favorite') // second route matches
-      // but the third route never gets the request
-      // since the second route has replied
-      cy.contains('li', 'Lemons 🍋').should('be.visible')
+        cy.visit('/')
+        cy.wait('@fruits') // first route matches
+        cy.wait('@favorite') // second route matches
+        // but the third route never gets the request
+        // since the second route has replied
+        cy.contains('li', 'Lemons 🍋').should('be.visible')
+      })
+
+      it('using substring matches multiple interceptors', () => {
+        cy.visit('/')
+        cy.intercept('/users').as('users')
+        cy.intercept('/users/2').as('secondUser')
+        cy.get('#load-second-user').click()
+
+        // confirm that both interceptors are matched
+        cy.wait('@users')
+        .its('request.url')
+        .should('equal', 'https://jsonplaceholder.cypress.io/users/2')
+
+        cy.wait('@secondUser')
+        .its('request.url')
+        .should('equal', 'https://jsonplaceholder.cypress.io/users/2')
+      })
+
+      it('use regex to match exactly', () => {
+        // if you want to be precise, use regular expressions
+        cy.visit('/')
+        cy.intercept(/\/users$/).as('users')
+        cy.intercept(/\/users\/2$/).as('secondUser')
+        cy.get('#load-second-user').click()
+        // only the second interceptor should match
+        cy.wait('@secondUser')
+        .its('request.url')
+        .should('equal', 'https://jsonplaceholder.cypress.io/users/2')
+      })
+
+      it('use regex to match exactly and check if the other intercept has not fired', () => {
+        cy.visit('/')
+        let usersMatched = false
+
+        cy.intercept(/\/users$/, () => {
+          usersMatched = true
+        })
+
+        cy.intercept(/\/users\/2$/).as('secondUser')
+        cy.get('#load-second-user').click()
+        // only the second interceptor should match
+        cy.wait('@secondUser')
+        .its('request.url')
+        .should('equal', 'https://jsonplaceholder.cypress.io/users/2')
+        // but the first intercept should have never fired
+        .then(() => {
+          expect(usersMatched, 'users intercept').to.be.false
+        })
+      })
     })
 
     describe('when starts with a slash', () => {
