@@ -5,7 +5,8 @@
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
-    "start": "echo",
+    "dev": "../../node_modules/.bin/start-test 7078 cypress:open",
+    "start": "node server.js --port 7078",
     "test:ci": "npm run cypress:run",
     "test:ci:record": "npm run cypress:run --record"
   }

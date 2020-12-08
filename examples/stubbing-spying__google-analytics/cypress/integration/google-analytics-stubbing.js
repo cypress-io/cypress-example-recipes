@@ -21,6 +21,12 @@ Cypress.on('window:before:load', (win) => {
 describe('Google Analytics', function () {
   beforeEach(function () {
     cy.visit('/index.html')
+    // cy.intercept will catch all google analytics requests
+    cy.intercept('https://www.google-analytics.com/**').as('googleAnalytics')
+  })
+
+  it('should intercept google analytics', () => {
+    cy.contains('#page2').click()
   })
 
   it('can ensure window.ga is called correctly', function () {
