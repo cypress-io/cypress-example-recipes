@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('intercept', () => {
+describe('intercept', { retries: 2 }, () => {
   beforeEach(() => {
     cy.visit('/')
   })
