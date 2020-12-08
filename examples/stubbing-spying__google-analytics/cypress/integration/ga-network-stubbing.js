@@ -7,6 +7,9 @@ describe('Google Analytics', () => {
     cy.intercept('POST', 'https://www.google-analytics.com/j/collect', { statusCode: 200 }).as('collect')
     cy.intercept('GET', 'https://www.google-analytics.com/collect', { statusCode: 200 }).as('gifCollect')
     cy.visit('/index.html')
+    // tip: cy.visit yields the window object
+    // confirm the `window.ga` function has been created
+    .its('ga').should('be.a', 'function')
 
     // confirm the GA called the collect endpoint
     cy.wait('@collect').its('request.url')

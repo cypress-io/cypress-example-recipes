@@ -4,6 +4,32 @@ This recipe shows how to test the Google Analytics logic in two ways
 - by stubbing method calls to `window.ga`
 - by intercepting the actual method calls Google Analytics makes to its event collection endpoint
 
+## How Google Analytics works
+
+The JavaScript code in [index.html](index.html) loads the Google Analytics script from address "https://www.google-analytics.com/analytics.js". This script creates a method `window.ga` that the application then can use to send analytics events to the server. The first call creates a new analytics client, and the calls after that send particular events.
+
+```js
+// in index.html
+ga('create', 'UA-XXXXX-Y', 'auto');
+ga('set', 'page', 'index.html');
+ga('send', 'pageview');
+```
+
+Every call to `set page` executed an Ajax call to `www.google-analytics.com/j/collect`, while every `pageview` call simply requests a tiny GIF image from `www.google-analytics.com/collect` which is a very lightweight request.
+
+Our application is a Single-Page-App, thus following the [GA practices](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) our application sends a `pageview` event on every hash change
+
+```js
+// in index.html
+window.onhashchange = function () {
+  // an example of calling into GA whenever there is a
+  // hashchange. this is used for demonstration purposes
+  ga('send', 'pageview', window.location.hash)
+}
+```
+
+Using our Cypress tests we can confirm the application is making the right calls to the `window.ga` function. We can go even further and confirm the expected network calls are made to the `www.google-analytics.com` servers.
+
 ## Stubbing `window.ga` method
 
 The first example in [ga-method-stubbing.js](cypress/integration/ga-method-stubbing.js) blocks all requests to domain `www.google-analytics.com`. Even though we are preventing the actual `GA` script from loading, we can still stub the `window.ga` object and ensure its being called correctly.

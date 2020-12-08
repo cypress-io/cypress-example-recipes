@@ -1,4 +1,6 @@
 {
   "fixturesFolder": false,
-  "supportFile": false
+  "supportFile": false,
+  "viewportHeight": 200,
+  "viewportWidth": 250
 }
