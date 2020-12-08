@@ -4,9 +4,17 @@ describe('intercept', () => {
   it('spies on loading a static image', () => {
     cy.intercept('/images').as('image')
     cy.visit('/pics.html')
-    // how to check if the /image route was called once?
-    // @see https://github.com/cypress-io/cypress/issues/8934
-    // cy.wait('@image')
+    cy.wait('@image')
+
+    // reload the page, it should send another request
+    cy.reload()
+    cy.wait('@image')
+  })
+
+  it('spies on loading a static image (2nd test)', () => {
+    cy.intercept('/images').as('image')
+    cy.visit('/pics.html')
+    cy.wait('@image')
   })
 
   it('stubs a static image', () => {
