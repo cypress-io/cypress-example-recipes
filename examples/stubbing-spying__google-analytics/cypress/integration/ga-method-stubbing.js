@@ -1,4 +1,6 @@
-// in our cypress.json file we have blocked the www.google-analytics.com host
+/// <reference types="cypress" />
+
+// before visiting the page, we have blocked the www.google-analytics.com host
 // which prevents the GA script from ever loading. however because there
 // is still a global 'window.ga' function, that means we can stub it
 // and ensure its called correctly.
@@ -6,20 +8,21 @@
 // if you pop open your dev tools you will see that the network request
 // for the script tag returns 503 because it's been blocked.
 
-// using a global event handler here because likely
-// in your real app you'll always want to stub window.ga
-//
-// if not you could just add a onBeforeLoad() callback
-// to the cy.visit
-Cypress.on('window:before:load', (win) => {
+describe('Google Analytics', function () {
+  // using a global event handler here because likely
+  // in your real app you'll always want to stub window.ga
+  //
+  // if not you could just add a onBeforeLoad() callback
+  // to the cy.visit
+  Cypress.on('window:before:load', (win) => {
   // because this is called before any scripts
   // have loaded - the ga function is undefined
   // so we need to create it.
-  win.ga = cy.stub().as('ga')
-})
+    win.ga = cy.stub().as('ga')
+  })
 
-describe('Google Analytics', function () {
   beforeEach(function () {
+    cy.intercept('www.google-analytics.com', { statusCode: 503 })
     cy.visit('/index.html')
   })
 
