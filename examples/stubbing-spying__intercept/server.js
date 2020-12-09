@@ -23,6 +23,10 @@ app.get('/redirect-example', (req, res) => {
   res.sendFile(`${__dirname}/redirect-example.html`)
 })
 
+app.get('/local-api-example', (req, res) => {
+  res.sendFile(`${__dirname}/local-api.html`)
+})
+
 app.get('/favorite-fruits', (req, res) => {
   res.json(_.sampleSize(fruits, 5))
 })

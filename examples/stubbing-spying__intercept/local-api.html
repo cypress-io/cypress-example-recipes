@@ -1,0 +1,33 @@
+<body>
+  <h2>Local API</h2>
+  <p>This page makes REST calls to the non-existent local API, thus
+    all network calls should be stubbed
+  </p>
+  <ul id="users"></ul>
+  <button id="load-users">Load users</button>
+
+  <script>
+    const loadUsers = () => {
+    document.querySelector('#users').innerText = ''
+
+    // there is no localhost API running
+    // thus the test will have to stub these endpoints
+    fetch(`http://localhost:3010/users`)
+    .then((r) => r.json())
+    .then((users) => {
+      console.table(users)
+
+      const usersHtml = users.map((user) => {
+        return `<li class="user">${user.id} - ${user.email}</li>`
+      }).join('\n')
+
+      document.querySelector('#users').innerHTML = usersHtml
+    })
+    .catch((e) => {
+      console.error('problem fetching users', e)
+      document.querySelector('#users').innerText = `Problem fetching users ${e.message}`
+    })
+  }
+  document.getElementById('load-users').addEventListener('click', loadUsers)
+  </script>
+</body>

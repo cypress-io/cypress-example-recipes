@@ -7,3 +7,4 @@
 - [matching-spec.js](cypress/integration/matching-spec.js) shows how the same request can match multiple `cy.intercept` matchers
 - [redirect-spec.js](cypress/integration/redirect-spec.js) shows how to spy on a redirect, and how to stub the redirect response from the server to avoid loading a second domain, for example
 - [repeat-spec.js](cypress/integration/repeat-spec.js) stress tests GET and POST calls by running the tests multiple times, as described in [Retry, Rerun, Repeat](https://www.cypress.io/blog/2020/12/03/retry-rerun-repeat/)
+- [stubbed-api-spec.js](cypress/integration/stubbed-api-spec.js) shows how stubbed requests work without any backend API
