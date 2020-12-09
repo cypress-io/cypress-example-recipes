@@ -6,11 +6,25 @@ describe('intercept', () => {
   context('stubbed API', () => {
     it('fetches mock users', () => {
       cy.visit('/local-api-example')
+
       cy.intercept('GET', '/users', {
         fixture: 'users.json',
       }).as('users')
 
       cy.get('#load-users').click()
+      cy.wait('@users')
+      cy.get('.user').should('have.length', 2)
+    })
+
+    // TODO: https://github.com/cypress-io/cypress/issues/9602
+    it.skip('fetches mock users even if the request uses headers', () => {
+      cy.visit('/local-api-example')
+
+      cy.intercept('/users', {
+        fixture: 'users.json',
+      }).as('users')
+
+      cy.get('#load-users-headers').click()
       cy.wait('@users')
       cy.get('.user').should('have.length', 2)
     })
