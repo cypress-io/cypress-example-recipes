@@ -5,7 +5,7 @@ describe('intercept', { retries: 2 }, () => {
     cy.visit('/')
   })
 
-  const N = 100
+  const N = 10
 
   Cypress._.times(N, (k) => {
     it(`gets a user ${k + 1} / ${N}`, () => {
