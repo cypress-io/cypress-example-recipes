@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-describe('dynamic users using request', () => {
+describe('dynamic users using request', { retries: 2 }, () => {
   // this example fetches list of 3 users from the server
   // and then creates 3 separate tests to check something about each user
 
