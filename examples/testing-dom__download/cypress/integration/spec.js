@@ -78,6 +78,14 @@ describe('file download', () => {
     })
   }
 
+  const validateZip = () => {
+    const downloadedFilename = path.join(downloadsFolder, 'files.zip')
+
+    // reading and validating a zip file requires direct access to it
+    // thus it is easier to perform the checks from the plugins file that runs in Node
+    cy.task('validateZipFile', downloadedFilename)
+  }
+
   beforeEach(() => {
     cy.task('clearDownloads')
 
@@ -162,6 +170,15 @@ describe('file download', () => {
       cy.log('**confirm downloaded image**')
       validateImage()
     })
+
+    // in Firefox we get "what should I do with this download?" popup
+    it('ZIP archive', { browser: '!firefox' }, () => {
+      cy.visit('/')
+      cy.get('[data-cy=download-zip]').click()
+
+      cy.log('**confirm downloaded ZIP**')
+      validateZip()
+    })
   })
 
   // The next step tries to download an image file located in
@@ -229,6 +246,15 @@ describe('file download', () => {
 
         expect(lines).to.have.length.gt(20)
       })
+    })
+
+    // in Firefox we get "what should I do with this download?" popup
+    it('ZIP archive', { browser: '!firefox' }, () => {
+      cy.visit('/')
+      cy.get('[data-cy=download-remote-zip]').click()
+
+      cy.log('**confirm downloaded ZIP**')
+      validateZip()
     })
   })
 })
