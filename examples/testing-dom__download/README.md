@@ -2,7 +2,7 @@
 
 ![File download in Chrome](images/chrome.png)
 
-See [cypress/plugins/index.js](cypress/plugins/index.js) to see how we set the download folder when launching the browser. See the [cypress/integration/spec.js](cypress/integration/spec.js) spec file that downloads and verifies:
+See [cypress/plugins/index.js](cypress/plugins/index.js) to see how we set the browser preferences to se the download folder and bypass the download modal dialog. See the [cypress/integration/spec.js](cypress/integration/spec.js) spec file that downloads and verifies:
 - a CSV file
 - an Excel file
 - a PNG image

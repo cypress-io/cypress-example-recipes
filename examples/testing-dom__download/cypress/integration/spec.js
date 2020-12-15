@@ -81,8 +81,9 @@ describe('file download', () => {
   const validateZip = () => {
     const downloadedFilename = path.join(downloadsFolder, 'files.zip')
 
-    // reading and validating a zip file requires direct access to it
+    // reading and validating a zip file requires direct access to the file system
     // thus it is easier to perform the checks from the plugins file that runs in Node
+    // see the plugins file "on('task')" code to see how we can read and validate a Zip file
     cy.task('validateZipFile', downloadedFilename)
   }
 
@@ -171,8 +172,7 @@ describe('file download', () => {
       validateImage()
     })
 
-    // in Firefox we get "what should I do with this download?" popup
-    it('ZIP archive', { browser: '!firefox' }, () => {
+    it('ZIP archive', () => {
       cy.visit('/')
       cy.get('[data-cy=download-zip]').click()
 
@@ -248,8 +248,7 @@ describe('file download', () => {
       })
     })
 
-    // in Firefox we get "what should I do with this download?" popup
-    it('ZIP archive', { browser: '!firefox' }, () => {
+    it('ZIP archive', () => {
       cy.visit('/')
       cy.get('[data-cy=download-remote-zip]').click()
 
