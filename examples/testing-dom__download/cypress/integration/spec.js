@@ -78,6 +78,19 @@ describe('file download', () => {
     })
   }
 
+  const validateZip = () => {
+    const downloadedFilename = path.join(downloadsFolder, 'files.zip')
+
+    // wait for the file to be fully downloaded by reading it (as binary)
+    // and checking its length
+    cy.readFile(downloadedFilename, 'binary', { timeout: 15000 }).should('have.length.gt', 300)
+
+    // unzipping and validating a zip file requires the direct access to the file system
+    // thus it is easier to perform the checks from the plugins file that runs in Node
+    // see the plugins file "on('task')" code to see how we can read and validate a Zip file
+    cy.task('validateZipFile', downloadedFilename)
+  }
+
   beforeEach(() => {
     cy.task('clearDownloads')
 
@@ -162,6 +175,14 @@ describe('file download', () => {
       cy.log('**confirm downloaded image**')
       validateImage()
     })
+
+    it('ZIP archive', () => {
+      cy.visit('/')
+      cy.get('[data-cy=download-zip]').click()
+
+      cy.log('**confirm downloaded ZIP**')
+      validateZip()
+    })
   })
 
   // The next step tries to download an image file located in
@@ -229,6 +250,14 @@ describe('file download', () => {
 
         expect(lines).to.have.length.gt(20)
       })
+    })
+
+    it('ZIP archive', () => {
+      cy.visit('/')
+      cy.get('[data-cy=download-remote-zip]').click()
+
+      cy.log('**confirm downloaded ZIP**')
+      validateZip()
     })
   })
 })

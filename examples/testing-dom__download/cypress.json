@@ -2,7 +2,7 @@
   "fixturesFolder": false,
   "supportFile": false,
   "viewportWidth": 500,
-  "viewportHeight": 800,
+  "viewportHeight": 900,
   "baseUrl": "http://localhost:8070",
   "chromeWebSecurity": false
 }
