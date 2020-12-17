@@ -16,8 +16,8 @@ describe('intercept', () => {
       cy.get('.user').should('have.length', 2)
     })
 
-    // TODO: https://github.com/cypress-io/cypress/issues/9602
-    it.skip('fetches mock users even if the request uses headers', () => {
+    // see https://github.com/cypress-io/cypress/issues/9602
+    it('fetches mock users even if the request uses headers', () => {
       cy.visit('/local-api-example')
 
       cy.intercept('/users', {
