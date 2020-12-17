@@ -3,6 +3,8 @@
 const path = require('path')
 const fs = require('fs')
 const readXlsxFile = require('read-excel-file/node')
+const AdmZip = require('adm-zip')
+const { stripIndent } = require('common-tags')
 
 // place downloads into "cypress/downloads" folder
 const downloadDirectory = path.join(__dirname, '..', 'downloads')
@@ -36,6 +38,74 @@ module.exports = (on, config) => {
 
       return readXlsxFile(filename)
     },
+
+    validateZipFile (filename) {
+      // now let's validate the downloaded ZIP file
+      // the validations depend on your projects. For this example
+      // we will check that the zip has two entries "a.txt" and "b.txt"
+      // and that the contents of the zipped file "a.txt" are the same as expected
+
+      // Tip: use https://github.com/cthackers/adm-zip to load and unzip the Zip contents
+      console.log('loading zip', filename)
+      const zip = new AdmZip(filename)
+      const zipEntries = zip.getEntries()
+
+      const names = zipEntries.map((entry) => entry.entryName).sort()
+
+      console.log('zip file %s has entries %o', filename, names)
+
+      // since this is plugins code we do not have built-in "expect" or "assert" functions
+      // instead we can throw an Error object which fails the "cy.task" command
+      if (names.length !== 2) {
+        throw new Error(`List of files ${names.join(',')} in ${filename} has extra files`)
+      }
+
+      // if there is no error, let's print positive message to the terminal
+      // to let the user know this validation was successful
+      console.log('✅ number of entries')
+
+      if (!names.includes('a.txt')) {
+        throw new Error(`List of files ${names.join(',')} in ${filename} is missing a.txt`)
+      }
+
+      console.log('✅ has a.txt entry')
+
+      if (!names.includes('b.txt')) {
+        throw new Error(`List of files ${names.join(',')} in ${filename} is missing b.txt`)
+      }
+
+      console.log('✅ has b.txt entry')
+
+      // confirm the contents of an entry inside the Zip file
+      // the entry is just a text file in our case
+      // let's grab its text content and compare to the expected string
+      const aEntry = zip.readAsText('a.txt').trim()
+      const expectedText = stripIndent`
+      hello zip
+      and Cypress recipes
+      `
+
+      if (aEntry !== expectedText) {
+        console.error('Expected file a.txt to have text')
+        console.error('------')
+        console.error(expectedText)
+        console.error('------')
+        console.error('but it had text')
+        console.error('------')
+        console.error(aEntry)
+        console.error('------')
+        throw new Error(stripIndent`
+          Invalid a.txt entry in the zip file ${filename}
+          See terminal for more details
+        `)
+      }
+
+      console.log('✅ a.txt file has the expected contents')
+
+      // any other validations?
+
+      return null
+    },
   })
 
   // https://on.cypress.io/browser-launch-api
@@ -43,14 +113,21 @@ module.exports = (on, config) => {
     console.log('browser %o', browser)
 
     if (isFirefox(browser)) {
+      // special settings for Firefox browser
+      // to prevent showing popup dialogs that block the rest of the test
       options.preferences['browser.download.dir'] = downloadDirectory
       options.preferences['browser.download.folderList'] = 2
 
-      // needed to prevent download prompt for text/csv and Excel files
-      // grab the Excel MIME types by downloading the files in Excel and observing
-      // the reported MIME content types in the Developer Toos
-      options.preferences['browser.helperApps.neverAsk.saveToDisk'] =
-        'text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      // needed to prevent the download prompt for CSV, Excel, and ZIP files
+      // TIP: with Firefox DevTools open, download the file yourself
+      // and observe the reported MIME type in the Developer Tools
+      const mimeTypes = [
+        'text/csv',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Excel
+        'application/zip',
+      ]
+
+      options.preferences['browser.helperApps.neverAsk.saveToDisk'] = mimeTypes.join(',')
 
       return options
     }
