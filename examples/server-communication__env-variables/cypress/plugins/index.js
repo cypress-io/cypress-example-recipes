@@ -12,6 +12,9 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
+// load the environment variables from the local .env file
+require('dotenv').config()
+
 module.exports = (on, config) => {
   // we can grab some process environment variables
   // and stick it into config.env before returning the updated config
@@ -20,7 +23,8 @@ module.exports = (on, config) => {
   // and rename them if necessary
   config.env.FOO = process.env.FOO
   config.env.BAR = process.env.BAR
-  console.log('extended config.env with process.env.{FOO, BAR}')
+  config.env.username = process.env.USER_NAME
+  console.log('extended config.env with process.env.{FOO, BAR, USER_NAME}')
 
   return config
 }
