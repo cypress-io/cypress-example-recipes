@@ -20,6 +20,11 @@ describe('process environment variables', () => {
     expect(Cypress.env('ping')).to.equal(123)
   })
 
+  it('has variable loaded from .env file', () => {
+    // loaded in the plugins file
+    expect(Cypress.env('username')).to.equal('aTester')
+  })
+
   it('removes CYPRESS_ and cypress_ prefixes', () => {
     cy.wrap(Cypress.env())
     .should('include', {
