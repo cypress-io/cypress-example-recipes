@@ -12,3 +12,5 @@ See [cypress/plugins/index.js](cypress/plugins/index.js) to see how we set the b
 
 
 Text files are validated right from the browser spec, but the binary files like the downloaded Zip archives need to be validated from Node code using the plugins file.
+
+The spec also shows how to "catch" form submission that downloads a file using [cy.intercept](https://on.cypress.io/intercept). After intercepting the request and redirecting back at the test, the test shows how to request the file and validate it.
