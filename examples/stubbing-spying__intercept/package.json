@@ -1,7 +1,8 @@
 {
-  "name": "spy-stub-clock",
+  "name": "stubbing-spying__intercept",
   "version": "1.0.0",
-  "description": "",
+  "description": "Working with cy.intercept",
+  "private": true,
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
