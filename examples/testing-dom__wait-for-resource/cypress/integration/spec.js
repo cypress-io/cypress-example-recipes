@@ -62,7 +62,11 @@ Cypress.Commands.add('waitForResource', (name, options = {}) => {
   )
 })
 
-describe('loading style', () => {
+// we allow these tests to fail and retry them because timing
+// thresholds require leeway. Setting them too high makes the
+// tests imprecise. Setting them to more likely values makes the tests flakey.
+// @see https://www.cypress.io/blog/2020/12/03/retry-rerun-repeat/
+describe('loading style', { retries: 2 }, () => {
   it('applies app.css styles', () => {
     cy.visit('/')
     cy.waitForResource('base.css')
