@@ -12,3 +12,9 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
+
+// if multiple specs need to use dayjs import it in the support file
+// and add to the global Cypress object
+const dayjs = require('dayjs')
+
+Cypress.dayjs = dayjs

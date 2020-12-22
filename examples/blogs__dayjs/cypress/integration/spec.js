@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+// import dayjs in a single spec that needs it
 const dayjs = require('dayjs')
 
 describe('dayjs example', () => {
