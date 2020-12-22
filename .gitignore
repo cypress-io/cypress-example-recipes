@@ -16,3 +16,4 @@ snapshots.js
 .nyc_output
 coverage
 dist
+test-data.json
