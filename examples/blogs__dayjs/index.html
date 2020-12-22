@@ -1,0 +1,16 @@
+<body>
+  <span id="shipped"></span>
+  <script>
+    const padLeftZero = (s) => s.length < 2 ? '0' + s : s
+
+    const span = document.getElementById('shipped')
+    // let's output the today's date in "MMM, DD YYYY" format
+    const months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ]
+    const d = new Date()
+    const formatted = months[d.getMonth()] + ' ' +
+      padLeftZero(d.getDate()) +', ' + d.getFullYear()
+    span.innerText = `Order shipped on: ${formatted}`
+  </script>
+</body>
