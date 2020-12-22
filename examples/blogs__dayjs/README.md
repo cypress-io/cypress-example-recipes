@@ -19,3 +19,18 @@ const dayjs = require('dayjs')
 
 Cypress.dayjs = dayjs
 ```
+
+## Plugins
+
+The dayjs library splits major features into plugins. The plugins are included with the NPM module, but they need to be loaded and registered separately. For example, if you want to parse UTC dates and custom string formats, you would need to:
+
+```js
+const dayjs = require('dayjs')
+// https://day.js.org/docs/en/plugin/utc
+const utc = require('dayjs/plugin/utc')
+// https://day.js.org/docs/en/plugin/custom-parse-format
+const customParseFormat = require('dayjs/plugin/customParseFormat')
+
+dayjs.extend(utc)
+dayjs.extend(customParseFormat)
+```
