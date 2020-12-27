@@ -113,6 +113,7 @@
     "cypress-react-unit-test": "4.17.1",
     "cypress-select-tests": "1.5.3",
     "cypress-wait-until": "1.7.1",
+    "dayjs": "1.9.7",
     "dotenv": "8.2.0",
     "eslint": "6.0.1",
     "eslint-plugin-json-format": "2.0.1",
