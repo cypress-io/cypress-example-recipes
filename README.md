@@ -81,6 +81,7 @@ Recipe | Description
 [Testing iframes](./examples/blogs__iframes) | Accessing elements in 3rd party iframe, spy and stub network calls from iframe
 [Class decorators](./examples/blogs__class-decorator) | Using JavaScript class decorator to expose objects created by the application so they are reachable from tests
 [Form Submit](./examples/blogs__form-submit) | Removing flake from the test where a page is reloaded after form submission
+[Using Day.js instead of Moment.js](./examples/blogs__dayjs) | Using [day.js](https://day.js.org/) library instead of the deprecated `Cypress.moment`
 
 ## Stubbing and spying
 
