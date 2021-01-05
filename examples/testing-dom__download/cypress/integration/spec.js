@@ -51,8 +51,10 @@ describe('file download', () => {
     })
   }
 
-  const validateImage = () => {
-    const downloadedFilename = path.join(downloadsFolder, 'logo.png')
+  const validateImage = (downloadedFilename) => {
+    if (!downloadedFilename) {
+      downloadedFilename = path.join(downloadsFolder, 'logo.png')
+    }
 
     // ensure the file has been saved before trying to parse it
     cy.readFile(downloadedFilename, 'binary', { timeout: 15000 })
@@ -288,6 +290,23 @@ describe('file download', () => {
           return neatCSV(body)
         }).then(validateCsvList)
       })
+    })
+  })
+
+  it('finds file', { browser: '!firefox' }, () => {
+    // imagine we do not know the exact filename after download
+    // so let's call a task to find the file on disk before verifying it
+    // image comes from the same domain as the page
+    cy.visit('/')
+    cy.get('[data-cy=download-png]').click()
+
+    cy.log('**find the image**')
+    const mask = `${downloadsFolder}/*.png`
+
+    cy.task('findFile', mask).then((foundImage) => {
+      cy.log(`found image ${foundImage}`)
+      cy.log('**confirm downloaded image**')
+      validateImage()
     })
   })
 })

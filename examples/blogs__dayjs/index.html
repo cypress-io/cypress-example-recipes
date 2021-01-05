@@ -33,9 +33,10 @@
     const months = [
       'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
     ]
+    debugger
     const d = new Date()
     const formatted = months[d.getMonth()] + ' ' +
-      padLeftZero(d.getDate()) +', ' + d.getFullYear()
+      padLeftZero(String(d.getDate())) +', ' + d.getFullYear()
     span.innerText = `Order shipped on: ${formatted}`
   </script>
 </body>

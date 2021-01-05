@@ -5,6 +5,7 @@ const fs = require('fs')
 const readXlsxFile = require('read-excel-file/node')
 const AdmZip = require('adm-zip')
 const { stripIndent } = require('common-tags')
+const globby = require('globby')
 
 // place downloads into "cypress/downloads" folder
 const downloadDirectory = path.join(__dirname, '..', 'downloads')
@@ -105,6 +106,26 @@ module.exports = (on, config) => {
       // any other validations?
 
       return null
+    },
+
+    // a task to find one file matching the given mask
+    // returns just the first matching file
+    findFile (mask) {
+      if (!mask) {
+        throw new Error('Missing a file mask to seach')
+      }
+
+      console.log('searching for files %s', mask)
+
+      return globby(mask).then((list) => {
+        if (!list.length) {
+          throw new Error(`Could not find files matching mask "${mask}"`)
+        }
+
+        console.log('found file: %s', list[0])
+
+        return list[0]
+      })
     },
   })
 
