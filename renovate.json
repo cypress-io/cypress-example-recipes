@@ -8,9 +8,6 @@
   "major": {
     "automerge": false
   },
-  "minor": {
-    "automerge": false
-  },
   "prConcurrentLimit": 3,
   "prHourlyLimit": 2,
   "rangeStrategy": "pin",
