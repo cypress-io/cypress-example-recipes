@@ -284,12 +284,45 @@ describe('intercept', () => {
           // ok, let's stub it, the server usually responds with the same object
           return req.reply(req.body)
         }
+
         // if we do not call req.reply, then the request goes to the server
         // and we can still spy on it
       }).as('postUser')
 
       cy.get('#post-user').click()
       cy.wait('@postUser')
+    })
+
+    it('reports any errors from the intercept as user application errors', () => {
+      cy.visit('/')
+
+      const errorMessage = 'Intercept gone wrong!'
+
+      cy.intercept('POST', '/users', () => {
+        // imagine we have an error in our intercept logic
+        // it will fail the test
+        throw new Error(errorMessage)
+      })
+
+      cy.on('uncaught:exception', (e) => {
+        const text = 'The following error originated from your test code, not from Cypress.'
+
+        if (!e.message.includes(text)) {
+          // hmm, unexpected error text
+          // return and fail the test
+          return
+        }
+
+        if (e.message.includes(errorMessage)) {
+          console.log('caught expected error')
+
+          return false
+        }
+
+        return true
+      })
+
+      cy.get('#post-user').click()
     })
   })
 })
