@@ -4,8 +4,6 @@ describe('intercept', () => {
   context('stubbing', function () {
     it('shows no Response message', () => {
       // stub server response with []
-      // for now have to stringify empty arrays
-      // https://github.com/cypress-io/cypress/issues/8532
       cy.intercept('/favorite-fruits', [])
       cy.visit('/')
       cy.contains('No favorites').should('be.visible')
@@ -276,6 +274,22 @@ describe('intercept', () => {
         cy.visit('/')
         cy.contains('footer', 'Cypress test').should('be.visible')
       })
+    })
+
+    it('stub or spy depending on the object sent', () => {
+      cy.visit('/')
+      cy.intercept('POST', '/users', (req) => {
+        // inspect the request to decide if we want to mock it or not
+        if (req.body.id === 101) {
+          // ok, let's stub it, the server usually responds with the same object
+          return req.reply(req.body)
+        }
+        // if we do not call req.reply, then the request goes to the server
+        // and we can still spy on it
+      }).as('postUser')
+
+      cy.get('#post-user').click()
+      cy.wait('@postUser')
     })
   })
 })
