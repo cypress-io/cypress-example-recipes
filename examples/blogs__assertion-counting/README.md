@@ -23,3 +23,9 @@ it('waits for planned number of assertion to run', () => {
 ```
 
 ![Automatic waiting for expected number of assertions to run](images/plan.gif)
+
+## Unhandled promise rejections
+
+If the application code creates an unhandled rejected promise, Cypress does NOT see it by default. If you want to fail the test, listen to the unhandled promise event and throw an error. See spec file [errors.js](cypress/integration/errors.js)
+
+![Fail the test when a promise is rejected and is not handled](./images/fail-test-on-unhandled-promise-rejection.gif)
