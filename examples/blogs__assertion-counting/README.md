@@ -1,5 +1,7 @@
 # Assertion counting
 
+Read the blog post [When can the test stop?](https://www.cypress.io/blog/2020/01/16/when-can-the-test-stop/)
+
 See the application in [index.html](index.html) that shows `window.confirm` on click
 
 ![Window confirm](images/confirm.gif)
