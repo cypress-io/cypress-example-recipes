@@ -1,5 +1,7 @@
 # Assertion counting
 
+Read the blog post [When can the test stop?](https://www.cypress.io/blog/2020/01/16/when-can-the-test-stop/)
+
 See the application in [index.html](index.html) that shows `window.confirm` on click
 
 ![Window confirm](images/confirm.gif)
@@ -21,3 +23,9 @@ it('waits for planned number of assertion to run', () => {
 ```
 
 ![Automatic waiting for expected number of assertions to run](images/plan.gif)
+
+## Unhandled promise rejections
+
+If the application code creates an unhandled rejected promise, Cypress does NOT see it by default. If you want to fail the test, listen to the unhandled promise event and throw an error. See spec file [errors.js](cypress/integration/errors.js)
+
+![Fail the test when a promise is rejected and is not handled](./images/fail-test-on-unhandled-promise-rejection.gif)
