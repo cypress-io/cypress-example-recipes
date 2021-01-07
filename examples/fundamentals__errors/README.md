@@ -4,6 +4,10 @@ For more details, see [Cypress catalogue of events](https://on.cypress.io/catalo
 
 ## Exceptions
 
+If an application throws an error, it fails the Cypress test automatically.
+
+![Application error fails the test](./images/app-error.gif)
+
 ## Unhandled promise rejections
 
 If the application code creates an unhandled rejected promise, Cypress does NOT see it by default and continues with the test. If you want to fail the test, listen to the unhandled promise event and throw an error.
