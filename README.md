@@ -8,6 +8,7 @@ Recipe | Description
 --- | ---
 [Node Modules](./examples/fundamentals__node-modules) | Import your own node modules
 [Environment variables](./examples/server-communication__env-variables) | Passing environment variables to tests
+[Handling errors](./examples/fundamentals__errors) | Handling thrown errors and unhandled promise rejections
 [Dynamic tests](./examples/fundamentals__dynamic-tests) | Create tests dynamically from data
 [Fixtures](./examples/fundamentals__fixtures) | Loading single or multiple fixtures
 [Adding Custom Commands](./examples/fundamentals__add-custom-command) | Write your own custom commands using JavaScript with correct types for IntelliSense to work
