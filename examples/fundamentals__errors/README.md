@@ -1,5 +1,7 @@
 # Handling application errors
 
+For more details, see [Cypress catalogue of events](https://on.cypress.io/catalog-of-events)
+
 ## Exceptions
 
 ## Unhandled promise rejections
@@ -8,4 +10,4 @@ If the application code creates an unhandled rejected promise, Cypress does NOT 
 
 ![Test failing after an application has unhandled rejected promise](./images/unhandled-promise.gif)
 
-You can register your own unhandled promise event listener during `cy.visit` as [cypress/integration/unhandled-promise.js](./cypress/integration/unhandled-promise.js) shows.
+You can register your own unhandled promise event listener during `cy.visit` as [cypress/integration/unhandled-promise.js](./cypress/integration/unhandled-promise.js) shows. Or you can register the window handler for all tests using `Cypress.on('window:before:load')` call, see [cypress/integration/unhandled-promise2.js](./cypress/integration/unhandled-promise2.js).
