@@ -221,6 +221,8 @@ jobs:
     <<: *defaults
   fundamentals__add-custom-command-ts:
     <<: *defaults
+  fundamentals__errors:
+    <<: *defaults
   logging-in__csrf-tokens:
     <<: *defaults
   logging-in__html-web-forms:
@@ -428,6 +430,9 @@ all_jobs: &all_jobs
   - fundamentals__add-custom-command-ts:
       requires:
         - build
+  - fundamentals__errors:
+      requires:
+        - build
   - logging-in__csrf-tokens:
       requires:
         - build
@@ -610,6 +615,7 @@ all_jobs: &all_jobs
         - fundamentals__module-api-wrap
         - fundamentals__add-custom-command
         - fundamentals__add-custom-command-ts
+        - fundamentals__errors
         - fundamentals__typescript
         - logging-in__csrf-tokens
         - logging-in__html-web-forms
