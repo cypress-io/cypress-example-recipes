@@ -45,4 +45,15 @@ app.get('/getout', (req, res) => {
   res.redirect('https://www.cypress.io')
 })
 
+app.get('/cached-user', (req, res) => {
+  console.log('returning JSON user to cache in the browser')
+  const user = {
+    name: 'Joe',
+    occupation: 'designer',
+  }
+
+  res.set('cache-control', 'private, max-age=600')
+  res.json(user)
+})
+
 app.listen(port)

@@ -131,6 +131,26 @@ if (updateUserButton) {
   updateUserButton.addEventListener('click', putUser)
 }
 
+const getCachedUser = document.getElementById('get-cached-user')
+
+if (getCachedUser) {
+  getCachedUser.addEventListener('click', () => {
+    document.querySelector('#users').innerText = ''
+
+    fetch(`/cached-user`)
+    .then((r) => r.json())
+    .then((user) => {
+      const usersHtml = `<div class="user">${user.name}, ${user.occupation}</div>`
+
+      document.querySelector('#users').innerHTML = usersHtml
+    })
+    .catch((e) => {
+      console.error('problem fetching users', e)
+      document.querySelector('#users').innerText = `Problem fetching user ${e.message}`
+    })
+  })
+}
+
 const updateNetworkStatus = () => {
   const el = document.getElementById('network-status')
   const text = window.navigator.onLine ? '🟢 online' : '🟥 offline'
