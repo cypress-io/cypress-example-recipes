@@ -47,53 +47,6 @@ describe('intercept', () => {
     cy.location('pathname').should('equal', '/form')
   })
 
-  /*
-    Parses (very simply) multipart buffer into string values.
-
-    the decoded buffer string will be something like
-    ------We  bKitFormBoundaryYxsB3tlu9eJsoCeY
-    Content-Disposition: form-data; name="city"
-
-    Boston
-    ------WebKitFormBoundaryYxsB3tlu9eJsoCeY
-    Content-Disposition: form-data; name="value"
-
-    28
-    ------WebKitFormBoundaryYxsB3tlu9eJsoCeY--
-
-    there are NPM packages for parsing such text into an object:
-    - https://www.npmjs.com/package/parse-multipart
-    - https://www.npmjs.com/package/multiparty
-    - https://www.npmjs.com/package/busboy
-    - https://www.npmjs.com/package/formidable
-    */
-  const parseMultipartForm = ({ boundary, buffer }) => {
-    expect(boundary, 'boundary').to.be.a('string')
-    const decoder = new TextDecoder()
-    const decoded = decoder.decode(buffer)
-
-    const parts = decoded.split(`--${boundary}`)
-    .map((s) => s.trim())
-    .filter((s) => s.startsWith('Content-Disposition: form-data;'))
-
-    console.log(decoded)
-    console.log(parts)
-
-    const result = {}
-
-    parts.forEach((part) => {
-      const lines = part.split(/\r?\n/g)
-
-      console.log('lines')
-      console.log(lines)
-      const key = lines[0].match(/name="(.+)"/)[1]
-
-      result[key] = lines[2].trim()
-    })
-
-    return result
-  }
-
   it('stubs multipart form', () => {
     cy.visit('/form')
     cy.get('[name=city]').type('Boston')
@@ -131,3 +84,50 @@ describe('intercept', () => {
     })
   })
 })
+
+/*
+  Utility: parses (very simply) multipart buffer into string values.
+
+  the decoded buffer string will be something like
+  ------We  bKitFormBoundaryYxsB3tlu9eJsoCeY
+  Content-Disposition: form-data; name="city"
+
+  Boston
+  ------WebKitFormBoundaryYxsB3tlu9eJsoCeY
+  Content-Disposition: form-data; name="value"
+
+  28
+  ------WebKitFormBoundaryYxsB3tlu9eJsoCeY--
+
+  there are NPM packages for parsing such text into an object:
+  - https://www.npmjs.com/package/parse-multipart
+  - https://www.npmjs.com/package/multiparty
+  - https://www.npmjs.com/package/busboy
+  - https://www.npmjs.com/package/formidable
+  */
+const parseMultipartForm = ({ boundary, buffer }) => {
+  expect(boundary, 'boundary').to.be.a('string')
+  const decoder = new TextDecoder()
+  const decoded = decoder.decode(buffer)
+
+  const parts = decoded.split(`--${boundary}`)
+  .map((s) => s.trim())
+  .filter((s) => s.startsWith('Content-Disposition: form-data;'))
+
+  console.log(decoded)
+  console.log(parts)
+
+  const result = {}
+
+  parts.forEach((part) => {
+    const lines = part.split(/\r?\n/g)
+
+    console.log('lines')
+    console.log(lines)
+    const key = lines[0].match(/name="(.+)"/)[1]
+
+    result[key] = lines[2].trim()
+  })
+
+  return result
+}

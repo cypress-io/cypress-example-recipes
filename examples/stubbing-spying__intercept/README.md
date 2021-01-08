@@ -8,6 +8,6 @@
 - [redirect-spec.js](cypress/integration/redirect-spec.js) shows how to spy on a redirect, and how to stub the redirect response from the server to avoid loading a second domain, for example
 - [repeat-spec.js](cypress/integration/repeat-spec.js) stress tests GET and POST calls by running the tests multiple times, as described in [Retry, Rerun, Repeat](https://www.cypress.io/blog/2020/12/03/retry-rerun-repeat/)
 - [stubbed-api-spec.js](cypress/integration/stubbed-api-spec.js) shows how stubbed requests work without any backend API
-- [form-spec.js](./cypress/integration/form-spec.js) shows how to stub form submission request and verify the submitted form fields
+- [form-spec.js](./cypress/integration/form-spec.js) shows how to stub form submission request and verify the submitted form fields (`application/x-www-form-urlencoded` or `multipart/form-data`)
 
 For more `cy.intercept` examples and tips read the [Cypress cy.intercept Problems](https://glebbahmutov.com/blog/cypress-intercept-problems/) blog post
