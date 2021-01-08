@@ -1,0 +1,25 @@
+<body>
+  <!--
+    not that during testing we do not even have
+    the server to submit to, the test will have to stub
+  -->
+
+  <p>Form sent via search parameters when using GET</p>
+  <form id="params" action="/submit-form">
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname">
+
+    <br/>
+    <input type="submit" value="Submit">
+  </form>
+
+  <br/>
+  <p>Multipart POST form</p>
+  <form id="multipart" action="/submit-form" method="post" enctype="multipart/form-data">
+    <p><input type="text" name="city"></p>
+    <p><input type="number" name="value"></p>
+    <p><button type="submit">Submit</button>
+  </form>
+</body>

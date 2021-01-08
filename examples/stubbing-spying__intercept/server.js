@@ -27,6 +27,10 @@ app.get('/local-api-example', (req, res) => {
   res.sendFile(`${__dirname}/local-api.html`)
 })
 
+app.get('/form', (req, res) => {
+  res.sendFile(`${__dirname}/form.html`)
+})
+
 app.get('/favorite-fruits', (req, res) => {
   res.json(_.sampleSize(fruits, 5))
 })
