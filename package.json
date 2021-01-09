@@ -108,7 +108,7 @@
     "cypress-failed-log": "2.9.0",
     "cypress-file-upload": "4.1.1",
     "cypress-iframe": "1.0.1",
-    "cypress-pipe": "1.7.0",
+    "cypress-pipe": "2.0.0",
     "cypress-plugin-snapshots": "1.4.3",
     "cypress-react-unit-test": "4.17.1",
     "cypress-select-tests": "1.5.3",
