@@ -1,10 +1,10 @@
 /// <reference types="cypress" />
 /* eslint-disable react/jsx-filename-extension */
-import { mount } from 'cypress-react-unit-test'
+import { mount } from '@cypress/react'
 import React from 'react'
 import Greeting from '../../greeting'
 
-describe('cypress-react-unit-test', () => {
+describe('@cypress/react', () => {
   it('shows greeting', () => {
     mount(<Greeting />)
     cy.contains('Hello World')

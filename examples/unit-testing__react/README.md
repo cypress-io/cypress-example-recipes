@@ -6,15 +6,15 @@ A little React [greeting.jsx](greeting.jsx) component is tested (inside Cypress 
   * import `enzyme` from `node_modules`.
   * extend chai assertions with [`chai-enzyme`](https://github.com/producthunt/chai-enzyme).
 - [cypress/integration/react-testing-library-spec.js](cypress/integration/react-testing-library-spec.js) using [react-testing-library](https://github.com/kentcdodds/react-testing-library)
-- [cypress/component/cypress-react-unit-test-spec.js](cypress/component/cypress-react-unit-test-spec.js) using [cypress-react-unit-test](https://github.com/bahmutov/cypress-react-unit-test)
+- [cypress/component/cypress-react-unit-test-spec.js](cypress/component/cypress-react-unit-test-spec.js) using [@cypress/react](https://github.com/cypress-io/cypress/tree/master/npm/react)
 
-### cypress-react-unit-test example
+### @cypress/react example
 
 ⚠️ This is an experimental feature that uses `"experimentalComponentTesting": true` flag in [cypress.json](cypress.json) and requires Cypress v4.5.0+. See [on.cypress.io/experimental](https://on.cypress.io/experimental) for more details.
 
-The screenshot below shows how [cypress-react-unit-test](https://github.com/bahmutov/cypress-react-unit-test) mounts a React component as "mini" web application.
+The screenshot below shows how [@cypress/react](https://github.com/cypress-io/cypress/tree/master/npm/react) mounts a React component as "mini" web application.
 
-![Testing React component using cypress-react-unit-test](images/button-click.png)
+![Testing React component using @cypress/react](images/button-click.png)
 
 Name | Description
 --- | ---

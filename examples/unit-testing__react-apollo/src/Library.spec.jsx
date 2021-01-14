@@ -1,6 +1,6 @@
 import React from 'react'
 import { Library, GET_BOOKS } from './App'
-import { mount } from 'cypress-react-unit-test'
+import { mount } from '@cypress/react'
 import { MockedProvider } from '@apollo/react-testing'
 
 // mocking GraphQL requests using
