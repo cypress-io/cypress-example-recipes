@@ -132,4 +132,32 @@ describe('intercept', () => {
       cy.wait('@users5')
     })
   })
+
+  it('can spy once on the first request', () => {
+    // we explicitly spy on the first request under alias "first"
+    // and also on all requests under alias "loading"
+    cy.intercept({ pathname: '/favorite-fruits', times: 1 }).as('first')
+    cy.intercept('/favorite-fruits').as('loading')
+
+    // the first request matches both spies
+    cy.clock()
+    cy.visit('/')
+    cy.wait('@first')
+    cy.wait('@loading')
+
+    // the second request only goes through the "loading" spy
+    // since the "first" intercept has been already applied once
+    cy.tick(30000)
+    cy.wait('@loading')
+
+    // IMPLEMENTATION DETAILS
+    // to confirm the number of times an alias was matched we can pull the info
+    // from the Cypress test's internal state
+    cy.then(() => {
+      cy.wrap(cy.state('aliasRequests')).should('deep.equal', {
+        first: 1, // "first" spy was matched once
+        loading: 2, // "loading" spy was matched twice
+      })
+    })
+  })
 })

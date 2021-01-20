@@ -90,19 +90,12 @@ describe('intercept', () => {
     })
 
     it('can stub network calls for each page', () => {
-      let k = 0
-
-      cy.intercept('/favorite-fruits', (req) => {
-        k += 1
-        switch (k) {
-          case 1:
-            return req.reply(['apples 🍎'])
-          case 2:
-            return req.reply(['grapes 🍇'])
-          default:
-            return req.reply(['kiwi 🥝'])
-        }
-      })
+      // first time respond with an apple
+      // second time respond with grapes
+      // and after that always respond with kiwi
+      cy.intercept({ pathname: '/favorite-fruits', times: 1 }, ['apples 🍎'])
+      cy.intercept({ pathname: '/favorite-fruits', times: 1 }, ['grapes 🍇'])
+      cy.intercept({ pathname: '/favorite-fruits' }, ['kiwi 🥝'])
 
       cy.visit('/')
       cy.contains('apples 🍎')
