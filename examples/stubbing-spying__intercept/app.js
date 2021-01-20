@@ -38,24 +38,28 @@ setInterval(getFavoriteFruits, 30000)
 
 const loadUsers = (nUsers = 3) => {
   return () => {
-    console.log('loading %d users', nUsers)
-    document.querySelector('#users').innerText = ''
+    // using delay parameter to make sure our tests
+    // are solid and can handle the Ajax request firing after a delay
+    setTimeout(() => {
+      console.log('loading %d users', nUsers)
+      document.querySelector('#users').innerText = ''
 
-    fetch(`https://jsonplaceholder.cypress.io/users?_limit=${nUsers}`)
-    .then((r) => r.json())
-    .then((users) => {
-      console.table(users)
+      fetch(`https://jsonplaceholder.cypress.io/users?_limit=${nUsers}`)
+      .then((r) => r.json())
+      .then((users) => {
+        console.table(users)
 
-      const usersHtml = users.map((user) => {
-        return `<li class="user">${user.id} - ${user.email}</li>`
-      }).join('\n')
+        const usersHtml = users.map((user) => {
+          return `<li class="user">${user.id} - ${user.email}</li>`
+        }).join('\n')
 
-      document.querySelector('#users').innerHTML = usersHtml
-    })
-    .catch((e) => {
-      console.error('problem fetching users', e)
-      document.querySelector('#users').innerText = `Problem fetching users ${e.message}`
-    })
+        document.querySelector('#users').innerHTML = usersHtml
+      })
+      .catch((e) => {
+        console.error('problem fetching users', e)
+        document.querySelector('#users').innerText = `Problem fetching users ${e.message}`
+      })
+    }, 200)
   }
 }
 

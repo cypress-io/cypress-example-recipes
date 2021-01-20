@@ -139,20 +139,17 @@ describe('intercept', () => {
       .wait(20).click()
       .wait(20).click()
 
-      cy.wait('@users5')
-      .then(() => {
+      // use "cy.should" to re-run the callback function
+      // until it times out or the assertions pass
+      cy.should(() => {
         // IMPLEMENTATION DETAILS
         // count the number of requests matching "users3"
         const users3 = getAliasCount('users3')
+
+        expect(users3, 'limit=3').to.equal(2)
         const users5 = getAliasCount('users5')
 
-        cy.wrap({
-          users3,
-          users5,
-        }).should('deep.equal', {
-          users3: 2,
-          users5: 4,
-        })
+        expect(users5, 'limit=5').to.equal(4)
       })
     })
 
