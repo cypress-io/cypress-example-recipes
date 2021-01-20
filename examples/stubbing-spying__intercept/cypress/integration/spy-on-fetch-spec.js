@@ -2,6 +2,22 @@
 
 // https://on.cypress.io/intercept
 describe('intercept', () => {
+  /**
+   * Implementation detail, returns number of times an intercept route
+   * was matched during the test
+   * @param {string} alias
+   */
+  const getAliasCount = (alias) => {
+    const testRoutes = cy.state('routes')
+    const aliasRoute = Cypress._.find(testRoutes, { alias })
+
+    if (!aliasRoute) {
+      return
+    }
+
+    return Cypress._.keys(aliasRoute.requests || {}).length
+  }
+
   context('spying', function () {
     beforeEach(function () {
       cy.intercept('/favorite-fruits').as('fetchFruits')
@@ -108,6 +124,36 @@ describe('intercept', () => {
 
       cy.get('#load-five-users').click()
       cy.wait('@users5')
+    })
+
+    it('confirms the number of times an intercept was called', () => {
+      cy.intercept('/users?_limit=3').as('users3')
+      cy.intercept('/users?_limit=5').as('users5')
+
+      cy.get('#load-users').click().click()
+      cy.wait('@users3')
+
+      // to avoid clicking too quickly, add small pauses
+      cy.get('#load-five-users').click()
+      .wait(20).click()
+      .wait(20).click()
+      .wait(20).click()
+
+      cy.wait('@users5')
+      .then(() => {
+        // IMPLEMENTATION DETAILS
+        // count the number of requests matching "users3"
+        const users3 = getAliasCount('users3')
+        const users5 = getAliasCount('users5')
+
+        cy.wrap({
+          users3,
+          users5,
+        }).should('deep.equal', {
+          users3: 2,
+          users5: 4,
+        })
+      })
     })
 
     it('spies using query parameter', () => {
