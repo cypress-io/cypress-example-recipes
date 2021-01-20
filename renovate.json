@@ -1,53 +1,43 @@
 {
+  "automerge": true,
+  "commitMessage": "{{semanticPrefix}}Update {{depName}} to {{newVersion}} 🌟",
   "extends": [
     "config:base"
   ],
-  "automerge": true,
-  "commitMessage": "{{semanticPrefix}}Update {{depName}} to {{newVersion}} 🌟",
-  "prTitle": "{{semanticPrefix}}{{#if isPin}}Pin{{else}}Update{{/if}} dependency {{depName}} to version {{newVersion}} 🌟",
-  "major": {
-    "automerge": false
-  },
-  "prConcurrentLimit": 3,
-  "prHourlyLimit": 2,
-  "rangeStrategy": "pin",
-  "schedule": [
-    "after 2am and before 3am on sunday"
-  ],
-  "updateNotScheduled": false,
-  "timezone": "America/New_York",
-  "lockFileMaintenance": {
-    "enabled": true
-  },
-  "separatePatchReleases": true,
-  "separateMultipleMajor": true,
-  "masterIssue": true,
   "labels": [
     "type: dependencies",
     "renovate"
   ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "major": {
+    "automerge": false
+  },
+  "masterIssue": true,
   "packageRules": [
     {
-      "packagePatterns": [
-        "^@cypress",
-        "^cypress"
-      ],
-      "groupName": "cypress",
-      "schedule": [
-        "after 2am and before 4am"
-      ]
+      "groupName": "eslint",
+      "packagePatterns": "^eslint"
     },
     {
-      "packagePatterns": "^eslint",
-      "groupName": "eslint"
-    },
-    {
+      "groupName": "typescript",
       "packageNames": [
         "@babel/preset-typescript",
         "tslint",
         "typescript"
-      ],
-      "groupName": "typescript"
+      ]
     }
-  ]
+  ],
+  "prConcurrentLimit": 3,
+  "prHourlyLimit": 2,
+  "prTitle": "{{semanticPrefix}}{{#if isPin}}Pin{{else}}Update{{/if}} dependency {{depName}} to version {{newVersion}} 🌟",
+  "rangeStrategy": "pin",
+  "schedule": [
+    "after 2am and before 3am on sunday"
+  ],
+  "separateMultipleMajor": true,
+  "separatePatchReleases": true,
+  "timezone": "America/New_York",
+  "updateNotScheduled": false
 }
