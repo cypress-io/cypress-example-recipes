@@ -39,19 +39,12 @@ describe('intercept', () => {
           cy.clock()
 
           // first request - respond with 3 fruits
-          // second request - respond with 4 fruits
-          let k = 0
+          // after that always respond with 4 fruits
           const firstList = ['Apple', 'Banana', 'Cantaloupe']
           const secondList = ['Orange', 'Cherry', 'Raspberry', 'Pineapple']
 
-          cy.intercept('/favorite-fruits', (req) => {
-            k += 1
-            if (k === 1) {
-              req.reply(firstList)
-            } else {
-              req.reply(secondList)
-            }
-          })
+          cy.intercept({ pathname: '/favorite-fruits', times: 1 }, firstList)
+          cy.intercept({ pathname: '/favorite-fruits' }, secondList)
 
           cy.visit('/')
           cy.get('.favorite-fruits li').as('favoriteFruits')
