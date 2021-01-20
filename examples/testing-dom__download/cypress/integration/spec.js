@@ -94,8 +94,6 @@ describe('file download', () => {
   }
 
   beforeEach(() => {
-    cy.task('clearDownloads')
-
     // The next command allow downloads in Electron, Chrome, and Edge
     // without any users popups or file save dialogs.
     if (!Cypress.isBrowser('firefox')) {
@@ -112,19 +110,6 @@ describe('file download', () => {
       )
     }
   })
-
-  // unfortunately this does not work
-  // https://github.com/cypress-io/cypress/issues/8594
-  // beforeEach({ browser: '!firefox' }, () => {
-  //   cy.wrap(
-  //     Cypress.automation('remote:debugger:protocol',
-  //       {
-  //         command: 'Page.setDownloadBehavior',
-  //         params: { behavior: 'allow', downloadPath: downloadsFolder },
-  //       }),
-  //     { log: false }
-  //   )
-  // })
 
   context('from local domain localhost:8070', () => {
     it('CSV file', () => {
