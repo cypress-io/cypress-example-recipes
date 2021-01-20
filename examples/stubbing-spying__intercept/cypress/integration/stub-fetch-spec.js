@@ -293,6 +293,23 @@ describe('intercept', () => {
       cy.wait('@postUser')
     })
 
+    it('can set an alias depending on the request', () => {
+      cy.visit('/')
+      cy.intercept('GET', '/users', (req) => {
+        // Inspect the request, and if it what we are looking for,
+        // set the alias to assert against later. Very useful for
+        // GraphQL requests!
+        if (req.url.endsWith('/users?_limit=5')) {
+          req.alias = 'load5'
+        }
+      })
+
+      cy.get('#load-users').click()
+      cy.get('#load-five-users').click()
+      cy.wait('@load5') // the second request created this alias dynamically
+      .its('response.body').should('have.length', 5)
+    })
+
     it('reports any errors from the intercept as user application errors', () => {
       cy.visit('/')
 
