@@ -67,6 +67,20 @@ describe('intercept', () => {
         expect(response).property('body').to.have.length(5)
       })
     })
+
+    // NOTE: shows how an assertion inside the intercept fails the test
+    it.skip('fails if XHR has wrong data', () => {
+      cy.intercept('/users', (req) => {
+        const url = new URL(req.url)
+        const limit = parseFloat(url.searchParams.get('_limit'))
+
+        // make the assertion fail on purpose
+        expect(limit, 'limit').to.equal(100)
+      }).as('users')
+
+      cy.get('#load-five-users').click()
+      cy.wait('@users')
+    })
   })
 
   context('spying on PUT request', () => {
