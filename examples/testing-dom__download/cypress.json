@@ -1,8 +1,7 @@
 {
+  "baseUrl": "http://localhost:8070",
   "fixturesFolder": false,
   "supportFile": false,
-  "viewportWidth": 500,
   "viewportHeight": 900,
-  "baseUrl": "http://localhost:8070",
-  "chromeWebSecurity": false
+  "viewportWidth": 500
 }

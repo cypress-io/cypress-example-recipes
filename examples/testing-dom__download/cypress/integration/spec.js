@@ -154,82 +154,6 @@ describe('file download', () => {
     })
   })
 
-  // The next step tries to download an image file located in
-  // the second domain. It runs in Chromium browsers with
-  // "chromeWebSecurity": false, but we need to skip it in Firefox
-  context('from remote domain localhost:9000', { browser: '!firefox' }, () => {
-    it('CSV file', () => {
-      cy.visit('/')
-      cy.contains('h3', 'Download CSV')
-      cy.get('[data-cy=download-remote-csv]').click()
-
-      cy.log('**read downloaded file**')
-
-      // file path is relative to the working folder
-      const filename = path.join(downloadsFolder, 'records.csv')
-
-      // browser might take a while to download the file,
-      // so use "cy.readFile" to retry until the file exists
-      // and has length - and we assume that it has finished downloading then
-      cy.readFile(filename, { timeout: 15000 })
-      .should('have.length.gt', 50)
-      // parse CSV text into objects
-      .then(neatCSV)
-      .then(validateCsvList)
-    })
-
-    it('Excel file', () => {
-      cy.visit('/')
-      cy.get('[data-cy=download-remote-xlsx]').click()
-
-      cy.log('**confirm downloaded file**')
-
-      validateExcelFile()
-    })
-
-    it('TXT file', () => {
-    // the text file comes from a domain different from the page
-      cy.visit('/')
-      cy.get('[data-cy=download-remote-txt]').click()
-
-      cy.log('**confirm downloaded text file**')
-      validateTextFile()
-    })
-
-    it('PNG image', () => {
-    // image comes from a domain different from the page
-      cy.visit('/')
-      cy.get('[data-cy=download-remote-png]').click()
-
-      cy.log('**confirm downloaded image**')
-      validateImage()
-    })
-
-    it('JS file', () => {
-    // the JavaScript file comes from a domain different from the page
-      cy.visit('/')
-      cy.get('[data-cy=download-remote-js]').click()
-
-      cy.log('**confirm downloaded JavaScript file**')
-      const downloadedFilename = path.join(downloadsFolder, 'analytics.js')
-
-      cy.readFile(downloadedFilename).should((text) => {
-      // validate the downloaded file
-        const lines = text.split('\n')
-
-        expect(lines).to.have.length.gt(20)
-      })
-    })
-
-    it('ZIP archive', () => {
-      cy.visit('/')
-      cy.get('[data-cy=download-remote-zip]').click()
-
-      cy.log('**confirm downloaded ZIP**')
-      validateZip()
-    })
-  })
-
   context('form submission', () => {
     it('sends csv', () => {
       cy.visit('/')
@@ -260,7 +184,7 @@ describe('file download', () => {
     })
   })
 
-  it('finds file', { browser: '!firefox' }, () => {
+  it('finds file', () => {
     // imagine we do not know the exact filename after download
     // so let's call a task to find the file on disk before verifying it
     // image comes from the same domain as the page
@@ -268,7 +192,7 @@ describe('file download', () => {
     cy.get('[data-cy=download-png]').click()
 
     cy.log('**find the image**')
-    const mask = `${downloadsFolder}/*.png`
+    const mask = `${downloadsFolder}/**.png`
 
     cy.task('findFile', mask).then((foundImage) => {
       cy.log(`found image ${foundImage}`)
