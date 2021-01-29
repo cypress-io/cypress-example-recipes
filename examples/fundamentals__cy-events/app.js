@@ -2,6 +2,8 @@
 document
 .getElementById('click-me')
 .addEventListener('click', () => {
-  /* global Analytics */
-  Analytics.sendEvent('click', 'button#click-me')
+/* global Analytics */
+  if (window.Analytics) {
+    window.Analytics.sendEvent('click', 'button#click-me')
+  }
 })
