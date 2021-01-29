@@ -20,6 +20,7 @@ Recipe | Description
 [Use Chrome Remote Interface](./examples/fundamentals__chrome-remote-debugging) | Use Chrome debugger protocol to trigger hover state and print media style
 [Out-of-the-box TypeScript](./examples/fundamentals__typescript) | Write tests in TypeScript without setting up preprocessors
 [Per-test timeout](./examples/fundamentals__timeout) | Fail a test if it runs longer than the specified time limit
+[Cypress events](./examples/fundamentals__cy-events) | Using `Cypress.on` and `cy.on` to listen to [Cypress events](https://on.cypress.io/catalog-of-events) like `before:window:load`
 
 ## Testing the DOM
 
