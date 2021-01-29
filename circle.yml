@@ -435,7 +435,7 @@ all_jobs: &all_jobs
   - fundamentals__errors:
       requires:
         - build
-  fundamentals__cy-events:
+  - fundamentals__cy-events:
       requires:
         - build
   - logging-in__csrf-tokens:
