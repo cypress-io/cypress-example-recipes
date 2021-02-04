@@ -2,6 +2,8 @@
 
 ![File download in Chrome](images/chrome.png)
 
+⚠️ **Note:** Testing downloading files from a [cross-origin domain](https://web.dev/same-site-same-origin/) is not currently supported in Cypress.
+
 See [cypress/plugins/index.js](cypress/plugins/index.js) to see how we validate the files after download. See the [cypress/integration/spec.js](cypress/integration/spec.js) spec file that downloads and verifies:
 
 - a CSV file
