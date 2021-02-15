@@ -94,22 +94,22 @@ module.exports = (on, config) => {
 
     // a task to find one file matching the given mask
     // returns just the first matching file
-    findFile (mask) {
+    async findFile (mask) {
       if (!mask) {
-        throw new Error('Missing a file mask to seach')
+        throw new Error('Missing a file mask to search')
       }
 
       console.log('searching for files %s', mask)
 
-      return globby(mask).then((list) => {
-        if (!list.length) {
-          throw new Error(`Could not find files matching mask "${mask}"`)
-        }
+      const list = await globby(mask)
 
-        console.log('found file: %s', list[0])
+      if (!list.length) {
+        throw new Error(`Could not find files matching mask "${mask}"`)
+      }
 
-        return list[0]
-      })
+      console.log('found file: %s', list[0])
+
+      return list[0]
     },
   })
 }
