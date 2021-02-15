@@ -260,12 +260,15 @@ describe('file download', () => {
     })
   })
 
-  it('finds file', { browser: '!firefox' }, () => {
+  it('finds file', { browser: '!firefox', retries: 1 }, () => {
     // imagine we do not know the exact filename after download
     // so let's call a task to find the file on disk before verifying it
     // image comes from the same domain as the page
     cy.visit('/')
     cy.get('[data-cy=download-png]').click()
+
+    // give the file time to download
+    cy.wait(3000)
 
     cy.log('**find the image**')
     const mask = `${downloadsFolder}/*.png`
