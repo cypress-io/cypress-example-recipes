@@ -35,7 +35,31 @@ describe('intercept', () => {
       })
 
       describe('polling every 30 secs', function () {
-        it('displays the new list of fruits', () => {
+        it('fetches from the server (spies)', () => {
+          cy.clock()
+          cy.intercept('GET', '/favorite-fruits').as('fruits')
+          cy.visit('/')
+          // first call
+          cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+
+          // 30 seconds passes and the application fetches again
+          cy.tick(30000)
+          cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+
+          // 3rd call
+          cy.tick(30000)
+          cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+
+          // 4th call
+          cy.tick(30000)
+          cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+
+          // 5th call
+          cy.tick(30000)
+          cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+        })
+
+        it('displays the new list of fruits (stubs)', () => {
           cy.clock()
 
           // first request - respond with 3 fruits
