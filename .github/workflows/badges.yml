@@ -1,0 +1,34 @@
+name: badges
+on:
+  push:
+    # update README badge only if the README file changes
+    # or if the package.json file changes, or this file changes
+    branches:
+      - master
+    paths:
+      - README.md
+      - package.json
+      - .github/workflows/badges.yml
+  schedule:
+    # update badges every night
+    # because we have a few badges that are linked
+    # to the external repositories
+    - cron: '0 3 * * *'
+
+jobs:
+  badges:
+    name: Badges
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - name: Update version badges 🏷
+        run: npx -p dependency-version-badge update-badge cypress
+
+      - name: Commit any changed files 💾
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Updated badges
+          branch: master
+          file_pattern: README.md
