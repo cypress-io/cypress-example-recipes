@@ -1,6 +1,5 @@
 {
   "automerge": true,
-  "commitMessage": "{{semanticPrefix}}Update {{depName}} to {{newVersion}} 🌟",
   "extends": [
     "config:base"
   ],
@@ -15,23 +14,8 @@
     "automerge": false
   },
   "masterIssue": true,
-  "packageRules": [
-    {
-      "groupName": "eslint",
-      "packagePatterns": "^eslint"
-    },
-    {
-      "groupName": "typescript",
-      "packageNames": [
-        "@babel/preset-typescript",
-        "tslint",
-        "typescript"
-      ]
-    }
-  ],
   "prConcurrentLimit": 3,
   "prHourlyLimit": 2,
-  "prTitle": "{{semanticPrefix}}{{#if isPin}}Pin{{else}}Update{{/if}} dependency {{depName}} to version {{newVersion}} 🌟",
   "rangeStrategy": "pin",
   "schedule": [
     "after 2am and before 3am on sunday"
@@ -39,5 +23,22 @@
   "separateMultipleMajor": true,
   "separatePatchReleases": true,
   "timezone": "America/New_York",
-  "updateNotScheduled": false
+  "updateNotScheduled": false,
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "*"
+      ],
+      "excludePackagePatterns": [
+        "cypress",
+        "@cypress/browserify-preprocessor",
+        "@cypress/eslint-plugin-dev",
+        "@cypress/snapshot",
+        "@cypress/webpack-preprocessor",
+        "start-server-and-test",
+        "typescript"
+      ],
+      "enabled": false
+    }
+  ]
 }
