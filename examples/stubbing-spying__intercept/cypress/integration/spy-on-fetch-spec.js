@@ -53,6 +53,28 @@ describe('intercept', () => {
       cy.get('.user').should('have.length', 3)
     })
 
+    it('spies on multiple requests', () => {
+      cy.intercept({
+        method: 'POST',
+        pathname: '/users',
+      }).as('postUser')
+
+      cy.get('#post-user').click()
+      cy.wait('@postUser').its('response.statusCode').should('equal', 201)
+
+      // post 2nd time
+      cy.get('#post-user').click()
+      cy.wait('@postUser').its('response.statusCode').should('equal', 201)
+
+      // post 3rd time
+      cy.get('#post-user').click()
+      cy.wait('@postUser').its('response.statusCode').should('equal', 201)
+
+      // post 4th time
+      cy.get('#post-user').click()
+      cy.wait('@postUser').its('response.statusCode').should('equal', 201)
+    })
+
     it('checks the status code', () => {
       cy.intercept('/users').as('users')
       cy.get('#load-five-users').click()
@@ -138,6 +160,13 @@ describe('intercept', () => {
 
       cy.get('#load-five-users').click()
       cy.wait('@users5')
+
+      // let's click the buttons again
+      cy.get('#load-users').click()
+      cy.wait('@users3').its('response.statusCode').should('equal', 200)
+
+      cy.get('#load-five-users').click()
+      cy.wait('@users5').its('response.statusCode').should('equal', 200)
     })
 
     it('confirms the number of times an intercept was called', () => {
