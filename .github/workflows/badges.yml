@@ -28,7 +28,12 @@ jobs:
 
       - name: Commit any changed files 💾
         uses: stefanzweifel/git-auto-commit-action@v4
+        # because the master branch is protected (requires status checks to pass)
+        # we need to force push whenever we update the README with the new badge
+        # https://github.com/stefanzweifel/git-auto-commit-action#push-to-protected-branches
         with:
           commit_message: Updated badges
           branch: master
           file_pattern: README.md
+          push_options: --force
+          token: ${{ secrets.BADGES_GH_TOKEN }}
