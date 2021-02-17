@@ -120,9 +120,18 @@ function putUser () {
   })
 }
 
-document.getElementById('load-users').addEventListener('click', loadUsers(3))
-document.getElementById('load-five-users').addEventListener('click', loadUsers(5))
-document.getElementById('load-second-user').addEventListener('click', loadUser(2))
+if (document.getElementById('load-users')) {
+  document.getElementById('load-users').addEventListener('click', loadUsers(3))
+}
+
+if (document.getElementById('load-five-users')) {
+  document.getElementById('load-five-users').addEventListener('click', loadUsers(5))
+}
+
+if (document.getElementById('load-second-user')) {
+  document.getElementById('load-second-user').addEventListener('click', loadUser(2))
+}
+
 const postUserButton = document.getElementById('post-user')
 
 if (postUserButton) {
@@ -137,6 +146,11 @@ if (updateUserButton) {
 
 const updateNetworkStatus = () => {
   const el = document.getElementById('network-status')
+
+  if (!el) {
+    return
+  }
+
   const text = window.navigator.onLine ? '🟢 online' : '🟥 offline'
 
   el.innerText = text
