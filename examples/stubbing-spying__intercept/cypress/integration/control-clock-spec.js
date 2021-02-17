@@ -34,71 +34,214 @@ describe('intercept', () => {
         .should('have.text', 'Cantaloupe')
       })
 
-      describe('polling every 30 secs', function () {
-        it('fetches from the server (spies)', () => {
-          cy.clock()
-          cy.intercept('GET', '/favorite-fruits').as('fruits')
-          cy.visit('/')
-          // first call
-          cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+      it('does not fetch for at least five seconds', () => {
+        let polled
 
-          // 30 seconds passes and the application fetches again
-          cy.tick(30000)
-          cy.wait('@fruits').its('response.statusCode').should('equal', 200)
-
-          // 3rd call
-          cy.tick(30000)
-          cy.wait('@fruits').its('response.statusCode').should('equal', 200)
-
-          // 4th call
-          cy.tick(30000)
-          cy.wait('@fruits').its('response.statusCode').should('equal', 200)
-
-          // 5th call
-          cy.tick(30000)
-          cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+        cy.intercept('/favorite-fruits', () => {
+          // we are not interested in the request
+          // we just want to know it has happened
+          polled = true
         })
 
-        it('displays the new list of fruits (stubs)', () => {
-          cy.clock()
+        cy.visit('/')
+        // at some point the request happens
+        // let's retry checking "polled" value until it happens
+        cy.wrap()
+        .should(() => {
+          expect(polled, 'fetched fruits').to.be.true
+          polled = false
+        })
 
-          // first request - respond with 3 fruits
-          // second request - respond with 4 fruits
-          let k = 0
-          const firstList = ['Apple', 'Banana', 'Cantaloupe']
-          const secondList = ['Orange', 'Cherry', 'Raspberry', 'Pineapple']
+        // physically wait 5 seconds
+        cy.wait(5000)
+        .then(() => {
+          expect(polled, 'no new requests').to.be.false
+        })
+      })
 
-          cy.intercept('/favorite-fruits', (req) => {
-            k += 1
-            if (k === 1) {
-              req.reply(firstList)
-            } else {
-              req.reply(secondList)
-            }
-          })
+      it('does not fetch for at least five seconds (implicit syntax)', () => {
+        // we will set a flag as a property in this object
+        const network = {
+          polled: true,
+        }
 
-          cy.visit('/')
-          cy.get('.favorite-fruits li').as('favoriteFruits')
+        cy.intercept('/favorite-fruits', () => {
+          // we are not interested in the request
+          // we just want to know it has happened
+          network.polled = true
+        }).as('fruits')
 
-          // initial list of fruits is shown
-          cy.get('@favoriteFruits').should('have.length', firstList.length)
-          firstList.forEach((fruit, j) => {
-            cy.get('@favoriteFruits').eq(j)
-            .should('have.text', firstList[j])
-          })
+        cy.visit('/')
+        // at some point the request happens
+        // let's retry checking "polled" value until it becomes true
+        cy.wrap(network).should('have.property', 'polled', true)
+        // let the network call finish before we reset the property
+        cy.wait('@fruits')
+        .then(() => {
+          network.polled = false
+        })
 
-          // move time 30 seconds and the setInterval will be triggered
-          // that polls for the fruit
-          cy.tick(30000)
+        // physically wait 5 seconds
+        cy.wait(5000)
+        // new network calls have not happened
+        cy.wrap(network).should('have.property', 'polled', false)
+      })
 
-          // make sure the updated list is shown
-          cy.get('@favoriteFruits')
-          .should('have.length', secondList.length)
+      it('does not fetch for at least five seconds (counter)', () => {
+        // we will set a flag as a property in this object
+        const network = {
+          polled: 0,
+        }
 
-          secondList.forEach((fruit, j) => {
-            cy.get('@favoriteFruits').eq(j)
-            .should('have.text', secondList[j])
-          })
+        cy.intercept('/favorite-fruits', () => {
+          // we are not interested in the request
+          // we just want to know it has happened
+          network.polled += 1
+        })
+
+        cy.visit('/')
+        // at some point the request happens
+        // let's retry checking "polled" value until it gets value 1
+        cy.wrap(network).should('have.property', 'polled', 1)
+
+        // physically wait 5 seconds
+        cy.wait(5000)
+        // still the network call only happened once
+        cy.wrap(network).should('have.property', 'polled', 1)
+      })
+
+      it('does not fetch for at least five seconds (cy.spy)', () => {
+        cy.intercept('/favorite-fruits', cy.spy().as('reqForFruits'))
+
+        cy.visit('/')
+        // at some point the request happens
+        cy.get('@reqForFruits').should('have.been.calledOnce')
+
+        // physically wait 5 seconds
+        cy.wait(5000)
+        // new network calls have not happened
+        cy.get('@reqForFruits').should('have.been.calledOnce')
+      })
+
+      it('does not fetch for at least five seconds (synthetic clock)', () => {
+        cy.clock()
+
+        let polled
+
+        cy.intercept('/favorite-fruits', () => {
+          // we are not interested in the request
+          // we just want to know it has happened
+          polled = true
+        })
+
+        cy.visit('/')
+        // at some point the request happens
+        // let's retry checking "polled" value until it happens
+        cy.wrap().should(() => {
+          // during the visit the network call happens
+          expect(polled, 'fetched fruits').to.be.true
+          // reset it back
+          polled = false
+        })
+
+        // the test runner sleeps for 5 seconds
+        cy.tick(5000)
+        .then(() => {
+          // and checks the "polled" value again
+          expect(polled, 'no new network call').to.be.false
+        })
+
+        // but if we wait 25 more seconds, a network call happens again
+        cy.tick(25000)
+        cy.wrap()
+        .should(() => {
+          expect(polled, 'new fruits').to.be.true
+        })
+      })
+
+      it('does not fetch for at least five seconds (synthetic clock and cy.spy)', () => {
+        cy.clock()
+        cy.intercept('/favorite-fruits', cy.spy().as('reqForFruits'))
+
+        cy.visit('/')
+        // at some point the request happens
+        cy.get('@reqForFruits').should('have.been.calledOnce')
+
+        cy.tick(5000)
+
+        // no new network calls
+        cy.get('@reqForFruits').should('have.been.calledOnce')
+
+        // but add 25 more seconds, and the app should have made a network call
+        cy.tick(25000)
+        cy.get('@reqForFruits').should('have.been.calledTwice')
+      })
+    })
+
+    describe('polling every 30 secs', function () {
+      it('fetches from the server (spies)', () => {
+        cy.clock()
+        cy.intercept('GET', '/favorite-fruits').as('fruits')
+        cy.visit('/')
+        // first call
+        cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+
+        // 30 seconds passes and the application fetches again
+        cy.tick(30000)
+        cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+
+        // 3rd call
+        cy.tick(30000)
+        cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+
+        // 4th call
+        cy.tick(30000)
+        cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+
+        // 5th call
+        cy.tick(30000)
+        cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+      })
+
+      it('displays the new list of fruits (stubs)', () => {
+        cy.clock()
+
+        // first request - respond with 3 fruits
+        // second request - respond with 4 fruits
+        let k = 0
+        const firstList = ['Apple', 'Banana', 'Cantaloupe']
+        const secondList = ['Orange', 'Cherry', 'Raspberry', 'Pineapple']
+
+        cy.intercept('/favorite-fruits', (req) => {
+          k += 1
+          if (k === 1) {
+            req.reply(firstList)
+          } else {
+            req.reply(secondList)
+          }
+        })
+
+        cy.visit('/')
+        cy.get('.favorite-fruits li').as('favoriteFruits')
+
+        // initial list of fruits is shown
+        cy.get('@favoriteFruits').should('have.length', firstList.length)
+        firstList.forEach((fruit, j) => {
+          cy.get('@favoriteFruits').eq(j)
+          .should('have.text', firstList[j])
+        })
+
+        // move time 30 seconds and the setInterval will be triggered
+        // that polls for the fruit
+        cy.tick(30000)
+
+        // make sure the updated list is shown
+        cy.get('@favoriteFruits')
+        .should('have.length', secondList.length)
+
+        secondList.forEach((fruit, j) => {
+          cy.get('@favoriteFruits').eq(j)
+          .should('have.text', secondList[j])
         })
       })
     })
