@@ -1,4 +1,4 @@
-/* global window, document, fetch */
+/* global window, document, fetch, XMLHttpRequest */
 /* eslint-disable no-console */
 function updateFavoriteFruits (contents) {
   if (typeof contents !== 'string') {
@@ -145,3 +145,25 @@ const updateNetworkStatus = () => {
 updateNetworkStatus()
 window.addEventListener('offline', updateNetworkStatus)
 window.addEventListener('online', updateNetworkStatus)
+
+function abortAndRequestAgain () {
+  let xhr = new XMLHttpRequest()
+
+  xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos/1')
+  xhr.responseType = 'json'
+  xhr.send()
+  xhr.abort()
+
+  xhr = new XMLHttpRequest()
+  xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos/1')
+  xhr.responseType = 'json'
+  xhr.send()
+  xhr.onload = () => {
+    document.body.innerHTML += `<pre>${JSON.stringify(xhr.response)}</pre>`
+  }
+}
+const abortButton = document.getElementById('aborted-request')
+
+if (abortButton) {
+  abortButton.addEventListener('click', abortAndRequestAgain)
+}

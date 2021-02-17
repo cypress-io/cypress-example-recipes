@@ -75,6 +75,17 @@ describe('intercept', () => {
       cy.wait('@postUser').its('response.statusCode').should('equal', 201)
     })
 
+    // https://github.com/cypress-io/cypress/issues/9549
+    it('handles aborted requests', () => {
+      cy.intercept('https://jsonplaceholder.typicode.com/todos/1').as('aborted')
+      cy.get('#aborted-request').click()
+      cy.wait('@aborted', { timeout: 2000 })
+
+      cy.wait(1000)
+      cy.get('#aborted-request').click()
+      cy.wait('@aborted', { timeout: 2000 })
+    })
+
     it('checks the status code', () => {
       cy.intercept('/users').as('users')
       cy.get('#load-five-users').click()
