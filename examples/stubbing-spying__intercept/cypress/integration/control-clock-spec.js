@@ -19,7 +19,7 @@ describe('intercept', () => {
       it('displays list of fruits', function () {
         // https://on.cypress.io/intercept
         cy.intercept('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe'])
-        cy.visit('/')
+        cy.visit('/fruits.html')
 
         cy.get('.favorite-fruits li').as('favoriteFruits')
         .should('have.length', 3)
@@ -43,7 +43,7 @@ describe('intercept', () => {
           polled = true
         })
 
-        cy.visit('/')
+        cy.visit('/fruits.html')
         // at some point the request happens
         // let's retry checking "polled" value until it happens
         cy.wrap()
@@ -71,7 +71,7 @@ describe('intercept', () => {
           network.polled = true
         }).as('fruits')
 
-        cy.visit('/')
+        cy.visit('/fruits.html')
         // at some point the request happens
         // let's retry checking "polled" value until it becomes true
         cy.wrap(network).should('have.property', 'polled', true)
@@ -99,7 +99,7 @@ describe('intercept', () => {
           network.polled += 1
         })
 
-        cy.visit('/')
+        cy.visit('/fruits.html')
         // at some point the request happens
         // let's retry checking "polled" value until it gets value 1
         cy.wrap(network).should('have.property', 'polled', 1)
@@ -113,7 +113,7 @@ describe('intercept', () => {
       it('does not fetch for at least five seconds (cy.spy)', () => {
         cy.intercept('/favorite-fruits', cy.spy().as('reqForFruits'))
 
-        cy.visit('/')
+        cy.visit('/fruits.html')
         // at some point the request happens
         cy.get('@reqForFruits').should('have.been.calledOnce')
 
@@ -134,7 +134,7 @@ describe('intercept', () => {
           polled = true
         })
 
-        cy.visit('/')
+        cy.visit('/fruits.html')
         // at some point the request happens
         // let's retry checking "polled" value until it happens
         cy.wrap().should(() => {
@@ -163,7 +163,7 @@ describe('intercept', () => {
         cy.clock()
         cy.intercept('/favorite-fruits', cy.spy().as('reqForFruits'))
 
-        cy.visit('/')
+        cy.visit('/fruits.html')
         // at some point the request happens
         cy.get('@reqForFruits').should('have.been.calledOnce')
 
@@ -182,7 +182,7 @@ describe('intercept', () => {
       it('fetches from the server (spies)', () => {
         cy.clock()
         cy.intercept('GET', '/favorite-fruits').as('fruits')
-        cy.visit('/')
+        cy.visit('/fruits.html')
         // first call
         cy.wait('@fruits').its('response.statusCode').should('equal', 200)
 
@@ -221,7 +221,7 @@ describe('intercept', () => {
           }
         })
 
-        cy.visit('/')
+        cy.visit('/fruits.html')
         cy.get('.favorite-fruits li').as('favoriteFruits')
 
         // initial list of fruits is shown
