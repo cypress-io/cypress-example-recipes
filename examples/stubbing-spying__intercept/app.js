@@ -9,7 +9,13 @@ function updateFavoriteFruits (contents) {
 }
 
 function getFavoriteFruits () {
-  document.querySelector('.favorite-fruits').innerHTML = '<div class="loader"></div>'
+  const favFruits = document.querySelector('.favorite-fruits')
+
+  if (!favFruits) {
+    return
+  }
+
+  favFruits.innerHTML = '<div class="loader"></div>'
 
   fetch('/favorite-fruits')
   .then((response) => {
@@ -159,3 +165,15 @@ const updateNetworkStatus = () => {
 updateNetworkStatus()
 window.addEventListener('offline', updateNetworkStatus)
 window.addEventListener('online', updateNetworkStatus)
+
+if (document.getElementById('get-headers')) {
+  document.getElementById('get-headers').addEventListener('click', () => {
+    fetch('/req-headers')
+    .then((r) => r.json())
+    .then((headers) => {
+      const output = document.getElementById('output')
+
+      output.innerText = JSON.stringify(headers, null, 2)
+    })
+  })
+}
