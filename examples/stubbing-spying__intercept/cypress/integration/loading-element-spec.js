@@ -64,4 +64,22 @@ describe('intercept', () => {
     cy.get('.loader').should('be.visible').then(sendResponse)
     cy.get('.loader').should('not.exist')
   })
+
+  it('shows loading element for as little as possible via Promise.defer', () => {
+    // while official Bluebird Promise deferred has been deprecated
+    // I don't think it is going away any time soon
+    const deferred = Cypress.Promise.defer()
+
+    const fruits = ['Apple', 'Banana', 'Cantaloupe']
+
+    cy.intercept('/favorite-fruits', (req) => {
+      return deferred.promise.then(req.reply)
+    })
+
+    cy.visit('/fruits.html')
+    cy.get('.loader').should('be.visible')
+    .then(() => deferred.resolve(fruits))
+
+    cy.get('.loader').should('not.exist')
+  })
 })
