@@ -92,6 +92,7 @@ describe('intercept', () => {
     it('can stub network calls for each page', () => {
       let k = 0
 
+      // return difference responses on each call
       cy.intercept('/favorite-fruits', (req) => {
         k += 1
         switch (k) {
@@ -214,66 +215,6 @@ describe('intercept', () => {
 
       // the user should be shown on the page
       cy.contains('.user', `${users[0].id} - ${users[0].email}`).should('be.visible')
-    })
-
-    describe('CSS', () => {
-      it('highlights LI elements using injected CSS', () => {
-        // let's intercept the stylesheet the application is loading
-        // to highlight list items with a border
-        cy.intercept('styles.css', (req) => {
-          // to avoid caching responses and the server responding
-          // with nothing (because the resource has not changed)
-          // and force the server to send the CSS file
-          // delete caching headers from the request
-          delete req.headers['if-modified-since']
-          delete req.headers['if-none-match']
-
-          req.reply((res) => {
-            res.send(`${res.body}
-              li {
-                border: 1px solid pink;
-              }
-            `)
-          })
-        })
-
-        cy.visit('/')
-        // confirm the CSS was injected and applied
-        cy.get('li').should('have.length.gt', 1).first().invoke('css', 'border')
-        .should('be.a', 'string')
-        .and('include', 'solid')
-      })
-    })
-
-    describe('HTML', () => {
-      it('modifies the page itself', () => {
-        const pageUrl = `${Cypress.config('baseUrl')}/`
-
-        cy.intercept('/', (req) => {
-          // we are only interested in the HTML root resource
-          if (req.url !== pageUrl) {
-            return
-          }
-
-          req.reply((res) => {
-            const style = `
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              width: 100%;
-              background-color: pink;
-              text-align: center;
-              text-size: large;
-              padding: 1em;
-            `
-
-            res.body += `<footer style="${style}">⚠️ This is a Cypress test ⚠️</footer>`
-          })
-        })
-
-        cy.visit('/')
-        cy.contains('footer', 'Cypress test').should('be.visible')
-      })
     })
 
     it('stub or spy depending on the object sent', () => {

@@ -14,37 +14,6 @@
 // stub out window.fetch again in order to control the response
 
 describe('intercept', () => {
-  it('shows loading element', () => {
-    cy.intercept('/favorite-fruits', {
-      body: ['Apple', 'Banana', 'Cantaloupe'],
-      delay: 1000,
-    })
-
-    cy.visit('/fruits.html')
-    // see https://glebbahmutov.com/blog/negative-assertions/
-    cy.get('.loader').should('be.visible')
-    cy.get('.loader').should('not.exist')
-  })
-
-  it('shows loading element for as little as possible', () => {
-    // see https://blog.dai.codes/cypress-loading-state-tests/
-    let sendResponse
-    const trigger = new Cypress.Promise((resolve) => {
-      // save the resolve method
-      // so this promise resolves when we call it
-      sendResponse = resolve
-    })
-
-    cy.intercept('/favorite-fruits', (req) => {
-      // wait for the trigger to be called
-      trigger.then(() => req.reply(['Apple', 'Banana', 'Cantaloupe']))
-    })
-
-    cy.visit('/fruits.html')
-    cy.get('.loader').should('be.visible').then(sendResponse)
-    cy.get('.loader').should('not.exist')
-  })
-
   context('clock', function () {
     describe('when favorite fruits are returned', function () {
       it('displays list of fruits', function () {
@@ -232,6 +201,51 @@ describe('intercept', () => {
         // 5th call
         cy.tick(30000)
         cy.wait('@fruits').its('response.statusCode').should('equal', 200)
+      })
+
+      it('returns different fruits every 30 seconds', () => {
+        cy.clock()
+        let k = 0
+
+        // return difference responses on each call
+        cy.intercept('/favorite-fruits', (req) => {
+          k += 1
+          switch (k) {
+            case 1:
+              return req.reply(['apples 🍎'])
+            case 2:
+              return req.reply(['grapes 🍇'])
+            default:
+              return req.reply(['kiwi 🥝'])
+          }
+        })
+
+        cy.visit('/fruits.html')
+        cy.contains('apples 🍎')
+        cy.tick(30000)
+        cy.contains('grapes 🍇')
+        cy.tick(30000)
+        cy.contains('kiwi 🥝')
+      })
+
+      it('returns different fruits every 30 seconds (array shift)', () => {
+        cy.clock()
+
+        // return difference responses on each call
+        const responses = [
+          ['apples 🍎'], ['grapes 🍇'],
+        ]
+
+        cy.intercept('/favorite-fruits', (req) => {
+          req.reply(responses.shift() || ['kiwi 🥝'])
+        })
+
+        cy.visit('/fruits.html')
+        cy.contains('apples 🍎')
+        cy.tick(30000)
+        cy.contains('grapes 🍇')
+        cy.tick(30000)
+        cy.contains('kiwi 🥝')
       })
 
       it('displays the new list of fruits (stubs)', () => {
