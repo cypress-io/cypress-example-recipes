@@ -92,6 +92,7 @@ describe('intercept', () => {
     it('can stub network calls for each page', () => {
       let k = 0
 
+      // return difference responses on each call
       cy.intercept('/favorite-fruits', (req) => {
         k += 1
         switch (k) {

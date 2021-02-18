@@ -234,6 +234,51 @@ describe('intercept', () => {
         cy.wait('@fruits').its('response.statusCode').should('equal', 200)
       })
 
+      it('returns different fruits every 30 seconds', () => {
+        cy.clock()
+        let k = 0
+
+        // return difference responses on each call
+        cy.intercept('/favorite-fruits', (req) => {
+          k += 1
+          switch (k) {
+            case 1:
+              return req.reply(['apples 🍎'])
+            case 2:
+              return req.reply(['grapes 🍇'])
+            default:
+              return req.reply(['kiwi 🥝'])
+          }
+        })
+
+        cy.visit('/fruits.html')
+        cy.contains('apples 🍎')
+        cy.tick(30000)
+        cy.contains('grapes 🍇')
+        cy.tick(30000)
+        cy.contains('kiwi 🥝')
+      })
+
+      it('returns different fruits every 30 seconds (array shift)', () => {
+        cy.clock()
+
+        // return difference responses on each call
+        const responses = [
+          ['apples 🍎'], ['grapes 🍇'],
+        ]
+
+        cy.intercept('/favorite-fruits', (req) => {
+          req.reply(responses.shift() || ['kiwi 🥝'])
+        })
+
+        cy.visit('/fruits.html')
+        cy.contains('apples 🍎')
+        cy.tick(30000)
+        cy.contains('grapes 🍇')
+        cy.tick(30000)
+        cy.contains('kiwi 🥝')
+      })
+
       it('displays the new list of fruits (stubs)', () => {
         cy.clock()
 
