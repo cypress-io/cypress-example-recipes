@@ -13,6 +13,39 @@ describe('intercept', () => {
     cy.get('.loader').should('not.exist')
   })
 
+  // this test does not work, Cypress has no idea you want to respond
+  // and just continues with the real network call to the server
+  // NOTE: cannot reply asynchronously using setTimeout
+  it.skip('slows the reply using setTimeout', () => {
+    cy.intercept('/favorite-fruits', (req) => {
+      setTimeout(() => {
+        req.reply(['Apple', 'Banana', 'Cantaloupe'])
+      }, 1000)
+    })
+
+    cy.visit('/fruits.html')
+    cy.get('.loader').should('be.visible')
+    cy.get('.loader').should('not.exist')
+  })
+
+  it('slows the reply by returning a Promise', () => {
+    // IMPORTANT: make sure the route handler returns a promise
+    // so Cypress knows the handler is still processing
+    const fruits = ['Apple', 'Banana', 'Cantaloupe']
+
+    cy.intercept('/favorite-fruits', (req) => {
+    // return a promise that waits 1 second
+    // and resolves with the list of fruits
+    // that response will then be passed to "req.reply(...)"
+    // to be returned from the network
+      return Cypress.Promise.delay(1000, fruits).then(req.reply)
+    })
+
+    cy.visit('/fruits.html')
+    cy.get('.loader').should('be.visible')
+    cy.get('.loader').should('not.exist')
+  })
+
   it('shows loading element for as little as possible', () => {
     // see https://blog.dai.codes/cypress-loading-state-tests/
     let sendResponse
@@ -24,7 +57,7 @@ describe('intercept', () => {
 
     cy.intercept('/favorite-fruits', (req) => {
       // wait for the trigger to be called
-      trigger.then(() => req.reply(['Apple', 'Banana', 'Cantaloupe']))
+      return trigger.then(() => req.reply(['Apple', 'Banana', 'Cantaloupe']))
     })
 
     cy.visit('/fruits.html')
