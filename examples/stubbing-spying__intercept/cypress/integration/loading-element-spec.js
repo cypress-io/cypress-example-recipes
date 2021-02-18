@@ -34,10 +34,10 @@ describe('intercept', () => {
     const fruits = ['Apple', 'Banana', 'Cantaloupe']
 
     cy.intercept('/favorite-fruits', (req) => {
-    // return a promise that waits 1 second
-    // and resolves with the list of fruits
-    // that response will then be passed to "req.reply(...)"
-    // to be returned from the network
+      // return a promise that waits 1 second
+      // and resolves with the list of fruits
+      // that response will then be passed to "req.reply(...)"
+      // to be returned from the network
       return Cypress.Promise.delay(1000, fruits).then(req.reply)
     })
 
