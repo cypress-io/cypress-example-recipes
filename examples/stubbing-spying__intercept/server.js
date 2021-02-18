@@ -31,6 +31,14 @@ app.get('/form', (req, res) => {
   res.sendFile(`${__dirname}/form.html`)
 })
 
+app.get('/fruits', (req, res) => {
+  res.sendFile(`${__dirname}/fruits.html`)
+})
+
+app.get('/headers', (req, res) => {
+  res.sendFile(`${__dirname}/headers.html`)
+})
+
 app.get('/favorite-fruits', (req, res) => {
   res.json(_.sampleSize(fruits, 5))
 })
@@ -43,6 +51,11 @@ app.get('/logout', (req, res) => {
 app.get('/getout', (req, res) => {
   console.log('logging out, redirecting to www.cypress.io')
   res.redirect('https://www.cypress.io')
+})
+
+app.get('/req-headers', (req, res) => {
+  console.log('request headers', req.headers)
+  res.json(req.headers)
 })
 
 app.listen(port)
