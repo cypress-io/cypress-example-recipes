@@ -18,21 +18,48 @@ describe('intercept', () => {
     return Cypress._.keys(aliasRoute.requests || {}).length
   }
 
-  context('spying', function () {
-    beforeEach(function () {
-      cy.intercept('/favorite-fruits').as('fetchFruits')
-      cy.visit('/')
-    })
-
+  context('fruits', () => {
     it('requests favorite fruits', function () {
+      cy.intercept('/favorite-fruits').as('fetchFruits')
+      cy.visit('/fruits.html')
       cy.wait('@fetchFruits').its('response.body')
       .then((fruits) => {
-        cy.get('.favorite-fruits li').should('have.length', fruits.length)
+        cy.get('.favorite-fruits li')
+        .should('have.length', fruits.length)
 
         fruits.forEach((fruit) => {
           cy.contains('.favorite-fruits li', fruit)
         })
       })
+    })
+
+    it('requests favorite fruits: wait and get', function () {
+      cy.intercept('/favorite-fruits').as('fetchFruits')
+      cy.visit('/fruits.html')
+      // wait on the request once
+      cy.wait('@fetchFruits')
+      // but get the latest request as many times as needed
+      cy.get('@fetchFruits').its('response.statusCode')
+      .should('eq', 200)
+
+      cy.get('@fetchFruits').its('response.body')
+      .should('have.length.gt', 3)
+    })
+
+    it('requests favorite fruits: multiple assertions', function () {
+      cy.intercept('/favorite-fruits').as('fetchFruits')
+      cy.visit('/fruits.html')
+      cy.wait('@fetchFruits').then((intercept) => {
+        expect(intercept.response.statusCode, 'status code').to.equal(200)
+        expect(intercept.response.body, 'at least 3 fruits').to.have.length.gt(3)
+      })
+      // also see https://www.cypress.io/blog/2019/12/23/asserting-network-calls-from-cypress-tests/
+    })
+  })
+
+  context('spying', function () {
+    beforeEach(function () {
+      cy.visit('/')
     })
 
     it('spying on 2nd domain', () => {
