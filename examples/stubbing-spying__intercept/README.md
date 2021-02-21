@@ -12,5 +12,6 @@
 - [form-spec.js](./cypress/integration/form-spec.js) shows how to stub form submission request and verify the submitted form fields (`application/x-www-form-urlencoded` or `multipart/form-data`)
 - [loading-element-spec.js](./cypress/integration/loading-element-spec.js) shows how to test the loading element that appears while the app is fetching the data
 - [headers-spec.js](./cypress/integration/header-spec.js) adds a custom header to the outgoing request. Note that this request header won't be shown by the browser's Network tab, since the request has already left the browser.
+- [ping-spec.js](./cypress/integration/ping-spec.js) shows how to confirm `<a ping="/track">` really is making a POST request
 
 For more `cy.intercept` examples and tips read the [Cypress cy.intercept Problems](https://glebbahmutov.com/blog/cypress-intercept-problems/) blog post
