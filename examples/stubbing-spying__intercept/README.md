@@ -5,7 +5,7 @@
 - [headers-spec.js](./cypress/integration/header-spec.js) adds a custom header to the outgoing request. Note that this request header won't be shown by the browser's Network tab, since the request has already left the browser.
 - [html-css-spec.js](cypress/integration/html-css-spec.js) modifies the page itself and changes the CSS requested by the page.
 - [image-spec.js](cypress/integration/image-spec.js) shows how to spy and stub static resources like images
-- [jsonp-spec.js](cypress/integration/jsonp-spec.js) shows how to spy on the JSONP data request
+- [jsonp-spec.js](cypress/integration/jsonp-spec.js) shows how to spy on or stub a JSONP data request
 - [loading-element-spec.js](./cypress/integration/loading-element-spec.js) shows how to test the loading element that appears while the app is fetching the data
 - [matching-spec.js](cypress/integration/matching-spec.js) shows how the same request can match multiple `cy.intercept` matchers
 - [ping-spec.js](./cypress/integration/ping-spec.js) shows how to confirm `<a ping="/track">` really is making a POST request

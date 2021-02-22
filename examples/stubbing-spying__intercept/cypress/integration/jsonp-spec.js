@@ -59,4 +59,39 @@ describe('intercept jsonp', { viewportHeight: 500, viewportWidth: 400 }, () => {
       })
     })
   })
+
+  it('stubs a JSONP request', () => {
+    // we will reply with these fruits
+    const fruits = ['apples 🍎', 'grapes 🍇', 'kiwi 🥝']
+
+    // prepare to intercept JSONP requests that will be something like
+    // /favorite-fruits-jsonp?fruitsCallback=jQuery3510137647...
+    cy.intercept({
+      method: 'GET',
+      pathname: '/favorite-fruits-jsonp',
+      query: {
+        // matches any value in this search parameter
+        fruitsCallback: '*',
+      },
+    }, (req) => {
+      // find the name of the callback method the app wants us to call
+      const url = new URL(req.url)
+      const callbackName = url.searchParams.get('fruitsCallback')
+
+      expect(callbackName, 'set by jQuery').to.be.a('string')
+
+      const fruitsText = JSON.stringify(fruits)
+      const fruitsJavaScript = `${callbackName}(${fruitsText})`
+
+      req.reply(fruitsJavaScript)
+    })
+    .as('fruits')
+
+    cy.visit('/fruits-jsonp')
+    // make sure the expected fruits are shown
+    cy.get('.favorite-fruits li').should('have.length', fruits.length)
+    fruits.forEach((fruit) => {
+      cy.contains('.favorite-fruits li', fruit)
+    })
+  })
 })
