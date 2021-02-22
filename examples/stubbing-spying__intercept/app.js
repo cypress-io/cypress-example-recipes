@@ -159,7 +159,9 @@ function abortAndRequestAgain () {
   xhr.responseType = 'json'
   xhr.send()
   xhr.onload = () => {
-    document.body.innerHTML += `<pre>${JSON.stringify(xhr.response)}</pre>`
+    const status = document.getElementById('network-status')
+
+    status.innerHTML += `<pre>${JSON.stringify(xhr.response)}</pre>`
   }
 }
 const abortButton = document.getElementById('aborted-request')
