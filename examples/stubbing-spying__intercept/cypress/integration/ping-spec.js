@@ -1,6 +1,8 @@
 /// <reference types="Cypress" />
 // <a ping="..."> syntax is behind a flag in Firefox
-describe('intercept', { browser: '!firefox' }, () => {
+// https://caniuse.com/?search=anchor%20ping
+// Thus make sure to enable it in the plugin file via the browser launch options
+describe('intercept', () => {
   it('stubs anchor ping', () => {
     cy.visit('/')
     cy.intercept({
