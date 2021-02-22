@@ -39,6 +39,7 @@ Recipe | Description
 [Select widgets](./examples/testing-dom__select2) | Working with `<select>` elements and [Select2](https://select2.org/) widgets
 [Lit Elements](./examples/testing-dom__lit-element) | Testing Lit Elements with Shadow DOM
 [File download](./examples/testing-dom__download) | Download and validate CSV, Excel, text, Zip, and image files
+[Page reloads](./examples/testing-dom__page-reloads) | Avoiding `while` loop when dealing with randomness
 
 ## Logging in recipes
 
