@@ -45,6 +45,7 @@ Recipe | Description
 
 Recipe | Description
 --- | ---
+[Basic Auth](./examples/logging-in__basic-auth) | Log in using Basic Authentication
 [Single Sign On](./examples/logging-in__single-sign-on) | Log in across multiple servers or providers
 [HTML Web Forms](./examples/logging-in__html-web-forms) | Log in with a basic HTML form
 [XHR Web Forms](./examples/logging-in__xhr-web-forms) | Log in using an XHR
