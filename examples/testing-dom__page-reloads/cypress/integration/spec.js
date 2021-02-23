@@ -52,4 +52,37 @@ describe('page reloads', () => {
     cy.visit('public/index.html')
     checkAndReload()
   })
+
+  it('until the number 7 appears with reload limit', () => {
+    let reloadCount = 0
+    const reloadLimit = 100
+
+    const checkAndReload = () => {
+      // get the element's text, convert into a number
+      cy.get('#result', { log: false })
+      .invoke({ log: false }, 'text').then(parseInt)
+      .then((number) => {
+        // if the expected number is found
+        // stop adding any more commands
+        if (number === 7) {
+          cy.log('lucky **7**')
+        } else {
+          // otherwise insert more Cypress commands
+          // by calling the function after reload
+          cy.wait(500, { log: false })
+          reloadCount += 1
+          cy.log(`reload **${reloadCount} / ${reloadLimit}**`)
+          if (reloadCount > reloadLimit) {
+            throw new Error('Reload limit reached')
+          }
+
+          cy.reload({ log: false })
+          checkAndReload()
+        }
+      })
+    }
+
+    cy.visit('public/index.html')
+    checkAndReload()
+  })
 })
