@@ -291,6 +291,8 @@ jobs:
     <<: *defaults
   testing-dom__sorting-table:
     <<: *defaults
+  testing-dom__page-reloads:
+    <<: *defaults
   unit-testing__application-code:
     <<: *defaults
   unit-testing__react:
@@ -530,6 +532,9 @@ all_jobs: &all_jobs
   - testing-dom__root-style:
       requires:
         - build
+  - testing-dom__page-reloads:
+      requires:
+        - build
   - testing-dom__select2:
       requires:
         - build
@@ -662,6 +667,7 @@ all_jobs: &all_jobs
         - testing-dom__root-style
         - testing-dom__select2
         - testing-dom__sorting-table
+        - testing-dom__page-reloads
         - unit-testing__application-code
         - unit-testing__react
         - unit-testing__react-skeleton
