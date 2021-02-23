@@ -260,6 +260,13 @@ describe('file download', () => {
     })
   })
 
+  context('from location.href', () => {
+    it('CSV file', () => {
+      cy.visit('/')
+      cy.get('[data-cy=download-csv-href]').click()
+    })
+  })
+
   it('finds file', { browser: '!firefox', retries: 1 }, () => {
     // imagine we do not know the exact filename after download
     // so let's call a task to find the file on disk before verifying it
