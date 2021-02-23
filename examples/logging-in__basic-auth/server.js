@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
 const minimist = require('minimist')
 const morgan = require('morgan')
 const express = require('express')
+const bodyParser = require('body-parser')
 const basicAuth = require('express-basic-auth')
 
 const app = express()
@@ -17,6 +19,11 @@ app.use(morgan('dev'))
 app.use(basicAuth({
   users: { 'jane.lane': 'password123' },
 }))
+
+app.post('/echo', bodyParser.json(), (req, res) => {
+  console.log('/echo received', req.body)
+  res.json(req.body)
+})
 
 app.use(express.static('public'))
 app.listen(port)
