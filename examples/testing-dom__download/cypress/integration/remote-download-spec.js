@@ -1,6 +1,6 @@
 // @ts-check
 /// <reference types="cypress" />
-import { validateCsvList, validateExcelFile, validateTextFile, validateImage, validateZip } from './utils'
+import { validateCsvList, validateCsvFile, validateExcelFile, validateTextFile, validateImage, validateZip } from './utils'
 const neatCSV = require('neat-csv')
 const path = require('path')
 
@@ -29,6 +29,17 @@ describe('file download', () => {
       // parse CSV text into objects
       .then(neatCSV)
       .then(validateCsvList)
+    })
+
+    it('CSV file attribute', () => {
+      cy.visit('/')
+      cy.contains('h3', 'Download CSV')
+      cy.get('[data-cy=download-remote-csv]').should('have.attr', 'download')
+      cy.get('[data-cy=download-remote-csv]').should('have.attr', 'href')
+      .and('match', /\/records\.csv$/)
+
+      cy.get('[data-cy=download-remote-csv]').click()
+      validateCsvFile('records.csv')
     })
 
     it('Excel file', () => {
