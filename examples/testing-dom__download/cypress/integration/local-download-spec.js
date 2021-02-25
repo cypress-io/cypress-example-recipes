@@ -1,6 +1,6 @@
 // @ts-check
 /// <reference types="cypress" />
-import { validateCsvList, validateExcelFile, validateTextFile, validateImage, validateZip } from './utils'
+import { validateCsvList, validateCsvFile, validateExcelFile, validateTextFile, validateImage, validateZip } from './utils'
 const neatCSV = require('neat-csv')
 const path = require('path')
 
@@ -26,6 +26,22 @@ describe('file download', () => {
       // parse CSV text into objects
       .then(neatCSV)
       .then(validateCsvList)
+    })
+
+    it('CSV file using anchor href name', () => {
+      cy.visit('/')
+      cy.contains('h3', 'Download CSV')
+      cy.get('[data-cy=download-csv]').click()
+
+      // let's find out the download name
+      cy.get('[data-cy=download-csv]').should('have.attr', 'download')
+      cy.get('[data-cy=download-csv]').should('have.attr', 'href')
+      .then((filename) => {
+        expect(filename).to.match(/\.csv$/)
+        cy.log(`CSV name **${filename}**`)
+        //@ts-ignore
+        validateCsvFile(filename)
+      })
     })
 
     it('Excel file', () => {

@@ -1,5 +1,15 @@
 // @ts-check
 const path = require('path')
+const neatCSV = require('neat-csv')
+
+/**
+ * @param {string} csv
+*/
+export const validateCsv = (csv) => {
+  cy.wrap(csv)
+  .then(neatCSV)
+  .then(validateCsvList)
+}
 
 export const validateCsvList = (list) => {
   expect(list, 'number of records').to.have.length(3)
@@ -11,6 +21,16 @@ export const validateCsvList = (list) => {
     Occupation: 'student',
     State: 'MA',
   })
+}
+
+/**
+ * @param {string} name File name in the downloads folder
+ */
+export const validateCsvFile = (name) => {
+  const downloadsFolder = Cypress.config('downloadsFolder')
+  const filename = path.join(downloadsFolder, name)
+
+  cy.readFile(filename, 'utf8').then(validateCsv)
 }
 
 export const validateExcelFile = () => {
@@ -91,4 +111,15 @@ export const validateZip = () => {
   // thus it is easier to perform the checks from the plugins file that runs in Node
   // see the plugins file "on('task')" code to see how we can read and validate a Zip file
   cy.task('validateZipFile', downloadedFilename)
+}
+
+export const downloadByClicking = (url, name) => {
+  cy.log(`about to download **${name}**`)
+  cy.document().then((doc) => {
+    const link = doc.createElement('a')
+
+    link.href = url
+    link.download = name
+    link.click()
+  })
 }
