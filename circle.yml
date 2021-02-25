@@ -211,6 +211,8 @@ jobs:
     <<: *defaults
   file-upload-react:
     <<: *defaults
+  fundamentals__window-size:
+    <<: *defaults
   fundamentals__node-modules:
     <<: *defaults
   fundamentals__fixtures:
@@ -427,6 +429,9 @@ all_jobs: &all_jobs
   - file-upload-react:
       requires:
         - build
+  - fundamentals__window-size:
+      requires:
+        - build
   - fundamentals__node-modules:
       requires:
         - build
@@ -622,6 +627,7 @@ all_jobs: &all_jobs
         - blogs__form-submit
         - extending-cypress__chai-assertions
         - file-upload-react
+        - fundamentals__window-size
         - fundamentals__node-modules
         - fundamentals__fixtures
         - fundamentals__timeout
