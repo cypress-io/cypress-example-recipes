@@ -14,7 +14,6 @@ module.exports = function (on, config) {
 
   // let's increase the browser window size when running headlessly
   // this will produce higher resolution images and videos
-  // https://glebbahmutov.com/blog/cypress-tips-and-tricks/#produce-high-quality-video-recording
   // https://on.cypress.io/browser-launch-api
   on('before:browser:launch', (browser = {}, launchOptions) => {
     console.log('launching browser %s is headless? %s', browser.name, browser.isHeadless)
@@ -34,6 +33,7 @@ module.exports = function (on, config) {
     }
 
     if (browser.name === 'electron' && browser.isHeadless) {
+      // might not work on CI for some reason
       launchOptions.preferences.width = width
       launchOptions.preferences.height = height
     }

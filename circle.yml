@@ -432,6 +432,7 @@ all_jobs: &all_jobs
   - fundamentals__window-size:
       requires:
         - build
+      test-command: npm run test:ci:record -- --group $CIRCLE_JOB
   - fundamentals__node-modules:
       requires:
         - build
@@ -445,6 +446,25 @@ all_jobs: &all_jobs
       requires:
         - build
   - fundamentals__cy-events:
+      requires:
+        - build
+  - fundamentals__dynamic-tests:
+      requires:
+        - build
+  - fundamentals__fixtures:
+      requires:
+        - build
+  - fundamentals__timeout:
+      requires:
+        - build
+  - fundamentals__module-api:
+      requires:
+        - build
+  - fundamentals__module-api-wrap:
+      requires:
+        - build
+      test-command: npm run test:ci
+  - fundamentals__typescript:
       requires:
         - build
   - logging-in__basic-auth:
@@ -580,25 +600,6 @@ all_jobs: &all_jobs
       requires:
         - build
   - server-communication__server-timing:
-      requires:
-        - build
-  - fundamentals__dynamic-tests:
-      requires:
-        - build
-  - fundamentals__fixtures:
-      requires:
-        - build
-  - fundamentals__timeout:
-      requires:
-        - build
-  - fundamentals__module-api:
-      requires:
-        - build
-  - fundamentals__module-api-wrap:
-      requires:
-        - build
-      test-command: npm run test:ci
-  - fundamentals__typescript:
       requires:
         - build
 
