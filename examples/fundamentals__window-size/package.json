@@ -6,7 +6,7 @@
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
-    "test:ci": "../../node_modules/.bin/cypress run --headless",
+    "test:ci": "../../node_modules/.bin/cypress run --headless --browser chrome",
     "test:ci:record": "../../node_modules/.bin/cypress run --record --headless"
   }
 }
