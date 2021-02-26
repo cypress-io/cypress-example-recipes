@@ -1,6 +1,7 @@
 # Stubbing application requests using [cy.intercept](https://on.cypress.io/intercept)
 
 - [control-clock-spec.js](cypress/integration/control-clock-spec.js) shows how to reply with different responses to an ajax request
+- [count-spec.js](cypress/integration/count-spec.js) uses `cy.intercept` and `cy.spy|cy.stub` combination to count the number of intercepted network calls
 - [form-spec.js](./cypress/integration/form-spec.js) shows how to stub form submission request and verify the submitted form fields (`application/x-www-form-urlencoded` or `multipart/form-data`)
 - [headers-spec.js](./cypress/integration/header-spec.js) adds a custom header to the outgoing request. Note that this request header won't be shown by the browser's Network tab, since the request has already left the browser.
 - [html-css-spec.js](cypress/integration/html-css-spec.js) modifies the page itself and changes the CSS requested by the page.

@@ -1,7 +1,12 @@
 /// <reference types="cypress" />
 /* eslint-env browser */
 describe('window size', () => {
-  it('shows the page clearly', () => {
+  /**
+   * Collects window and iframe sizes in pixels and prints
+   * them to the command log. Also sends the to the plugins file
+   * via cy.task to be printed in the terminal
+   */
+  const logSizes = () => {
     // let's get the total opened browser dimensions
     const windowWidth = window.top.innerWidth
     const windowHeight = window.top.innerHeight
@@ -36,7 +41,10 @@ describe('window size', () => {
       cy.log(`app viewport is: **${viewportWidth} x ${viewportHeight}**`)
       cy.task('log', { message: 'app viewport', o: { viewportWidth, viewportHeight } }, { log: false })
     })
+  }
 
+  it('shows the page clearly', () => {
+    logSizes()
     cy.visit('index.html')
     cy.screenshot('page', { capture: 'runner' })
   })
