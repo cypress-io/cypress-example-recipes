@@ -1,6 +1,55 @@
 /// <reference types="Cypress" />
 
 describe('intercept', () => {
+  context('counting network calls', () => {
+    it('makes 3 calls', () => {
+      let count = 0
+
+      cy.intercept('/favorite-fruits', () => {
+        // we are not changing the request or response here
+        // just counting the matched calls
+        count += 1
+      })
+
+      cy.visit('/fruits.html')
+      // ensure the fruits are loaded
+      cy.get('.favorite-fruits li').should('have.length', 5)
+
+      cy.reload()
+      cy.get('.favorite-fruits li').should('have.length', 5)
+
+      cy.reload()
+      cy.get('.favorite-fruits li').should('have.length', 5)
+      .then(() => {
+        // by now the count should have been updated
+        expect(count, 'network calls to fetch fruits').to.equal(3)
+      })
+    })
+
+    it('stubs 3 calls', () => {
+      let count = 0
+
+      cy.intercept('/favorite-fruits', (req) => {
+        count += 1
+        req.reply({ fixture: 'fruits.json' })
+      })
+
+      cy.visit('/fruits.html')
+      // ensure the fruits are loaded
+      cy.get('.favorite-fruits li').should('have.length', 3)
+
+      cy.reload()
+      cy.get('.favorite-fruits li').should('have.length', 3)
+
+      cy.reload()
+      cy.get('.favorite-fruits li').should('have.length', 3)
+      .then(() => {
+        // by now the count should have been updated
+        expect(count, 'network calls to fetch fruits').to.equal(3)
+      })
+    })
+  })
+
   context('counting network calls (spy)', () => {
     it('fetches every 30 seconds', () => {
       cy.clock()
