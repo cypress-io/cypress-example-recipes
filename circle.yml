@@ -104,12 +104,12 @@ jobs:
       - run: echo "all good"
 
   # a single utility job that can run multiple examples one by one
-  # but with chunking
+  # but with chunking. Let's use a Docker image with all browsers
   test-examples:
     parallelism: 20
     working_directory: ~/app
     docker:
-      - image: cypress/base:10
+      - image: cypress/browsers:node12.18.3-chrome87-ff82
     environment:
       TERM: xterm
     steps:
