@@ -117,5 +117,14 @@ describe('file download', () => {
         })
       })
     })
+
+    describe('PDF file', () => {
+      // NOTE: work in progress, depends strongly on each browser
+      it.skip('is downloaded', () => {
+        cy.visit('/')
+        cy.get('[data-cy=download-pdf-href]').invoke('attr', 'target', '_blank').click()
+        cy.location('pathname').should('equal', '/why-cypress.pdf')
+      })
+    })
   })
 })
