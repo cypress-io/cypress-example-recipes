@@ -1,6 +1,10 @@
 // @ts-check
 /// <reference types="cypress" />
-import { validateCsvList, validateCsvFile, validateExcelFile, validateTextFile, validateImage, validateZip } from './utils'
+import {
+  validateCsvList, validateCsvFile, validateExcelFile,
+  validateTextFile, validateImage, validateZip,
+  validateBinaryFile,
+} from './utils'
 const neatCSV = require('neat-csv')
 const path = require('path')
 
@@ -81,6 +85,14 @@ describe('file download', () => {
 
       cy.log('**confirm downloaded ZIP**')
       validateZip()
+    })
+
+    it('PDF', () => {
+      cy.visit('/')
+      cy.get('[data-cy=download-pdf]').click()
+
+      cy.log('**confirm downloaded PDF**')
+      validateBinaryFile('why-cypress.pdf', 97672)
     })
   })
 

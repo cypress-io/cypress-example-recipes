@@ -123,3 +123,26 @@ export const downloadByClicking = (url, name) => {
     link.click()
   })
 }
+
+/**
+ * Checks if the downloaded folder has file with the given name
+ * and the given size in bytes.
+ * @param {string} filename The downloaded file name
+ * @param {number} expectedSize Expected binary file size in bytes
+ */
+export const validateBinaryFile = (filename, expectedSize) => {
+  expect(filename, 'filename').to.be.a('string')
+  expect(expectedSize, 'file size').to.be.a('number').and.be.gt(0)
+
+  const downloadsFolder = Cypress.config('downloadsFolder')
+  const downloadedFilename = path.join(downloadsFolder, filename)
+
+  // for now just check the file size
+  cy.readFile(downloadedFilename, 'binary', { timeout: 15000 })
+  .should((buffer) => {
+    // avoid logging the binary data into Command Log
+    if (buffer.length !== expectedSize) {
+      throw new Error(`File size ${buffer.length} is not ${expectedSize}`)
+    }
+  })
+}
