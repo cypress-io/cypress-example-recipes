@@ -5,11 +5,14 @@ import {
   validateTextFile, validateImage, validateZip,
   validateBinaryFile,
 } from './utils'
+import { recurse } from 'cypress-recurse'
 const neatCSV = require('neat-csv')
 const path = require('path')
 
 describe('file download', () => {
   const downloadsFolder = Cypress.config('downloadsFolder')
+
+  // should we delete all the files in the downloads folder before each test?
 
   context('from local domain localhost:8070', () => {
     it('CSV file', () => {
@@ -96,23 +99,49 @@ describe('file download', () => {
     })
   })
 
-  it('finds file', { browser: '!firefox', retries: 1 }, () => {
-    // imagine we do not know the exact filename after download
-    // so let's call a task to find the file on disk before verifying it
-    // image comes from the same domain as the page
-    cy.visit('/')
-    cy.get('[data-cy=download-png]').click()
+  context('finds file', () => {
+    it('after waiting', { browser: '!firefox', retries: 1 }, () => {
+      // imagine we do not know the exact filename after download
+      // so let's call a task to find the file on disk before verifying it
+      // image comes from the same domain as the page
+      cy.visit('/')
+      cy.get('[data-cy=download-png]').click()
 
-    // give the file time to download
-    cy.wait(3000)
+      // give the file time to download
+      cy.wait(3000)
 
-    cy.log('**find the image**')
-    const mask = `${downloadsFolder}/*.png`
+      cy.log('**find the image**')
+      const mask = `${downloadsFolder}/*.png`
 
-    cy.task('findFile', mask).then((foundImage) => {
-      cy.log(`found image ${foundImage}`)
-      cy.log('**confirm downloaded image**')
-      validateImage()
+      cy.task('findFiles', mask).then((foundImage) => {
+        expect(foundImage).to.be.a('string')
+        cy.log(`found image ${foundImage}`)
+        cy.log('**confirm downloaded image**')
+        validateImage()
+      })
+    })
+
+    it('using recurse', { browser: '!firefox' }, () => {
+      // imagine we do not know the exact filename after download
+      // so let's call a task to find the file on disk before verifying it
+      // image comes from the same domain as the page
+      cy.visit('/')
+      cy.get('[data-cy=download-png]').click()
+
+      cy.log('**find the image**')
+      const mask = `${downloadsFolder}/*.png`
+
+      recurse(
+        () => cy.task('findFiles', mask),
+        (foundImage) => typeof foundImage === 'string'
+      )
+      // TODO: recurse should yield the subject
+
+      // .then((foundImage) => {
+      //   cy.log(`found image ${foundImage}`)
+      //   cy.log('**confirm downloaded image**')
+      //   validateImage()
+      // })
     })
   })
 })
