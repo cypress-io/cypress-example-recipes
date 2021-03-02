@@ -135,13 +135,11 @@ describe('file download', () => {
         () => cy.task('findFiles', mask),
         (foundImage) => typeof foundImage === 'string'
       )
-      // TODO: recurse should yield the subject
-
-      // .then((foundImage) => {
-      //   cy.log(`found image ${foundImage}`)
-      //   cy.log('**confirm downloaded image**')
-      //   validateImage()
-      // })
+      .then((foundImage) => {
+        cy.log(`found image ${foundImage}`)
+        cy.log('**confirm downloaded image**')
+        validateImage()
+      })
     })
   })
 })
