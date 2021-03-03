@@ -3,6 +3,16 @@ const path = require('path')
 const neatCSV = require('neat-csv')
 
 /**
+ * Delete the downloads folder to make sure the test has "clean"
+ * slate before starting.
+ */
+export const deleteDownloadsFolder = () => {
+  const downloadsFolder = Cypress.config('downloadsFolder')
+
+  cy.task('deleteFolder', downloadsFolder)
+}
+
+/**
  * @param {string} csv
 */
 export const validateCsv = (csv) => {

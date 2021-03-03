@@ -4,6 +4,7 @@ const readXlsxFile = require('read-excel-file/node')
 const AdmZip = require('adm-zip')
 const { stripIndent } = require('common-tags')
 const globby = require('globby')
+const { rmdir } = require('fs')
 
 /**
  * @type {Cypress.PluginConfig}
@@ -112,6 +113,22 @@ module.exports = (on, config) => {
       console.log('found %d files, first one %s', list.length, list[0])
 
       return list[0]
+    },
+
+    deleteFolder (folderName) {
+      console.log('deleting folder %s', folderName)
+
+      return new Promise((resolve, reject) => {
+        rmdir(folderName, { maxRetries: 10, recursive: true }, (err) => {
+          if (err) {
+            console.error(err)
+
+            return reject(err)
+          }
+
+          resolve(null)
+        })
+      })
     },
   })
 }
