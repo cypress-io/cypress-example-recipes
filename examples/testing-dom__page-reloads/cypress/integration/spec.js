@@ -1,4 +1,7 @@
+// @ts-check
 /// <reference types="Cypress" />
+import { recurse } from 'cypress-recurse'
+
 describe('page reloads', () => {
   // ⛔️ THIS WILL NOT WORK
   // NOTE: eventually crashes, cannot use "while" loop with async commands
@@ -84,5 +87,19 @@ describe('page reloads', () => {
 
     cy.visit('public/index.html')
     checkAndReload()
+  })
+
+  it('until 7 appears using cypress-recurse', () => {
+    // see https://github.com/bahmutov/cypress-recurse
+    cy.visit('public/index.html')
+    recurse(
+      () => {
+        cy.reload()
+
+        return cy.get('#result', { log: false })
+        .invoke({ log: false }, 'text').then(parseInt)
+      },
+      (x) => x === 7
+    )
   })
 })
