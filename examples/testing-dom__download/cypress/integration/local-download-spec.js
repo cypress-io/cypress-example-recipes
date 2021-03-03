@@ -121,6 +121,19 @@ describe('file download', () => {
       })
     })
 
+    const isNonEmptyString = (x) => {
+      return typeof x === 'string' && Boolean(x)
+    }
+
+    // quick unit test to confirm our predicate
+    // function works as expected
+    it('isNonEmptyString', () => {
+      expect(isNonEmptyString()).to.be.false
+      expect(isNonEmptyString(null)).to.be.false
+      expect(isNonEmptyString('')).to.be.false
+      expect(isNonEmptyString('logo.png')).to.be.true
+    })
+
     it('using recurse', { browser: '!firefox' }, () => {
       // imagine we do not know the exact filename after download
       // so let's call a task to find the file on disk before verifying it
@@ -133,7 +146,7 @@ describe('file download', () => {
 
       recurse(
         () => cy.task('findFiles', mask),
-        (foundImage) => typeof foundImage === 'string'
+        isNonEmptyString
       )
       .then((foundImage) => {
         cy.log(`found image ${foundImage}`)
