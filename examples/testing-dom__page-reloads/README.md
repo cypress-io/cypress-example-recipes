@@ -37,3 +37,5 @@ it('until the number 7 appears', () => {
   checkAndReload()
 })
 ```
+
+The spec also uses [cypress-recurse](https://github.com/bahmutov/cypress-recurse) to achieve the same result.
