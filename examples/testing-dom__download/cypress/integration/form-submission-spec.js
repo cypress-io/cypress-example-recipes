@@ -1,9 +1,11 @@
 // @ts-check
 /// <reference types="cypress" />
-import { validateCsvList } from './utils'
+import { validateCsvList, deleteDownloadsFolder } from './utils'
 const neatCSV = require('neat-csv')
 
 describe('file download', () => {
+  beforeEach(deleteDownloadsFolder)
+
   context('form submission', () => {
     it('sends csv', () => {
       cy.visit('/')

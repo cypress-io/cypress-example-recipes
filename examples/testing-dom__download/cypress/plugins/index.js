@@ -4,6 +4,7 @@ const readXlsxFile = require('read-excel-file/node')
 const AdmZip = require('adm-zip')
 const { stripIndent } = require('common-tags')
 const globby = require('globby')
+const { rmdir } = require('fs')
 
 /**
  * @type {Cypress.PluginConfig}
@@ -94,7 +95,7 @@ module.exports = (on, config) => {
 
     // a task to find one file matching the given mask
     // returns just the first matching file
-    async findFile (mask) {
+    async findFiles (mask) {
       if (!mask) {
         throw new Error('Missing a file mask to search')
       }
@@ -104,12 +105,30 @@ module.exports = (on, config) => {
       const list = await globby(mask)
 
       if (!list.length) {
-        throw new Error(`Could not find files matching mask "${mask}"`)
+        console.log('found no files')
+
+        return null
       }
 
-      console.log('found file: %s', list[0])
+      console.log('found %d files, first one %s', list.length, list[0])
 
       return list[0]
+    },
+
+    deleteFolder (folderName) {
+      console.log('deleting folder %s', folderName)
+
+      return new Promise((resolve, reject) => {
+        rmdir(folderName, { maxRetries: 10, recursive: true }, (err) => {
+          if (err) {
+            console.error(err)
+
+            return reject(err)
+          }
+
+          resolve(null)
+        })
+      })
     },
   })
 }
