@@ -15,13 +15,26 @@ app.get('/', (req, res) => {
   res.sendFile(`${staticFolder}/index.html`)
 })
 
-let greetingRespondsAfter = +new Date()
+let greetingRespondsAfter = 0
 
-app.post('/reset-api', () => {
-  const apiDelay = Math.random() * 4000 + 1000
+app.post('/reset-api', (req, res) => {
+  const apiDelay = Math.round(Math.random() * 4000 + 1000)
 
   console.log('resetting api, it will respond in %dms', apiDelay)
-  greetingRespondsAfter = new Date() + apiDelay
+  greetingRespondsAfter = +new Date() + apiDelay
+  res.send('reset')
+})
+
+app.get('/greeting', (req, res) => {
+  const now = +new Date()
+
+  if (now > greetingRespondsAfter) {
+    return res.send('Hello!')
+  }
+
+  console.log('greeting API is not ready yet ... ready in %dms', greetingRespondsAfter - now)
+
+  return res.status(404).send('Not ready')
 })
 
 app.listen(port, (err) => {

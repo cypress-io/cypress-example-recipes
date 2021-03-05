@@ -30,17 +30,64 @@ describe('waits for API', () => {
     cy.wait('@greeting')
   })
 
-  it.only('works if we wait up to 5 seconds for the API to be ready', () => {
+  // slow because of hard-coded maximum wait
+  it('works if we wait up to 5 seconds for the API to be ready', () => {
     cy.visit('/')
     cy.wait(5000)
+
+    cy.get('#get-api-response').click()
+    cy.contains('#output', 'Hello!').should('be.visible')
   })
 
-  it.skip('waits for (mock) API endpoint to start', () => {
-    setTimeout(() => {
-      cy.intercept('GET', '/greeting', 'Hello')
-    }, 1000)
+  it('checks API until it responds', () => {
+    // let's write our own function that checks the API using cy.request
+    // if the API responds, we are done
+    // otherwise, wait half a second and try again
+    const checkApi = () => {
+      cy.request({
+        url: '/greeting',
+        failOnStatusCode: false,
+      }).its('isOkStatusCode', { log: false }).then((ok) => {
+        if (ok) {
+          cy.log('API is ready')
 
-    cy.visit('index.html')
-    cy.contains('#output', 'Hello').should('be.visible')
+          return
+        }
+
+        cy.wait(500, { log: false })
+        checkApi()
+      })
+    }
+
+    cy.visit('/')
+    checkApi()
+    // now the API is ready and we can use the GUI
+    cy.get('#get-api-response').click()
+    cy.contains('#output', 'Hello!').should('be.visible')
+  })
+
+  it('checks API using cypress-recurse', () => {
+    cy.visit('/')
+    // useful utility for retrying multiple Cypress commands
+    // until the predicate function returns true
+    // https://github.com/bahmutov/cypress-recurse
+    recurse(
+      () => {
+        return cy.request({
+          url: '/greeting',
+          failOnStatusCode: false,
+        })
+      },
+      (res) => res.isOkStatusCode,
+      {
+        timeout: 5000, // check API for up to 5 seconds
+        delay: 500, // half second pauses between retries
+        log: false, // do not log details
+      }
+    )
+
+    // now the API is ready and we can use the GUI
+    cy.get('#get-api-response').click()
+    cy.contains('#output', 'Hello!').should('be.visible')
   })
 })
