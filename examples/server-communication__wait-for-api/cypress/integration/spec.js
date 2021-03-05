@@ -17,17 +17,15 @@ describe('waits for API', () => {
 
   it('fails because the API is not ready', () => {
     cy.visit('/')
+    // spy on the application's call to make sure it returns 404
     cy.intercept({
       pathname: '/greeting',
-    }, {
-      body: '',
-      statusCode: 404,
     }).as('greeting')
 
     cy.get('#get-api-response').click()
     cy.contains('#output', 'Not Found').should('be.visible')
     // confirm our intercept was hit
-    cy.wait('@greeting')
+    cy.wait('@greeting').its('response.statusCode').should('equal', 404)
   })
 
   // slow because of hard-coded maximum wait
