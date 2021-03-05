@@ -9,6 +9,7 @@
       const p = document.getElementById('response')
       p.style.display = 'block'
 
+      console.log('fetching greeting')
       fetch('/greeting').then(r => {
         if (!r.ok) {
           return r.statusText
