@@ -1,7 +1,8 @@
 {
-  "name": "xhr-assertions",
+  "name": "wait-for-api",
   "version": "1.0.0",
-  "description": "Checking network request and response",
+  "description": "Calling backend API until it is ready to work",
+  "private": true,
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
