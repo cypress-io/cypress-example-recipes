@@ -6,13 +6,7 @@
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
-    "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
-    "cypress:run:firefox": "../../node_modules/.bin/cypress run --browser firefox",
     "dev": "../../node_modules/.bin/start-test 7668 cypress:open",
-    "start": "node ./server",
-    "test:ci": "npm run cypress:run",
-    "test:ci:chrome": "npm run cypress:run:chrome",
-    "test:ci:firefox": "npm run cypress:run:firefox",
-    "test:ci:record": "npm run cypress:run --record"
+    "start": "node ./server"
   }
 }
