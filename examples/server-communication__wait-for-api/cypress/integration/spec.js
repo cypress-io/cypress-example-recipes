@@ -80,7 +80,7 @@ describe('waits for API', () => {
       },
       (res) => res.isOkStatusCode,
       {
-        timeout: 5000, // check API for up to 5 seconds
+        timeout: 6000, // check API for up to 6 seconds
         delay: 500, // half second pauses between retries
         log: false, // do not log details
       }
