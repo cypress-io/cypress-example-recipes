@@ -320,6 +320,8 @@ jobs:
     <<: *defaults
   server-communication__server-timing:
     <<: *defaults
+  server-communication__wait-for-api:
+    <<: *defaults
   fundamentals__dynamic-tests:
     <<: *defaults
   fundamentals__module-api:
@@ -603,6 +605,9 @@ all_jobs: &all_jobs
   - server-communication__server-timing:
       requires:
         - build
+  - server-communication__wait-for-api:
+      requires:
+        - build
 
   # to avoid constantly tweaking required jobs on CircleCI
   # we can have a single job wait on all other test jobs here.
@@ -660,6 +665,7 @@ all_jobs: &all_jobs
         - server-communication__stream-tests
         - server-communication__offline
         - server-communication__server-timing
+        - server-communication__wait-for-api
         - stubbing-spying__functions
         - stubbing-spying__window-fetch
         - stubbing-spying__intercept

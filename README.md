@@ -123,6 +123,7 @@ Recipe | Description
 [Stream test results](./examples/server-communication__stream-tests) | Streams each test result from the browser to the plugins to an external process via IPC
 [Offline](./examples/server-communication__offline) | Test web application when the network is offline
 [Server timing](./examples/server-communication__server-timing) | Report server timing results from Cypress test
+[Wait for API](./examples/server-communication__wait-for-api) | Call the backend using `cy.request` until it responds
 
 ## Other Cypress Recipes
 

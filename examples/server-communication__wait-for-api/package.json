@@ -1,0 +1,12 @@
+{
+  "name": "wait-for-api",
+  "version": "1.0.0",
+  "description": "Calling backend API until it is ready to work",
+  "private": true,
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "dev": "../../node_modules/.bin/start-test 7668 cypress:open",
+    "start": "node ./server"
+  }
+}
