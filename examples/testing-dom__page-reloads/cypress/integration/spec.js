@@ -102,4 +102,19 @@ describe('page reloads', () => {
       (x) => x === 7
     )
   })
+
+  it('still has window.Cypress after reload', () => {
+    cy.visit('public/index.html')
+    .should('have.property', 'appHasCypressPresent', true)
+
+    cy.reload()
+    .should('have.property', 'appHasCypressPresent', true)
+
+    // reload a couple of times, still should have window.Cypress
+    cy.reload().reload()
+    cy.window()
+    .then((win) => {
+      expect(win).to.have.property('appHasCypressPresent', true)
+    })
+  })
 })
