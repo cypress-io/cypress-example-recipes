@@ -56,7 +56,10 @@ describe('Google Analytics', () => {
   it('sends button click event', () => {
     // because we use stubs we place our "Register" button intercept first
     cy.log('**stub GA click event**')
+    // let's be very explicit about the expected call
+    // by using the hostname, pathname, and some of the query parameters
     cy.intercept({
+      hostname: 'www.google-analytics.com',
       pathname: '/collect',
       query: {
         ec: 'button',
