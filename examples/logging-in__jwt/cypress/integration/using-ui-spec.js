@@ -50,7 +50,7 @@ describe('logs in', () => {
     cy.visit('/')
     cy.location('pathname').should('equal', '/login')
 
-    // enter valid username and password
+    // try logging in with invalid password
     cy.get('[name=username]').type('username')
     cy.get('[name=password]').type('wrong-password')
     cy.contains('button', 'Login').click()
