@@ -92,7 +92,7 @@ describe('file download', () => {
       validateZip()
     })
 
-    it('PDF', () => {
+    it('PDF', { browser: '!firefox' }, () => {
       cy.visit('/')
       cy.get('[data-cy=download-pdf]').click()
 
