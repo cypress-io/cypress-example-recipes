@@ -163,7 +163,7 @@ describe('file download', () => {
       .then(validateCsvList)
     })
 
-    it('CSV file downloaded via cy.request', () => {
+    it('CSV file downloaded via cy.request', { browser: '!firefox' }, () => {
       cy.visit('/')
       let downloadUrl
 

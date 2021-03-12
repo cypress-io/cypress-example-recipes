@@ -65,7 +65,7 @@ describe('file download', () => {
         })
       })
 
-      it('downloaded via cy.request', () => {
+      it('downloaded via cy.request', { browser: '!firefox' }, () => {
         cy.visit('/')
         let downloadUrl
 
