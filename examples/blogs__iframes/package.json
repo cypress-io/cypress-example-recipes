@@ -5,9 +5,9 @@
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
+    "skip:test:ci:firefox": "../../node_modules/.bin/cypress run --browser firefox",
     "test:ci": "../../node_modules/.bin/cypress run",
     "test:ci:chrome": "../../node_modules/.bin/cypress run --browser chrome",
-    "test:ci:firefox": "../../node_modules/.bin/cypress run --browser firefox",
     "test:ci:record": "../../node_modules/.bin/cypress run --record"
   }
 }
