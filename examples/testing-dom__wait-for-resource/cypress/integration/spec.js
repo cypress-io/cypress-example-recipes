@@ -10,6 +10,12 @@
  * @see https://developers.google.com/web/tools/chrome-devtools/network/understanding-resource-timing
  */
 Cypress.Commands.add('waitForResource', (name, options = {}) => {
+  if (Cypress.browser.family === 'firefox') {
+    cy.log('Skip waitForResource in Firefox')
+
+    return
+  }
+
   cy.log(`Waiting for resource ${name}`)
 
   const log = false // let's not log inner commands
@@ -66,16 +72,18 @@ Cypress.Commands.add('waitForResource', (name, options = {}) => {
 // thresholds require leeway. Setting them too high makes the
 // tests imprecise. Setting them to more likely values makes the tests flakey.
 // @see https://www.cypress.io/blog/2020/12/03/retry-rerun-repeat/
-describe('loading style', { retries: 2 }, () => {
+describe('loading style', { retries: 0 }, () => {
+  const timeout = 1500 // ms
+
   it('applies app.css styles', () => {
     cy.visit('/')
     cy.waitForResource('base.css')
     cy.waitForResource('app.css')
     // red color means the style from "app.css" has been loaded and applied
-    cy.get('h1', { timeout: 250 }).should('have.css', 'color', 'rgb(255, 0, 0)')
+    cy.get('h1', { timeout }).should('have.css', 'color', 'rgb(255, 0, 0)')
   })
 
-  it('app.css is a tiny resource', () => {
+  it('app.css is a tiny resource', { browser: '!firefox' }, () => {
     cy.visit('/')
     cy.waitForResource('app.css').then((resourceTiming) => {
       expect(resourceTiming, 'got resource timing').to.not.be.null
@@ -87,11 +95,11 @@ describe('loading style', { retries: 2 }, () => {
 
       expect(resourceTiming, 'the CSS file is very small (in bytes)')
       .property('transferSize')
-      .to.be.lt(300)
+      .to.be.lt(500)
 
-      expect(resourceTiming, 'loads in less than 150ms')
+      expect(resourceTiming, `loads in less than ${timeout}ms`)
       .property('duration')
-      .to.be.lt(150)
+      .to.be.lt(timeout)
     })
   })
 
@@ -100,10 +108,10 @@ describe('loading style', { retries: 2 }, () => {
     // the "cy.waitForResources" command was written in cypress/support/index.js file
     cy.waitForResources('base.css', 'app.css')
     // red color means the style from "app.css" has been loaded and applied
-    cy.get('h1', { timeout: 250 }).should('have.css', 'color', 'rgb(255, 0, 0)')
+    cy.get('h1', { timeout }).should('have.css', 'color', 'rgb(255, 0, 0)')
   })
 
-  it('waits on resource using wait-until 3rd party plugin', () => {
+  it('waits on resource using wait-until 3rd party plugin', { browser: '!firefox' }, () => {
     cy.visit('/')
 
     // 3rd party module "cypress-wait-until" is really useful
@@ -120,7 +128,7 @@ describe('loading style', { retries: 2 }, () => {
     })
 
     // red color means the style from "app.css" has been loaded and applied
-    cy.get('h1', { timeout: 250 }).should('have.css', 'color', 'rgb(255, 0, 0)')
+    cy.get('h1', { timeout }).should('have.css', 'color', 'rgb(255, 0, 0)')
   })
 })
 

@@ -29,6 +29,12 @@ const { isPlainObject, last } = Cypress._
  * @example cy.waitForResources('base.css', 'app.css', { timeout: 3000 })
  */
 Cypress.Commands.add('waitForResources', (...args) => {
+  if (Cypress.browser.family === 'firefox') {
+    cy.log('Skip waitForResource in Firefox')
+
+    return
+  }
+
   let names
   let options
 
