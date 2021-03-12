@@ -161,6 +161,20 @@ jobs:
           at: ~/
       - run: npm run test:ci:chrome:headless -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
 
+  test-examples-firefox:
+    parallelism: 10
+    working_directory: ~/app
+    docker:
+      - image: cypress/browsers:node12.18.3-chrome89-ff86
+    environment:
+      TERM: xterm
+      # no need to record these runs yet
+      CYPRESS_RECORD_KEY: ''
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run test:ci:firefox -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+
   # a single utility script to run multiple examples against Brave browser
   test-examples-brave:
     # only one recipe shows how to run Cypress using Brave browser
@@ -357,6 +371,10 @@ all_jobs: &all_jobs
         - build
 
   - test-examples-chrome-headless:
+      requires:
+        - build
+
+  - test-examples-firefox:
       requires:
         - build
 
@@ -701,6 +719,7 @@ all_jobs: &all_jobs
         - test-examples
         - test-examples-chrome
         - test-examples-chrome-headless
+        - test-examples-firefox
 
 workflows:
   version: 2
