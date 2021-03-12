@@ -78,4 +78,21 @@ cy.wait('@gifCollect').then(interceptToPageEvent).should('deep.equal', {
 
 ![Network stubbing test](images/network.png)
 
+For particular calls we can match using the query arguments. For example, the button click sends an event that we can intercept with
+
+```js
+cy.intercept({
+  pathname: '/collect',
+  query: {
+    ec: 'button',
+    ea: 'click',
+    el: 'Register'
+  }
+}, {
+  statusCode: 200
+}).as('register')
+```
+
+After the above specific stub we can register all other generic network intercepts.
+
 See [cy.intercept](https://on.cypress.io/intercept) for more details
