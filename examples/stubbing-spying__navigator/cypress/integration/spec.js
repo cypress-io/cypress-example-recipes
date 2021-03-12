@@ -5,7 +5,7 @@ context('Navigator', () => {
       cy.visit('index.html', {
         onBeforeLoad (win) {
           // stub property using https://on.cypress.io/stub
-          cy.stub(win.navigator, 'cookieEnabled', false)
+          cy.stub(win.navigator, 'cookieEnabled').value(false)
         },
       })
 
