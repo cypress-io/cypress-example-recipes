@@ -17,7 +17,12 @@ function getFavoriteFruits () {
 
   favFruits.innerHTML = '<div class="loader"></div>'
 
-  fetch('/favorite-fruits')
+  fetch('/favorite-fruits', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+    },
+  })
   .then((response) => {
     /* eslint-disable-next-line no-console */
     console.log('fetch response', response)
@@ -50,8 +55,19 @@ const loadUsers = (nUsers = 3) => {
       console.log('loading %d users', nUsers)
       document.querySelector('#users').innerText = ''
 
-      fetch(`https://jsonplaceholder.cypress.io/users?_limit=${nUsers}`)
-      .then((r) => r.json())
+      fetch(`https://jsonplaceholder.cypress.io/users?_limit=${nUsers}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+      })
+      .then((r) => {
+        if (!r.ok) {
+          throw new Error(r.statusText)
+        }
+
+        return r.json()
+      })
       .then((users) => {
         console.table(users)
 

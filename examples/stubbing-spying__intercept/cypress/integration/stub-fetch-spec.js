@@ -282,5 +282,63 @@ describe('intercept', () => {
 
       cy.get('#post-user').click()
     })
+
+    it('stubs all non-stubbed Ajax with 404', () => {
+      // similar to the deprecated cy.server({ force:404 })
+      // we want to stub all non-stubbed Ajax calls
+      cy.intercept('/favorite-fruits', { fixture: 'fruits.json' })
+      cy.visit('/')
+      cy.get('.favorite-fruits li').should('have.length', 3)
+
+      // now let's stop all other Ajax application/json requests
+      cy.intercept({
+        headers: {
+          accept: 'application/json',
+        },
+      }, {
+        statusCode: 404,
+      })
+
+      // let's try non-stubbed network call - it should fail
+      cy.get('#load-users').click()
+      cy.contains('#users', 'Not Found').should('be.visible')
+      // but we can still fetch fruits
+      cy.reload()
+      cy.get('.favorite-fruits li').should('have.length', 3)
+      // yet another fetch is blocked
+      cy.get('#load-five-users').click()
+      cy.contains('#users', 'Not Found').should('be.visible')
+    })
+
+    it('stubs all Ajax but fruits with 404', () => {
+      // similar to the deprecated cy.server({ force:404 })
+      // we want to stub all Ajax calls but GET /favorite-fruits
+      // now let's stop all other Ajax application/json requests
+      cy.intercept('*', (req) => {
+        if (req.method === 'GET' && req.url.endsWith('/favorite-fruits')) {
+          // let the request go to the server
+          return
+        }
+
+        if (req.headers.accept === 'application/json') {
+          req.reply({
+            statusCode: 404,
+          })
+        }
+      })
+
+      cy.visit('/')
+      cy.get('.favorite-fruits li').should('have.length', 5)
+
+      // let's try non-stubbed network call - it should fail
+      cy.get('#load-users').click()
+      cy.contains('#users', 'Not Found').should('be.visible')
+      // but we can still fetch fruits
+      cy.reload()
+      cy.get('.favorite-fruits li').should('have.length', 5)
+      // yet another fetch is blocked
+      cy.get('#load-five-users').click()
+      cy.contains('#users', 'Not Found').should('be.visible')
+    })
   })
 })
