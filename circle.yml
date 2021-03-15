@@ -340,6 +340,8 @@ jobs:
     <<: *defaults
   fundamentals__dynamic-tests:
     <<: *defaults
+  fundamentals__dynamic-tests-from-csv:
+    <<: *defaults
   fundamentals__module-api:
     <<: *defaults
   fundamentals__module-api-wrap:
@@ -472,6 +474,9 @@ all_jobs: &all_jobs
       requires:
         - build
   - fundamentals__dynamic-tests:
+      requires:
+        - build
+  - fundamentals__dynamic-tests-from-csv:
       requires:
         - build
   - fundamentals__fixtures:
@@ -662,6 +667,7 @@ all_jobs: &all_jobs
         - fundamentals__fixtures
         - fundamentals__timeout
         - fundamentals__dynamic-tests
+        - fundamentals__dynamic-tests-from-csv
         - fundamentals__module-api
         - fundamentals__module-api-wrap
         - fundamentals__add-custom-command
