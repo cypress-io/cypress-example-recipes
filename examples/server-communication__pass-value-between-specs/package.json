@@ -1,7 +1,7 @@
 {
-  "name": "visit-2nd-domain",
+  "name": "pass-value-between-specs",
   "version": "1.0.0",
-  "description": "Visiting two different domains from two different tests",
+  "description": "Passing a value from a test in the first spec to a test in the second spec",
   "private": true,
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
