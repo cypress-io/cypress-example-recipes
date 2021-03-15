@@ -328,6 +328,8 @@ jobs:
     <<: *defaults
   server-communication__visit-2nd-domain:
     <<: *defaults
+  server-communication__pass-value-between-specs:
+    <<: *defaults
   server-communication__xhr-assertions:
     <<: *defaults
   server-communication__stream-tests:
@@ -624,6 +626,9 @@ all_jobs: &all_jobs
   - server-communication__visit-2nd-domain:
       requires:
         - build
+  - server-communication__pass-value-between-specs:
+      requires:
+        - build
   - server-communication__stream-tests:
       requires:
         - build
@@ -691,6 +696,7 @@ all_jobs: &all_jobs
         - server-communication__seeding-database-in-node
         - server-communication__xhr-assertions
         - server-communication__visit-2nd-domain
+        - server-communication__pass-value-between-specs
         - server-communication__stream-tests
         - server-communication__offline
         - server-communication__server-timing
