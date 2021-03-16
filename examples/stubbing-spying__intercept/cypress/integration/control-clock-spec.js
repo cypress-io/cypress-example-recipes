@@ -202,6 +202,7 @@ describe('intercept', () => {
 
     describe('polling every 30 secs', function () {
       it('fetches from the server (spies)', () => {
+        cy.log('**start**')
         cy.clock()
         cy.intercept('GET', '/favorite-fruits').as('fruits')
         cy.visit('/fruits.html')
@@ -209,28 +210,34 @@ describe('intercept', () => {
         cy.wait('@fruits').its('response.statusCode').should('equal', 200)
 
         // 30 seconds passes and the application fetches again
+        cy.log('**30 seconds**')
         cy.tick(30000)
         cy.wait('@fruits').its('response.statusCode').should('equal', 200)
 
         // 3rd call
+        cy.log('**60 seconds**')
         cy.tick(30000)
         cy.wait('@fruits').its('response.statusCode').should('equal', 200)
 
         // 4th call
+        cy.log('**90 seconds**')
         cy.tick(30000)
         cy.wait('@fruits').its('response.statusCode').should('equal', 200)
 
         // 5th call
+        cy.log('**2 minutes**')
         cy.tick(30000)
         cy.wait('@fruits').its('response.statusCode').should('equal', 200)
 
         // confirm the displayed fruits
         cy.get('@fruits').its('response.body')
         .then((fruits) => {
+          expect(fruits).to.be.an('array')
           cy.get('.favorite-fruits li')
           .should('have.length', fruits.length)
 
-          fruits.forEach((fruit) => {
+          fruits.forEach((fruit, k) => {
+            cy.log(`${k + 1}: ${fruit}`)
             cy.contains('.favorite-fruits li', fruit)
           })
         })
