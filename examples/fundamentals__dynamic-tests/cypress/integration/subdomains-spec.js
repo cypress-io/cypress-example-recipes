@@ -2,6 +2,8 @@
 describe('Subdomains', () => {
   // logo selector on public static site after moving to Gatsby
   const logoSelector = 'img[alt="Cypress.io"]'
+  // logo selector at https://docs.cypress.io/
+  const docsLogoSelector = '.app-header-logo'
 
   // ignore errors from the site itself
   Cypress.on('uncaught:exception', () => {
@@ -16,7 +18,7 @@ describe('Subdomains', () => {
       cy.visit(url)
 
       // our logo is different on static site vs documentation site
-      const selector = url.includes('www') ? logoSelector : '#logo'
+      const selector = url.includes('www') ? logoSelector : docsLogoSelector
 
       cy.get(selector).should('be.visible')
     })
