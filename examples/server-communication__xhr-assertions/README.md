@@ -76,6 +76,10 @@ it('is faster than 300ms', { retries: 3 }, () => {
 
 ![Test retries on failure](images/re-run.gif)
 
+## XML responses
+
+If the server is returning a XML response, you can parse it into a plain object and then confirm its properties. See the [server.js](./server.js) and the [cypress/integration/xml-spec.js](./cypress/integration/xml-spec.js) files.
+
 ## See also
 
 - [Cypress network guide](https://on.cypress.io/network-requests)
