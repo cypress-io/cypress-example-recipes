@@ -7,7 +7,7 @@ describe('dynamic users using request', { retries: 2 }, () => {
 
   before(() => {
     // receive the dynamic list of users
-    cy.request('https://jsonplaceholder.cypress.io/users?limit=3')
+    cy.request('https://jsonplaceholder.cypress.io/users?_limit=10')
     .its('body')
     .should('have.length', 10)
     .invoke('slice', 0, 3)
