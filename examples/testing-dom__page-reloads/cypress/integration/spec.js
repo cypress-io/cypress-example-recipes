@@ -99,7 +99,11 @@ describe('page reloads', () => {
         return cy.get('#result', { log: false })
         .invoke({ log: false }, 'text').then(parseInt)
       },
-      (x) => x === 7
+      (x) => x === 7,
+      {
+        timeout: 10000, // try up to 10 seconds
+        limit: 100, // try up to 100 times
+      }
     )
   })
 
