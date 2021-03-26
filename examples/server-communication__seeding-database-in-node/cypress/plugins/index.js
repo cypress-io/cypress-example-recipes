@@ -5,6 +5,6 @@
 // by the version of node run by Cypress) can
 // be configured via babel plugins in the .babelrc
 
-require('babel-register')
+require('@babel/register')
 
 module.exports = require('./main').default
