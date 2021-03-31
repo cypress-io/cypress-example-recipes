@@ -156,7 +156,11 @@ describe('file download', () => {
 
       recurse(
         () => cy.task('findFiles', mask),
-        isNonEmptyString
+        isNonEmptyString,
+        {
+          delay: 100, // pause 100ms between tries
+          timeout: 10000, // iterate up to 10 seconds
+        }
       )
       .then((foundImage) => {
         cy.log(`found image ${foundImage}`)
