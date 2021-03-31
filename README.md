@@ -1,4 +1,5 @@
-# Recipes [![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) [![Build status](https://ci.appveyor.com/api/projects/status/7p4qkwavheciwbxc/branch/master?svg=true)](https://ci.appveyor.com/project/cypress-io/cypress-example-recipes/branch/master) [![renovate-app badge][renovate-badge]][renovate-app] [![Cypress Dashboard][dashboard badge]][dashboard url]
+# Recipes
+[![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) [![Build status](https://ci.appveyor.com/api/projects/status/7p4qkwavheciwbxc/branch/master?svg=true)](https://ci.appveyor.com/project/cypress-io/cypress-example-recipes/branch/master) [![renovate-app badge][renovate-badge]][renovate-app] [![Cypress Dashboard][dashboard badge]][dashboard url]
 
 > This repo contains various recipes for testing common scenarios using Cypress: [Fundamentals](#fundamentals), [Testing the DOM](#testing-the-dom), [Logging in](#logging-in-recipes), [Preprocessors](#preprocessors), [Blogs](#blogs), [Stubbing and spying](#stubbing-and-spying), [Unit Testing](#unit-testing), [Server Communication](#server-communication), [Other Cypress Recipes](#other-cypress-recipes), [Community Recipes](#community-recipes)
 
@@ -20,6 +21,8 @@ Recipe | Description
 [Use Chrome Remote Interface](./examples/fundamentals__chrome-remote-debugging) | Use Chrome debugger protocol to trigger hover state and print media style
 [Out-of-the-box TypeScript](./examples/fundamentals__typescript) | Write tests in TypeScript without setting up preprocessors
 [Per-test timeout](./examples/fundamentals__timeout) | Fail a test if it runs longer than the specified time limit
+[Cypress events](./examples/fundamentals__cy-events) | Using `Cypress.on` and `cy.on` to listen to [Cypress events](https://on.cypress.io/catalog-of-events) like `before:window:load`
+[Video resolution](./examples/fundamentals__window-size) | Increase the browser window size to record high quality videos and capture detailed screenshots
 
 ## Testing the DOM
 
@@ -37,11 +40,13 @@ Recipe | Description
 [Select widgets](./examples/testing-dom__select2) | Working with `<select>` elements and [Select2](https://select2.org/) widgets
 [Lit Elements](./examples/testing-dom__lit-element) | Testing Lit Elements with Shadow DOM
 [File download](./examples/testing-dom__download) | Download and validate CSV, Excel, text, Zip, and image files
+[Page reloads](./examples/testing-dom__page-reloads) | Avoiding `while` loop when dealing with randomness
 
 ## Logging in recipes
 
 Recipe | Description
 --- | ---
+[Basic Auth](./examples/logging-in__basic-auth) | Log in using Basic Authentication
 [Single Sign On](./examples/logging-in__single-sign-on) | Log in across multiple servers or providers
 [HTML Web Forms](./examples/logging-in__html-web-forms) | Log in with a basic HTML form
 [XHR Web Forms](./examples/logging-in__xhr-web-forms) | Log in using an XHR

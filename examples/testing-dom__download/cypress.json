@@ -4,5 +4,7 @@
   "viewportWidth": 500,
   "viewportHeight": 900,
   "baseUrl": "http://localhost:8070",
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "pageLoadTimeout": 5000,
+  "testFiles": "**/*-spec.js"
 }

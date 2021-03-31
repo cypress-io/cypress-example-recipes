@@ -211,6 +211,8 @@ jobs:
     <<: *defaults
   file-upload-react:
     <<: *defaults
+  fundamentals__window-size:
+    <<: *defaults
   fundamentals__node-modules:
     <<: *defaults
   fundamentals__fixtures:
@@ -223,6 +225,8 @@ jobs:
     <<: *defaults
   fundamentals__errors:
     <<: *defaults
+  fundamentals__cy-events:
+    <<: *defaults
   logging-in__csrf-tokens:
     <<: *defaults
   logging-in__html-web-forms:
@@ -234,6 +238,8 @@ jobs:
   logging-in__jwt:
     <<: *defaults
   logging-in__using-app-code:
+    <<: *defaults
+  logging-in__basic-auth:
     <<: *defaults
   preprocessors__grep:
     <<: *defaults
@@ -288,6 +294,8 @@ jobs:
   testing-dom__select2:
     <<: *defaults
   testing-dom__sorting-table:
+    <<: *defaults
+  testing-dom__page-reloads:
     <<: *defaults
   unit-testing__application-code:
     <<: *defaults
@@ -421,6 +429,10 @@ all_jobs: &all_jobs
   - file-upload-react:
       requires:
         - build
+  - fundamentals__window-size:
+      requires:
+        - build
+      test-command: npm run test:ci:record -- --group $CIRCLE_JOB
   - fundamentals__node-modules:
       requires:
         - build
@@ -431,6 +443,31 @@ all_jobs: &all_jobs
       requires:
         - build
   - fundamentals__errors:
+      requires:
+        - build
+  - fundamentals__cy-events:
+      requires:
+        - build
+  - fundamentals__dynamic-tests:
+      requires:
+        - build
+  - fundamentals__fixtures:
+      requires:
+        - build
+  - fundamentals__timeout:
+      requires:
+        - build
+  - fundamentals__module-api:
+      requires:
+        - build
+  - fundamentals__module-api-wrap:
+      requires:
+        - build
+      test-command: npm run test:ci
+  - fundamentals__typescript:
+      requires:
+        - build
+  - logging-in__basic-auth:
       requires:
         - build
   - logging-in__csrf-tokens:
@@ -525,6 +562,9 @@ all_jobs: &all_jobs
   - testing-dom__root-style:
       requires:
         - build
+  - testing-dom__page-reloads:
+      requires:
+        - build
   - testing-dom__select2:
       requires:
         - build
@@ -562,25 +602,6 @@ all_jobs: &all_jobs
   - server-communication__server-timing:
       requires:
         - build
-  - fundamentals__dynamic-tests:
-      requires:
-        - build
-  - fundamentals__fixtures:
-      requires:
-        - build
-  - fundamentals__timeout:
-      requires:
-        - build
-  - fundamentals__module-api:
-      requires:
-        - build
-  - fundamentals__module-api-wrap:
-      requires:
-        - build
-      test-command: npm run test:ci
-  - fundamentals__typescript:
-      requires:
-        - build
 
   # to avoid constantly tweaking required jobs on CircleCI
   # we can have a single job wait on all other test jobs here.
@@ -607,6 +628,7 @@ all_jobs: &all_jobs
         - blogs__form-submit
         - extending-cypress__chai-assertions
         - file-upload-react
+        - fundamentals__window-size
         - fundamentals__node-modules
         - fundamentals__fixtures
         - fundamentals__timeout
@@ -615,14 +637,16 @@ all_jobs: &all_jobs
         - fundamentals__module-api-wrap
         - fundamentals__add-custom-command
         - fundamentals__add-custom-command-ts
-        - fundamentals__errors
         - fundamentals__typescript
+        - fundamentals__errors
+        - fundamentals__cy-events
         - logging-in__csrf-tokens
         - logging-in__html-web-forms
         - logging-in__single-sign-on
         - logging-in__xhr-web-forms
         - logging-in__jwt
         - logging-in__using-app-code
+        - logging-in__basic-auth
         - preprocessors__grep
         - preprocessors__flow-browserify
         - preprocessors__typescript-browserify
@@ -656,6 +680,7 @@ all_jobs: &all_jobs
         - testing-dom__root-style
         - testing-dom__select2
         - testing-dom__sorting-table
+        - testing-dom__page-reloads
         - unit-testing__application-code
         - unit-testing__react
         - unit-testing__react-skeleton

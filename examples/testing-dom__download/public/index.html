@@ -1,4 +1,7 @@
 <body>
+  <p>The first group of examples uses <code>download</code> anchor attribute
+    to prompt file download</p>
+
   <h3>Download CSV</h3>
   <!-- when the user clicks on this link, the file save dialog appears -->
   <a data-cy="download-csv" href="records.csv" download>records.csv</a>
@@ -14,6 +17,9 @@
 
   <h3>Download ZIP file</h3>
   <a data-cy="download-zip" href="files.zip" download>files.zip</a>
+
+  <p>The next group of examples uses <code>download</code> anchor attribute
+    to prompt file download from a remote domain</p>
 
   <h3>Download a remote CSV file</h3>
   <a data-cy="download-remote-csv" href="http://localhost:9000/records.csv" download>remote records.csv</a>
@@ -33,8 +39,15 @@
   <h3>Download a remote ZIP file</h3>
   <a data-cy="download-remote-zip" href="http://localhost:9000/files.zip" download>remote files.zip</a>
 
+  <p>Down load the file by prompting form submit</p>
   <h3>Download from a form</h3>
   <form method="get" action="records.csv">
     <button data-cy="download-form-csv" type="submit">records.csv</button>
   </form>
+
+  <p>Download files by setting the <code>document.location.href</code></p>
+  <h3>Download CSV via location HREF</h3>
+  <button data-cy="download-csv-href">Download CSV</button>
+
+  <script src="app.js"></script>
 </body>

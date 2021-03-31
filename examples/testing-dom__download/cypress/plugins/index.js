@@ -1,16 +1,9 @@
 /// <reference types="cypress" />
 /* eslint-disable no-console */
-const path = require('path')
-const fs = require('fs')
 const readXlsxFile = require('read-excel-file/node')
 const AdmZip = require('adm-zip')
 const { stripIndent } = require('common-tags')
 const globby = require('globby')
-
-// place downloads into "cypress/downloads" folder
-const downloadDirectory = path.join(__dirname, '..', 'downloads')
-
-const isFirefox = (browser) => browser.family === 'firefox'
 
 /**
  * @type {Cypress.PluginConfig}
@@ -19,17 +12,8 @@ module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 
-  // register utility tasks to clear the downloads folder,
-  // read and parse Excel files
+  // register utility tasks to read and parse Excel files
   on('task', {
-    clearDownloads () {
-      console.log('clearing folder %s', downloadDirectory)
-
-      fs.rmdirSync(downloadDirectory, { recursive: true })
-
-      return null
-    },
-
     readExcelFile (filename) {
       // we must read the Excel file using Node library
       // and can return the parsed list to the browser
@@ -110,50 +94,22 @@ module.exports = (on, config) => {
 
     // a task to find one file matching the given mask
     // returns just the first matching file
-    findFile (mask) {
+    async findFile (mask) {
       if (!mask) {
-        throw new Error('Missing a file mask to seach')
+        throw new Error('Missing a file mask to search')
       }
 
       console.log('searching for files %s', mask)
 
-      return globby(mask).then((list) => {
-        if (!list.length) {
-          throw new Error(`Could not find files matching mask "${mask}"`)
-        }
+      const list = await globby(mask)
 
-        console.log('found file: %s', list[0])
+      if (!list.length) {
+        throw new Error(`Could not find files matching mask "${mask}"`)
+      }
 
-        return list[0]
-      })
+      console.log('found file: %s', list[0])
+
+      return list[0]
     },
-  })
-
-  // https://on.cypress.io/browser-launch-api
-  on('before:browser:launch', (browser, options) => {
-    console.log('browser %o', browser)
-
-    if (isFirefox(browser)) {
-      // special settings for Firefox browser
-      // to prevent showing popup dialogs that block the rest of the test
-      options.preferences['browser.download.dir'] = downloadDirectory
-      options.preferences['browser.download.folderList'] = 2
-
-      // needed to prevent the download prompt for CSV, Excel, and ZIP files
-      // TIP: with Firefox DevTools open, download the file yourself
-      // and observe the reported MIME type in the Developer Tools
-      const mimeTypes = [
-        'text/csv',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Excel
-        'application/zip',
-      ]
-
-      options.preferences['browser.helperApps.neverAsk.saveToDisk'] = mimeTypes.join(',')
-
-      return options
-    }
-
-    // note: we set the download folder in Chrome-based browsers
-    // from the spec itself using automation API
   })
 }

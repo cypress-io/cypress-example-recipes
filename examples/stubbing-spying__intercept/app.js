@@ -9,7 +9,13 @@ function updateFavoriteFruits (contents) {
 }
 
 function getFavoriteFruits () {
-  document.querySelector('.favorite-fruits').innerHTML = '<div class="loader"></div>'
+  const favFruits = document.querySelector('.favorite-fruits')
+
+  if (!favFruits) {
+    return
+  }
+
+  favFruits.innerHTML = '<div class="loader"></div>'
 
   fetch('/favorite-fruits')
   .then((response) => {
@@ -38,24 +44,28 @@ setInterval(getFavoriteFruits, 30000)
 
 const loadUsers = (nUsers = 3) => {
   return () => {
-    console.log('loading %d users', nUsers)
-    document.querySelector('#users').innerText = ''
+    // using delay parameter to make sure our tests
+    // are solid and can handle the Ajax request firing after a delay
+    setTimeout(() => {
+      console.log('loading %d users', nUsers)
+      document.querySelector('#users').innerText = ''
 
-    fetch(`https://jsonplaceholder.cypress.io/users?_limit=${nUsers}`)
-    .then((r) => r.json())
-    .then((users) => {
-      console.table(users)
+      fetch(`https://jsonplaceholder.cypress.io/users?_limit=${nUsers}`)
+      .then((r) => r.json())
+      .then((users) => {
+        console.table(users)
 
-      const usersHtml = users.map((user) => {
-        return `<li class="user">${user.id} - ${user.email}</li>`
-      }).join('\n')
+        const usersHtml = users.map((user) => {
+          return `<li class="user">${user.id} - ${user.email}</li>`
+        }).join('\n')
 
-      document.querySelector('#users').innerHTML = usersHtml
-    })
-    .catch((e) => {
-      console.error('problem fetching users', e)
-      document.querySelector('#users').innerText = `Problem fetching users ${e.message}`
-    })
+        document.querySelector('#users').innerHTML = usersHtml
+      })
+      .catch((e) => {
+        console.error('problem fetching users', e)
+        document.querySelector('#users').innerText = `Problem fetching users ${e.message}`
+      })
+    }, 200)
   }
 }
 
@@ -116,9 +126,18 @@ function putUser () {
   })
 }
 
-document.getElementById('load-users').addEventListener('click', loadUsers(3))
-document.getElementById('load-five-users').addEventListener('click', loadUsers(5))
-document.getElementById('load-second-user').addEventListener('click', loadUser(2))
+if (document.getElementById('load-users')) {
+  document.getElementById('load-users').addEventListener('click', loadUsers(3))
+}
+
+if (document.getElementById('load-five-users')) {
+  document.getElementById('load-five-users').addEventListener('click', loadUsers(5))
+}
+
+if (document.getElementById('load-second-user')) {
+  document.getElementById('load-second-user').addEventListener('click', loadUser(2))
+}
+
 const postUserButton = document.getElementById('post-user')
 
 if (postUserButton) {
@@ -133,6 +152,11 @@ if (updateUserButton) {
 
 const updateNetworkStatus = () => {
   const el = document.getElementById('network-status')
+
+  if (!el) {
+    return
+  }
+
   const text = window.navigator.onLine ? '🟢 online' : '🟥 offline'
 
   el.innerText = text
@@ -141,3 +165,15 @@ const updateNetworkStatus = () => {
 updateNetworkStatus()
 window.addEventListener('offline', updateNetworkStatus)
 window.addEventListener('online', updateNetworkStatus)
+
+if (document.getElementById('get-headers')) {
+  document.getElementById('get-headers').addEventListener('click', () => {
+    fetch('/req-headers')
+    .then((r) => r.json())
+    .then((headers) => {
+      const output = document.getElementById('output')
+
+      output.innerText = JSON.stringify(headers, null, 2)
+    })
+  })
+}

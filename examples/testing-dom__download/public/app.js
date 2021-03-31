@@ -1,0 +1,6 @@
+/* global document */
+/* eslint-disable no-console */
+document.querySelector('[data-cy=download-csv-href]').addEventListener('click', () => {
+  console.log('about to download CSV file')
+  document.location.href = 'records.csv'
+})
