@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import { checkImageResolution } from './utils'
 
 describe('intercept', () => {
   it('spies on loading a static image', () => {
@@ -15,6 +16,15 @@ describe('intercept', () => {
     cy.intercept('/images').as('image')
     cy.visit('/pics.html')
     cy.wait('@image')
+  })
+
+  const checkTigerImageResolution = checkImageResolution(500, 333)
+  const checkRooImageResolution = checkImageResolution(300, 450)
+
+  it('confirms the image shows', () => {
+    cy.visit('/pics.html')
+    cy.get('img[src="images/tiger.jpg"]').should('be.visible')
+    .and(checkTigerImageResolution)
   })
 
   it('stubs a static image', () => {
@@ -44,6 +54,18 @@ describe('intercept', () => {
     // images with subpixel accuracy
     cy.get('img').invoke('width').should('closeTo', 300, 1)
     cy.get('img').invoke('height').should('closeTo', 450, 1)
+  })
+
+  it('replaces image after delay option', () => {
+    cy.intercept({
+      pathname: '/images/tiger.jpg',
+    }, { fixture: 'roo.jpg', delay: 2000 }).as('image')
+
+    cy.visit('/pics.html')
+    cy.wait('@image')
+
+    cy.get('img[src="images/tiger.jpg"]').should('be.visible')
+    .and(checkRooImageResolution)
   })
 
   it('redirects static image', () => {

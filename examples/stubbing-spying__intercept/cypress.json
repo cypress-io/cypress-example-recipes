@@ -2,5 +2,6 @@
   "baseUrl": "http://localhost:7080",
   "ignoreTestFiles": "deferred.js",
   "supportFile": false,
-  "defaultCommandTimeout": 8000
+  "defaultCommandTimeout": 8000,
+  "testFiles": "**/*-spec.js"
 }
