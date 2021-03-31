@@ -4,5 +4,6 @@
   "pluginsFile": false,
   "supportFile": false,
   "viewportWidth": 500,
-  "viewportHeight": 400
+  "viewportHeight": 400,
+  "defaultCommandTimeout": 8000
 }

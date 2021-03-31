@@ -107,6 +107,7 @@ describe('offline mode', { browser: '!firefox' }, () => {
 
     // now let's go back online and fetch the users
     goOnline()
+    assertOnline()
     cy.get('#load-users').click()
     cy.get('.user').should('have.length', 3)
   })
@@ -125,6 +126,7 @@ describe('offline mode', { browser: '!firefox' }, () => {
 
     // now let's go back online and fetch the users
     goOnline()
+    assertOnline()
     cy.get('#load-users').click()
     cy.get('.user').should('have.length', 3)
     cy.get('@fetchUsers').should('have.been.calledTwice')
@@ -157,6 +159,8 @@ describe('offline mode', { browser: '!firefox' }, () => {
 
     // now let's go back online and fetch the users
     goOnline()
+    assertOnline()
+
     cy.get('#load-users').click()
     // we can retry the assertion to know when the network call has happened
     // using .should callback function with an assertion inside
