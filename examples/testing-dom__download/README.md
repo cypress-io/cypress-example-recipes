@@ -8,6 +8,7 @@
 - a TXT file
 - a JS file
 - a Zip file
+- a PDF file
 
 Spec file | Description
 ---|---

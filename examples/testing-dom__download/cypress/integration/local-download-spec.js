@@ -98,6 +98,14 @@ describe('file download', () => {
 
       cy.log('**confirm downloaded PDF**')
       validateBinaryFile('why-cypress.pdf', 97672)
+
+      // let's read PDF in the plugin file and confirm its basics
+      cy.task('readPdf', './cypress/downloads/why-cypress.pdf')
+      // @ts-ignore
+      .then(({ numpages, text }) => {
+        expect(numpages, 'number of PDF pages').to.equal(1)
+        expect(text, 'has expected text').to.include('Why Cypress?')
+      })
     })
   })
 
