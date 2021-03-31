@@ -1,10 +1,12 @@
 /// <reference types="cypress" />
 /* eslint-disable no-console */
-const readXlsxFile = require('read-excel-file/node')
 const AdmZip = require('adm-zip')
 const { stripIndent } = require('common-tags')
 const globby = require('globby')
 const { rmdir } = require('fs')
+
+const { readExcelFile } = require('./read-excel')
+const { readPdf } = require('./read-pdf')
 
 /**
  * @type {Cypress.PluginConfig}
@@ -15,15 +17,9 @@ module.exports = (on, config) => {
 
   // register utility tasks to read and parse Excel files
   on('task', {
-    readExcelFile (filename) {
-      // we must read the Excel file using Node library
-      // and can return the parsed list to the browser
-      // for the spec code to validate it
-      console.log('reading Excel file %s', filename)
-      console.log('from cwd %s', process.cwd())
+    readExcelFile,
 
-      return readXlsxFile(filename)
-    },
+    readPdf,
 
     validateZipFile (filename) {
       // now let's validate the downloaded ZIP file

@@ -98,6 +98,14 @@ describe('file download', () => {
 
       cy.log('**confirm downloaded PDF**')
       validateBinaryFile('why-cypress.pdf', 97672)
+
+      // let's read PDF in the plugin file and confirm its basics
+      cy.task('readPdf', './cypress/downloads/why-cypress.pdf')
+      // @ts-ignore
+      .then(({ numpages, text }) => {
+        expect(numpages, 'number of PDF pages').to.equal(1)
+        expect(text, 'has expected text').to.include('Why Cypress?')
+      })
     })
   })
 
@@ -148,7 +156,11 @@ describe('file download', () => {
 
       recurse(
         () => cy.task('findFiles', mask),
-        isNonEmptyString
+        isNonEmptyString,
+        {
+          delay: 100, // pause 100ms between tries
+          timeout: 10000, // iterate up to 10 seconds
+        }
       )
       .then((foundImage) => {
         cy.log(`found image ${foundImage}`)

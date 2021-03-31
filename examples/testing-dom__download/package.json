@@ -2,6 +2,7 @@
   "name": "download",
   "version": "1.0.0",
   "description": "Download and validate a file",
+  "private": true,
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
