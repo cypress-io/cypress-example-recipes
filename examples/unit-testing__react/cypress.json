@@ -1,5 +1,4 @@
 {
   "fixturesFolder": false,
-  "pluginsFile": false,
-  "experimentalComponentTesting": true
+  "pluginsFile": false
 }
