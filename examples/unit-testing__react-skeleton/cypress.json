@@ -1,5 +1,0 @@
-{
-  "fixturesFolder": false,
-  "componentFolder": "src",
-  "testFiles": "**/*.spec.jsx"
-}
