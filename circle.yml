@@ -601,12 +601,6 @@ all_jobs: &all_jobs
   - unit-testing__application-code:
       requires:
         - build
-  - unit-testing__react:
-      requires:
-        - build
-  - unit-testing__react-skeleton:
-      requires:
-        - build
   - server-communication__bootstrapping-your-app:
       requires:
         - build
@@ -721,8 +715,6 @@ all_jobs: &all_jobs
         - testing-dom__page-reloads
         - testing-dom__pagination
         - unit-testing__application-code
-        - unit-testing__react
-        - unit-testing__react-skeleton
         # "meta" jobs
         - test-examples
         - test-examples-chrome
