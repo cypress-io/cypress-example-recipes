@@ -2,7 +2,8 @@
 
 /* eslint-disable no-console */
 describe('Unhandled promises', () => {
-  it('does not affect the Cypress test', () => {
+  // NOTE: this test will pass in Cypress < 7.0 and fail in Cypress 7.0+
+  it.skip('does not affect the Cypress test', () => {
     cy.visit('index.html')
     cy.get('button#promise').click()
     // the unhandled promise happens after 1000ms

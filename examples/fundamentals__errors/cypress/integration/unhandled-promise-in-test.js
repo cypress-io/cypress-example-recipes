@@ -3,7 +3,8 @@
 /* eslint-env browser */
 /* eslint-disable no-console */
 describe('Unhandled promises in the test code', () => {
-  it('does not affect the Cypress test', () => {
+  // NOTE: this test will pass in Cypress < 7.0 and fail in Cypress 7.0+
+  it.skip('does not affect the Cypress test', () => {
     Cypress.Promise.delay(1000).then(() => {
       throw new Error('Test code has a rejected promise')
     })
