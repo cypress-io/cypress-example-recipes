@@ -84,7 +84,7 @@ describe('offline mode', { browser: '!firefox' }, () => {
   it('shows error if we stub the network call', () => {
     assertOnline()
     cy.visit('/')
-    cy.intercept(url, { forceNetworkError: true }).as('users')
+    cy.intercept(`${url}*`, { forceNetworkError: true }).as('users')
     cy.get('#load-users').click()
     cy.contains('#users', 'Problem fetching users Failed to fetch')
 
@@ -140,7 +140,7 @@ describe('offline mode', { browser: '!firefox' }, () => {
     // and lets keep track the number of network calls made
     let callCount = 0
 
-    cy.intercept(url, () => {
+    cy.intercept(`${url}*`, () => {
       callCount += 1
     }).as('users')
 
