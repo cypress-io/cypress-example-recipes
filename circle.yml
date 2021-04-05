@@ -316,10 +316,6 @@ jobs:
     <<: *defaults
   unit-testing__application-code:
     <<: *defaults
-  unit-testing__react:
-    <<: *defaults
-  unit-testing__react-skeleton:
-    <<: *defaults
   server-communication__bootstrapping-your-app:
     <<: *defaults
   server-communication__env-variables:
