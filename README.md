@@ -110,9 +110,9 @@ Recipe | Description
 Recipe | Description
 --- | ---
 [Application Code](./examples/unit-testing__application-code) | Import and test your own application code
-[React](./examples/unit-testing__react) | Test your React components in isolation
-[React Skeleton](./examples/unit-testing__react-skeleton) | Component testing for React
 [File Upload in React](./examples/file-upload-react) | Test file upload in React app
+
+**Note:** looking for the React/Vue component testing recipes? Read the [Introducing the Cypress Component Test Runner– new in 7.0.0](https://www.cypress.io/blog/2021/04/06/introducing-the-cypress-component-test-runner/) blog post.
 
 ## Server Communication
 
