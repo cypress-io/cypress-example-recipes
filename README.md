@@ -127,6 +127,7 @@ Recipe | Description
 [Offline](./examples/server-communication__offline) | Test web application when the network is offline
 [Server timing](./examples/server-communication__server-timing) | Report server timing results from Cypress test
 [Wait for API](./examples/server-communication__wait-for-api) | Call the backend using `cy.request` until it responds
+[Making HTTP requests](./examples/server-communication__request) | How to use `cy.request`, `window.fetch`, and `cy.task` commands to make HTTP requests to the server with and without cookies
 
 ## Other Cypress Recipes
 
