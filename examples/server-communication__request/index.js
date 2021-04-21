@@ -21,7 +21,7 @@ module.exports = parseCookies(async (req, res) => {
     console.log('=== all cookies 🍪 ===')
     console.log(req.cookies)
 
-    return send(res, 200, req.cookies)
+    return send(res, 200, req.cookies || {})
   }
 
   throw createError(500, 'Unknown path')
