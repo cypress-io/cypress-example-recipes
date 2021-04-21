@@ -1,9 +1,11 @@
 /// <reference types="cypress" />
 describe('Subdomains', () => {
-  // logo selector on public static site after moving to Gatsby
-  const logoSelector = 'img[alt="Cypress.io"]'
-  // logo selector at https://docs.cypress.io/
-  const docsLogoSelector = '.app-header-logo'
+  const urlToLogoSelector = {
+    // logo selector at https://docs.cypress.io/
+    'https://docs.cypress.io': 'img[alt="Cypress Docs Logo"]',
+    // logo selector on public static site after moving to Gatsby
+    'https://www.cypress.io': 'img[alt="Cypress.io"]',
+  }
 
   // ignore errors from the site itself
   Cypress.on('uncaught:exception', () => {
@@ -11,14 +13,15 @@ describe('Subdomains', () => {
   })
 
   // run the same test against different subdomain
-  const urls = ['https://docs.cypress.io', 'https://www.cypress.io']
+  const urls = Object.keys(urlToLogoSelector)
 
   urls.forEach((url) => {
     it(`Should display logo on ${url}`, () => {
       cy.visit(url)
 
-      // our logo is different on static site vs documentation site
-      const selector = url.includes('www') ? logoSelector : docsLogoSelector
+      const selector = urlToLogoSelector[url]
+
+      expect(selector, `logo selector for ${url}`).to.be.a('string')
 
       cy.get(selector).should('be.visible')
     })
