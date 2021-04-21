@@ -3,27 +3,22 @@ describe('Google Analytics', () => {
   // we can arrange the intercepts to be in a particular order in each test
   // by making small utility functions rather than using "beforeEach" hooks
 
-  const stubAll = () => {
+  beforeEach(() => {
     cy.log('**stub all GA calls**')
     // Do not let collect network calls get to Google Analytics. Instead intercept them
     // returning the status code 200. Since different events use different endpoints
     // let's define two intercepts to be precise
-    cy.intercept('POST', 'https://www.google-analytics.com/j/collect', { statusCode: 200 }).as('collect')
-    cy.intercept('GET', 'https://www.google-analytics.com/collect', { statusCode: 200 }).as('gifCollect')
-  }
+    cy.intercept('POST', 'https://www.google-analytics.com/j/collect*', { statusCode: 200 }).as('collect')
+    cy.intercept('GET', 'https://www.google-analytics.com/collect*', { statusCode: 200 }).as('gifCollect')
 
-  const visitThePage = () => {
     cy.log('**visiting the page**')
     cy.visit('/index.html')
     // tip: cy.visit yields the window object
     // confirm the `window.ga` function has been created
     .its('ga').should('be.a', 'function')
-  }
+  })
 
   it('makes collect calls', () => {
-    stubAll()
-    visitThePage()
-
     // confirm the GA called the collect endpoint
     cy.wait('@collect').its('request.url')
     // extract the information from the URL search params step by step
@@ -60,7 +55,7 @@ describe('Google Analytics', () => {
     // by using the hostname, pathname, and some of the query parameters
     cy.intercept({
       hostname: 'www.google-analytics.com',
-      pathname: '/collect',
+      // pathname: '/collect',
       query: {
         ec: 'button',
         ea: 'click',
@@ -69,10 +64,6 @@ describe('Google Analytics', () => {
     }, {
       statusCode: 200,
     }).as('register')
-
-    // then we stub the other GA network calls
-    stubAll()
-    visitThePage()
 
     cy.contains('button', 'Register').click()
     cy.wait('@register') // the page has sent the GA event on click

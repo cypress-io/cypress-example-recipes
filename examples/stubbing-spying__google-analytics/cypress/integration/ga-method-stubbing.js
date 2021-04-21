@@ -22,7 +22,7 @@ describe('Google Analytics', function () {
   })
 
   beforeEach(function () {
-    cy.intercept('www.google-analytics.com', { statusCode: 503 })
+    cy.intercept({ hostname: 'www.google-analytics.com' }, { statusCode: 503 })
     cy.visit('/index.html')
   })
 
