@@ -65,7 +65,7 @@ describe('intercept', () => {
     cy.location('pathname').should('equal', '/form')
 
     cy.wait('@submitForm').its('request').then(({ headers, body }) => {
-      expect(body, 'request body').to.be.a('ArrayBuffer')
+      expect(body, 'request body').to.be.a('string')
       const contentType = headers['content-type']
 
       // the browser sets the separator string when sending the form
@@ -75,7 +75,7 @@ describe('intercept', () => {
       // to convert the multipart text into an object of values
       expect(contentType, 'boundary').to.match(/^multipart\/form-data; boundary=/)
       const boundary = contentType.split('boundary=')[1]
-      const values = parseMultipartForm({ boundary, buffer: body })
+      const values = parseMultipartForm({ boundary, body })
 
       expect(values, 'form values').to.deep.equal({
         city: 'Boston',
@@ -86,10 +86,10 @@ describe('intercept', () => {
 })
 
 /*
-  Utility: parses (very simply) multipart buffer into string values.
+  Utility: parses (very simply) multipart body into string values.
 
-  the decoded buffer string will be something like
-  ------We  bKitFormBoundaryYxsB3tlu9eJsoCeY
+  the decoded body string will be something like
+  ------WebKitFormBoundaryYxsB3tlu9eJsoCeY
   Content-Disposition: form-data; name="city"
 
   Boston
@@ -105,16 +105,15 @@ describe('intercept', () => {
   - https://www.npmjs.com/package/busboy
   - https://www.npmjs.com/package/formidable
   */
-const parseMultipartForm = ({ boundary, buffer }) => {
+const parseMultipartForm = ({ boundary, body }) => {
   expect(boundary, 'boundary').to.be.a('string')
-  const decoder = new TextDecoder()
-  const decoded = decoder.decode(buffer)
+  expect(body, 'body').to.be.a('string')
 
-  const parts = decoded.split(`--${boundary}`)
+  const parts = body.split(`--${boundary}`)
   .map((s) => s.trim())
   .filter((s) => s.startsWith('Content-Disposition: form-data;'))
 
-  console.log(decoded)
+  console.log(body)
   console.log(parts)
 
   const result = {}

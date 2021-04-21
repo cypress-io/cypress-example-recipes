@@ -2,7 +2,7 @@
 
 describe('intercept', () => {
   it('spies on loading a static image', () => {
-    cy.intercept('/images').as('image')
+    cy.intercept('/images/*').as('image')
     cy.visit('/pics.html')
     cy.wait('@image')
 
@@ -12,14 +12,14 @@ describe('intercept', () => {
   })
 
   it('spies on loading a static image (2nd test)', () => {
-    cy.intercept('/images').as('image')
+    cy.intercept('/images/*').as('image')
     cy.visit('/pics.html')
     cy.wait('@image')
   })
 
   it('stubs a static image', () => {
     // 🐅 -> 🦘
-    cy.intercept('/images', {
+    cy.intercept({ url: '/images/*' }, {
       fixture: 'roo.jpg',
       headers: {
         'content-type': 'image/jpeg',
@@ -34,7 +34,7 @@ describe('intercept', () => {
 
   it('stubs a static image using fixture', () => {
     // 🐅 -> 🦘
-    cy.intercept('/images', { fixture: 'roo.jpg' })
+    cy.intercept('/images/*', { fixture: 'roo.jpg' })
     cy.visit('/pics.html')
     // we DO see the roo image, but again, just like the test above
     // cannot wait for it using cy.wait

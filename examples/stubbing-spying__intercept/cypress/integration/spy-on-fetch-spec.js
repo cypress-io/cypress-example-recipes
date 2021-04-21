@@ -63,7 +63,7 @@ describe('intercept', () => {
     })
 
     it('spying on 2nd domain', () => {
-      cy.intercept('https://jsonplaceholder.cypress.io/users').as('users')
+      cy.intercept('https://jsonplaceholder.cypress.io/users*').as('users')
       cy.get('#load-users').click()
       cy.wait('@users').its('response.body').should('have.length', 3)
       .its('0') // grab the first user from the list
@@ -103,7 +103,7 @@ describe('intercept', () => {
     })
 
     it('checks the status code', () => {
-      cy.intercept('/users').as('users')
+      cy.intercept('/users*').as('users')
       cy.get('#load-five-users').click()
       cy.wait('@users').its('response').then((response) => {
         expect(response).to.include({
@@ -133,9 +133,9 @@ describe('intercept', () => {
   })
 
   context('spying on PUT request', () => {
-    it('can spy using URL substring', () => {
+    it('can spy using path', () => {
       cy.visit('/')
-      cy.intercept('PUT', '/users').as('updateUser')
+      cy.intercept('PUT', '/users/1').as('updateUser')
       cy.get('#put-user').click()
       cy.wait('@updateUser').then((xhr) => {
         expect(xhr.response.statusCode).to.equal(200)
