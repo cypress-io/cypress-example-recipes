@@ -30,7 +30,7 @@ describe('intercept', () => {
     it('stubs fetch to test loading indicator', () => {
       cy.intercept('/favorite-fruits', (req) => {
         req.reply((res) => {
-          res.delay(2000).send(['Pineapple 🍍'])
+          res.setDelay(2000).send(['Pineapple 🍍'])
         })
       })
 
@@ -51,7 +51,7 @@ describe('intercept', () => {
         req.reply((res) => {
           // hmm, every time we want to return an empty list
           // we need to stringify it, otherwise the stub does not ... stub
-          res.delay(1000).send([])
+          res.setDelay(1000).send([])
         })
       })
 
@@ -177,7 +177,7 @@ describe('intercept', () => {
 
     it('displays error (short)', function () {
       // you can give the response object with status code
-      cy.intercept('/favorite-fruits', {
+      cy.intercept({ url: '/favorite-fruits' }, {
         statusCode: 500,
         body: '',
         headers: {
@@ -200,7 +200,7 @@ describe('intercept', () => {
         username: 'Test User',
       }]
 
-      cy.intercept('https://jsonplaceholder.cypress.io/users', {
+      cy.intercept({ url: 'https://jsonplaceholder.cypress.io/users*' }, {
         body: users,
         headers: {
           'access-control-allow-origin': Cypress.config('baseUrl'),
@@ -236,7 +236,7 @@ describe('intercept', () => {
 
     it('can set an alias depending on the request', () => {
       cy.visit('/')
-      cy.intercept('GET', '/users', (req) => {
+      cy.intercept('GET', '/users*', (req) => {
         // Inspect the request, and if it what we are looking for,
         // set the alias to assert against later. Very useful for
         // GraphQL requests!
@@ -251,7 +251,7 @@ describe('intercept', () => {
       .its('response.body').should('have.length', 5)
     })
 
-    it('reports any errors from the intercept as user application errors', () => {
+    it('any errors from the intercept fail the test', (done) => {
       cy.visit('/')
 
       const errorMessage = 'Intercept gone wrong!'
@@ -262,22 +262,14 @@ describe('intercept', () => {
         throw new Error(errorMessage)
       })
 
-      cy.on('uncaught:exception', (e) => {
-        const text = 'The following error originated from your test code, not from Cypress.'
-
-        if (!e.message.includes(text)) {
+      cy.on('fail', (e) => {
+        if (!e.message === errorMessage) {
           // hmm, unexpected error text
           // return and fail the test
-          return
+          throw e
         }
 
-        if (e.message.includes(errorMessage)) {
-          console.log('caught expected error')
-
-          return false
-        }
-
-        return true
+        done()
       })
 
       cy.get('#post-user').click()
@@ -285,12 +277,8 @@ describe('intercept', () => {
 
     it('stubs all non-stubbed Ajax with 404', () => {
       // similar to the deprecated cy.server({ force:404 })
-      // we want to stub all non-stubbed Ajax calls
-      cy.intercept('/favorite-fruits', { fixture: 'fruits.json' })
-      cy.visit('/')
-      cy.get('.favorite-fruits li').should('have.length', 3)
 
-      // now let's stop all other Ajax application/json requests
+      // stop all fall-through Ajax application/json requests with a 404
       cy.intercept({
         headers: {
           accept: 'application/json',
@@ -299,6 +287,11 @@ describe('intercept', () => {
         statusCode: 404,
       })
 
+      // we want to stub this specific JSON call only
+      cy.intercept('/favorite-fruits', { fixture: 'fruits.json' })
+
+      cy.visit('/')
+      cy.get('.favorite-fruits li').should('have.length', 3)
       // let's try non-stubbed network call - it should fail
       cy.get('#load-users').click()
       cy.contains('#users', 'Not Found').should('be.visible')

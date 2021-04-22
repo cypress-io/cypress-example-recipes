@@ -3,10 +3,10 @@
 describe('intercept', () => {
   context('matches order', () => {
     describe('multiple matches', () => {
-      it('uses the first found route matcher that responds', () => {
-        cy.intercept('*-fruits').as('fruits') // does not reply
-        cy.intercept('favorite-*', ['Lemons 🍋']).as('favorite') // replies with a fruit
+      it('uses the last found route matcher that responds', () => {
         cy.intercept('favorite-fruits').as('favorite-fruits') // does not reply
+        cy.intercept('favorite-*', ['Lemons 🍋']).as('favorite') // replies with a fruit
+        cy.intercept('*-fruits').as('fruits') // does not reply
 
         cy.visit('/')
         cy.wait('@fruits') // first route matches
@@ -16,9 +16,9 @@ describe('intercept', () => {
         cy.contains('li', 'Lemons 🍋').should('be.visible')
       })
 
-      it('using substring matches multiple interceptors', () => {
+      it('using glob matches multiple interceptors', () => {
         cy.visit('/')
-        cy.intercept('/users').as('users')
+        cy.intercept('/users/*').as('users')
         cy.intercept('/users/2').as('secondUser')
         cy.get('#load-second-user').click()
 
