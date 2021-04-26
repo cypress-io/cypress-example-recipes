@@ -12,6 +12,7 @@ Recipe | Description
 [Handling errors](./examples/fundamentals__errors) | Handling thrown errors and unhandled promise rejections
 [Dynamic tests](./examples/fundamentals__dynamic-tests) | Create tests dynamically from JSON data
 [Dynamic tests from CSV](./examples/fundamentals__dynamic-tests-from-csv) | Create tests dynamically from CSV file
+[Dynamic tests from API](./examples/fundamentals__dynamic-tests-from-api) | Create tests dynamically by calling an external API
 [Fixtures](./examples/fundamentals__fixtures) | Loading single or multiple fixtures
 [Adding Custom Commands](./examples/fundamentals__add-custom-command) | Write your own custom commands using JavaScript with correct types for IntelliSense to work
 [Adding Custom Commands (TS)](./examples/fundamentals__add-custom-command-ts) | Write your own custom commands using TypeScript
