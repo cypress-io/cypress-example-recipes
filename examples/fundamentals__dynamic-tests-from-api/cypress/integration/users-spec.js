@@ -15,7 +15,7 @@ describe('Users from API', () => {
     it(`has the user ${user.id} ${user.username} ${user.email}`, () => {
       // confirm the user object has the expected keys
       expect(user).to.include.keys(['id', 'username', 'email'])
-
+      // check the page
       cy.contains('td[data-cy=userId]', user.id)
       .parent('tr')
       .within(() => {
