@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const got = require('got')
-// Cypress tests running in the browser have access to
+// Cypress tests in the 'integration' folder have access to
 // the Cypress object and the bundled Cypress._ Lodash
 // The plugin file does NOT have Cypress object
 // and thus has to import any 3rd party libraries
