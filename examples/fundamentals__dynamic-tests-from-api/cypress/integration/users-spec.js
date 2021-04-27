@@ -5,9 +5,11 @@ const users = Cypress.env('users')
 
 describe('Users from API', () => {
   before(() => {
-    // confirm the users data
+    // confirm the users data has been set
     expect(users).to.be.an('array').and.to.have.length(3)
+  })
 
+  beforeEach(() => {
     cy.visit('index.html')
   })
 
