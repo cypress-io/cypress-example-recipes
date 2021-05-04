@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-
 import { Given, Then } from 'cypress-cucumber-preprocessor/steps'
 import fizzbuzz from '../../../fizzbuzz'
 
@@ -9,7 +8,11 @@ Given(`I try with {int}`, (i) => {
   inputNumber = i
 })
 
-//    I see Fizz     in the output
-Then(`I see {string} in the output`, (text) => {
+Then(`the output shall be: {string}`, (text) => {
+  expect(fizzbuzz(inputNumber)).to.eq(text)
+})
+
+//  with regular expression to match a string
+Then(/^the output shall be ([^"]*)$/, (text) => {
   expect(fizzbuzz(inputNumber)).to.eq(text)
 })
