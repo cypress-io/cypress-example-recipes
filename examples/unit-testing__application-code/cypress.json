@@ -1,4 +1,6 @@
 {
-  "pluginsFile": false,
-  "supportFile": false
+  "pluginsFile": "./cypress/plugins/index.js",
+  "supportFile": false,
+  "ignoreTestFiles": "*.nospec.js",
+  "testFiles": "**/*.{js,feature,features}"
 }
