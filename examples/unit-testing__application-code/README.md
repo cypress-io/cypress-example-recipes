@@ -1,4 +1,9 @@
+# unit test with Gerkin
+
+<https://www.rb2.nl/en/university/how-to-use-cypress-with-cucumber-plugin>
+
 # unit-test-application-code
+
 > Load and unit test application code without loading a web page
 
 - Unit test your own application code libraries.
@@ -6,8 +11,8 @@
 - Test simple math functions.
 - Test the canonical *fizzbuzz* test.
 - Automatically retry assertion until a given property inside an object:
-  * is added or deleted
-  * has expected value
+  - is added or deleted
+  - has expected value
 - unit test asynchronous code using promises and async / await
 
 In [cypress/integration](cypress/integration) folder the specs show:

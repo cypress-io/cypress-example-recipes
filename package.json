@@ -179,8 +179,5 @@
       "eslint --ext .json --fix",
       "git add"
     ]
-  },
-  "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
   }
 }

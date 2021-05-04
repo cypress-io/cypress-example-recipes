@@ -4,4 +4,4 @@ Feature: FizzBuzz BDD
 
   Scenario: the number 3 should fizz
     Given I try with 3
-    Then I see "Fizz" in the output
+
