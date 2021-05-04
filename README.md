@@ -1,4 +1,5 @@
 # Recipes
+
 [![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) [![Build status](https://ci.appveyor.com/api/projects/status/7p4qkwavheciwbxc/branch/master?svg=true)](https://ci.appveyor.com/project/cypress-io/cypress-example-recipes/branch/master) [![renovate-app badge][renovate-badge]][renovate-app] [![Cypress Dashboard][dashboard badge]][dashboard url]
 
 > This repo contains various recipes for testing common scenarios using Cypress: [Fundamentals](#fundamentals), [Testing the DOM](#testing-the-dom), [Logging in](#logging-in-recipes), [Preprocessors](#preprocessors), [Blogs](#blogs), [Stubbing and spying](#stubbing-and-spying), [Unit Testing](#unit-testing), [Server Communication](#server-communication), [Other Cypress Recipes](#other-cypress-recipes), [Community Recipes](#community-recipes)
@@ -67,6 +68,7 @@ Recipe | Description
 [Typescript with Browserify](./examples/preprocessors__typescript-browserify) | Add typescript support with browserify
 [Typescript with Webpack](./examples/preprocessors__typescript-webpack) | Add typescript support with webpack
 [Flow with Browserify](./examples/preprocessors__flow-browserify) | Add flow support with browserify
+[Cucumber for unit testing](./examples/preprocessor_cucumber__unit-testing)| Write tests using Gherkin and steps in JS, no need to invoke Cy for browsing
 
 ## Blogs
 

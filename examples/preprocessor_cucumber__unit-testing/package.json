@@ -1,0 +1,23 @@
+{
+  "name": "unit-test-application-code",
+  "version": "1.0.0",
+  "description": "Load and unit test application code without loading a web page",
+  "main": "index.js",
+  "scripts": {
+    "cypress:bdd": "cypress run --spec \"**/*.feature\"",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "start": "echo there is no web server to start in this project",
+    "test:ci": "npm run cypress:run",
+    "test:ci:firefox": "npm run cypress:run -- --browser firefox",
+    "test:ci:record": "npm run cypress:run -- --record",
+    "test:ci:windows": "bin-up cypress run",
+    "test:ci:windows:record": "bin-up cypress run --record --group unit-test-application-code"
+  },
+  "devDependencies": {
+    "cypress": "^7.2.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  }
+}
