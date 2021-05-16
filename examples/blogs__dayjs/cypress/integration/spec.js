@@ -24,16 +24,6 @@ describe('dayjs example', () => {
     cy.contains('span', `Order shipped on: ${todaysDate}`)
   })
 
-  it('generate past & furture dates', () => {
-    cy.visit('index.html')
-    const yesterdaysDate = dayjs().add(-1, 'day').format('MMM DD, YYYY')
-
-    cy.log(yesterdaysDate)
-    const tomorrowsDate = dayjs().add(1, 'day').format('MMM DD, YYYY')
-
-    cy.log(tomorrowsDate)
-  })
-
   it('parses UTC', () => {
     const time = dayjs.utc('2014-04-25T19:38:53.196Z').format('h:mm A')
 
