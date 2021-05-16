@@ -44,7 +44,7 @@
     "cors": "2.8.5",
     "cross-env": "5.2.0",
     "csurf": "1.9.0",
-    "cypress": "^6.5.0",
+    "cypress": "7.3.0",
     "debug": "3.1.0",
     "dragula": "3.7.2",
     "enzyme": "3.3.0",
