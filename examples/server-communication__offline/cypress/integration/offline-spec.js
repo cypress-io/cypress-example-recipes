@@ -48,14 +48,14 @@ describe('offline/online mode', () => {
 
     it('shows error if we stub the network call', () => {
       cy.get('#load-users').click()
-      cy.contains('#users', 'Problem fetching users Failed to fetch')
+      cy.contains('#users', 'Problem fetching users')
 
-      cy.wait('@users', { timeout: 1000 }) // the network call happens
+      cy.wait('@users') // the network call happens
     })
 
     it('shows error trying to fetch users in offline mode', () => {
       cy.get('#load-users').click()
-      cy.contains('#users', 'Problem fetching users Failed to fetch')
+      cy.contains('#users', 'Problem fetching users')
     })
 
     it('makes fetch request when offline', () => {
@@ -74,7 +74,7 @@ describe('offline/online mode', () => {
       }).as('users')
 
       cy.get('#load-users').click()
-      cy.contains('#users', 'Problem fetching users Failed to fetch')
+      cy.contains('#users', 'Problem fetching users')
 
       // the cy.intercept network call does NOT happen
       // because the browser does not fire it
