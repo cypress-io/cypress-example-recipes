@@ -74,3 +74,7 @@ The rest of the application's code runs "normally" without any stubbing.
 ![Application stubbing](images/stub-app-method.png)
 
 Check out a blog post that describes this technique in general ["Shrink the Untestable Code With App Actions And Effects"](https://www.cypress.io/blog/2019/02/28/shrink-the-untestable-code-with-app-actions-and-effects/)
+
+### [csv-file-spec.js](./cypress/integration/csv-file-spec.js)
+
+Attaches the CSV fixture using the `cypress-file-upload`. The attached file is parsed by the application using the [papaparse](https://www.papaparse.com/) library. The test then validates the parsed results.

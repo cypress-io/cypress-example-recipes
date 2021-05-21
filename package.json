@@ -110,7 +110,7 @@
     "cypress-axe": "0.12.2",
     "cypress-expect-n-assertions": "1.0.0",
     "cypress-failed-log": "2.9.1",
-    "cypress-file-upload": "4.1.1",
+    "cypress-file-upload": "5.0.7",
     "cypress-iframe": "1.0.1",
     "cypress-pipe": "2.0.0",
     "cypress-plugin-snapshots": "1.4.4",
