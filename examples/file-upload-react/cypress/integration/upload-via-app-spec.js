@@ -6,8 +6,8 @@ describe('File upload', () => {
   })
 
   it('uploads file by stubbing application code', () => {
-    cy.server()
-    cy.route('POST', 'https://some-server.com/upload', 200).as('upload')
+    cy.intercept('POST', 'https://some-server.com/upload', {}).as('upload')
+
     // load mock data from a fixture or construct here
     const testFile = new File(['data to upload'], 'upload.txt')
 

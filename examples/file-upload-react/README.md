@@ -20,7 +20,7 @@ const file = e.nativeEvent.testFile || e.nativeEvent.target.files[0]
 
 We can confirm that the file gets uploaded by stubbing either XHR request or intercepting the `axios` library method used by the application's code to actually perform the file upload. See the `spec.js` how to:
 
-- Stub remote server using [`cy.route()`](https://on.cypress.io/route)
+- Stub network calls using [`cy.intercept()`](https://on.cypress.io/intercept)
 - Alternatively stub `axios.post` method using [`cy.stub()`](https://on.cypress.io/stub)
 
 ### [upload-plugin-spec.js](cypress/integration/upload-plugin-spec.js)

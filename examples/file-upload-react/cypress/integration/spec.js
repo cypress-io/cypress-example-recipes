@@ -6,10 +6,8 @@ describe('File upload', () => {
   })
 
   it('uploads mock file and stubs the server', () => {
-    // see how to mock a remote server
-    // https://on.cypress.io/route
-    cy.server()
-    cy.route('POST', 'https://some-server.com/upload', 200).as('upload')
+    // mock the network call using https://on.cypress.io/intercept
+    cy.intercept('POST', 'https://some-server.com/upload', {}).as('upload')
     // load mock data from a fixture or construct here
     const testFile = new File(['data to upload'], 'upload.txt')
 
