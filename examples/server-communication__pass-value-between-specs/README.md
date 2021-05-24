@@ -50,3 +50,7 @@ returning item todo
 ## Warning ⚠️
 
 Saving an item in the plugin file only works as expected if the specs run in the expected order on the same machine. If you are using parallelization with `--parallel` flag the order of specs is determined by their historical timings, and the specs are split amongst all participating machines. Thus the specs might run in the wrong order, or only the second spec might execute on the machine, breaking the test.
+
+## See also
+
+- recipe ["Visiting 2nd domain"](https://github.com/cypress-io/cypress-example-recipes#server-communication)
