@@ -180,17 +180,18 @@ describe('select2', () => {
     // used as a blog post demo
     it.skip('selects a value by typing and selecting', () => {
       // if you want to stub network calls to simulate slow server responses
-      // cy.server()
-      // cy.route({
-      //   url: 'https://jsonplaceholder.cypress.io/users?_type=query',
-      //   response: 'fixture:query.json',
-      //   delay: 1000,
+      // cy.intercept('https://jsonplaceholder.cypress.io/users?_type=query', (req) => {
+      //   req.reply({
+      //     fixture: 'query.json',
+      //     delay: 1000,
+      //   })
       // }).as('query')
 
-      // cy.route({
-      //   url: 'https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem',
-      //   response: 'fixture:clem.json',
-      //   delay: 1000,
+      // cy.intercept('https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem', (req) => {
+      //   req.reply({
+      //     fixture: 'clem.json',
+      //     delay: 1000,
+      //   })
       // }).as('user_search')
 
       // first open the container, which makes the initial ajax call
@@ -256,8 +257,7 @@ describe('select2', () => {
     })
 
     it('selects a value after Ajax completes', () => {
-      cy.server()
-      cy.route('https://jsonplaceholder.cypress.io/users?_type=query').as('users')
+      cy.intercept('https://jsonplaceholder.cypress.io/users?_type=query').as('users')
       cy.get('#select2-user-container').click()
       cy.wait('@users')
 
@@ -272,9 +272,8 @@ describe('select2', () => {
     })
 
     it('selects a value by typing and selecting (no flake)', () => {
-      cy.server()
-      cy.route('https://jsonplaceholder.cypress.io/users?_type=query').as('query')
-      cy.route('https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem').as('user_search')
+      cy.intercept('https://jsonplaceholder.cypress.io/users?_type=query').as('query')
+      cy.intercept('https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem').as('user_search')
 
       // first open the container, which makes the initial ajax call
       cy.get('#select2-user-container').click()
@@ -313,8 +312,7 @@ describe('select2', () => {
     it('selects the user returned by the Ajax call', () => {
       // instead of hard-coding the user id and name, let's
       // select the user using the Ajax response data
-      cy.server()
-      cy.route('https://jsonplaceholder.cypress.io/users?_type=query').as('users')
+      cy.intercept('https://jsonplaceholder.cypress.io/users?_type=query').as('users')
       cy.get('#select2-user-container').click()
       cy.wait('@users').its('responseBody').should('have.length', 10)
       // let's take user #5
@@ -331,19 +329,19 @@ describe('select2', () => {
     })
 
     it('selects the user from stubbed Ajax call', () => {
-      cy.server()
       // do not go to the server, mock the response instead
       // but return the response after a delay
-      cy.route({
-        url: 'https://jsonplaceholder.cypress.io/users?_type=query',
-        response: [{
-          id: 101,
-          name: 'Joe Smith',
-        }, {
-          id: 201,
-          name: 'Mary Jane',
-        }],
-        delay: 2000,
+      cy.intercept('https://jsonplaceholder.cypress.io/users?_type=query', (req) => {
+        req.reply({
+          body: [{
+            id: 101,
+            name: 'Joe Smith',
+          }, {
+            id: 201,
+            name: 'Mary Jane',
+          }],
+          delay: 2000,
+        })
       })
 
       cy.get('#select2-user-container').click()
