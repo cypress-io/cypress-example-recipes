@@ -8,3 +8,5 @@ The widget to copy text is `@github/clipboard-copy-element` custom element that 
 See the [cypress/integration/spec.js](./cypress/integration/spec.js) file.
 
 The page [index.html](./index.html) shows the copy button on "mouseover" event. When the text is copied to the clipboard, it shows a [tiny toast](https://github.com/bahmutov/tiny-toast) popup.
+
+See the [Mozilla Clipboard docs](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard)
