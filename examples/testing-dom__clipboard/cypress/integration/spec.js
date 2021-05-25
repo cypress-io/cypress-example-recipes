@@ -1,6 +1,9 @@
 /// <reference types="cypress" />
 
-describe('Clipboard', () => {
+// access to the clipboard reliably works in Electron browser
+// in other browsers, there are popups asking for permission
+// thus we should only run these tests in Electron
+describe('Clipboard', { browser: 'electron' }, () => {
   it('copies text to clipboard', () => {
     cy.visit('index.html')
     cy.get('code').trigger('mouseover')
