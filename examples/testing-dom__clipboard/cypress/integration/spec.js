@@ -10,6 +10,10 @@ describe('Clipboard', { browser: 'electron' }, () => {
     cy.get('[aria-label="Copy"]').click()
 
     // let's check the copied text
+    // on Chrome this operation will prompt the browser
+    // to ask the user for permission:
+    //  http://localhost:port wants to
+    //  See text and images copied the clipboard
     cy.window().its('navigator.clipboard')
     .invoke('readText')
     .should('equal', 'npm install -D cypress')
