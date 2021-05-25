@@ -56,5 +56,7 @@ describe('Clipboard permissions', () => {
     cy.window().its('navigator.clipboard')
     .invoke('readText')
     .should('equal', 'npm install -D cypress')
+
+    // TODO how can we paste the clipboard into the text area?
   })
 })
