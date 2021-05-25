@@ -36,7 +36,8 @@
         "@cypress/snapshot",
         "@cypress/webpack-preprocessor",
         "start-server-and-test",
-        "typescript"
+        "typescript",
+        "cypress-file-upload"
       ],
       "enabled": false
     }
