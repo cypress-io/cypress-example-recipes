@@ -19,4 +19,16 @@ describe('Clipboard', () => {
       cy.get('#paste-here').click().invoke('val', text)
     })
   })
+
+  it('spies on the clipboard methods', () => {
+    cy.visit('index.html')
+    cy.get('code').trigger('mouseover')
+    cy.window().its('navigator.clipboard').then((clipboard) => {
+      cy.spy(clipboard, 'writeText').as('writeText')
+    })
+
+    cy.get('[aria-label="Copy"]').click()
+    cy.get('@writeText')
+    .should('have.been.calledOnceWith', 'npm install -D cypress')
+  })
 })
