@@ -6,9 +6,26 @@ describe('Clipboard', () => {
     cy.get('code').trigger('mouseover')
     cy.get('[aria-label="Copy"]').click()
 
+    // let's check the copied text
+    cy.window().its('navigator.clipboard')
+    .invoke('readText')
+    .should('equal', 'npm install -D cypress')
+  })
+
+  it('shows the popup', () => {
+    cy.visit('index.html')
+    cy.get('code').trigger('mouseover')
+    cy.get('[aria-label="Copy"]').click()
+
     cy.contains('.tinyToast', 'Copied!').should('be.visible')
     // the toast then goes away in less than 2 seconds
     cy.get('.tinyToast', { timeout: 2000 }).should('not.exist')
+  })
+
+  it('can set the clipboard text in the text area', () => {
+    cy.visit('index.html')
+    cy.get('code').trigger('mouseover')
+    cy.get('[aria-label="Copy"]').click()
 
     // let's check the copied text
     cy.window().its('navigator.clipboard')
