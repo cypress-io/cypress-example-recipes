@@ -16,14 +16,23 @@
     <script src="https://fb.me/react-dom-15.0.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/papaparse@latest/papaparse.min.js"></script>
+
     <script type="text/babel">
       let FileUploadApp = React.createClass({
         render: function() {
           return (
-            <div>
-              <h3>File upload</h3>
-              <input id="file1" type="file" onChange={this.fileUpload}/>
-            </div>
+            <main>
+              <div>
+                <h3>File upload</h3>
+                <input id="file1" type="file" onChange={this.fileUpload}/>
+              </div>
+
+              <div>
+                <h3>CSV File parse</h3>
+                <input id="csv-file" type="file" onChange={this.csvFileParse}/>
+              </div>
+            </main>
           )
         },
 
@@ -45,6 +54,25 @@
           // FormData.append(name, value, filename)
           data.append("file", file, file.name)
           axios.post('https://some-server.com/upload', data)
+        },
+
+        csvFileParse (e) {
+          const file = e.nativeEvent.target.files[0];
+          console.log('file', file)
+          // parse CSV file using
+          // https://www.papaparse.com/
+          Papa.parse(file, {
+            delimiter: ',',
+            header: true,
+            skipEmptyLines: true,
+            complete (results) {
+              console.log('finished parsing CSV file')
+              console.log(results)
+              // set the results on the window object
+              // and the tests can verify them
+              window.__csvResults = results
+            }
+          })
         }
       });
 

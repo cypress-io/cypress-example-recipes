@@ -44,3 +44,7 @@ The second test gets the URL from the plugins process using [cy.task](https://on
 ## using file
 
 The tests in [using-file-spec.js](cypress/integration/using-file-spec.js) save the extracted URL in a local JSON file.
+
+## See also
+
+- recipe ["Pass value between specs"](https://github.com/cypress-io/cypress-example-recipes#server-communication)

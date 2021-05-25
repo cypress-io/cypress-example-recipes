@@ -20,7 +20,7 @@ const file = e.nativeEvent.testFile || e.nativeEvent.target.files[0]
 
 We can confirm that the file gets uploaded by stubbing either XHR request or intercepting the `axios` library method used by the application's code to actually perform the file upload. See the `spec.js` how to:
 
-- Stub remote server using [`cy.route()`](https://on.cypress.io/route)
+- Stub network calls using [`cy.intercept()`](https://on.cypress.io/intercept)
 - Alternatively stub `axios.post` method using [`cy.stub()`](https://on.cypress.io/stub)
 
 ### [upload-plugin-spec.js](cypress/integration/upload-plugin-spec.js)
@@ -74,3 +74,7 @@ The rest of the application's code runs "normally" without any stubbing.
 ![Application stubbing](images/stub-app-method.png)
 
 Check out a blog post that describes this technique in general ["Shrink the Untestable Code With App Actions And Effects"](https://www.cypress.io/blog/2019/02/28/shrink-the-untestable-code-with-app-actions-and-effects/)
+
+### [csv-file-spec.js](./cypress/integration/csv-file-spec.js)
+
+Attaches the CSV fixture using the `cypress-file-upload`. The attached file is parsed by the application using the [papaparse](https://www.papaparse.com/) library. The test then validates the parsed results.
