@@ -35,6 +35,9 @@ describe('Clipboard', () => {
       // paste the text from the clipboard into the text area
       cy.get('#paste-here').click().invoke('val', text)
     })
+
+    // take a screenshot to show the pasted text
+    cy.screenshot()
   })
 
   it('spies on the clipboard methods', () => {
@@ -67,5 +70,7 @@ describe('Clipboard', () => {
     cy.get('#paste-here').focus()
     cy.document().invoke('execCommand', 'paste')
     cy.get('#paste-here').should('have.value', 'npm install -D cypress')
+    // take a screenshot to show the pasted text
+    cy.screenshot()
   })
 })
