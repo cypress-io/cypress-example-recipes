@@ -76,4 +76,20 @@ describe('Clipboard', { browser: 'electron' }, () => {
     // take a screenshot to show the pasted text
     cy.screenshot()
   })
+
+  it('writes text into clipboard', () => {
+    cy.visit('index.html')
+    // the document has to have focus before we can
+    // write our text into the clipboard
+    cy.get('#paste-here').focus()
+    cy.window()
+    .its('navigator.clipboard')
+    .invoke('writeText', 'this is a test')
+
+    // paste the clipboard into the text area
+    cy.document().invoke('execCommand', 'paste')
+    cy.get('#paste-here').should('have.value', 'this is a test')
+    // take a screenshot to show the pasted text
+    cy.screenshot()
+  })
 })
