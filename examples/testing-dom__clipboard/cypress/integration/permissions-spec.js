@@ -58,6 +58,8 @@ describe('Clipboard permissions', () => {
     .its('state').should('equal', 'granted')
 
     // now reading the clipboard from test will work
+    // but only via navigator.clipboard - the document.execCommand
+    // does nothing.
     cy.get('code').trigger('mouseover')
     cy.get('[aria-label="Copy"]').click()
     // confirm the clipboard's contents
