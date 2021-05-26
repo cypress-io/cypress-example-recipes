@@ -14,3 +14,9 @@ See the [Mozilla Clipboard docs](https://developer.mozilla.org/en-US/docs/Mozill
 ## Other browsers
 
 Work in progress, mostly because the default permissions prompt the user to allow the page to access the clipboard.
+
+## Videos
+
+We show how to test the clipboard access from Cypress in these videos:
+
+- [Access the clipboard from Cypress test using Electron browser](https://youtu.be/SExmed1dCL4)
