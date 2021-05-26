@@ -4,6 +4,8 @@ const allUsers = require('../fixtures/users.json')
 describe('array fixture', () => {
   it('iterates over a list', () => {
     cy.fixture('users').then((users) => {
+      expect(users).to.be.an('array').and.to.have.have.length(3)
+
       users.forEach((user) => {
         expect(user).to.have.keys(['name', 'age'])
         expect(user.age).to.be.a('number').and.be.gt(10).and.be.lt(100)
