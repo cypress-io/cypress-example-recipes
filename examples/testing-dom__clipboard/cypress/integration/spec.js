@@ -42,9 +42,6 @@ describe('Clipboard', { browser: 'electron' }, () => {
       // paste the text from the clipboard into the text area
       cy.get('#paste-here').click().invoke('val', text)
     })
-
-    // take a screenshot to show the pasted text
-    cy.screenshot()
   })
 
   it('spies on the clipboard methods', () => {
@@ -77,8 +74,6 @@ describe('Clipboard', { browser: 'electron' }, () => {
     cy.get('#paste-here').focus()
     cy.document().invoke('execCommand', 'paste')
     cy.get('#paste-here').should('have.value', 'npm install -D cypress')
-    // take a screenshot to show the pasted text
-    cy.screenshot()
   })
 
   it('writes text into clipboard', () => {
@@ -93,7 +88,5 @@ describe('Clipboard', { browser: 'electron' }, () => {
     // paste the clipboard into the text area
     cy.document().invoke('execCommand', 'paste')
     cy.get('#paste-here').should('have.value', 'this is a test')
-    // take a screenshot to show the pasted text
-    cy.screenshot()
   })
 })
