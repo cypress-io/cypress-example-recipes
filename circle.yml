@@ -126,7 +126,7 @@ jobs:
     parallelism: 10
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node14.7.0-chrome84
+      - image: cypress/browsers:node14.16.0-chrome90-ff88
     environment:
       TERM: xterm
       # no need to record these runs yet
@@ -149,7 +149,7 @@ jobs:
     parallelism: 1
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node12.14.0-chrome79-ff71
+      - image: cypress/browsers:node14.16.0-chrome90-ff88
     environment:
       TERM: xterm
       # no need to record these runs yet
@@ -165,7 +165,7 @@ jobs:
     parallelism: 10
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node12.18.3-chrome89-ff86
+      - image: cypress/browsers:node14.16.0-chrome90-ff88
     environment:
       TERM: xterm
       # no need to record these runs yet
@@ -313,6 +313,8 @@ jobs:
   testing-dom__page-reloads:
     <<: *defaults
   testing-dom__pagination:
+    <<: *defaults
+  testing-dom__clipboard:
     <<: *defaults
   unit-testing__application-code:
     <<: *defaults
@@ -605,6 +607,9 @@ all_jobs: &all_jobs
       requires:
         - build
       repeat: 5
+  - testing-dom__clipboard:
+      requires:
+        - build
   - unit-testing__application-code:
       requires:
         - build
@@ -726,6 +731,7 @@ all_jobs: &all_jobs
         - testing-dom__sorting-table
         - testing-dom__page-reloads
         - testing-dom__pagination
+        - testing-dom__clipboard
         - unit-testing__application-code
         # "meta" jobs
         - test-examples

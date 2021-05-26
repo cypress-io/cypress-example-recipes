@@ -1,0 +1,114 @@
+<head>
+  <script src="https://unpkg.com/@github/clipboard-copy-element@latest" defer></script>
+  <script src="https://unpkg.com/tiny-toast@1.2.0/dist/tiny-toast.js" defer></script>
+  <style>
+    pre {
+      padding: 16px;
+      overflow: auto;
+      font-size: 85%;
+      line-height: 1.45;
+      background-color: #f6f8fa;
+      border-radius: 6px;
+    }
+
+    .snippet-clipboard-content {
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+      font-size: 16px;
+      line-height: 1.5;
+      word-wrap: break-word;
+      box-sizing: border-box;
+      position: relative!important;
+    }
+    .zeroclipboard-container {
+      display: none;
+      animation: fade-out .2s both;
+    }
+
+    .right-0 {
+      right: 0!important;
+    }
+    .top-0 {
+      top: 0!important;
+    }
+    .position-relative {
+      position: relative!important;
+    }
+    .position-absolute {
+      position: absolute!important;
+    }
+    .p-0 {
+      padding:0!important;
+    }
+    .m-2 {
+      margin: 8px!important;
+    }
+    .ClipboardButton {
+      position: relative;
+    }
+    .btn {
+      position: relative;
+      display: inline-block;
+      padding: 5px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      border: 1px solid;
+      border-radius: 6px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    .btn .octicon {
+      color: lightgray;
+      margin-right: 4px;
+      vertical-align: text-bottom;
+    }
+    .octicon {
+      display: inline-block;
+      overflow: visible!important;
+      vertical-align: text-bottom;
+    }
+  </style>
+</head>
+<body>
+  <h1>Clipboard</h1>
+
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ npm install -D cypress</code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy aria-label="Copy"
+        class="ClipboardButton btn js-clipboard-copy m-2 p-0 tooltipped-no-delay"
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="npm install -D cypress" tabindex="0" role="button">
+        <svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" data-view-component="true" height="16" width="16" class="octicon octicon-clippy js-clipboard-clippy-icon m-2">
+          <path fill-rule="evenodd" d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+
+  <textarea id="paste-here" rows="4" cols="40"></textarea>
+
+  <script>
+    const contents = document.querySelector('.snippet-clipboard-content')
+    const clipboardContainer = contents.querySelector('.zeroclipboard-container')
+
+    contents.addEventListener('mouseover', (e) => {
+      clipboardContainer.style.display = 'inherit'
+    })
+    contents.addEventListener('mouseout', (e) => {
+      clipboardContainer.style.display = 'none'
+    })
+    document.addEventListener('clipboard-copy', function(event) {
+      tinyToast.show('Copied!').hide(1500)
+    })
+  </script>
+</body>
