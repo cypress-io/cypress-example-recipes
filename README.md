@@ -44,6 +44,7 @@ Recipe | Description
 [File download](./examples/testing-dom__download) | Download and validate CSV, Excel, text, Zip, and image files
 [Page reloads](./examples/testing-dom__page-reloads) | Avoiding `while` loop when dealing with randomness
 [Pagination](./examples/testing-dom__pagination) | Clicking the "Next" link until we reach the last page
+[Clipboard](./examples/testing-dom__clipboard) | Copy and paste text into the clipboard from the test
 
 ## Logging in recipes
 

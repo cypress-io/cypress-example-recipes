@@ -1,0 +1,16 @@
+{
+  "name": "clipboard",
+  "version": "1.0.0",
+  "description": "Copy / paste text example",
+  "private": true,
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "start": "echo nothing to start",
+    "test:ci": "npm run cypress:run",
+    "test:ci:chrome": "../../node_modules/.bin/cypress run --browser chrome",
+    "test:ci:chrome:headless": "../../node_modules/.bin/cypress run --browser chrome --headless",
+    "test:ci:record": "npm run cypress:run -- --record",
+    "test:repeat": "../../node_modules/.bin/cypress-repeat -n 5"
+  }
+}
