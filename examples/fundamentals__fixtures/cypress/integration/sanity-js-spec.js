@@ -26,7 +26,7 @@ describe('sanity JavaScript tests', () => {
   it('has __filename', () => {
     expect(__filename).to.be.a('string')
     expect(__filename).to.equal(
-      join('cypress', 'integration', 'require-fixtures-spec.js')
+      join('cypress', 'integration', 'sanity-js-spec.js')
     )
   })
 })
