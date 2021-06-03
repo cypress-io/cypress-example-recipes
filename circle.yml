@@ -316,6 +316,8 @@ jobs:
     <<: *defaults
   testing-dom__clipboard:
     <<: *defaults
+  testing-dom__page-source:
+    <<: *defaults
   unit-testing__application-code:
     <<: *defaults
   server-communication__bootstrapping-your-app:
@@ -610,6 +612,9 @@ all_jobs: &all_jobs
   - testing-dom__clipboard:
       requires:
         - build
+  - testing-dom__page-source:
+      requires:
+        - build
   - unit-testing__application-code:
       requires:
         - build
@@ -732,6 +737,7 @@ all_jobs: &all_jobs
         - testing-dom__page-reloads
         - testing-dom__pagination
         - testing-dom__clipboard
+        - testing-dom__page-source
         - unit-testing__application-code
         # "meta" jobs
         - test-examples

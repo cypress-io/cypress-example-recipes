@@ -1,0 +1,12 @@
+{
+  "name": "page-source",
+  "version": "1.0.0",
+  "description": "Get the source of the page under test",
+  "private": true,
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "start": "echo nothing to start",
+    "test:ci": "npm run cypress:run"
+  }
+}

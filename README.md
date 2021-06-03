@@ -45,6 +45,7 @@ Recipe | Description
 [Page reloads](./examples/testing-dom__page-reloads) | Avoiding `while` loop when dealing with randomness
 [Pagination](./examples/testing-dom__pagination) | Clicking the "Next" link until we reach the last page
 [Clipboard](./examples/testing-dom__clipboard) | Copy and paste text into the clipboard from the test
+[Page source](./examples/testing-dom__page-source) | Get the source of the page under test
 
 ## Logging in recipes
 
