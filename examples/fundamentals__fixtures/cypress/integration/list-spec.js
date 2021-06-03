@@ -1,5 +1,11 @@
 /// <reference types="cypress" />
 const allUsers = require('../fixtures/users.json')
+// you can even require another JavaScript file
+// and use whatever was exported there
+const { names } = require('../fixtures/names')
+
+// sanity check
+expect(names, 'list of names').to.be.an('array')
 
 describe('array fixture', () => {
   it('iterates over a list', () => {
@@ -20,6 +26,15 @@ describe('array fixture', () => {
     it(`has user ${user.name}`, () => {
       cy.wrap(user).should('have.property', 'name', user.name)
       cy.wrap(user).should('have.property', 'age', user.age)
+    })
+  })
+
+  context('imported names', () => {
+    // create a test for each name
+    names.forEach((name) => {
+      it(`"${name}" has first and last name`, () => {
+        expect(name).to.match(/^\w+ \w+$/)
+      })
     })
   })
 })
