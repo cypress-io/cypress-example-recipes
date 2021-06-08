@@ -76,12 +76,13 @@ describe('Browser notifications', () => {
     cy.get('@Notification').should('not.have.been.called')
   })
 
-  // NOTE: spying breaks for constructors that should be called with "new" keyword
-  it.skip('spying on Notification does not work', () => {
+  it('spying on Notification', () => {
     cy.visit('index.html', {
       onBeforeLoad (win) {
+        // the application checks if the permission was granted
+        // using the property Notification.permission === 'granted'
+        // which Sinon still supports, although it is marked deprecated
         cy.stub(win.Notification, 'permission', 'granted')
-        // the problematic command causing problem
         cy.spy(win, 'Notification').as('Notification')
       },
     })
@@ -92,7 +93,7 @@ describe('Browser notifications', () => {
     .and('have.been.calledWithExactly', 'Permission was granted before')
   })
 
-  it('spying on Notification via workaround', () => {
+  it('spying on Notification via a workaround', () => {
     cy.visit('index.html', {
       onBeforeLoad (win) {
         // let's wrap Notification constructor
