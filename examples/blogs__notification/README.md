@@ -1,5 +1,7 @@
 # Testing browser notifications
 
+Read the blog post [Testing the Browser Notification API](https://www.cypress.io/blog/2020/01/24/testing-the-browser-notification-api/).
+
 You can find the sample app in [index.html](index.html) and all tests in [cypress/integration/spec.js](cypress/integration/spec.js). The tests spy / stub Notification function in various ways to check how the app handles:
 - permission was granted before
 - permission was denied before
@@ -52,53 +54,6 @@ it('shows alert if the browser does not support notifications', () => {
   .and('have.been.calledWith', 'This browser does not support desktop notification')
 })
 ```
-
-## Cannot use spy
-
-⚠️ In the tests we use `cy.stub(win, 'Notification')` and not `cy.spy(win, 'Notification')` because the [Sinon.js spy](https://on.cypress.io/spy) Cypress creates does not call the original function with `new` keyword.
-
-![Cannot use spy](images/cannot-use-spy.png)
-
-Cypress issue [#6129](https://github.com/cypress-io/cypress/issues/6129)
-
-### Workaround - spy via wrapper
-
-To solve the above problem, we can wrap the native `Notification` constructor with our own function that always calls the problematic constructor using `new` keyword.
-
-```js
-it('spying on Notification via workaround', () => {
-  cy.visit('index.html', {
-    onBeforeLoad (win) {
-      // let's wrap Notification constructor
-      // to make sure it is always called with "new" keyword
-      const _Notification = win.Notification
-
-      win.Notification = function MockNotification (text) {
-        // use "new" when calling true Notification
-        return new _Notification(text)
-      }
-
-      // and copy the rest of the important properties
-      win.Notification.requestPermission = _Notification.requestPermission
-      win.Notification.permission = 'granted'
-
-      // now spy on the wrapped Notification method
-      cy.spy(win, 'Notification').as('Notification')
-    },
-  })
-
-  cy.get('button').click()
-  cy.get('@Notification')
-  .should('have.been.calledWithNew')
-  .and('have.been.calledWithExactly', 'Permission was granted before')
-  .and('have.been.calledWithNew')
-})
-```
-
-![Spy is working](images/spying-via-workaround.png)
-
-See the actual notification popup during test visible in the screenshot.
-
 
 ## See also
 

@@ -76,11 +76,10 @@ describe('Browser notifications', () => {
     cy.get('@Notification').should('not.have.been.called')
   })
 
-  // NOTE: spying breaks for constructors that should be called with "new" keyword
-  it.skip('spying on Notification does not work', () => {
+  it('spying on Notification does not work', () => {
     cy.visit('index.html', {
       onBeforeLoad (win) {
-        cy.stub(win.Notification, 'permission', 'granted')
+        cy.stub(win.Notification, 'permission').resolves('granted')
         // the problematic command causing problem
         cy.spy(win, 'Notification').as('Notification')
       },
