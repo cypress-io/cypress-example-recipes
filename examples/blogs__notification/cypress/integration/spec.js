@@ -76,11 +76,13 @@ describe('Browser notifications', () => {
     cy.get('@Notification').should('not.have.been.called')
   })
 
-  it('spying on Notification does not work', () => {
+  it('spying on Notification', () => {
     cy.visit('index.html', {
       onBeforeLoad (win) {
-        cy.stub(win.Notification, 'permission').resolves('granted')
-        // the problematic command causing problem
+        // the application checks if the permission was granted
+        // using the property Notification.permission === 'granted'
+        // which Sinon still supports, although it is marked deprecated
+        cy.stub(win.Notification, 'permission', 'granted')
         cy.spy(win, 'Notification').as('Notification')
       },
     })
@@ -91,7 +93,7 @@ describe('Browser notifications', () => {
     .and('have.been.calledWithExactly', 'Permission was granted before')
   })
 
-  it('spying on Notification via workaround', () => {
+  it('spying on Notification via a workaround', () => {
     cy.visit('index.html', {
       onBeforeLoad (win) {
         // let's wrap Notification constructor

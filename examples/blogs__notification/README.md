@@ -60,3 +60,4 @@ it('shows alert if the browser does not support notifications', () => {
 - Cypress guide to [Stubs, spies and clocks](https://on.cypress.io/stubs-spies-and-clocks)
 - Read [Mozilla Notification page](https://developer.mozilla.org/en-US/docs/Web/API/Notification)
 - [`cy.stub`](https://on.cypress.io/stub)
+- [Cypress Automation](https://glebbahmutov.com/blog/cypress-automation/)
