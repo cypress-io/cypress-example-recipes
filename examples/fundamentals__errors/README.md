@@ -36,13 +36,7 @@ You can listen to the "fail" events and return false to NOT fail the test, as [c
 
 ## Unhandled promise rejections in the application
 
-If the application code creates an unhandled rejected promise, Cypress does NOT see it by default and continues with the test. If you want to fail the test, listen to the unhandled promise event and throw an error.
-
-![Test failing after an application has unhandled rejected promise](./images/unhandled-promise.gif)
-
-You can register your own unhandled promise event listener during `cy.visit` as [cypress/integration/unhandled-promise.js](./cypress/integration/unhandled-promise.js) shows. Or you can register the window handler for all tests using `Cypress.on('window:before:load')` call, see [cypress/integration/unhandled-promise2.js](./cypress/integration/unhandled-promise2.js).
-
-You can also watch a small video explaining it here: [https://www.youtube.com/watch?v=VY9yVle8LRQ](https://www.youtube.com/watch?v=VY9yVle8LRQ)
+Cypress v7+ automatically fails the test if the application has an unhandled promise rejection event. See the [cypress/integration/unhandled-promise.js](./cypress/integration/unhandled-promise.js) spec file.
 
 ## Unhandled promise rejections in the test code
 

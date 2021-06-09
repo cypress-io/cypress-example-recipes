@@ -14,7 +14,8 @@ document.getElementById('promise').addEventListener('click', () => {
   new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log('application is about to reject a promise')
-      reject('Did not handle this promise')
+      // important: reject with an Error object
+      reject(new Error('Did not handle this promise'))
     }, 1000)
   })
 })

@@ -2,37 +2,32 @@
 
 /* eslint-disable no-console */
 describe('Unhandled promises', () => {
-  // NOTE: this test will pass in Cypress < 7.0 and fail in Cypress 7.0+
-  it.skip('does not affect the Cypress test', () => {
+  // NOTE: this test fails in Cypress 7.0+
+  it.skip('fail the Cypress test', () => {
     cy.visit('index.html')
     cy.get('button#promise').click()
     // the unhandled promise happens after 1000ms
     cy.wait(1500)
-    // but our test happily finishes
   })
 
-  // NOTE: skipping the test because it shows how to fail the test for real
-  it.skip('fails Cypress test if we register our own handler', () => {
-    // we can install our handler to listen for unhandled rejected promises
-    // in the application code and fail the test
-    cy.visit('index.html', {
-      onBeforeLoad (win) {
-        // https://developer.mozilla.org/en-US/docs/Web/API/Window/unhandledrejection_event
-        win.addEventListener('unhandledrejection', (event) => {
-          const msg = `UNHANDLED PROMISE REJECTION: ${event.reason}`
+  it('handles the promise rejection', () => {
+    // place any caught errors in this object
+    const caught = {
+      message: null,
+    }
 
-          // fail the test
-          throw new Error(msg)
-        })
-      },
+    cy.on('uncaught:exception', (e, runnable, promise) => {
+      caught.message = e.message
+
+      return false
     })
 
-    cy.get('button#promise').click()
-    // the unhandled promise happens after 1000ms
-    cy.wait(1500)
-  })
+    cy.visit('index.html')
 
-  afterEach(() => {
-    console.log('afterEach')
+    cy.get('button#promise').click()
+    // waits for the error and confirms the message
+    cy.wrap(caught).should((c) => {
+      expect(c.message).to.include('Did not handle this promise')
+    })
   })
 })
