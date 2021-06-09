@@ -36,6 +36,42 @@ describe('App error', () => {
     cy.visit('index.html')
     cy.get('button#error').click()
     // the error happens after 1000ms
+    // we can use hard-coded wait, see the other test
+    // to learn how to avoid an unnecessary wait
     cy.wait(1500)
+  })
+
+  // if the test finishes before the error is thrown -
+  // the test is still passing!
+  // NOTE: just a demo of the test that does not wait for an error
+  it.skip('does not wait for the error', () => {
+    cy.visit('index.html')
+    cy.get('button#error').click()
+    // the thrown error is "lost" because the test finishes
+  })
+
+  // we can avoid hard-coded waits in the test
+  // by using Cypress retry-ability
+  // https://on.cypress.io/retry-ability
+  it('waits for the error', () => {
+    // place any caught errors in this object
+    const caught = {
+      message: null,
+    }
+
+    cy.on('uncaught:exception', (e) => {
+      caught.message = e.message
+
+      // ignore the error
+      return false
+    })
+
+    cy.visit('index.html')
+    cy.get('button#error').click()
+
+    // waits for the error and confirms the message
+    cy.wrap(caught).should((c) => {
+      expect(c.message).to.include('Things went bad')
+    })
   })
 })

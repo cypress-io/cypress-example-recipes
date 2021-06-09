@@ -10,6 +10,20 @@ If an application throws an error, it fails the Cypress test automatically.
 
 You can see how to ignore such errors in [cypress/integration/app-error.js](./cypress/integration/app-error.js) spec file.
 
+```js
+// inspect the caught error
+cy.on('uncaught:exception', (e) => {
+  if (e.message.includes('Things went bad')) {
+    // we expected this error, so let's ignore it
+    // and let the test continue
+    return false
+  }
+  // on any other error message the test fails
+})
+```
+
+Make sure the test is long enough or waits for the error to happen!
+
 See short video about this topic here: [https://www.youtube.com/watch?v=DwVezYq4zPM](https://www.youtube.com/watch?v=DwVezYq4zPM)
 
 ## Test fails
