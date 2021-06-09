@@ -160,6 +160,8 @@ Recipe | Description
 [Cucumber](https://github.com/TheBrainFamily/cypress-cucumber-example) | Example usage of Cypress with Cucumber
 [Jest](https://github.com/TheBrainFamily/jest-runner-cypress-example) | Example for the jest-runner-cypress
 [Mailosaur](https://github.com/muratkeremozcan/cypressExamples/tree/master/cypress-mailosaur) | Utilizes `cy.request()` or `cy.task()` with [`mailosaur`](https://www.npmjs.com/package/mailosaur) to test emails sent with [`sendmail`](https://www.npmjs.com/package/sendmail)
+[Chat App](https://glebbahmutov.com/blog/test-socketio-chat-using-cypress/) | Test a Socket.io Chat App using Cypress
+[Email Testing](https://www.cypress.io/blog/2021/05/24/full-testing-of-html-emails-using-ethereal-accounts/) | Full Testing of HTML Emails using SendGrid and Ethereal Accounts
 
 ## Overview
 
