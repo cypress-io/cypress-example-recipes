@@ -1,0 +1,12 @@
+{
+  "name": "responsive-image",
+  "version": "1.0.0",
+  "description": "Testing how the browser loads images depending on viewport",
+  "private": true,
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "start": "echo nothing to start",
+    "test:ci": "npm run cypress:run"
+  }
+}
