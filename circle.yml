@@ -318,6 +318,8 @@ jobs:
     <<: *defaults
   testing-dom__page-source:
     <<: *defaults
+  testing-dom__responsive-image:
+    <<: *defaults
   unit-testing__application-code:
     <<: *defaults
   server-communication__bootstrapping-your-app:
@@ -615,6 +617,9 @@ all_jobs: &all_jobs
   - testing-dom__page-source:
       requires:
         - build
+  - testing-dom__responsive-image:
+      requires:
+        - build
   - unit-testing__application-code:
       requires:
         - build
@@ -738,6 +743,7 @@ all_jobs: &all_jobs
         - testing-dom__pagination
         - testing-dom__clipboard
         - testing-dom__page-source
+        - testing-dom__responsive-image
         - unit-testing__application-code
         # "meta" jobs
         - test-examples
