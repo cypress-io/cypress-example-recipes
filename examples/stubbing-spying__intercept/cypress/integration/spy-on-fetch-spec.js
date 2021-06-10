@@ -117,14 +117,12 @@ describe('intercept', () => {
       })
     })
 
-    // NOTE: shows how an assertion inside the intercept fails the test
-    it.skip('fails if XHR has wrong data', () => {
-      cy.intercept('/users', (req) => {
+    it('assertions inside the intercept', () => {
+      cy.intercept({ pathname: '/users' }, (req) => {
         const url = new URL(req.url)
         const limit = parseFloat(url.searchParams.get('_limit'))
 
-        // make the assertion fail on purpose
-        expect(limit, 'limit').to.equal(100)
+        expect(limit, 'limit').to.equal(5)
       }).as('users')
 
       cy.get('#load-five-users').click()
