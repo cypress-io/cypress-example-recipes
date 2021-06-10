@@ -128,6 +128,31 @@ describe('intercept', () => {
       cy.get('#load-five-users').click()
       cy.wait('@users')
     })
+
+    // you cannot use "cy.*" commands inside the intercept
+    // but you can save the data to work with later
+    it('saves the response', () => {
+      let users5
+
+      cy.intercept('/users?_limit=5', (req) => {
+        req.continue((res) => {
+          // we want to write the response as a JSON file
+          // we CANNOT use cy.writeFile command from the intercept
+          // because it would "break" the already running chain of commands
+          // cy.writeFile('users5.json', res.body)
+          // instead we can save the data for later
+          users5 = res.body
+        })
+      }).as('users5')
+
+      cy.get('#load-five-users').click()
+      cy.wait('@users5').then(() => {
+        // by now the users5 should have been set
+        expect(users5).to.be.an('array').and.have.length(5)
+        // and we can use "cy.*" commands to work with it
+        cy.writeFile('users5.json', users5)
+      })
+    })
   })
 
   context('spying on PUT request', () => {
