@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Responsive HTML images demo</title>
+    <style>
+      html {
+        font-family: sans-serif;
+        background-color: gray;
+      }
+
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: white;
+      }
+
+      section {
+        padding: 20px;
+      }
+
+      p {
+        line-height: 1.5;
+      }
+
+      img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <h1>My website</h1>
+
+        <picture>
+          <source media="(max-width: 799px)" srcset="elva-480w-close-portrait.jpg">
+          <source media="(min-width: 800px)" srcset="elva-800w.jpg">
+          <img src="elva-800w.jpg" alt="Chris standing up holding his daughter Elva">
+        </picture>
+      </section>
+    </main>
+  </body>
+</html>

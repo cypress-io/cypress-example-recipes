@@ -46,6 +46,7 @@ Recipe | Description
 [Pagination](./examples/testing-dom__pagination) | Clicking the "Next" link until we reach the last page
 [Clipboard](./examples/testing-dom__clipboard) | Copy and paste text into the clipboard from the test
 [Page source](./examples/testing-dom__page-source) | Get the source of the page under test
+[Responsive image](./examples/testing-dom__responsive-image) | Uses `cy.intercept` to confirm the image loaded by the `<picture>` element
 
 ## Logging in recipes
 
