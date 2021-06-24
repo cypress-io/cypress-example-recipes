@@ -16,5 +16,6 @@
 - [stub-fetch-spec.js](cypress/integration/stub-fetch-spec.js) shows how to stub `fetch` calls from the application, event depending on the object sent
 - [stubbed-api-spec.js](cypress/integration/stubbed-api-spec.js) shows how stubbed requests work without any backend API
 - [times-spec.js](cypress/integration/times-spec.js) shows how to use the `cy.intercept` "times" option
-
+- [glob-matching-intercept-url.spec.js](cypress/integration/glob-matching-intercept-url.spec.js) shows how glob matching urls works
+  
 For more `cy.intercept` examples and tips read the [Cypress cy.intercept Problems](https://glebbahmutov.com/blog/cypress-intercept-problems/) blog post
