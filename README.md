@@ -95,13 +95,18 @@ Recipe | Description
 [Form Submit](./examples/blogs__form-submit) | Removing flake from the test where a page is reloaded after form submission
 [Using Day.js instead of Moment.js](./examples/blogs__dayjs) | Using [day.js](https://day.js.org/) library instead of the deprecated `Cypress.moment`
 
-## Stubbing and spying
+## Network stubbing and spying
+
+Recipe | Description
+--- | ---
+[Stubbing using `cy.intercept`](./examples/stubbing-spying__intercept) | Control network using `cy.intercept` API
+
+## JS-level stubbing and spying
 
 Recipe | Description
 --- | ---
 [Stubbing Functions](./examples/stubbing-spying__functions) | Use `cy.spy()` and `cy.stub()` to test function calls
 [Stubbing `window.fetch`](./examples/stubbing-spying__window-fetch) | Work around the `window.fetch` limitation
-[Stubbing using `cy.intercept`](./examples/stubbing-spying__intercept) | Control network using `cy.intercept` API
 [Stubbing `window.open` and `console.log`](./examples/stubbing-spying__window) | Use `cy.stub()` and `cy.spy()` to test application behavior
 [Stubbing `window.print`](./examples/stubbing-spying__window-print) | Use `cy.stub()` to test `window.print` call made from the application
 [Stubbing Google Analytics](./examples/stubbing-spying__google-analytics) | Use `cy.stub()` or `cy.intercept()` to test Google Analytics calls
