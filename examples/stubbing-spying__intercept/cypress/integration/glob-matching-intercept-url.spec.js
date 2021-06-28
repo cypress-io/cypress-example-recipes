@@ -8,7 +8,7 @@ describe('intercept', () => {
   // will match https://example.com/api/roles?country=US
 
   cy.intercept('/api/roles?*utm_source=+(MyApp|https*)')
-  // will match https://example.com/api/roles?utm_medium=Nav&utm_campaign=Docs&utm_source=MyApp
-  // will match https://example.com/api/roles?utm_medium=Nav&utm_campaign=Docs&utm_source=https://....
-  // will not match https://example.com/api/roles?utm_medium=Nav&utm_campaign=Docs&utm_source=marketing
+  // will match https://example.com/api/roles?utm_campaign=Docs&utm_source=MyApp
+  // will match https://example.com/api/roles?utm_campaign=Docs&utm_source=https://....
+  // will not match https://example.com/api/roles?utm_campaign=Docs&utm_source=marketing
 })
