@@ -16,6 +16,7 @@
 - [stub-fetch-spec.js](cypress/integration/stub-fetch-spec.js) shows how to stub `fetch` calls from the application, event depending on the object sent
 - [stubbed-api-spec.js](cypress/integration/stubbed-api-spec.js) shows how stubbed requests work without any backend API
 - [times-spec.js](cypress/integration/times-spec.js) shows how to use the `cy.intercept` "times" option
+- [intercept-force404.spec.js](cypress/integration/intercept-force404.spec) shows how to implement an equivalent of `force404` (a feature of `cy.route()`) with `cy.intercept()`
 - [intercept-events.spec.js](cypress/integration/) shows how to use intercept events
 - [middleware-intercept.spec.js](cypress/integration/middleware-intercept.spec.js) shows how to set middleware handlers that apply before all others
 
