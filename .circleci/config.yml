@@ -465,7 +465,7 @@ all_jobs: &all_jobs
   - fundamentals__window-size:
       requires:
         - build
-      test-command: npm run test:ci:record -- --record --key d9af509d-cc38-44e2-a5b3-3c8e53f8c8ec --group $CIRCLE_JOB
+      test-command: npm run test:ci --group $CIRCLE_JOB
   - fundamentals__node-modules:
       requires:
         - build
