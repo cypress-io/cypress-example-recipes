@@ -51,12 +51,6 @@ const goOnline = () => {
         },
       })
   })
-  .then(() => {
-    return Cypress.automation('remote:debugger:protocol',
-      {
-        command: 'Network.disable',
-      })
-  })
 }
 
 // since we are using Chrome debugger protocol API
