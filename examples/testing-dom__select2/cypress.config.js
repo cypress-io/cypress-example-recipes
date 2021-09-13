@@ -1,0 +1,9 @@
+const json = {
+  "supportFile": false,
+  "pluginsFile": false,
+  "defaultCommandTimeout": 3000,
+  "retries": {
+    "runMode": 2,
+    "openMode": 0
+  }
+}

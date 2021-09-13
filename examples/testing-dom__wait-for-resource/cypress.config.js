@@ -1,0 +1,6 @@
+const json = {
+  "baseUrl": "http://localhost:4500",
+  "viewportHeight": 600,
+  "viewportWidth": 300,
+  "pluginsFile": false
+}

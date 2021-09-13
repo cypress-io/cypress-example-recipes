@@ -1,0 +1,6 @@
+const json = {
+  "fixturesFolder": false,
+  "pluginsFile": false,
+  "viewportWidth": 500,
+  "viewportHeight": 200
+}

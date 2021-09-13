@@ -1,0 +1,3 @@
+const json = {
+  "pluginsFile": false
+}

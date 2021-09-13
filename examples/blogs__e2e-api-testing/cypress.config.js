@@ -1,0 +1,6 @@
+const json = {
+  "baseUrl": "http://localhost:7081",
+  "fixturesFolder": false,
+  "pluginsFile": false,
+  "supportFile": false
+}

@@ -1,0 +1,6 @@
+const json = {
+  "fixturesFolder": false,
+  "pluginsFile": false,
+  "supportFile": false,
+  "testFiles": "**/*spec.js"
+}

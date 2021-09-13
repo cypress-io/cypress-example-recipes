@@ -1,0 +1,6 @@
+const json = {
+  "baseUrl": "http://todomvc.com/examples/angularjs",
+  "fixturesFolder": false,
+  "pluginsFile": false,
+  "supportFile": false
+}

@@ -1,0 +1,6 @@
+const json = {
+  "fixturesFolder": false,
+  "supportFile": false,
+  "pluginsFile": false,
+  "baseUrl": "https://www.cypress.io/"
+}
