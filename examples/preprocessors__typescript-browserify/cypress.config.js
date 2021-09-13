@@ -1,13 +1,13 @@
-const browserify = require('@cypress/browserify-preprocessor')
+const browserify = require("@cypress/browserify-preprocessor")
 
 module.exports = (on) => {
   const options = {
-    typescript: require.resolve('typescript'),
+    typescript: require.resolve("typescript"),
   }
 
-  on('file:preprocessor', browserify(options))
+  on("file:preprocessor", browserify(options))
 }
 const json = {
-  "fixturesFolder": false,
-  "supportFile": false
+  fixturesFolder: false,
+  supportFile: false,
 }

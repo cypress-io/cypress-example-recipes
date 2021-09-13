@@ -1,1 +1,3 @@
-const json = {}
+const { defineConfig } = require("cypress")
+
+module.exports = defineConfig({})

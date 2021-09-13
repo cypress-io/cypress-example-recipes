@@ -1,28 +1,27 @@
+const { defineConfig } = require("cypress")
+
 /// <reference types="cypress" />
-const got = require('got')
+const got = require("got")
 
-/* eslint-disable no-console */
+module.exports = defineConfig({
+  baseUrl: "http://localhost:3000",
+  fixturesFolder: false,
+  supportFile: false,
+  viewportHeight: 200,
+  viewportWidth: 300,
 
-/**
- * @type {Cypress.PluginConfig}
- */
-// eslint-disable-next-line no-unused-vars
-module.exports = (on, config) => {
-  on('task', {
-    httpRequest (params) {
-      console.log('making the HTTP request:')
-      console.log(params)
+  e2e: {
+    setupNodeEvents(on, config) {
+      on("task", {
+        httpRequest(params) {
+          console.log("making the HTTP request:")
+          console.log(params)
 
-      // use the "got" module to make HTTP requests
-      // https://github.com/sindresorhus/got#readme
-      return got(params).then((r) => r.body)
+          // use the "got" module to make HTTP requests
+          // https://github.com/sindresorhus/got#readme
+          return got(params).then((r) => r.body)
+        },
+      })
     },
-  })
-}
-const json = {
-  "baseUrl": "http://localhost:3000",
-  "fixturesFolder": false,
-  "supportFile": false,
-  "viewportHeight": 200,
-  "viewportWidth": 300
-}
+  },
+})

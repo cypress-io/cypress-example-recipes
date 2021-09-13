@@ -5,10 +5,10 @@
 // by the version of node run by Cypress) can
 // be configured via babel plugins in the .babelrc
 
-require('babel-register')
+require("babel-register")
 
-module.exports = require('./main').default
+module.exports = require("./main").default
 const json = {
-  "baseUrl": "http://localhost:7082",
-  "supportFile": false
+  baseUrl: "http://localhost:7082",
+  supportFile: false,
 }

@@ -1,3 +1,5 @@
+const { defineConfig } = require("cypress")
+
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -12,15 +14,14 @@
 // the project's config changing)
 
 /* eslint-disable no-console */
+const fs = require("fs")
 
-const fs = require('fs')
-const path = require('path')
+const path = require("path")
 
 const findRecord = (title) => {
-  const dbFilename = path.join(__dirname, '..', '..', 'data.json')
+  const dbFilename = path.join(__dirname, "..", "..", "data.json")
   const contents = JSON.parse(fs.readFileSync(dbFilename))
   const todos = contents.todos
-
   return todos.find((record) => record.title === title)
 }
 
@@ -44,27 +45,35 @@ const hasRecordAsync = (title, ms) => {
   })
 }
 
-module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
-  on('task', {
-    hasSavedRecord (title, ms = 3000) {
-      console.log('looking for title "%s" in the database (time limit %dms)',
-        title, ms)
+module.exports = defineConfig({
+  baseUrl: "http://localhost:3000",
+  video: false,
+  supportFile: false,
 
-      return hasRecordAsync(title, ms)
+  e2e: {
+    setupNodeEvents(on, config) {
+      // `on` is used to hook into various events Cypress emits
+      // `config` is the resolved Cypress config
+      on("task", {
+        hasSavedRecord(title, ms = 3000) {
+          console.log(
+            'looking for title "%s" in the database (time limit %dms)',
+            title,
+            ms
+          )
+          return hasRecordAsync(title, ms)
+        },
+
+        testTimings(attributes) {
+          console.log(
+            'Test "%s" has finished in %dms',
+            attributes.title,
+            attributes.duration
+          )
+          console.table(attributes.commands)
+          return null
+        },
+      })
     },
-
-    testTimings (attributes) {
-      console.log('Test "%s" has finished in %dms', attributes.title, attributes.duration)
-      console.table(attributes.commands)
-
-      return null
-    },
-  })
-}
-const json = {
-  "baseUrl": "http://localhost:3000",
-  "video": false,
-  "supportFile": false
-}
+  },
+})

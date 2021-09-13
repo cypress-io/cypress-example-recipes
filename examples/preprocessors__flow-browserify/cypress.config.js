@@ -1,11 +1,17 @@
-const browserify = require('@cypress/browserify-preprocessor')
+const { defineConfig } = require("cypress")
 
-module.exports = (on, config) => {
-  const options = browserify.defaultOptions
+const browserify = require("@cypress/browserify-preprocessor")
 
-  options.browserifyOptions.transform[1][1].presets.push('@babel/preset-flow')
-  on('file:preprocessor', browserify(options))
-}
-const json = {
-  "fixturesFolder": false
-}
+module.exports = defineConfig({
+  fixturesFolder: false,
+
+  e2e: {
+    setupNodeEvents(on, config) {
+      const options = browserify.defaultOptions
+      options.browserifyOptions.transform[1][1].presets.push(
+        "@babel/preset-flow"
+      )
+      on("file:preprocessor", browserify(options))
+    },
+  },
+})

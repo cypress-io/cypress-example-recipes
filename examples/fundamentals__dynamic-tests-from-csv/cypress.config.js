@@ -12,22 +12,22 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
-const fs = require('fs')
-const path = require('path')
-const neatCSV = require('neat-csv')
+const fs = require("fs")
+const path = require("path")
+const neatCSV = require("neat-csv")
 
 module.exports = async (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 
   // when we load the plugins file, let's load the CSV file
-  const filename = path.join(__dirname, 'users.csv')
+  const filename = path.join(__dirname, "users.csv")
 
-  console.log('loading file', filename)
-  const text = fs.readFileSync(filename, 'utf8')
+  console.log("loading file", filename)
+  const text = fs.readFileSync(filename, "utf8")
   const csv = await neatCSV(text)
 
-  console.log('loaded the users')
+  console.log("loaded the users")
   console.log(csv)
 
   // then set it inside the config object under the environment
@@ -38,6 +38,6 @@ module.exports = async (on, config) => {
   return config
 }
 const json = {
-  "fixturesFolder": false,
-  "supportFile": false
+  fixturesFolder: false,
+  supportFile: false,
 }

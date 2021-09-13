@@ -1,20 +1,27 @@
-const tasks = require('./tasks')
+const { defineConfig } = require("cypress")
 
-module.exports = (on, config) => {
-  on('task', tasks)
+const tasks = require("./tasks")
 
-  // only filter browsers if we are passed a list - this way
-  // this example works on Cypress v3.7.0+ and below
-  if (!config.browsers) {
-    return
-  }
+module.exports = defineConfig({
+  supportFile: false,
+  fixturesFolder: false,
 
-  // Cypress v4.0.0+
-  return {
-    browsers: config.browsers.filter((browser) => browser.name === 'electron'),
-  }
-}
-const json = {
-  "supportFile": false,
-  "fixturesFolder": false
-}
+  e2e: {
+    setupNodeEvents(on, config) {
+      on("task", tasks)
+
+      // only filter browsers if we are passed a list - this way
+      // this example works on Cypress v3.7.0+ and below
+      if (!config.browsers) {
+        return
+      }
+
+      // Cypress v4.0.0+
+      return {
+        browsers: config.browsers.filter(
+          (browser) => browser.name === "electron"
+        ),
+      }
+    },
+  },
+})

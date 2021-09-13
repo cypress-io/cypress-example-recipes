@@ -1,17 +1,19 @@
-const { initPlugin } = require('cypress-plugin-snapshots/plugin')
+const { defineConfig } = require("cypress")
 
-module.exports = (on, config) => {
-  initPlugin(on, config)
+const { initPlugin } = require("cypress-plugin-snapshots/plugin")
 
-  return config
-}
-const json = {
-  "baseUrl": "http://localhost:3000",
-  "ignoreTestFiles": [
-    "**/*.snap",
-    "**/__snapshot__/*"
-  ],
-  "env": {
-    "cypress-plugin-snapshots": {}
-  }
-}
+module.exports = defineConfig({
+  baseUrl: "http://localhost:3000",
+  ignoreTestFiles: ["**/*.snap", "**/__snapshot__/*"],
+
+  env: {
+    "cypress-plugin-snapshots": {},
+  },
+
+  e2e: {
+    setupNodeEvents(on, config) {
+      initPlugin(on, config)
+      return config
+    },
+  },
+})

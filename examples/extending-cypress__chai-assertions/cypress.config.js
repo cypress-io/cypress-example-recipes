@@ -1,4 +1,6 @@
-const json = {
-  "fixturesFolder": false,
-  "pluginsFile": false
-}
+const { defineConfig } = require("cypress")
+
+module.exports = defineConfig({
+  fixturesFolder: false,
+  pluginsFile: false,
+})
