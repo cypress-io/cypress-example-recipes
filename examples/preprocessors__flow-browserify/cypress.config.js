@@ -4,7 +4,6 @@ const browserify = require("@cypress/browserify-preprocessor")
 
 module.exports = defineConfig({
   fixturesFolder: false,
-
   e2e: {
     setupNodeEvents(on, config) {
       const options = browserify.defaultOptions
