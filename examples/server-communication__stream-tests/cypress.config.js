@@ -1,7 +1,5 @@
-const { defineConfig } = require('cypress')
-
-/// <reference types="cypress" />
 /* eslint-disable no-console */
+const { defineConfig } = require('cypress')
 
 // http://riaevangelist.github.io/node-ipc/
 const ipc = require('node-ipc')

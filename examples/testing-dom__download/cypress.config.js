@@ -1,6 +1,5 @@
 const { defineConfig } = require('cypress')
 
-/// <reference types="cypress" />
 /* eslint-disable no-console */
 const AdmZip = require('adm-zip')
 const { stripIndent } = require('common-tags')
