@@ -1,3 +1,5 @@
+const { defineConfig } = require('cypress')
+
 // This enables using import/export in plugins/main.js
 // and any files it requires
 //
@@ -5,10 +7,14 @@
 // by the version of node run by Cypress) can
 // be configured via babel plugins in the .babelrc
 
-require("babel-register")
+require('babel-register')
 
-module.exports = require("./main").default
-const json = {
-  baseUrl: "http://localhost:7082",
+module.exports = defineConfig({
+  baseUrl: 'http://localhost:7082',
   supportFile: false,
-}
+  e2e: {
+    setupNodeEvents () {
+      require('./main').default
+    },
+  },
+})

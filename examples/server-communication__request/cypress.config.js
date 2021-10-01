@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 const { defineConfig } = require('cypress')
 
-/// <reference types="cypress" />
 const got = require('got')
 
 module.exports = defineConfig({

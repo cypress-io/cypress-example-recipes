@@ -1,13 +1,17 @@
-const wp = require("@cypress/webpack-preprocessor")
+const { defineConfig } = require('cypress')
 
-module.exports = (on) => {
-  const options = {
-    webpackOptions: require("../../webpack.config"),
-  }
+const wp = require('@cypress/webpack-preprocessor')
 
-  on("file:preprocessor", wp(options))
-}
-const json = {
-  supportFile: "cypress/support/index.ts",
+module.exports = defineConfig({
+  supportFile: 'cypress/support/index.ts',
   fixturesFolder: false,
-}
+  e2e: {
+    setupNodeEvents (on, config) {
+      const options = {
+        webpackOptions: require('../../webpack.config'),
+      }
+
+      on('file:preprocessor', wp(options))
+    },
+  },
+})

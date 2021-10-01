@@ -1,21 +1,25 @@
-const webpack = require("@cypress/webpack-preprocessor")
+const { defineConfig } = require('cypress')
 
-module.exports = (on) => {
-  // bundle spec files using same webpack logic as "normal" application
-  const options = {
-    // send in the options from your webpack.config.js, so it works the same
-    // as your app's code
-    webpackOptions: require("../../webpack.config"),
-    watchOptions: {},
-  }
+const webpack = require('@cypress/webpack-preprocessor')
 
-  on("file:preprocessor", webpack(options))
-}
-const json = {
-  baseUrl: "http://localhost:8081",
+module.exports = defineConfig({
+  baseUrl: 'http://localhost:8081',
   env: {
-    username: "test",
-    password: "test",
+    username: 'test',
+    password: 'test',
   },
   supportFile: false,
-}
+  e2e: {
+    setupNodeEvents (on, config) {
+      // bundle spec files using same webpack logic as "normal" application
+      const options = {
+        // send in the options from your webpack.config.js, so it works the same
+        // as your app's code
+        webpackOptions: require('../../webpack.config'),
+        watchOptions: {},
+      }
+
+      on('file:preprocessor', webpack(options))
+    },
+  },
+})
