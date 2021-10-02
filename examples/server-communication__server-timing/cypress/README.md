@@ -10,9 +10,9 @@ These folders hold end-to-end tests and supporting files for the Cypress Test Ru
 - [integration](integration) holds the actual test files, [read more](https://on.cypress.io/writing-and-organizing-tests)
 - [support](support) file runs before all tests and is a great place to write or load additional custom commands, [read more](https://on.cypress.io/writing-and-organizing-tests#Support-file)
 
-## `cypress.json` file
+## Cypress configuration
 
-You can configure project options in the [../cypress.json](../cypress.json) file, see [Cypress configuration doc](https://on.cypress.io/configuration).
+You can configure project options in the [cypress.config.js](../cypress.config.js) file, see [Cypress configuration doc](https://on.cypress.io/configuration).
 
 ## More information
 

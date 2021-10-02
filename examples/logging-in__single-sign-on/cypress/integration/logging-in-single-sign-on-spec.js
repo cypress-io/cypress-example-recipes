@@ -6,7 +6,7 @@
 
 // There is a web security restriction in Cypress that prevents
 // you from visiting two different super domains in the same test
-// without setting {chromeWebSecurity: false} in cypress.json.
+// without setting {chromeWebSecurity: false} in cypress.config.js.
 // However this restriction is easy to bypass (and is much more
 // performant and less brittle) with cy.request
 
@@ -19,7 +19,7 @@
 
 // NOTE: We are able to use auth.corp.com without modifying our
 // local /etc/hosts file because cypress supports hosts mapping
-// in cypress.json
+// in cypress.config.js
 
 // Most 3rd party authentication works like this:
 

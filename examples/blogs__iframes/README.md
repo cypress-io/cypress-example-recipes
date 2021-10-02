@@ -20,4 +20,4 @@ Spec | Description
 
 ## Notes
 
-In [cypress.json](cypress.json) we are using [test retries](https://on.cypress.io/test-retries) to get through an occasional (rare) flake, see issue [#558](https://github.com/cypress-io/cypress-example-recipes/issues/558)
+In [cypress.config.js](cypress.config.js) we are using [test retries](https://on.cypress.io/test-retries) to get through an occasional (rare) flake, see issue [#558](https://github.com/cypress-io/cypress-example-recipes/issues/558)

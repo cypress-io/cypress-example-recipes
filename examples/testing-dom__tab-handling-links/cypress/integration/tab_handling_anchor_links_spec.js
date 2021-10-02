@@ -192,7 +192,7 @@ describe('Tab Handling Anchor Links', function () {
       // https://on.cypress.io/web-security
       //
       // This test will not work until you add {chromeWebSecurity: false} in your
-      // cypress.json which is why the test below is commented out.
+      // cypress.config.js which is why the test below is commented out.
       //
       // cy.get('#google').click()
       // cy.url().should('include', 'google.com')

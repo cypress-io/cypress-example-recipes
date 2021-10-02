@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 // https://on.cypress.io/environment-variables
 describe('process environment variables', () => {
-  it('has variable my-var from cypress.json', () => {
+  it('has variable my-var from cypress.config.js', () => {
     expect(Cypress.env('my-var')).to.equal('ok')
   })
 
