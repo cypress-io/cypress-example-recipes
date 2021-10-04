@@ -7,6 +7,5 @@ module.exports = defineConfig({
     password: "test",
   },
   fixturesFolder: false,
-  pluginsFile: false,
   supportFile: false,
 })
