@@ -24,7 +24,7 @@ cy.task('getItem', 'todo')
   .should('deep.equal', expectedTodo)
 ```
 
-The console log messages from the setupNodeEvents function show the saved and retrieved items
+The console log messages from the `setupNodeEvents` function show the saved and retrieved items
 
 ```text
   Running:  first-spec.js  (1 of 2)
@@ -49,7 +49,7 @@ returning item todo
 
 ## Warning ⚠️
 
-Saving an item in the setupNodeEvents function only works as expected if the specs run in the expected order on the same machine. If you are using parallelization with `--parallel` flag the order of specs is determined by their historical timings, and the specs are split amongst all participating machines. Thus the specs might run in the wrong order, or only the second spec might execute on the machine, breaking the test.
+Saving an item in the `setupNodeEvents` function only works as expected if the specs run in the expected order on the same machine. If you are using parallelization with `--parallel` flag the order of specs is determined by their historical timings, and the specs are split amongst all participating machines. Thus the specs might run in the wrong order, or only the second spec might execute on the machine, breaking the test.
 
 ## See also
 

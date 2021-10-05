@@ -50,7 +50,7 @@ on('task', {
 })
 ```
 
-Finally, in the browser, after each test we save the test final attributes: the title, the state, the duration (there are more, but we are only interested in those), and send them to the setupNodeEvents background process either at the start of the next test, or after all tests finish, see [setupNodeEvents](cypress.config.js) file.
+Finally, in the browser, after each test we save the test final attributes: the title, the state, the duration (there are more, but we are only interested in those), and send them to the `setupNodeEvents` background process either at the start of the next test, or after all tests finish, see [setupNodeEvents](cypress.config.js) file.
 
 ```js
 // cypress/support/index.js
@@ -80,8 +80,8 @@ Cypress.on('test:after:run', (attributes, test) => {
 })
 ```
 
-Every time the test finishes, its status and other attributes are saved. When the next test starts, the previous test results are sent to the setupNodeEvents background process, where they are forwarded via IPC communication channel to the `cypressListener` server process. The server process can do any action desired: send notifications as soon as a test fails, push an event, etc. For example, it can print the test status in the terminal.
+Every time the test finishes, its status and other attributes are saved. When the next test starts, the previous test results are sent to the `setupNodeEvents` background process, where they are forwarded via IPC communication channel to the `cypressListener` server process. The server process can do any action desired: send notifications as soon as a test fails, push an event, etc. For example, it can print the test status in the terminal.
 
 ![Test statuses](images/tests.png)
 
-**Note:** we cannot invoke the `cy.task('testFinished')` from `Cypress.on('test:after:run')` callback, because it does not allow async code to execute, thus we need to use `beforeEach + after` trick to actually send each test result to the setupNodeEvents background process.
+**Note:** we cannot invoke the `cy.task('testFinished')` from `Cypress.on('test:after:run')` callback, because it does not allow async code to execute, thus we need to use `beforeEach + after` trick to actually send each test result to the `setupNodeEvents` background process.

@@ -10,7 +10,7 @@ describe('Two domains', () => {
     // get the "href" value
     .invoke('attr', 'href')
     .then((url) => {
-      // save the value in the setupNodeEvents process
+      // save the value in the `setupNodeEvents` process
       // that is preserved between browser page reloads
       expect(url).to.be.a('string')
       cy.task('saveUrl', url)

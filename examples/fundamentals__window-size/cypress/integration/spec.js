@@ -3,7 +3,7 @@
 describe('window size', () => {
   /**
    * Collects window and iframe sizes in pixels and prints
-   * them to the command log. Also sends the to the setupNodeEvents
+   * them to the command log. Also sends the to the `setupNodeEvents`
    * function via cy.task to be printed in the terminal
    */
   const logSizes = () => {

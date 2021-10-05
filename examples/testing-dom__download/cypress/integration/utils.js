@@ -118,8 +118,8 @@ export const validateZip = () => {
   cy.readFile(downloadedFilename, 'binary', { timeout: 15000 }).should('have.length.gt', 300)
 
   // unzipping and validating a zip file requires the direct access to the file system
-  // thus it is easier to perform the checks from the setupNodeEvents function in the Cypress configuration that runs in Node
-  // see the "on('task')" code in the setupNodeEvents function to see how we can read and validate a Zip file
+  // thus it is easier to perform the checks from the `setupNodeEvents` function in the Cypress configuration that runs in Node
+  // see the "on('task')" code in the `setupNodeEvents` function to see how we can read and validate a Zip file
   cy.task('validateZipFile', downloadedFilename)
 }
 

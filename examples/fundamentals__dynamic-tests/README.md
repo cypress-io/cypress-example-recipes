@@ -5,7 +5,7 @@ Sometimes you want to iterate through a list of items, and for each item create 
 - run same test against different viewport resolutions
 - run same test against different sub-domains of your site
 - generate tests based on the fetched data
-- get the dynamic data from the setupNodeEvents function before the tests start
+- get the dynamic data from the `setupNodeEvents` function before the tests start
 
 ## Note
 
@@ -14,7 +14,7 @@ Sometimes the data to generate tests might be dynamic and come from an external 
 1. you can fetch data using a script that runs _before_ Cypress starts. Save the results as a JSON file and load data using `require`. This has an advantage that the data does not change while running the tests, making debugging simpler. See suite called "generated from fixture" for an example.
 2. you can fetch the dynamic data before the tests and save as a local variable or context property, then have multiple tests assert against dynamic data items.
 3. you can get the data to use to create dynamic tests using [`cy.task`](https://on.cypress.io/task)
-4. you can get the data during the setupNodeEvents function start and place the result into `Cypress.env()` object to pass to the specs
+4. you can get the data during the `setupNodeEvents` function start and place the result into `Cypress.env()` object to pass to the specs
 
 ## Examples
 

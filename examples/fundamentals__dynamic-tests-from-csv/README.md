@@ -5,7 +5,7 @@ Sometimes you want to generate tests dynamically from a CSV file. We cannot load
 We can do this from the [setupNodeEvents](cypress.config.js) function. It has access to the file system, can load the CSV file, parse it, then set the list of records in the `config.env` object. This config object will be available in each spec file. You then can get the list of records before the tests are created, see [csv-spec.js](./cypress/integration/csv-spec.js)
 
 ```js
-// setupNodeEvents
+// `setupNodeEvents`
 const text = fs.readFileSync(filename, 'utf8')
 const csv = await neatCSV(text)
 config.env.usersList = csv

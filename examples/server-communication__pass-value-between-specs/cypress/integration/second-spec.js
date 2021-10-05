@@ -10,7 +10,7 @@ describe('Second spec', () => {
 
   it('has the saved item from the first spec', () => {
     // if the previous spec file has passed, we should have
-    // the item stored in the setupNodeEvents function in the
+    // the item stored in the `setupNodeEvents` function in the
     // Cypress configuration
     cy.task('getItem', 'todo').should('deep.equal', expectedTodo)
   })

@@ -131,8 +131,8 @@ Recipe | Description
 [Seeding your Database in Node](./examples/server-communication__seeding-database-in-node) | Seed your database with test data
 [XHR assertions](./examples/server-communication__xhr-assertions) | Spy and assert on application's network calls
 [Visiting 2nd domain](./examples/server-communication__visit-2nd-domain) | Visiting two different domains from two different tests and passing value from one test to another
-[Pass value between specs](./examples/server-communication__pass-value-between-specs) | Pass a value from spec to spec via the setupNodeEvents function in the Cypress configuration using [cy.task](https://on.cypress.io/task)
-[Stream test results](./examples/server-communication__stream-tests) | Streams each test result from the browser to the setupNodeEvents function to an external process via IPC
+[Pass value between specs](./examples/server-communication__pass-value-between-specs) | Pass a value from spec to spec via the `setupNodeEvents` function in the Cypress configuration using [cy.task](https://on.cypress.io/task)
+[Stream test results](./examples/server-communication__stream-tests) | Streams each test result from the browser to the `setupNodeEvents` function to an external process via IPC
 [Offline](./examples/server-communication__offline) | Test web application when the network is offline
 [Server timing](./examples/server-communication__server-timing) | Report server timing results from Cypress test
 [Wait for API](./examples/server-communication__wait-for-api) | Call the backend using `cy.request` until it responds

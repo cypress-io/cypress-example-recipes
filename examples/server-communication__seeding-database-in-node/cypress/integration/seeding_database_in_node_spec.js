@@ -6,7 +6,7 @@ describe('Seeding Database in Node', function () {
   })
 
   it('can use fixture data to seed database', function () {
-    // We can use cy.task to communicate with node via the setupNodeEvents function
+    // We can use cy.task to communicate with node via the `setupNodeEvents` function
     // See cypress.config.js for the implementation of the 'seed:db' task
     cy.task('seed:db', this.seed)
     cy.visit('/index.html')
