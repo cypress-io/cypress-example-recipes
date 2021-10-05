@@ -11,7 +11,7 @@ These folders hold end-to-end tests and supporting files for the Cypress Test Ru
 - [support](support) file runs before all tests and is a great place to write or load additional custom commands, [read more](https://on.cypress.io/writing-and-organizing-tests#Support-file)
 
 ## Cypress configuration
-You can configure project options and customize how tests are loaded in the [cypress.config.js](../cypress.config.js) file, see [Cypress configuration doc](https://on.cypress.io/configuration).
+You can configure project options and customize how tests are loaded in [cypress.config.js](../cypress.config.js), see [Cypress configuration doc](https://on.cypress.io/configuration).
 
 ## More information
 

@@ -12,7 +12,7 @@ These folders hold end-to-end tests and supporting files for the Cypress Test Ru
 
 ## Cypress configuration
 
-You can configure project options in the [cypress.config.js](../cypress.config.js) file, see [Cypress configuration doc](https://on.cypress.io/configuration).
+You can configure project options in [cypress.config.js](../cypress.config.js), see [Cypress configuration doc](https://on.cypress.io/configuration).
 
 ## More information
 

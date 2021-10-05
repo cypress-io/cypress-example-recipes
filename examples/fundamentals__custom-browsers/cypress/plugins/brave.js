@@ -1,4 +1,7 @@
 /* eslint-disable no-console */
+
+const { defineConfig } = require('cypress')
+
 const os = require('os')
 const execa = require('execa')
 const tasks = require('./tasks')
@@ -47,31 +50,35 @@ const findBraveBrowser = () => {
   }
 }
 
-module.exports = (on, config) => {
-  on('task', tasks)
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents (on, config) {
+      on('task', tasks)
 
-  // only filter browsers if we are passed a list - this way
-  // this example works on Cypress v3.7.0+ and below
-  if (!config.browsers) {
-    return
-  }
+      // only filter browsers if we are passed a list - this way
+      // this example works on Cypress v3.7.0+ and below
+      if (!config.browsers) {
+        return
+      }
 
-  // kind of hack - we don't know the Cypress version running
-  // so we need to look at known Electron browser
-  const electron = config.browsers.find((browser) => browser.name === 'electron')
+      // kind of hack - we don't know the Cypress version running
+      // so we need to look at known Electron browser
+      const electron = config.browsers.find((browser) => browser.name === 'electron')
 
-  if (!electron) {
-    console.error('Could not find even Electron browser ⚠️')
+      if (!electron) {
+        console.error('Could not find even Electron browser ⚠️')
 
-    return
-  }
+        return
+      }
 
-  // Cypress v3.7.0+
-  return findBraveBrowser().then((browser) => {
-    browser.family = electron.family
+      // Cypress v3.7.0+
+      return findBraveBrowser().then((browser) => {
+        browser.family = electron.family
 
-    return {
-      browsers: [browser],
-    }
-  })
-}
+        return {
+          browsers: [browser],
+        }
+      })
+    },
+  },
+})
