@@ -7,7 +7,8 @@ describe('process environment variables', () => {
 
   it('has variables FOO and BAR from process.env', () => {
     // FOO=42 BAR=baz cypress open
-    // see how FOO and BAR were copied in "cypress/plugins/index.js"
+    // see how FOO and BAR were copied in the setupNodeEvents function
+    // in the Cypress configuration
     expect(Cypress.env()).to.contain({
       FOO: '42',
       BAR: 'baz',
@@ -21,7 +22,7 @@ describe('process environment variables', () => {
   })
 
   it('has variable loaded from .env file', () => {
-    // loaded in the plugins file
+    // loaded in the setupNodeEvents function in the Cypress configuration
     expect(Cypress.env('username')).to.equal('aTester')
   })
 

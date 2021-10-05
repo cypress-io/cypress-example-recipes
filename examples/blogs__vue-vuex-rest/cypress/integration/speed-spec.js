@@ -3,8 +3,8 @@
 let commands = []
 let testAttributes
 
-// sends test results to the plugins process
-// using cy.task https://on.cypress.io/task
+// sends test results using
+// cy.task https://on.cypress.io/task
 const sendTestTimings = () => {
   if (!testAttributes) {
     return

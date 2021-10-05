@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
 
 // If we do NOT know the expected number of items we can grab them
-// before the spec starts running using the plugin file.
-// The plugin file places the dynamic list into "Cypress.env()" object
+// before the spec starts running using the setupNodeEvents function.
+// setupNodeEvents places the dynamic list into "Cypress.env()" object
 describe('Test for each user', { retries: 2 }, () => {
   // Cypress.env() object is set by the time the tests start
   const users = Cypress.env('users')

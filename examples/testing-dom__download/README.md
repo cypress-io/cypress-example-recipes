@@ -19,7 +19,7 @@ Spec file | Description
 
 ## Notes
 
-Text files are validated right from the browser spec, but the binary files like the downloaded Zip archives need to be validated from Node code using the plugins file, see [cypress/plugins/index.js](cypress/plugins/index.js)
+Text files are validated right from the browser spec, but the binary files like the downloaded Zip archives need to be validated from Node code, see [setupNodeEvents](cypress.config.js)
 
 The spec also shows how to "catch" form submission that downloads a file using [cy.intercept()](https://on.cypress.io/intercept). After intercepting the request and redirecting back at the test, the test shows how to request the file and validate it.
 

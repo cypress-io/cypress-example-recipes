@@ -1,7 +1,8 @@
 /// <reference types="Cypress" />
 // <a ping="..."> syntax is behind a flag in Firefox
 // https://caniuse.com/?search=anchor%20ping
-// Thus make sure to enable it in the plugin file via the browser launch options
+// Thus make sure to enable it in the setupNodeEvents function in the
+// Cypress configuration via the browser launch options
 describe('intercept', () => {
   it('stubs anchor ping', () => {
     cy.visit('/')

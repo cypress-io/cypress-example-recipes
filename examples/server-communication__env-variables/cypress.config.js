@@ -21,7 +21,6 @@ module.exports = defineConfig({
       // you could extract only specific variables
       // and rename them if necessary
       config.env.FOO = process.env.FOO
-
       config.env.BAR = process.env.BAR
       config.env.username = process.env.USER_NAME
       console.log('extended config.env with process.env.{FOO, BAR, USER_NAME}')

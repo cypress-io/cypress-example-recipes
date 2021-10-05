@@ -1,6 +1,6 @@
 const { defineConfig } = require('cypress')
 
-// This enables using import/export in plugins/main.js
+// This enables using import/export
 // and any files it requires
 //
 // Support for other syntax and features (not supported

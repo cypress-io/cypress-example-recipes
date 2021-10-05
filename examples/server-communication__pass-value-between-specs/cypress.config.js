@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/* eslint-disable no-console */
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({

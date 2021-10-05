@@ -16,7 +16,6 @@ module.exports = defineConfig({
     setupNodeEvents (on, config) {
       on('task', {
         testFinished (attributes) {
-          // console.log(name)
           console.log(
             '%s: "%s" %dms',
             attributes.state,

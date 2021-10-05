@@ -26,7 +26,8 @@ describe('First spec', () => {
 
   it('2 - has the saved item in the next test', () => {
     // if the previous test has passed, we should have
-    // the item stored in the plugin file
+    // the item stored in the setupNodeEvents function in the
+    // Cypress configuration
     cy.task('getItem', 'todo').should('deep.equal', expectedTodo)
   })
 })

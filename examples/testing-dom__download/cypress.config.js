@@ -41,7 +41,7 @@ module.exports = defineConfig({
 
           console.log('zip file %s has entries %o', filename, names)
 
-          // since this is plugins code we do not have built-in "expect" or "assert" functions
+          // since this code is running in a Node process we do not have built-in "expect" or "assert" functions
           // instead we can throw an Error object which fails the "cy.task" command
           if (names.length !== 2) {
             throw new Error(

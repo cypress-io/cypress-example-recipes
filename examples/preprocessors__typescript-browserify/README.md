@@ -7,5 +7,5 @@ via [@cypress/browserify-preprocessor](https://github.com/cypress-io/cypress-bro
 
 See:
 - [tsconfig.json](tsconfig.json)
-- [cypress/plugins/index.js](cypress/plugins/index.js)
+- [cypress.config.js](cypress.config.js)
 - [example test](cypress/integration/spec.ts)

@@ -99,4 +99,4 @@ $ npm run cypress:run -- --env grep='feature A'
 
 ## Details
 
-See [cypress/plugins/index.js](cypress/plugins/index.js) file how to configure test selection preprocessor, built on top of [Cypress Browserify preprocessor](https://github.com/cypress-io/cypress-browserify-preprocessor).
+See the [setupNodeEvents](cypress.config.js) function for how to configure test selection preprocessor, built on top of [Cypress Browserify preprocessor](https://github.com/cypress-io/cypress-browserify-preprocessor).

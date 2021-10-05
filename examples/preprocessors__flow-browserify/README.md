@@ -12,6 +12,6 @@ and [@babel/preset-flow](https://github.com/babel/babel/tree/master/packages/bab
 `npm install --save-dev @cypress/browserify-preprocessor @babel/preset-flow`
 
 See:
-- [cypress/plugins/index.js](cypress/plugins/index.js)
+- [cypress.config.js](cypress.config.js)
 - [example test](cypress/integration/spec.js)
 - [support/add.js](cypress/support/add.js)

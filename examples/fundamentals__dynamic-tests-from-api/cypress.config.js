@@ -3,9 +3,10 @@ const { defineConfig } = require('cypress')
 
 const got = require('got')
 // Cypress tests in the 'integration' folder have access to
-// the Cypress object and the bundled Cypress._ Lodash
-// The plugin file does NOT have Cypress object
-// and thus has to import any 3rd party libraries
+// the Cypress object and the bundled Cypress._ Lodash.
+// The Cypress configuration does NOT and thus has
+// to import any 3rd party libraries
+
 const _ = require('lodash')
 
 // This function is called when a project is opened or re-opened (e.g. due to
@@ -15,7 +16,7 @@ module.exports = defineConfig({
   supportFile: false,
   e2e: {
     async setupNodeEvents (on, config) {
-      // when we load the plugins file, let's fetch the list of users
+      // let's fetch the list of users
       const users = await got(
         'https://jsonplaceholder.cypress.io/users?_limit=3'
       ).json()
