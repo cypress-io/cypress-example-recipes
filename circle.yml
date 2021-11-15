@@ -14,7 +14,7 @@ defaults: &defaults
   parallelism: 1
   working_directory: ~/app
   docker:
-    - image: cypress/browsers:node14.7.0-chrome84
+    - image: cypress/browsers:node16.5.0-chrome94-ff93
   environment:
     TERM: xterm
   steps:
@@ -51,7 +51,7 @@ jobs:
   build:
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node14.7.0-chrome84
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
     environment:
       TERM: xterm
     steps:
@@ -89,7 +89,7 @@ jobs:
   lint:
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node14.7.0-chrome84
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
     steps:
       - attach_workspace:
           at: ~/
@@ -99,7 +99,7 @@ jobs:
   # dummy job running after all end-to-end tests
   after-tests:
     docker:
-      - image: cypress/browsers:node14.7.0-chrome84
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
     steps:
       - run: echo "all good"
 
@@ -110,7 +110,7 @@ jobs:
     parallelism: 20
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node14.7.0-chrome84
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
     environment:
       TERM: xterm
     steps:
@@ -126,7 +126,7 @@ jobs:
     parallelism: 10
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node14.16.0-chrome90-ff88
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
     environment:
       TERM: xterm
       # no need to record these runs yet
@@ -149,7 +149,7 @@ jobs:
     parallelism: 1
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node14.16.0-chrome90-ff88
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
     environment:
       TERM: xterm
       # no need to record these runs yet
@@ -165,7 +165,7 @@ jobs:
     parallelism: 10
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node14.16.0-chrome90-ff88
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
     environment:
       TERM: xterm
       # no need to record these runs yet
