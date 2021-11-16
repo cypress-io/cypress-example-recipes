@@ -183,7 +183,7 @@ Recipe | Description
 npm install
 ```
 
-## Opening Cypress GUI
+## Opening Cypress App
 
 ```bash
 cd ./examples/testing-dom__drag-drop
