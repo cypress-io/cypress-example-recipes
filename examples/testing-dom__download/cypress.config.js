@@ -17,8 +17,8 @@ module.exports = defineConfig({
   baseUrl: "http://localhost:8070",
   chromeWebSecurity: false,
   pageLoadTimeout: 5000,
-  testFiles: "**/*-spec.js",
   e2e: {
+    specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
     setupNodeEvents(on, config) {
       // `on` is used to hook into various events Cypress emits
       // `config` is the resolved Cypress config
