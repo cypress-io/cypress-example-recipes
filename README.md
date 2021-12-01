@@ -189,7 +189,7 @@ npm install
 cd ./examples/testing-dom__drag-drop
 # start local server
 npm start &
-# and open Cypress App
+# open Cypress App
 npm run cypress:open
 ```
 
