@@ -4,7 +4,7 @@
 In this recipe we do not use `tsconfig.json` file, thus we need to specify additional command types using `/// <reference ...>` commands, like this:
 
 ```js
-// cypress/integration/spec.ts
+// cypress/e2e/spec.ts
 /// <reference path="../support/index.d.ts" />
 ```
 

@@ -13,5 +13,5 @@ and [@babel/preset-flow](https://github.com/babel/babel/tree/master/packages/bab
 
 See:
 - [cypress.config.js](cypress.config.js)
-- [example test](cypress/integration/spec.js)
+- [example test](cypress/e2e/spec.js)
 - [support/add.js](cypress/support/add.js)

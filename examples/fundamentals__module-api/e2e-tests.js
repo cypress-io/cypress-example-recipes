@@ -35,7 +35,7 @@ const runOneSpec = (spec) => {
   })
 }
 
-globby('./cypress/integration/*-spec.js')
+globby('./cypress/e2e/*-spec.js')
 .then(sortByLastModified)
 .then((specs) => {
   console.table('Running last modified spec first', specs)

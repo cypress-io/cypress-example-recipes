@@ -10,11 +10,11 @@
   * has expected value
 - unit test asynchronous code using promises and async / await
 
-In [cypress/integration](cypress/integration) folder the specs show:
+In [cypress/e2e](cypress/e2e) folder the specs show:
 
-- [unit_test_application_code_spec.js](cypress/integration/unit_test_application_code_spec.js) loads functions from the application and unit tests them.
-- [wait-for-object-property-spec.js](cypress/integration/wait-for-object-property-spec.js) shows how Cypress can wrap and object and wait for a new property to be added to it (or deleted or modified).
-- [wait-for-window-property-spec.js](cypress/integration/wait-for-window-property-spec.js) shows how an application can "signal" that it is ready to be tested by adding a property to the `window` object. The test will wait for the new property to appear.
-- [async-tests.js](cypress/integration/async-tests.js) shows how to unit test asynchronous functions from [async-methods.js](async-methods.js) using Promises or async / await syntax
+- [unit_test_application_code_spec.js](cypress/e2e/unit_test_application_code_spec.js) loads functions from the application and unit tests them.
+- [wait-for-object-property-spec.js](cypress/e2e/wait-for-object-property-spec.js) shows how Cypress can wrap and object and wait for a new property to be added to it (or deleted or modified).
+- [wait-for-window-property-spec.js](cypress/e2e/wait-for-window-property-spec.js) shows how an application can "signal" that it is ready to be tested by adding a property to the `window` object. The test will wait for the new property to appear.
+- [async-tests.js](cypress/e2e/async-tests.js) shows how to unit test asynchronous functions from [async-methods.js](async-methods.js) using Promises or async / await syntax
 
 **note:** the specs load the application directly, there is no web server to start. Just do `npm run cypress:run` to open Cypress and run the unit tests.

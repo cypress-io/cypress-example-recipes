@@ -18,7 +18,7 @@ Because this recipe is part of the monorepo with lots of examples, we don't want
 ## See
 - [webpack.config.js](webpack.config.js)
 - [cypress.config.js](cypress.config.js)
-- [cypress/integration/spec.ts](cypress/integration/spec.ts)
+- [cypress/e2e/spec.ts](cypress/e2e/spec.ts)
 
 ## Run
 

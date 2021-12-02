@@ -2,7 +2,7 @@
 const { defineConfig } = require("cypress")
 
 const got = require("got")
-// Cypress tests in the "integration" folder have access to
+// Cypress tests in the "e2e" folder have access to
 // the Cypress object and the bundled Cypress._ Lodash.
 // The Cypress configuration does NOT and thus has
 // to import any 3rd party libraries

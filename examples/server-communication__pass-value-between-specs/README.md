@@ -3,10 +3,10 @@
 
 ## using task
 
-The tests in [first-spec.js](cypress/integration/first-spec.js) store a Todo item retrieved from the API. The Todo item is stored in the [setupNodeEvents](cypress.config.js) function which is the background process continuously running while the browser relaunches for every spec.
+The tests in [first-spec.js](cypress/e2e/first-spec.js) store a Todo item retrieved from the API. The Todo item is stored in the [setupNodeEvents](cypress.config.js) function which is the background process continuously running while the browser relaunches for every spec.
 
 ```js
-// cypress/integration/first-spec.js
+// cypress/e2e/first-spec.js
 const url = 'https://jsonplaceholder.cypress.io/todos/1'
 cy.request(url).its('body').then(todo => {
   cy.task('setItem', {
@@ -16,10 +16,10 @@ cy.request(url).its('body').then(todo => {
 })
 ```
 
-The [second spec](./cypress/integration/second-spec.js) that always runs _after_ the first one retrieves the saved item
+The [second spec](./cypress/e2e/second-spec.js) that always runs _after_ the first one retrieves the saved item
 
 ```js
-// cypress/integration/second-spec.js
+// cypress/e2e/second-spec.js
 cy.task('getItem', 'todo')
   .should('deep.equal', expectedTodo)
 ```

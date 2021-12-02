@@ -36,5 +36,5 @@ All Ajax requests to the protected resources need to have `Authorization` header
 
 ## Tests
 
-- [cypress/integration/using-ui-spec.js](cypress/integration/using-ui-spec.js) tests the login user interface form
-- [cypress/integration/spec.js](cypress/integration/spec.js) shows how to log in once using [cy.request](https://on.cypress.io/request) and then set the JWT in the `localStorage` to log in instantly before each test
+- [cypress/e2e/using-ui-spec.js](cypress/e2e/using-ui-spec.js) tests the login user interface form
+- [cypress/e2e/spec.js](cypress/e2e/spec.js) shows how to log in once using [cy.request](https://on.cypress.io/request) and then set the JWT in the `localStorage` to log in instantly before each test

@@ -7,9 +7,9 @@ const EOL = Cypress.platform === 'win32' ? '\\' : '/'
 /**
  * Joins parts of the file path using the EOL
  * @example
- *  join('cypress', 'integration')
- *    // "cypress/integration" on non-Windows
- *    // "cypress\integration" on Windows
+ *  join('cypress', 'e2e')
+ *    "cypress/e2e" on non-Windows
+ *    "cypress\e2e" on Windows
 */
 const join = (...paths) => paths.join(EOL)
 
@@ -18,15 +18,15 @@ describe('sanity JavaScript tests', () => {
 
   it('has __dirname', () => {
     expect(__dirname).to.be.a('string')
-    // on Windows OS the directory is "cypress\integration"
-    // on other operating systems it is "cypress/integration"
-    expect(__dirname).to.equal(join('cypress', 'integration'))
+    // on Windows OS the directory is "cypress\e2e"
+    // on other operating systems it is "cypress/e2e"
+    expect(__dirname).to.equal(join('cypress', 'e2e'))
   })
 
   it('has __filename', () => {
     expect(__filename).to.be.a('string')
     expect(__filename).to.equal(
-      join('cypress', 'integration', 'sanity-js-spec.js')
+      join('cypress', 'e2e', 'sanity-js-spec.js')
     )
   })
 })

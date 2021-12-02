@@ -33,7 +33,7 @@ produces
 
 ```text
 Running: feature-a.js...     (1 of 2)
-picking tests to run in file cypress/integration/feature-a.js
+picking tests to run in file cypress/e2e/feature-a.js
 
 
   feature A
@@ -45,7 +45,7 @@ picking tests to run in file cypress/integration/feature-a.js
   2 pending
 
   Running: feature-b.js...   (2 of 2)
-picking tests to run in file cypress/integration/feature-b.js
+picking tests to run in file cypress/e2e/feature-b.js
 
 
   feature B

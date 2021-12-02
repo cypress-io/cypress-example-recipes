@@ -7,7 +7,7 @@
 These folders hold end-to-end tests and supporting files for the Cypress Test Runner.
 
 - [fixtures](fixtures) holds optional JSON data for mocking, [read more](https://on.cypress.io/fixture)
-- [integration](integration) holds the actual test files, [read more](https://on.cypress.io/writing-and-organizing-tests)
+- [e2e](e2e) holds the actual test files, [read more](https://on.cypress.io/writing-and-organizing-tests)
 - [support](support) file runs before all tests and is a great place to write or load additional custom commands, [read more](https://on.cypress.io/writing-and-organizing-tests#Support-file)
 
 ## Cypress configuration

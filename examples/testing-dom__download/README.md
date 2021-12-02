@@ -12,10 +12,10 @@
 
 Spec file | Description
 ---|---
-[form-submission-spec.js](./cypress/integration/form-submission-spec.js) | Intercepts and verifies a file downloaded after a form submission
-[local-download-spec.js](./cypress/integration/local-download-spec.js) | Downloads files from local domain by using `<a href=... download>` anchor links
-[location-href-spec.js](./cypress/integration/location-href-spec.js) | Intercepts and verifies a file downloaded via setting `document.location.href=...` URL
-[remote-download-spec.js](./cypress/integration/remote-download-spec.js) | Downloads files from another domain by using `<a href=... download>` anchor links
+[form-submission-spec.js](./cypress/e2e/form-submission-spec.js) | Intercepts and verifies a file downloaded after a form submission
+[local-download-spec.js](./cypress/e2e/local-download-spec.js) | Downloads files from local domain by using `<a href=... download>` anchor links
+[location-href-spec.js](./cypress/e2e/location-href-spec.js) | Intercepts and verifies a file downloaded via setting `document.location.href=...` URL
+[remote-download-spec.js](./cypress/e2e/remote-download-spec.js) | Downloads files from another domain by using `<a href=... download>` anchor links
 
 ## Notes
 

@@ -1,6 +1,6 @@
 # file-upload-react
 
-Tests React component that uploads a file. React source is in [index.html](index.html), spec files in [cypress/integration](cypress/integration) folder. To run tests
+Tests React component that uploads a file. React source is in [index.html](index.html), spec files in [cypress/e2e](cypress/e2e) folder. To run tests
 
 ```shell
 npm run cypress:open
@@ -8,7 +8,7 @@ npm run cypress:open
 
 ## Tests
 
-### [spec.js](cypress/integration/spec.js)
+### [spec.js](cypress/e2e/spec.js)
 
 - The tests are trying to pass a synthetic test file to upload via an [`.trigger('change')`](https://on.cypress.io/trigger) event passing `File` reference using event property `testFile`. In the source code we try to grab this property before accessing the native file reference (which Cypress cannot set until we can fire the native file upload event)
 
@@ -23,11 +23,11 @@ We can confirm that the file gets uploaded by stubbing either XHR request or int
 - Stub network calls using [`cy.intercept()`](https://on.cypress.io/intercept)
 - Alternatively stub `axios.post` method using [`cy.stub()`](https://on.cypress.io/stub)
 
-### [upload-plugin-spec.js](cypress/integration/upload-plugin-spec.js)
+### [upload-plugin-spec.js](cypress/e2e/upload-plugin-spec.js)
 
 - uses [`cypress-file-upload`](https://github.com/abramenal/cypress-file-upload) for file upload via `input` event
 
-### [upload-via-app-spec.js](cypress/integration/upload-via-app-spec.js)
+### [upload-via-app-spec.js](cypress/e2e/upload-via-app-spec.js)
 
 The most generic way to bypass all native event restrictions is to factor out accessing native `change` event to extract the file into the tiniest application method and stub it from the end-to-end test. Here is the relevant application code:
 
@@ -75,6 +75,6 @@ The rest of the application's code runs "normally" without any stubbing.
 
 Check out a blog post that describes this technique in general ["Shrink the Untestable Code With App Actions And Effects"](https://www.cypress.io/blog/2019/02/28/shrink-the-untestable-code-with-app-actions-and-effects/)
 
-### [csv-file-spec.js](./cypress/integration/csv-file-spec.js)
+### [csv-file-spec.js](./cypress/e2e/csv-file-spec.js)
 
 Attaches the CSV fixture using the `cypress-file-upload`. The attached file is parsed by the application using the [papaparse](https://www.papaparse.com/) library. The test then validates the parsed results.

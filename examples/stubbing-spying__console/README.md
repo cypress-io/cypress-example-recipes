@@ -1,6 +1,6 @@
 # Stubbing Console
 
-The spec file [cypress/integration/spec.js](cypress/integration/spec.js) shows how to spy on and stub methods of the `console` object. See [index.html](index.html) to see what the "application" is logging on load.
+The spec file [cypress/e2e/spec.js](cypress/e2e/spec.js) shows how to spy on and stub methods of the `console` object. See [index.html](index.html) to see what the "application" is logging on load.
 
 ![Test example](images/console-example.png)
 

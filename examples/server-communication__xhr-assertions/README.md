@@ -2,11 +2,11 @@
 
 This recipe shows how to spy on a network call and assert its request and response data.
 
-[cypress/integration/spec.js](cypress/integration/spec.js) runs multiple assertions against an XHR object
+[cypress/e2e/spec.js](cypress/e2e/spec.js) runs multiple assertions against an XHR object
 
 ![Multiple assertions](images/assertions.png)
 
-[cypress/integration/spok-spec.js](cypress/integration/spok-spec.js) asserts multiple values and schema properties using [cy-spok](https://github.com/bahmutov/cy-spok) plugin built on top of [spok](https://github.com/thlorenz/spok)
+[cypress/e2e/spok-spec.js](cypress/e2e/spok-spec.js) asserts multiple values and schema properties using [cy-spok](https://github.com/bahmutov/cy-spok) plugin built on top of [spok](https://github.com/thlorenz/spok)
 
 ![Spok assertions](images/spok.png)
 
@@ -41,7 +41,7 @@ cy.wait('@post').should('have.property', 'status', 201)
 
 ![cy.wait works](images/cy-wait-example.png)
 
-Find the above tests in [cypress/integration/wait-vs-get.js](cypress/integration/wait-vs-get.js)
+Find the above tests in [cypress/e2e/wait-vs-get.js](cypress/e2e/wait-vs-get.js)
 
 **Tip:** you can inspect the full XHR object by logging it to the console
 
@@ -53,19 +53,19 @@ cy.wait('@post').then(console.log)
 
 ## Multiple requests
 
-[cypress/integration/multiple-requests.js](cypress/integration/multiple-requests.js) shows how to wait for multiple matching requests and how to retrieve them all, or individually.
+[cypress/e2e/multiple-requests.js](cypress/e2e/multiple-requests.js) shows how to wait for multiple matching requests and how to retrieve them all, or individually.
 
 ![multiple requests](images/multiple.png)
 
 ## Controlling the clock
 
-We can skip the initial 1 second delay set using `setTimeout(..., 1000)` inside the application by controlling the application's clock. See [cypress/integration/clock-control.js](cypress/integration/clock-control.js).
+We can skip the initial 1 second delay set using `setTimeout(..., 1000)` inside the application by controlling the application's clock. See [cypress/e2e/clock-control.js](cypress/e2e/clock-control.js).
 
 ![Fast test via clock control](images/clock.gif)
 
 ## Test retries
 
-If we decide to assert the network call's duration yet avoid specifying extremely large limit to avoid spurious test failures, we can use test retries to re-run the test. See [cypress/integration/duration-spec.js](cypress/integration/duration-spec.js)
+If we decide to assert the network call's duration yet avoid specifying extremely large limit to avoid spurious test failures, we can use test retries to re-run the test. See [cypress/e2e/duration-spec.js](cypress/e2e/duration-spec.js)
 
 ```js
 it('is faster than 300ms', { retries: 3 }, () => {
@@ -78,7 +78,7 @@ it('is faster than 300ms', { retries: 3 }, () => {
 
 ## XML responses
 
-If the server is returning a XML response, you can parse it into a plain object and then confirm its properties. See the [server.js](./server.js) and the [cypress/integration/xml-spec.js](./cypress/integration/xml-spec.js) files.
+If the server is returning a XML response, you can parse it into a plain object and then confirm its properties. See the [server.js](./server.js) and the [cypress/e2e/xml-spec.js](./cypress/e2e/xml-spec.js) files.
 
 ## See also
 

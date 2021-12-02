@@ -1,6 +1,6 @@
 # Utilize window.performance 
 
-The spec file [cypress/integration/spec.js](cypress/integration/spec.js) shows how you can utilize [cypress](https://cypress.io) to monitor your website.
+The spec file [cypress/e2e/spec.js](cypress/e2e/spec.js) shows how you can utilize [cypress](https://cypress.io) to monitor your website.
 
 ![Test example](images/performance-example.png)
 

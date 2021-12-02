@@ -3,13 +3,13 @@
 
 You can spy and stub `window.fetch` directly, or, to recreate the same [Network support](https://on.cypress.io/network-requests) experience, remove `window.fetch` completely and let your application fall back to `XMLHttpRequest` protocol. If the application does NOT have fallback mechanism, then the Cypress tests can provide it using a polyfill.
 
-See individual spec files in [cypress/integration](cypress/integration) folder.
+See individual spec files in [cypress/e2e](cypress/e2e) folder.
 
 Spec | Description
 --- | ---
-[spy-on-fetch-spec.js](cypress/integration/spy-on-fetch-spec.js) | Observes calls the application makes using `window.fetch` via [`cy.spy()`](https://on.cypress.io/spy)
-[stub-fetch-spec.js](cypress/integration/stub-fetch-spec.js) | Uses Cypress default network stubbing to intercept `fetch` calls from the application
-[control-clock-spec.js](cypress/integration/control-clock-spec.js) | **Bonus:** shows how to "speed-up" application to make Ajax calls by controlling time using [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick)
+[spy-on-fetch-spec.js](cypress/e2e/spy-on-fetch-spec.js) | Observes calls the application makes using `window.fetch` via [`cy.spy()`](https://on.cypress.io/spy)
+[stub-fetch-spec.js](cypress/e2e/stub-fetch-spec.js) | Uses Cypress default network stubbing to intercept `fetch` calls from the application
+[control-clock-spec.js](cypress/e2e/control-clock-spec.js) | **Bonus:** shows how to "speed-up" application to make Ajax calls by controlling time using [`cy.clock()`](https://on.cypress.io/clock) and [`cy.tick()`](https://on.cypress.io/tick)
 
 ## Stubbing `fetch`
 

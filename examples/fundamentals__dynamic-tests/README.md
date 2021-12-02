@@ -20,12 +20,12 @@ Sometimes the data to generate tests might be dynamic and come from an external 
 
 In these repo you can find:
 
-- [cypress/integration/list-spec.js](cypress/integration/list-spec.js) iterates through an array, creating a test for each item
-- [cypress/integration/viewports-spec.js](cypress/integration/viewports-spec.js) runs the same test against different viewports
-- [cypress/integration/subdomains-spec.js](cypress/integration/subdomains-spec.js) runs the same test against different urls
-- [cypress/integration/fixture-spec.js](cypress/integration/fixture-spec.js) uses `require` to load JSON fixture file and generates tests for each item from the fixture.
-- [cypress/integration/request-spec.js](cypress/integration/request-spec.js) fetches a list of users from an external API endpoint and creates a test for each user
-- [cypress/integration/task-spec.js](cypress/integration/task-spec.js) gets a list of items by calling [`cy.task`](https://on.cypress.io/task) and then generating a test for each item
-- [cypress/integration/user-spec.js](./cypress/integration/user-spec.js) gets the list of users on start up, see the [setupNodeEvents](cypress.config.js) function. You can see the fetched list in the `Cypress.env()` object
+- [cypress/e2e/list-spec.js](cypress/e2e/list-spec.js) iterates through an array, creating a test for each item
+- [cypress/e2e/viewports-spec.js](cypress/e2e/viewports-spec.js) runs the same test against different viewports
+- [cypress/e2e/subdomains-spec.js](cypress/e2e/subdomains-spec.js) runs the same test against different urls
+- [cypress/e2e/fixture-spec.js](cypress/e2e/fixture-spec.js) uses `require` to load JSON fixture file and generates tests for each item from the fixture.
+- [cypress/e2e/request-spec.js](cypress/e2e/request-spec.js) fetches a list of users from an external API endpoint and creates a test for each user
+- [cypress/e2e/task-spec.js](cypress/e2e/task-spec.js) gets a list of items by calling [`cy.task`](https://on.cypress.io/task) and then generating a test for each item
+- [cypress/e2e/user-spec.js](./cypress/e2e/user-spec.js) gets the list of users on start up, see the [setupNodeEvents](cypress.config.js) function. You can see the fetched list in the `Cypress.env()` object
 
 ![Cypress env object with fetched users](./images/users.png)
