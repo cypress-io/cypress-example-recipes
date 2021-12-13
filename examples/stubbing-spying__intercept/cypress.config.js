@@ -2,10 +2,10 @@ const { defineConfig } = require("cypress")
 
 module.exports = defineConfig({
   baseUrl: "http://localhost:7080",
-  ignoreTestFiles: "deferred.js",
   supportFile: false,
   defaultCommandTimeout: 8000,
   e2e: {
+    specExcludePattern: "deferred.js",
     setupNodeEvents(on, config) {
       on("before:browser:launch", (browser = {}, launchOptions) => {
         if (browser.family === "firefox") {
