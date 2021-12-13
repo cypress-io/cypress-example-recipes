@@ -1,14 +1,19 @@
-// This enables using import/export in plugins/main.js
-// and any files it requires
-//
-// Support for other syntax and features (not supported
-// by the version of node run by Cypress) can
-// be configured via babel plugins in the .babelrc
+const { defineConfig } = require("cypress")
 
-require("babel-register")
+const { seed } = require("./server/db")
 
-module.exports = require("./main").default
-const json = {
+module.exports = defineConfig({
   baseUrl: "http://localhost:7082",
   supportFile: false,
-}
+  e2e: {
+    setupNodeEvents(on, config) {
+      on("task", {
+        "seed:db" (data) {
+          return seed(data).then(() => {
+            return data
+          })
+        },
+      })
+    },
+  },
+})

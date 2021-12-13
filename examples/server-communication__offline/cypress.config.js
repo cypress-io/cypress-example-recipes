@@ -3,7 +3,6 @@ const { defineConfig } = require("cypress")
 module.exports = defineConfig({
   baseUrl: "http://localhost:7080",
   fixturesFolder: false,
-  pluginsFile: false,
   supportFile: false,
   viewportWidth: 500,
   viewportHeight: 400,

@@ -2,7 +2,7 @@
 
 Read the blog post [Testing the Browser Notification API](https://www.cypress.io/blog/2020/01/24/testing-the-browser-notification-api/).
 
-You can find the sample app in [index.html](index.html) and all tests in [cypress/integration/spec.js](cypress/integration/spec.js). The tests spy / stub Notification function in various ways to check how the app handles:
+You can find the sample app in [index.html](index.html) and all tests in [cypress/e2e/spec.cy.js](cypress/e2e/spec.cy.js). The tests spy / stub Notification function in various ways to check how the app handles:
 - permission was granted before
 - permission was denied before
 - permission was neither granted nor denied before, so the app asks the user and acts depending on the answer

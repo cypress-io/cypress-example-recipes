@@ -4,7 +4,7 @@
 
 The browser window, the command log, and the application's iframe sizes are printed.
 
-The [plugin file](./cypress/plugins/index.js) increases the browser window size when running in the headless mode to produce high quality video. See [launch api](https://on.cypress.io/browser-launch-api) for more documentation.
+The [setupNodeEvents](cypress.config.js) function increases the browser window size when running in the headless mode to produce high quality video. See [launch api](https://on.cypress.io/browser-launch-api) for more documentation.
 
 **Note:** increasing the browser window size seems to not work very well in Electron browser
 

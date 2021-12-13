@@ -6,5 +6,4 @@ module.exports = defineConfig({
     "auth.corp.com": "127.0.0.1",
   },
   fixturesFolder: false,
-  pluginsFile: false,
 })

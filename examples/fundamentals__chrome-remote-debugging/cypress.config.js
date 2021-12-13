@@ -2,7 +2,8 @@ const { defineConfig } = require("cypress")
 
 const CDP = require("chrome-remote-interface")
 const debug = require("debug")("cypress:server:protocol")
-function ensureRdpPort(args) {
+
+function ensureRdpPort (args) {
   const existing = args.find(
     (arg) => arg.slice(0, 23) === "--remote-debugging-port"
   )
@@ -12,7 +13,9 @@ function ensureRdpPort(args) {
   }
 
   const port = 40000 + Math.round(Math.random() * 25000)
+
   args.push(`--remote-debugging-port=${port}`)
+
   return port
 }
 
@@ -22,7 +25,6 @@ let client = null
 module.exports = defineConfig({
   fixturesFolder: false,
   supportFile: false,
-
   e2e: {
     setupNodeEvents(on, config) {
       on("before:browser:launch", (browser, launchOptionsOrArgs) => {
@@ -30,6 +32,7 @@ module.exports = defineConfig({
         const args = Array.isArray(launchOptionsOrArgs)
           ? launchOptionsOrArgs
           : launchOptionsOrArgs.args
+
         port = ensureRdpPort(args)
         debug("ensureRdpPort %d", port)
         debug("Chrome arguments %o", args)
@@ -45,7 +48,6 @@ module.exports = defineConfig({
 
           return Promise.resolve(true)
         },
-
         activatePrintMediaQuery: async () => {
           debug("activatePrintMediaQuery")
 
@@ -59,7 +61,6 @@ module.exports = defineConfig({
             media: "print",
           })
         },
-
         activateHoverPseudo: async ({ selector }) => {
           debug("activateHoverPseudo")
 
@@ -77,6 +78,7 @@ module.exports = defineConfig({
 
           const isIframe = (node) =>
             node.nodeName === "IFRAME" && node.contentDocument
+
           const filtered = allRootNodes.nodes.filter(isIframe)
 
           // The first IFrame is our App

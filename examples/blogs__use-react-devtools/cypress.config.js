@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { defineConfig } = require("cypress")
 
 const path = require("path")
@@ -15,6 +16,7 @@ module.exports = defineConfig({
 
           console.log("adding React DevTools extension from", extensionFolder)
           launchOptions.args.push(extensionFolder)
+
           return launchOptions
         }
       })

@@ -1,9 +1,9 @@
+/* eslint-disable no-console */
 const { defineConfig } = require("cypress")
 
 module.exports = defineConfig({
   fixturesFolder: false,
   supportFile: false,
-
   e2e: {
     setupNodeEvents(on, config) {
       // configure plugins here
@@ -32,8 +32,8 @@ module.exports = defineConfig({
         // the browser width and height we want to get
         // our screenshots and videos will be of that resolution
         const width = 1920
-
         const height = 1080
+
         console.log("setting the browser window size to %d x %d", width, height)
 
         if (browser.name === "chrome" && browser.isHeadless) {

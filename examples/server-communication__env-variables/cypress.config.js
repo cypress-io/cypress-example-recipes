@@ -1,30 +1,17 @@
-const { defineConfig } = require("cypress")
-
 /* eslint-disable no-console */
-// ***********************************************************
-// This example plugins/index.js can be used to load plugins
-//
-// You can change the location of this file or turn off loading
-// the plugins file with the 'pluginsFile' configuration option.
-//
-// You can read more here:
-// https://on.cypress.io/plugins-guide
-// ***********************************************************
-
-// This function is called when a project is opened or re-opened (e.g. due to
-// the project's config changing)
+const { defineConfig } = require("cypress")
 
 // load the environment variables from the local .env file
 require("dotenv").config()
 
+// This function is called when a project is opened or re-opened (e.g. due to
+// the project's config changing)
 module.exports = defineConfig({
   env: {
     "my-var": "ok",
   },
-
   fixturesFolder: false,
   supportFile: false,
-
   e2e: {
     setupNodeEvents(on, config) {
       // we can grab some process environment variables
@@ -34,10 +21,10 @@ module.exports = defineConfig({
       // you could extract only specific variables
       // and rename them if necessary
       config.env.FOO = process.env.FOO
-
       config.env.BAR = process.env.BAR
       config.env.username = process.env.USER_NAME
       console.log("extended config.env with process.env.{FOO, BAR, USER_NAME}")
+
       return config
     },
   },

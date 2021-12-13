@@ -1,9 +1,9 @@
+/* eslint-disable no-console */
 const { defineConfig } = require("cypress")
 
 module.exports = defineConfig({
   fixturesFolder: false,
   supportFile: false,
-
   e2e: {
     setupNodeEvents(on, config) {
       const items = {}
@@ -23,16 +23,19 @@ module.exports = defineConfig({
           }
 
           items[name] = value
+
           return null
         },
 
         getItem(name) {
           if (name in items) {
             console.log("returning item %s", name)
+
             return items[name]
           }
 
           const msg = `Missing item "${name}"`
+
           console.error(msg)
           throw new Error(msg)
         },

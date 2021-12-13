@@ -1,17 +1,12 @@
 const { defineConfig } = require("cypress")
 
-/// <reference types="cypress" />
 /* eslint-disable no-console */
 const AdmZip = require("adm-zip")
-
 const { stripIndent } = require("common-tags")
-
 const globby = require("globby")
-
 const { rmdir } = require("fs")
 
 const { readExcelFile } = require("./read-excel")
-
 const { readPdf } = require("./read-pdf")
 
 module.exports = defineConfig({
@@ -22,9 +17,8 @@ module.exports = defineConfig({
   baseUrl: "http://localhost:8070",
   chromeWebSecurity: false,
   pageLoadTimeout: 5000,
-  testFiles: "**/*-spec.js",
-
   e2e: {
+    specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
     setupNodeEvents(on, config) {
       // `on` is used to hook into various events Cypress emits
       // `config` is the resolved Cypress config
@@ -44,9 +38,10 @@ module.exports = defineConfig({
           const zip = new AdmZip(filename)
           const zipEntries = zip.getEntries()
           const names = zipEntries.map((entry) => entry.entryName).sort()
+
           console.log("zip file %s has entries %o", filename, names)
 
-          // since this is plugins code we do not have built-in "expect" or "assert" functions
+          // since this code is running in a Node process we do not have built-in "expect" or "assert" functions
           // instead we can throw an Error object which fails the "cy.task" command
           if (names.length !== 2) {
             throw new Error(
@@ -118,10 +113,12 @@ module.exports = defineConfig({
 
           if (!list.length) {
             console.log("found no files")
+
             return null
           }
 
           console.log("found %d files, first one %s", list.length, list[0])
+
           return list[0]
         },
 
@@ -138,8 +135,10 @@ module.exports = defineConfig({
               (err) => {
                 if (err) {
                   console.error(err)
+
                   return reject(err)
                 }
+
                 resolve(null)
               }
             )

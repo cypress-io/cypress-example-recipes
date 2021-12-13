@@ -1,7 +1,7 @@
 # Server Timing
 > Show server timing results from Cypress visit
 
-Imagine the server collects its performance timings while preparing and serving the `/` page. The server can send these timings using [Server-Timing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server-Timing) header (see [index.js](index.js)), and we can inspect these numbers from the Cypress test. See [cypress/integration/spec.js](cypress/integration/spec.js) file.
+Imagine the server collects its performance timings while preparing and serving the `/` page. The server can send these timings using [Server-Timing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server-Timing) header (see [index.js](index.js)), and we can inspect these numbers from the Cypress test. See [cypress/e2e/spec.cy.js](cypress/e2e/spec.cy.js) file.
 
 We can intercept the `/` load using [cy.intercept](https://on.cypress.io/intercept) and inspect the response's headers. We have to find the `server-timing` header and parse it ourselves.
 

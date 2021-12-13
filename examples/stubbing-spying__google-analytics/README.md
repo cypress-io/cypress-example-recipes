@@ -32,7 +32,7 @@ Using our Cypress tests we can confirm the application is making the right calls
 
 ## Stubbing `window.ga` method
 
-The first example in [ga-method-stubbing.js](cypress/integration/ga-method-stubbing.js) blocks all requests to domain `www.google-analytics.com`. Even though we are preventing the actual `GA` script from loading, we can still stub the `window.ga` object and ensure its being called correctly.
+The first example in [ga-method-stubbing.cy.js](cypress/e2e/ga-method-stubbing.cy.js) blocks all requests to domain `www.google-analytics.com`. Even though we are preventing the actual `GA` script from loading, we can still stub the `window.ga` object and ensure its being called correctly.
 
 - Use [`cy.intercept`](https://on.cypress.io/intercept) to block Google Analytics from receiving requests.
 - Use [`cy.stub()`](https://on.cypress.io/stub) to verify that `window.ga(...)` was called with the correct arguments
@@ -55,7 +55,7 @@ We can do more than just stub `window.ga` calls. We can confirm that the actual 
 
 **Note:** the XHR call goes to `https://www.google-analytics.com/j/collect` endpoint, while the image resource is loaded from `https://www.google-analytics.com/collect`
 
-The spec file [ga-network-stubbing.js](cypress/integration/ga-network-stubbing.js) shows how to stub both
+The spec file [ga-network-stubbing.cy.js](cypress/e2e/ga-network-stubbing.cy.js) shows how to stub both
 
 ```js
 cy.intercept('POST', 'https://www.google-analytics.com/j/collect',

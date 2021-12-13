@@ -1,6 +1,6 @@
+/* eslint-disable no-console */
 const { defineConfig } = require("cypress")
 
-/// <reference types="cypress" />
 const got = require("got")
 
 module.exports = defineConfig({
@@ -9,7 +9,6 @@ module.exports = defineConfig({
   supportFile: false,
   viewportHeight: 200,
   viewportWidth: 300,
-
   e2e: {
     setupNodeEvents(on, config) {
       on("task", {

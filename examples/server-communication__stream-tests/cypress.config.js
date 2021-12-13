@@ -1,7 +1,5 @@
-const { defineConfig } = require("cypress")
-
-/// <reference types="cypress" />
 /* eslint-disable no-console */
+const { defineConfig } = require("cypress")
 
 // http://riaevangelist.github.io/node-ipc/
 const ipc = require("node-ipc")
@@ -14,18 +12,11 @@ ipc.connectTo("cypressListener", () => {
 
 module.exports = defineConfig({
   fixturesFolder: false,
-
   e2e: {
     setupNodeEvents(on, config) {
       on("task", {
         testFinished(attributes) {
-          // console.log(name)
-          console.log(
-            '%s: "%s" %dms',
-            attributes.state,
-            attributes.title,
-            attributes.duration
-          )
+          console.log('%s: "%s" %dms', attributes.state, attributes.title, attributes.duration)
 
           ipc.of.cypressListener.emit("test:after:run", {
             state: attributes.state,

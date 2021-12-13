@@ -5,7 +5,6 @@ const tasks = require("./tasks")
 module.exports = defineConfig({
   supportFile: false,
   fixturesFolder: false,
-
   e2e: {
     setupNodeEvents(on, config) {
       on("task", tasks)
