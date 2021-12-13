@@ -1,7 +1,7 @@
 # Responsive image
 > Testing how the browser loads images depending on viewport
 
-The test in [cypress/e2e/spec.js](./cypress/e2e/spec.js) observes the images loaded by the `<picture>` element to confirm that the mobile version is requested for mobile viewport. The desktop viewport causes the page to request the desktop image version.
+The test in [cypress/e2e/spec.cy.js](./cypress/e2e/spec.cy.js) observes the images loaded by the `<picture>` element to confirm that the mobile version is requested for mobile viewport. The desktop viewport causes the page to request the desktop image version.
 
 ![The test](./images/picture.gif)
 

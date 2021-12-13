@@ -10,13 +10,13 @@ Read the companion blog post [Working with iframes in Cypress](https://cypress.i
 
 Spec | Description
 --- | ---
-[first-spec.js](cypress/e2e/first-spec.js) | Loads the [index.html](index.html)
-[button-spec.js](cypress/e2e/button-spec.js) | Clicks the button inside an iframe and checks the text
-[single-its-spec.js](cypress/e2e/single-its-spec.js) | Uses a single Cypress command to retry while iframe is loading
-[custom-command-spec.js](cypress/e2e/custom-command-spec.js) | Moves iframe access into a reusable common custom command
-[spy-on-fetch-spec.js](cypress/e2e/spy-on-fetch-spec.js) | Accesses `window` inside the iframe and spies on `fetch` calls
-[xhr-spec.js](cypress/e2e/xhr-spec.js) | Shows how to spy and stub network calls the iframe is making
-[plugin-spec.js](cypress/e2e/plugin-spec.js) | Uses [cypress-iframe](https://gitlab.com/kgroat/cypress-iframe) plugin to work elements inside an iframe
+[first-spec.cy.js](cypress/e2e/first-spec.cy.js) | Loads the [index.html](index.html)
+[button-spec.cy.js](cypress/e2e/button-spec.cy.js) | Clicks the button inside an iframe and checks the text
+[single-its-spec.cy.js](cypress/e2e/single-its-spec.cy.js) | Uses a single Cypress command to retry while iframe is loading
+[custom-command-spec.cy.js](cypress/e2e/custom-command-spec.cy.js) | Moves iframe access into a reusable common custom command
+[spy-on-fetch-spec.cy.js](cypress/e2e/spy-on-fetch-spec.cy.js) | Accesses `window` inside the iframe and spies on `fetch` calls
+[xhr-spec.cy.js](cypress/e2e/xhr-spec.cy.js) | Shows how to spy and stub network calls the iframe is making
+[plugin-spec.cy.js](cypress/e2e/plugin-spec.cy.js) | Uses [cypress-iframe](https://gitlab.com/kgroat/cypress-iframe) plugin to work elements inside an iframe
 
 ## Notes
 

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { seconds, testTimeout } from './timeout'
+import { seconds, testTimeout } from './timeout.cy'
 
 describe('Sets timeout in every test', () => {
   // this test runs fine, because it finishes

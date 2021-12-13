@@ -8,7 +8,7 @@ If an application throws an error, it fails the Cypress test automatically.
 
 ![Application error fails the test](./images/app-error.gif)
 
-You can see how to ignore such errors in [cypress/e2e/app-error.js](./cypress/e2e/app-error.js) spec file.
+You can see how to ignore such errors in [cypress/e2e/app-error.cy.js](./cypress/e2e/app-error.cy.js) spec file.
 
 ```js
 // inspect the caught error
@@ -32,15 +32,15 @@ If a Cypress command fails, the test fails
 
 ![Test fails after it fails to find an element](./images/test-error.gif)
 
-You can listen to the "fail" events and return false to NOT fail the test, as [cypress/e2e/test-fails.js](./cypress/e2e/test-fails.js) shows.
+You can listen to the "fail" events and return false to NOT fail the test, as [cypress/e2e/test-fails.cy.js](./cypress/e2e/test-fails.cy.js) shows.
 
 ## Unhandled promise rejections in the application
 
-Cypress v7+ automatically fails the test if the application has an unhandled promise rejection event. See the [cypress/e2e/unhandled-promise.js](./cypress/e2e/unhandled-promise.js) spec file.
+Cypress v7+ automatically fails the test if the application has an unhandled promise rejection event. See the [cypress/e2e/unhandled-promise.cy.js](./cypress/e2e/unhandled-promise.cy.js) spec file.
 
 ## Unhandled promise rejections in the test code
 
-If your test code has an unhandled promise rejection, Cypress test happily continues. You can register handlers to fail the test. See [cypress/e2e/unhandled-promise-in-test.js](./cypress/e2e/unhandled-promise-in-test.js), but you have two choices:
+If your test code has an unhandled promise rejection, Cypress test happily continues. You can register handlers to fail the test. See [cypress/e2e/unhandled-promise-in-test.cy.js](./cypress/e2e/unhandled-promise-in-test.cy.js), but you have two choices:
 
 If the test code uses [Cypress.Promise](https://on.cypress.io/promise) API, then:
 

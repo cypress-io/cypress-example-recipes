@@ -4,4 +4,4 @@ The application in [index.html](index.html) uses `<input type="color">` to set t
 
 ![triggered color change](images/red.gif)
 
-Find tests in [cypress/e2e/spec.js](cypress/e2e/spec.js) file.
+Find tests in [cypress/e2e/spec.cy.js](cypress/e2e/spec.cy.js) file.

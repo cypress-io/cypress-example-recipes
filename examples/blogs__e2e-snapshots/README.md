@@ -9,9 +9,9 @@ Adding snapshot support to Cypress via 3rd party module [@cypress/snapshot](http
 ## Lessons
 
 - Adding `.snapshot()` command by requiring 3rd party module [cypress/support/commands.js](cypress/support/commands.js)
-- Capturing and saving snapshots of primitive values [cypress/e2e/unit-spec.js](cypress/e2e/unit-spec.js)
-- Testing central data Vuex store using snapshots [cypress/e2e/store-spec.js](cypress/e2e/store-spec.js)
-- Making assertions against a DOM element using `cy.get('todo-list').snapshot()`  [cypress/e2e/ui-spec.js](cypress/e2e/ui-spec.js)
+- Capturing and saving snapshots of primitive values [cypress/e2e/unit-spec.cy.js](cypress/e2e/unit-spec.cy.js)
+- Testing central data Vuex store using snapshots [cypress/e2e/store-spec.cy.js](cypress/e2e/store-spec.cy.js)
+- Making assertions against a DOM element using `cy.get('todo-list').snapshot()`  [cypress/e2e/ui-spec.cy.js](cypress/e2e/ui-spec.cy.js)
 
 ## Development
 

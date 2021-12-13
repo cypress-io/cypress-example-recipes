@@ -1,7 +1,7 @@
 # logging-in-single-sign-on
 > Login when authentication is done on a 3rd party server.
 
-The app server [app_server.js](app_server.js) runs on port 7074 and the auth server [auth_server.js](auth_server.js) runs on port 7075. File [cypress/e2e/logging-in-single-sign-on-spec.js](cypress/e2e/logging-in-single-sign-on-spec.js) describes the overall authentication flow and implements tests that follow it.
+The app server [app_server.js](app_server.js) runs on port 7074 and the auth server [auth_server.js](auth_server.js) runs on port 7075. File [cypress/e2e/logging-in-single-sign-on-spec.cy.js](cypress/e2e/logging-in-single-sign-on-spec.cy.js) describes the overall authentication flow and implements tests that follow it.
 
 The tests show how to:
 

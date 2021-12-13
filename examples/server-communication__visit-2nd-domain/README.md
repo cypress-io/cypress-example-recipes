@@ -35,7 +35,7 @@ The solution is to save the `myValue` not in a local variable, but in a more per
 
 ## using task
 
-The tests in [using-task-spec.js](cypress/e2e/using-task-spec.js) store the intermediate URL in the `setupNodeEvents` process.
+The tests in [using-task-spec.cy.js](cypress/e2e/using-task-spec.cy.js) store the intermediate URL in the `setupNodeEvents` process.
 
 The first test visits the first domain `https://www.cypress.io/`, finds link to Cypress Test Runner's GitHub repo and saves the `href` in the `setupNodeEvents` process by using [cy.task](https://on.cypress.io/task). The `setupNodeEvents` process keeps running preserving the variables, while the specs are started and stopped.
 
@@ -43,7 +43,7 @@ The second test gets the URL from the `setupNodeEvents` process using [cy.task](
 
 ## using file
 
-The tests in [using-file-spec.js](cypress/e2e/using-file-spec.js) save the extracted URL in a local JSON file.
+The tests in [using-file-spec.cy.js](cypress/e2e/using-file-spec.cy.js) save the extracted URL in a local JSON file.
 
 ## See also
 

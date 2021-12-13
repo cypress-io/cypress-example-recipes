@@ -5,7 +5,7 @@ The widget to copy text is `@github/clipboard-copy-element` custom element that 
 
 ![Copy / paste test](./images/copy-paste.gif)
 
-See the [cypress/e2e/spec.js](./cypress/e2e/spec.js) file. The test currently work only in Electron where the clipboard permission is granted when Cypress starts it.
+See the [cypress/e2e/spec.cy.js](./cypress/e2e/spec.cy.js) file. The test currently work only in Electron where the clipboard permission is granted when Cypress starts it.
 
 The page [index.html](./index.html) shows the copy button on "mouseover" event. When the text is copied to the clipboard, it shows a [tiny toast](https://github.com/bahmutov/tiny-toast) popup.
 

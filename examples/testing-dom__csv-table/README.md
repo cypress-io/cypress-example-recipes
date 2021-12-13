@@ -6,7 +6,7 @@ Uses [neat-csv](https://github.com/sindresorhus/neat-csv) to parse the loaded CS
 
 ## Tests
 
-- [spec.js](cypress/e2e/spec.js) loads the CSV file using [`cy.readFile`](https://on.cypress.io/readfile), parses the text into list of objects, then goes through the rows of the table element comparing cell text content to the records.
+- [spec.cy.js](cypress/e2e/spec.cy.js) loads the CSV file using [`cy.readFile`](https://on.cypress.io/readfile), parses the text into list of objects, then goes through the rows of the table element comparing cell text content to the records.
 
 ![Table test](images/rows.png)
 

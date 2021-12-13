@@ -59,7 +59,7 @@ As an example this spec includes 3rd party module [cypress-wait-until](https://g
 
 ## Async commands
 
-A custom command can call an async function from the application, the resolved value will be automatically yielded to the next command or assertion in the test. See [cypress/e2e/async-command.js](cypress/e2e/async-command.js) file.
+A custom command can call an async function from the application, the resolved value will be automatically yielded to the next command or assertion in the test. See [cypress/e2e/async-command.cy.js](cypress/e2e/async-command.cy.js) file.
 
 ![Async add custom command](images/async-add.png)
 

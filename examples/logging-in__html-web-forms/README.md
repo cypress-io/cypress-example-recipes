@@ -1,6 +1,6 @@
 # logging-in-html-web-form
 
-The tests in [cypress/e2e/logging-in-html-web-form-spec.js](cypress/e2e/logging-in-html-web-form-spec.js) show how log into protected website using a regular form like this:
+The tests in [cypress/e2e/logging-in-html-web-form-spec.cy.js](cypress/e2e/logging-in-html-web-form-spec.cy.js) show how log into protected website using a regular form like this:
 
 ![Login form](images/login.png)
 

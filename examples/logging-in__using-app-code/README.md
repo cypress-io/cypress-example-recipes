@@ -3,7 +3,7 @@
 
 Application copied from [../logging-in__jwt](../logging-in__jwt) example.
 
-This example shows how you can use your own application code to log in. The "normal" application logs in at [src/_services/user.service.js](src/_services/user.service.js) given username and password. From our [cypress/e2e/spec.js](cypress/e2e/spec.js) file, we can import this service and use [`cy.wrap()`](https://on.cypress.io/wrap) to wait for the returned promise to resolve before continuing with the test.
+This example shows how you can use your own application code to log in. The "normal" application logs in at [src/_services/user.service.js](src/_services/user.service.js) given username and password. From our [cypress/e2e/spec.cy.js](cypress/e2e/spec.cy.js) file, we can import this service and use [`cy.wrap()`](https://on.cypress.io/wrap) to wait for the returned promise to resolve before continuing with the test.
 
 ![Passing test](images/login.png)
 

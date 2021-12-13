@@ -16,7 +16,7 @@ export default class TodoItem extends Component {
 During the test, we can get to that component using `cy.window().its('TodoItem')` to check internal state or trigger component's methods.
 
 ```js
-// cypress/e2e/spec.js
+// cypress/e2e/spec.cy.js
 it('creates Todo components', () => {
   cy.visit('/')
   cy.get('.new-todo')
