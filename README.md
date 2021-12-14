@@ -183,13 +183,13 @@ Recipe | Description
 npm install
 ```
 
-## Opening Cypress GUI
+## Opening Cypress App
 
 ```bash
 cd ./examples/testing-dom__drag-drop
 # start local server
 npm start &
-# and open Cypress GUI
+# open Cypress App
 npm run cypress:open
 ```
 
