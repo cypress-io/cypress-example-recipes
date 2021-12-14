@@ -1,6 +1,6 @@
-const { defineConfig } = require("cypress")
+const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
   supportFile: false,
-  fixturesFolder: "cypress/fixtures",
+  fixturesFolder: 'cypress/fixtures',
 })

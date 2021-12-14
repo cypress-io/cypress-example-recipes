@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
-const { defineConfig } = require("cypress")
+const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
   fixturesFolder: false,
   supportFile: false,
   e2e: {
-    setupNodeEvents(on, config) {
+    setupNodeEvents (on, config) {
       // configure plugins here
-      on("task", {
-        log({ message, o }) {
+      on('task', {
+        log ({ message, o }) {
           console.log(message)
 
           if (o) {
@@ -22,9 +22,9 @@ module.exports = defineConfig({
       // let's increase the browser window size when running headlessly
       // this will produce higher resolution images and videos
       // https://on.cypress.io/browser-launch-api
-      on("before:browser:launch", (browser = {}, launchOptions) => {
+      on('before:browser:launch', (browser = {}, launchOptions) => {
         console.log(
-          "launching browser %s is headless? %s",
+          'launching browser %s is headless? %s',
           browser.name,
           browser.isHeadless
         )
@@ -34,23 +34,23 @@ module.exports = defineConfig({
         const width = 1920
         const height = 1080
 
-        console.log("setting the browser window size to %d x %d", width, height)
+        console.log('setting the browser window size to %d x %d', width, height)
 
-        if (browser.name === "chrome" && browser.isHeadless) {
+        if (browser.name === 'chrome' && browser.isHeadless) {
           launchOptions.args.push(`--window-size=${width},${height}`)
 
           // force screen to be non-retina and just use our given resolution
-          launchOptions.args.push("--force-device-scale-factor=1")
+          launchOptions.args.push('--force-device-scale-factor=1')
         }
 
-        if (browser.name === "electron" && browser.isHeadless) {
+        if (browser.name === 'electron' && browser.isHeadless) {
           // might not work on CI for some reason
           launchOptions.preferences.width = width
 
           launchOptions.preferences.height = height
         }
 
-        if (browser.name === "firefox" && browser.isHeadless) {
+        if (browser.name === 'firefox' && browser.isHeadless) {
           launchOptions.args.push(`--width=${width}`)
           launchOptions.args.push(`--height=${height}`)
         }
