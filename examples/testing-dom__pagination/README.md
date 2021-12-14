@@ -3,4 +3,4 @@
 
 ![The last page](./images/last-page.png)
 
-See the [cypress/integration/spec.js](./cypress/integration/spec.js) file.
+See the [cypress/e2e/spec.cy.js](./cypress/e2e/spec.cy.js) file.

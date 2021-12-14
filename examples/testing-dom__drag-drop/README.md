@@ -2,7 +2,7 @@
 
 > Performing Drag & Drop by triggering mouse and drag events
 
-See test file [cypress/integration/drag_n_drop_spec.js](cypress/integration/drag_n_drop_spec.js) that shows how to simulate drag & drop behavior using
+See test file [cypress/e2e/drag_n_drop_spec.cy.js](cypress/e2e/drag_n_drop_spec.cy.js) that shows how to simulate drag & drop behavior using
 
 - mouse events
 - drag events

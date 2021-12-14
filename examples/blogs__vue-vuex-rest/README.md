@@ -10,12 +10,12 @@ Testing Vue + Vuex + REST TodoMVC using Cypress.
 
 ## Shows how to
 
-Spec files are in [cypress/integration](cypress/integration) folder
+Spec files are in [cypress/e2e](cypress/e2e) folder
 
-- test application through the GUI in [ui-spec.js](cypress/integration/ui-spec.js)
+- test application through the GUI in [ui-spec.cy.js](cypress/e2e/ui-spec.cy.js)
 - mock REST calls to the server
-- test application through the Vuex store in [store-spec.js](cypress/integration/store-spec.js)
-- test application through REST calls in [api-spec.js](cypress/integration/api-spec.js)
+- test application through the Vuex store in [store-spec.cy.js](cypress/e2e/store-spec.cy.js)
+- test application through REST calls in [api-spec.cy.js](cypress/e2e/api-spec.cy.js)
 - test text file upload
 
 ## Script commands
@@ -24,6 +24,6 @@ Spec files are in [cypress/integration](cypress/integration) folder
 
 ## Speed test
 
-Spec file [cypress/integration/speed-spec.js](cypress/integration/speed-spec.js) shows how to get test and command timings.
+Spec file [cypress/e2e/speed-spec.cy.js](cypress/e2e/speed-spec.cy.js) shows how to get test and command timings.
 
 ![Speed spec](img/speed-spec.png)

@@ -6,7 +6,7 @@
 - Stub an XHR to seed with test data.
 - Wait on an XHR to finish.
 
-See [cypress/integration/bootstrapping_your_app_spec.js](cypress/integration/bootstrapping_your_app_spec.js) for two solutions.
+See [cypress/e2e/bootstrapping_your_app_spec.cy.js](cypress/e2e/bootstrapping_your_app_spec.cy.js) for two solutions.
 
 ## 1. Injecting object into `window`
 

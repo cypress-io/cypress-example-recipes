@@ -1,5 +1,7 @@
 # Custom browsers
 
+**Warning ⚠️** This example recipe has not been updated to reflect the new [Cypress configuration](https://on.cypress.io/configuration). 
+
 Cypress v3.7.0+ allows the project to customize the list of browsers. In this example, [cypress/plugins/index.js](cypress/plugins/index.js) filters the list of all browsers detected on the user's machine and only returns the bundled Electron browser. Or you could do the opposite and only allow the project to use Chrome browsers
 
 ```js
