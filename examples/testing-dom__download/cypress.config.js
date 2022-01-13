@@ -6,8 +6,8 @@ const { stripIndent } = require("common-tags")
 const globby = require("globby")
 const { rmdir } = require("fs")
 
-const { readExcelFile } = require("./read-excel")
-const { readPdf } = require("./read-pdf")
+const { readExcelFile } = require("./cypress/plugins/read-excel")
+const { readPdf } = require("./cypress/plugins/read-pdf")
 
 module.exports = defineConfig({
   fixturesFolder: false,

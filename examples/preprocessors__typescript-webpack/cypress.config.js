@@ -8,7 +8,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       const options = {
-        webpackOptions: require("../../webpack.config"),
+        webpackOptions: require("./webpack.config"),
       }
 
       on("file:preprocessor", wp(options))

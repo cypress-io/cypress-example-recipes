@@ -10,7 +10,7 @@ import {
   TODO_ITEM_THREE,
   TODO_ITEM_TWO,
   toggle,
-} from './utils'
+} from './utils.cy'
 
 describe('TodoMVC', function () {
   beforeEach(function () {

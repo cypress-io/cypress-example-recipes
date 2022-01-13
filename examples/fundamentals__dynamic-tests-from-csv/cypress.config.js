@@ -15,7 +15,7 @@ module.exports = defineConfig({
     // `config` is the resolved Cypress config
     async setupNodeEvents(on, config) {
       // let"s load the CSV file
-      const filename = path.join(__dirname, "users.csv")
+      const filename = path.join(__dirname, "cypress/plugins/users.csv")
 
       console.log("loading file", filename)
       const text = fs.readFileSync(filename, "utf8")

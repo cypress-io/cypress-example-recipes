@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { seconds, testTimeout } from './timeout'
+import { seconds, testTimeout } from './timeout.cy'
 
 describe('Global timeout of 3 seconds', () => {
   // Let's try to time limit _every test_
