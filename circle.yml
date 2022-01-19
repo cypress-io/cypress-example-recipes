@@ -224,8 +224,6 @@ jobs:
     <<: *defaults
   extending-cypress__chai-assertions:
     <<: *defaults
-  file-upload-react:
-    <<: *defaults
   fundamentals__window-size:
     <<: *defaults
   fundamentals__node-modules:
@@ -459,9 +457,6 @@ all_jobs: &all_jobs
   - extending-cypress__chai-assertions:
       requires:
         - build
-  - file-upload-react:
-      requires:
-        - build
   - fundamentals__window-size:
       requires:
         - build
@@ -681,7 +676,6 @@ all_jobs: &all_jobs
         - blogs__use-react-devtools
         - blogs__form-submit
         - extending-cypress__chai-assertions
-        - file-upload-react
         - fundamentals__window-size
         - fundamentals__node-modules
         - fundamentals__fixtures
