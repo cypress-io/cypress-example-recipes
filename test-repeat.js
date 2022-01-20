@@ -25,7 +25,9 @@ const allRunOptions = []
 
 for (let k = 0; k < repeatNtimes; k += 1) {
   const runOptions = {
-    specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
+    config: {
+      specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
+    }
   }
 
   if (process.env.CYPRESS_RECORD_KEY) {
