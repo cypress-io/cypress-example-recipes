@@ -35,6 +35,6 @@ Cypress.Commands.add('foo', () => 'foo')
 declare namespace Cypress {
   // tslint:disable-next-line interface-name
   interface Chainable {
-    foo: () => string
+    foo: () => Chainable<string>
   }
 }
