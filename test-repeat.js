@@ -63,6 +63,8 @@ Bluebird.mapSeries(allRunOptions, (runOptions, k, n) => {
     }
   }
 
+  console.log('runOptions:', runOptions)
+
   return cypress.run(runOptions).then(onTestResults)
 }).then(() => {
   console.log('***** finished %d run(s) successfully *****', repeatNtimes)
