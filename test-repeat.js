@@ -24,11 +24,7 @@ console.log('will repeat Cypress run %d time(s)', repeatNtimes)
 const allRunOptions = []
 
 for (let k = 0; k < repeatNtimes; k += 1) {
-  const runOptions = {
-    config: {
-      specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
-    }
-  }
+  const runOptions = {}
 
   if (process.env.CYPRESS_RECORD_KEY) {
     runOptions.record = true
@@ -64,8 +60,6 @@ Bluebird.mapSeries(allRunOptions, (runOptions, k, n) => {
       process.exit(testResults.totalFailed)
     }
   }
-
-  console.log('runOptions:', runOptions)
 
   return cypress.run(runOptions).then(onTestResults)
 }).then(() => {
