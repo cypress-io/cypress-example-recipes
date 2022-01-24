@@ -32,12 +32,12 @@ describe('TypeScript', () => {
   })
 
   // enable once we release updated TypeScript definitions
-  it.only('has Cypress object type definition', () => {
-    console.log({Cypress});
-    console.log('hello');
+  // it.skip('has Cypress object type definition', () => {
+  //   console.log({ Cypress })
+  //   console.log('hello')
 
-    expect(Cypress.version).to.be.a('string')
-  })
+  //   expect(Cypress.version).to.be.a('string')
+  // })
 
   // wrong code on purpose to type check our definitions
   // it('can visit website', () => {
