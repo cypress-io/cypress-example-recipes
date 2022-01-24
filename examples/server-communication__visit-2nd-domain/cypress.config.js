@@ -2,8 +2,8 @@ const { defineConfig } = require("cypress")
 
 module.exports = defineConfig({
   fixturesFolder: false,
-  supportFile: false,
   e2e: {
+    supportFile: false,
     setupNodeEvents(on, config) {
       // the URL will set by the first test
       let href

@@ -10,14 +10,14 @@ const { readExcelFile } = require("./cypress/plugins/read-excel")
 const { readPdf } = require("./cypress/plugins/read-pdf")
 
 module.exports = defineConfig({
+  baseUrl: "http://localhost:8070",
   fixturesFolder: false,
-  supportFile: false,
   viewportWidth: 500,
   viewportHeight: 900,
-  baseUrl: "http://localhost:8070",
   chromeWebSecurity: false,
   pageLoadTimeout: 5000,
   e2e: {
+    supportFile: false,
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
     setupNodeEvents(on, config) {
       // `on` is used to hook into various events Cypress emits

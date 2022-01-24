@@ -6,10 +6,10 @@ const got = require("got")
 module.exports = defineConfig({
   baseUrl: "http://localhost:3000",
   fixturesFolder: false,
-  supportFile: false,
   viewportHeight: 200,
   viewportWidth: 300,
   e2e: {
+    supportFile: false,
     setupNodeEvents(on, config) {
       on("task", {
         httpRequest(params) {

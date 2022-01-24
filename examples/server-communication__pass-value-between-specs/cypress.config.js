@@ -3,8 +3,8 @@ const { defineConfig } = require("cypress")
 
 module.exports = defineConfig({
   fixturesFolder: false,
-  supportFile: false,
   e2e: {
+    supportFile: false,
     setupNodeEvents(on, config) {
       const items = {}
 

@@ -8,8 +8,8 @@ module.exports = defineConfig({
     username: "test",
     password: "test",
   },
-  supportFile: false,
   e2e: {
+    supportFile: false,
     setupNodeEvents(on, config) {
       // bundle spec files using same webpack logic as "normal" application
       const options = {

@@ -1,8 +1,10 @@
 const { defineConfig } = require("cypress")
 
 module.exports = defineConfig({
+  fixturesFolder: false,
   viewportHeight: 100,
   viewportWidth: 100,
-  supportFile: false,
-  fixturesFolder: false,
+  e2e: {
+    supportFile: false,
+  },
 })

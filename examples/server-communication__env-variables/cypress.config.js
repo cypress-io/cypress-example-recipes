@@ -11,8 +11,8 @@ module.exports = defineConfig({
     "my-var": "ok",
   },
   fixturesFolder: false,
-  supportFile: false,
   e2e: {
+    supportFile: false,
     setupNodeEvents(on, config) {
       // we can grab some process environment variables
       // and stick it into config.env before returning the updated config

@@ -24,8 +24,8 @@ let client = null
 
 module.exports = defineConfig({
   fixturesFolder: false,
-  supportFile: false,
   e2e: {
+    supportFile: false,
     setupNodeEvents(on, config) {
       on("before:browser:launch", (browser, launchOptionsOrArgs) => {
         debug("browser launch args or options %o", launchOptionsOrArgs)

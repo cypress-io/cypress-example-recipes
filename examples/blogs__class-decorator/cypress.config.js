@@ -1,7 +1,9 @@
-const { defineConfig } = require("cypress")
+const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
-  baseUrl: "http://localhost:1234",
+  baseUrl: 'http://localhost:1234',
   fixturesFolder: false,
-  supportFile: false,
+  e2e: {
+    supportFile: false,
+  },
 })

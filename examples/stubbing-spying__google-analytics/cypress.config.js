@@ -2,10 +2,10 @@ const { defineConfig } = require("cypress")
 
 module.exports = defineConfig({
   fixturesFolder: false,
-  supportFile: false,
   viewportHeight: 200,
   viewportWidth: 250,
   e2e: {
+    supportFile: false,
     setupNodeEvents(on, config) {
       // `on` is used to hook into various events Cypress emits
       // `config` is the resolved Cypress config

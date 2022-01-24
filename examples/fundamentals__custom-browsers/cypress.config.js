@@ -3,9 +3,9 @@ const { defineConfig } = require("cypress")
 const tasks = require("./cypress/plugins/tasks")
 
 module.exports = defineConfig({
-  supportFile: false,
   fixturesFolder: false,
   e2e: {
+    supportFile: false,
     setupNodeEvents (on, config) {
       on("task", tasks)
 

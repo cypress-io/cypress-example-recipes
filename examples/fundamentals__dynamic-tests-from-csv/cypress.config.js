@@ -9,8 +9,8 @@ const neatCSV = require("neat-csv")
 // the project's config changing)
 module.exports = defineConfig({
   fixturesFolder: false,
-  supportFile: false,
   e2e: {
+    supportFile: false,
     // `on` is used to hook into various events Cypress emits
     // `config` is the resolved Cypress config
     async setupNodeEvents(on, config) {

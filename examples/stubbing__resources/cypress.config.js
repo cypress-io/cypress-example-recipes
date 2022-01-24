@@ -1,6 +1,8 @@
 const { defineConfig } = require("cypress")
 
 module.exports = defineConfig({
-  supportFile: false,
   fixturesFolder: "cypress/fixtures",
+  e2e: {
+    supportFile: false,
+  },
 })

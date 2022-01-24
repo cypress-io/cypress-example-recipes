@@ -1,7 +1,9 @@
-const { defineConfig } = require("cypress")
+const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
-  supportFile: false,
   fixturesFolder: false,
   experimentalShadowDomSupport: true,
+  e2e: {
+    supportFile: false,
+  },
 })

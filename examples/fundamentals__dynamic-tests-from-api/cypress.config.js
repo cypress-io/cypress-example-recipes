@@ -13,8 +13,8 @@ const _ = require("lodash")
 // the project's config changing)
 module.exports = defineConfig({
   fixturesFolder: false,
-  supportFile: false,
   e2e: {
+    supportFile: false,
     async setupNodeEvents(on, config) {
       // let's fetch the list of users
       const users = await got(
