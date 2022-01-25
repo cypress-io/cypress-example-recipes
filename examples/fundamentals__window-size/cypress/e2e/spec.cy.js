@@ -15,7 +15,7 @@ describe('window size', () => {
     cy.task('log', { message: 'browser window', o: { windowWidth, windowHeight } }, { log: false })
 
     // part of the browser window is taken up the command log
-    const commandLog = window.top.document.querySelector('.reporter-wrap')
+    const commandLog = window.top.document.querySelector('.container')
     const commandLogWidth = commandLog.offsetWidth
     const commandLogHeight = commandLog.offsetHeight
 
