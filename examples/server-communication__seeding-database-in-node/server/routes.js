@@ -1,7 +1,7 @@
-import path from 'path'
-import minimist from 'minimist'
-import express from 'express'
-import { getPosts } from './db'
+const path = require('path')
+const minimist = require('minimist')
+const express = require('express')
+const { getPosts } = require('./db')
 
 const app = express()
 
