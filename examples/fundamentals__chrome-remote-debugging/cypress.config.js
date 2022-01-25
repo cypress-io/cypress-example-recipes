@@ -1,15 +1,15 @@
-const { defineConfig } = require("cypress")
+const { defineConfig } = require('cypress')
 
-const CDP = require("chrome-remote-interface")
-const debug = require("debug")("cypress:server:protocol")
+const CDP = require('chrome-remote-interface')
+const debug = require('debug')('cypress:server:protocol')
 
 function ensureRdpPort (args) {
   const existing = args.find(
-    (arg) => arg.slice(0, 23) === "--remote-debugging-port"
+    (arg) => arg.slice(0, 23) === '--remote-debugging-port'
   )
 
   if (existing) {
-    return Number(existing.split("=")[1])
+    return Number(existing.split('=')[1])
   }
 
   const port = 40000 + Math.round(Math.random() * 25000)
@@ -26,22 +26,22 @@ module.exports = defineConfig({
   fixturesFolder: false,
   e2e: {
     supportFile: false,
-    setupNodeEvents(on, config) {
-      on("before:browser:launch", (browser, launchOptionsOrArgs) => {
-        debug("browser launch args or options %o", launchOptionsOrArgs)
+    setupNodeEvents (on, config) {
+      on('before:browser:launch', (browser, launchOptionsOrArgs) => {
+        debug('browser launch args or options %o', launchOptionsOrArgs)
         const args = Array.isArray(launchOptionsOrArgs)
           ? launchOptionsOrArgs
           : launchOptionsOrArgs.args
 
         port = ensureRdpPort(args)
-        debug("ensureRdpPort %d", port)
-        debug("Chrome arguments %o", args)
+        debug('ensureRdpPort %d', port)
+        debug('Chrome arguments %o', args)
       })
 
-      on("task", {
+      on('task', {
         resetCRI: async () => {
           if (client) {
-            debug("resetting CRI client")
+            debug('resetting CRI client')
             await client.close()
             client = null
           }
@@ -49,7 +49,7 @@ module.exports = defineConfig({
           return Promise.resolve(true)
         },
         activatePrintMediaQuery: async () => {
-          debug("activatePrintMediaQuery")
+          debug('activatePrintMediaQuery')
 
           client =
             client ||
@@ -57,12 +57,12 @@ module.exports = defineConfig({
               port,
             }))
 
-          return client.send("Emulation.setEmulatedMedia", {
-            media: "print",
+          return client.send('Emulation.setEmulatedMedia', {
+            media: 'print',
           })
         },
         activateHoverPseudo: async ({ selector }) => {
-          debug("activateHoverPseudo")
+          debug('activateHoverPseudo')
 
           client =
             client ||
@@ -76,8 +76,9 @@ module.exports = defineConfig({
           // as the Window consists of two IFrames, we must retrieve the right one
           const allRootNodes = await client.DOM.getFlattenedDocument()
 
-          const isIframe = (node) =>
-            node.nodeName === "IFRAME" && node.contentDocument
+          const isIframe = (node) => {
+            return node.nodeName === 'IFRAME' && node.contentDocument
+          }
 
           const filtered = allRootNodes.nodes.filter(isIframe)
 
@@ -91,7 +92,7 @@ module.exports = defineConfig({
 
           return client.CSS.forcePseudoState({
             nodeId,
-            forcedPseudoClasses: ["hover"],
+            forcedPseudoClasses: ['hover'],
           })
         },
       })

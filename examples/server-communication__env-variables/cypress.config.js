@@ -1,19 +1,19 @@
 /* eslint-disable no-console */
-const { defineConfig } = require("cypress")
+const { defineConfig } = require('cypress')
 
 // load the environment variables from the local .env file
-require("dotenv").config()
+require('dotenv').config()
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 module.exports = defineConfig({
   env: {
-    "my-var": "ok",
+    'my-var': 'ok',
   },
   fixturesFolder: false,
   e2e: {
     supportFile: false,
-    setupNodeEvents(on, config) {
+    setupNodeEvents (on, config) {
       // we can grab some process environment variables
       // and stick it into config.env before returning the updated config
       config.env = config.env || {}
@@ -23,7 +23,7 @@ module.exports = defineConfig({
       config.env.FOO = process.env.FOO
       config.env.BAR = process.env.BAR
       config.env.username = process.env.USER_NAME
-      console.log("extended config.env with process.env.{FOO, BAR, USER_NAME}")
+      console.log('extended config.env with process.env.{FOO, BAR, USER_NAME}')
 
       return config
     },

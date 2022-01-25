@@ -1,10 +1,10 @@
-const { defineConfig } = require("cypress")
+const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
-  baseUrl: "http://localhost:7080",
+  baseUrl: 'http://localhost:7080',
   fixturesFolder: false,
   experimentalFetchPolyfill: true,
   e2e: {
-    specExcludePattern: "deferred.js"
-  }
+    specExcludePattern: 'deferred.js',
+  },
 })

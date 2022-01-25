@@ -1,15 +1,15 @@
-const { defineConfig } = require("cypress")
+const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
   fixturesFolder: false,
   e2e: {
     supportFile: false,
-    setupNodeEvents(on, config) {
+    setupNodeEvents (on, config) {
       // the URL will set by the first test
       let href
 
-      on("task", {
-        saveUrl(url) {
+      on('task', {
+        saveUrl (url) {
           href = url
 
           // cy.task() requires returning a Promise
@@ -19,7 +19,7 @@ module.exports = defineConfig({
           return null
         },
 
-        getUrl() {
+        getUrl () {
           return href
         },
       })

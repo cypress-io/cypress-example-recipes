@@ -16,5 +16,5 @@ function getPosts () {
 
 module.exports = {
   seed,
-  getPosts
+  getPosts,
 }
