@@ -3,7 +3,8 @@
 import { validateCsvList, deleteDownloadsFolder } from './utils'
 const neatCSV = require('neat-csv')
 
-// console.log();
+// console.log()
+// console.log()
 describe('file download', () => {
   beforeEach(deleteDownloadsFolder)
 
