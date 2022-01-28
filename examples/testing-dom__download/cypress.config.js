@@ -6,8 +6,46 @@ const { stripIndent } = require('common-tags')
 const globby = require('globby')
 const { rmdir } = require('fs')
 
-const { readExcelFile } = require('./cypress/plugins/read-excel')
-const { readPdf } = require('./cypress/plugins/read-pdf')
+// const { readExcelFile } = require('./document-utils/read-excel')
+// const { readPdf } = require('./document-utils/read-pdf')
+
+const readXlsxFile = require('read-excel-file/node')
+const fs = require('fs')
+const pdf = require('pdf-parse')
+
+const readExcelFile = (filename) => {
+  // we must read the Excel file using Node library
+  // and can return the parsed list to the browser
+  // for the spec code to validate it
+  console.log('reading Excel file %s', filename)
+  console.log('from cwd %s', process.cwd())
+
+  return readXlsxFile(filename)
+}
+
+// module.exports = { readExcelFile }
+
+/* eslint-disable no-console */
+const readPdf = (filename) => {
+  console.log('reading PDF file %s', filename)
+
+  const dataBuffer = fs.readFileSync(filename)
+
+  return pdf(dataBuffer).then(function (data) {
+    return {
+      numpages: data.numpages,
+      text: data.text,
+    }
+  })
+}
+
+// module.exports = { readPdf }
+
+if (!module.parent) {
+  const filename = './public/why-cypress.pdf'
+
+  readPdf(filename).then(console.log)
+}
 
 module.exports = defineConfig({
   baseUrl: 'http://localhost:8070',
