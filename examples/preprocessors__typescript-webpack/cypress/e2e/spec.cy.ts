@@ -41,9 +41,9 @@ describe('TypeScript', () => {
   //   cy.boo()
   // })
 
-  it('adds numbers', () => {
-    expect(add(2, 3)).to.equal(5)
-  })
+  // it('adds numbers', () => {
+  //   expect(add(2, 3)).to.equal(5)
+  // })
 
   it('uses custom command cy.foo()', () => {
     cy.foo().should('be.equal', 'foo')
