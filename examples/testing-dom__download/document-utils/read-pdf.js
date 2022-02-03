@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 
-const fs = require('fs')
+const { readFileSync } = require('fs')
 const pdf = require('pdf-parse')
 
 const readPdf = (filename) => {
   console.log('reading PDF file %s', filename)
 
-  const dataBuffer = fs.readFileSync(filename)
+  const dataBuffer = readFileSync(filename)
 
   return pdf(dataBuffer).then(function (data) {
     return {

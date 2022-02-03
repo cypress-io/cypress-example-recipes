@@ -2,13 +2,10 @@
 /// <reference types="cypress" />
 import {
   validateCsv, validateCsvFile, downloadByClicking,
-  deleteDownloadsFolder,
 } from './utils'
 const path = require('path')
 
 describe('file download', () => {
-  beforeEach(deleteDownloadsFolder)
-
   const downloadsFolder = Cypress.config('downloadsFolder')
 
   context('using location.href', () => {

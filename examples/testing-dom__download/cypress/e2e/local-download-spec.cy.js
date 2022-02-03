@@ -3,7 +3,7 @@
 import {
   validateCsvList, validateCsvFile, validateExcelFile,
   validateTextFile, validateImage, validateZip,
-  validateBinaryFile, deleteDownloadsFolder,
+  validateBinaryFile,
 } from './utils'
 import { recurse } from 'cypress-recurse'
 const neatCSV = require('neat-csv')
@@ -11,10 +11,6 @@ const path = require('path')
 
 describe('file download', () => {
   const downloadsFolder = Cypress.config('downloadsFolder')
-
-  // should we delete all the files in the downloads folder
-  // before each test?
-  beforeEach(deleteDownloadsFolder)
 
   context('from local domain localhost:8070', () => {
     it('CSV file', () => {

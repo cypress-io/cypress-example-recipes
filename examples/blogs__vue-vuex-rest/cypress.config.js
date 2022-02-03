@@ -5,7 +5,7 @@ const fs = require('fs')
 const path = require('path')
 
 const findRecord = (title) => {
-  const dbFilename = path.join(__dirname, '..', '..', 'data.json')
+  const dbFilename = path.join(__dirname, 'data.json')
   const contents = JSON.parse(fs.readFileSync(dbFilename))
   const todos = contents.todos
 

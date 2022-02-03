@@ -3,14 +3,12 @@
 import {
   validateCsvList, validateCsvFile, validateExcelFile,
   validateTextFile, validateImage, validateZip,
-  validateBinaryFile, deleteDownloadsFolder,
+  validateBinaryFile,
 } from './utils'
 const neatCSV = require('neat-csv')
 const path = require('path')
 
 describe('file download', () => {
-  beforeEach(deleteDownloadsFolder)
-
   const downloadsFolder = Cypress.config('downloadsFolder')
 
   // The next step tries to download an image file located in
