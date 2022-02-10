@@ -50,7 +50,7 @@ it('applies app.css styles', () => {
 })
 ```
 
-The custom command `cy.waitForResource` is written directly in the spec file. Another custom command `cy.waitForResources` is coded in [cypress/support/index.js](cypress/support/index.js)
+The custom command `cy.waitForResource` is written directly in the spec file. Another custom command `cy.waitForResources` is coded in [cypress/support/e2e.js](cypress/support/e2e.js)
 
 ## 3rd party module
 

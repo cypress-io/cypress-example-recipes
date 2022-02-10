@@ -23,7 +23,7 @@ describe('Chai Assertion Plugins', function () {
     // importing it in this file is that it's been globally
     // imported from our supportFile
     //
-    // if look inside cypress/support/index.js
+    // if look inside cypress/support/e2e.js
     // you'll see that we import cypress/support/assertions.js
     // and because the supportFile is bundled before our spec file,
     // it means we already have access to it
