@@ -3,12 +3,12 @@ const { defineConfig } = require('cypress')
 const webpack = require('@cypress/webpack-preprocessor')
 
 module.exports = defineConfig({
-  baseUrl: 'http://localhost:8081',
   env: {
     username: 'test',
     password: 'test',
   },
   e2e: {
+    baseUrl: 'http://localhost:8081',
     supportFile: false,
     setupNodeEvents (on, config) {
       // bundle spec files using same webpack logic as "normal" application

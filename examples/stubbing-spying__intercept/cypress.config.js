@@ -1,9 +1,9 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
-  baseUrl: 'http://localhost:7080',
   defaultCommandTimeout: 8000,
   e2e: {
+    baseUrl: 'http://localhost:7080',
     supportFile: false,
     excludeSpecPattern: 'deferred.js',
     setupNodeEvents (on, config) {

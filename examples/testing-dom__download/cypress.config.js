@@ -10,13 +10,13 @@ const { readExcelFile } = require('./document-utils/read-excel')
 const { readPdf } = require('./document-utils/read-pdf')
 
 module.exports = defineConfig({
-  baseUrl: 'http://localhost:8070',
   fixturesFolder: false,
   viewportWidth: 500,
   viewportHeight: 900,
   chromeWebSecurity: false,
   pageLoadTimeout: 5000,
   e2e: {
+    baseUrl: 'http://localhost:8070',
     supportFile: false,
     specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
     setupNodeEvents (on, config) {

@@ -4,11 +4,11 @@ const { defineConfig } = require('cypress')
 const got = require('got')
 
 module.exports = defineConfig({
-  baseUrl: 'http://localhost:3000',
   fixturesFolder: false,
   viewportHeight: 200,
   viewportWidth: 300,
   e2e: {
+    baseUrl: 'http://localhost:3000',
     supportFile: false,
     setupNodeEvents (on, config) {
       on('task', {
