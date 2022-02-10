@@ -5,6 +5,6 @@ module.exports = defineConfig({
   fixturesFolder: false,
   experimentalFetchPolyfill: true,
   e2e: {
-    specExcludePattern: 'deferred.js',
+    excludeSpecPattern: 'deferred.js',
   },
 })

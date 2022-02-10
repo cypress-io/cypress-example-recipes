@@ -5,7 +5,7 @@ module.exports = defineConfig({
   defaultCommandTimeout: 8000,
   e2e: {
     supportFile: false,
-    specExcludePattern: 'deferred.js',
+    excludeSpecPattern: 'deferred.js',
     setupNodeEvents (on, config) {
       on('before:browser:launch', (browser = {}, launchOptions) => {
         if (browser.family === 'firefox') {

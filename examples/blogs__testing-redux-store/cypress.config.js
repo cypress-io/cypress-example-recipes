@@ -8,7 +8,7 @@ module.exports = defineConfig({
     'cypress-plugin-snapshots': {},
   },
   e2e: {
-    specExcludePattern: ['**/*.snap', '**/__snapshot__/*'],
+    excludeSpecPattern: ['**/*.snap', '**/__snapshot__/*'],
     setupNodeEvents (on, config) {
       initPlugin(on, config)
 

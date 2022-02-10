@@ -5,6 +5,6 @@ module.exports = defineConfig({
   fixturesFolder: false,
   defaultCommandTimeout: 8000,
   e2e: {
-    specExcludePattern: 'utils.js',
+    excludeSpecPattern: 'utils.js',
   },
 })
