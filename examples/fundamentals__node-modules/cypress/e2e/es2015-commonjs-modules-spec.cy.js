@@ -1,5 +1,5 @@
 // By default we expect you to put global configuration
-// in cypress/support/index.js.
+// in cypress/support/e2e.js.
 //
 // But you can also store reusable util functions
 // in cypress/support and simply require them

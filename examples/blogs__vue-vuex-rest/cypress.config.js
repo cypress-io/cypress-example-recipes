@@ -33,9 +33,9 @@ const hasRecordAsync = (title, ms) => {
 }
 
 module.exports = defineConfig({
-  baseUrl: 'http://localhost:3000',
   video: false,
   e2e: {
+    baseUrl: 'http://localhost:3000',
     supportFile: false,
     setupNodeEvents (on, config) {
       // `on` is used to hook into various events Cypress emits

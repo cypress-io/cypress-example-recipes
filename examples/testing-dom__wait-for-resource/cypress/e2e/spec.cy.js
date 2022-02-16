@@ -105,7 +105,7 @@ describe('loading style', { retries: 0 }, () => {
 
   it('waits for multiple resources', () => {
     cy.visit('/')
-    // the "cy.waitForResources" command was written in cypress/support/index.js file
+    // the "cy.waitForResources" command was written in cypress/support/e2e.js file
     cy.waitForResources('base.css', 'app.css')
     // red color means the style from "app.css" has been loaded and applied
     cy.get('h1', { timeout }).should('have.css', 'color', 'rgb(255, 0, 0)')

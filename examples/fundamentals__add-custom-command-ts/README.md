@@ -10,4 +10,4 @@ In this recipe we do not use `tsconfig.json` file, thus we need to specify addit
 
 ![IntelliSense for custom command cy.dataCy](images/data-cy.png)
 
-See [cypress/support/index.ts](cypress/support/index.ts) and [cypress/support/index.d.ts](cypress/support/index.d.ts).
+See [cypress/support/e2e.ts](cypress/support/e2e.ts) and [cypress/support/index.d.ts](cypress/support/index.d.ts).

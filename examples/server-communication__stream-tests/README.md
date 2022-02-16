@@ -53,7 +53,7 @@ on('task', {
 Finally, in the browser, after each test we save the test final attributes: the title, the state, the duration (there are more, but we are only interested in those), and send them to the `setupNodeEvents` background process either at the start of the next test, or after all tests finish, see [setupNodeEvents](cypress.config.js) file.
 
 ```js
-// cypress/support/index.js
+// cypress/support/e2e.js
 let testAttributesToSend
 
 const sendTestAttributes = () => {
