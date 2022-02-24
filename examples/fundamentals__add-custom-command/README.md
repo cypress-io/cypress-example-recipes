@@ -11,7 +11,9 @@ You write Cypress custom command, for example for selecting DOM elements by `dat
  *
  * @example cy.dataCy('greeting')
  */
-Cypress.Commands.add('dataCy', (value) => cy.get(`[data-cy=${value}]`))
+Cypress.Commands.add('dataCy', (value) => {
+    cy.get(`[data-cy=${value}]`)
+})
 ```
 
 Yet, TypeScript compiler and IntelliSense do not understand that you have added a new method to the global `cy` object.
