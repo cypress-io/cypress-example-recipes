@@ -51,7 +51,7 @@ module.exports = defineConfig({
 
           // if there is no error, let's print positive message to the terminal
           // to let the user know this validation was successful
-          console.log('✅ number of entries')
+          // console.log('✅ number of entries')
 
           if (!names.includes('a.txt')) {
             throw new Error(
