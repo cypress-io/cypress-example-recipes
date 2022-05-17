@@ -11,7 +11,7 @@ describe('Sorting table', () => {
 
     cy.get('#myGrid') // table
     .within(() => {
-      cy.get('[role=rowgroup] .ag-row')
+      cy.get('.ag-center-cols-container[role=rowgroup] .ag-row')
       .should('have.length', 3) // non-header rows
 
       cy.log('**sort by price**')
