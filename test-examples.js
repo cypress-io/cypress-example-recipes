@@ -21,7 +21,6 @@ const args = arg({
   '--chrome': Boolean,
   '--brave': Boolean,
   '--firefox': Boolean,
-  '--windows': Boolean,
   '--chunk': Number,
   '--total-chunks': Number,
   // TODO switch from separate --chrome|--brave|--firefox
@@ -53,10 +52,6 @@ if (args['--brave']) {
 
 if (args['--firefox']) {
   scriptName = 'test:ci:firefox'
-}
-
-if (args['--windows']) {
-  scriptName = 'test:ci:windows'
 }
 
 if (args['--record']) {
