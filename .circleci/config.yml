@@ -328,8 +328,8 @@ jobs:
     <<: *defaults
   server-communication__stream-tests:
     <<: *defaults
-  server-communication__offline:
-    <<: *defaults
+  # server-communication__offline:
+  #   <<: *defaults
   server-communication__server-timing:
     <<: *defaults
   server-communication__wait-for-api:
@@ -633,9 +633,9 @@ all_jobs: &all_jobs
   - server-communication__stream-tests:
       requires:
         - build
-  - server-communication__offline:
-      requires:
-        - build
+  # - server-communication__offline:
+  #     requires:
+  #       - build
   - server-communication__server-timing:
       requires:
         - build
@@ -702,7 +702,7 @@ all_jobs: &all_jobs
         - server-communication__visit-2nd-domain
         - server-communication__pass-value-between-specs
         - server-communication__stream-tests
-        - server-communication__offline
+        # - server-communication__offline
         - server-communication__server-timing
         - server-communication__wait-for-api
         - server-communication__request
