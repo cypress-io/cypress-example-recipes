@@ -8,6 +8,6 @@ The page [index.html](index.html) calls `window.print` on button click. Without 
 
 ![System print dialog](images/print-dialog.png)
 
-By stubbing the `window.print` the [spec.js](cypress/integration/spec.js) can confirm the call has happened.
+By stubbing the `window.print` the [spec.cy.js](cypress/e2e/spec.cy.js) can confirm the call has happened.
 
 ![Stub window print test](images/stub-print.png)

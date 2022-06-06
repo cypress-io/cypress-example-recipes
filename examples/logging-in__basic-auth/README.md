@@ -3,4 +3,4 @@ Shows how to visit the page protected by the [Basic Authentication](https://deve
 
 The static site from [public folder](./public) is protected by the basic authentication, see [server.js](./server.js).
 
-The [cypress/integration/spec.js](./cypress/integration/spec.js) shows how to pass the username and the password when calling [cy.visit](https://on.cypress.io/visit) and [cy.request](https://on.cypress.io/request) commands.
+The [cypress/e2e/spec.cy.js](./cypress/e2e/spec.cy.js) shows how to pass the username and the password when calling [cy.visit](https://on.cypress.io/visit) and [cy.request](https://on.cypress.io/request) commands.

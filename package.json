@@ -17,8 +17,6 @@
     "test:ci:chrome": "node ./test-examples --chrome",
     "test:ci:chrome:headless": "node ./test-examples --chrome --headless",
     "test:ci:firefox": "node ./test-examples --firefox",
-    "test:ci:windows": "node ./test-examples --windows",
-    "test:ci:windows:record": "node ./test-examples --windows --record",
     "warn-only": "stop-only --warn --folder examples --skip node_modules"
   },
   "husky": {
@@ -107,7 +105,7 @@
     "common-tags": "1.8.0",
     "console.table": "0.10.0",
     "cy-spok": "1.3.2",
-    "cypress": "9.6.1",
+    "cypress": "10.0.2",
     "cypress-axe": "0.12.2",
     "cypress-expect-n-assertions": "1.0.0",
     "cypress-failed-log": "2.9.1",
@@ -158,7 +156,7 @@
     "x2js": "3.4.1"
   },
   "engines": {
-    "node": "11.6.0"
+    "node": "16.13.0"
   },
   "license": "MIT",
   "repository": {

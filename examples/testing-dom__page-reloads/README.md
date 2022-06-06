@@ -7,7 +7,7 @@ For example, this recipe shows how to reload the page until the target element r
 
 ![Test runs until the page shows 7](./images/lucky-7.gif)
 
-See [cypress/integration/spec.js](cypress/integration/spec.js) file, in general it does the following:
+See [cypress/e2e/spec.cy.js](cypress/e2e/spec.cy.js) file, in general it does the following:
 
 ```js
 it('until the number 7 appears', () => {

@@ -10,5 +10,5 @@ The test triggers `change` event on an `<input name="range-input" type="range" v
 
 ## See
 
-- [cypress/integration/form-interactions-spec.js](cypress/integration/form-interactions-spec.js)
+- [cypress/e2e/form-interactions-spec.cy.js](cypress/e2e/form-interactions-spec.cy.js)
 - [`cy.trigger`](https://on.cypress.io/trigger)
