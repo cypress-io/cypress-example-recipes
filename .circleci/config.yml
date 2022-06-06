@@ -57,7 +57,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
+          key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum ".circleci/config.yml" }}
       - run: npm ci
 
       # run verify and then save cache.
@@ -66,7 +66,7 @@ jobs:
       - run: npm run cypress:info
       - run: npm run stop-only
       - save_cache:
-          key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
+          key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum ".circleci/config.yml" }}
           paths:
             - ~/.npm
             - ~/.cache
