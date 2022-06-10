@@ -418,9 +418,6 @@ all_jobs: &all_jobs
   - blogs__iframes:
       requires:
         - build
-      # investigate flake
-      # https://github.com/cypress-io/cypress-example-recipes/issues/558
-      repeat: 10
   - blogs__application-actions:
       requires:
         - build
@@ -535,8 +532,6 @@ all_jobs: &all_jobs
       requires:
         - build
   - stubbing-spying__intercept:
-      # make sure there is no flake in cy.intercept
-      repeat: 5
       requires:
         - build
   - stubbing-spying__window-print:
@@ -599,7 +594,6 @@ all_jobs: &all_jobs
   - testing-dom__select2:
       requires:
         - build
-      repeat: 5
   - testing-dom__clipboard:
       requires:
         - build
