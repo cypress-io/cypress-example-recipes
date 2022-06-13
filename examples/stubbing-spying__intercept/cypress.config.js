@@ -4,7 +4,7 @@ module.exports = defineConfig({
   defaultCommandTimeout: 8000,
   retries: {
     runMode: 5,
-    openMode: 1,
+    openMode: 0,
   },
   e2e: {
     baseUrl: 'http://localhost:7080',
