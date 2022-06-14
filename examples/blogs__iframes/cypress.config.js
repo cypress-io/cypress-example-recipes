@@ -5,7 +5,7 @@ module.exports = defineConfig({
   viewportHeight: 1000,
   fixturesFolder: false,
   retries: {
-    runMode: 2,
-    openMode: 0,
+    runMode: 5,
   },
+  e2e: {},
 })
