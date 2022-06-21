@@ -14,7 +14,7 @@
     "cypress:run:win": "bin-up cypress run",
     "cypress:run:win:record": "bin-up cypress run --record --browser chrome",
     "dev": "../../node_modules/.bin/start-test start 8070 start:second 9000 cypress:open",
-    "start": "../../node_modules/.bin/serve -l 8070 public",
+    "start": "../../node_modules/.bin/serve -l 8070 -n public",
     "start:second": "../../node_modules/.bin/serve -l 9000 public",
     "start:win": "bin-up serve -l 8070 --no-clipboard public",
     "test:ci:chrome": "../../node_modules/.bin/start-test start 8070 start:second 9000 cypress:run:chrome",
