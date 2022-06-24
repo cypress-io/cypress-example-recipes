@@ -1,6 +1,8 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
+  fixturesFolder:"cypress/fixtures",
+  integrationFolder:"cypress/e2e",
   defaultCommandTimeout: 8000,
   retries: {
     runMode: 5,

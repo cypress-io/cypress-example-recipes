@@ -7,5 +7,8 @@
     "cypress:run": "../../node_modules/.bin/cypress run",
     "test:ci": "npm run cypress:run",
     "test:ci:record": "npm run cypress:run -- --record"
+  },
+  "dependencies": {
+    "cypress": "^9.7.0"
   }
 }

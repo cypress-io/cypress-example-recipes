@@ -11,5 +11,8 @@
     "start": "node server.js --port 7080",
     "test:ci": "../../node_modules/.bin/start-test 7080 cypress:run",
     "test:ci:record": "../../node_modules/.bin/start-test 7080 cypress:run:record"
+  },
+  "dependencies": {
+    "cypress": "^9.7.0"
   }
 }
