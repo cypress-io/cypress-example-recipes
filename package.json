@@ -142,7 +142,7 @@
     "react-scripts": "^3.4.1",
     "react-testing-library": "6.0.0",
     "read-excel-file": "4.0.7",
-    "start-server-and-test": "1.11.6",
+    "start-server-and-test": "1.14.0",
     "stop-only": "3.0.1",
     "terminal-banner": "1.1.0",
     "tslint": "5.9.1",
