@@ -3,18 +3,14 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { CypressSingleton } from '../decorators'
 
-@CypressSingleton()
-export default class TodoTextInput extends Component {
-  static propTypes = {
-    onSave: PropTypes.func.isRequired,
-    text: PropTypes.string,
-    placeholder: PropTypes.string,
-    editing: PropTypes.bool,
-    newTodo: PropTypes.bool,
-  }
+@CypressSingleton('TodoTextInput')
+class TodoTextInput extends Component {
+  constructor (props) {
+    super(props)
 
-  state = {
-    text: this.props.text || '',
+    this.state = {
+      text: this.props.text || '',
+    }
   }
 
   handleSubmit = (e) => {
@@ -55,3 +51,13 @@ export default class TodoTextInput extends Component {
     )
   }
 }
+
+TodoTextInput.propTypes = {
+  onSave: PropTypes.func.isRequired,
+  text: PropTypes.string,
+  placeholder: PropTypes.string,
+  editing: PropTypes.bool,
+  newTodo: PropTypes.bool,
+}
+
+export default TodoTextInput

@@ -4,17 +4,14 @@ import classnames from 'classnames'
 import TodoTextInput from './TodoTextInput'
 import { CypressInstances } from '../decorators'
 
-@CypressInstances()
-export default class TodoItem extends Component {
-  static propTypes = {
-    todo: PropTypes.object.isRequired,
-    editTodo: PropTypes.func.isRequired,
-    deleteTodo: PropTypes.func.isRequired,
-    completeTodo: PropTypes.func.isRequired,
-  }
+@CypressInstances('TodoItem')
+class TodoItem extends Component {
+  constructor (props) {
+    super(props)
 
-  state = {
-    editing: false,
+    this.state = {
+      editing: false,
+    }
   }
 
   handleDoubleClick = () => {
@@ -72,3 +69,12 @@ export default class TodoItem extends Component {
     )
   }
 }
+
+TodoItem.propTypes = {
+  todo: PropTypes.object.isRequired,
+  editTodo: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
+  completeTodo: PropTypes.func.isRequired,
+}
+
+export default TodoItem

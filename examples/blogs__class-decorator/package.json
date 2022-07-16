@@ -10,6 +10,7 @@
     "start": "../../node_modules/.bin/parcel serve src/index.html"
   },
   "devDependencies": {
-    "@babel/core": "7.9.6"
-  }
+    "@babel/core": "^7.18.6"
+  },
+  "browserslist": "> 0.5%"
 }
