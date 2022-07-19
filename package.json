@@ -84,6 +84,7 @@
   },
   "devDependencies": {
     "@apollo/react-testing": "3.1.4",
+    "@babel/core": "^7.12.0",
     "@babel/preset-flow": "7.0.0",
     "@babel/preset-typescript": "7.9.0",
     "@cypress/browserify-preprocessor": "3.0.1",
@@ -177,6 +178,5 @@
       "eslint --ext .json --fix",
       "git add"
     ]
-  },
-  "browserslist": "> 0.25%, not dead"
+  }
 }
