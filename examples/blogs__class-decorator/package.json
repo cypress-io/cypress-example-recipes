@@ -9,5 +9,8 @@
     "dev": "../../node_modules/.bin/start-test 1234 cypress:open",
     "start": "../../node_modules/.bin/parcel serve src/index.html"
   },
-  "browserslist": "> 0.5%"
+  "devDependencies": {
+    "@babel/core": "^7.18.9"
+  },
+  "browserslist": "> 0.25%, not dead"
 }

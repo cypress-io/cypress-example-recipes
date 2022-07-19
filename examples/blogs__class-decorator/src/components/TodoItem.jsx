@@ -6,12 +6,15 @@ import { CypressInstances } from '../decorators'
 
 @CypressInstances('TodoItem')
 class TodoItem extends Component {
-  constructor (props) {
-    super(props)
+  static propTypes = {
+    todo: PropTypes.object.isRequired,
+    editTodo: PropTypes.func.isRequired,
+    deleteTodo: PropTypes.func.isRequired,
+    completeTodo: PropTypes.func.isRequired,
+  }
 
-    this.state = {
-      editing: false,
-    }
+  state = {
+    editing: false,
   }
 
   handleDoubleClick = () => {
@@ -68,13 +71,6 @@ class TodoItem extends Component {
       </li>
     )
   }
-}
-
-TodoItem.propTypes = {
-  todo: PropTypes.object.isRequired,
-  editTodo: PropTypes.func.isRequired,
-  deleteTodo: PropTypes.func.isRequired,
-  completeTodo: PropTypes.func.isRequired,
 }
 
 export default TodoItem

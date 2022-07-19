@@ -5,12 +5,16 @@ import { CypressSingleton } from '../decorators'
 
 @CypressSingleton('TodoTextInput')
 class TodoTextInput extends Component {
-  constructor (props) {
-    super(props)
+  static propTypes = {
+    onSave: PropTypes.func.isRequired,
+    text: PropTypes.string,
+    placeholder: PropTypes.string,
+    editing: PropTypes.bool,
+    newTodo: PropTypes.bool,
+  }
 
-    this.state = {
-      text: this.props.text || '',
-    }
+  state = {
+    text: this.props.text || '',
   }
 
   handleSubmit = (e) => {
@@ -50,14 +54,6 @@ class TodoTextInput extends Component {
       onKeyDown={this.handleSubmit} />
     )
   }
-}
-
-TodoTextInput.propTypes = {
-  onSave: PropTypes.func.isRequired,
-  text: PropTypes.string,
-  placeholder: PropTypes.string,
-  editing: PropTypes.bool,
-  newTodo: PropTypes.bool,
 }
 
 export default TodoTextInput
