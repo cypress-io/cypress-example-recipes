@@ -4,8 +4,8 @@ import classnames from 'classnames'
 import TodoTextInput from './TodoTextInput'
 import { CypressInstances } from '../decorators'
 
-@CypressInstances()
-export default class TodoItem extends Component {
+@CypressInstances('TodoItem')
+class TodoItem extends Component {
   static propTypes = {
     todo: PropTypes.object.isRequired,
     editTodo: PropTypes.func.isRequired,
@@ -72,3 +72,5 @@ export default class TodoItem extends Component {
     )
   }
 }
+
+export default TodoItem
