@@ -1,5 +1,15 @@
 /// <reference types="cypress" />
 describe('Two domains', () => {
+  Cypress.on('uncaught:exception', (err) => {
+    // cypress.io has a few React exceptions related to state hydration,
+    // but these exceptions do not impact this test
+    if (err.message.includes('Minified React error')) {
+      return false
+    }
+
+    return true
+  })
+
   it('visits 1nd domain', () => {
     cy.visit('https://www.cypress.io/')
     // there are several GitHub links on the page, make sure

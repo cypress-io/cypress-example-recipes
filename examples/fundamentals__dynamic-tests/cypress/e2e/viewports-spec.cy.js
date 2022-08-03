@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 describe('Viewports', () => {
-  // logo selector on public static site after moving to Gatsby
-  const logoSelector = 'img[alt="Cypress.io"]'
+  // on the public static site, the logo is rendered within a labeled link
+  const logoSelector = 'a[aria-label="Return to cypress.io homepage"]'
 
   // ignore errors from the site itself
   Cypress.on('uncaught:exception', () => {

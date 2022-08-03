@@ -3,8 +3,8 @@ describe('Subdomains', () => {
   const urlToLogoSelector = {
     // logo selector at https://docs.cypress.io/
     'https://docs.cypress.io': 'img[alt="Cypress Docs Logo"]',
-    // logo selector on public static site after moving to Gatsby
-    'https://www.cypress.io': 'img[alt="Cypress.io"]',
+    // on the public static site, the logo is rendered within a labeled link
+    'https://www.cypress.io': 'a[aria-label="Return to cypress.io homepage"]',
   }
 
   // ignore errors from the site itself
