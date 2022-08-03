@@ -1,6 +1,11 @@
 /// <reference types="cypress" />
 
 describe('Page source', () => {
+  // ignore errors from the site itself
+  Cypress.on('uncaught:exception', () => {
+    return false
+  })
+
   it('gets the currently loaded document HTML', () => {
     cy.visit('/')
     cy.document().its('documentElement.outerHTML')

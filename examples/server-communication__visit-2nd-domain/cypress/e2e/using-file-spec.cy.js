@@ -2,6 +2,11 @@
 describe('Two domains using file', () => {
   const filename = 'test-data.json'
 
+  // ignore errors from the site itself
+  Cypress.on('uncaught:exception', () => {
+    return false
+  })
+
   it('visits 1nd domain', () => {
     cy.visit('https://www.cypress.io/')
     // there are several GitHub links on the page, make sure

@@ -1,5 +1,10 @@
 /// <reference types="cypress" />
 describe('Two domains', () => {
+  // ignore errors from the site itself
+  Cypress.on('uncaught:exception', () => {
+    return false
+  })
+
   it('visits 1nd domain', () => {
     cy.visit('https://www.cypress.io/')
     // there are several GitHub links on the page, make sure
