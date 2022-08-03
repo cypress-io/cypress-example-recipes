@@ -1,6 +1,16 @@
 /// <reference types="cypress" />
 
 describe('Page source', () => {
+  Cypress.on('uncaught:exception', (err) => {
+    // cypress.io has a few React exceptions related to state hydration,
+    // but these exceptions do not impact this test
+    if (err.message.includes('Minified React error')) {
+      return false
+    }
+
+    return true
+  })
+
   it('gets the currently loaded document HTML', () => {
     cy.visit('/')
     cy.document().its('documentElement.outerHTML')
