@@ -156,9 +156,6 @@
     "webpack-dev-server": "3.7.1",
     "x2js": "3.4.1"
   },
-  "engines": {
-    "node": "16.13.0"
-  },
   "license": "MIT",
   "repository": {
     "type": "git",
