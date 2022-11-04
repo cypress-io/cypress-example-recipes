@@ -55,8 +55,7 @@ describe('Recipe: blogs__iframes', () => {
 
       replaceIFrameFetchWithXhr()
       // spy on XHR before clicking the button
-      cy.server()
-      cy.route('/todos/1').as('getTodo')
+      cy.intercept('/todos/1').as('getTodo')
 
       getIframeBody().find('#run-button').should('have.text', 'Try it').click()
 
@@ -79,8 +78,7 @@ describe('Recipe: blogs__iframes', () => {
 
       replaceIFrameFetchWithXhr()
       // spy on XHR before clicking the button
-      cy.server()
-      cy.route('/todos/1', {
+      cy.intercept('/todos/1', {
         completed: true,
         id: 1,
         title: 'write tests',

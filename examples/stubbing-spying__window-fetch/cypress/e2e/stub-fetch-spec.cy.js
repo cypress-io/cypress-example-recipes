@@ -44,12 +44,13 @@ describe('stubbing', function () {
   // difficult against a fast development server
   it('shows loader while fetching fruits', function () {
     // stub the XHR request from the app
-    cy.server()
-    cy.route({
-      url: '/favorite-fruits',
-      response: [],
-      delay: 1000,
-    })
+    cy.intercept(
+      '/favorite-fruits',
+      {
+        body: [],
+        delay: 1000,
+      }
+    )
 
     cy.visit('/')
     cy.get('.loader').should('be.visible')
@@ -60,8 +61,7 @@ describe('stubbing', function () {
   })
 
   it('can spy on network calls from the second page', () => {
-    cy.server()
-    cy.route('/favorite-fruits').as('favoriteFruits')
+    cy.intercept('/favorite-fruits').as('favoriteFruits')
     cy.visit('/')
     cy.wait('@favoriteFruits')
 
@@ -72,28 +72,26 @@ describe('stubbing', function () {
   })
 
   it('can stub network calls for each page', () => {
-    cy.server()
-    cy.route('/favorite-fruits', ['apples 🍎'])
+    cy.intercept('/favorite-fruits', ['apples 🍎'])
     cy.visit('/')
     cy.contains('apples 🍎')
 
     // change the response before going to the second page
-    cy.route('/favorite-fruits', ['grapes 🍇'])
+    cy.intercept('/favorite-fruits', ['grapes 🍇'])
     cy.contains('a', 'Go to page 2').click()
     cy.url().should('match', /\/page2\.html$/)
     cy.contains('grapes 🍇')
 
     // change the response before going back to the index page
-    cy.route('/favorite-fruits', ['kiwi 🥝'])
+    cy.intercept('/favorite-fruits', ['kiwi 🥝'])
     cy.contains('a', 'Go back').click()
     cy.contains('kiwi 🥝')
   })
 
   describe('when favorite fruits are returned', function () {
     it('displays the list of fruits', function () {
-      cy.server()
       // aliasing allows us to easily get access to our stub
-      cy.route('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe']).as('fetchFavorites')
+      cy.intercept('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe']).as('fetchFavorites')
       cy.visit('/')
       cy.wait('@fetchFavorites')
 
@@ -113,8 +111,7 @@ describe('stubbing', function () {
 
   describe('when no favorite fruits are returned', function () {
     it('displays empty message', function () {
-      cy.server()
-      cy.route('/favorite-fruits', [])
+      cy.intercept('/favorite-fruits', [])
       cy.visit('/')
       cy.get('.favorite-fruits').should('have.text', 'No favorites')
     })
@@ -122,16 +119,17 @@ describe('stubbing', function () {
 
   describe('when request fails', function () {
     it('displays error', function () {
-      cy.server()
-      cy.route({
-        url: '/favorite-fruits',
-        status: 500,
-        response: '',
-        delay: 2000,
-        headers: {
-          'status-text': 'Orchard under maintenance',
-        },
-      })
+      cy.intercept(
+        '/favorite-fruits',
+        {
+          status: 500,
+          body: '',
+          delay: 2000,
+          headers: {
+            'status-text': 'Orchard under maintenance',
+          },
+        }
+      )
 
       cy.visit('/')
 

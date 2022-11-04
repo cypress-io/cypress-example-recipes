@@ -8,8 +8,7 @@ describe('clock', () => {
 
     // before the request goes out we need to set up spying
     // see https://on.cypress.io/network-requests
-    cy.server()
-    cy.route('POST', '/posts').as('post')
+    cy.intercept('POST', '/posts').as('post')
 
     cy.get('#delayed-load').click()
     // force the application to pass 1 second really quickly

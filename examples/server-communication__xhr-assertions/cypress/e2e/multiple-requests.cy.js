@@ -3,8 +3,7 @@ describe('waits', () => {
   // using test retries to get occasional (rare) flake
   it('for multiple requests to finish', { retries: { runMode: 2 } }, () => {
     cy.visit('index.html')
-    cy.server()
-    cy.route('POST', '/posts').as('post')
+    cy.intercept('POST', '/posts').as('post')
 
     // click both buttons - there will be 2 XHR requests going out
     cy.get('#load').click()

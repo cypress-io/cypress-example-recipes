@@ -169,9 +169,8 @@ describe('Logging In - Single Sign on', function () {
         cy.loginBySingleSignOn({ followRedirect: false })
         .then(responseToToken)
         .then((id_token) => {
-          cy.server()
           // observe the "GET /config" call from the application
-          cy.route('/config').as('getConfig')
+          cy.inspect('/config').as('getConfig')
 
           // now go visit our app
           cy.visit('/', {
@@ -240,9 +239,8 @@ describe('Logging In - Single Sign on', function () {
           // note again this test uses "function () { ... }" callback
           // in order to get access to the test context "this.token" saved above
 
-          cy.server()
           // observe the "GET /config" call from the application
-          cy.route('/config').as('getConfig')
+          cy.inspect('/config').as('getConfig')
 
           cy.visit('/')
 

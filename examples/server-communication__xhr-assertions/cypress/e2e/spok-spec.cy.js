@@ -9,8 +9,7 @@ describe('network', () => {
 
     // before the request goes out we need to set up spying
     // see https://on.cypress.io/network-requests
-    cy.server()
-    cy.route('POST', '/posts').as('post')
+    cy.intercept('POST', '/posts').as('post')
 
     cy.get('#load').click()
     cy.contains('#output', '"title": "example post"').should('be.visible')
@@ -61,8 +60,7 @@ describe('network', () => {
   it('can chain assertions using .then', () => {
     cy.visit('index.html')
 
-    cy.server()
-    cy.route('POST', '/posts').as('post')
+    cy.intercept('POST', '/posts').as('post')
 
     cy.get('#delayed-load').click()
     // the request has gone out - let's wait for it

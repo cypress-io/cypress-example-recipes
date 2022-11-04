@@ -4,8 +4,7 @@ describe('XHR', () => {
   it.skip('cy.get yields null if the network request has not happened yet', () => {
     cy.visit('index.html')
 
-    cy.server()
-    cy.route('POST', '/posts').as('post')
+    cy.intercept('POST', '/posts').as('post')
 
     cy.get('#delayed-load').click()
     // cy.get does NOT work
@@ -17,8 +16,7 @@ describe('XHR', () => {
   it('cy.wait waits for the network request to happen', () => {
     cy.visit('index.html')
 
-    cy.server()
-    cy.route('POST', '/posts').as('post')
+    cy.intercept('POST', '/posts').as('post')
 
     cy.get('#delayed-load').click()
     cy.wait('@post').should('have.property', 'status', 201)
@@ -27,8 +25,7 @@ describe('XHR', () => {
   it('cy.wait then cy.get to retrieve the same XHR', () => {
     cy.visit('index.html')
 
-    cy.server()
-    cy.route('POST', '/posts').as('post')
+    cy.intercept('POST', '/posts').as('post')
 
     cy.get('#delayed-load').click()
     // there is only 1 POST request

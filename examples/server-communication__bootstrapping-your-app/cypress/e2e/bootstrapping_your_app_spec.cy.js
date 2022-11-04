@@ -69,8 +69,7 @@ describe('Bootstrapping App Test Data', function () {
       // store our test bootstrap data as a fixture
       // data in /fixtures/bootstrap.json
       cy.fixture('bootstrap.json').then((data) => {
-        cy.server()
-        cy.route('GET', '/data.json', data)
+        cy.inspect('GET', '/data.json', data)
         cy.visit('/xhr.html')
         cy.get('pre')
         .invoke('text')
@@ -89,12 +88,13 @@ describe('Bootstrapping App Test Data', function () {
       // coming in
 
       cy.fixture('bootstrap.json').then((data) => {
-        cy.server()
-        cy.route({
-          delay: 2000, // simulate a slow XHR request
-          url: '/data.json',
-          response: data,
-        }).as('getData')
+        cy.inspect(
+          '/data.json',
+          {
+            delay: 2000, // simulate a slow XHR request
+            body: data,
+          }
+        ).as('getData')
 
         cy.visit('/xhr.html')
         cy.wait('@getData')
