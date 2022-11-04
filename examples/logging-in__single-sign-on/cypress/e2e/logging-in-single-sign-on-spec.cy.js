@@ -170,7 +170,7 @@ describe('Logging In - Single Sign on', function () {
         .then(responseToToken)
         .then((id_token) => {
           // observe the "GET /config" call from the application
-          cy.inspect('/config').as('getConfig')
+          cy.intercept('/config').as('getConfig')
 
           // now go visit our app
           cy.visit('/', {
@@ -240,7 +240,7 @@ describe('Logging In - Single Sign on', function () {
           // in order to get access to the test context "this.token" saved above
 
           // observe the "GET /config" call from the application
-          cy.inspect('/config').as('getConfig')
+          cy.intercept('/config').as('getConfig')
 
           cy.visit('/')
 

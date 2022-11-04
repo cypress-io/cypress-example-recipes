@@ -69,7 +69,7 @@ describe('Bootstrapping App Test Data', function () {
       // store our test bootstrap data as a fixture
       // data in /fixtures/bootstrap.json
       cy.fixture('bootstrap.json').then((data) => {
-        cy.inspect('GET', '/data.json', data)
+        cy.intercept('GET', '/data.json', data)
         cy.visit('/xhr.html')
         cy.get('pre')
         .invoke('text')
@@ -88,7 +88,7 @@ describe('Bootstrapping App Test Data', function () {
       // coming in
 
       cy.fixture('bootstrap.json').then((data) => {
-        cy.inspect(
+        cy.intercept(
           '/data.json',
           {
             delay: 2000, // simulate a slow XHR request

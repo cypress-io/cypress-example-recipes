@@ -42,7 +42,7 @@ describe('Logging In - XHR Web Form', function () {
       // during unsuccessful login attempt
 
       // alias this route so we can wait on it later
-      cy.inspect('POST', '/login').as('postLogin')
+      cy.intercept('POST', '/login').as('postLogin')
 
       // incorrect username on password
       cy.get('input[name=username]').type('jane.lae')
@@ -68,7 +68,7 @@ describe('Logging In - XHR Web Form', function () {
 
       // simulate the server returning 503 with
       // empty JSON response body
-      cy.inspect(
+      cy.intercept(
         'POST',
         '/login',
         {
@@ -133,7 +133,7 @@ describe('Logging In - XHR Web Form', function () {
 
       // simulate the server returning 503 with
       // empty JSON response body
-      cy.inspect(
+      cy.intercept(
         'POST',
         '/login',
         {
