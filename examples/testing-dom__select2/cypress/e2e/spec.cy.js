@@ -183,7 +183,7 @@ describe('select2', () => {
       // cy.intercept(
       //   'https://jsonplaceholder.cypress.io/users?_type=query',
       //   {
-      //     body: 'fixture:query.json',
+      //     fixture: 'query.json',
       //     delay: 1000,
       //   }
       // ).as('query')
@@ -191,7 +191,7 @@ describe('select2', () => {
       // cy.intercept(
       //   'https://jsonplaceholder.cypress.io/users?term=clem&_type=query&q=clem',
       //   {
-      //     response: 'fixture:clem.json',
+      //     fixture: 'clem.json',
       //     delay: 1000,
       //   }
       // ).as('user_search')

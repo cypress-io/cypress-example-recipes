@@ -76,7 +76,7 @@ describe('Misc tests', () => {
   // from a fixture file
   it('loads todos from fixture file', () => {
     // loads response from "cypress/fixtures/todos.json"
-    cy.intercept('/todos', 'fixture:todos')
+    cy.intercept('/todos', { fixture: 'todos' })
     cy.visit('/')
     getTodoItems()
     .should('have.length', 2)

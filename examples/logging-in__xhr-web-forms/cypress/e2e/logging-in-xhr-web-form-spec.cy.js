@@ -72,7 +72,7 @@ describe('Logging In - XHR Web Form', function () {
         'POST',
         '/login',
         {
-          status: 503,
+          statusCode: 503,
           response: {},
         }
       )
@@ -86,7 +86,7 @@ describe('Logging In - XHR Web Form', function () {
       // we can even test that the correct request
       // body was sent in this XHR
       cy.wait('@postLogin')
-      .its('requestBody')
+      .its('request.body')
       .should('deep.eq', {
         username: 'jane.lae',
         password: 'password123',

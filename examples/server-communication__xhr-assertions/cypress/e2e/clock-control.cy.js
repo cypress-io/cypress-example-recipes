@@ -14,6 +14,6 @@ describe('clock', () => {
     // force the application to pass 1 second really quickly
     // https://on.cypress.io/tick
     cy.tick(1001)
-    cy.wait('@post').should('have.property', 'status', 201)
+    cy.wait('@post').its('response').should('have.property', 'statusCode', 201)
   })
 })

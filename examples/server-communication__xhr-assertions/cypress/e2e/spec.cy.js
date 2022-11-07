@@ -42,20 +42,21 @@ describe('XHR', { retries: 3 }, () => {
     // see https://on.cypress.io/get
 
     // tip: log the request object to see everything it has in the console
-    cy.get('@post').then(console.log)
+    cy.wait('@post').then(console.log)
 
     // you can retrieve the XHR multiple times - returns the same object
     // confirm the request status
-    cy.get('@post').should('have.property', 'status', 201)
+    cy.get('@post').its('response').should('have.property', 'statusCode', 201)
 
     // we cannot chain any more assertions to the above request object
     // because the "have.property" assertion yields the property's value
     // so let's just grab the request object again and run multiple assertions
     cy.get('@post').should((req) => {
-      expect(req.method).to.equal('POST')
-      expect(req.url).to.match(/\/posts$/)
+      console.log('post req', req)
+      expect(req.request.method).to.equal('POST')
+      expect(req.request.url).to.match(/\/posts$/)
       // it is good practice to add message to the assertion
-      expect(req, 'has duration in ms').to.have.property('duration').and.be.a('number')
+      expect(req, 'has a request id').to.have.property('browserRequestId').and.be.a('string')
     })
 
     // let's confirm the request sent to the server
@@ -66,7 +67,7 @@ describe('XHR', { retries: 3 }, () => {
     })
 
     // alternative: use "requestBody" alias to "request.body" property access
-    cy.get('@post').its('requestBody')
+    cy.get('@post').its('request.body')
     .should('have.property', 'title', 'example post')
 
     // get the same request object again and confirm the response
@@ -110,8 +111,8 @@ describe('XHR', { retries: 3 }, () => {
     //
     //  https://on.cypress.io/wait
     cy.wait('@post').should((xhr) => {
-      expect(xhr.status, 'successful POST').to.equal(201)
-      expect(xhr.url, 'post url').to.match(/\/posts$/)
+      expect(xhr.response.statusCode, 'successful POST').to.equal(201)
+      expect(xhr.request.url, 'post url').to.match(/\/posts$/)
     // assert any other XHR properties
     })
 

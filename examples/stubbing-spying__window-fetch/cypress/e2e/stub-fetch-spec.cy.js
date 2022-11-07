@@ -122,7 +122,7 @@ describe('stubbing', function () {
       cy.intercept(
         '/favorite-fruits',
         {
-          status: 500,
+          statusCode: 500,
           body: '',
           delay: 2000,
           headers: {
