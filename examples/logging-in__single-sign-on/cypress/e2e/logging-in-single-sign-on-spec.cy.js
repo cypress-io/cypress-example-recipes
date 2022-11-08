@@ -240,7 +240,10 @@ describe('Logging In - Single Sign on', function () {
           // in order to get access to the test context "this.token" saved above
 
           // observe the "GET /config" call from the application
-          cy.intercept('/config').as('getConfig')
+          cy.intercept('/config', (req) => {
+            // a work around to prevent cached results
+            delete req.headers['if-none-match']
+          }).as('getConfig')
 
           cy.visit('/')
 
