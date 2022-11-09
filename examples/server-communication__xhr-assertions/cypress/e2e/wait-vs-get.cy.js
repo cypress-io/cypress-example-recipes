@@ -19,7 +19,7 @@ describe('XHR', () => {
     cy.intercept('POST', '/posts').as('post')
 
     cy.get('#delayed-load').click()
-    cy.wait('@post').should('have.property', 'status', 201)
+    cy.wait('@post').its('response').should('have.property', 'statusCode', 201)
   })
 
   it('cy.wait then cy.get to retrieve the same XHR', () => {
