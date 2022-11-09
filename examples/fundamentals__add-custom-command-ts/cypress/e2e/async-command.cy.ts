@@ -4,13 +4,15 @@
 
 Cypress.Commands.add('asyncAdd', (a, b) => {
   cy.log(`${a} + ${b}`)
-  // our application in "index.html" has placed a promise-returning
+
+  // After 1000 ms, our application's index.html adds a promise-returning
   // method "asyncAdd" onto the "window" object.
-  // from the tests's custom command we can invoke that method
-  // Cypress automatically waits for the promises to resolve
-  // before yielding their value to the next command in the test
-  // https://on.cypress.io/invoke
-  cy.window().invoke('asyncAdd', a, b)
+  // .its() waits for this to exist before passing it to .then().
+
+  // .then() in turn automatically waits for the returned promise to resolve
+  // before yielding its value to the next command in the test
+  // https://on.cypress.io/then
+  cy.window().its('asyncAdd').then(add => add(a, b))
 })
 
 describe('example', () => {
