@@ -138,7 +138,7 @@ describe('Logging In - XHR Web Form', function () {
         '/login',
         {
           body: {
-          // simulate a redirect to another page
+            // simulate a redirect to another page
             redirect: '/error',
           },
         }
