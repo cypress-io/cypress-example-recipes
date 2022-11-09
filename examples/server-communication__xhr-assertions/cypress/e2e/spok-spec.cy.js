@@ -9,8 +9,7 @@ describe('network', () => {
 
     // before the request goes out we need to set up spying
     // see https://on.cypress.io/network-requests
-    cy.server()
-    cy.route('POST', '/posts').as('post')
+    cy.intercept('POST', '/posts').as('post')
 
     cy.get('#load').click()
     cy.contains('#output', '"title": "example post"').should('be.visible')
@@ -19,12 +18,6 @@ describe('network', () => {
     // Since it supports nested objects, in a single "should()" we can verify desired
     // properties of the XHR object, its request and response nested objects.
     cy.get('@post').should(spok({
-      status: 201,
-      url: spok.endsWith('posts'),
-      // network request takes at least 10ms
-      // but should finish in less than 3 seconds on CI
-      duration: spok.range(10, 3500),
-      statusMessage: spok.string,
       // check the request inside XHR object
       request: {
       // using special keyword "$topic" to get
@@ -34,6 +27,7 @@ describe('network', () => {
           title: 'example post',
           userId: 1,
         },
+        url: spok.endsWith('posts'),
       },
       response: {
         $topic: 'response',
@@ -48,7 +42,10 @@ describe('network', () => {
           // we don't know the exact id the server assigns to the new post
           // but it should be > 100
           id: spok.gt(100),
+
         },
+        statusCode: 201,
+        statusMessage: spok.string,
       },
     }))
   })
@@ -61,14 +58,15 @@ describe('network', () => {
   it('can chain assertions using .then', () => {
     cy.visit('index.html')
 
-    cy.server()
-    cy.route('POST', '/posts').as('post')
+    cy.intercept('POST', '/posts').as('post')
 
     cy.get('#delayed-load').click()
     // the request has gone out - let's wait for it
     // and then assert some of its properties
     cy.wait('@post').then(spok({
-      status: 201,
+      response: {
+        statusCode: 201,
+      },
     }))
     // let's confirm the request object
     .its('request.body')
