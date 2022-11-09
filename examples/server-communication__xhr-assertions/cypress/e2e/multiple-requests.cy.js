@@ -33,7 +33,7 @@ describe('waits', () => {
     // server response speed. Sometimes a later request finishes first.
     // all we can say that each request should receive a response with
     // id equal to 101 or 102
-    cy.get('@post.1').its('response').its('body.id').should('be.oneOf', [101, 102])
-    cy.get('@post.2').its('response').its('body.id').should('be.oneOf', [101, 102])
+    cy.get('@post.1').its('response.body.id').should('be.oneOf', [101, 102])
+    cy.get('@post.2').its('response.body.id').should('be.oneOf', [101, 102])
   })
 })
