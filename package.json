@@ -106,7 +106,7 @@
     "common-tags": "1.8.0",
     "console.table": "0.10.0",
     "cy-spok": "1.3.2",
-    "cypress": "10.7.0",
+    "cypress": "https://cdn.cypress.io/beta/npm/12.0.0/linux-x64/release/12.0.0-d7e148f8cde4f74300bec3a3e2fa55ed3139d6fd/cypress.tgz",
     "cypress-axe": "0.12.2",
     "cypress-expect-n-assertions": "1.0.0",
     "cypress-failed-log": "2.9.1",
