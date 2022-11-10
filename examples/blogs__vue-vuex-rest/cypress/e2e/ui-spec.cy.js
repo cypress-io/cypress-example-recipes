@@ -51,7 +51,7 @@ describe('UI', () => {
     })
 
     it('can add many items', () => {
-      const N = 100
+      const N = 20
 
       for (let k = 0; k < N; k += 1) {
         enterTodo(`item ${k + 1}`)
