@@ -35,7 +35,7 @@ export const visit = (skipWaiting) => {
 
 export const getTodoApp = () => cy.get('.todoapp')
 
-export const getTodoItems = () => getTodoApp().find('.todo-list').find('li')
+export const getTodoItems = () => cy.get('.todoapp .todo-list').find('li')
 
 export const newId = () => Math.random().toString().substr(2, 10)
 
@@ -67,7 +67,7 @@ export const makeTodo = (text = 'todo') => {
   }
 }
 
-export const getNewTodoInput = () => getTodoApp().find('.new-todo')
+export const getNewTodoInput = () => cy.get('.todoapp .new-todo')
 
 export const enterTodo = (text = 'example todo') => {
   console.log('entering todo', text)
@@ -82,5 +82,5 @@ export const enterTodo = (text = 'example todo') => {
   // the element and not use stale reference from previous chain call
   const lastItem = '.todoapp .todo-list li:last'
 
-  cy.get(lastItem).should('contain', text)
+  cy.get(lastItem, { log: false }).should('contain', text)
 }

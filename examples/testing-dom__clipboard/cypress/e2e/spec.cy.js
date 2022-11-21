@@ -15,7 +15,7 @@ describe('Clipboard', { browser: 'electron' }, () => {
     //  http://localhost:port wants to
     //  See text and images copied the clipboard
     cy.window().its('navigator.clipboard')
-    .invoke('readText')
+    .then((clip) => clip.readText())
     .should('equal', 'npm install -D cypress')
   })
 
@@ -36,7 +36,7 @@ describe('Clipboard', { browser: 'electron' }, () => {
 
     // let's check the copied text
     cy.window().its('navigator.clipboard')
-    .invoke('readText')
+    .then((clip) => clip.readText())
     .should('equal', 'npm install -D cypress')
     .then((text) => {
       // paste the text from the clipboard into the text area
