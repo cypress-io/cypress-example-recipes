@@ -350,16 +350,25 @@ describe('Store actions', () => {
 
     getStore()
     .its('state')
-    .should('deep.equal', {
-      loading: false,
-      todos: [
-        {
-          title: 'a new todo',
-          completed: false,
-          id: '1',
-        },
-      ],
-      newTodo: '',
+    .should((state) => {
+      // The vue store returns a proxy object, with getters over the various props.
+      // _.deepClone() resolves these getters into a primitive object, so we can
+      // assert on the values directly.
+
+      // It's important to us a callback form of .should() here, rather than
+      // .then(Cypress._.deepClone()), because .then() doesn't retry. See
+      // https://on.cypress.io/should#Function for a fuller explanation.
+      expect(Cypress._.cloneDeep(state)).to.deep.equal({
+        loading: false,
+        todos: [
+          {
+            title: 'a new todo',
+            completed: false,
+            id: '1',
+          },
+        ],
+        newTodo: '',
+      })
     })
   })
 
