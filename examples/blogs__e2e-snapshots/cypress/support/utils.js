@@ -93,3 +93,5 @@ const getTodoItemCheckbox = (text) => getTodo(text).find('[type="checkbox"]')
 export const toggle = (text) => getTodoItemCheckbox(text).click()
 
 export const getCompleted = () => cy.get('.todoapp .todo-list li.completed')
+
+after(resetDatabase)

@@ -1,12 +1,4 @@
 module.exports = {
-  "UI": {
-    "advanced": {
-      "marks completed items": {
-        "todo-list with 2 completed items": "<ul class=\"todo-list\">\n  <li class=\"todo\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>first item</label> <button\n        class=\"destroy\"></button></div>\n  </li>\n  <li class=\"todo\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>second item</label> <button\n        class=\"destroy\"></button></div>\n  </li>\n  <li class=\"todo completed\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>item 3</label> <button class=\"destroy\"></button>\n    </div>\n  </li>\n  <li class=\"todo completed\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>item 4</label> <button class=\"destroy\"></button>\n    </div>\n  </li>\n</ul>"
-      }
-    }
-  },
-  "__version": "12.0.0",
   "via API": {
     "adds todo deep": {
       "1": [
@@ -41,6 +33,7 @@ module.exports = {
       }
     }
   },
+  "__version": "12.0.0",
   "UI to Vuex store": {
     "has loading, newTodo and todos properties": {
       "1": [
@@ -183,13 +176,12 @@ module.exports = {
       }
     }
   },
-  "adds numbers": {
-    "1": 5,
-    "2": 11,
-    "negatives": -9
-  },
-  "converts string to lowercase": {
-    "lowercase string": "my string"
+  "UI": {
+    "advanced": {
+      "marks completed items": {
+        "todo-list with 2 completed items": "<ul class=\"todo-list\">\n  <li class=\"todo\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>first item</label> <button\n        class=\"destroy\"></button></div>\n  </li>\n  <li class=\"todo\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>second item</label> <button\n        class=\"destroy\"></button></div>\n  </li>\n  <li class=\"todo completed\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>item 3</label> <button class=\"destroy\"></button>\n    </div>\n  </li>\n  <li class=\"todo completed\">\n    <div class=\"view\"><input type=\"checkbox\"\n        class=\"toggle\"> <label>item 4</label> <button class=\"destroy\"></button>\n    </div>\n  </li>\n</ul>"
+      }
+    }
   },
   "functions": {
     "adds numbers": {
