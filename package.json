@@ -116,7 +116,7 @@
     "cypress-real-events": "1.4.0",
     "cypress-recurse": "1.8.1",
     "cypress-repeat": "2.2.3",
-    "cypress-select-tests": "1.5.3",
+    "cypress-select-tests": "1.5.9",
     "cypress-wait-until": "1.7.1",
     "dayjs": "1.9.7",
     "dotenv": "8.2.0",
