@@ -6,7 +6,7 @@ module.exports = {
       }
     }
   },
-  "__version": "11.1.0",
+  "__version": "12.0.0",
   "via API": {
     "adds todo deep": {
       "1": [
