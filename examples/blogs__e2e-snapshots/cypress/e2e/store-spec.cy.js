@@ -88,7 +88,12 @@ describe('UI to Vuex store', () => {
   })
 })
 
-describe('Vuex store', () => {
+describe('Vuex store', {
+  retries: {
+    runMode: 2,
+    openMode: 1,
+  },
+}, () => {
   beforeEach(resetDatabase)
   beforeEach(() => visit())
   beforeEach(stubMathRandom)
@@ -220,7 +225,12 @@ describe('Vuex store', () => {
   })
 })
 
-describe('Store actions', () => {
+describe('Store actions', {
+  retries: {
+    runMode: 2,
+    openMode: 1,
+  },
+}, () => {
   const getStore = () => cy.window().its('app.$store')
 
   beforeEach(resetDatabase)

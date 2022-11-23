@@ -287,7 +287,12 @@ describe('Vuex store', () => {
   })
 })
 
-describe('Store actions', () => {
+describe('Store actions', {
+  retries: {
+    runMode: 2,
+    openMode: 1,
+  },
+}, () => {
   const getStore = () => cy.window().its('app.$store')
 
   beforeEach(resetDatabase)
