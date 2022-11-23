@@ -224,16 +224,23 @@ describe('Vuex store', () => {
     .contains('a new todo')
 
     // assert store
-    getStore().snapshot()
+    getStore()
+    .its('loading')
+    .should('eq', false)
+
+    getStore()
+    .snapshot()
   })
 })
 
 describe('Store actions', () => {
   const getStore = () => cy.window().its('app.$store')
 
-  beforeEach(resetDatabase)
-  beforeEach(() => visit())
-  beforeEach(stubMathRandom)
+  beforeEach(() => {
+    resetDatabase()
+    visit()
+    stubMathRandom()
+  })
 
   it('changes the state', () => {
     getStore().then((store) => {
@@ -241,6 +248,10 @@ describe('Store actions', () => {
       store.dispatch('addTodo')
       store.dispatch('clearNewTodo')
     })
+
+    getStore()
+    .its('state.loading')
+    .should('eq', false)
 
     getStore()
     .its('state')
