@@ -114,28 +114,16 @@ describe('Vuex store', () => {
   beforeEach(() => visit())
   beforeEach(stubMathRandom)
 
-  let store
-
-  const getVuex = () => cy.window({ log: false }).its('app.$store')
-
-  beforeEach(() => {
-    getVuex().then((s) => {
-      store = s
-    })
-  })
-
-  const toJSON = (x) => JSON.parse(JSON.stringify(x))
-
-  // returns the entire Vuex store state
-  const getStore = () => cy.then((_) => cy.wrap(toJSON(store.state)))
-
-  // returns given getter value from the store
-  const getFromStore = (property) => {
-    return cy.then((_) => cy.wrap(store.getters[property]))
-  }
+  // returns the entire Vuex store
+  const getStore = (log = true) => cy.window({ log }).its('app.$store', { log })
 
   // and a helper methods because we are going to pull "todos" often
-  const getStoreTodos = getFromStore.bind(null, 'todos')
+  const getStoreTodos = () => {
+    // always wait for the store to finish loading
+    getStore(false).its('state.loading').should('be.false')
+
+    return getStore().its('state.todos')
+  }
 
   it('starts empty', () => {
     getStoreTodos().should('deep.equal', [])
@@ -149,11 +137,11 @@ describe('Vuex store', () => {
     .type(text)
     .trigger('change')
 
-    getFromStore('newTodo').should('equal', text)
+    getStore().its('state.newTodo').should('equal', text)
   })
 
   it('can compare the entire store', () => {
-    getStore().should('deep.equal', {
+    getStore().its('state').should('deep.equal', {
       loading: false,
       todos: [],
       newTodo: '',
@@ -166,7 +154,7 @@ describe('Vuex store', () => {
       'POST',
       '/todos',
       {
-        delay: 3000,
+        delay: 1000,
         body: {},
       }
     )
@@ -178,7 +166,7 @@ describe('Vuex store', () => {
     const newTitleText = 'this is a second todo title, slowly typed'
 
     getNewTodoInput()
-    .type(newTitleText, { delay: 100 })
+    .type(newTitleText, { delay: 50 })
     .trigger('change')
 
     getNewTodoInput().should('have.value', newTitleText)
@@ -196,7 +184,7 @@ describe('Vuex store', () => {
     .type(text)
     .trigger('change')
 
-    getStore().should('deep.equal', {
+    getStore().its('state').should('deep.equal', {
       loading: false,
       todos: [
         {
@@ -259,14 +247,10 @@ describe('Vuex store', () => {
   })
 
   it('can wait on promise-returning store actions', () => {
-    // automatically waits for promise returned by the action to resolve
-    getVuex().invoke('dispatch', 'addTodoAfterDelay', {
+    getStore().invoke('dispatch', 'addTodoAfterDelay', {
       milliseconds: 2000,
       title: 'async task',
     })
-
-    // log message appears after 2 seconds
-    cy.log('after invoke')
 
     // assert UI
     getTodoItems()
@@ -276,9 +260,11 @@ describe('Vuex store', () => {
   })
 
   it('can be driven by dispatching actions', () => {
-    store.dispatch('setNewTodo', 'a new todo')
-    store.dispatch('addTodo')
-    store.dispatch('clearNewTodo')
+    getStore().then((store) => {
+      store.dispatch('setNewTodo', 'a new todo')
+      store.dispatch('addTodo')
+      store.dispatch('clearNewTodo')
+    })
 
     // assert UI
     getTodoItems()
@@ -287,7 +273,7 @@ describe('Vuex store', () => {
     .contains('a new todo')
 
     // assert store
-    getStore().should('deep.equal', {
+    getStore().its('state').should('deep.equal', {
       loading: false,
       todos: [
         {
@@ -309,11 +295,15 @@ describe('Store actions', () => {
   beforeEach(stubMathRandom)
 
   it('changes the state', () => {
+    cy.intercept('POST', '/todos').as('postTodo')
+
     getStore().then((store) => {
       store.dispatch('setNewTodo', 'a new todo')
       store.dispatch('addTodo')
       store.dispatch('clearNewTodo')
     })
+
+    cy.wait('@postTodo')
 
     getStore()
     .its('state')
@@ -341,12 +331,12 @@ describe('Store actions', () => {
 
   it('changes the state after delay', () => {
     // this will force store action "setNewTodo" to commit
-    // change to the store only after 3 seconds
+    // change to the store only after a second
     cy.intercept(
       'POST',
       '/todos',
       {
-        delay: 3000,
+        delay: 1000,
         body: {},
       }
     )
@@ -375,11 +365,15 @@ describe('Store actions', () => {
   })
 
   it('changes the ui', () => {
+    cy.intercept('POST', '/todos').as('postTodo')
+
     getStore().then((store) => {
       store.dispatch('setNewTodo', 'a new todo')
       store.dispatch('addTodo')
       store.dispatch('clearNewTodo')
     })
+
+    cy.wait('@postTodo')
 
     // assert UI
     getTodoItems()
@@ -412,7 +406,7 @@ describe('Store actions', () => {
       'POST',
       '/todos',
       {
-        delay: 3000,
+        delay: 1000,
         body: {},
       }
     ).as('postTodo')
@@ -423,7 +417,7 @@ describe('Store actions', () => {
       store.dispatch('clearNewTodo')
     })
 
-    // assert server call - will wait 3 seconds until stubbed server responds
+    // assert server call - will wait a second until stubbed server responds
     cy.wait('@postTodo')
     .its('request.body')
     .should('deep.equal', {
