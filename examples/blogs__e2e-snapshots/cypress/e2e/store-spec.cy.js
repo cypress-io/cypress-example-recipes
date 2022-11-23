@@ -212,7 +212,10 @@ describe('Vuex store', () => {
     .first()
     .contains('a new todo')
 
-    // assert store
+    // make sure the store is done loading
+    getStore(false).its('state.loading').should('be.false')
+
+    // then snapshot it
     getStore().its('state').snapshot()
   })
 })
