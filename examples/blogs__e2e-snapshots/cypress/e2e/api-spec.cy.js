@@ -53,8 +53,7 @@ describe('via API', () => {
 
 describe('initial', () => {
   it('todos', () => {
-    cy.server()
-    cy.route('/todos', [
+    cy.intercept('/todos', [
       {
         title: 'mock first',
         completed: false,
@@ -123,11 +122,7 @@ describe('API', () => {
   })
 
   it('is adding todo item', () => {
-    cy.server()
-    cy.route({
-      method: 'POST',
-      url: '/todos',
-    }).as('postTodo')
+    cy.intercept('POST', '/todos').as('postTodo')
 
     // go through the UI
     enterTodo('first item') // id "1"
@@ -140,11 +135,7 @@ describe('API', () => {
   })
 
   it('is deleting a todo item', () => {
-    cy.server()
-    cy.route({
-      method: 'DELETE',
-      url: '/todos/1',
-    }).as('deleteTodo')
+    cy.intercept('DELETE', '/todos/1').as('deleteTodo')
 
     // go through the UI
     enterTodo('first item') // id "1"

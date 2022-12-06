@@ -4,7 +4,7 @@
 const csvUsers = Cypress.env('usersList')
 
 describe('Users from CSV', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('index.html')
   })
 

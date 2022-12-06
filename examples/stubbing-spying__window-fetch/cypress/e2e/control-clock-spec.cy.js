@@ -15,9 +15,8 @@
 describe('clock', function () {
   describe('when favorite fruits are returned', function () {
     it('displays list of fruits', function () {
-      cy.server()
       // aliasing allows us to easily get access to our stub
-      cy.route('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe'])
+      cy.intercept('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe'])
       cy.visit('/')
 
       cy.get('.favorite-fruits li').as('favoriteFruits')
@@ -36,16 +35,15 @@ describe('clock', function () {
     describe('polling every 30 secs', function () {
       it('displays the new list of fruits', () => {
         cy.clock()
-        cy.server()
         // aliasing allows us to easily get access to our stub
-        cy.route('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe'])
+        cy.intercept('/favorite-fruits', ['Apple', 'Banana', 'Cantaloupe'])
         cy.visit('/')
 
         // initial list of fruits is shown
         cy.get('.favorite-fruits li').should('have.length', 3)
 
         // now prepare for the second call
-        cy.route('/favorite-fruits', ['Orange', 'Cherry', 'Raspberry', 'Pineapple'])
+        cy.intercept('/favorite-fruits', ['Orange', 'Cherry', 'Raspberry', 'Pineapple'])
         // move time 30 seconds and the setInterval will be triggered
         // that polls for the fruit
         cy.tick(30000)

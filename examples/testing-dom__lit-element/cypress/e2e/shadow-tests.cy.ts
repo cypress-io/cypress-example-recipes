@@ -31,6 +31,10 @@ describe('element-one', () => {
 })
 
 describe('element-two', () => {
+  beforeEach(() => {
+    cy.visit('/index.html')
+  })
+
   it('renders a default slot', () => {
     cy
     .get('element-two')

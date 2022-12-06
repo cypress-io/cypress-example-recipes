@@ -40,10 +40,9 @@ describe('Logging In - XHR Web Form', function () {
     it('displays errors on login', function () {
       // we can observe both the UI and the network XHR call
       // during unsuccessful login attempt
-      cy.server()
 
       // alias this route so we can wait on it later
-      cy.route('POST', '/login').as('postLogin')
+      cy.intercept('POST', '/login').as('postLogin')
 
       // incorrect username on password
       cy.get('input[name=username]').type('jane.lae')
@@ -66,16 +65,17 @@ describe('Logging In - XHR Web Form', function () {
     it('can stub the XHR to force it to fail', function () {
       // instead of letting this XHR hit our backend we can instead
       // control its behavior programmatically by stubbing it
-      cy.server()
 
       // simulate the server returning 503 with
       // empty JSON response body
-      cy.route({
-        method: 'POST',
-        url: '/login',
-        status: 503,
-        response: {},
-      })
+      cy.intercept(
+        'POST',
+        '/login',
+        {
+          statusCode: 503,
+          response: {},
+        }
+      )
       // alias this route so we can wait on it later
       .as('postLogin')
 
@@ -86,7 +86,7 @@ describe('Logging In - XHR Web Form', function () {
       // we can even test that the correct request
       // body was sent in this XHR
       cy.wait('@postLogin')
-      .its('requestBody')
+      .its('request.body')
       .should('deep.eq', {
         username: 'jane.lae',
         password: 'password123',
@@ -131,18 +131,18 @@ describe('Logging In - XHR Web Form', function () {
         cy.stub(win.Login, 'redirect').as('redirect')
       })
 
-      cy.server()
-
       // simulate the server returning 503 with
       // empty JSON response body
-      cy.route({
-        method: 'POST',
-        url: '/login',
-        response: {
-          // simulate a redirect to another page
-          redirect: '/error',
-        },
-      })
+      cy.intercept(
+        'POST',
+        '/login',
+        {
+          body: {
+            // simulate a redirect to another page
+            redirect: '/error',
+          },
+        }
+      )
       // alias this route so we can wait on it later
       .as('postLogin')
 

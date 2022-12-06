@@ -2,8 +2,11 @@
 /// <reference path="../types.d.ts" />
 
 describe('tests', () => {
-  it('test custom command', () => {
+  beforeEach(() => {
     cy.visit('cypress/fixtures/test.html')
+  })
+
+  it('test custom command', () => {
     cy.clickLink('click me')
   })
 
