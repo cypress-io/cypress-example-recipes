@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 describe('Viewports', () => {
   // on the public static site, the logo is rendered within a labeled link
-  const logoSelector = 'a[aria-label="Return to cypress.io homepage"]'
+  const logoSelector = 'a[aria-label="Cypress"]'
 
   // ignore errors from the site itself
   Cypress.on('uncaught:exception', () => {

@@ -14,10 +14,7 @@ describe('Two domains', () => {
     cy.visit('https://www.cypress.io/')
     // there are several GitHub links on the page, make sure
     // to use the selector that returns a single item
-    cy.get('header [aria-label="Check out our github page"]')
-    .should('have.length', 1)
-    // from the jQuery wrapping <a href="https://github.io ..." />
-    // get the "href" value
+    cy.get('[href="https://github.com/cypress-io/cypress"]').first()
     .invoke('attr', 'href')
     .then((url) => {
       // save the value in the `setupNodeEvents` process
