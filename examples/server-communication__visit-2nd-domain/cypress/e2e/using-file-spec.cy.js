@@ -12,14 +12,11 @@ describe('Two domains using file', () => {
     return true
   })
 
-  it('visits 1nd domain', () => {
+  it('visits 1st domain', () => {
     cy.visit('https://www.cypress.io/')
     // there are several GitHub links on the page, make sure
     // to use the selector that returns a single item
-    cy.get('header [aria-label="Check out our github page"]')
-    .should('have.length', 1)
-    // from the jQuery wrapping <a href="https://github.io ..." />
-    // get the "href" value
+    cy.get('[href="https://github.com/cypress-io/cypress"]').first()
     .invoke('attr', 'href')
     .then((url) => {
       expect(url).to.be.a('string')
