@@ -1,0 +1,10 @@
+{
+  "name": "pass-value-between-specs",
+  "version": "1.0.0",
+  "description": "Passing a value from a test in the first spec to a test in the second spec",
+  "private": true,
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run"
+  }
+}

@@ -1,0 +1,753 @@
+version: 2.1
+
+# testing jobs are all the same, so just use a template
+defaults: &defaults
+  parameters:
+    repeat:
+      description: Number of times to run this particular example
+      type: integer
+      default: 1
+    test-command:
+      description: Custom test command to use to run tests, like "npm run test:ci"
+      type: string
+      default: ''
+  parallelism: 1
+  working_directory: ~/app
+  docker:
+    - image: cypress/browsers:node16.5.0-chrome94-ff93
+  environment:
+    TERM: xterm
+  steps:
+    - attach_workspace:
+        at: ~/
+    # some examples have the server part
+    # so start it in the background
+    - run:
+        command: |
+          cd examples/$CIRCLE_JOB
+          npm run start --if-present
+        name: start the server (if needed)
+        background: true
+    # some jobs have 2nd start command to simulate 2nd domain
+    - run:
+        command: |
+          cd examples/$CIRCLE_JOB
+          npm run start:second --if-present
+        name: start the 2nd server (if any)
+        background: true
+    - run:
+        command: |
+          cd examples/$CIRCLE_JOB
+          if [ -n "<< parameters.test-command >>" ]; then
+            echo "Running command: << parameters.test-command >>"
+            << parameters.test-command >>
+          else
+            node ../../test-repeat -n << parameters.repeat >> --group $CIRCLE_JOB
+          fi
+        name: Cypress tests
+
+jobs:
+  # a single job that installs dependencies (NPM and Cypress)
+  build:
+    working_directory: ~/app
+    docker:
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
+    environment:
+      TERM: xterm
+    steps:
+      - checkout
+      - restore_cache:
+          key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum ".circleci/config.yml" }}
+      - run: npm ci
+
+      # run verify and then save cache.
+      # this ensures that the Cypress verified status is cached too
+      - run: npm run cypress:verify
+      - run: npm run cypress:info
+      - run: npm run stop-only
+      - save_cache:
+          key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum ".circleci/config.yml" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      # all other test jobs will run AFTER this build job finishes
+      # to avoid reinstalling dependencies, we persist the source folder "app"
+      # and the Cypress binary to workspace, which is the fastest way
+      # for Circle jobs to pass files
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - app
+            - .cache/Cypress
+
+  lint:
+    working_directory: ~/app
+    docker:
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run lint:json
+      - run: npm run lint
+
+  # dummy job running after all end-to-end tests
+  after-tests:
+    docker:
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
+    steps:
+      - run: echo "all good"
+
+  # a single utility job that can run multiple examples one by one
+  # but with chunking. Let's use the same Docker image with
+  # Chrome that we use in the "build" job
+  test-examples:
+    parallelism: 20
+    working_directory: ~/app
+    docker:
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
+    environment:
+      TERM: xterm
+    steps:
+      - attach_workspace:
+          at: ~/
+      # when running in parallel, the total number of parallel containers
+      # is in variable CIRCLE_NODE_TOTAL and the current container index in CIRCLE_NODE_INDEX
+      # which starts at 0 and goes to $CIRCLE_NODE_TOTAL - 1
+      - run: npm run test:ci -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL --record
+
+  # a single utility script to run multiple examples against Chrome
+  test-examples-chrome:
+    parallelism: 10
+    working_directory: ~/app
+    docker:
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
+    environment:
+      TERM: xterm
+      # no need to record these runs yet
+      CYPRESS_RECORD_KEY: ''
+      # while debugging https://github.com/cypress-io/cypress/issues/6053
+      DEBUG: cypress:server:protocol
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run test:ci:chrome -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+      # store test artifacts from any failing projects
+      # if the project is not running on this machine, no worries
+      - store_artifacts:
+          path: ~/app/examples/blogs__iframes/cypress/videos
+      - store_artifacts:
+          path: ~/app/examples/blogs__iframes/cypress/screenshots
+
+  # run recipes that have "test:ci:chrome:headless" script
+  test-examples-chrome-headless:
+    parallelism: 1
+    working_directory: ~/app
+    docker:
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
+    environment:
+      TERM: xterm
+      # no need to record these runs yet
+      CYPRESS_RECORD_KEY: ''
+      # while debugging https://github.com/cypress-io/cypress/issues/6053
+      DEBUG: cypress:server:protocol
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run test:ci:chrome:headless -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+
+  test-examples-firefox:
+    parallelism: 10
+    working_directory: ~/app
+    docker:
+      - image: cypress/browsers:node16.5.0-chrome94-ff93
+    environment:
+      TERM: xterm
+      # no need to record these runs yet
+      CYPRESS_RECORD_KEY: ''
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run test:ci:firefox -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+
+  # a single utility script to run multiple examples against Brave browser
+  test-examples-brave:
+    # only one recipe shows how to run Cypress using Brave browser
+    parallelism: 1
+    working_directory: ~/app
+    docker:
+      - image: cypress/browsers:node12.13.0-chrome78-ff70-brave78
+    environment:
+      TERM: xterm
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run test:ci:brave -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+
+  # define a new job with defaults for each "examples/*" subfolder
+  blogs__a11y:
+    <<: *defaults
+  blogs__class-decorator:
+    <<: *defaults
+  blogs__assertion-counting:
+    <<: *defaults
+  blogs__application-actions:
+    <<: *defaults
+  blogs__dayjs:
+    <<: *defaults
+  blogs__notification:
+    <<: *defaults
+  blogs__iframes:
+    <<: *defaults
+  blogs__codepen-demo:
+    <<: *defaults
+  blogs__direct-control-angular:
+    <<: *defaults
+  blogs__e2e-api-testing:
+    <<: *defaults
+  blogs__e2e-snapshots:
+    <<: *defaults
+  blogs__element-coverage:
+    <<: *defaults
+  blogs__testing-redux-store:
+    <<: *defaults
+  blogs__vue-vuex-rest:
+    <<: *defaults
+  blogs__use-react-devtools:
+    <<: *defaults
+  blogs__form-submit:
+    <<: *defaults
+  extending-cypress__chai-assertions:
+    <<: *defaults
+  fundamentals__window-size:
+    <<: *defaults
+  fundamentals__node-modules:
+    <<: *defaults
+  fundamentals__fixtures:
+    <<: *defaults
+  fundamentals__timeout:
+    <<: *defaults
+  fundamentals__add-custom-command:
+    <<: *defaults
+  fundamentals__add-custom-command-ts:
+    <<: *defaults
+  fundamentals__errors:
+    <<: *defaults
+  fundamentals__cy-events:
+    <<: *defaults
+  logging-in__csrf-tokens:
+    <<: *defaults
+  logging-in__html-web-forms:
+    <<: *defaults
+  logging-in__single-sign-on:
+    <<: *defaults
+  logging-in__xhr-web-forms:
+    <<: *defaults
+  logging-in__jwt:
+    <<: *defaults
+  logging-in__using-app-code:
+    <<: *defaults
+  logging-in__basic-auth:
+    <<: *defaults
+  preprocessors__grep:
+    <<: *defaults
+    # in this particular example we want to grep tests
+    # and run only tests with name having "@admin"
+    environment:
+      CYPRESS_grep: '@admin'
+  preprocessors__flow-browserify:
+    <<: *defaults
+  preprocessors__typescript-browserify:
+    <<: *defaults
+  preprocessors__typescript-webpack:
+    <<: *defaults
+  stubbing-spying__functions:
+    <<: *defaults
+  stubbing-spying__window-fetch:
+    <<: *defaults
+  stubbing-spying__intercept:
+    <<: *defaults
+  stubbing-spying__window-print:
+    <<: *defaults
+  stubbing-spying__google-analytics:
+    <<: *defaults
+  stubbing-spying__navigator:
+    <<: *defaults
+  stubbing-spying__window:
+    <<: *defaults
+  stubbing-spying__console:
+    <<: *defaults
+  stubbing__resources:
+    <<: *defaults
+  testing-dom__drag-drop:
+    <<: *defaults
+  testing-dom__download:
+    <<: *defaults
+  testing-dom__form-interactions:
+    <<: *defaults
+  testing-dom__hover-hidden-elements:
+    <<: *defaults
+  testing-dom__lit-element:
+    <<: *defaults
+  testing-dom__tab-handling-links:
+    <<: *defaults
+  testing-dom__wait-for-resource:
+    <<: *defaults
+  testing-dom__performance-metrics:
+    <<: *defaults
+  testing-dom__csv-table:
+    <<: *defaults
+  testing-dom__root-style:
+    <<: *defaults
+  testing-dom__select2:
+    <<: *defaults
+  testing-dom__sorting-table:
+    <<: *defaults
+  testing-dom__page-reloads:
+    <<: *defaults
+  testing-dom__pagination:
+    <<: *defaults
+  testing-dom__clipboard:
+    <<: *defaults
+  testing-dom__page-source:
+    <<: *defaults
+  testing-dom__responsive-image:
+    <<: *defaults
+  unit-testing__application-code:
+    <<: *defaults
+  server-communication__bootstrapping-your-app:
+    <<: *defaults
+  server-communication__env-variables:
+    <<: *defaults
+  server-communication__seeding-database-in-node:
+    <<: *defaults
+  server-communication__visit-2nd-domain:
+    <<: *defaults
+  server-communication__pass-value-between-specs:
+    <<: *defaults
+  server-communication__xhr-assertions:
+    <<: *defaults
+  server-communication__stream-tests:
+    <<: *defaults
+  # server-communication__offline:
+  #   <<: *defaults
+  server-communication__server-timing:
+    <<: *defaults
+  server-communication__wait-for-api:
+    <<: *defaults
+  server-communication__request:
+    <<: *defaults
+  fundamentals__dynamic-tests:
+    <<: *defaults
+  fundamentals__dynamic-tests-from-csv:
+    <<: *defaults
+  fundamentals__dynamic-tests-from-api:
+    <<: *defaults
+  fundamentals__module-api:
+    <<: *defaults
+  fundamentals__module-api-wrap:
+    <<: *defaults
+  fundamentals__chrome-remote-debugging:
+    <<: *defaults
+  fundamentals__typescript:
+    <<: *defaults
+
+# list all jobs to run and their dependencies here
+# and then use this list from workflow definition
+all_jobs: &all_jobs
+  - build
+  - lint:
+      requires:
+        - build
+  - test-examples:
+      requires:
+        - build
+      filters:
+        branches:
+          only:
+            - master
+            # for https://github.com/cypress-io/cypress-example-recipes/issues/531
+            - record-test-examples-job
+
+  - test-examples-chrome:
+      requires:
+        - build
+
+  - test-examples-chrome-headless:
+      requires:
+        - build
+
+  - test-examples-firefox:
+      requires:
+        - build
+
+  # disabled Brave testing for now
+  # on v3 it needs --browser brave
+  # but v4 filters browser names and does not allow "brave"
+  # - test-examples-brave:
+  #     requires:
+  #       - build
+  #     filters:
+  #       branches:
+  #         only:
+  #           - master
+
+  # when adding new example subfolder with a recipe
+  # add its name here to "create" CircleCI job
+
+  # Do not run Codepen demo by default - because it depends on
+  # the external service that sometimes gives 502 breaking our tests
+  # - blogs__codepen-demo:
+  #     requires:
+  #       - build
+
+  - blogs__a11y:
+      requires:
+        - build
+  - blogs__dayjs:
+      requires:
+        - build
+  - blogs__class-decorator:
+      requires:
+        - build
+  - blogs__assertion-counting:
+      requires:
+        - build
+  - blogs__notification:
+      requires:
+        - build
+  - blogs__iframes:
+      requires:
+        - build
+  - blogs__application-actions:
+      requires:
+        - build
+  - blogs__direct-control-angular:
+      requires:
+        - build
+  - blogs__e2e-api-testing:
+      requires:
+        - build
+  - blogs__e2e-snapshots:
+      requires:
+        - build
+  - blogs__element-coverage:
+      requires:
+        - build
+  - blogs__testing-redux-store:
+      requires:
+        - build
+  - blogs__vue-vuex-rest:
+      requires:
+        - build
+  - blogs__use-react-devtools:
+      requires:
+        - build
+  - blogs__form-submit:
+      requires:
+        - build
+  - extending-cypress__chai-assertions:
+      requires:
+        - build
+  - fundamentals__window-size:
+      requires:
+        - build
+      test-command: npm run test:ci:record -- --group $CIRCLE_JOB
+  - fundamentals__node-modules:
+      requires:
+        - build
+  - fundamentals__add-custom-command:
+      requires:
+        - build
+  - fundamentals__add-custom-command-ts:
+      requires:
+        - build
+  - fundamentals__errors:
+      requires:
+        - build
+  - fundamentals__cy-events:
+      requires:
+        - build
+  - fundamentals__dynamic-tests:
+      requires:
+        - build
+  - fundamentals__dynamic-tests-from-csv:
+      requires:
+        - build
+  - fundamentals__dynamic-tests-from-api:
+      requires:
+        - build
+  - fundamentals__fixtures:
+      requires:
+        - build
+  - fundamentals__timeout:
+      requires:
+        - build
+  - fundamentals__module-api:
+      requires:
+        - build
+  - fundamentals__module-api-wrap:
+      requires:
+        - build
+      test-command: npm run test:ci
+  - fundamentals__typescript:
+      requires:
+        - build
+  - logging-in__basic-auth:
+      requires:
+        - build
+  - logging-in__csrf-tokens:
+      requires:
+        - build
+  - logging-in__html-web-forms:
+      requires:
+        - build
+  - logging-in__single-sign-on:
+      requires:
+        - build
+  - logging-in__xhr-web-forms:
+      requires:
+        - build
+  - logging-in__jwt:
+      requires:
+        - build
+  - logging-in__using-app-code:
+      requires:
+        - build
+  - preprocessors__grep:
+      requires:
+        - build
+  - preprocessors__flow-browserify:
+      requires:
+        - build
+  - preprocessors__typescript-browserify:
+      requires:
+        - build
+  - preprocessors__typescript-webpack:
+      requires:
+        - build
+  - stubbing-spying__functions:
+      requires:
+        - build
+  - stubbing-spying__window-fetch:
+      requires:
+        - build
+  - stubbing-spying__intercept:
+      requires:
+        - build
+  - stubbing-spying__window-print:
+      requires:
+        - build
+  - stubbing-spying__console:
+      requires:
+        - build
+  - stubbing-spying__window:
+      requires:
+        - build
+  - stubbing-spying__google-analytics:
+      requires:
+        - build
+  - stubbing-spying__navigator:
+      requires:
+        - build
+  - stubbing__resources:
+      requires:
+        - build
+  - testing-dom__sorting-table:
+      requires:
+        - build
+  - testing-dom__drag-drop:
+      requires:
+        - build
+  - testing-dom__download:
+      requires:
+        - build
+  - testing-dom__form-interactions:
+      requires:
+        - build
+  - testing-dom__hover-hidden-elements:
+      requires:
+        - build
+  - testing-dom__lit-element:
+      requires:
+        - build
+  - testing-dom__tab-handling-links:
+      requires:
+        - build
+  - testing-dom__wait-for-resource:
+      requires:
+        - build
+  - testing-dom__csv-table:
+      requires:
+        - build
+  - testing-dom__performance-metrics:
+      requires:
+        - build
+  - testing-dom__root-style:
+      requires:
+        - build
+  - testing-dom__page-reloads:
+      requires:
+        - build
+  - testing-dom__pagination:
+      requires:
+        - build
+  - testing-dom__select2:
+      requires:
+        - build
+  - testing-dom__clipboard:
+      requires:
+        - build
+  - testing-dom__page-source:
+      requires:
+        - build
+  - testing-dom__responsive-image:
+      requires:
+        - build
+  - unit-testing__application-code:
+      requires:
+        - build
+  - server-communication__bootstrapping-your-app:
+      requires:
+        - build
+  - server-communication__env-variables:
+      requires:
+        - build
+  - server-communication__seeding-database-in-node:
+      requires:
+        - build
+  - server-communication__xhr-assertions:
+      requires:
+        - build
+  - server-communication__visit-2nd-domain:
+      requires:
+        - build
+  - server-communication__pass-value-between-specs:
+      requires:
+        - build
+  - server-communication__stream-tests:
+      requires:
+        - build
+  # - server-communication__offline:
+  #     requires:
+  #       - build
+  - server-communication__server-timing:
+      requires:
+        - build
+  - server-communication__wait-for-api:
+      requires:
+        - build
+  - server-communication__request:
+      requires:
+        - build
+
+  # to avoid constantly tweaking required jobs on CircleCI
+  # we can have a single job wait on all other test jobs here.
+  # CircleCI can then just require this 1 job to pass
+  # see https://glebbahmutov.com/blog/parallel-or-not/
+  - after-tests:
+      requires:
+        - build
+        - lint
+        - blogs__a11y
+        - blogs__dayjs
+        - blogs__class-decorator
+        - blogs__assertion-counting
+        - blogs__application-actions
+        - blogs__notification
+        - blogs__iframes
+        - blogs__direct-control-angular
+        - blogs__e2e-api-testing
+        - blogs__e2e-snapshots
+        - blogs__element-coverage
+        - blogs__testing-redux-store
+        - blogs__vue-vuex-rest
+        - blogs__use-react-devtools
+        - blogs__form-submit
+        - extending-cypress__chai-assertions
+        - fundamentals__window-size
+        - fundamentals__node-modules
+        - fundamentals__fixtures
+        - fundamentals__timeout
+        - fundamentals__dynamic-tests
+        - fundamentals__dynamic-tests-from-csv
+        - fundamentals__dynamic-tests-from-api
+        - fundamentals__module-api
+        - fundamentals__module-api-wrap
+        - fundamentals__add-custom-command
+        - fundamentals__add-custom-command-ts
+        - fundamentals__typescript
+        - fundamentals__errors
+        - fundamentals__cy-events
+        - logging-in__csrf-tokens
+        - logging-in__html-web-forms
+        - logging-in__single-sign-on
+        - logging-in__xhr-web-forms
+        - logging-in__jwt
+        - logging-in__using-app-code
+        - logging-in__basic-auth
+        - preprocessors__grep
+        - preprocessors__flow-browserify
+        - preprocessors__typescript-browserify
+        - preprocessors__typescript-webpack
+        - server-communication__bootstrapping-your-app
+        - server-communication__env-variables
+        - server-communication__seeding-database-in-node
+        - server-communication__xhr-assertions
+        - server-communication__visit-2nd-domain
+        - server-communication__pass-value-between-specs
+        - server-communication__stream-tests
+        # - server-communication__offline
+        - server-communication__server-timing
+        - server-communication__wait-for-api
+        - server-communication__request
+        - stubbing-spying__functions
+        - stubbing-spying__window-fetch
+        - stubbing-spying__intercept
+        - stubbing-spying__window-print
+        - stubbing-spying__google-analytics
+        - stubbing-spying__navigator
+        - stubbing-spying__window
+        - stubbing-spying__console
+        - stubbing__resources
+        - testing-dom__drag-drop
+        - testing-dom__download
+        - testing-dom__form-interactions
+        - testing-dom__hover-hidden-elements
+        - testing-dom__lit-element
+        - testing-dom__tab-handling-links
+        - testing-dom__wait-for-resource
+        - testing-dom__csv-table
+        - testing-dom__performance-metrics
+        - testing-dom__root-style
+        - testing-dom__select2
+        - testing-dom__sorting-table
+        - testing-dom__page-reloads
+        - testing-dom__pagination
+        - testing-dom__clipboard
+        - testing-dom__page-source
+        - testing-dom__responsive-image
+        - unit-testing__application-code
+        # "meta" jobs
+        - test-examples
+        - test-examples-chrome
+        - test-examples-chrome-headless
+        - test-examples-firefox
+
+workflows:
+  version: 2
+
+  # run this workflow on each commit and pull request
+  all-recipes:
+    jobs: *all_jobs
+
+  # since this is testing a lot of external sites
+  # let's run these tests once per day (at night)
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs: *all_jobs

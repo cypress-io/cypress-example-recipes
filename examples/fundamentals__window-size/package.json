@@ -1,0 +1,12 @@
+{
+  "name": "window-size",
+  "version": "1.0.0",
+  "description": "How to control the browser window size",
+  "private": true,
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "test:ci": "../../node_modules/.bin/cypress run --headless --browser chrome",
+    "test:ci:record": "../../node_modules/.bin/cypress run --record --headless --browser chrome"
+  }
+}

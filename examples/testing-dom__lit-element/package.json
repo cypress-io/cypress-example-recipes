@@ -1,0 +1,13 @@
+{
+  "name": "unit-test-lit-element",
+  "version": "1.0.0",
+  "description": "Load and unit test lit-element projects",
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "start": "echo there is no web server to start in this project",
+    "test:ci": "npm run cypress:run",
+    "test:ci:firefox": "npm run cypress:run -- --browser firefox",
+    "test:ci:record": "npm run cypress:run -- --record"
+  }
+}

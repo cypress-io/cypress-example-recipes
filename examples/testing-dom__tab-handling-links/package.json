@@ -1,12 +1,14 @@
 {
-  "name": "tab-handling-anchor-links",
+  "name": "testing-dom__tab-handling-links",
   "version": "1.0.0",
   "description": "",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
     "dev": "../../node_modules/.bin/start-test 7078 cypress:open",
     "start": "node server.js --port 7078",
-    "test:ci": "../../node_modules/.bin/start-test 7078 cypress:run"
+    "test:ci": "../../node_modules/.bin/start-test 7078 cypress:run",
+    "test:ci:record": "../../node_modules/.bin/start-test 7078 cypress:run:record"
   }
 }

@@ -8,10 +8,10 @@ The application [index.html](index.html) has a single button that executes `wind
 
 ## The tests
 
-- [cypress/integration/spec.js](cypress/integration/spec.js) stubs the `window.open` method using [`cy.stub()`](https://on.cypress.io/stub). Because the application executes `window.open` after the click we create the method stub after [`cy.visit`](https://on.cypress.io/visit)
+- [cypress/e2e/spec.cy.js](cypress/e2e/spec.cy.js) stubs the `window.open` method using [`cy.stub()`](https://on.cypress.io/stub). Because the application executes `window.open` after the click we create the method stub after [`cy.visit`](https://on.cypress.io/visit)
 
 ![Window open stub](images/window-open-stub.png)
 
-- [cypress/integration/spy-before-load.js](cypress/integration/spy-before-load.js) starts spying on `console.log` during [`cy.visit`](https://on.cypress.io/visit) to confirm that `console.log('hello')` is called when the page loads.
+- [cypress/e2e/spy-before-load.cy.js](cypress/e2e/spy-before-load.cy.js) starts spying on `console.log` during [`cy.visit`](https://on.cypress.io/visit) to confirm that `console.log('hello')` is called when the page loads.
 
 ![Spy on console.log](images/spy-before-load.png)

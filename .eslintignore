@@ -4,6 +4,7 @@ examples/preprocessors__flow-browserify
 examples/blogs__testing-redux-store/src
 **/node_modules
 **/vendor
+**/dist
 # React DevTools extension source code
 examples/blogs__use-react-devtools/4.2.1_0
 # and demo game

@@ -1,0 +1,15 @@
+{
+  "name": "server-timing",
+  "version": "1.0.0",
+  "description": "Show server timing results from Cypress visit",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "dev": "../../node_modules/.bin/start-test 3000 cypress:open",
+    "start": "../../node_modules/.bin/micro"
+  },
+  "license": "MIT",
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>"
+}

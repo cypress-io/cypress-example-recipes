@@ -6,7 +6,7 @@ module.exports = {
       }
     }
   },
-  "__version": "3.3.0",
+  "__version": "12.0.0",
   "via API": {
     "adds todo deep": {
       "1": [
@@ -190,5 +190,15 @@ module.exports = {
   },
   "converts string to lowercase": {
     "lowercase string": "my string"
+  },
+  "functions": {
+    "adds numbers": {
+      "1": 5,
+      "2": 11,
+      "negatives": -9
+    },
+    "converts string to lowercase": {
+      "lowercase string": "my string"
+    }
   }
 }

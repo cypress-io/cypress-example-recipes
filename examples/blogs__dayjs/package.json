@@ -1,0 +1,12 @@
+{
+  "name": "dayjs-example",
+  "version": "1.0.0",
+  "description": "Using Dayjs instead of moment.js",
+  "private": true,
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "test:ci": "../../node_modules/.bin/cypress run",
+    "test:ci:record": "../../node_modules/.bin/cypress run --record"
+  }
+}

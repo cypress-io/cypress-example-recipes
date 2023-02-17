@@ -10,6 +10,8 @@
       <li><a href="#page2" />#page2</a></li>
       <li><a href="#page3" />#page3</a></li>
     </ul>
+    <br/>
+    <button id="register">Register</button>
 
     <script>
       // standard google analytics code
@@ -19,6 +21,7 @@
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-XXXXX-Y', 'auto');
+      ga('set', 'page', 'index.html');
       ga('send', 'pageview');
 
       window.onhashchange = function () {
@@ -26,6 +29,16 @@
         // hashchange. this is used for demonstration purposes
         ga('send', 'pageview', window.location.hash)
       }
+
+      document.getElementById('register').addEventListener('click', (e) => {
+        e.preventDefault()
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'button',
+          eventAction: 'click',
+          eventLabel: 'Register'
+        })
+      })
     </script>
   </body>
 </html>

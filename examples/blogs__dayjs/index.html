@@ -1,0 +1,42 @@
+<head>
+  <style>
+    .badge {
+      display: inline-block;
+      min-width: 10px;
+      padding: 3px 7px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      background-color: #777;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <span id="shipped"></span>
+  </div>
+
+  <div class="posted">
+    Posted at <span class="badge badge-primary">3:38 PM</span>
+  </div>
+
+  <script>
+    const padLeftZero = (s) => s.length < 2 ? '0' + s : s
+
+    const span = document.getElementById('shipped')
+    // let's output the today's date in "MMM, DD YYYY" format
+    const months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ]
+    debugger
+    const d = new Date()
+    const formatted = months[d.getMonth()] + ' ' +
+      padLeftZero(String(d.getDate())) +', ' + d.getFullYear()
+    span.innerText = `Order shipped on: ${formatted}`
+  </script>
+</body>

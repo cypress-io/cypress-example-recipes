@@ -1,0 +1,10 @@
+{
+  "name": "visit-2nd-domain",
+  "version": "1.0.0",
+  "description": "Visiting two different domains from two different tests",
+  "private": true,
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run"
+  }
+}

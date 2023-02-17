@@ -26,7 +26,7 @@ Normally the functional tests do not check the element style. As long as the but
 
 ## Custom command
 
-From the [cypress/integration/spec.js](cypress/integration/spec.js) we wait for `base.css` and `app.css` to load before checking if the style from `app.css` has been applied to the page elements. The check for `app.css` is done by looking at the `performance` object that exists in the modern browsers.
+From the [cypress/e2e/spec.cy.js](cypress/e2e/spec.cy.js) we wait for `base.css` and `app.css` to load before checking if the style from `app.css` has been applied to the page elements. The check for `app.css` is done by looking at the `performance` object that exists in the modern browsers.
 
 ```js
 // how to check if a resource has been loaded
@@ -40,7 +40,7 @@ cy.window().then(win => {
 From the tests, we can call the above code wrapped in a custom command `cy.waitForResource`.
 
 ```js
-// cypress/integration/spec.js
+// cypress/e2e/spec.cy.js
 it('applies app.css styles', () => {
   cy.visit('/')
   cy.waitForResource('base.css')
@@ -50,11 +50,11 @@ it('applies app.css styles', () => {
 })
 ```
 
-The custom command `cy.waitForResource` is written directly in the spec file. Another custom command `cy.waitForResources` is coded in [cypress/support/index.js](cypress/support/index.js)
+The custom command `cy.waitForResource` is written directly in the spec file. Another custom command `cy.waitForResources` is coded in [cypress/support/e2e.js](cypress/support/e2e.js)
 
 ## 3rd party module
 
-The [cypress/integration/spec.js](cypress/integration/spec.js) also includes a test that uses [cypress-wait-until](https://github.com/NoriSte/cypress-wait-until) 3rd party module with custom command `cy.waitUntil` to retry finding the performance entry with expected name.
+The [cypress/e2e/spec.cy.js](cypress/e2e/spec.cy.js) also includes a test that uses [cypress-wait-until](https://github.com/NoriSte/cypress-wait-until) 3rd party module with custom command `cy.waitUntil` to retry finding the performance entry with expected name.
 
 ## Delayed image
 

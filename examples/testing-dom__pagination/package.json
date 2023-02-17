@@ -1,0 +1,10 @@
+{
+  "name": "pagination",
+  "version": "1.0.0",
+  "description": "The test clicks the Next link until it gets to the last page",
+  "private": true,
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run"
+  }
+}

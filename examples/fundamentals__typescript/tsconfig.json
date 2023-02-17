@@ -1,0 +1,7 @@
+// This file is required to make `npm run tsc` work.
+{
+    "include": [
+        "cypress/e2e/*.ts",
+        "cypress/e2e/**/*.ts",
+    ]
+}

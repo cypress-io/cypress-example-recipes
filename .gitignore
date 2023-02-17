@@ -11,4 +11,12 @@ screenshots
 videos
 out.js
 examples/*/cypress/logs
+examples/*/cypress/downloads
 snapshots.js
+.nyc_output
+coverage
+dist
+test-data.json
+examples/stubbing-spying__intercept/users5.json
+**/.parcel-cache
+examples/*/data.json

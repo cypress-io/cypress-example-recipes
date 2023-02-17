@@ -6,8 +6,10 @@
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
     "cypress:run": "npm run wait-on && ../../node_modules/.bin/cypress run",
+    "cypress:run:record": "npm run wait-on && ../../node_modules/.bin/cypress run --record",
     "start": "../../node_modules/.bin/react-scripts start",
     "test:ci": "../../node_modules/.bin/start-test 3000 cypress:run",
+    "test:ci:record": "../../node_modules/.bin/start-test 3000 cypress:run:record",
     "wait-on": "../../node_modules/.bin/wait-on http://localhost:3000"
   },
   "browserslist": [

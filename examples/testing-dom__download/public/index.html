@@ -1,0 +1,62 @@
+<body>
+  <p>The first group of examples uses <code>download</code> anchor attribute
+    to prompt file download</p>
+
+  <h3>Download CSV</h3>
+  <!-- when the user clicks on this link, the file save dialog appears -->
+  <a data-cy="download-csv" href="records.csv" download>records.csv</a>
+
+  <h3>Download XLSX</h3>
+  <a data-cy="download-xlsx" href="people.xlsx" download>people.xlsx</a>
+
+  <h3>Download PNG image</h3>
+  <a data-cy="download-png" href="logo.png" download>logo.png</a>
+
+  <h3>Download TXT file</h3>
+  <a data-cy="download-txt" href="robots.txt" download>robots.txt</a>
+
+  <h3>Download ZIP file</h3>
+  <a data-cy="download-zip" href="files.zip" download>files.zip</a>
+
+  <h3>Download PDF file</h3>
+  <a data-cy="download-pdf" href="why-cypress.pdf" download>why-cypress.pdf</a>
+
+  <p>The next group of examples uses <code>download</code> anchor attribute
+    to prompt file download from a remote domain</p>
+
+  <h3>Download a remote CSV file</h3>
+  <a data-cy="download-remote-csv" href="http://localhost:9000/records.csv" download>remote records.csv</a>
+
+  <h3>Download a remove XLSX file</h3>
+  <a data-cy="download-remote-xlsx" href="http://localhost:9000/people.xlsx" download>remote people.xlsx</a>
+
+  <h3>Download a remote PNG image</h3>
+  <a data-cy="download-remote-png" href="http://localhost:9000/logo.png" download>remote logo.png</a>
+
+  <h3>Download a remote TXT file</h3>
+  <a data-cy="download-remote-txt" href="http://localhost:9000/robots.txt" download>remote robots.txt</a>
+
+  <h3>Download a remote JS file</h3>
+  <a data-cy="download-remote-js" href="https://www.google-analytics.com/analytics.js" download>remote analytics.js</a>
+
+  <h3>Download a remote ZIP file</h3>
+  <a data-cy="download-remote-zip" href="http://localhost:9000/files.zip" download>remote files.zip</a>
+
+  <h3>Download a remote PDF file</h3>
+  <a data-cy="download-remote-pdf" href="http://localhost:9000/why-cypress.pdf" download>remote why-cypress.pdf</a>
+
+  <p>Down load the file by prompting form submit</p>
+  <h3>Download from a form</h3>
+  <form method="get" action="records.csv">
+    <button data-cy="download-form-csv" type="submit">records.csv</button>
+  </form>
+
+  <p>Download files by setting the <code>document.location.href</code></p>
+  <h3>Download CSV via location HREF</h3>
+  <button data-cy="download-csv-href">Download CSV</button>
+
+  <h3>Download PDF via location HREF</h3>
+  <button data-cy="download-pdf-href">Download PDF</button>
+
+  <script src="app.js"></script>
+</body>

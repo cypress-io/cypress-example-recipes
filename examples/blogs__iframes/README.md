@@ -17,3 +17,7 @@ Spec | Description
 [spy-on-fetch-spec.js](cypress/integration/spy-on-fetch-spec.js) | Accesses `window` inside the iframe and spies on `fetch` calls
 [xhr-spec.js](cypress/integration/xhr-spec.js) | Shows how to spy and stub network calls the iframe is making
 [plugin-spec.js](cypress/integration/plugin-spec.js) | Uses [cypress-iframe](https://gitlab.com/kgroat/cypress-iframe) plugin to work elements inside an iframe
+
+## Notes
+
+In [cypress.json](cypress.json) we are using [test retries](https://on.cypress.io/test-retries) to get through an occasional (rare) flake, see issue [#558](https://github.com/cypress-io/cypress-example-recipes/issues/558)

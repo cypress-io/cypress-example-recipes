@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Stubbing Navigator</title>
+</head>
+
+<body>
+  <h1>My Application</h1>
+  <div id="message"><div>
+</body>
+<script>
+  if (navigator.cookieEnabled === false) {
+    document.getElementById("message").innerHTML = "Error: cookies not enabled!"
+  } else {
+    document.getElementById("message").innerHTML = "Yay! cookies are enabled!"
+  }
+</script>
+
+</html>

@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "Example showing TypeScript tests with Cypress",
   "scripts": {
-    "build": "../../node_modules/.bin/webpack --output-filename out.js --entry ./cypress/integration/*.ts",
+    "build": "../../node_modules/.bin/webpack --output-filename out.js --entry ./cypress/e2e/*.ts",
     "cypress:open": "../../node_modules/.bin/cypress open",
     "precypress:run": "npm run lint",
     "cypress:run": "../../node_modules/.bin/cypress run",
     "lint": "../../node_modules/.bin/tslint --project ./tsconfig.json",
     "postlint": "npm run tsc",
     "test:ci": "../../node_modules/.bin/cypress run",
+    "test:ci:record": "../../node_modules/.bin/cypress run --record",
     "tsc": "../../node_modules/.bin/tsc --pretty --noEmit"
   }
 }

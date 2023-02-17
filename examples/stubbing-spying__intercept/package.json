@@ -1,0 +1,15 @@
+{
+  "name": "stubbing-spying__intercept",
+  "version": "1.0.0",
+  "description": "Working with cy.intercept",
+  "private": true,
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
+    "dev": "../../node_modules/.bin/start-test 7080 cypress:open",
+    "start": "node server.js --port 7080",
+    "test:ci": "../../node_modules/.bin/start-test 7080 cypress:run",
+    "test:ci:record": "../../node_modules/.bin/start-test 7080 cypress:run:record"
+  }
+}

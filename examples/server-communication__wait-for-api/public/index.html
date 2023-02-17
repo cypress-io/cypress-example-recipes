@@ -1,0 +1,22 @@
+<body>
+  <h1>Example page</h1>
+  <button id="get-api-response">Get API response</button>
+
+  <p id="response" style="display: none;">Api response: <pre id="output"></pre></p>
+
+  <script>
+    document.getElementById('get-api-response').addEventListener('click', () => {
+      const p = document.getElementById('response')
+      p.style.display = 'block'
+
+      fetch('/greeting').then(r => {
+        if (!r.ok) {
+          return r.statusText
+        }
+        return r.text()
+      }).then(text => {
+        document.getElementById('output').innerText = text
+      })
+    })
+  </script>
+</body>

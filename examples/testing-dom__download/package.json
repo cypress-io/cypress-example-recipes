@@ -1,0 +1,26 @@
+{
+  "name": "download",
+  "version": "1.0.0",
+  "description": "Download and validate a file",
+  "private": true,
+  "scripts": {
+    "cypress:open": "../../node_modules/.bin/cypress open",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
+    "cypress:run:chrome:headless": "../../node_modules/.bin/cypress run --browser chrome --headless",
+    "cypress:run:chrome:record": "../../node_modules/.bin/cypress run --record --browser chrome",
+    "cypress:run:firefox": "../../node_modules/.bin/cypress run --browser firefox",
+    "cypress:run:firefox:headless": "../../node_modules/.bin/cypress run --browser firefox --headless",
+    "cypress:run:win": "bin-up cypress run",
+    "cypress:run:win:record": "bin-up cypress run --record --browser chrome",
+    "dev": "../../node_modules/.bin/start-test start 8070 start:second 9000 cypress:open",
+    "start": "../../node_modules/.bin/serve -l 8070 -n public",
+    "start:second": "../../node_modules/.bin/serve -l 9000 public",
+    "start:win": "bin-up serve -l 8070 --no-clipboard public",
+    "test:ci:chrome": "../../node_modules/.bin/start-test start 8070 start:second 9000 cypress:run:chrome",
+    "test:ci:chrome:headless": "../../node_modules/.bin/start-test start 8070 start:second 9000 cypress:run:chrome:headless",
+    "test:ci:chrome:record": "../../node_modules/.bin/start-test start 8070 start:second 9000 cypress:run:chrome:record",
+    "test:ci:firefox": "../../node_modules/.bin/start-test start 8070 start:second 9000 cypress:run:firefox",
+    "test:ci:firefox:headless": "../../node_modules/.bin/start-test start 8070 start:second 9000 cypress:run:firefox:headless"
+  }
+}

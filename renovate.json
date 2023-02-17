@@ -1,57 +1,45 @@
 {
+  "automerge": true,
   "extends": [
     "config:base"
   ],
-  "automerge": true,
-  "commitMessage": "{{semanticPrefix}}Update {{depName}} to {{newVersion}} 🌟",
-  "prTitle": "{{semanticPrefix}}{{#if isPin}}Pin{{else}}Update{{/if}} dependency {{depName}} to version {{newVersion}} 🌟",
+  "labels": [
+    "type: dependencies",
+    "renovate"
+  ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "major": {
     "automerge": false
   },
-  "minor": {
-    "automerge": false
-  },
+  "masterIssue": true,
   "prConcurrentLimit": 3,
   "prHourlyLimit": 2,
   "rangeStrategy": "pin",
   "schedule": [
     "after 2am and before 3am on sunday"
   ],
-  "updateNotScheduled": false,
-  "timezone": "America/New_York",
-  "lockFileMaintenance": {
-    "enabled": true
-  },
-  "separatePatchReleases": true,
   "separateMultipleMajor": true,
-  "masterIssue": true,
-  "labels": [
-    "type: dependencies",
-    "renovate"
-  ],
+  "separatePatchReleases": true,
+  "timezone": "America/New_York",
+  "updateNotScheduled": false,
   "packageRules": [
     {
       "packagePatterns": [
-        "^@cypress",
-        "^cypress"
+        "*"
       ],
-      "groupName": "cypress",
-      "schedule": [
-        "after 2am and before 4am"
-      ]
-    },
-    {
-      "packagePatterns": "^eslint",
-      "groupName": "eslint"
-    },
-    {
-      "packageNames": [
-        "ts-loader",
-        "tsify",
-        "tslint",
-        "typescript"
+      "excludePackagePatterns": [
+        "cypress",
+        "@cypress/browserify-preprocessor",
+        "@cypress/eslint-plugin-dev",
+        "@cypress/snapshot",
+        "@cypress/webpack-preprocessor",
+        "start-server-and-test",
+        "typescript",
+        "cypress-file-upload"
       ],
-      "groupName": "typescript"
+      "enabled": false
     }
   ]
 }

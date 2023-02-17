@@ -1,5 +1,9 @@
 # Codepen.io Testing Demo
 
+## Warning: no longer working
+
+**Warning ⚠️**  Codepen.io has added a CAPTCHA to prevent scrapers and 3rd party tools from accessing the hosted web apps. The testing approach shown in this blog post no longer works, but we will keep it here for reference.
+
 Demo of E2E testing HyperApp.js counter app running on Codepen.io.
 
 - Load Codepen and get around iframe security restrictions.
