@@ -67,8 +67,7 @@ describe('Misc tests', () => {
   // waits for the alias "todos" to make sure
   // the application has actually made the request
   it('loads todos on start', () => {
-    cy.server()
-    cy.route('/todos').as('todos')
+    cy.intercept('/todos').as('todos')
     cy.visit('/')
     cy.wait('@todos')
   })
@@ -76,9 +75,8 @@ describe('Misc tests', () => {
   // stubs expected API call with JSON response
   // from a fixture file
   it('loads todos from fixture file', () => {
-    cy.server()
     // loads response from "cypress/fixtures/todos.json"
-    cy.route('/todos', 'fixture:todos')
+    cy.intercept('/todos', { fixture: 'todos' })
     cy.visit('/')
     getTodoItems()
     .should('have.length', 2)
@@ -88,8 +86,7 @@ describe('Misc tests', () => {
   })
 
   it('initial todos', () => {
-    cy.server()
-    cy.route('/todos', [
+    cy.intercept('/todos', [
       {
         title: 'mock first',
         completed: false,
@@ -159,13 +156,7 @@ describe('API', () => {
   })
 
   it('is adding todo item', () => {
-    cy.server()
-    cy
-    .route({
-      method: 'POST',
-      url: '/todos',
-    })
-    .as('postTodo')
+    cy.intercept('POST', '/todos').as('postTodo')
 
     // go through the UI
     enterTodo('first item') // id "1"
@@ -180,13 +171,7 @@ describe('API', () => {
   })
 
   it('is deleting a todo item', () => {
-    cy.server()
-    cy
-    .route({
-      method: 'DELETE',
-      url: '/todos/1',
-    })
-    .as('deleteTodo')
+    cy.intercept('DELETE', '/todos/1').as('deleteTodo')
 
     // go through the UI
     enterTodo('first item') // id "1"

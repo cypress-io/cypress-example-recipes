@@ -80,8 +80,7 @@ describe('speed', () => {
     .should('have.length', 2)
 
     // delete one item and confirm it was deleted
-    cy.server()
-    cy.route('DELETE', '/todos/*').as('delete')
+    cy.intercept('DELETE', '/todos/*').as('delete')
     cy.contains('.todo-list li', 'be cool').find('.destroy').click({ force: true })
     cy.wait('@delete')
 
@@ -94,11 +93,10 @@ describe('speed', () => {
     // there is no need to reset the backend data
 
     // stub all network calls
-    cy.server()
     // initially return an empty list of todos
-    cy.route('GET', '/todos', [])
-    cy.route('POST', '/todos', {})
-    cy.route('DELETE', '/todos/*', {}).as('delete')
+    cy.intercept('GET', '/todos', [])
+    cy.intercept('POST', '/todos', {})
+    cy.intercept('DELETE', '/todos/*', {}).as('delete')
 
     // load the application
     cy.visit('/')
@@ -131,8 +129,7 @@ describe('speed', () => {
     })
 
     // spy on the application's XHR calls
-    cy.server()
-    cy.route('DELETE', '/todos/*').as('delete')
+    cy.intercept('DELETE', '/todos/*').as('delete')
 
     // load the application
     cy.visit('/')
@@ -168,8 +165,7 @@ describe('speed', () => {
     })
 
     // spy on the application's XHR calls
-    cy.server()
-    cy.route('DELETE', '/todos/*').as('delete')
+    cy.intercept('DELETE', '/todos/*').as('delete')
 
     // load the application
     cy.visit('/')

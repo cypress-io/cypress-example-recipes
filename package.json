@@ -106,7 +106,7 @@
     "common-tags": "1.8.0",
     "console.table": "0.10.0",
     "cy-spok": "1.3.2",
-    "cypress": "10.3.1",
+    "cypress": "12.5.1",
     "cypress-axe": "0.12.2",
     "cypress-expect-n-assertions": "1.0.0",
     "cypress-failed-log": "2.9.1",
@@ -116,7 +116,7 @@
     "cypress-real-events": "1.4.0",
     "cypress-recurse": "1.8.1",
     "cypress-repeat": "2.2.3",
-    "cypress-select-tests": "1.5.3",
+    "cypress-select-tests": "1.5.9",
     "cypress-wait-until": "1.7.1",
     "dayjs": "1.9.7",
     "dotenv": "8.2.0",
@@ -157,7 +157,7 @@
     "x2js": "3.4.1"
   },
   "engines": {
-    "node": "16.13.0"
+    "node": "16.16.0"
   },
   "license": "MIT",
   "repository": {

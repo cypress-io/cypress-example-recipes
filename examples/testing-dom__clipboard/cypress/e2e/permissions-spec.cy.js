@@ -13,7 +13,7 @@ describe('Clipboard permissions', () => {
     .its('navigator.permissions')
     // permission names taken from
     // https://w3c.github.io/permissions/#enumdef-permissionname
-    .invoke('query', { name: 'clipboard-read' })
+    .then((permissions) => permissions.query({ name: 'clipboard-read' }))
     .its('state')
     .should('equal', 'granted')
   })
@@ -24,7 +24,7 @@ describe('Clipboard permissions', () => {
     .its('navigator.permissions')
     // permission names taken from
     // https://w3c.github.io/permissions/#enumdef-permissionname
-    .invoke('query', { name: 'clipboard-read' })
+    .then((permissions) => permissions.query({ name: 'clipboard-read' }))
     // by default it is "prompt" which shows a popup asking
     // the user if the site can have access to the clipboard
     // if the user allows, then next time it will be "granted"
@@ -54,7 +54,7 @@ describe('Clipboard permissions', () => {
     .its('navigator.permissions')
     // permission names taken from
     // https://w3c.github.io/permissions/#enumdef-permissionname
-    .invoke('query', { name: 'clipboard-read' })
+    .then((permissions) => permissions.query({ name: 'clipboard-read' }))
     .its('state').should('equal', 'granted')
 
     // now reading the clipboard from test will work
@@ -64,7 +64,7 @@ describe('Clipboard permissions', () => {
     cy.get('[aria-label="Copy"]').click()
     // confirm the clipboard's contents
     cy.window().its('navigator.clipboard')
-    .invoke('readText')
+    .then((clip) => clip.readText())
     .should('equal', 'npm install -D cypress')
 
     // TODO how can we paste the clipboard into the text area?
