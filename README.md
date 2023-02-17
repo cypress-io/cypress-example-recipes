@@ -62,7 +62,7 @@ Recipe | Description
 [Json Web Tokens (JWT)](./examples/logging-in__jwt) | Log in using JWT
 [Using application code](./examples/logging-in__using-app-code) | Log in by calling the application code
 
-Also see [Authentication plugins](https://on.cypress.io/plugins#authentication) and watch video ["Organizing Tests, Logging In, Controlling State"](https://www.youtube.com/watch?v=5XQOK0v_YRE)
+Also see [Authentication plugins](https://docs.cypress.io/plugins#Authentication) and watch video ["Organizing Tests, Logging In, Controlling State"](https://www.youtube.com/watch?v=5XQOK0v_YRE)
 
 ## Preprocessors
 
