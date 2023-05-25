@@ -4,6 +4,7 @@ const { defineConfig } = require('cypress')
 module.exports = defineConfig({
   fixturesFolder: false,
   e2e: {
+    video: true,
     supportFile: false,
     setupNodeEvents (on, config) {
       // configure plugins here
