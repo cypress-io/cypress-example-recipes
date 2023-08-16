@@ -28,6 +28,7 @@ const args = arg({
   '--browser': String,
   '--headless': Boolean,
   '--record': Boolean,
+  '--glob': String,
 })
 
 // fill default values
@@ -61,8 +62,8 @@ if (args['--record']) {
 
 console.log('script name "%s"', scriptName)
 
-const getExamples = () => {
-  return globby('examples/*', { onlyFiles: false, expandDirectories: false })
+const getExamples = (glob) => {
+  return globby(glob ? glob : 'examples/*', { onlyFiles: false, expandDirectories: false })
 }
 
 const printFolders = (folders) => {
@@ -191,7 +192,7 @@ const filterByScriptName = (folders) => {
 }
 
 bluebird
-.try(getExamples)
+.try(() => getExamples(args['--glob']))
 .then((list) => list.sort())
 .then(filterByScriptName)
 .then(filterSomeFolders)
