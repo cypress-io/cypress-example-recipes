@@ -113,7 +113,7 @@ jobs:
       # when running in parallel, the total number of parallel containers
       # is in variable CIRCLE_NODE_TOTAL and the current container index in CIRCLE_NODE_INDEX
       # which starts at 0 and goes to $CIRCLE_NODE_TOTAL - 1
-      - run: npm run test:ci -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL --record
+      - run: DISABLE_ESLINT_PLUGIN=true npm run test:ci -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL --record
 
   # a single utility script to run multiple examples against Chrome
   test-examples-chrome:
