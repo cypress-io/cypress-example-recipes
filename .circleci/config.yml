@@ -14,7 +14,7 @@ defaults: &defaults
   parallelism: 1
   working_directory: ~/app
   docker:
-    - image: cypress/browsers-internal:node18.15.0-chrome114-ff115
+    - image: cypress/browsers:node-18.16.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1
   environment:
     TERM: xterm
   steps:
@@ -51,7 +51,7 @@ jobs:
   build:
     working_directory: ~/app
     docker:
-      - image: cypress/browsers-internal:node18.15.0-chrome114-ff115
+      - image: cypress/browsers:node-18.16.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1
     environment:
       TERM: xterm
     steps:
@@ -83,7 +83,7 @@ jobs:
   lint:
     working_directory: ~/app
     docker:
-      - image: cypress/browsers-internal:node18.15.0-chrome114-ff115
+      - image: cypress/browsers:node-18.16.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1
     steps:
       - attach_workspace:
           at: ~/
@@ -93,7 +93,7 @@ jobs:
   # dummy job running after all end-to-end tests
   after-tests:
     docker:
-      - image: cypress/browsers-internal:node18.15.0-chrome114-ff115
+      - image: cypress/browsers:node-18.16.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1
     steps:
       - run: echo "all good"
 
@@ -104,7 +104,7 @@ jobs:
     parallelism: 20
     working_directory: ~/app
     docker:
-      - image: cypress/browsers-internal:node18.15.0-chrome114-ff115
+      - image: cypress/browsers:node-18.16.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1
     environment:
       TERM: xterm
     steps:
@@ -113,14 +113,14 @@ jobs:
       # when running in parallel, the total number of parallel containers
       # is in variable CIRCLE_NODE_TOTAL and the current container index in CIRCLE_NODE_INDEX
       # which starts at 0 and goes to $CIRCLE_NODE_TOTAL - 1
-      - run: DISABLE_ESLINT_PLUGIN=true npm run test:ci -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL --record
+      - run: npm run test:ci -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL --record
 
   # a single utility script to run multiple examples against Chrome
   test-examples-chrome:
     parallelism: 10
     working_directory: ~/app
     docker:
-      - image: cypress/browsers-internal:node18.15.0-chrome114-ff115
+      - image: cypress/browsers:node-18.16.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1
     environment:
       TERM: xterm
       # no need to record these runs yet
@@ -130,7 +130,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: npm run test:ci:chrome -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+      - run: DISABLE_ESLINT_PLUGIN=true npm run test:ci:chrome -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
       # store test artifacts from any failing projects
       # if the project is not running on this machine, no worries
       - store_artifacts:
@@ -143,7 +143,7 @@ jobs:
     parallelism: 1
     working_directory: ~/app
     docker:
-      - image: cypress/browsers-internal:node18.15.0-chrome114-ff115
+      - image: cypress/browsers:node-18.16.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1
     environment:
       TERM: xterm
       # no need to record these runs yet
@@ -153,13 +153,13 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: npm run test:ci:chrome:headless -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+      - run: DISABLE_ESLINT_PLUGIN=true npm run test:ci:chrome:headless -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
 
   test-examples-firefox:
     parallelism: 10
     working_directory: ~/app
     docker:
-      - image: cypress/browsers-internal:node18.15.0-chrome114-ff115
+      - image: cypress/browsers:node-18.16.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1
     environment:
       TERM: xterm
       # no need to record these runs yet
