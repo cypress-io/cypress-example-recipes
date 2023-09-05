@@ -160,7 +160,7 @@
     "x2js": "3.4.1"
   },
   "engines": {
-    "node": "18.15.0"
+    "node": "^18.16.0"
   },
   "license": "MIT",
   "repository": {
