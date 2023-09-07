@@ -17,7 +17,7 @@ export const getVisibleTodos = createSelector(
       default:
         throw new Error(`Unknown filter: ${visibilityFilter}`)
     }
-  }
+  },
 )
 
 export const getCompletedTodoCount = createSelector(
@@ -29,5 +29,5 @@ export const getCompletedTodoCount = createSelector(
       },
       0)
     )
-  }
+  },
 )
