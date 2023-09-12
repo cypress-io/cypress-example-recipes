@@ -1,16 +1,15 @@
 {
-  "plugins": [
-    "@cypress/dev"
-  ],
-  "extends": [
-    "plugin:@cypress/dev/general",
-    "plugin:@cypress/dev/tests"
-  ],
+  "plugins": ["@cypress/dev"],
+  "extends": ["plugin:@cypress/dev/general", "plugin:@cypress/dev/tests"],
   "env": {
     "node": true
   },
   "globals": {
     "cy": true,
     "Cypress": true
+  },
+  "rules": {
+    "semi": "off",
+    "comma-dangle": "off"
   }
 }
