@@ -10,6 +10,7 @@
   },
   "rules": {
     "semi": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "arrow-parens": "off"
   }
 }
