@@ -1,4 +1,4 @@
-import { LitElement, html } from 'https://unpkg.com/lit-element/lit-element.js?module'
+import { LitElement, html } from 'https://unpkg.com/lit-element@3.3.3/lit-element.js?module'
 
 window.customElements.define('element-one', class extends LitElement {
   static get properties () {
