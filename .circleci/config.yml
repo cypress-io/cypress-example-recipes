@@ -10,7 +10,7 @@ defaults: &defaults
     test-command:
       description: Custom test command to use to run tests, like "npm run test:ci"
       type: string
-      default: ''
+      default: ""
   parallelism: 1
   working_directory: ~/app
   docker:
@@ -124,7 +124,7 @@ jobs:
     environment:
       TERM: xterm
       # no need to record these runs yet
-      CYPRESS_RECORD_KEY: ''
+      CYPRESS_RECORD_KEY: ""
       # while debugging https://github.com/cypress-io/cypress/issues/6053
       DEBUG: cypress:server:protocol
     steps:
@@ -147,7 +147,7 @@ jobs:
     environment:
       TERM: xterm
       # no need to record these runs yet
-      CYPRESS_RECORD_KEY: ''
+      CYPRESS_RECORD_KEY: ""
       # while debugging https://github.com/cypress-io/cypress/issues/6053
       DEBUG: cypress:server:protocol
     steps:
@@ -163,7 +163,7 @@ jobs:
     environment:
       TERM: xterm
       # no need to record these runs yet
-      CYPRESS_RECORD_KEY: ''
+      CYPRESS_RECORD_KEY: ""
     steps:
       - attach_workspace:
           at: ~/
@@ -253,7 +253,7 @@ jobs:
     # in this particular example we want to grep tests
     # and run only tests with name having "@admin"
     environment:
-      CYPRESS_grep: '@admin'
+      CYPRESS_grep: "@admin"
   preprocessors__flow-browserify:
     <<: *defaults
   preprocessors__typescript-browserify:
@@ -365,6 +365,7 @@ all_jobs: &all_jobs
         branches:
           only:
             - master
+            - fix-record-workflow
             # for https://github.com/cypress-io/cypress-example-recipes/issues/531
             - record-test-examples-job
 
