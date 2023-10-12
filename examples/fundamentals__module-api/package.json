@@ -7,6 +7,6 @@
     "cypress:run": "node ./e2e-tests",
     "start": "echo nothing to start",
     "test:ci": "node ./e2e-tests",
-    "test:ci:record": "node ./e2e-tests"
+    "test:ci:record": "node ./e2e-tests --record"
   }
 }

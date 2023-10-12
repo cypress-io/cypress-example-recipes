@@ -7,6 +7,7 @@ const cypress = require('cypress')
 const globby = require('globby')
 const Promise = require('bluebird')
 const fs = require('fs')
+const minimist = require('minimist')
 
 require('console.table')
 
@@ -26,11 +27,14 @@ const sortByLastModified = (filenames) => {
   return withTimes.sort(byTime)
 }
 
+const args = minimist(process.argv)
+
 const runOneSpec = (spec) => {
   return cypress.run({
     config: {
       video: false,
     },
+    record: args.record,
     spec: spec.filename,
   })
 }
