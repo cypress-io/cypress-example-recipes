@@ -1,5 +1,6 @@
 # Recipes
-[![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) 
+
+[![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master)
 <!-- [![Build status](https://ci.appveyor.com/api/projects/status/7p4qkwavheciwbxc/branch/master?svg=true)](https://ci.appveyor.com/project/cypress-io/cypress-example-recipes/branch/master)  -->
 [![renovate-app badge][renovate-badge]][renovate-app] [![Cypress Dashboard][dashboard badge]][dashboard url]
 
@@ -164,7 +165,7 @@ Recipe | Description
 --- | ---
 [Visual Regression Testing](https://github.com/mjhea0/cypress-visual-regression) | Adding visual regression testing to Cypress
 [Code coverage](https://github.com/paulfalgout/cypress-coverage-example) | Cypress with Coverage reports
-[Cucumber](https://github.com/TheBrainFamily/cypress-cucumber-example) | Example usage of Cypress with Cucumber
+[Cucumber](https://github.com/badeball/cypress-cucumber-preprocessor) | Example usage of Cypress with Cucumber
 [Jest](https://github.com/TheBrainFamily/jest-runner-cypress-example) | Example for the jest-runner-cypress
 [Mailosaur](https://github.com/muratkeremozcan/cypressExamples/tree/master/cypress-mailosaur) | Utilizes `cy.request()` or `cy.task()` with [`mailosaur`](https://www.npmjs.com/package/mailosaur) to test emails sent with [`sendmail`](https://www.npmjs.com/package/sendmail)
 [Chat App](https://glebbahmutov.com/blog/test-socketio-chat-using-cypress/) | Test a Socket.io Chat App using Cypress
