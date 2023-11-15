@@ -6,7 +6,7 @@ examples/blogs__testing-redux-store/src
 **/vendor
 **/dist
 # React DevTools extension source code
-examples/blogs__use-react-devtools/4.2.1_0
+examples/blogs__use-react-devtools/4.28.0_0
 # and demo game
 examples/blogs__use-react-devtools/src
 # don't ignore hidden files, useful for formatting json config files

@@ -1,4 +1,3 @@
-/* global window */
 import { ADD_TODO, CLEAR_COMPLETED, COMPLETE_ALL_TODOS, COMPLETE_TODO, DELETE_TODO, EDIT_TODO } from '../constants/ActionTypes'
 
 const initialState = (window.Cypress && window.initialState) || [
@@ -27,7 +26,7 @@ export default function todos (state = initialState, action) {
 
     case EDIT_TODO:
       return state.map(
-        (todo) => (todo.id === action.id ? { ...todo, text: action.text } : todo)
+        (todo) => (todo.id === action.id ? { ...todo, text: action.text } : todo),
       )
 
     case COMPLETE_TODO:
@@ -36,7 +35,7 @@ export default function todos (state = initialState, action) {
           return (todo.id === action.id
             ? { ...todo, completed: !todo.completed }
             : todo)
-        }
+        },
       )
 
     case COMPLETE_ALL_TODOS: {
