@@ -92,7 +92,7 @@ describe('file download', () => {
       })
 
       // NOTE: the Command Log says the file has been downloaded, but it's not there
-      it.skip('downloaded via out own anchor click', () => {
+      it.skip('downloaded via our own anchor click', () => {
         cy.visit('/')
         let downloadUrl
 
