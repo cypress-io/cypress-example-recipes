@@ -8,8 +8,7 @@ const utc = require('dayjs/plugin/utc')
 // we also need to know if a timestamp is between two other timestamps
 // https://day.js.org/docs/en/query/is-between
 const isBetween = require('dayjs/plugin/isBetween')
-// we will parse a few time strings
-// https://day.js.org/docs/en/plugin/custom-parse-format
+
 const customParseFormat = require('dayjs/plugin/customParseFormat')
 
 dayjs.extend(utc)
