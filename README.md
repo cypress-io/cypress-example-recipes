@@ -81,7 +81,6 @@ Demo recipes from the blog posts at [www.cypress.io/blog](https://www.cypress.io
 Recipe | Description
 --- | ---
 [Application Actions](./examples/blogs__application-actions) | Application actions are a replacement for Page Objects
-[Direct Control of AngularJS](./examples/blogs__direct-control-angular) | Bypass the DOM and control AngularJS
 [E2E API Testing](./examples/blogs__e2e-api-testing) | Run your API Tests with a GUI
 [E2E Snapshots](./examples/blogs__e2e-snapshots) | End-to-End Snapshot Testing
 [Element Coverage](./examples/blogs__element-coverage) | Track elements covered by tests
