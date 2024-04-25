@@ -117,7 +117,7 @@
     "cypress-plugin-snapshots": "1.4.4",
     "cypress-real-events": "1.4.0",
     "cypress-recurse": "1.8.1",
-    "cypress-repeat": "2.2.3",
+    "cypress-repeat": "2.2.5",
     "cypress-select-tests": "1.5.9",
     "cypress-wait-until": "1.7.1",
     "dayjs": "1.9.7",
