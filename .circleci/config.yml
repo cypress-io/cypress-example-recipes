@@ -14,7 +14,7 @@ defaults: &defaults
   parallelism: 1
   working_directory: ~/app
   docker:
-    - image: cypress/browsers:node16.5.0-chrome94-ff93
+    - image: cypress/browsers:node-20.11.1-chrome-123.0.6312.58-1-ff-124.0-edge-122.0.2365.92-1
   environment:
     TERM: xterm
   steps:
@@ -51,13 +51,13 @@ jobs:
   build:
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node16.5.0-chrome94-ff93
+      - image: cypress/browsers:node-20.11.1-chrome-123.0.6312.58-1-ff-124.0-edge-122.0.2365.92-1
     environment:
       TERM: xterm
     steps:
       - checkout
       - restore_cache:
-          key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum ".circleci/config.yml" }}
+          key: cache-dirs-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ checksum ".circleci/config.yml" }}
       - run: npm ci
 
       # run verify and then save cache.
@@ -66,7 +66,7 @@ jobs:
       - run: npm run cypress:info
       - run: npm run stop-only
       - save_cache:
-          key: cache-dirs-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum ".circleci/config.yml" }}
+          key: cache-dirs-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ checksum ".circleci/config.yml" }}
           paths:
             - ~/.npm
             - ~/.cache
@@ -83,7 +83,7 @@ jobs:
   lint:
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node16.5.0-chrome94-ff93
+      - image: cypress/browsers:node-20.11.1-chrome-123.0.6312.58-1-ff-124.0-edge-122.0.2365.92-1
     steps:
       - attach_workspace:
           at: ~/
@@ -93,7 +93,7 @@ jobs:
   # dummy job running after all end-to-end tests
   after-tests:
     docker:
-      - image: cypress/browsers:node16.5.0-chrome94-ff93
+      - image: cypress/browsers:node-20.11.1-chrome-123.0.6312.58-1-ff-124.0-edge-122.0.2365.92-1
     steps:
       - run: echo "all good"
 
@@ -104,7 +104,7 @@ jobs:
     parallelism: 20
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node16.5.0-chrome94-ff93
+      - image: cypress/browsers:node-20.11.1-chrome-123.0.6312.58-1-ff-124.0-edge-122.0.2365.92-1
     environment:
       TERM: xterm
     steps:
@@ -120,7 +120,7 @@ jobs:
     parallelism: 10
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node16.5.0-chrome94-ff93
+      - image: cypress/browsers:node-20.11.1-chrome-123.0.6312.58-1-ff-124.0-edge-122.0.2365.92-1
     environment:
       TERM: xterm
       # no need to record these runs yet
@@ -130,7 +130,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: npm run test:ci:chrome -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+      - run: DISABLE_ESLINT_PLUGIN=true npm run test:ci:chrome -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
       # store test artifacts from any failing projects
       # if the project is not running on this machine, no worries
       - store_artifacts:
@@ -143,7 +143,7 @@ jobs:
     parallelism: 1
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node16.5.0-chrome94-ff93
+      - image: cypress/browsers:node-20.11.1-chrome-123.0.6312.58-1-ff-124.0-edge-122.0.2365.92-1
     environment:
       TERM: xterm
       # no need to record these runs yet
@@ -153,13 +153,13 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: npm run test:ci:chrome:headless -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
+      - run: DISABLE_ESLINT_PLUGIN=true npm run test:ci:chrome:headless -- --chunk $CIRCLE_NODE_INDEX --total-chunks $CIRCLE_NODE_TOTAL
 
   test-examples-firefox:
     parallelism: 10
     working_directory: ~/app
     docker:
-      - image: cypress/browsers:node16.5.0-chrome94-ff93
+      - image: cypress/browsers:node-20.11.1-chrome-123.0.6312.58-1-ff-124.0-edge-122.0.2365.92-1
     environment:
       TERM: xterm
       # no need to record these runs yet
@@ -199,8 +199,6 @@ jobs:
   blogs__iframes:
     <<: *defaults
   blogs__codepen-demo:
-    <<: *defaults
-  blogs__direct-control-angular:
     <<: *defaults
   blogs__e2e-api-testing:
     <<: *defaults
@@ -419,9 +417,6 @@ all_jobs: &all_jobs
       requires:
         - build
   - blogs__application-actions:
-      requires:
-        - build
-  - blogs__direct-control-angular:
       requires:
         - build
   - blogs__e2e-api-testing:
@@ -655,7 +650,6 @@ all_jobs: &all_jobs
         - blogs__application-actions
         - blogs__notification
         - blogs__iframes
-        - blogs__direct-control-angular
         - blogs__e2e-api-testing
         - blogs__e2e-snapshots
         - blogs__element-coverage

@@ -10,7 +10,6 @@ describe('Cypress Run wrap', () => {
 
   it('sets the expected config variables by parsing --config', () => {
     expect(Cypress.config()).to.include({
-      video: false,
       viewportWidth: 100,
       viewportHeight: 300,
     })

@@ -25,7 +25,7 @@ describe('Unit Test Application Code', function () {
       expect(divide(27, 9)).to.eq(3)
     })
 
-    it('can muliple numbers', function () {
+    it('can multiply numbers', function () {
       expect(multiply(5, 4)).to.eq(20)
     })
   })

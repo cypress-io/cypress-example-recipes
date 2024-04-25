@@ -1,5 +1,6 @@
 # Recipes
-[![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master) 
+
+[![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-example-recipes/tree/master)
 <!-- [![Build status](https://ci.appveyor.com/api/projects/status/7p4qkwavheciwbxc/branch/master?svg=true)](https://ci.appveyor.com/project/cypress-io/cypress-example-recipes/branch/master)  -->
 [![renovate-app badge][renovate-badge]][renovate-app] [![Cypress Dashboard][dashboard badge]][dashboard url]
 
@@ -80,7 +81,6 @@ Demo recipes from the blog posts at [www.cypress.io/blog](https://www.cypress.io
 Recipe | Description
 --- | ---
 [Application Actions](./examples/blogs__application-actions) | Application actions are a replacement for Page Objects
-[Direct Control of AngularJS](./examples/blogs__direct-control-angular) | Bypass the DOM and control AngularJS
 [E2E API Testing](./examples/blogs__e2e-api-testing) | Run your API Tests with a GUI
 [E2E Snapshots](./examples/blogs__e2e-snapshots) | End-to-End Snapshot Testing
 [Element Coverage](./examples/blogs__element-coverage) | Track elements covered by tests
@@ -164,11 +164,12 @@ Recipe | Description
 --- | ---
 [Visual Regression Testing](https://github.com/mjhea0/cypress-visual-regression) | Adding visual regression testing to Cypress
 [Code coverage](https://github.com/paulfalgout/cypress-coverage-example) | Cypress with Coverage reports
-[Cucumber](https://github.com/TheBrainFamily/cypress-cucumber-example) | Example usage of Cypress with Cucumber
+[Cucumber](https://github.com/badeball/cypress-cucumber-preprocessor) | Example usage of Cypress with Cucumber
 [Jest](https://github.com/TheBrainFamily/jest-runner-cypress-example) | Example for the jest-runner-cypress
 [Mailosaur](https://github.com/muratkeremozcan/cypressExamples/tree/master/cypress-mailosaur) | Utilizes `cy.request()` or `cy.task()` with [`mailosaur`](https://www.npmjs.com/package/mailosaur) to test emails sent with [`sendmail`](https://www.npmjs.com/package/sendmail)
 [Chat App](https://glebbahmutov.com/blog/test-socketio-chat-using-cypress/) | Test a Socket.io Chat App using Cypress
 [Email Testing](https://www.cypress.io/blog/2021/05/24/full-testing-of-html-emails-using-ethereal-accounts/) | Full Testing of HTML Emails using SendGrid and Ethereal Accounts
+[OAuth Popup Authorization](https://developers.livechat.com/updates/cypress-stubbing-popup-auth) | Stubbing OAuth Popup Authorization with Cypress
 
 ## Overview
 

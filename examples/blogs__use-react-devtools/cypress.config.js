@@ -12,10 +12,10 @@ module.exports = defineConfig({
         // only load React DevTools extension when opening Chrome in interactive mode
         if (browser.family === 'chromium') {
           // we could also restrict the extension to only load when browser.isHeaded is true
-          const extensionFolder = path.resolve(__dirname, '..', '..', '4.2.1_0')
+          const extensionFolder = path.resolve(__dirname, '4.28.0_0')
 
           console.log('adding React DevTools extension from', extensionFolder)
-          launchOptions.args.push(extensionFolder)
+          launchOptions.args.push(`--load-extension==${extensionFolder}`)
 
           return launchOptions
         }

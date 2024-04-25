@@ -3,7 +3,7 @@
 describe('window size', () => {
   /**
    * Collects window and iframe sizes in pixels and prints
-   * them to the command log. Also sends the to the `setupNodeEvents`
+   * them to the command log. Also sends them to the `setupNodeEvents`
    * function via cy.task to be printed in the terminal
    */
   const logSizes = () => {
@@ -13,14 +13,6 @@ describe('window size', () => {
 
     cy.log(`browser window is: **${windowWidth} x ${windowHeight}**`)
     cy.task('log', { message: 'browser window', o: { windowWidth, windowHeight } }, { log: false })
-
-    // part of the browser window is taken up the command log
-    const commandLog = window.top.document.querySelector('.container')
-    const commandLogWidth = commandLog.offsetWidth
-    const commandLogHeight = commandLog.offsetHeight
-
-    cy.log(`command log is: **${commandLogWidth} x ${commandLogHeight}**`)
-    cy.task('log', { message: 'command log', o: { commandLogWidth, commandLogHeight } }, { log: false })
 
     // the app thinks it has the following dimensions
     cy.window({ log: false }).then((win) => {
