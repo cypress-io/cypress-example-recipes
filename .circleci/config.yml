@@ -733,15 +733,3 @@ workflows:
   # run this workflow on each commit and pull request
   all-recipes:
     jobs: *all_jobs
-
-  # since this is testing a lot of external sites
-  # let's run these tests once per day (at night)
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs: *all_jobs
