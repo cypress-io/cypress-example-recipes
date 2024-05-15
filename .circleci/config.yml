@@ -446,7 +446,7 @@ all_jobs: &all_jobs
   - fundamentals__window-size:
       requires:
         - build
-      test-command: npm run test:ci:record -- --group $CIRCLE_JOB
+      test-command: DEBUG=cypress:* npm run test:ci:record -- --group $CIRCLE_JOB
   - fundamentals__node-modules:
       requires:
         - build
