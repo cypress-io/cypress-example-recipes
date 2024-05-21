@@ -119,7 +119,7 @@
     "cypress-recurse": "1.8.1",
     "cypress-repeat": "2.2.5",
     "cypress-select-tests": "1.5.9",
-    "cypress-wait-until": "1.7.1",
+    "cypress-wait-until": "1.7.2",
     "dayjs": "1.9.7",
     "dotenv": "8.2.0",
     "eslint": "6.0.1",
