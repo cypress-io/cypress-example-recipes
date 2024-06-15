@@ -146,7 +146,6 @@ Recipe | Description
 [Visual Testing](https://on.cypress.io/visual-testing) | Official Cypress guide to visual testing
 [Code Coverage](https://on.cypress.io/code-coverage) | Official Cypress guide to code coverage
 [detect-page-reload](https://glebbahmutov.com/blog/detect-page-reload/) | How to detect from Cypress test when a page reloads using object property assertions
-[run in Docker](https://www.cypress.io/blog/2019/05/02/run-cypress-with-a-single-docker-command/) | Run Cypress with a single Docker command
 [SSR E2E](https://glebbahmutov.com/blog/ssr-e2e/) | End-to-end Testing for Server-Side Rendered Pages
 [Using TS aliases](https://glebbahmutov.com/blog/using-ts-aliases-in-cypress-tests/) | Using TypeScript aliases in Cypress tests
 [stub-navigator-api](https://glebbahmutov.com/blog/stub-navigator-api/) | Stub navigator API in end-to-end tests
