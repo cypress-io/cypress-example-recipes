@@ -87,7 +87,7 @@
     "@apollo/react-testing": "3.1.4",
     "@babel/core": "7.22.11",
     "@babel/preset-flow": "7.0.0",
-    "@babel/preset-typescript": "7.9.0",
+    "@babel/preset-typescript": "7.24.7",
     "@cypress/browserify-preprocessor": "3.0.2",
     "@cypress/eslint-plugin-dev": "5.0.2",
     "@cypress/skip-test": "2.5.1",
