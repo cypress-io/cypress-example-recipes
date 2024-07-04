@@ -16,6 +16,7 @@ Spec file | Description
 [local-download-spec.cy.js](./cypress/e2e/local-download-spec.cy.js) | Downloads files from local domain by using `<a href=... download>` anchor links
 [location-href-spec.cy.js](./cypress/e2e/location-href-spec.cy.js) | Intercepts and verifies a file downloaded via setting `document.location.href=...` URL
 [remote-download-spec.cy.js](./cypress/e2e/remote-download-spec.cy.js) | Downloads files from another domain by using `<a href=... download>` anchor links
+[download-click-command.js](./cypress/e2e/download-click-command.js) | Add a cypress helper to allow you to avoid "waiting for page load"
 
 ## Notes
 
