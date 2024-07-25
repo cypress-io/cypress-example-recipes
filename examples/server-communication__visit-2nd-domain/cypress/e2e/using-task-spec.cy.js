@@ -3,7 +3,9 @@ describe('Two domains', () => {
   Cypress.on('uncaught:exception', (err) => {
     // cypress.io has a few React exceptions related to state hydration,
     // but these exceptions do not impact this test
-    if (err.message.includes('Minified React error')) {
+    // This is also true with Cannot read properties of null (reading 'addEventListener') which has to due with the osano library
+    // that is on www.cypress.io
+    if (err.message.includes('Minified React error') || err.message.includes(`Cannot read properties of null (reading 'addEventListener')`)) {
       return false
     }
 
