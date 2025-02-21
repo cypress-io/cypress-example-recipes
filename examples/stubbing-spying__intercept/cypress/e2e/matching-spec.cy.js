@@ -25,11 +25,11 @@ describe('intercept', () => {
         // confirm that both interceptors are matched
         cy.wait('@users')
         .its('request.url')
-        .should('equal', 'https://jsonplaceholder.cypress.io/users/2')
+        .should('equal', 'http://localhost:7081/users/2')
 
         cy.wait('@secondUser')
         .its('request.url')
-        .should('equal', 'https://jsonplaceholder.cypress.io/users/2')
+        .should('equal', 'http://localhost:7081/users/2')
       })
 
       it('use regex to match exactly', () => {
@@ -41,7 +41,7 @@ describe('intercept', () => {
         // only the second interceptor should match
         cy.wait('@secondUser')
         .its('request.url')
-        .should('equal', 'https://jsonplaceholder.cypress.io/users/2')
+        .should('equal', 'http://localhost:7081/users/2')
       })
 
       it('use regex to match exactly and check if the other intercept has not fired', () => {
@@ -57,7 +57,7 @@ describe('intercept', () => {
         // only the second interceptor should match
         cy.wait('@secondUser')
         .its('request.url')
-        .should('equal', 'https://jsonplaceholder.cypress.io/users/2')
+        .should('equal', 'http://localhost:7081/users/2')
         // but the first intercept should have never fired
         .then(() => {
           expect(usersMatched, 'users intercept').to.be.false

@@ -63,7 +63,7 @@ describe('intercept', () => {
     })
 
     it('spying on 2nd domain', () => {
-      cy.intercept('https://jsonplaceholder.cypress.io/users*').as('users')
+      cy.intercept('http://localhost:7081/users*').as('users')
       cy.get('#load-users').click()
       cy.wait('@users').its('response.body').should('have.length', 3)
       .its('0') // grab the first user from the list

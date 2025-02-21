@@ -55,7 +55,7 @@ const loadUsers = (nUsers = 3) => {
       console.log('loading %d users', nUsers)
       document.querySelector('#users').innerText = ''
 
-      fetch(`https://jsonplaceholder.cypress.io/users?_limit=${nUsers}`, {
+      fetch(`http://localhost:7081/users?_limit=${nUsers}`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -90,7 +90,7 @@ const loadUser = (id) => {
     console.log('loading user #%d', id)
     document.querySelector('#users').innerText = ''
 
-    fetch(`https://jsonplaceholder.cypress.io/users/${id}`)
+    fetch(`http://localhost:7081/users/${id}`)
     .then((r) => r.json())
     .then((user) => {
       const users = [user]
@@ -116,7 +116,7 @@ function postUser () {
     name: 'Joe Smith',
   }
 
-  return fetch('https://jsonplaceholder.cypress.io/users', {
+  return fetch('http://localhost:7081/users', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -128,11 +128,11 @@ function postUser () {
 
 function putUser () {
   const user = {
-    id: 101,
+    id: 1,
     name: 'Joe Smith',
   }
 
-  return fetch('https://jsonplaceholder.cypress.io/users/1', {
+  return fetch('http://localhost:7081/users/1', {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',

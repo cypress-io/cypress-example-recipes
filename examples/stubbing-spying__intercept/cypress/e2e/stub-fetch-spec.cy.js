@@ -200,7 +200,7 @@ describe('intercept', () => {
         username: 'Test User',
       }]
 
-      cy.intercept({ url: 'https://jsonplaceholder.cypress.io/users*' }, {
+      cy.intercept({ url: 'http://localhost:7081/users*' }, {
         body: users,
         headers: {
           'access-control-allow-origin': Cypress.config('baseUrl'),
