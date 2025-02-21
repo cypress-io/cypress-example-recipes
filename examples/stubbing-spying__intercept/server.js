@@ -4,12 +4,15 @@ const path = require('path')
 const minimist = require('minimist')
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 
 const fruits = require('./fruits')
+const users = require('./users')
 const app = express()
 
 // get port from passed in args from scripts/start.js
-const port = minimist(process.argv.slice(2)).port
+const port1 = minimist(process.argv.slice(2)).port1
+const port2 = minimist(process.argv.slice(2)).port2
 
 app.use(morgan('dev'))
 app.use(express.static('.'))
@@ -76,4 +79,55 @@ app.get('/req-headers', (req, res) => {
   res.json(req.headers)
 })
 
-app.listen(port)
+app.listen(port1)
+
+const app2 = express()
+
+app2.disable('etag')
+app2.use(morgan('dev'))
+app2.use(cors())
+app2.use(express.json())
+
+app2.get('/', (req, res) => {
+  res.sendFile(`${__dirname}/index.html`)
+})
+
+app2.get('/users/:id', (req, res) => {
+  const id = parseInt(req.params.id)
+  const user = users.find((u) => u.id === id)
+
+  if (user) {
+    return res.json(user)
+  }
+
+  res.status(404).json({ error: 'User not found' })
+})
+
+app2.get('/users', (req, res) => {
+  const limit = req.query._limit
+
+  if (limit) {
+    return res.json(users.slice(0, limit))
+  }
+
+  return res.json(users)
+})
+
+app2.post('/users', (req, res) => {
+  res.sendStatus(201)
+})
+
+app2.put('/users/:id', (req, res) => {
+  const id = parseInt(req.params.id)
+  const user = users.find((u) => u.id === id)
+
+  if (user) {
+    return res.json({
+      ...req.body,
+    })
+  }
+
+  res.status(404).json({ error: 'User not found' })
+})
+
+app2.listen(port2)
