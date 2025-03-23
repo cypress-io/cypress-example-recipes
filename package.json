@@ -89,7 +89,7 @@
     "@babel/preset-flow": "7.0.0",
     "@babel/preset-typescript": "7.9.0",
     "@cypress/browserify-preprocessor": "3.0.2",
-    "@cypress/eslint-plugin-dev": "5.0.2",
+    "@cypress/eslint-plugin-dev": "5.3.3",
     "@cypress/skip-test": "2.5.1",
     "@cypress/snapshot": "2.1.7",
     "@cypress/webpack-preprocessor": "5.5.0",
