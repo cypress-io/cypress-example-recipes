@@ -18,7 +18,7 @@ describe('Sorting table', () => {
       cy.contains('.ag-header-cell-label', 'Price').click()
       // check ↑ is visible
       cy.contains('.ag-header-cell-label', 'Price')
-      .find('[ref=eSortAsc]').should('be.visible')
+      .find('[data-ref=eSortAsc]').should('be.visible')
 
       // verify the prices in the column are indeed in sorted order
       const cellsToPriceObjects = (cells$) => {
