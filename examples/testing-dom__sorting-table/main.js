@@ -23,5 +23,5 @@ const gridOptions = {
 document.addEventListener('DOMContentLoaded', function () {
   const gridDiv = document.querySelector('#myGrid')
 
-  new agGrid.Grid(gridDiv, gridOptions)
+  agGrid.createGrid(gridDiv, gridOptions)
 })
