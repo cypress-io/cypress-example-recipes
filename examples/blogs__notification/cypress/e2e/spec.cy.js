@@ -23,7 +23,7 @@ describe('Browser notifications', () => {
     cy.visit('index.html', {
       onBeforeLoad (win) {
         // https://on.cypress.io/stub
-        cy.stub(win.Notification, 'permission', 'granted')
+        cy.stub(win.Notification, 'permission').value('granted')
         cy.stub(win, 'Notification').as('Notification')
       },
     })
@@ -37,7 +37,7 @@ describe('Browser notifications', () => {
   it('asks for permission first, then shows notification if granted', () => {
     cy.visit('index.html', {
       onBeforeLoad (win) {
-        cy.stub(win.Notification, 'permission', 'unknown')
+        cy.stub(win.Notification, 'permission').value('unknown')
         cy.stub(win.Notification, 'requestPermission').resolves('granted').as('ask')
         cy.stub(win, 'Notification').as('Notification')
       },
@@ -52,7 +52,7 @@ describe('Browser notifications', () => {
   it('asks for permission first, does nothing if denied', () => {
     cy.visit('index.html', {
       onBeforeLoad (win) {
-        cy.stub(win.Notification, 'permission', 'unknown')
+        cy.stub(win.Notification, 'permission').value('unknown')
         cy.stub(win.Notification, 'requestPermission').resolves('denied').as('ask')
         cy.stub(win, 'Notification').as('Notification')
       },
@@ -66,7 +66,7 @@ describe('Browser notifications', () => {
   it('does not show notification if permission was denied before', () => {
     cy.visit('index.html', {
       onBeforeLoad (win) {
-        cy.stub(win.Notification, 'permission', 'denied')
+        cy.stub(win.Notification, 'permission').value('denied')
         cy.stub(win.Notification, 'requestPermission').resolves('denied').as('ask')
         cy.stub(win, 'Notification').as('Notification')
       },
@@ -82,7 +82,7 @@ describe('Browser notifications', () => {
         // the application checks if the permission was granted
         // using the property Notification.permission === 'granted'
         // which Sinon still supports, although it is marked deprecated
-        cy.stub(win.Notification, 'permission', 'granted')
+        cy.stub(win.Notification, 'permission').value('granted')
         cy.spy(win, 'Notification').as('Notification')
       },
     })

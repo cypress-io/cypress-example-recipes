@@ -21,7 +21,7 @@ context('Console', () => {
     beforeEach(() => {
       cy.visit('/index.html', {
         onBeforeLoad (win) {
-          cy.stub(win.console, 'log', (x) => {
+          cy.stub(win.console, 'log').callsFake((x) => {
             parameter = x
           })
         },
