@@ -210,8 +210,6 @@ jobs:
     <<: *defaults
   blogs__vue-vuex-rest:
     <<: *defaults
-  blogs__use-react-devtools:
-    <<: *defaults
   blogs__form-submit:
     <<: *defaults
   extending-cypress__chai-assertions:
@@ -434,9 +432,6 @@ all_jobs: &all_jobs
   - blogs__vue-vuex-rest:
       requires:
         - build
-  - blogs__use-react-devtools:
-      requires:
-        - build
   - blogs__form-submit:
       requires:
         - build
@@ -655,7 +650,6 @@ all_jobs: &all_jobs
         - blogs__element-coverage
         - blogs__testing-redux-store
         - blogs__vue-vuex-rest
-        - blogs__use-react-devtools
         - blogs__form-submit
         - extending-cypress__chai-assertions
         - fundamentals__window-size
