@@ -108,7 +108,7 @@
     "common-tags": "1.8.0",
     "console.table": "0.10.0",
     "cy-spok": "1.3.2",
-    "cypress": "14.3.3",
+    "cypress": "14.4.1",
     "cypress-axe": "0.12.2",
     "cypress-expect-n-assertions": "1.0.0",
     "cypress-failed-log": "2.9.5",
