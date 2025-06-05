@@ -11,7 +11,9 @@ describe('Form submit', () => {
   it('wait for URL change', () => {
     cy.visit('')
     cy.get('select').select('Second')
-    cy.location('search').should('equal', '?')
+    // Starting with Cypress 15, the search object will no longer contain an ? is the key value pairs are empty
+    // This more closely aligns with the url standard in https://developer.mozilla.org/en-US/docs/Web/API/URL/search
+    cy.location('href').should('contain', '?')
     cy.get('input').type('Hallo')
   })
 
