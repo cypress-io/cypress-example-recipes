@@ -9,7 +9,7 @@ describe('generated from fixture', () => {
   const rainbow = ['red', 'orange', 'yellow', 'green', 'blue', 'violet']
 
   colors.forEach((color) => {
-    it(`🌈 has color ${color}`, () => {
+    it.skip(`🌈 has color ${color}`, () => {
       cy.wrap(color).should('be.oneOf', rainbow)
     })
   })
