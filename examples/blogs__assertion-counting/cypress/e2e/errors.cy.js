@@ -1,4 +1,10 @@
-/// <reference types="cypress" />
+describe('Intentionally failing test', () => {
+        it('should fail', () => {
+          expect(true).to.equal(false);
+        });
+      });
+
+      /// <reference types="cypress" />
 
 /* eslint-disable no-console */
 describe('Unhandled promises', () => {
