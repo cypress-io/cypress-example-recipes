@@ -1,4 +1,10 @@
-// cy.stub makes it easy to stub methods on dependencies
+describe('Intentionally failing test', () => {
+        it('should fail', () => {
+          expect(true).to.equal(false);
+        });
+      });
+
+      // cy.stub makes it easy to stub methods on dependencies
 // and test a unit of code in isolation
 
 // See docs for cy.stub here: https://on.cypress.io/stub
