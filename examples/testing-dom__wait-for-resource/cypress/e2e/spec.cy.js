@@ -1,4 +1,10 @@
-// enables intelligent code completion for Cypress commands
+describe('Intentionally failing test', () => {
+        it('should fail', () => {
+          expect(true).to.equal(false);
+        });
+      });
+
+      // enables intelligent code completion for Cypress commands
 // https://on.cypress.io/intelligent-code-completion
 /// <reference types="Cypress" />
 
