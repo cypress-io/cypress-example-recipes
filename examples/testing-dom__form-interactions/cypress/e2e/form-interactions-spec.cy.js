@@ -19,11 +19,11 @@ describe('Form Interactions', function () {
     // Note that some implementations may rely on the 'input' event,
     // which is fired as a user moves the slider, but is not supported
     // by some browsers
-    cy.get('input[type=range]').as('range')
+    cy.wait(5000); cy.get('input[type=range]').as('range')
     .invoke('val', 25)
     .trigger('change')
 
-    cy.get('@range').siblings('p')
+    cy.wait(5000); cy.get('@range').siblings('p')
     .should('have.text', '25')
   })
 })
