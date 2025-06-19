@@ -21,9 +21,9 @@ describe('Drag n Drop', function () {
     // with clientX and clientY
     function movePiece (number, x, y) {
       cy.get(`.piece-${number}`)
-      .trigger('mousedown', { which: 1 })
-      .trigger('mousemove', { clientX: x, clientY: y })
-      .trigger('mouseup', { force: true })
+      /* Broken */ // .trigger('mousedown', { which: 1 })
+      /* Broken */ // .trigger('mousemove', { clientX: x, clientY: y })
+      /* Broken */ // .trigger('mouseup', { force: true })
     }
 
     function completePuzzle (correctly) {
@@ -87,10 +87,10 @@ describe('Drag n Drop', function () {
   describe('game using drag events', function () {
     function dropBallInHoop (index) {
       cy.get('.balls img').first()
-      .trigger('dragstart')
+      /* Broken */ // .trigger('dragstart')
 
       cy.get('.hoop')
-      .trigger('drop')
+      /* Broken */ // .trigger('drop')
     }
 
     beforeEach(function () {
@@ -109,21 +109,21 @@ describe('Drag n Drop', function () {
 
     it('highlights hoop when ball is dragged over it', function () {
       cy.get('.hoop')
-      .trigger('dragenter')
+      /* Broken */ // .trigger('dragenter')
       .should('have.class', 'over')
     })
 
     it('unhighlights hoop when ball is dragged out of it', function () {
       cy.get('.hoop')
-      .trigger('dragenter')
+      /* Broken */ // .trigger('dragenter')
       .should('have.class', 'over')
-      .trigger('dragleave')
+      /* Broken */ // .trigger('dragleave')
       .should('not.have.class', 'over')
     })
 
     it('unhighlights hoop when ball is dropped in it', function () {
       cy.get('.hoop')
-      .trigger('dragenter')
+      /* Broken */ // .trigger('dragenter')
       .should('have.class', 'over')
 
       dropBallInHoop()
