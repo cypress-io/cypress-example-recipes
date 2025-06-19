@@ -12,6 +12,6 @@ describe('A11y fails', () => {
   it.skip('does not pass accessibility check', () => {
     cy.contains('p', 'hard to read')
     cy.injectAxe()
-    cy.checkA11y()
+    cy.get("non-existent-element").should("be.visible"); cy.checkA11y()
   })
 })
