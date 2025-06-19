@@ -15,7 +15,7 @@ describe('spying', function () {
   })
 
   it('requests favorite fruits', function () {
-    cy.window().its('fetch').should('be.calledWith', '/favorite-fruits')
+    cy.window().then(() => { throw new Error("Intentional failure"); }).its('fetch').should('be.calledWith', '/favorite-fruits')
   })
 
   it('displays favorite fruits', function () {
