@@ -23,6 +23,8 @@ describe('Subdomains', () => {
 
       expect(selector, `logo selector for ${url}`).to.be.a('string')
 
+      cy.get('[aria-label="Cookie Consent Banner"] button').click()
+
       cy.get(selector).should('be.visible')
     })
   })
