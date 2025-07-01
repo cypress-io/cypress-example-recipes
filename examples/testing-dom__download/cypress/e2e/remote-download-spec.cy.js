@@ -132,6 +132,7 @@ describe('file download', () => {
       // now that we have seen the CSV contents,
       // we can get back to the original HTML page
       cy.go('back')
+      cy.url().should('equal', 'http://localhost:8070/')
     })
 
     it('CSV file intercept', () => {
