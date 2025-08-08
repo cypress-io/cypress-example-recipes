@@ -92,7 +92,7 @@
     "@cypress/eslint-plugin-dev": "5.0.2",
     "@cypress/skip-test": "2.5.1",
     "@cypress/snapshot": "2.1.7",
-    "@cypress/webpack-batteries-included-preprocessor": "3.1.0",
+    "@cypress/webpack-batteries-included-preprocessor": "4.0.0",
     "@cypress/webpack-preprocessor": "5.5.0",
     "@medv/finder": "1.1.2",
     "@types/chai": "4.1.7",
