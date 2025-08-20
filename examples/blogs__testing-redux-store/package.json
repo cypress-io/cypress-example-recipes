@@ -11,9 +11,6 @@
     "test:ci": "../../node_modules/.bin/start-test 3000 cypress:run",
     "test:ci:record": "../../node_modules/.bin/start-test 3000 cypress:run:record"
   },
-  "devDependencies": {
-    "cypress-plugin-snapshots": "1.0.6"
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
