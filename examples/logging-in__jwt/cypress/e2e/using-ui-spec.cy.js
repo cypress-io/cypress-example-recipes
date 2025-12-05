@@ -6,7 +6,10 @@ describe('logs in', () => {
 
     // enter valid username and password
     cy.get('[name=username]').type(Cypress.env('username'))
-    cy.get('[name=password]').type(Cypress.env('password'))
+    cy.task('getUserPassword').then(({ password }) => {
+      cy.get('[name=password]').type(password)
+    })
+
     cy.contains('button', 'Login').click()
 
     // confirm we have logged in successfully
