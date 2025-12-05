@@ -4,13 +4,15 @@
 let user
 
 before(function fetchUser () {
-  cy.request('POST', 'http://localhost:4000/users/authenticate', {
-    username: Cypress.env('username'),
-    password: Cypress.env('password'),
-  })
-  .its('body')
-  .then((res) => {
-    user = res
+  cy.task('getUserPassword').then(({ password }) => {
+    cy.request('POST', 'http://localhost:4000/users/authenticate', {
+      username: Cypress.env('username'),
+      password,
+    })
+    .its('body')
+    .then((res) => {
+      user = res
+    })
   })
 })
 
