@@ -23,7 +23,16 @@ describe('Subdomains', () => {
 
       expect(selector, `logo selector for ${url}`).to.be.a('string')
 
-      cy.get('[aria-label="Cookie Consent Banner"] button').click()
+      // The Osano cookie banner is third-party and may not appear (or may
+      // be in a hidden state if consent is already persisted). Dismiss it
+      // only when it is actually visible.
+      cy.get('body').then(($body) => {
+        const $banner = $body.find('[aria-label="Cookie Consent Banner"] button')
+
+        if ($banner.length && $banner.is(':visible')) {
+          cy.wrap($banner).first().click()
+        }
+      })
 
       cy.get(selector).should('be.visible')
     })
