@@ -14,11 +14,54 @@
     <button id="register">Register</button>
 
     <script>
-      // standard google analytics code
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      // lightweight local GA shim that sends expected GET pixel requests
+      ;(function (w) {
+        if (!w.ga) {
+          let currentPage = ''
+          function sendCollect (params) {
+            const u = new URL('https://www.google-analytics.com/collect')
+            Object.keys(params).forEach((k) => {
+              if (params[k] != null && params[k] !== '') {
+                u.searchParams.set(k, params[k])
+              }
+            })
+            // trigger GET request similar to analytics.js pixel
+            new Image().src = u.toString()
+          }
+
+          w.ga = function () {
+            const args = Array.prototype.slice.call(arguments)
+            const cmd = args[0]
+            if (cmd === 'create') {
+              // no-op in shim
+              return
+            }
+            if (cmd === 'set') {
+              // e.g. ga('set', 'page', 'index.html')
+              if (args[1] === 'page') {
+                currentPage = args[2] || ''
+              }
+              return
+            }
+            if (cmd === 'send') {
+              const payload = args[1]
+              if (typeof payload === 'string' && payload === 'pageview') {
+                const page = args[2] || currentPage || ''
+                sendCollect({ t: 'pageview', dp: page })
+                return
+              }
+              if (payload && typeof payload === 'object' && payload.hitType === 'event') {
+                sendCollect({
+                  ec: payload.eventCategory,
+                  ea: payload.eventAction,
+                  el: payload.eventLabel,
+                })
+                return
+              }
+            }
+          }
+        }
+      })(window)
 
       ga('create', 'UA-XXXXX-Y', 'auto');
       ga('set', 'page', 'index.html');

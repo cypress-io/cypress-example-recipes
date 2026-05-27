@@ -8,9 +8,7 @@
 // if you pop open your dev tools you will see that the network request
 // for the script tag returns 503 because it's been blocked.
 
-// FIXME: this test is failing because GA is not actually firing the XHR events on send any longer. Cause needs to be investigated
-// @see https://github.com/cypress-io/cypress-example-recipes/issues/930
-describe.skip('Google Analytics', function () {
+describe('Google Analytics', function () {
   // using a global event handler here because likely
   // in your real app you'll always want to stub window.ga
   //

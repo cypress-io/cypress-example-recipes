@@ -6,6 +6,7 @@ module.exports = defineConfig({
   viewportWidth: 250,
   e2e: {
     supportFile: false,
+    projectId: 'your-cloud-project-id',
     setupNodeEvents (on, config) {
       // `on` is used to hook into various events Cypress emits
       // `config` is the resolved Cypress config
