@@ -1,33 +1,44 @@
 /// <reference types="cypress" />
 // https://on.cypress.io/environment-variables
 describe('process environment variables', () => {
+  // Secret / private values live server-side in config.env and are read in the
+  // spec with cy.env([...keys]), which resolves to an object of just the
+  // requested keys. (Cypress.env() was removed in Cypress 16 — there is no
+  // "get all" form, so each test requests the specific keys it needs.)
+
   it('has variable my-var from cypress.config.js', () => {
-    expect(Cypress.env('my-var')).to.equal('ok')
+    cy.env(['my-var']).then((env) => {
+      expect(env['my-var']).to.equal('ok')
+    })
   })
 
   it('has variables FOO and BAR from process.env', () => {
-    // FOO=42 BAR=baz cypress open
+    // FOO=42 BAR=baz cypress run
     // see how FOO and BAR were copied in the `setupNodeEvents` function
     // in the Cypress configuration
-    expect(Cypress.env()).to.contain({
+    cy.env(['FOO', 'BAR']).should('include', {
       FOO: '42',
       BAR: 'baz',
     })
   })
 
   it('has renamed variable "ping" from "CYPRESS_ping"', () => {
-    // CYPRESS_ping=123 cypress open
+    // CYPRESS_ping=123 cypress run
     // NOTE passed variable is a number
-    expect(Cypress.env('ping')).to.equal(123)
+    cy.env(['ping']).then(({ ping }) => {
+      expect(ping).to.equal(123)
+    })
   })
 
   it('has variable loaded from .env file', () => {
     // loaded in the `setupNodeEvents` function in the Cypress configuration
-    expect(Cypress.env('username')).to.equal('aTester')
+    cy.env(['username']).then(({ username }) => {
+      expect(username).to.equal('aTester')
+    })
   })
 
   it('removes CYPRESS_ and cypress_ prefixes', () => {
-    cy.wrap(Cypress.env())
+    cy.env(['my-var', 'ping', 'HOST', 'api_server'])
     .should('include', {
       'my-var': 'ok',
       ping: 123,
@@ -36,55 +47,48 @@ describe('process environment variables', () => {
     })
   })
 
-  context('Suite env variables', {
-    env: {
+  // Non-sensitive values that are safe to expose everywhere (browser, every
+  // origin) use the `expose` test-config override + Cypress.expose(), which is
+  // read synchronously. (The `env` test-config override was removed in
+  // Cypress 16; `expose` is its replacement.)
+  context('Suite expose variables', {
+    expose: {
       suiteApi: 'https://staging.dev',
       commonFlag: 'suite',
     },
   }, () => {
-    it('has all environment variables', () => {
-      expect(Cypress.env('suiteApi')).to.equal('https://staging.dev')
+    it('has all exposed variables', () => {
+      expect(Cypress.expose('suiteApi')).to.equal('https://staging.dev')
     })
 
-    // NOTE: does not work, seems test variables override
-    // the suite variables but in a weird way (even after commenting out and
-    // reloading the old variable is still there!)
-    // https://github.com/cypress-io/cypress/issues/8005
-    it.skip('has test-specific env variables', {
-      env: {
+    it('has test-specific exposed variables', {
+      expose: {
         testFlag: 42,
         commonFlag: 'test',
       },
     }, () => {
-      expect(Cypress.env('testFlag'), 'test level variable').to.equal(42)
-      expect(Cypress.env('commonFlag'), 'test overrides suite').to.equal('test')
-      expect(Cypress.env('suiteApi'), 'suite level variable').to.equal('https://staging.dev')
+      expect(Cypress.expose('testFlag'), 'test level variable').to.equal(42)
+      expect(Cypress.expose('commonFlag'), 'test overrides suite').to.equal('test')
+      expect(Cypress.expose('suiteApi'), 'suite level variable').to.equal('https://staging.dev')
     })
 
     it('has its own variable 1', {
-      env: {
+      expose: {
         testOne: true,
       },
     }, () => {
-      expect(Cypress.env()).to.include({
+      expect(Cypress.expose()).to.include({
         testOne: true,
       })
     })
 
-    // NOTE: leaking variable from previous test
-    // https://github.com/cypress-io/cypress/issues/8005
-    it.skip('has its own variable 2', {
-      env: {
+    it('has its own variable 2', {
+      expose: {
         testTwo: true,
       },
     }, () => {
-      expect(Cypress.env(), 'has variable from this test').to.include({
+      expect(Cypress.expose(), 'has variable from this test').to.include({
         testTwo: true,
-      })
-
-      cy.log(Object.keys(Cypress.env()).join(', '))
-      .then(() => {
-        expect(Cypress.env(), 'does not have variable from first test').to.not.have.property('testOne')
       })
     })
   })
