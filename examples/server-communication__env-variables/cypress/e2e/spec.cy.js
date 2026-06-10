@@ -1,11 +1,6 @@
 /// <reference types="cypress" />
 // https://on.cypress.io/environment-variables
 describe('process environment variables', () => {
-  // Secret / private values live server-side in config.env and are read in the
-  // spec with cy.env([...keys]), which resolves to an object of just the
-  // requested keys. (Cypress.env() was removed in Cypress 16 — there is no
-  // "get all" form, so each test requests the specific keys it needs.)
-
   it('has variable my-var from cypress.config.js', () => {
     cy.env(['my-var']).then((env) => {
       expect(env['my-var']).to.equal('ok')
@@ -37,6 +32,15 @@ describe('process environment variables', () => {
     })
   })
 
+  it('reads secret values kept server-side', () => {
+    // SECRET and PASSWORD live in config.env (loaded from .env) and never
+    // reach the browser; cy.env() returns only the keys this test requests
+    cy.env(['secret', 'password']).should('include', {
+      secret: 'super-secret-token',
+      password: 'p@ssw0rd',
+    })
+  })
+
   it('removes CYPRESS_ and cypress_ prefixes', () => {
     cy.env(['my-var', 'ping', 'HOST', 'api_server'])
     .should('include', {
@@ -47,10 +51,6 @@ describe('process environment variables', () => {
     })
   })
 
-  // Non-sensitive values that are safe to expose everywhere (browser, every
-  // origin) use the `expose` test-config override + Cypress.expose(), which is
-  // read synchronously. (The `env` test-config override was removed in
-  // Cypress 16; `expose` is its replacement.)
   context('Suite expose variables', {
     expose: {
       suiteApi: 'https://staging.dev',
