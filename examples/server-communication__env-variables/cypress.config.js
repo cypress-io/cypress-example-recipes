@@ -23,7 +23,12 @@ module.exports = defineConfig({
       config.env.FOO = process.env.FOO
       config.env.BAR = process.env.BAR
       config.env.username = process.env.USER_NAME
-      console.log('extended config.env with process.env.{FOO, BAR, USER_NAME}')
+
+      // secret values stay server-side in config.env and are never exposed to
+      // the browser; specs read them with cy.env(['secret', 'password'])
+      config.env.secret = process.env.SECRET
+      config.env.password = process.env.PASSWORD
+      console.log('extended config.env with process.env.{FOO, BAR, USER_NAME, SECRET, PASSWORD}')
 
       return config
     },
