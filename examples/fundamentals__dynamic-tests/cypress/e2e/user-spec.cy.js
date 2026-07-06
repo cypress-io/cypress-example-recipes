@@ -2,10 +2,10 @@
 
 // If we do NOT know the expected number of items we can grab them
 // before the spec starts running using the `setupNodeEvents` function.
-// `setupNodeEvents` places the dynamic list into "Cypress.env()" object
+// `setupNodeEvents` exposes the dynamic list via "Cypress.expose()"
 describe('Test for each user', { retries: 2 }, () => {
-  // Cypress.env() object is set by the time the tests start
-  const users = Cypress.env('users')
+  // the exposed values are set by the time the tests start
+  const users = Cypress.expose('users')
 
   it('has valid users', () => {
     expect(users).to.be.an('array').and.not.be.empty

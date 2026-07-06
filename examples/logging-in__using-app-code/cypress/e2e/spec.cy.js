@@ -6,31 +6,35 @@ describe('logs in', () => {
   it('by using application service', () => {
     cy.log('user service login')
 
-    // see https://on.cypress.io/wrap
-    // cy.wrap(user promise) forces the test commands to wait until
-    // the user promise resolves. We also don't want to log empty "wrap {}"
-    // to the command log, since we already logged a good message right above
-    cy.wrap(userService.login(Cypress.env('username'), Cypress.env('password')), {
-      log: false,
-    }).then((user) => {
-    // the userService.login resolves with "user" object
-    // and we can assert its values inside .then()
+    // the credentials are sensitive, thus we read them with cy.env
+    // see https://on.cypress.io/env
+    cy.env(['username', 'password']).then(({ username, password }) => {
+      // see https://on.cypress.io/wrap
+      // cy.wrap(user promise) forces the test commands to wait until
+      // the user promise resolves. We also don't want to log empty "wrap {}"
+      // to the command log, since we already logged a good message right above
+      cy.wrap(userService.login(username, password), {
+        log: false,
+      }).then((user) => {
+      // the userService.login resolves with "user" object
+      // and we can assert its values inside .then()
 
-      // confirm general shape of the object
-      expect(user).to.be.an('object')
-      expect(user).to.have.keys([
-        'firstName',
-        'lastName',
-        'username',
-        'id',
-        'token',
-      ])
+        // confirm general shape of the object
+        expect(user).to.be.an('object')
+        expect(user).to.have.keys([
+          'firstName',
+          'lastName',
+          'username',
+          'id',
+          'token',
+        ])
 
-      // we don't know the token or id, but we know the expected names
-      expect(user).to.contain({
-        username: 'test',
-        firstName: 'Test',
-        lastName: 'User',
+        // we don't know the token or id, but we know the expected names
+        expect(user).to.contain({
+          username: 'test',
+          firstName: 'Test',
+          lastName: 'User',
+        })
       })
     })
 
@@ -45,18 +49,20 @@ describe('logs in', () => {
   it('can assert against resolved object using .should', () => {
     cy.log('user service login')
 
-    // same login promise
-    cy.wrap(userService.login(Cypress.env('username'), Cypress.env('password')), {
-      log: false,
-    })
-    // but resolved value checked using implicit assertions
-    // that can be easier to read
-    .should('be.an', 'object')
-    .and('have.keys', ['firstName', 'lastName', 'username', 'id', 'token'])
-    .and('contain', {
-      username: 'test',
-      firstName: 'Test',
-      lastName: 'User',
+    cy.env(['username', 'password']).then(({ username, password }) => {
+      // same login promise
+      cy.wrap(userService.login(username, password), {
+        log: false,
+      })
+      // but resolved value checked using implicit assertions
+      // that can be easier to read
+      .should('be.an', 'object')
+      .and('have.keys', ['firstName', 'lastName', 'username', 'id', 'token'])
+      .and('contain', {
+        username: 'test',
+        firstName: 'Test',
+        lastName: 'User',
+      })
     })
 
     // cy.visit command will wait for the promise returned from
@@ -76,8 +82,11 @@ describe('logs in', () => {
  */
   Cypress.Commands.add(
     'login',
-    (username = Cypress.env('username'), password = Cypress.env('password')) => {
-      return userService.login(username, password)
+    (username, password) => {
+      // default to the credentials kept server-side in the Cypress config env
+      return cy.env(['username', 'password']).then((env) => {
+        return userService.login(username || env.username, password || env.password)
+      })
     }
   )
 

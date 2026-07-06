@@ -139,11 +139,35 @@ describe('Redux store', () => {
     cy.get('.todo-list li.completed').should('have.length', 2)
   })
 
-  it('snapshots', () => {
+  it('has expected state after adding and completing todos', () => {
     cy.visit('/')
     cy.focused().type('first{enter}').type('second{enter}').type('third{enter}')
     cy.contains('.todo-list li', 'second').find('input[type=checkbox]').click()
     cy.contains('.filters a', 'Completed').click()
-    cy.window().its('store').invoke('getState').toMatchSnapshot()
+    cy.window().its('store').invoke('getState').should('deep.equal', {
+      todos: [
+        {
+          completed: false,
+          id: 0,
+          text: 'Use Redux',
+        },
+        {
+          completed: false,
+          id: 1,
+          text: 'first',
+        },
+        {
+          completed: true,
+          id: 2,
+          text: 'second',
+        },
+        {
+          completed: false,
+          id: 3,
+          text: 'third',
+        },
+      ],
+      visibilityFilter: 'show_completed',
+    })
   })
 })

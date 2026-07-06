@@ -15,8 +15,8 @@ describe('Cypress Run wrap', () => {
     })
   })
 
-  it('sets the environment variables by parsing --env', () => {
-    expect(Cypress.env()).to.include({
+  it('sets the exposed public variables by parsing --expose', () => {
+    expect(Cypress.expose()).to.include({
       MY_FLAG: true,
     })
   })

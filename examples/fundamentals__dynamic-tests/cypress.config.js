@@ -32,10 +32,10 @@ module.exports = defineConfig({
       )
 
       // pass the data through the Cypress config object
-      // by storing it in the environment object.
+      // by exposing it as a public configuration value.
       // we are only interested in a few properties in each user object
-      config.env.users = _.map(body, (user) => _.pick(user, 'id', 'name', 'email'))
-      console.table(config.env.users)
+      config.expose.users = _.map(body, (user) => _.pick(user, 'id', 'name', 'email'))
+      console.table(config.expose.users)
 
       // IMPORTANT: return the updated config object
       return config

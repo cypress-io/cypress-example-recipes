@@ -116,7 +116,6 @@
     "cypress-failed-log": "2.9.5",
     "cypress-iframe": "1.0.1",
     "cypress-pipe": "2.0.0",
-    "cypress-plugin-snapshots": "1.4.4",
     "cypress-real-events": "1.4.0",
     "cypress-recurse": "1.8.1",
     "cypress-repeat": "2.2.5",

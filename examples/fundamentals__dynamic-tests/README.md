@@ -14,7 +14,7 @@ Sometimes the data to generate tests might be dynamic and come from an external 
 1. you can fetch data using a script that runs _before_ Cypress starts. Save the results as a JSON file and load data using `require`. This has an advantage that the data does not change while running the tests, making debugging simpler. See suite called "generated from fixture" for an example.
 2. you can fetch the dynamic data before the tests and save as a local variable or context property, then have multiple tests assert against dynamic data items.
 3. you can get the data to use to create dynamic tests using [`cy.task`](https://on.cypress.io/task)
-4. you can get the data during the `setupNodeEvents` function start and place the result into `Cypress.env()` object to pass to the specs
+4. you can get the data during the `setupNodeEvents` function start and place the result into the `config.expose` object to pass to the specs, where it can be read synchronously with [`Cypress.expose()`](https://on.cypress.io/expose)
 
 ## Examples
 
@@ -26,6 +26,6 @@ In these repo you can find:
 - [cypress/e2e/fixture-spec.cy.js](cypress/e2e/fixture-spec.cy.js) uses `require` to load JSON fixture file and generates tests for each item from the fixture.
 - [cypress/e2e/request-spec.cy.js](cypress/e2e/request-spec.cy.js) fetches a list of users from an external API endpoint and creates a test for each user
 - [cypress/e2e/task-spec.cy.js](cypress/e2e/task-spec.cy.js) gets a list of items by calling [`cy.task`](https://on.cypress.io/task) and then generating a test for each item
-- [cypress/e2e/user-spec.cy.js](./cypress/e2e/user-spec.cy.js) gets the list of users on start up, see the [setupNodeEvents](cypress.config.js) function. You can see the fetched list in the `Cypress.env()` object
+- [cypress/e2e/user-spec.cy.js](./cypress/e2e/user-spec.cy.js) gets the list of users on start up, see the [setupNodeEvents](cypress.config.js) function. You can see the fetched list via the `Cypress.expose()` object
 
 ![Cypress env object with fetched users](./images/users.png)

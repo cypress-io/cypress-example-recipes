@@ -4,14 +4,17 @@
 let user
 
 before(function fetchUser () {
-  cy.task('getUserPassword').then(({ password }) => {
-    cy.request('POST', 'http://localhost:4000/users/authenticate', {
-      username: Cypress.env('username'),
-      password,
-    })
-    .its('body')
-    .then((res) => {
-      user = res
+  // the username is sensitive, thus we read it with cy.env
+  cy.env(['username']).then(({ username }) => {
+    cy.task('getUserPassword').then(({ password }) => {
+      cy.request('POST', 'http://localhost:4000/users/authenticate', {
+        username,
+        password,
+      })
+      .its('body')
+      .then((res) => {
+        user = res
+      })
     })
   })
 })

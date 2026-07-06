@@ -2,6 +2,7 @@ const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
   fixturesFolder: false,
+  // sensitive values stay server-side in "env" and are read with cy.env()
   env: {
     username: 'test',
   },

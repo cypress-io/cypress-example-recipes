@@ -3,6 +3,7 @@ const { defineConfig } = require('cypress')
 const webpack = require('@cypress/webpack-preprocessor')
 
 module.exports = defineConfig({
+  // sensitive values stay server-side in "env" and are read with cy.env()
   env: {
     username: 'test',
     password: 'test',

@@ -29,10 +29,10 @@ module.exports = defineConfig({
       console.log('Fetched the following users for testing')
       console.table(userInfo)
 
-      // then set it inside the config object under the environment
-      // which will make it available via Cypress.env("users")
+      // then set it inside the config object under "expose"
+      // which will make it available via Cypress.expose("users")
       // before the start of the tests
-      config.env.users = userInfo
+      config.expose.users = userInfo
 
       return config
     },

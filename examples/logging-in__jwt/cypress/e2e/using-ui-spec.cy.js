@@ -5,7 +5,10 @@ describe('logs in', () => {
     cy.location('pathname').should('equal', '/login')
 
     // enter valid username and password
-    cy.get('[name=username]').type(Cypress.env('username'))
+    cy.env(['username']).then(({ username }) => {
+      cy.get('[name=username]').type(username)
+    })
+
     cy.task('getUserPassword').then(({ password }) => {
       cy.get('[name=password]').type(password)
     })

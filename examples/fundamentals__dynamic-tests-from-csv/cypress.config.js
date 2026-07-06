@@ -24,10 +24,10 @@ module.exports = defineConfig({
       console.log('loaded the users')
       console.log(csv)
 
-      // then set it inside the config object under the environment
-      // which will make it available via Cypress.env("usersList")
+      // then set it inside the config object under "expose"
+      // which will make it available via Cypress.expose("usersList")
       // before the start of the tests
-      config.env.usersList = csv
+      config.expose.usersList = csv
 
       return config
     },

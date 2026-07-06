@@ -9,7 +9,7 @@ Testing Redux store using Cypress as described in [this blog post](https://www.c
 - use Redux actions directly from tests
 - load initial Redux state from a fixture file
 - use automatic user function retries with [cypress-pipe](https://github.com/NicholasBoll/cypress-pipe#readme)
-- use snapshot testing via [meinaart/cypress-plugin-snapshots](https://github.com/meinaart/cypress-plugin-snapshots) plugin
+- assert the entire store state with a single `deep.equal` assertion
 
 ## Application
 

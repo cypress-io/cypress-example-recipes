@@ -10,12 +10,8 @@ function getWebpackOptions () {
 }
 
 module.exports = defineConfig({
-  env: {
-    'cypress-plugin-snapshots': {},
-  },
   e2e: {
     baseUrl: 'http://localhost:3000',
-    excludeSpecPattern: ['**/*.snap", "**/__snapshot__/*'],
     setupNodeEvents (on, config) {
       on(
         'file:preprocessor',

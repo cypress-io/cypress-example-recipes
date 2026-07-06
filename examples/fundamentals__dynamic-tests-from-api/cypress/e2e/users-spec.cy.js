@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-// we can access the Cypress.env() object outside the test
-const users = Cypress.env('users')
+// we can access the exposed public values outside the test
+const users = Cypress.expose('users')
 
 describe('Users from API', () => {
   before(() => {
