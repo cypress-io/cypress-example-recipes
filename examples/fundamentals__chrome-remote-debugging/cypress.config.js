@@ -73,22 +73,34 @@ module.exports = defineConfig({
           await client.DOM.enable()
           await client.CSS.enable()
 
-          // as the Window consists of two IFrames, we must retrieve the right one
+          // The window contains multiple same-origin iframes (e.g. the reporter
+          // frame and the app frame), so find the one that actually holds the
+          // element rather than assuming a fixed position.
           const allRootNodes = await client.DOM.getFlattenedDocument()
 
           const isIframe = (node) => {
             return node.nodeName === 'IFRAME' && node.contentDocument
           }
 
-          const filtered = allRootNodes.nodes.filter(isIframe)
+          const frames = allRootNodes.nodes.filter(isIframe)
 
-          // The first IFrame is our App
-          const root = filtered[0].contentDocument
+          let nodeId
 
-          const { nodeId } = await client.DOM.querySelector({
-            nodeId: root.nodeId,
-            selector,
-          })
+          for (const frame of frames) {
+            const { nodeId: found } = await client.DOM.querySelector({
+              nodeId: frame.contentDocument.nodeId,
+              selector,
+            })
+
+            if (found) {
+              nodeId = found
+              break
+            }
+          }
+
+          if (!nodeId) {
+            throw new Error(`Could not find an iframe containing selector: ${selector}`)
+          }
 
           return client.CSS.forcePseudoState({
             nodeId,
