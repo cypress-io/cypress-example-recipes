@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
-// FIXME: this test is failing because GA is not actually firing the XHR events on send any longer. Cause needs to be investigated
-// @see https://github.com/cypress-io/cypress-example-recipes/issues/930
-describe.skip('Google Analytics', () => {
+describe('Google Analytics', () => {
   // we can arrange the intercepts to be in a particular order in each test
   // by making small utility functions rather than using "beforeEach" hooks
 
@@ -21,8 +19,8 @@ describe.skip('Google Analytics', () => {
   })
 
   it('makes collect calls', () => {
-    // confirm the GA called the collect endpoint
-    cy.wait('@collect').its('request.url')
+    // confirm the GA called the collect endpoint (GET pixel request)
+    cy.wait('@gifCollect').its('request.url')
     // extract the information from the URL search params step by step
     .then((s) => new URL(s)).its('searchParams').invoke('get', 't').should('equal', 'pageview')
 
