@@ -1,7 +1,8 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "automerge": true,
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "labels": [
     "type: dependencies",
@@ -13,7 +14,7 @@
   "major": {
     "automerge": false
   },
-  "masterIssue": true,
+  "dependencyDashboard": true,
   "prConcurrentLimit": 3,
   "prHourlyLimit": 2,
   "rangeStrategy": "pin",
@@ -21,25 +22,39 @@
     "after 2am and before 3am on sunday"
   ],
   "separateMultipleMajor": true,
-  "separatePatchReleases": true,
+  "separateMinorPatch": true,
   "timezone": "America/New_York",
   "updateNotScheduled": false,
   "packageRules": [
     {
-      "packagePatterns": [
-        "*"
+      "description": "Batch minor and patch bumps of the example apps' runtime dependencies (React, Vue, express, jQuery, …) into a single PR per update type. These back the demo apps rather than the Cypress techniques being demonstrated, so one PR beats 57.",
+      "matchDepTypes": [
+        "dependencies"
       ],
-      "excludePackagePatterns": [
-        "cypress",
-        "@cypress/browserify-preprocessor",
-        "@cypress/eslint-plugin-dev",
-        "@cypress/snapshot",
-        "@cypress/webpack-preprocessor",
-        "start-server-and-test",
-        "typescript",
-        "cypress-file-upload"
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
       ],
-      "enabled": false
+      "groupName": "example app dependencies"
+    },
+    {
+      "description": "Batch minor and patch bumps of non-Cypress build and lint tooling (webpack, babel, eslint, enzyme, …) into a single PR per update type. The negations hold Cypress and its plugins out of the group so they keep landing as individual, reviewable PRs.",
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "matchPackageNames": [
+        "!cypress",
+        "!@cypress/**",
+        "!/^cypress-/",
+        "!cy-spok",
+        "!start-server-and-test",
+        "!typescript"
+      ],
+      "groupName": "dev dependencies"
     }
   ]
 }
