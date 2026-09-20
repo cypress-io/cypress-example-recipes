@@ -10,9 +10,7 @@
 
 Recipe | Description
 --- | ---
-[Node Modules](./examples/fundamentals__node-modules) | Import your own node modules
 [Environment variables](./examples/server-communication__env-variables) | Passing environment variables to tests
-[Handling errors](./examples/fundamentals__errors) | Handling thrown errors and unhandled promise rejections
 [Dynamic tests](./examples/fundamentals__dynamic-tests) | Create tests dynamically from JSON data
 [Dynamic tests from CSV](./examples/fundamentals__dynamic-tests-from-csv) | Create tests dynamically from CSV file
 [Dynamic tests from API](./examples/fundamentals__dynamic-tests-from-api) | Create tests dynamically by calling an external API
@@ -20,14 +18,10 @@ Recipe | Description
 [Adding Custom Commands](./examples/fundamentals__add-custom-command) | Write your own custom commands using JavaScript with correct types for IntelliSense to work
 [Adding Custom Commands (TS)](./examples/fundamentals__add-custom-command-ts) | Write your own custom commands using TypeScript
 [Adding Chai Assertions](./examples/extending-cypress__chai-assertions) | Add new or custom chai assertions with correct types
-[Cypress module API](./examples/fundamentals__module-api) | Run Cypress via its module API
-[Wrapping Cypress module API](./examples/fundamentals__module-api-wrap) | Writing a wrapper around "cypress run" command line parsing
-[Custom browsers](./examples/fundamentals__custom-browsers) | Control which browsers the project can use, or even add a custom browser into the list
 [Use Chrome Remote Interface](./examples/fundamentals__chrome-remote-debugging) | Use Chrome debugger protocol to trigger hover state and print media style
 [Out-of-the-box TypeScript](./examples/fundamentals__typescript) | Write tests in TypeScript without setting up preprocessors
 [Per-test timeout](./examples/fundamentals__timeout) | Fail a test if it runs longer than the specified time limit
 [Cypress events](./examples/fundamentals__cy-events) | Using `Cypress.on` and `cy.on` to listen to [Cypress events](https://on.cypress.io/catalog-of-events) like `before:window:load`
-[Video resolution](./examples/fundamentals__window-size) | Increase the browser window size to record high quality videos and capture detailed screenshots
 
 ## Testing the DOM
 
@@ -37,7 +31,6 @@ Recipe | Description
 [Hover and Hidden Elements](./examples/testing-dom__hover-hidden-elements) | Test hidden elements requiring hover
 [Form Interactions](./examples/testing-dom__form-interactions) | Test form elements like input type `range`
 [Drag and Drop](./examples/testing-dom__drag-drop) | Use `.trigger()` to test drag and drop
-[Shadow DOM](./examples/testing-dom__shadow-dom) | You need to use any of available custom commands
 [Waiting for static resource](./examples/testing-dom__wait-for-resource) | Shows how to wait for CSS, image, or any other static resource to load
 [CSV load and table test](./examples/testing-dom__csv-table) | Loads CSV file and quickly compares objects against cells in a table
 [Evaluate performance metrics](./examples/testing-dom__performance-metrics) | Utilize Cypress to monitor a website
@@ -132,7 +125,6 @@ Recipe | Description
 [XHR assertions](./examples/server-communication__xhr-assertions) | Spy and assert on application's network calls
 [Visiting 2nd domain](./examples/server-communication__visit-2nd-domain) | Visiting two different domains from two different tests and passing value from one test to another
 [Pass value between specs](./examples/server-communication__pass-value-between-specs) | Pass a value from spec to spec via the `setupNodeEvents` function in the Cypress configuration using [cy.task](https://on.cypress.io/task)
-[Stream test results](./examples/server-communication__stream-tests) | Streams each test result from the browser to the `setupNodeEvents` function to an external process via IPC
 [Offline](./examples/server-communication__offline) | Test web application when the network is offline
 [Server timing](./examples/server-communication__server-timing) | Report server timing results from Cypress test
 [Wait for API](./examples/server-communication__wait-for-api) | Call the backend using `cy.request` until it responds

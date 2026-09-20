@@ -214,10 +214,6 @@ jobs:
     <<: *defaults
   extending-cypress__chai-assertions:
     <<: *defaults
-  fundamentals__window-size:
-    <<: *defaults
-  fundamentals__node-modules:
-    <<: *defaults
   fundamentals__fixtures:
     <<: *defaults
   fundamentals__timeout:
@@ -225,8 +221,6 @@ jobs:
   fundamentals__add-custom-command:
     <<: *defaults
   fundamentals__add-custom-command-ts:
-    <<: *defaults
-  fundamentals__errors:
     <<: *defaults
   fundamentals__cy-events:
     <<: *defaults
@@ -322,8 +316,6 @@ jobs:
     <<: *defaults
   server-communication__xhr-assertions:
     <<: *defaults
-  server-communication__stream-tests:
-    <<: *defaults
   # server-communication__offline:
   #   <<: *defaults
   server-communication__server-timing:
@@ -337,10 +329,6 @@ jobs:
   fundamentals__dynamic-tests-from-csv:
     <<: *defaults
   fundamentals__dynamic-tests-from-api:
-    <<: *defaults
-  fundamentals__module-api:
-    <<: *defaults
-  fundamentals__module-api-wrap:
     <<: *defaults
   fundamentals__chrome-remote-debugging:
     <<: *defaults
@@ -438,20 +426,10 @@ all_jobs: &all_jobs
   - extending-cypress__chai-assertions:
       requires:
         - build
-  - fundamentals__window-size:
-      requires:
-        - build
-      test-command: DEBUG=cypress:* npm run test:ci:record -- --group $CIRCLE_JOB
-  - fundamentals__node-modules:
-      requires:
-        - build
   - fundamentals__add-custom-command:
       requires:
         - build
   - fundamentals__add-custom-command-ts:
-      requires:
-        - build
-  - fundamentals__errors:
       requires:
         - build
   - fundamentals__cy-events:
@@ -472,13 +450,6 @@ all_jobs: &all_jobs
   - fundamentals__timeout:
       requires:
         - build
-  - fundamentals__module-api:
-      requires:
-        - build
-  - fundamentals__module-api-wrap:
-      requires:
-        - build
-      test-command: npm run test:ci
   - fundamentals__typescript:
       requires:
         - build
@@ -614,9 +585,6 @@ all_jobs: &all_jobs
   - server-communication__pass-value-between-specs:
       requires:
         - build
-  - server-communication__stream-tests:
-      requires:
-        - build
   # - server-communication__offline:
   #     requires:
   #       - build
@@ -652,19 +620,14 @@ all_jobs: &all_jobs
         - blogs__vue-vuex-rest
         - blogs__form-submit
         - extending-cypress__chai-assertions
-        - fundamentals__window-size
-        - fundamentals__node-modules
         - fundamentals__fixtures
         - fundamentals__timeout
         - fundamentals__dynamic-tests
         - fundamentals__dynamic-tests-from-csv
         - fundamentals__dynamic-tests-from-api
-        - fundamentals__module-api
-        - fundamentals__module-api-wrap
         - fundamentals__add-custom-command
         - fundamentals__add-custom-command-ts
         - fundamentals__typescript
-        - fundamentals__errors
         - fundamentals__cy-events
         - logging-in__csrf-tokens
         - logging-in__html-web-forms
@@ -683,7 +646,6 @@ all_jobs: &all_jobs
         - server-communication__xhr-assertions
         - server-communication__visit-2nd-domain
         - server-communication__pass-value-between-specs
-        - server-communication__stream-tests
         # - server-communication__offline
         - server-communication__server-timing
         - server-communication__wait-for-api
