@@ -79,14 +79,10 @@ describe('file download', () => {
       cy.get('[data-cy=download-remote-js]').click()
 
       cy.log('**confirm downloaded JavaScript file**')
-      const downloadedFilename = path.join(downloadsFolder, 'analytics.js')
+      const downloadedFilename = path.join(downloadsFolder, 'example.js')
 
-      cy.readFile(downloadedFilename).should((text) => {
-      // validate the downloaded file
-        const lines = text.split('\n')
-
-        expect(lines).to.have.length.gt(20)
-      })
+      cy.readFile(downloadedFilename, { timeout: 15000 })
+      .should('contain', 'Hello from the downloaded example.js file')
     })
 
     it('ZIP archive', () => {
