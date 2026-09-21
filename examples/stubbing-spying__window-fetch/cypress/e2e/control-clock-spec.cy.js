@@ -11,7 +11,7 @@
 //
 // Since the list of fruits returned from the API are random,
 // using the real server would lead to flaky tests, so we
-// stub out window.fetch again in order to control the response
+// stub the network call with cy.intercept in order to control the response
 describe('clock', function () {
   describe('when favorite fruits are returned', function () {
     it('displays list of fruits', function () {
