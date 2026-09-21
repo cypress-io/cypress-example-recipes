@@ -38,7 +38,7 @@
       "groupName": "example app dependencies"
     },
     {
-      "description": "Batch minor and patch bumps of non-Cypress build and lint tooling (webpack, babel, eslint, enzyme, …) into a single PR per update type. The negations hold Cypress and its plugins out of the group so they keep landing as individual, reviewable PRs.",
+      "description": "Batch minor and patch bumps of non-Cypress build and lint tooling (webpack, babel, eslint, …) into a single PR per update type. The negations hold Cypress and its plugins out of the group so they keep landing as individual, reviewable PRs.",
       "matchDepTypes": [
         "devDependencies"
       ],
