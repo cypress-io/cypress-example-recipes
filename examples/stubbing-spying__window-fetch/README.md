@@ -2,10 +2,10 @@
 
 Cypress observes and controls `fetch` calls natively. [`cy.intercept`](https://on.cypress.io/intercept) works in Cypress' proxy layer, outside the browser, so it sees `fetch` and `XMLHttpRequest` requests alike — no polyfill, no patching of the application, and no configuration flag to turn on.
 
-That leaves you with two ways to take control of a `fetch` call, and they answer different questions:
+There are two ways to take control of a `fetch` call:
 
-- **[`cy.intercept()`](https://on.cypress.io/intercept)** controls the *network*. Stub the response body, status code, headers, or add a delay, and the application's own `fetch` runs untouched. This is the one to reach for most of the time — you are testing the code you ship.
-- **[`cy.spy()`](https://on.cypress.io/spy) and [`cy.stub()`](https://on.cypress.io/stub) on `window.fetch`** control the *application*. Use a spy when the question is "did my app call `fetch` with the right arguments?", and a stub when you want to hand back a hand-made response and resolve it on your own schedule. Both need `cy.visit({ onBeforeLoad })` so the spy or stub is in place before any application code runs.
+- **[`cy.intercept()`](https://on.cypress.io/intercept)** controls the *network*. Stub the response body, status code, headers, or add a delay, and the application's own `fetch` runs untouched. This is usually what you want, since the application code under test runs unchanged.
+- **[`cy.spy()`](https://on.cypress.io/spy) and [`cy.stub()`](https://on.cypress.io/stub) on `window.fetch`** control the *application*. Use a spy to check the arguments the application passed to `fetch`, and a stub to return a response you build yourself and resolve when you choose. Both need `cy.visit({ onBeforeLoad })` so the spy or stub is in place before any application code runs.
 
 See individual spec files in the [cypress/e2e](cypress/e2e) folder.
 
@@ -17,7 +17,7 @@ Spec | Description
 
 ## Controlling the response
 
-Stubbing the network is what makes the awkward cases testable. A slow response is hard to reproduce against a fast development server, but trivial to ask for:
+Stubbing the network makes the awkward cases testable. A slow response is hard to reproduce against a fast development server, but easy to request:
 
 ```js
 cy.intercept('/favorite-fruits', {
@@ -31,7 +31,7 @@ cy.get('.loader').should('be.visible')
 cy.get('.loader').should('not.exist')
 ```
 
-Failures are the same story — set the `statusCode` and any headers the application reads, then assert on the message your users would actually see. See the "when request fails" test in [stub-fetch-spec.cy.js](cypress/e2e/stub-fetch-spec.cy.js).
+Failures work the same way. Set the `statusCode` and any headers the application reads, then assert on the message your users would see. See the "when request fails" test in [stub-fetch-spec.cy.js](cypress/e2e/stub-fetch-spec.cy.js).
 
 ## A note on `experimentalFetchPolyfill`
 
