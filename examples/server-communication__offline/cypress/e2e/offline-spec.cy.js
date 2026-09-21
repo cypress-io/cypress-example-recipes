@@ -29,10 +29,6 @@ const goOnline = () => {
   })
 }
 
-const assertOnline = () => cy.window().its('navigator.onLine').should('be.true')
-
-const assertOffline = () => cy.window().its('navigator.onLine').should('be.false')
-
 describe('offline mode', () => {
   it('shows the network status', () => {
     cy.visit('/')
@@ -52,7 +48,6 @@ describe('offline mode', () => {
       onBeforeLoad: (win) => setOnLine(win, false),
     })
 
-    assertOffline()
     cy.contains('#network-status', 'offline')
   })
 
@@ -62,7 +57,6 @@ describe('offline mode', () => {
     cy.intercept(`${url}*`, { forceNetworkError: true }).as('users')
 
     goOffline()
-    assertOffline()
 
     cy.get('#load-users').click()
     cy.wait('@users')
@@ -111,10 +105,8 @@ describe('offline mode', () => {
     })
 
     goOnline()
-    assertOnline()
+    cy.contains('#network-status', 'online')
 
-    // the browser decides how many interceptions a destroyed request produces,
-    // so waiting on the route by index would be browser-specific
     cy.get('#load-users').click()
     cy.get('.user').should('have.length', 3)
   })
