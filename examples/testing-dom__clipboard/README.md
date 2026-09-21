@@ -14,9 +14,9 @@ See the [Mozilla Clipboard API docs](https://developer.mozilla.org/en-US/docs/We
 
 ## Browser support
 
-Both specs run in Chrome only, set through the `browser` test configuration option, and the recipe's npm scripts and CI job pass `--browser chrome`. Firefox and WebKit do not expose `navigator.clipboard.readText()` to the page.
+Both specs are scoped to Chrome through the `browser` test configuration option, and [cypress.config.js](./cypress.config.js) sets `defaultBrowser: 'chrome'` so that is what runs. Reading the clipboard is what limits them: the tests grant the permission over the Chrome DevTools Protocol, and other browsers gate the read behind a user gesture or a paste prompt that a test cannot answer.
 
-Chrome starts with the clipboard permission in the `prompt` state, which would open a popup the test cannot answer, so the tests grant it for the current origin over the Chrome DevTools Protocol:
+Chrome starts with the clipboard permission in the `prompt` state, so the tests grant it for the current origin over the Chrome DevTools Protocol:
 
 ```js
 cy.wrap(Cypress.automation('remote:debugger:protocol', {

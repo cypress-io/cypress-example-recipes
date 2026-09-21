@@ -50,7 +50,7 @@ npm run lint:json
 
 ### Testing in specific browser
 
-Recipes run in Chrome. Each `cypress.config.js` sets `defaultBrowser: 'chrome'`, which Cypress uses in both `cypress open` and `cypress run` whenever `--browser` is not passed. A new recipe should set it too, and only name a different browser when it demonstrates behavior specific to one.
+Recipes run in Chrome. Each recipe's Cypress config sets `defaultBrowser: 'chrome'`, which Cypress uses in both `cypress open` and `cypress run` whenever `--browser` is not passed. A new recipe should set it too, and only name a different browser when it demonstrates behavior specific to one.
 
 You can also test some examples using a specific browser. For example, to run just some folders using Brave browser, call
 

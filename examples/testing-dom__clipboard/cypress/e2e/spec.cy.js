@@ -1,8 +1,9 @@
 /// <reference types="cypress" />
 
 // The asynchronous Clipboard API is the only supported way to reach the
-// clipboard from a test. Firefox and WebKit do not expose
-// navigator.clipboard.readText() to the page, so these tests run in Chrome.
+// clipboard from a test. These tests run in Chrome because reading the
+// clipboard needs the permission granted over the Chrome DevTools Protocol -
+// other browsers gate the read behind a user gesture or a paste prompt.
 // https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
 
 /* eslint-env browser */
