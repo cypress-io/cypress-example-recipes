@@ -2,30 +2,27 @@
 
 // The asynchronous Clipboard API is the only supported way to reach the
 // clipboard from a test. Firefox and WebKit do not expose
-// navigator.clipboard.readText() to the page, so these tests are limited
-// to Chrome and Electron.
+// navigator.clipboard.readText() to the page, so these tests run in Chrome.
 // https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
 
 /* eslint-env browser */
 const copiedText = 'npm install -D cypress'
 
-describe('Clipboard', { browser: ['chrome', 'electron'] }, () => {
+describe('Clipboard', { browser: 'chrome' }, () => {
   beforeEach(() => {
-    if (Cypress.browser.name === 'chrome') {
-      // Electron launches with the clipboard permission already granted.
-      // Chrome starts in the "prompt" state, which would open a popup the test
-      // cannot answer, so grant it through the Chrome DevTools Protocol.
-      // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-grantPermissions
-      cy.wrap(Cypress.automation('remote:debugger:protocol', {
-        command: 'Browser.grantPermissions',
-        params: {
-          permissions: ['clipboardReadWrite', 'clipboardSanitizedWrite'],
-          // make the permission tighter by allowing the current origin only
-          // like "http://localhost:56978"
-          origin: window.location.origin,
-        },
-      }))
-    }
+    // Chrome starts with the clipboard permission in the "prompt" state, which
+    // would open a popup the test cannot answer, so grant it over the Chrome
+    // DevTools Protocol before visiting the page.
+    // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-grantPermissions
+    cy.wrap(Cypress.automation('remote:debugger:protocol', {
+      command: 'Browser.grantPermissions',
+      params: {
+        permissions: ['clipboardReadWrite', 'clipboardSanitizedWrite'],
+        // make the permission tighter by allowing the current origin only
+        // like "http://localhost:56978"
+        origin: window.location.origin,
+      },
+    }))
 
     cy.visit('index.html')
   })

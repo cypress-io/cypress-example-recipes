@@ -12,9 +12,11 @@ The page [index.html](./index.html) shows the copy button on "mouseover". Copyin
 
 See the [Mozilla Clipboard API docs](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API).
 
-## Permissions
+## Browser support
 
-Electron launches with clipboard access already granted. Chrome starts in the `prompt` state, which would open a popup the test cannot answer, so the tests grant the permission for the current origin through the Chrome DevTools Protocol:
+Both specs run in Chrome only, set through the `browser` test configuration option, and the recipe's npm scripts and CI job pass `--browser chrome`. Firefox and WebKit do not expose `navigator.clipboard.readText()` to the page.
+
+Chrome starts with the clipboard permission in the `prompt` state, which would open a popup the test cannot answer, so the tests grant it for the current origin over the Chrome DevTools Protocol:
 
 ```js
 cy.wrap(Cypress.automation('remote:debugger:protocol', {
@@ -32,13 +34,3 @@ Cypress sends key events, it does not perform a native paste, so `cy.type('{ctrl
 
 - an application that listens for the `paste` event receives a `ClipboardEvent` built in the application's window and carrying a `DataTransfer`
 - an application that implements Ctrl+V itself reads `navigator.clipboard` when the test types the shortcut
-
-## Other browsers
-
-Firefox and WebKit do not expose `navigator.clipboard.readText()` to the page, so both specs are limited to Chrome and Electron with the `browser` test configuration option.
-
-## Videos
-
-We show how to test the clipboard access from Cypress in these videos:
-
-- [Access the clipboard from Cypress test using Electron browser](https://youtu.be/SExmed1dCL4)
