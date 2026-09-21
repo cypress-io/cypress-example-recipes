@@ -13,8 +13,4 @@ A browser going offline changes two separate things, and a test has to simulate 
 
 Neither touches the browser's real network stack, so these tests run in Chrome, Firefox, Edge, WebKit, and Electron alike.
 
-## Why not the Chrome Debugger Protocol?
-
-An earlier version of this recipe went offline for real, with `Network.emulateNetworkConditions` over the Chrome Debugger Protocol. [Chromium 97 fixed a bug](https://bugs.chromium.org/p/chromium/issues/detail?id=1139824) so that WebSockets finally honor emulated network conditions — including the WebSocket the Cypress runner uses to talk to the Cypress server. Going offline that way now disconnects the runner and hangs the test run. See [issue #772](https://github.com/cypress-io/cypress-example-recipes/issues/772).
-
-One trade-off comes with the approach used here: because the requests are failed at the proxy rather than at the network interface, the browser still makes them. A test can assert that the application *attempted* a request and handled the failure, which is what matters for the application's own behavior, but it cannot assert that nothing left the machine.
+Because requests fail at the proxy rather than at the network interface, the browser still makes them. These tests assert that the application attempted a request and handled the failure, not that nothing left the machine.

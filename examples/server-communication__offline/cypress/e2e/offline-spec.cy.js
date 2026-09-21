@@ -1,19 +1,9 @@
 /// <reference types="cypress" />
 
-// Taking the browser offline for real, through the Chrome Debugger Protocol's
-// Network.emulateNetworkConditions, also severs the WebSocket the Cypress
-// runner needs, which hangs the run from Chromium 97 onward.
-// https://github.com/cypress-io/cypress-example-recipes/issues/772
-//
-// So this spec simulates the two things the application itself observes:
-// its view of connectivity (navigator.onLine plus the online/offline events)
-// and its requests failing (cy.intercept). Neither touches the browser's real
-// network stack, so these tests run in every browser Cypress supports.
-
 const url = 'https://jsonplaceholder.cypress.io/users'
 
-// navigator.onLine is a getter on Navigator.prototype, and an own property
-// defined on the instance shadows it. https://caniuse.com/online-status
+// navigator.onLine is a prototype getter, so assignment is ignored and only an
+// own property shadows it. https://caniuse.com/online-status
 const setOnLine = (win, online) => {
   Object.defineProperty(win.navigator, 'onLine', {
     configurable: true,
@@ -56,8 +46,8 @@ describe('offline mode', () => {
   })
 
   it('renders as offline when the page loads without a connection', () => {
-    // onBeforeLoad runs before the application's own scripts, so its very
-    // first render already sees a disconnected browser
+    // onBeforeLoad runs before the application scripts, so the first render
+    // already sees a disconnected browser
     cy.visit('/', {
       onBeforeLoad: (win) => setOnLine(win, false),
     })
@@ -68,7 +58,7 @@ describe('offline mode', () => {
 
   it('shows an error when the request fails', () => {
     cy.visit('/')
-    // when a whole test is offline, a static forceNetworkError is enough
+    // a static response suffices while the whole test is offline
     cy.intercept(`${url}*`, { forceNetworkError: true }).as('users')
 
     goOffline()
@@ -76,9 +66,8 @@ describe('offline mode', () => {
 
     cy.get('#load-users').click()
     cy.wait('@users')
-    // the rest of the message comes from the browser's own fetch
-    // implementation and differs between browsers, so assert only on the
-    // part the application controls
+    // the remainder of the message comes from the browser's fetch
+    // implementation and differs per browser
     cy.contains('#users', 'Problem fetching users')
   })
 
@@ -98,8 +87,7 @@ describe('offline mode', () => {
   })
 
   it('recovers when the network comes back', () => {
-    // to flip connectivity inside a single test, let one route handler decide
-    // each request's fate rather than stubbing a static network error
+    // only a handler can fail some requests and pass others as the flag changes
     let offline = false
 
     cy.intercept(`${url}*`, (req) => {
@@ -125,9 +113,8 @@ describe('offline mode', () => {
     goOnline()
     assertOnline()
 
-    // assert on what the application renders rather than waiting on the route:
-    // how many interceptions a destroyed request produces is up to the browser,
-    // so counting them makes the test browser-specific
+    // the browser decides how many interceptions a destroyed request produces,
+    // so waiting on the route by index would be browser-specific
     cy.get('#load-users').click()
     cy.get('.user').should('have.length', 3)
   })
