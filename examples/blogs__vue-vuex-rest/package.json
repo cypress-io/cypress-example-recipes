@@ -4,10 +4,10 @@
   "description": "Testing Vue + Vuex + REST TodoMVC using Cypress",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
     "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
     "cypress:run:chrome:headless": "../../node_modules/.bin/cypress run --browser chrome --headless",
-    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record --browser chrome",
     "dev": "../../node_modules/.bin/start-test 3000 cypress:open",
     "reset": "node reset-db.js",
     "reset:db": "node reset-db.js",

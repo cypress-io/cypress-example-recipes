@@ -50,7 +50,9 @@ npm run lint:json
 
 ### Testing in specific browser
 
-You can test some examples using a specific browser. For example, to run just some folders using Brave browser, call
+Recipes run in Chrome. The `cypress:run` scripts pass `--browser chrome`, and [test-repeat.js](test-repeat.js), which the CircleCI job for each recipe uses, runs Chrome unless you pass `--browser`. A new recipe should follow that, and only name a different browser when it demonstrates behavior specific to one.
+
+You can also test some examples using a specific browser. For example, to run just some folders using Brave browser, call
 
 ```shell
 npm run test:ci:brave

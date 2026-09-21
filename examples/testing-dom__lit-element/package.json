@@ -4,7 +4,7 @@
   "description": "Load and unit test lit-element projects",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
     "start": "echo there is no web server to start in this project",
     "test:ci": "npm run cypress:run",
     "test:ci:firefox": "npm run cypress:run -- --browser firefox",

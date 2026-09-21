@@ -4,8 +4,8 @@
   "description": "Confirms the number of assertions during a test",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run",
-    "test:ci": "../../node_modules/.bin/cypress run",
-    "test:ci:record": "../../node_modules/.bin/cypress run --record"
+    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
+    "test:ci": "../../node_modules/.bin/cypress run --browser chrome",
+    "test:ci:record": "../../node_modules/.bin/cypress run --record --browser chrome"
   }
 }

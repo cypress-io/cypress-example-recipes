@@ -4,7 +4,7 @@
   "description": "Test throws an error if it runs over the time limit",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
     "test:ci": "npm run cypress:run"
   }
 }

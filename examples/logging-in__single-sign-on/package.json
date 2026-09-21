@@ -4,10 +4,10 @@
   "description": "Login when authentication is done on a 3rd party server",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
     "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
     "cypress:run:firefox": "../../node_modules/.bin/cypress run --browser firefox",
-    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record --browser chrome",
     "dev": "../../node_modules/.bin/start-test 7074 cypress:open",
     "start": "node app_server.js --port 7074 & node auth_server.js --port 7075",
     "test:ci": "../../node_modules/.bin/start-test 7074 cypress:run",

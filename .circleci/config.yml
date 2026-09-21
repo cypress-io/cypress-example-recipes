@@ -558,8 +558,6 @@ all_jobs: &all_jobs
   - testing-dom__clipboard:
       requires:
         - build
-      # the clipboard specs need Chrome, the default command runs Electron
-      test-command: npm run test:ci:chrome
   - testing-dom__page-source:
       requires:
         - build

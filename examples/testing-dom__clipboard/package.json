@@ -5,10 +5,11 @@
   "private": true,
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
-    "cypress:run:chrome:headless": "../../node_modules/.bin/cypress run --browser chrome --headless",
+    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
     "start": "echo nothing to start",
-    "test:ci:chrome": "npm run cypress:run:chrome",
-    "test:ci:chrome:headless": "npm run cypress:run:chrome:headless"
+    "test:ci": "npm run cypress:run",
+    "test:ci:chrome": "npm run cypress:run",
+    "test:ci:chrome:headless": "../../node_modules/.bin/cypress run --browser chrome --headless",
+    "test:ci:record": "npm run cypress:run -- --record"
   }
 }

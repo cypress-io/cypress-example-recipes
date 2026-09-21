@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
     "cypress:run:chrome": "../../node_modules/.bin/cypress run --browser chrome",
     "cypress:run:firefox": "../../node_modules/.bin/cypress run --browser firefox",
     "start": "echo",

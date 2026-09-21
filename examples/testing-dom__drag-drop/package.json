@@ -4,9 +4,9 @@
   "description": "Performing Drag & Drop by triggering mouse and drag events",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
     "cypress:run:firefox": "../../node_modules/.bin/cypress run --browser firefox",
-    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record --browser chrome",
     "dev": "../../node_modules/.bin/start-test http://localhost:7071/puzzle.html cypress:open",
     "start": "node server.js --port 7071",
     "test:ci": "../../node_modules/.bin/start-test http://localhost:7071/puzzle.html cypress:run",

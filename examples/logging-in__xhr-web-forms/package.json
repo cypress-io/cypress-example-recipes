@@ -4,8 +4,8 @@
   "description": "Log into the server using XHR from end-to-end tests",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run",
-    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
+    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record --browser chrome",
     "dev": "../../node_modules/.bin/start-test 7079 cypress:open",
     "start": "node server.js --port 7079",
     "test:ci": "../../node_modules/.bin/start-test 7079 cypress:run",
