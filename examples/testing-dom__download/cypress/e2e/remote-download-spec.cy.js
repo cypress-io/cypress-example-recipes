@@ -79,7 +79,7 @@ describe('file download', () => {
       cy.get('[data-cy=download-remote-js]').click()
 
       cy.log('**confirm downloaded JavaScript file**')
-      const downloadedFilename = path.join(downloadsFolder, 'analytics.js')
+      const downloadedFilename = path.join(downloadsFolder, 'demo-script.js')
 
       cy.readFile(downloadedFilename).should((text) => {
       // validate the downloaded file
