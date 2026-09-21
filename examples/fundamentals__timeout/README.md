@@ -1,8 +1,16 @@
 # Test timeout
 
-The example shows how to stop a test if it takes too long to execute, similar to [Mocha's timeout](https://mochajs.org/#test-level) option. The timeout function is in [cypress/e2e/timeout.cy.js](cypress/e2e/timeout.cy.js).
+The example shows how to stop a test if it takes too long to execute. The timeout function is in [cypress/e2e/timeout.cy.js](cypress/e2e/timeout.cy.js) and uses public Cypress API only.
 
-You can set timeout inside the test only, see [cypress/e2e/spec.cy.js](cypress/e2e/spec.cy.js)
+## Why not Mocha's timeout?
+
+[Mocha's `this.timeout(ms)`](https://mochajs.org/#test-level) is available in Cypress tests, but it does not limit how long the whole test runs. Cypress manages that timer itself: it restarts after every command, and `cy.wait(ms)` extends it by the time it waits. A test built from many commands can run far past `this.timeout(2000)` without ever failing, which is why this recipe measures the test from start to finish instead.
+
+Reach for `this.timeout(ms)` when you want to give a *single* command more (or less) room, and for `testTimeout(ms)` when you want a budget for the *test*.
+
+## Set the timeout inside a test
+
+See [cypress/e2e/spec.cy.js](cypress/e2e/spec.cy.js)
 
 ```js
 // this test fails after two seconds due to timeout
@@ -14,4 +22,14 @@ it('does not finish long tests', () => {
 
 ![Test is too long](images/test-is-too-long.png)
 
-You can set global timeout that applies to every test, see [cypress/e2e/all-tests-spec.cy.js](cypress/e2e/all-tests-spec.cy.js) using `Cypress.on('test:before:run' ...` event
+## Set the timeout for every test
+
+Call `testTimeout` from a `beforeEach` hook, see [cypress/e2e/all-tests-spec.cy.js](cypress/e2e/all-tests-spec.cy.js). This recipe sets `supportFile: false`, but in a project that has a support file, the same hook placed there limits every test in the project.
+
+```js
+beforeEach(() => {
+  testTimeout(3 * 1000)
+})
+```
+
+The limit covers the test's hooks as well as its body. If it runs out while a `beforeEach` or `afterEach` hook is running, Cypress reports the failure against that hook and skips the rest of the suite, the way it treats any hook failure.
