@@ -43,7 +43,7 @@ describe('stubbing', function () {
   // how our app handles a slow response, which normally might be
   // difficult against a fast development server
   it('shows loader while fetching fruits', function () {
-    // stub the XHR request from the app
+    // stub the fetch request from the app
     cy.intercept(
       '/favorite-fruits',
       {
