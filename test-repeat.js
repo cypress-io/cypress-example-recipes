@@ -4,8 +4,6 @@
 //    node ../../test-repeat.js -n 3
 // if you want to record, a good idea is to pass a group name
 //    node ../../test-repeat.js -n 3 --group my-example
-// runs Chrome unless the example needs another browser
-//    node ../../test-repeat.js -n 3 --browser firefox
 
 // if there is an .env file, lots it and add to process.env
 require('dotenv').config()
@@ -17,18 +15,16 @@ const Bluebird = require('bluebird')
 const args = arg({
   '-n': Number,
   '--group': String,
-  '--browser': String,
 })
 
 const repeatNtimes = args['-n'] ? args['-n'] : 1
-const browser = args['--browser'] ? args['--browser'] : 'chrome'
 
-console.log('will repeat Cypress run %d time(s) in %s', repeatNtimes, browser)
+console.log('will repeat Cypress run %d time(s)', repeatNtimes)
 
 const allRunOptions = []
 
 for (let k = 0; k < repeatNtimes; k += 1) {
-  const runOptions = { browser }
+  const runOptions = {}
 
   if (process.env.CYPRESS_RECORD_KEY) {
     runOptions.record = true

@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
-    "cypress:run:record": "../../node_modules/.bin/cypress run --record --browser chrome",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
     "dev": "../../node_modules/.bin/start-test 58000 cypress:open",
     "start": "../../node_modules/.bin/http-server -p 58000 html",
     "test:ci": "../../node_modules/.bin/start-test 58000 cypress:run",

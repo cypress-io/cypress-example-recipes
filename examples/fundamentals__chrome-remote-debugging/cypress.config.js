@@ -23,6 +23,7 @@ let port = 0
 let client = null
 
 module.exports = defineConfig({
+  defaultBrowser: 'chrome',
   fixturesFolder: false,
   e2e: {
     supportFile: false,

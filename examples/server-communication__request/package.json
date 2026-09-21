@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
+    "cypress:run": "../../node_modules/.bin/cypress run",
     "dev": "../../node_modules/.bin/start-test 3000 cypress:open",
     "start": "../../node_modules/.bin/micro"
   },

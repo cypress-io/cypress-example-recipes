@@ -4,9 +4,9 @@
   "description": "",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
+    "cypress:run": "../../node_modules/.bin/cypress run",
     "start": "echo",
-    "test:ci": "../../node_modules/.bin/cypress run --browser chrome",
-    "test:ci:record": "../../node_modules/.bin/cypress run --record --browser chrome"
+    "test:ci": "../../node_modules/.bin/cypress run",
+    "test:ci:record": "../../node_modules/.bin/cypress run --record"
   }
 }

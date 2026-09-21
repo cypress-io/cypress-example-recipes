@@ -3,6 +3,7 @@ const { defineConfig } = require('cypress')
 const { seed } = require('./server/db')
 
 module.exports = defineConfig({
+  defaultBrowser: 'chrome',
   e2e: {
     baseUrl: 'http://localhost:7082',
     supportFile: false,

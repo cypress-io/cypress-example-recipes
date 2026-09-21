@@ -4,8 +4,8 @@
   "description": "End-to-end snapshots for Cypress",
   "scripts": {
     "cypress:open": "../../node_modules/.bin/cypress open",
-    "cypress:run": "../../node_modules/.bin/cypress run --browser chrome",
-    "cypress:run:record": "../../node_modules/.bin/cypress run --record --browser chrome",
+    "cypress:run": "../../node_modules/.bin/cypress run",
+    "cypress:run:record": "../../node_modules/.bin/cypress run --record",
     "dev": "../../node_modules/.bin/start-test 3700 cypress:open",
     "reset": "node reset-db.js",
     "reset:db": "node reset-db.js",
