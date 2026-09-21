@@ -24,10 +24,12 @@ it('does not finish long tests', () => {
 
 ## Set the timeout for every test
 
-Call `testTimeout` from a `beforeEach` hook, see [cypress/e2e/all-tests-spec.cy.js](cypress/e2e/all-tests-spec.cy.js). Move the same hook into your support file to limit every test in the project.
+Call `testTimeout` from a `beforeEach` hook, see [cypress/e2e/all-tests-spec.cy.js](cypress/e2e/all-tests-spec.cy.js). This recipe sets `supportFile: false`, but in a project that has a support file, the same hook placed there limits every test in the project.
 
 ```js
 beforeEach(() => {
   testTimeout(3 * 1000)
 })
 ```
+
+The limit covers the test's hooks as well as its body. If it runs out while a `beforeEach` or `afterEach` hook is running, Cypress reports the failure against that hook and skips the rest of the suite, the way it treats any hook failure.

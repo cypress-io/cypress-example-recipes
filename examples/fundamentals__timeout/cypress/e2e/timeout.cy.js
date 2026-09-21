@@ -28,8 +28,9 @@ Cypress.on('test:after:run', clearTestTimer)
 export function testTimeout (ms) {
   clearTestTimer()
 
-  // an error thrown from the timer fails whichever test is running,
-  // and only the test that set the timer can still be running
+  // an error thrown from the timer fails the runnable that is running:
+  // the test itself, or one of its hooks if the limit is reached
+  // while the test is being set up or torn down
   timer = setTimeout(() => {
     throw new Error(`Test ran longer than ${ms}ms`)
   }, ms)

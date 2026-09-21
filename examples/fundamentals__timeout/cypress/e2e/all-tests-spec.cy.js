@@ -4,7 +4,7 @@ import { seconds, testTimeout } from './timeout.cy'
 
 describe('Global timeout of 3 seconds', () => {
   // the time limit applies to a single test, so set it before each one.
-  // move this hook into a support file to limit every test in the project
+  // in a project with a support file, the same hook there limits every test
   beforeEach(() => {
     testTimeout(seconds(3))
   })
