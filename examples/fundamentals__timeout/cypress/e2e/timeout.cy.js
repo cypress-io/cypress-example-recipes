@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-/* eslint-disable no-console */
 
 /**
  * Converts seconds to milliseconds
@@ -7,58 +6,32 @@
  */
 export const seconds = (n) => n * 1000
 
-// keep an object with timers for tests where we set
-// the timeout to avoid setting multiple timers
-global.timers = new Map()
+let timer = null
+
+const clearTestTimer = () => {
+  clearTimeout(timer)
+  timer = null
+}
+
+// the time limit belongs to a single test,
+// so drop the timer the moment that test ends
+Cypress.on('test:after:run', clearTestTimer)
 
 /**
- * Stops the current Cypress test if it takes longer than the provided timeout
+ * Stops the current Cypress test if it takes longer than the provided timeout.
+ * Call it inside a test, or inside a "beforeEach" hook to limit every test.
  * @param {number} ms Test timeout in milliseconds
  * @example
  *  // stop and fail the test if it runs for longer than 10 seconds
- *  testTimeout(10 * 1000)
+ *  testTimeout(seconds(10))
  */
-export function testTimeout (ms, test) {
-  // get the current test reference using
-  // the cy.state() magic method
-  const currentTest = cy.state('runnable') || test
+export function testTimeout (ms) {
+  clearTestTimer()
 
-  if (!currentTest) {
-    throw new Error('Could not determine current test')
-  }
-
-  if (global.timers.has(currentTest)) {
-    console.log('removing existing timer for test', currentTest)
-    clearTimeout(global.timers.get(currentTest))
-    global.timers.delete(currentTest)
-  }
-
-  const startedAt = +new Date()
-
-  const timer = setTimeout(() => {
-    const testNow = cy.state('runnable')
-
-    console.log('test started', currentTest)
-    console.log('test now', testNow)
-
-    if (currentTest !== testNow) {
-      // different test already
-      return
-    }
-
-    console.log('test now state', testNow.state)
-    if (testNow.state) {
-      // test has finished
-      return
-    }
-
-    const timeNow = +new Date()
-
-    console.log('elapsed %d limit %d', timeNow - startedAt, ms)
-    if (timeNow - startedAt >= ms) {
-      throw new Error(`Test ran longer than ${ms}ms`)
-    }
+  // an error thrown from the timer fails the runnable that is running:
+  // the test itself, or one of its hooks if the limit is reached
+  // while the test is being set up or torn down
+  timer = setTimeout(() => {
+    throw new Error(`Test ran longer than ${ms}ms`)
   }, ms)
-
-  global.timers.set(currentTest, timer)
 }
