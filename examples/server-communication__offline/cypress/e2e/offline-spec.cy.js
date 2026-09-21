@@ -106,7 +106,7 @@ describe('offline mode', () => {
       if (offline) {
         req.destroy()
       }
-    }).as('users')
+    })
 
     cy.visit('/')
 
@@ -116,7 +116,6 @@ describe('offline mode', () => {
 
     goOffline()
     cy.get('#load-users').click()
-    cy.wait('@users')
     cy.contains('#users', 'Problem fetching users')
 
     cy.then(() => {
@@ -126,8 +125,10 @@ describe('offline mode', () => {
     goOnline()
     assertOnline()
 
+    // assert on what the application renders rather than waiting on the route:
+    // how many interceptions a destroyed request produces is up to the browser,
+    // so counting them makes the test browser-specific
     cy.get('#load-users').click()
-    cy.wait('@users').its('response.statusCode').should('eq', 200)
     cy.get('.user').should('have.length', 3)
   })
 })
