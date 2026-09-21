@@ -12,6 +12,7 @@ const _ = require('lodash')
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 module.exports = defineConfig({
+  defaultBrowser: 'chrome',
   fixturesFolder: false,
   e2e: {
     supportFile: false,

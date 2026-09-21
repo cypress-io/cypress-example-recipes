@@ -50,13 +50,9 @@ npm run lint:json
 
 ### Testing in specific browser
 
-You can test some examples using a specific browser. For example, to run just some folders using Brave browser, call
+Recipes run in Chrome. Each recipe's Cypress config sets `defaultBrowser: 'chrome'`, which Cypress uses in both `cypress open` and `cypress run` whenever `--browser` is not passed. A new recipe should set it too, and only name a different browser when it demonstrates behavior specific to one.
 
-```shell
-npm run test:ci:brave
-```
-
-Similarly, there are NPM scripts to test Firefox, Chrome, and even run some projects on Windows. The `test:ci:*` scripts are special in that they will find all projects with the matching script in each example subfolder and will only run those projects. Also, these scripts should start the server if necessary in each subproject. For example, [examples/blogs__application-actions/package.json](examples/blogs__application-actions/package.json) has the following scripts
+You can also test some examples using a specific browser. There are NPM scripts to test Firefox and Chrome, and even to run some projects on Windows. The `test:ci:*` scripts are special in that they will find all projects with the matching script in each example subfolder and will only run those projects. Also, these scripts should start the server if necessary in each subproject. For example, [examples/blogs__application-actions/package.json](examples/blogs__application-actions/package.json) has the following scripts
 
 ```json
 {

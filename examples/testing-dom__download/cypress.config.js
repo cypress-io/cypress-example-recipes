@@ -10,6 +10,7 @@ const { readExcelFile } = require('./document-utils/read-excel')
 const { readPdf } = require('./document-utils/read-pdf')
 
 module.exports = defineConfig({
+  defaultBrowser: 'chrome',
   fixturesFolder: false,
   viewportWidth: 500,
   viewportHeight: 900,
