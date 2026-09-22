@@ -37,6 +37,8 @@ it('creates Todo components', () => {
 
 Note: class decorators are an experimental JavaScript feature. In this recipe they are transpiled using Babel plugins in the [.babelrc](.babelrc) file.
 
+Note: the `package-lock.json` in this folder installs nothing — dependencies are installed once at the repo root. It is here because Parcel picks its project root from the nearest lockfile, and Babel only applies a `.babelrc` that lives inside that root. Delete it and the project root becomes the repo root, the `.babelrc` above is quietly ignored, and the build fails on the very first `@` decorator. Please leave it in place.
+
 There are two class decorators in the [src/decorators/index.js](src/decorators/index.js) file.
 
 ```js
