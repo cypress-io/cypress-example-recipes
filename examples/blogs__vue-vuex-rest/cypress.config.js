@@ -33,6 +33,7 @@ const hasRecordAsync = (title, ms) => {
 }
 
 module.exports = defineConfig({
+  defaultBrowser: 'chrome',
   video: false,
   e2e: {
     baseUrl: 'http://localhost:3000',

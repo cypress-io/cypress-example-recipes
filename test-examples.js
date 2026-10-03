@@ -19,11 +19,10 @@ const debug = require('debug')('cypress-example-recipes')
 // run this script with "--chrome" CLI flag
 const args = arg({
   '--chrome': Boolean,
-  '--brave': Boolean,
   '--firefox': Boolean,
   '--chunk': Number,
   '--total-chunks': Number,
-  // TODO switch from separate --chrome|--brave|--firefox
+  // TODO switch from separate --chrome|--firefox
   // to using "--browser chrome" or "--browser firefox" argument
   '--browser': String,
   '--headless': Boolean,
@@ -44,10 +43,6 @@ if (args['--chrome']) {
   } else {
     scriptName = 'test:ci:chrome'
   }
-}
-
-if (args['--brave']) {
-  scriptName = 'test:ci:brave'
 }
 
 if (args['--firefox']) {

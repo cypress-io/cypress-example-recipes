@@ -197,9 +197,9 @@ npm start &
 # run Cypress tests headlessly
 npm run cypress:run
 
-### runs all example projects in specific browser
-### similar to cypress run --browser <name>
-npm run cypress:run -- --browser chrome
+### recipes run in Chrome by default
+### pass another browser to override it
+npm run cypress:run -- --browser firefox
 
 ### sends test results, videos, screenshots
 ### to Cypress dashboard

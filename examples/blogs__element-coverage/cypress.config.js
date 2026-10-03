@@ -10,6 +10,7 @@ function getWebpackOptions () {
 }
 
 module.exports = defineConfig({
+  defaultBrowser: 'chrome',
   e2e: {
     baseUrl: 'http://localhost:3000',
     setupNodeEvents (on, config) {

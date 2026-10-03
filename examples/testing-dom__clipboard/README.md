@@ -1,22 +1,36 @@
 # Clipboard
 > Copy / paste text example
 
-The widget to copy text is `@github/clipboard-copy-element` custom element that comes from [github/github-elements](https://github.com/github/github-elements)
+The widget to copy text is the `@github/clipboard-copy-element` custom element that comes from [github/github-elements](https://github.com/github/github-elements). It and the [tiny toast](https://github.com/bahmutov/tiny-toast) popup shown on copy are vendored at pinned versions under [vendor](./vendor), so the page has no runtime CDN dependency.
 
 ![Copy / paste test](./images/copy-paste.gif)
 
-See the [cypress/e2e/spec.cy.js](./cypress/e2e/spec.cy.js) file. The test currently work only in Electron where the clipboard permission is granted when Cypress starts it.
+The page [index.html](./index.html) shows the copy button on "mouseover". Copying goes through `navigator.clipboard.writeText`, and the tests read the text back with `navigator.clipboard.readText`.
 
-The page [index.html](./index.html) shows the copy button on "mouseover" event. When the text is copied to the clipboard, it shows a [tiny toast](https://github.com/bahmutov/tiny-toast) popup.
+- [cypress/e2e/spec.cy.js](./cypress/e2e/spec.cy.js) copies the code snippet and pastes it into the page two different ways.
+- [cypress/e2e/permissions-spec.cy.js](./cypress/e2e/permissions-spec.cy.js) queries the clipboard permission state.
 
-See the [Mozilla Clipboard docs](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard)
+See the [Mozilla Clipboard API docs](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API).
 
-## Other browsers
+## Browser support
 
-Work in progress, mostly because the default permissions prompt the user to allow the page to access the clipboard.
+Both specs are scoped to Chrome through the `browser` test configuration option, and [cypress.config.js](./cypress.config.js) sets `defaultBrowser: 'chrome'` so that is what runs. Reading the clipboard is what limits them: the tests grant the permission over the Chrome DevTools Protocol, and other browsers gate the read behind a user gesture or a paste prompt that a test cannot answer.
 
-## Videos
+Chrome starts with the clipboard permission in the `prompt` state, so the tests grant it for the current origin over the Chrome DevTools Protocol:
 
-We show how to test the clipboard access from Cypress in these videos:
+```js
+cy.wrap(Cypress.automation('remote:debugger:protocol', {
+  command: 'Browser.grantPermissions',
+  params: {
+    permissions: ['clipboardReadWrite', 'clipboardSanitizedWrite'],
+    origin: window.location.origin,
+  },
+}))
+```
 
-- [Access the clipboard from Cypress test using Electron browser](https://youtu.be/SExmed1dCL4)
+## Pasting
+
+Cypress sends key events, it does not perform a native paste, so `cy.type('{ctrl}v')` pastes only if your application handles the shortcut itself — which is what grid and editor components tend to do. The recipe covers both shapes an application can take:
+
+- an application that listens for the `paste` event receives a `ClipboardEvent` built in the application's window and carrying a `DataTransfer`
+- an application that implements Ctrl+V itself reads `navigator.clipboard` when the test types the shortcut

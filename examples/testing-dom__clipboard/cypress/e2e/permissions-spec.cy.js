@@ -5,21 +5,9 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Permissions/query
 
 /* eslint-env browser */
-describe('Clipboard permissions', () => {
-  // Electron has access to the clipboard
-  // https://www.electronjs.org/docs/api/clipboard#clipboard
-  it('are granted in Electron', { browser: 'electron' }, () => {
-    cy.visit('index.html') // yields the window object
-    .its('navigator.permissions')
-    // permission names taken from
-    // https://w3c.github.io/permissions/#enumdef-permissionname
-    .then((permissions) => permissions.query({ name: 'clipboard-read' }))
-    .its('state')
-    .should('equal', 'granted')
-  })
-
+describe('Clipboard permissions', { browser: 'chrome' }, () => {
   // we can safely query the current permission status in Chrome
-  it('can be queried in Chrome', { browser: 'chrome' }, () => {
+  it('can be queried', () => {
     cy.visit('index.html') // yields the window object
     .its('navigator.permissions')
     // permission names taken from
@@ -33,7 +21,7 @@ describe('Clipboard permissions', () => {
     .its('state').should('be.oneOf', ['prompt', 'granted', 'denied'])
   })
 
-  it('can be granted in Chrome', { browser: 'chrome' }, () => {
+  it('can be granted', () => {
     // use the Chrome debugger protocol to grant the current browser window
     // access to the clipboard from the current origin
     // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-grantPermissions
@@ -57,18 +45,12 @@ describe('Clipboard permissions', () => {
     .then((permissions) => permissions.query({ name: 'clipboard-read' }))
     .its('state').should('equal', 'granted')
 
-    // now reading the clipboard from test will work
-    // but only via navigator.clipboard - the document.execCommand
-    // does nothing.
+    // now reading the clipboard from the test will work
     cy.get('code').trigger('mouseover')
     cy.get('[aria-label="Copy"]').click()
     // confirm the clipboard's contents
     cy.window().its('navigator.clipboard')
     .then((clip) => clip.readText())
     .should('equal', 'npm install -D cypress')
-
-    // TODO how can we paste the clipboard into the text area?
-    // right now the document.execCommand('paste') does not
-    // do anything in the Chrome browser
   })
 })

@@ -1,6 +1,6 @@
 <head>
-  <script type="module" src="https://unpkg.com/@github/clipboard-copy-element@latest" defer></script>
-  <script src="https://unpkg.com/tiny-toast@1.2.0/dist/tiny-toast.js" defer></script>
+  <script type="module" src="./vendor/clipboard-copy-element-1.3.2.js" defer></script>
+  <script src="./vendor/tiny-toast-1.2.0.js" defer></script>
   <style>
     pre {
       padding: 16px;
@@ -95,11 +95,21 @@
     </div>
   </div>
 
-  <textarea id="paste-here" rows="4" cols="40"></textarea>
+  <p>
+    <label for="paste-here">Handles the paste event</label><br>
+    <textarea id="paste-here" rows="2" cols="40"></textarea>
+  </p>
+
+  <p>
+    <label for="paste-on-shortcut">Reads the clipboard on Ctrl+V</label><br>
+    <textarea id="paste-on-shortcut" rows="2" cols="40"></textarea>
+  </p>
 
   <script>
     const contents = document.querySelector('.snippet-clipboard-content')
     const clipboardContainer = contents.querySelector('.zeroclipboard-container')
+    const pasteHere = document.querySelector('#paste-here')
+    const pasteOnShortcut = document.querySelector('#paste-on-shortcut')
 
     contents.addEventListener('mouseover', (e) => {
       clipboardContainer.style.display = 'inherit'
@@ -109,6 +119,24 @@
     })
     document.addEventListener('clipboard-copy', function(event) {
       tinyToast.show('Copied!').hide(1500)
+    })
+
+    // a synthetic paste event carries its text in clipboardData, and the
+    // browser skips the default insertion for it, so the page inserts the text
+    pasteHere.addEventListener('paste', (event) => {
+      event.preventDefault()
+      pasteHere.value = event.clipboardData.getData('text/plain')
+    })
+
+    // apps that implement their own Ctrl+V - spreadsheet grids, for example -
+    // read the clipboard themselves instead of waiting for a paste event
+    pasteOnShortcut.addEventListener('keydown', async (event) => {
+      if (event.key !== 'v' || !(event.ctrlKey || event.metaKey)) {
+        return
+      }
+
+      event.preventDefault()
+      pasteOnShortcut.value = await navigator.clipboard.readText()
     })
   </script>
 </body>

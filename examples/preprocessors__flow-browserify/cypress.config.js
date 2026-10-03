@@ -3,6 +3,7 @@ const { defineConfig } = require("cypress")
 const browserify = require("@cypress/browserify-preprocessor")
 
 module.exports = defineConfig({
+  defaultBrowser: 'chrome',
   fixturesFolder: false,
   e2e: {
     setupNodeEvents(on, config) {

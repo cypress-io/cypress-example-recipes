@@ -1,6 +1,7 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
+  defaultBrowser: 'chrome',
   defaultCommandTimeout: 8000,
   retries: {
     runMode: 5,

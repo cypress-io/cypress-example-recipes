@@ -1,6 +1,7 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
+  defaultBrowser: 'chrome',
   hosts: {
     'auth.corp.com': '127.0.0.1',
   },

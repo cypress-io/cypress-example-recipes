@@ -1,6 +1,7 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
+  defaultBrowser: 'chrome',
   video: false,
   e2e: {
     baseUrl: 'http://localhost:3700',
